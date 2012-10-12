@@ -22,14 +22,19 @@
         <a class="brand" href="#">CPP 2.0</a>
         <div class="nav-collapse">
           <ul class="nav">
-            <li><%= link_to "Student Dashboard", "/student_dash" %></li>
-            <li><%= link_to "Student Companies", "/student_companies"%></li>
-            <li><%= link_to "Student Company", "/student_company"%></li>
+            <li><%= link_to "S Dashboard", "/student_dash" %></li>
+            <li><%= link_to "S Companies", "/student_companies"%></li>
+            <li><%= link_to "S Company", "/student_company"%></li>
             
-            <li><%= link_to "Company Dashboard", "/company_dash"%></li>
-            <li><%= link_to "Company Students", "/company_students"%></li>
-            <li><%= link_to "Company Student", "/company_student"%></li>
+            <li><%= link_to "C Dashboard", "/company_dash"%></li>
+            <li><%= link_to "C Students", "/company_students"%></li>
+            <li><%= link_to "C Student", "/company_student"%></li>
           </ul>
+          <form class="navbar-form pull-right">
+            <input type="text" class="input-small" placeholder="Email">
+            <input type="password" class="input-small" placeholder="Password">
+            <button type="submit" class="btn">Sign in</button>
+          </form>
         </div>
       </div>
     </div>
