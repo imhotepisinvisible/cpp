@@ -7,6 +7,9 @@ gem 'rails', '3.2.1'
 # Twitter Bootstrapping
 gem 'twitter-bootstrap-rails'
 
+# Font Awesome = Icons via Font!
+gem 'font-awesome-rails'
+
 # Pagination
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
