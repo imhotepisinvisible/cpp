@@ -1,67 +1,166 @@
 <h1 class="section-header">Google</h1>
 <div class="row">
-  <div class="span12">
-    <%= lipsum('paragraphs', 2) %>
+  <div class="span4">
+    <div class="company-logo-large">
+      <%= image_tag "google_logo.jpg" %>
+    </div>
+  </div>
+  <div class="span8">
+    <%= lipsum('paragraphs', 1) %>
   </div>
 </div>
 
 <div class="row">
   <div class="span6">
-    <h1>Events</h1>
-    <ul>
-      <li>Event 1</li>
-      <li>Event 2</li>
-      <li>Event 3</li>
+    <h1 class="section-header">
+      <i class="icon-calendar"></i>
+      Events
+    </h1>
+    <ul class="cpp-list">
+      <li>
+        <a href="#">
+          <div class="link-title">
+            Event 1
+          </div>
+          <div class="link-description">
+            <%= lipsum("words", 20) %>
+          </div>
+          
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <div class="link-title">
+            Event 2
+          </div>
+          <div class="link-description">
+            <%= lipsum("words", 20) %>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <div class="link-title">
+            Event 3
+          </div>
+          <div class="link-description">
+            <%= lipsum("words", 20) %>
+          </div>
+        </a>
+      </li>
     </ul>
-    <%= link_to "See All" %>
+    <div class="see-all-link"><%= link_to "See All" %></div>
   </div>
   <div class="span6">
-    <h1>Placements</h1>
-    <ul>
-      <li>Placement 1</li>
-      <li>Placement 2</li>
-      <li>Placement 3</li>
+    <h1 class="section-header">
+      <i class="icon-briefcase"></i>
+      Placements
+    </h1>
+    <ul class="cpp-list">
+      <li>
+        <a href="#">
+          <div class="link-title">
+            Placement 1
+          </div>
+          <div class="link-description">
+            <%= lipsum("words", 20) %>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <div class="link-title">
+            Placement 2
+          </div>
+          <div class="link-description">
+            <%= lipsum("words", 20) %>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <div class="link-title">
+            Placement 3
+          </div>
+          <div class="link-description">
+            <%= lipsum("words", 20) %>
+          </div>
+        </a>
+      </li>
     </ul>
-    <%= link_to "See All" %>
+    <div class="see-all-link"><%= link_to "See All" %></div>
   </div>
 </div>
 
 <div class="row">
   <div class="span12">
     <h1 class="section-header">Project X
-      <span class="pull-right"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
+      <span class="pull-right">
+        <i class="icon-star"></i>
+        <i class="icon-star"></i>
+        <i class="icon-star"></i>
+        <i class="icon-star"></i>
+        <i class="icon-star-empty"></i>
+      </span>
     </h1>
   </div>
 </div>
 <div class="row">
-  <div class="span6">
+  <div class="span12">
     <div class="well">
-      <h2>Google is Awesome!!!</h2>
-      <p>
-        <%= lipsum('paragraphs', 3) %>
-      </p>
-    </div>
-  </div>
-  <div class="span6">
-    <div class="well">
-      <dl class="dl-horizontal">
-        <dt>Department</dt>
-        <dd>Computing</dd>
-        <dt>Course</dt>
-        <dd>MEng</dd>
-        <dt>Year</dt>
-        <dd>3</dd>
-        <hr>
-        <dt>Pay</dt>
-        <dd><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></dd>
-        <dt>Opportunites</dt>
-        <dd><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></dd>
-        <dt>Fun-ness</dt>
-        <dd><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></dd>
-        <dt>Overall</dt>
-        <dd><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></dd>
-      </dl>
-
+      <div class="row-fluid">
+        <div class="span6">
+        <h2>Google is Awesome!!!</h2>
+        <p>
+          <%= lipsum('words', 50) %>
+          ...
+          <%= link_to "Read More" %>
+        </p>
+        </div>
+        <div class="span3">
+          <dl class="dl-horizontal">
+            <dt>Department:</dt> <dd>Computing</dd>
+            <dt>Course:</dt> <dd>MEng</dd>
+            <dt>Year:</dt> <dd>3</dd>
+          </dl>
+        </div>
+        <div class="span3">
+          <dl class="dl-horizontal">
+            <dt>Pay:</dt>
+            <dd>
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+              <i class="icon-star-empty"></i>
+              <i class="icon-star-empty"></i>
+            </dd>
+            <dt>Opportunites:</dt>
+            <dd>
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+              <i class="icon-star-empty"></i>
+            </dd>
+            <dt>Fun-ness:</dt>
+            <dd>
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+            </dd>
+            <dt>Overall:</dt>
+            <dd>
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+              <i class="icon-star"></i>
+              <i class="icon-star-empty"></i>
+            </dd>
+          </dl>
+        </div>
+      </div>
     </div>
   </div>
 </div>
