@@ -54,6 +54,7 @@ CPP::Application.routes.draw do
   match 'student_dash' => 'site#sample_student_dashboard'
   match 'company_dash' => 'site#sample_company_dashboard'
   match 'company_students' => 'site#sample_company_students'
+  match 'student_companies' => 'site#sample_student_companies'
 
   # See how all your routes lay out with "rake routes"
 

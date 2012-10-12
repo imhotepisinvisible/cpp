@@ -6,4 +6,8 @@ class SiteController < ApplicationController
   def sample_student_dashboard
     # No Variables/Code Necessary Right now
   end
+
+  def sample_student_companies
+
+  end
 end
