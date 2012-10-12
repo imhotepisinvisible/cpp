@@ -3,12 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body{
-  background: url("cream_dust.png");
 }
 
 h1 {
   padding-bottom:5px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   margin-top: 20px;
 
   &.section-header {
@@ -26,4 +25,58 @@ h1 {
   padding: 20px;
   background: #ccc;
   overflow: scroll;
+}
+
+.company-logo-large{
+  float:left;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
+.cpp-list{
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+
+  margin-bottom: 10px;
+
+  li {
+    a {
+      padding: 10px 5px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      display: block;
+      text-decoration: none;
+      color: #444;
+
+      .btn {
+        display: none;
+      }
+      &:hover{
+        background: #efefef;
+        text-decoration: none;
+
+        .btn{
+          display: block;
+        }
+      }
+
+      .link-title {
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+
+      .link-description{
+        margin-top: 5px;
+      }
+    }
+  }
+}
+
+.see-all-link{
+  float: right;
+}
+
+.clear {
+  clear: both;
 }

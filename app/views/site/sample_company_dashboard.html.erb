@@ -1,40 +1,136 @@
 <h1 class="section-header">Google</h1>
 <div class="row">
-  <div class="span12">
-    <%= lipsum('paragraphs', 2) %>
+  <div class="span4">
+    <div class="company-logo-large">
+      <%= image_tag "google_logo.jpg" %>
+    </div>
+  </div>
+  <div class="span8">
+    <%= lipsum('paragraphs', 1) %>
   </div>
 </div>
 
 <div class="row">
   <div class="span6">
-    <h1 class="section-header">Events</h1>
-    <ul>
-      <li>Event 1</li>
-      <li>Event 2</li>
-      <li>Event 3</li>
+    <h1 class="section-header">
+      Events
+      <div class="btn pull-right">New</div>
+    </h1>
+    <ul class="cpp-list">
+      <li>
+        <a href="#">
+          <div class="link-title">
+            Event 1
+            <div class="btn btn-mini pull-right">Edit</div>
+          </div>
+          <div class="link-description">
+            <%= lipsum("words", 20) %>
+          </div>
+          
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <div class="link-title">
+            Event 2
+            <div class="btn btn-mini pull-right">Edit</div>
+          </div>
+          <div class="link-description">
+            <%= lipsum("words", 20) %>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <div class="link-title">
+            Event 3
+            <div class="btn btn-mini pull-right">Edit</div>
+          </div>
+          <div class="link-description">
+            <%= lipsum("words", 20) %>
+          </div>
+        </a>
+      </li>
     </ul>
-    <%= link_to "See All" %>
+    <div class="see-all-link"><%= link_to "See All" %></div>
   </div>
   <div class="span6">
-    <h1 class="section-header">Placements</h1>
-    <ul>
-      <li>Placement 1</li>
-      <li>Placement 2</li>
-      <li>Placement 3</li>
+    <h1 class="section-header">
+      Placements
+      <div class="btn pull-right">New</div>
+    </h1>
+    <ul class="cpp-list">
+      <li>
+        <a href="#">
+          <div class="link-title">
+            Placement 1
+            <div class="btn btn-mini pull-right">Edit</div>
+          </div>
+          <div class="link-description">
+            <%= lipsum("words", 20) %>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <div class="link-title">
+            Placement 2
+            <div class="btn btn-mini pull-right">Edit</div>
+          </div>
+          <div class="link-description">
+            <%= lipsum("words", 20) %>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <div class="link-title">
+            Placement 3
+            <div class="btn btn-mini pull-right">Edit</div>
+          </div>
+          <div class="link-description">
+            <%= lipsum("words", 20) %>
+          </div>
+        </a>
+      </li>
     </ul>
-    <%= link_to "See All" %>
+    <div class="see-all-link"><%= link_to "See All" %></div>
   </div>
 </div>
 
 <div class="row">
   <div class="span6">
-    <h1 class="section-header">Mailing</h1>
-    <ul>
-      <li>Mail 1</li>
-      <li>Mail 2</li>
-      <li>Mail 3</li>
-    </ul>
-    <%= link_to "See All" %>
+    <h1 class="section-header">
+      Mailings
+      <div class="btn pull-right">New</div>
+    </h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Subject</th>
+          <th>Approved?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>10/10/2012</td>
+          <td>Work For Us!!</td>
+          <td><i class="icon-ok"></i> 12/10/2012</td>
+        </tr>
+        <tr>
+          <td>06/10/2012</td>
+          <td>WE IS AWESOME!!!11!1</td>
+          <td><i class="icon-remove"></i> 10/10/2012</td>
+        </tr>
+        <tr>
+          <td>01/10/2012</td>
+          <td>YO KIDZ</td>
+          <td><i class="icon-remove"></i> 06/10/2012</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="see-all-link"><%= link_to "See All" %></div>
   </div>
   <div class="span6">
     <h1 class="section-header">Stats</h1>
