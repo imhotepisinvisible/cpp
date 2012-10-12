@@ -53,6 +53,7 @@ CPP::Application.routes.draw do
   # Samples/Mockups
   match 'student_dash' => 'site#sample_student_dashboard'
   match 'company_dash' => 'site#sample_company_dashboard'
+  match 'company_students' => 'site#sample_company_students'
 
   # See how all your routes lay out with "rake routes"
 
