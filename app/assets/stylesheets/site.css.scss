@@ -1,3 +1,13 @@
 // Place all the styles related to the Site controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+h1 {
+  border-bottom: 1px solid #333;
+  margin-bottom: 20px;
+}
+
+.student_profile_picture{
+  height: 130px;
+  background: #CCC;
+}

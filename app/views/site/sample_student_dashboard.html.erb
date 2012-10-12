@@ -1,0 +1,64 @@
+
+<h1>Peter Hamilton</h1>
+<div class="row">
+  <div class="span2">
+    <div class="student_profile_picture"></div>
+  </div>
+  <div class="span4">
+    <ul>
+      <li>Something/User Details</li>
+      <li>Something Else</li>
+      <li>Something Else Again</li>
+    </ul>
+  </div>
+  <div class="span6">
+    <%= lipsum('words', 60) %>
+  </div>
+</div>
+
+<h1>C.V</h1>
+<div class="row">
+  <div class="span9">
+    <%= lipsum('words', 20) %>
+  </div>
+  <div class="span3">
+    <div class="btn">View</div>
+    <div class="btn">Download</div>
+  </div>
+</div>
+
+<h1>Interests</h1>
+<div class="row">
+  <div class="span4">
+    <form class="form-inline">
+      <input type="text" data-provide="typeahead" data-source="<%= lipsum('words', 4).split.inspect %>" class="input-medium typeahead">
+      <button type="submit" class="btn">Add</button>
+    </form>
+  </div>
+  <div class="span8">
+    <% lipsum('words', 20).split.each do |word| %>
+      <span class="label label-success"><%= word %></span>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span6">
+    <h1>Events</h1>
+    <ul>
+      <li>Event 1</li>
+      <li>Event 2</li>
+      <li>Event 3</li>
+    </ul>
+    <%= link_to "See All" %>
+  </div>
+  <div class="span6">
+    <h1>Placements</h1>
+    <ul>
+      <li>Placement 1</li>
+      <li>Placement 2</li>
+      <li>Placement 3</li>
+    </ul>
+    <%= link_to "See All" %>
+  </div>
+</div>
