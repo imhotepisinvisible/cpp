@@ -1,16 +1,13 @@
-# Hackathon Template for Rails
-A basic Rails app template for a hackathon project
+# CPP 2.0
+Revolutionising the Corporate Partnership Programme
 
 Requirements
 ============
 
-* I assume all teammembers are running OSX or Ubuntu (or some other Linux flavour). Windows users, You're on your own...)
-* [Homebrew](http://mxcl.github.com/homebrew/) (OSX only)
-* Git ``$ sudo apt-get install git``` or ``$ brew install git```
-* RVM + Ruby 1.9.3
-  * Install RVM ```curl -L https://get.rvm.io | bash -s stable```
-  * Install Ruby 1.9.3 ```rvm install 1.9.2```
-  * Set default ruby version ```rvm use 1.9.2 --default```
+* Assuming all teammembers are running OSX or Ubuntu...
+* (OSX only) Install [Homebrew](http://mxcl.github.com/homebrew/)
+* Install Git ``$ sudo apt-get install git``` or ``$ brew install git```
+* Install [RVM with Ruby](https://rvm.io/rvm/install/)
 
 
 Useful tools
@@ -33,9 +30,7 @@ Sublime
 Getting Started
 ===============
 
-* Clone template locally ```$ git clone git@github.com:PeterHamilton/CPPRails.git```
-* Remove git ```$ rm -rf .git``` in root
-* Create new repo for hackathon
+* Clone template locally ```$ git clone git@github.com:PeterHamilton/cpp.git```
 * Run ```$ bundle install``` in the root to get all the gems
 * Run rails server ```$ rails s```
-* Check rails is running by visiting [http://localhost:3000/](http://localhost:3000/) You should be able to see a static index.html file.
+* Check rails is running by visiting [http://localhost:3000/](http://localhost:3000/)
