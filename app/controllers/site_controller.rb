@@ -10,4 +10,8 @@ class SiteController < ApplicationController
   def sample_student_companies
 
   end
+
+  def sample_student_company
+
+  end
 end
