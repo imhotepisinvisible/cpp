@@ -6,14 +6,18 @@ h1 {
   padding-bottom:5px;
   margin-bottom: 20px;
   margin-top: 20px;
+
+  &.section-header {
+    border-bottom: 1px solid #444;
+  }
 }
 
-.student_profile_picture{
+.student-profile-picture{
   height: 130px;
   background: #CCC;
 }
 
-.fake_cv{
+.fake-cv{
   height:500px;
   padding: 20px;
   background: #ccc;
