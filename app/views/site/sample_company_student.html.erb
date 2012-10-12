@@ -1,50 +1,51 @@
-<h1 class="section-header">Peter Hamilton</h1>
-<div class="row">
-  <div class="span2">
-    <div class="student-profile-picture"></div>
-  </div>
-  <div class="span4">
-    <ul>
-      <li>Something/User Details</li>
-      <li>Something Else</li>
-      <li>Something Else Again</li>
-    </ul>
-  </div>
-  <div class="span6">
-    <%= lipsum('words', 60) %>
-  </div>
-</div>
-
-<h1 class="section-header">C.V</h1>
 <div class="row">
   <div class="span9">
-    <%= lipsum('words', 20) %>
+    <h1 class="section-header">
+      <i class="icon-user"></i>
+      Jack Stevenson
+    </h1>
+    <div class="row">
+      <div class="span2">
+        <div class="student-profile-picture">
+          <%= image_tag "jack_profile.jpg", { :class => "img-polaroid" } %>
+        </div>
+      </div>
+      <div class="span3">
+        <dl class="dl-horizontal">
+          <dt>Department:</dt> <dd>Computing</dd>
+          <dt>Course:</dt> <dd>MEng</dd>
+          <dt>Year:</dt> <dd>3</dd>
+        </dl>
+      </div>
+      <div class="span4">
+        <%= lipsum('words', 60) %>
+      </div>
+    </div>
   </div>
   <div class="span3">
-    <div class="btn">View</div>
-    <div class="btn">Download</div>
-  </div>
-</div>
-
-<h1 class="section-header">Interests</h1>
-<div class="row">
-  <div class="span12">
-    <% lipsum('words', 20).split.each do |word| %>
-      <span class="label label-success"><%= word %></span>
-    <% end %>
+    <h1 class="section-header">
+      <i class="icon-list-alt"></i>
+      C.V
+    </h1>
+    <div class="alert alert-success">
+      <div class="row-fluid">
+        <div class="btn span6">View</div>
+        <div class="btn span6">Download</div>
+      </div>
+    </div>
   </div>
 </div>
 
 <h1 class="section-header">
-  C.V
-  <div class="btn" style="float:right">Download</div>
+  <i class="icon-tags"></i>
+  Interests
 </h1>
 <div class="row">
   <div class="span12">
-    <div class="fake-cv">
-      <%= 4.times do |i| %>
-        <p><%= lipsum("paragraphs", 2) %></p>
-      <% end %>
-    </div>
+    <% lipsum('words', 20).split.each do |word| %>
+      <span class="label label-info interest-tag">
+        <span class="label-text"><%= word %></span>
+      </span>
+    <% end %>
   </div>
 </div>
