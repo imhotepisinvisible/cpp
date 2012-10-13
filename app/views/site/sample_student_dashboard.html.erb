@@ -62,7 +62,7 @@
     <% lipsum('words', 20).split.each do |word| %>
       <span class="label label-info interest-tag">
         <span class="label-text"><%= word %></span>
-        <span><%= image_tag "closelabel.png", { :class => "label-close" } %></span>
+        <button type="button" class="close" data-dismiss="alert">×</button>
       </span>
     <% end %>
   </div>

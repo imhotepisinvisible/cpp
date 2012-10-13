@@ -94,15 +94,8 @@ h1 {
     float: left;
   }
 
-  .label-close{
-    opacity: 0.3;
-    cursor: pointer;
-    padding:3px;
-    float: right;
-
-    &:hover{
-      opacity: 0.7;
-    }
+  .close{
+    line-height: 12px;
   }
 }
 
