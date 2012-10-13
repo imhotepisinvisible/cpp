@@ -1,51 +1,143 @@
-<h1 class="section-header">Browse Companies</h1>
-<div class="row-fluid">
-	<div class="span3" >
-		<form class="form-search">
-      <div class="input-append">
-        <input type="text" class="input-medium search-query">
-        <button type="submit" class="btn">Search</button>
-      </div>
-    </form>
-	</div>
-	<div class="span9" >
-		<div class="row-fluid">
-			<div class="hero-unit">
-				<h1>Google</h1>
-				<p>Google is great...</p>
-				<a class="btn btn-primary btn-large">Explore</a>
-			</div>
-    </div>
-    <div class="row-fluid">
-      <div class="span6">
-        <div class="hero-unit">
-          <h1>Google</h1>
-          <p>Google is great...</p>
-          <a class="btn btn-primary btn-large">Explore</a>
-        </div>
-      </div>
-      <div class="span6">
-        <div class="hero-unit">
-          <h1>Google</h1>
-          <p>Google is great...</p>
-          <a class="btn btn-primary btn-large">Explore</a>
+<div class="row">
+  <div class="span3">
+    <h1 class="section-header">Filters</h1>
+  </div>
+  <div class="span9 company-tiles">
+    <h1 class="section-header">Companies</h1>
+    <div class="row">
+      <div class="span9">
+        <div class="thumbnail company-tile">
+          <div class="row-fluid">
+            <div class="span6">
+              <%= image_tag "company_logos/google_logo.jpg" %>
+            </div>
+            <div class="span6">
+              <div class="company-tile-blurb">
+                <%= lipsum('words', 40) %>
+              </div>
+              <div class="btn btn-small pull-right">Read More</div>
+              <div class="clear"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="row-fluid">
-      <hr>
-      <h2>Amazon</h2>
-      <p>Amazon is also great</p>
+
+    <div class="row">
+      <div class="span3">
+        <div class="thumbnail company-tile">
+          <div class="company-tile-logo">
+          <%= image_tag "company_logos/amazon_logo.jpg" %>
+          </div>
+          <div class="company-tile-blurb">
+            <%= lipsum('words', 20) %>
+          </div>
+          <div class="btn btn-small pull-right">Read More</div>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <div class="span3">
+        <div class="thumbnail company-tile">
+          <div class="company-tile-logo">
+          <%= image_tag "company_logos/facebook_logo.jpg" %>
+          </div>
+          <div class="company-tile-blurb">
+            <%= lipsum('words', 20) %>
+          </div>
+          <div class="btn btn-small pull-right">Read More</div>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <div class="span3">
+        <div class="thumbnail company-tile">
+          <div class="company-tile-logo">
+            <%= image_tag "company_logos/microsoft_logo.jpg" %>
+          </div>
+          <div class="company-tile-blurb">
+            <%= lipsum('words', 20) %>
+          </div>
+          <div class="btn btn-small pull-right">Read More</div>
+          <div class="clear"></div>
+        </div>
+      </div>
     </div>
-    <div class="row-fluid">
-      <hr>
-      <h2>Amazon</h2>
-      <p>Amazon is also great</p>
+
+    <div class="row">
+      <div class="span3">
+        <div class="thumbnail company-tile">
+          <div class="company-tile-logo">
+          <%= image_tag "company_logos/ibm_logo.jpg" %>
+          </div>
+          <div class="company-tile-blurb">
+            <%= lipsum('words', 20) %>
+          </div>
+          <div class="btn btn-small pull-right">Read More</div>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <div class="span3">
+        <div class="thumbnail company-tile">
+          <div class="company-tile-logo">
+          <%= image_tag "company_logos/palantir_logo.jpg" %>
+          </div>
+          <div class="company-tile-blurb">
+            <%= lipsum('words', 20) %>
+          </div>
+          <div class="btn btn-small pull-right">Read More</div>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <div class="span3">
+        <div class="thumbnail company-tile">
+          <div class="company-tile-logo">
+            <%= image_tag "company_logos/netcraft_logo.jpg" %>
+          </div>
+          <div class="company-tile-blurb">
+            <%= lipsum('words', 20) %>
+          </div>
+          <div class="btn btn-small pull-right">Read More</div>
+          <div class="clear"></div>
+        </div>
+      </div>
     </div>
-    <div class="row-fluid">
-      <hr>
-      <h2>Amazon</h2>
-      <p>Amazon is also great</p>
+
+    <div class="row">
+      <div class="span3">
+        <div class="thumbnail company-tile">
+          <div class="company-tile-logo">
+          <%= image_tag "company_logos/nextjump_logo.jpg" %>
+          </div>
+          <div class="company-tile-blurb">
+            <%= lipsum('words', 20) %>
+          </div>
+          <div class="btn btn-small pull-right">Read More</div>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <div class="span3">
+        <div class="thumbnail company-tile">
+          <div class="company-tile-logo">
+          <%= image_tag "company_logos/intel_logo.jpg" %>
+          </div>
+          <div class="company-tile-blurb">
+            <%= lipsum('words', 20) %>
+          </div>
+          <div class="btn btn-small pull-right">Read More</div>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <div class="span3">
+        <div class="thumbnail company-tile">
+          <div class="company-tile-logo">
+            <%= image_tag "company_logos/vmware_logo.jpg" %>
+          </div>
+          <div class="company-tile-blurb">
+            <%= lipsum('words', 20) %>
+          </div>
+          <div class="btn btn-small pull-right">Read More</div>
+          <div class="clear"></div>
+        </div>
+      </div>
     </div>
-	</div>
+  </div>
 </div>
