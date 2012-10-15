@@ -25,6 +25,8 @@ Sublime
   * start typing coffeescript, enter
 * Install git package
   * Same as Coffeescript but typing git
+* Install scss package (for Super CSS)
+  * Same as Coffeescript but typing scss
 * Set default settings for 2 space indentation
 
 Getting Started
