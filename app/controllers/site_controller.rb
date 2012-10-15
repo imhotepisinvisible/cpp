@@ -26,4 +26,14 @@ class SiteController < ApplicationController
   def sample_company_student
 
   end
+
+  def sample_admin_students
+    @people = ["Peter Hamilton",
+               "Tom Wilshere",
+               "Jack Stevenson",
+               "Tom Wilding",
+               "Sarah Tattersall"]
+    @years = ["First Year", "Second Year"]
+  end
+
 end
