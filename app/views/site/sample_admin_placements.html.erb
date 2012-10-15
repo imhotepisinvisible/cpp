@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="span3">
+    <h1 class="section-header">Filters</h1>
+  </div>
+  <div class="span9">
+    <h1 class="section-header">Placements</h1>
+    <div class="table-toolbar">
+      <div class="btn pull-right">
+        Add Placement
+      </div>
+      <div class="clear"></div>
+    </div>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th><%= check_box_tag "TestCheck", 1, false %></th>
+          <th>Company</th>
+          <th>Placement</th>
+          <th>Position</th>
+          <th>Location</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= check_box_tag "TestCheck", 1 %></td>
+          <td>Google</td>
+          <td>Develop a management analysis application for iPad</td>
+          <td>Software Developer Internship</td>
+          <td>London</td>
+          <td>
+            <div class="student-profile-buttons">
+              <div class="btn">
+                View
+              </div>
+              <div class="btn">
+                Edit
+              </div>
+              <div class="btn btn-danger">
+                Delete
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><%= check_box_tag "TestCheck", 1 %></td>
+          <td>Amazon</td>
+          <td>Improve current system efficiency</td>
+          <td>Software Internship</td>
+          <td>Ceattle</td>
+          <td>
+            <div class="student-profile-buttons">
+              <div class="btn">
+                View
+              </div>
+              <div class="btn">
+                Edit
+              </div>
+              <div class="btn btn-danger">
+                Delete
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
