@@ -7,8 +7,8 @@ Requirements
 * Assuming all teammembers are running OSX or Ubuntu...
 * (OSX only) Install [Homebrew](http://mxcl.github.com/homebrew/)
 * Install Git ``$ sudo apt-get install git``` or ``$ brew install git```
-* Install RVM: run ``\curl -L https://get.rvm.io | bash -s stable --rails`` - more info: [RVM with Ruby](https://rvm.io/rvm/install/)
 * On Ubuntu you may need to run ``sudo apt-get install zlib1g-dev``
+* Install RVM: run ``\curl -L https://get.rvm.io | bash -s stable --rails`` - more info: [RVM with Ruby](https://rvm.io/rvm/install/)
 
 
 Useful tools
