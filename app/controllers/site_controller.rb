@@ -14,4 +14,16 @@ class SiteController < ApplicationController
   def sample_student_company
 
   end
+
+  def sample_company_dashboard
+
+  end
+
+  def sample_company_students
+
+  end
+
+  def sample_company_student
+
+  end
 end
