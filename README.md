@@ -27,7 +27,7 @@ Sublime
   * Same as Coffeescript but typing git
 * Install scss package (for Super CSS)
   * Same as Coffeescript but typing scss
-* Set default settings for 2 space indentation
+* Set default settings for 2 space indentation, no line wrap, 80+120 line guides
 
 Getting Started
 ===============
