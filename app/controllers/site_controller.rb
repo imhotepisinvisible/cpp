@@ -36,4 +36,7 @@ class SiteController < ApplicationController
     @years = ["First Year", "Second Year"]
   end
 
+  def sample_admin_emails
+    
+  end
 end
