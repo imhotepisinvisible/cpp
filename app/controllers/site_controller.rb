@@ -44,4 +44,8 @@ class SiteController < ApplicationController
 
   end
 
+  def sample_admin_emails
+    
+  end
+
 end
