@@ -22,13 +22,22 @@
         <a class="brand" href="#"><%= image_tag "imperial.png" %> CPP 2.0</a>
         <div class="nav-collapse">
           <ul class="nav">
-            <li><%= link_to "S Dashboard", "/student_dash" %></li>
-            <li><%= link_to "S Companies", "/student_companies"%></li>
-            <li><%= link_to "S Company", "/student_company"%></li>
-            
-            <li><%= link_to "C Dashboard", "/company_dash"%></li>
-            <li><%= link_to "C Students", "/company_students"%></li>
-            <li><%= link_to "C Student", "/company_student"%></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Student<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Dashboard", "/student_dash" %></li>
+                <li><%= link_to "Companies", "/student_companies"%></li>
+                <li><%= link_to "Company", "/student_company"%></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Company<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Dashboard", "/company_dash"%></li>
+                <li><%= link_to "Students", "/company_students"%></li>
+                <li><%= link_to "Student", "/company_student"%></li>
+              </ul>
+            </li>
           </ul>
           <form class="navbar-form pull-right">
             <input type="text" class="input-small" placeholder="Email">
