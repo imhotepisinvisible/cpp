@@ -45,7 +45,7 @@ class SiteController < ApplicationController
   end
 
   def sample_admin_emails
-    
+
   end
 
   def sample_admin_stats
@@ -88,6 +88,10 @@ class SiteController < ApplicationController
 
     opts   = { :displayAnnotations => true }
     @timechart = GoogleVisualr::Interactive::AnnotatedTimeLine.new(data_table2, opts)
+
+  end
+
+  def sample_admin_events
 
   end
 
