@@ -40,19 +40,14 @@ group :production do
 end
 
 group :test, :development do
-  gem "rspec-rails"
-  gem 'rspec-instafail'
-  gem 'rb-fsevent'
-  gem 'growl'
-  gem 'pry'
-  gem 'factory_girl_rails'
+  gem 'minitest'
+  gem 'turn'
+  gem 'test-unit'
+
+  gem 'pry' # Awesome developer console http://pryrepl.org/
+  gem 'factory_girl_rails' # Easy fixtures
+  gem 'ffaker' # For faking data
   gem 'database_cleaner'
-  gem "factory_girl_rails"
-  gem "capybara"
-  gem 'guard-spork'
-  gem "guard-bundler"
-  gem "guard-rspec"
-  gem "guard-migrate"
 end
 
 # To use ActiveModel has_secure_password
