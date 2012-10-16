@@ -65,10 +65,9 @@ module CPP
     config.assets.version = '1.1'
 
     config.generators do |g|
-      g.test_framework :rspec, :fixture => true
-      g.fixture_replacement :factory_girl, :dir => 'spec/factories'
+      g.test_framework :test_unit, :fixture_replacement => :factory_girl
       g.form_builder :simple_form
-      g.template_engine :haml
+      g.template_engine :erb
     end
   end
 end
