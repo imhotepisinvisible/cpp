@@ -10,6 +10,9 @@ gem 'twitter-bootstrap-rails'
 # Font Awesome = Icons via Font!
 gem 'font-awesome-rails'
 
+# Google Charts
+gem "google_visualr", ">= 2.1"
+
 # Pagination
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'

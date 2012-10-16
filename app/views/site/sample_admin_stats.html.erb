@@ -1,0 +1,28 @@
+<h1 class="section-header">Statistics</h1>
+<div class="row" >
+  <div class="span3">
+    <h1 class="section-header">Filter</h1>
+    <p>Filter module will go here (if required)</p>
+  </div>
+  <div class="span9">
+    <div class="row">
+      <div class="span9">
+        <h1 class="section-header"><i class="icon-calendar"></i> Event Stats</h1>
+        <div id='linechart'></div>
+        <%= render_chart(@linechart, 'linechart') %>
+      </div>
+      <div class="span4">
+        <h1 class="section-header">More stats</h1>
+        <div id='piechart'></div>
+        <%= render_chart(@piechart, 'piechart') %>
+      </div>
+      <div class="span5">
+        <h1 class="section-header">More stats</h1>
+        <div id='barchart'></div>
+        <%= render_chart(@barchart, 'barchart') %>
+      </div>
+    </div>
+    <div class="row">
+    </div>
+  </div>
+</div>

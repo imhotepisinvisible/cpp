@@ -65,6 +65,7 @@ GEM
     ffi (1.1.5)
     font-awesome-rails (0.4.1)
       railties (~> 3.1)
+    google_visualr (2.1.4)
     growl (1.0.3)
     guard (1.3.3)
       listen (>= 0.4.2)
@@ -228,6 +229,7 @@ DEPENDENCIES
   database_cleaner
   factory_girl_rails
   font-awesome-rails
+  google_visualr (>= 2.1)
   growl
   guard-bundler
   guard-migrate

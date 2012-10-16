@@ -63,6 +63,7 @@ CPP::Application.routes.draw do
   match 'admin_companies' => 'site#sample_admin_companies'
   match 'admin_placements' => 'site#sample_admin_placements'
   match 'admin_emails' => 'site#sample_admin_emails'
+  match 'admin_stats' => 'site#sample_admin_stats'
 
   # See how all your routes lay out with "rake routes"
 
