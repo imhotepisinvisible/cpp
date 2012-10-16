@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121016195845) do
+ActiveRecord::Schema.define(:version => 20121016200049) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -32,6 +32,17 @@ ActiveRecord::Schema.define(:version => 20121016195845) do
     t.string   "google_map_url"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+  end
+
+  create_table "placements", :force => true do |t|
+    t.integer  "company_id"
+    t.string   "position"
+    t.text     "description"
+    t.string   "duration"
+    t.string   "location"
+    t.datetime "deadline"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
 end
