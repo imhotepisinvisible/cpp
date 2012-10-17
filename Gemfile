@@ -20,8 +20,8 @@ gem 'validates_timeliness', '~> 3.0'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 
-#
 gem 'cantango' # Nice role based access control
+gem 'bcrypt-ruby' # For password encryption
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
