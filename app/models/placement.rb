@@ -1,10 +1,9 @@
 class Placement < ActiveRecord::Base
-  belongs_to  :company
+  belongs_to :company
 
-  validate  :company,      :presence => true 
-  validate  :position,     :presence => true
-  validate  :description,  :presence => true
-  validate  :location,     :presence => true
-  validate  :deadline,     :presence => true
-
+  validates :company,     :presence => true 
+  validates :position,    :presence => true
+  validates :description, :presence => true
+  validates :location,    :presence => true
+  validates :deadline,    :presence => true
 end
