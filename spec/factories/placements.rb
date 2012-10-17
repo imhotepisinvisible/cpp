@@ -1,5 +1,4 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
-require 'support/factory_helper'
 
 FactoryGirl.define do
   factory :placement do
