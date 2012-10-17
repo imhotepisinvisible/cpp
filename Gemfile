@@ -40,9 +40,9 @@ group :production do
 end
 
 group :test, :development do
-  gem 'minitest'
-  gem 'turn'
-  gem 'test-unit'
+  gem 'rspec-rails'
+  gem 'rspec-instafail'
+  gem 'shoulda'
 
   gem 'pry' # Awesome developer console http://pryrepl.org/
   gem 'factory_girl_rails' # Easy fixtures

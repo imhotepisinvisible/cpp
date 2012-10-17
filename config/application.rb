@@ -6,7 +6,7 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "active_resource/railtie"
 require "sprockets/railtie"
-require "rails/test_unit/railtie"
+# require "rails/test_unit/railtie"
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -65,7 +65,7 @@ module CPP
     config.assets.version = '1.1'
 
     config.generators do |g|
-      g.test_framework :test_unit, :fixture_replacement => :factory_girl
+      g.test_framework :rspec, :fixture_replacement => :factory_girl
       g.form_builder :simple_form
       g.template_engine :erb
     end
