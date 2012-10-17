@@ -24,7 +24,8 @@ ActiveRecord::Schema.define(:version => 20121016200049) do
   create_table "events", :force => true do |t|
     t.integer  "company_id"
     t.string   "title"
-    t.datetime "date"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.datetime "deadline"
     t.text     "description"
     t.string   "location"
