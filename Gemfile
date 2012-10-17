@@ -33,6 +33,7 @@ group :development do
   gem 'heroku'            # Useful for deploying for demos
   gem 'sqlite3'           # Local development
   gem 'lorem'
+  gem 'rails-erd'
 end
 
 group :production do
