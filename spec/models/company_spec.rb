@@ -19,7 +19,7 @@ describe Company do
     assert @company.should be_invalid
   end
 
-  it "requires a description with at most 80 words" do
+  it "requires that a description contains less than 80 words" do
     @company.description = "word " * 79
     @company.should be_valid
 
