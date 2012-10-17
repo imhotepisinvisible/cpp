@@ -3,7 +3,9 @@ class Event < ActiveRecord::Base
 
 	validates :company_id,   :presence => true
 	validates :title,        :presence => true
-	validates :date,         :presence => true
+  # TODO: start_date and end_date need to be validated
+	validates :start_date,   :presence => true
+  validates :end_date,     :presence => true
 	validates :description,  :presence => true
 	validates :location,     :presence => true
 end

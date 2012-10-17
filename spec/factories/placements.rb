@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :placement do
-    company_id 1
+    company
     position "MyString"
     description "MyText"
     duration "MyString"
