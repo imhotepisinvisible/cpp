@@ -10,16 +10,15 @@
       </div>
       <div class="clear"></div>
     </div>
-    <table class="table table-bordered">
+    <table class="table table-bordered sortable">
       <thead>
         <tr>
-          <th><%= check_box_tag "master-check", 1, false %></th>
-          <th></th>
-          <th>Company</th>
+          <th class="sorttable_nosort"><%= check_box_tag "master-check", 1, false %></th>
+          <th colspan=2 class="sorttable_nosort">Company</th>
           <th>Placements</th>
           <th>Locations</th>
           <th>Stuff</th>
-          <th>&nbsp;</th>
+          <th class="sorttable_nosort"></th>
         </tr>
       </thead>
       <tbody>
