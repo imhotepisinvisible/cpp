@@ -50,6 +50,12 @@ CPP::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => 'site#index'
 
+  get "logout" => "sessions#destroy", :as => "logout"
+  get "login" => "sessions#new", :as => "login"
+
+  resources :users
+  resources :sessions
+
   # Samples/Mockups
   match 'student_dash' => 'site#sample_student_dashboard'
   match 'student_companies' => 'site#sample_student_companies'
