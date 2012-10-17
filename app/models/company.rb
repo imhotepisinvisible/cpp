@@ -3,10 +3,10 @@ class Company < ActiveRecord::Base
   has_many :placements
 
   validates :name,        :presence => true
-  
-  validates :description, :presence => true
+
+  # TODO: test the messages
   validates :description, :length => {
-    :maximum   => 80,
+    :in => 1..80,
     :tokenizer => lambda { |str| str.scan(/\w+/) },
     :too_short => "must have at least %{count} words",
     :too_long  => "must have at most %{count} words"
