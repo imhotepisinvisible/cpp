@@ -3,7 +3,8 @@ class CreateEvents < ActiveRecord::Migration
     create_table :events do |t|
       t.integer :company_id
       t.string :title
-      t.datetime :date
+      t.datetime :start_date
+      t.datetime :end_date
       t.datetime :deadline
       t.text :description
       t.string :location
