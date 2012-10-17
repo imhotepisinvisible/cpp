@@ -1,12 +1,13 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
+require 'support/factory_helper'
 
 FactoryGirl.define do
   factory :placement do
     company
-    position "MyString"
-    description "MyText"
-    duration "MyString"
-    location "MyString"
-    deadline "2012-10-16 21:00:49"
+    position "SDE INTERN"
+    description Faker::Company.bs
+    duration "6 months"
+    location Faker::Address.street_address
+    deadline { FactoryHelper.time_rand }
   end
 end
