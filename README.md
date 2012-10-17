@@ -30,6 +30,11 @@ Sublime
   * Same as Coffeescript but typing scss
 * Set default settings for 2 space indentation, no line wrap, 80+120 line guides
 
+Rails ERD
+---------
+Allows you to view project entities in graphical form
+Follow the [Installation Instructions](http://rails-erd.rubyforge.org/install.html)
+
 Getting Started
 ===============
 
