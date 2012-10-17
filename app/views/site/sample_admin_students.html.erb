@@ -13,7 +13,7 @@
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
-          <th><%= check_box_tag "TestCheck", 1, false %></th>
+          <th><%= check_box_tag "master-check", 1, false %></th>
           <th></th> 
           <th>First Name</th>
           <th>Last Name</th>
@@ -25,7 +25,7 @@
       <tbody>
         <% @people.each do |person| %>
           <tr>
-            <td><%= check_box_tag "TestCheck", 1 %></td>
+            <td><%= check_box_tag "test-check1", 1, false, {:class => "check-boxes"} %></td>
             <td> 
               <div class="student-profile-picture">
                 <%= image_tag "jack_profile.jpg" %>

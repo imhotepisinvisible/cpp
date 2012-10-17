@@ -13,7 +13,7 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th><%= check_box_tag "TestCheck", 1, false %></th>
+          <th><%= check_box_tag "master-check", 1, false %></th>
           <th>Company</th>
           <th>Placement</th>
           <th>Position</th>
@@ -23,7 +23,7 @@
       </thead>
       <tbody>
         <tr>
-          <td><%= check_box_tag "TestCheck", 1 %></td>
+          <td><%= check_box_tag "test-check1", 1, false, {:class => "check-boxes"} %></td>
           <td>Google</td>
           <td>Develop a management analysis application for iPad</td>
           <td>Software Developer Internship</td>
@@ -43,11 +43,11 @@
           </td>
         </tr>
         <tr>
-          <td><%= check_box_tag "TestCheck", 1 %></td>
+          <td><%= check_box_tag "test-check2", 1, false, {:class => "check-boxes"} %></td>
           <td>Amazon</td>
           <td>Improve current system efficiency</td>
           <td>Software Internship</td>
-          <td>Ceattle</td>
+          <td>Seattle</td>
           <td>
             <div class="student-profile-buttons">
               <div class="btn">

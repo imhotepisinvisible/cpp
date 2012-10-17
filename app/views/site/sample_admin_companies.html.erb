@@ -13,7 +13,7 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th><%= check_box_tag "TestCheck", 1, false %></th>
+          <th><%= check_box_tag "master-check", 1, false %></th>
           <th></th>
           <th>Company</th>
           <th>Placements</th>
@@ -24,7 +24,7 @@
       </thead>
       <tbody>
         <tr>
-          <td><%= check_box_tag "TestCheck", 1 %></td>
+          <td><%= check_box_tag "test-check1", 1, false, {:class => "check-boxes"} %></td>
           <td><%= image_tag "company_logos/google_logo.jpg", {:class => "admin-company-logo"} %></td>
           <td>Google</td>
           <td>2</td>
@@ -45,7 +45,7 @@
           </td>
         </tr>
         <tr>
-          <td><%= check_box_tag "TestCheck", 1 %></td>
+          <td><%= check_box_tag "test-check2", 1, false, {:class => "check-boxes"}%></td>
           <td><%= image_tag "company_logos/amazon_logo.jpg", {:class => "admin-company-logo"} %></td>
           <td>Amazon</td>
           <td>3</td>
