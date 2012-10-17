@@ -13,6 +13,9 @@ gem 'font-awesome-rails'
 # Google Charts
 gem "google_visualr", ">= 2.1"
 
+# Date and time validation plugin for ActiveModel and Rails.
+gem 'validates_timeliness', '~> 3.0'
+
 # Pagination
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
