@@ -32,8 +32,11 @@ Sublime
 
 Rails ERD
 ---------
-Allows you to view project entities in graphical form
-Follow the [Installation Instructions](http://rails-erd.rubyforge.org/install.html)
+Allows you to view project entities in graphical form. [More Info](http://rails-erd.rubyforge.org/install.html)
+
+* Install GraphViz with `brew install graphviz` or `sudo aptitude install graphviz`
+* Run `rake erd`
+
 
 Getting Started
 ===============
