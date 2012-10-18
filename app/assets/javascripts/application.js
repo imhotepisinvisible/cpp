@@ -15,3 +15,13 @@
 //= require twitter/bootstrap
 //= require site
 //= require_tree .
+//= require underscore
+//= require backbone
+//
+//= require .//cpp
+//
+//= require_tree ../templates/
+//= require_tree .//models
+//= require_tree .//collections
+//= require_tree .//views
+//= require_tree .//routers

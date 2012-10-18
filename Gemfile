@@ -23,6 +23,8 @@ gem 'bootstrap-will_paginate'
 gem 'cantango' # Nice role based access control
 gem 'bcrypt-ruby' # For password encryption
 
+gem 'backbone-on-rails' # Nice client side JS framework
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
