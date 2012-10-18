@@ -24,6 +24,7 @@ gem 'cantango' # Nice role based access control
 gem 'bcrypt-ruby' # For password encryption
 
 gem 'backbone-on-rails' # Nice client side JS framework
+gem 'underscore' # Templating for backboneJS
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
