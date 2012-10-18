@@ -6,9 +6,9 @@ class Company < ActiveRecord::Base
 
   # TODO: test the messages
   validates :description, :length => {
-    :in => 1..80,
-    :tokenizer => lambda { |str| str.scan(/\w+/) },
-    :too_short => "must have at least %{count} words",
-    :too_long  => "must have at most %{count} words"
+    :in => 1..500,
+    # :tokenizer => lambda { |str| str.scan(/\w+/) },
+    :too_short => "must have at least %{count} characters",
+    :too_long  => "must have at most %{count} characters"
   }
 end

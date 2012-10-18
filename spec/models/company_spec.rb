@@ -7,7 +7,7 @@ describe Company do
 
   context "when attributes are set" do
     it { should be_valid }
-    its(:description) { should have_at_most(80).items }
+    its(:description) { should have_at_most(500).items }
   end
 
   context "when attributes are not set" do
