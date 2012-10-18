@@ -1,32 +1,18 @@
 require 'spec_helper'
 
 describe Company do
-  before(:each) do
-    @company = FactoryGirl.create :company
+  include AttributeValidators
+  let(:company) { FactoryGirl.create :company }
+  subject { company }
+
+  context "when attributes are set" do
+    it { should be_valid }
+    its(:description) { should have_at_most(80).items }
   end
 
-  it "has a valid factory" do
-    @company.should be_valid
-  end
-  
-  it "requires a name" do
-    @company.name = ""
-    @company.should be_invalid
+  context "when attributes are not set" do
+    it { should be_invalid_for_nil_field(:name) }
+    it { should be_invalid_for_nil_field(:description) }
   end
 
-  it "requires a description" do
-    @company.description = ""
-    assert @company.should be_invalid
-  end
-
-  it "requires that a description contains less than 80 words" do
-    @company.description = "word " * 79
-    @company.should be_valid
-
-    @company.description = "word " * 80
-    @company.should be_valid
-
-    @company.description = "word " * 81
-    @company.should be_invalid
-  end
 end
