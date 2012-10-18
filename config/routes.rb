@@ -56,6 +56,8 @@ CPP::Application.routes.draw do
   resources :users
   resources :sessions
 
+  resources :companies
+
   # Samples/Mockups
   match 'student_dash' => 'site#sample_student_dashboard'
   match 'student_companies' => 'site#sample_student_companies'
