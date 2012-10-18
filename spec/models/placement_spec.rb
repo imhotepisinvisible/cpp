@@ -6,16 +6,22 @@ describe Placement do
 
   it {should be_valid}
 
-  it {should be_invalid_for_nil_field(:position)}
+  context "when attributes are not set" do
+    it {should be_invalid_for_nil_field(:position)}
 
-  it {should be_invalid_for_nil_field(:description)}
+    it {should be_invalid_for_nil_field(:description)}
 
-  it {should be_invalid_for_nil_field(:location)}
+    it {should be_invalid_for_nil_field(:location)}
 
-  it {should be_invalid_for_nil_field(:deadline)}
+    it {should be_invalid_for_nil_field(:deadline)}
+  end
 
-  it {should be_invalid_for_given_field(:deadline, Time.at(Time.now.to_i - 1.day.to_i))}
+  context "when deadline is before the current date" do
+    it {should be_invalid_for_given_field(:deadline, Time.at(Time.now.to_i - 1.day.to_i))}
+  end
 
-  it {should be_valid_for_given_field(:deadline, Time.at(Time.now.to_i + 1.day.to_i))}
+  context "when the deadline is after the current date" do
+    it {should be_valid_for_given_field(:deadline, Time.at(Time.now.to_i + 1.day.to_i))}
+  end
 
 end
