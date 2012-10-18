@@ -25,8 +25,18 @@ describe Placement do
   end
 
   it "requires a deadline" do
-    @placement.deadline = ""
+    @placement.deadline = nil
     assert @placement.should be_invalid
+  end
+
+  it "does not allow a deadline before the current date" do
+    @placement.deadline = Time.at(Time.now.to_i - 1.day.to_i)
+    assert @placement.should be_invalid
+  end
+
+  it "allows a deadline after the current date" do
+    @placement.deadline = Time.at(Time.now.to_i + 1.day.to_i)
+    assert @placement.should be_valid
   end
 
 end
