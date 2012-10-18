@@ -1,42 +1,26 @@
 require 'spec_helper'
 
 describe Placement do
-  before(:each) do
-    @placement = FactoryGirl.create :placement
-  end
+  include ValidateInvalidAttribute
+  let(:placement) { FactoryGirl.build :placement }
+  subject { placement }
 
-  it "has a valid factory" do
-    @placement.should be_valid
-  end
+  it {should be_valid}
 
-  it "requires a position" do
-    @placement.position = ""
-    @placement.should be_invalid
-  end
+  it {should be_invalid_for_nil_field(:position)}
 
-  it "requires a description" do
-    @placement.description = ""
-    assert @placement.should be_invalid
-  end
+  it {should be_invalid_for_nil_field(:description)}
 
-  it "requires a location" do
-    @placement.location = ""
-    @placement.should be_invalid
-  end
+  it {should be_invalid_for_nil_field(:location)}
 
-  it "requires a deadline" do
-    @placement.deadline = nil
-    assert @placement.should be_invalid
-  end
+  it {should be_invalid_for_nil_field(:deadline)}
 
-  it "does not allow a deadline before the current date" do
-    @placement.deadline = Time.at(Time.now.to_i - 1.day.to_i)
-    assert @placement.should be_invalid
-  end
+  it {should be_invalid_for_given_field(:deadline, Time.at(Time.now.to_i - 1.day.to_i))}
 
+# TODO: Matcher
   it "allows a deadline after the current date" do
-    @placement.deadline = Time.at(Time.now.to_i + 1.day.to_i)
-    assert @placement.should be_valid
+    placement.deadline = Time.at(Time.now.to_i + 1.day.to_i)
+    placement.should be_valid
   end
 
 end
