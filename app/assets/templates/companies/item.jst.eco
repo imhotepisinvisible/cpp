@@ -1,0 +1,4 @@
+<td><%= @company.get 'logo' %></td>
+<td><%= @company.get 'name' %></td>
+<td><%= @company.get 'description' %></td>
+<td></td>

@@ -2,8 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.1'
 
-
-
 # Twitter Bootstrapping
 gem 'twitter-bootstrap-rails'
 
@@ -25,6 +23,8 @@ gem 'bcrypt-ruby' # For password encryption
 
 gem 'backbone-on-rails' # Nice client side JS framework
 gem 'underscore' # Templating for backboneJS
+
+gem 'thin' # Better server :)
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

@@ -3,7 +3,9 @@ window.CPP =
   Collections: {}
   Views: {}
   Routers: {}
-  init: -> alert 'Hello from Backbone!'
+  init: ->
+    new CPP.Routers.Companies
+    Backbone.history.start()
 
 $(document).ready ->
   CPP.init()
