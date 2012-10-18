@@ -1,4 +1,6 @@
 class CompaniesController < ApplicationController
+  respond_to :json
+
   # GET /companies
   # GET /companies.json
   def index
@@ -15,10 +17,7 @@ class CompaniesController < ApplicationController
   def show
     @company = Company.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @company }
-    end
+    respond_with @company
   end
 
   # GET /companies/new
@@ -26,10 +25,7 @@ class CompaniesController < ApplicationController
   def new
     @company = Company.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @company }
-    end
+    respond_with @company
   end
 
   # GET /companies/1/edit
@@ -44,11 +40,9 @@ class CompaniesController < ApplicationController
 
     respond_to do |format|
       if @company.save
-        format.html { redirect_to @company, notice: 'Company was successfully created.' }
-        format.json { render json: @company, status: :created, location: @company }
+        respond_with @company, status: :created, location: @company
       else
-        format.html { render action: "new" }
-        format.json { render json: @company.errors, status: :unprocessable_entity }
+        respond_with @company.errors, status: :unprocessable_entity
       end
     end
   end
@@ -60,11 +54,9 @@ class CompaniesController < ApplicationController
 
     respond_to do |format|
       if @company.update_attributes(params[:company])
-        format.html { redirect_to @company, notice: 'Company was successfully updated.' }
-        format.json { head :no_content }
+        head :no_content
       else
-        format.html { render action: "edit" }
-        format.json { render json: @company.errors, status: :unprocessable_entity }
+        render @company.errors, status: :unprocessable_entity
       end
     end
   end
@@ -74,10 +66,7 @@ class CompaniesController < ApplicationController
   def destroy
     @company = Company.find(params[:id])
     @company.destroy
-
-    respond_to do |format|
-      format.html { redirect_to companies_url }
-      format.json { head :no_content }
-    end
+    
+    head :no_content
   end
 end
