@@ -7,7 +7,7 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'database_cleaner'
 require 'support/factory_helper'
-require 'support/validate_invalid_attribute'
+require 'support/attribute_validators'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.

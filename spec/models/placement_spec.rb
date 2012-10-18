@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Placement do
-  include ValidateInvalidAttribute
+  include AttributeValidators
   let(:placement) { FactoryGirl.build :placement }
   subject { placement }
 
@@ -17,10 +17,6 @@ describe Placement do
 
   it {should be_invalid_for_given_field(:deadline, Time.at(Time.now.to_i - 1.day.to_i))}
 
-# TODO: Matcher
-  it "allows a deadline after the current date" do
-    placement.deadline = Time.at(Time.now.to_i + 1.day.to_i)
-    placement.should be_valid
-  end
+  it {should be_valid_for_given_field(:deadline, Time.at(Time.now.to_i + 1.day.to_i))}
 
 end
