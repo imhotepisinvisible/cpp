@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe Placement do
   include AttributeValidators
-  let(:placement) { FactoryGirl.build :placement }
-  subject { placement }
+  subject { FactoryGirl.build :placement }
 
   it {should be_valid}
 
