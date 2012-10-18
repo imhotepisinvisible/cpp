@@ -1,56 +1,36 @@
 require 'spec_helper'
 
 describe Event do
-  before(:each) do
-    @event = FactoryGirl.create :event
+  include AttributeValidators
+  let(:event) { FactoryGirl.build :event }
+  subject { event }
+
+  it {should be_valid}
+
+  context "when attributes are not set" do
+    it {should be_invalid_for_nil_field(:title)}
+
+    it {should be_invalid_for_nil_field(:description)}
+
+    it {should be_invalid_for_nil_field(:start_date)}
+
+    it {should be_invalid_for_nil_field(:end_date)}
   end
 
-  it "has a valid factory" do
-    @event.should be_valid
+  context "when start_date is before the current time" do
+    it {should be_invalid_for_given_field(:start_date, Time.now - 1.day)}
   end
 
-  it "requires a title" do
-    @event.title = ""
-    @event.should be_invalid
+  context "when end_date is before start date" do
+    it {should be_invalid_for_given_field(:end_date, event.start_date - 1.day)}
+
+    it {should be_invalid_for_given_field(:end_date, event.start_date - 1.day)}
+
+    it {should be_invalid_for_given_field(:end_date, event.start_date)}
   end
 
-
-  it "requires a description" do
-    @event.description = ""
-    assert @event.should be_invalid
+  context "when the end_date is after the start_date" do
+    it {should be_valid_for_given_field(:end_date, event.start_date + 1.day)}
   end
-
-  it "requires a location" do
-    @event.description = ""
-    assert @event.should be_invalid
-  end
-
-
-  it "requires a start_date" do
-    @event.start_date = nil
-    assert @event.should be_invalid
-  end
-
-  it "requires the start date be after the current time" do
-    @event.start_date = Time.now - 1.day
-    assert @event.should be_invalid
-  end
-
-  it "requires an end_date" do
-    @event.end_date = nil
-    assert @event.should be_invalid
-  end
-
-  it "requires the end_date should be after the start_date" do
-    @event.end_date = @event.start_date - 1.day
-    assert @event.should be_invalid
-
-    @event.end_date = @event.start_date
-    assert @event.should be_invalid
-
-    @event.end_date = @event.start_date + 1.day
-    assert @event.should be_valid
-  end
-
 
 end
