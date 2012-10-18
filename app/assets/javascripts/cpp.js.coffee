@@ -4,7 +4,8 @@ window.CPP =
   Views: {}
   Routers: {}
   init: ->
-    # new CPP.Routers.Companies
+    new CPP.Routers.Companies
+    new CPP.Routers.Events
     Backbone.history.start()
 
 $(document).ready ->

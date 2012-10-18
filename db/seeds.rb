@@ -18,3 +18,17 @@ companies = Company.create([
   { :name => "Facebook", :logo => "facebook.jpg", :description => "Facebook move fast and break things" },
   { :name => "Amazon", :logo => "amazon.jpg", :description => "World's most trusted company" }
 ])
+
+companies.each do |company|
+  company.events.create({
+   :title => "Awesome event",
+   :start_date => Time.at(Time.now.to_i + 1000),
+   :end_date => Time.at(Time.now.to_i + 2000),
+   :deadline => Time.at(Time.now.to_i + 500),
+   :description => "Event Description",
+   :location => "London",
+   :capacity => 10,
+   :google_map_url => "http://maps.google.com/blah"
+  })
+  company.save
+end
