@@ -1,4 +1,7 @@
 <td><%= @company.get 'logo' %></td>
 <td><%= @company.get 'name' %></td>
 <td><%= @company.get 'description' %></td>
-<td></td>
+<td>
+  <div class="btn btn-edit">Edit</div>
+  <div class="btn btn-danger btn-delete">Delete</div>
+</td>
