@@ -38,12 +38,10 @@ class CompaniesController < ApplicationController
   def create
     @company = Company.new(params[:company])
 
-    respond_to do |format|
-      if @company.save
-        respond_with @company, status: :created, location: @company
-      else
-        respond_with @company.errors, status: :unprocessable_entity
-      end
+    if @company.save
+      respond_with @company, status: :created, location: @company
+    else
+      respond_with @company.errors, status: :unprocessable_entity
     end
   end
 
@@ -52,12 +50,10 @@ class CompaniesController < ApplicationController
   def update
     @company = Company.find(params[:id])
 
-    respond_to do |format|
-      if @company.update_attributes(params[:company])
-        head :no_content
-      else
-        render @company.errors, status: :unprocessable_entity
-      end
+    if @company.update_attributes(params[:company])
+      head :no_content
+    else
+      render @company.errors, status: :unprocessable_entity
     end
   end
 

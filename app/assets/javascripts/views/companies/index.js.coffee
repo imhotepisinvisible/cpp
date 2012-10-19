@@ -5,9 +5,6 @@ class CPP.Views.CompaniesIndex extends Backbone.View
   events:
     "click .filterbutton" : "testFunc"
 
-  testFunc: ->
-    console.log("hi") 
-
   initialize: ->
     @collection.bind 'reset', @render, @
 
@@ -19,3 +16,5 @@ class CPP.Views.CompaniesIndex extends Backbone.View
       @$('#companies').append(view.render().el)
     @
 
+  testFunc: ->
+    console.log("hi") 
