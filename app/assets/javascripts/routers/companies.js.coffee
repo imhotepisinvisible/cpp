@@ -1,6 +1,6 @@
 class CPP.Routers.Companies extends Backbone.Router
   routes:
-      '': 'index'
+      'companies': 'index'
 
   index: ->
     companies = new CPP.Collections.Companies

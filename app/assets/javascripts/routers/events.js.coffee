@@ -1,6 +1,6 @@
 class CPP.Routers.Events extends Backbone.Router
   routes:
-      '': 'index'
+      'events': 'index'
 
   index: ->
     events = new CPP.Collections.Events
