@@ -2,5 +2,7 @@
 
 FactoryGirl.define do
   factory :student do
+    email Faker::Internet.email
+    password_digest Faker::Lorem.words(2).join
   end
 end
