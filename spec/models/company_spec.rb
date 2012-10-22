@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Company do
   include AttributeValidators
-  let(:company) { FactoryGirl.create :company }
+  let(:company) { FactoryGirl.build :company }
   subject { company }
 
   context "when attributes are set" do
