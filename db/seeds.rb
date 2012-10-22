@@ -16,7 +16,12 @@ end
 companies = Company.create([
   { :name => "Google", :logo => "google.jpg", :description => "Google ins't evil" },
   { :name => "Facebook", :logo => "facebook.jpg", :description => "Facebook move fast and break things" },
-  { :name => "Amazon", :logo => "amazon.jpg", :description => "World's most trusted company" }
+  { :name => "Amazon", :logo => "amazon.jpg", :description => "World's most trusted company" },
+  { :name => "Amazon", :logo => "amazon.jpg", :description => "World's most trusted company" },
+  { :name => "Amazon", :logo => "amazon.jpg", :description => "World's most trusted company" },
+  { :name => "Amazon", :logo => "amazon.jpg", :description => "World's most trusted company" },
+  { :name => "Amazon", :logo => "amazon.jpg", :description => "World's most trusted company" },
+  { :name => "Amazon", :logo => "amazon.jpg", :description => "World's most trusted company" },
 ])
 
 companies.each do |company|

@@ -11,13 +11,17 @@ class CPP.Views.CompaniesItem extends Backbone.View
 
   render: ->
     $(@el).html(@template(company: @model))
+    console.log("model render")
     @
+    
 
   editCompany: ->
-    console.log("edit company " + @model.get("name"))
+    console.log(@model)
     @model.set {name : "EDIT"}
-    Backbone.sync "update", @model
+    @model.save
+      wait: true
 
   deleteCompany: ->
     console.log("delete company " + @model.get("name"))
     @model.destroy
+      wait: true
