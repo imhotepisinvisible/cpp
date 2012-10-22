@@ -6,9 +6,8 @@ module AttributeValidators
     end
 
     def matches?(model)
-      valid = model.valid?
       model[@attribute] = @value
-      valid and model.invalid?
+      model.invalid?
     end
 
     def failure_message_for_should
@@ -27,9 +26,8 @@ module AttributeValidators
     end
 
     def matches?(model)
-      valid = model.valid?
       model[@attribute] = @value
-      valid and model.valid?
+      model.valid?
     end
 
     def failure_message_for_should
