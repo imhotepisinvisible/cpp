@@ -24,4 +24,8 @@ describe Placement do
     it {should be_valid_for_given_field(:deadline, Time.at(Time.now.to_i + 1.day.to_i))}
   end
 
+  it "should fail" do
+    raise "ARGHHHHHH"
+  end
+
 end
