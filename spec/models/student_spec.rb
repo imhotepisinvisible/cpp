@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe Student do
-  it_behaves_like "a user"
+
+  it_should_behave_like "a user" do
+    let(:user) { FactoryGirl.create :student }
+  end
+
 end

@@ -3,11 +3,16 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  # TODO: Validate students have only IC/other email addresses.
   validates :email,           :presence => true
   validates :password_digest, :presence => true, :on => :create
 
-  validates :password, :length =>
-    { :minimum => 8,
-      :too_short => "password is too short, must be at least %{count} characters"
-    }
+  validates :type, :inclusion => { :in => %w(company admin student),
+    :message => "%{:type} is not a valid user type" }
+
+  validates :password, :length =>{
+    :minimum => 8,
+    :too_short => "password is too short, must be at least %{count} characters"
+  }
+
 end
