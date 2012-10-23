@@ -62,7 +62,7 @@ group :test, :development do
   gem 'shoulda-matchers'
 
   gem 'pry' # Awesome developer console http://pryrepl.org/
-  gem 'ffaker' # For faking data
+  gem 'faker' # For faking data
   gem 'database_cleaner'
 end
 
