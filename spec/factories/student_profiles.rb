@@ -2,7 +2,6 @@
 
 FactoryGirl.define do
   factory :student_profile do
-    user_id_needs_fixing
     standard_bio
     beng_student
     first_year
@@ -37,11 +36,6 @@ FactoryGirl.define do
 
     trait :fourth_year do
       year "4"
-    end
-
-    # TODO: How to get just user?
-    trait :user_id_needs_fixing do
-      user_id 1
     end
 
     trait :standard_bio do
