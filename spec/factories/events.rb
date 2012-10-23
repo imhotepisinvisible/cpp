@@ -10,7 +10,7 @@ FactoryGirl.define do
     description Faker::Company.bs
     location Faker::Address.street_address
     capacity Random.rand(100)
-    google_map_url Faker::Internet.http_url
+    google_map_url Faker::Internet.url
   end
 end
 
