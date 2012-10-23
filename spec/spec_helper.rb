@@ -94,6 +94,7 @@ require 'rspec/autorun'
 require 'database_cleaner'
 require 'support/factory_helper'
 require 'support/attribute_validators'
+require 'support/behaviours'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
