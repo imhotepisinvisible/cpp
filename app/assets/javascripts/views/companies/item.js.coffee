@@ -12,7 +12,6 @@ class CPP.Views.CompaniesItem extends CPP.Views.Base
   render: ->
     $(@el).html(@template(company: @model))
     @
-    
 
   editCompany: ->
     Backbone.history.navigate("companies/" + @model.id + "/edit", trigger: true)

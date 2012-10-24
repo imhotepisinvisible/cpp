@@ -4,11 +4,12 @@
     <div><button class="filterbutton" type="button">Click Me</button></div>
   </div>
   <div class="span9">
-    <h1 class="section-header">Companies</h1>
-    <div class="table-toolbar">
+    <h1 class="section-header">Companies
       <div class="btn pull-right">
         Add Company
       </div>
+    </h1>
+    <div class="table-toolbar">
       <div class="clear"></div>
     </div>
     <table class="table table-bordered">
