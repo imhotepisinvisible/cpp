@@ -2,8 +2,7 @@ class CPP.Views.CompaniesItem extends Backbone.View
   tagName: "tr"
   template: JST['companies/item']
 
-  initialize: (options) ->
-    @router = options.router
+  initialize: ->
     @model.bind 'change', @render, @
   
   events: 
