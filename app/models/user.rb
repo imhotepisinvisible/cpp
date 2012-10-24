@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   validates :password_digest, :presence => true, :on => :create
 
   validates :type, :inclusion => { :in => %w(Student),
-    :message => "%{:type} is not a valid user type" }
+    :message => "%{type} is not a valid user type" }
 
   validates :password, :length =>{
     :minimum => 8,
