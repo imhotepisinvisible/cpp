@@ -2,7 +2,11 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    if params.keys.include? "company_id"
+      @events = Event.find_all_by_company_id(params[:company_id], :limit => 3)
+    else
+      @events = Event.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
