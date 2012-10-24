@@ -14,7 +14,7 @@ window.notify = (alert_class, message) ->
   n.removeClass()
   n.addClass("alert alert-" + alert_class)
   n.html(message)
-  n.slideDown()
+  n.slideDown().delay(2000).slideUp()
 
 $(document).ready ->
   $.ajaxSetup
