@@ -7,10 +7,6 @@ class StudentProfile < ActiveRecord::Base
   validates :bio,        :presence => true
   validates :degree,     :presence => true
 
-
-  validates :year, :inclusion => { :in => %w(1 2 3 4),
-    :message => "%{value} is not a valid year" }
-
   # TODO: How much do we want to limit it to? Also do we want to force them to
   # have a bio? Should we make :in be 0..500?
   validates :bio, :length => {

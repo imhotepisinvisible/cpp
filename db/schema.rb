@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(:version => 20121018175110) do
 
   create_table "student_profiles", :force => true do |t|
     t.integer  "user_id"
-    t.string   "year"
+    t.integer  "year"
     t.text     "bio"
     t.text     "degree"
     t.datetime "created_at", :null => false
