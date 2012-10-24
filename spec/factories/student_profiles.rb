@@ -10,7 +10,7 @@ FactoryGirl.define do
       degree "BEng"
     end
 
-    trait :meng_studnet do
+    trait :meng_student do
       degree "MEng"
     end
 
