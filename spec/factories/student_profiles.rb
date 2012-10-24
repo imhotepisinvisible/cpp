@@ -23,19 +23,19 @@ FactoryGirl.define do
     end
 
     trait :first_year do
-      year "1"
+      year 1
     end
 
     trait :second_year do
-      year "2"
+      year 2
     end
 
     trait :third_year do
-      year "3"
+      year 3
     end
 
     trait :fourth_year do
-      year "4"
+      year 4
     end
 
     trait :standard_bio do
