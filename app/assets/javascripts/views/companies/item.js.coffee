@@ -21,3 +21,7 @@ class CPP.Views.CompaniesItem extends Backbone.View
   deleteCompany: ->
     @model.destroy
       wait: true
+      success: (model, response) ->
+        notify "success", "Company deleted"
+      error: (model, response) ->
+        notify "error", "Company could not be deleted"
