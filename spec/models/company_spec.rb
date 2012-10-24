@@ -11,8 +11,11 @@ describe Company do
   end
 
   context "when attributes are not set" do
-    it { should be_invalid_for_nil_field(:name) }
-    it { should be_invalid_for_nil_field(:description) }
+    fields = [:name, :description, :logo]
+
+    fields.each do |field|
+      it { should be_invalid_for_nil_field(field) }
+    end
   end
 
 end
