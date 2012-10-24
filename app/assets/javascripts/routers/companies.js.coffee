@@ -8,7 +8,6 @@ class CPP.Routers.Companies extends Backbone.Router
     companies = new CPP.Collections.Companies
     new CPP.Views.CompaniesIndex
       collection: companies
-      router: @
     companies.fetch()
 
   view: (id) ->

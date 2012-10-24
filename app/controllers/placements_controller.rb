@@ -3,9 +3,9 @@ class PlacementsController < ApplicationController
   # GET /placements.json
   def index
     if params.keys.include? "company_id"
-      @placements = Event.find_all_by_company_id(params[:company_id], :limit => 3)
+      @placements = Placement.find_all_by_company_id(params[:company_id], :limit => 3)
     else
-      @placements = Event.all
+      @placements = Placement.all
     end
 
     respond_to do |format|

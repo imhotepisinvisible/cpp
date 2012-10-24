@@ -12,9 +12,14 @@ class CPP.Views.CompaniesEdit extends Backbone.View
   render: ->
     $(@el).html(@template(company: @model))
 
-    events_partial = new CPP.Views.EventsPartial
+    new CPP.Views.EventsPartial
       el: $(@el).find('#events-partial')
       collection: @model.events
+    
+    new CPP.Views.PlacementsPartial
+      el: $(@el).find('#placements-partial')
+      collection: @model.placements
+
     @
 
   editCompany: ->

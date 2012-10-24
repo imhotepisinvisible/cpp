@@ -14,6 +14,10 @@ class CPP.Views.CompaniesView extends Backbone.View
     events_partial = new CPP.Views.EventsPartial
       el: $(@el).find('#events-partial')
       collection: @model.events
+
+    placements_partial = new CPP.Views.PlacementsPartial
+      el: $(@el).find('#placements-partial')
+      collection: @model.placements
     @
 
   log: ->

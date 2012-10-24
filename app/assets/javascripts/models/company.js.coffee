@@ -3,7 +3,7 @@ class CPP.Models.Company extends Backbone.Model
     @events = new CPP.Collections.Events
     @events.url = '/companies/' + this.id + '/events'
     @events.fetch()
-    @events.on("reset", @eventsUpdated)
 
-  eventsUpdated: ->
-    console.log "EVENTS UPDATED"
+    @placements = new CPP.Collections.Placements
+    @placements.url = '/companies/' + this.id + '/placements'
+    @placements.fetch()   

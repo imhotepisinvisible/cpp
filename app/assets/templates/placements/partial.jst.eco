@@ -1,0 +1,8 @@
+<h1 class="section-header">
+  <i class="icon-briefcase"></i>
+  Placement
+  <div class="btn pull-right">Add New</div>
+</h1>
+<ul id="placements" class="cpp-list">
+</ul>
+<div class="see-all-link">See all</div>
