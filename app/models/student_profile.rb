@@ -28,11 +28,11 @@ class StudentProfile < ActiveRecord::Base
     when "Msc"
       range = 1..1
     else
-      errors.add(:degree, "Degree isn't valid")
+      errors.add(:degree, "#{degree} isn't a valid degree type")
     end
 
-    if range and !range.cover?(year.to_i)
-      errors.add(:year, "Year is not valid for degree type %{:degree}")
+    if range and !range.cover?(year)
+      errors.add(:year, "#{year} is not valid for degree type #{degree}")
     end
   end
 end

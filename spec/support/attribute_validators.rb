@@ -6,16 +6,17 @@ module AttributeValidators
     end
 
     def matches?(model)
+      @model = model
       model[@attribute] = @value
       model.invalid?
     end
 
     def failure_message_for_should
-      "#{@attribute} was valid with the given value #{@value}"
+      "#{@model.errors.full_messages} was valid with #{@attribute}: #{@value}"
     end
 
     def failure_message_for_should_not
-      "#{@attribute} was invalid with the given value #{@value}"
+      "#{@model.errors.full_messages} was invalid with #{@attribute}: #{@value}"
     end
   end
 
@@ -26,16 +27,17 @@ module AttributeValidators
     end
 
     def matches?(model)
+      @model = model
       model[@attribute] = @value
       model.valid?
     end
 
     def failure_message_for_should
-      "#{@attribute} was invalid with the given value #{@value}"
+      "#{@model.errors.full_messages} was invalid with #{@attribute}: #{@value}"
     end
 
     def failure_message_for_should_not
-      "#{@attribute} was valid with the given value #{@value}"
+      "#{@model.errors.full_messages} was valid with #{@attribute}: #{@value}"
     end
   end
 
