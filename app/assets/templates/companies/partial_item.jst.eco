@@ -1,9 +1,0 @@
-<a href="#">
-  <div class="link-title">
-    <%= @placement.get 'title' %>
-    <div class="btn btn-mini pull-right">Placements</div>
-  </div>
-  <div class="link-description">
-    <%= @placement.get 'description' %>
-  </div>
-</a>
