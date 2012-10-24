@@ -1,8 +1,0 @@
-<h1 class="section-header">
-  <i class="icon-calendar"></i>
-  Placements
-  <div class="btn pull-right">Add New</div>
-</h1>
-<ul id="events" class="cpp-list">
-</ul>
-<div class="see-all-link">See all</div>
