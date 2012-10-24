@@ -1,3 +1,7 @@
+require 'factory_girl'
+require Rails.root.join("spec/support/factory_helper.rb")
+Dir[Rails.root.join("spec/factories/*.rb")].each {|f| require f}
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -13,27 +17,12 @@ team.each do |team_member|
 end
 
 # Sample Companies
-companies = Company.create([
-  { :name => "Google", :logo => "google.jpg", :description => "Google ins't evil" },
-  { :name => "Facebook", :logo => "facebook.jpg", :description => "Facebook move fast and break things" },
-  { :name => "Amazon", :logo => "amazon.jpg", :description => "World's most trusted company" },
-  { :name => "Amazon", :logo => "amazon.jpg", :description => "World's most trusted company" },
-  { :name => "Amazon", :logo => "amazon.jpg", :description => "World's most trusted company" },
-  { :name => "Amazon", :logo => "amazon.jpg", :description => "World's most trusted company" },
-  { :name => "Amazon", :logo => "amazon.jpg", :description => "World's most trusted company" },
-  { :name => "Amazon", :logo => "amazon.jpg", :description => "World's most trusted company" },
-])
+10.times do
+  FactoryGirl.create :company
+end
 
-companies.each do |company|
-  company.events.create({
-   :title => "Awesome event",
-   :start_date => Time.at(Time.now.to_i + 1000),
-   :end_date => Time.at(Time.now.to_i + 2000),
-   :deadline => Time.at(Time.now.to_i + 500),
-   :description => "Event Description",
-   :location => "London",
-   :capacity => 10,
-   :google_map_url => "http://maps.google.com/blah"
-  })
-  company.save
+Company.all.each do |company|
+  5.times do
+    FactoryGirl.create(:event, :company => company)
+  end
 end
