@@ -58,9 +58,11 @@ CPP::Application.routes.draw do
 
   resources :companies
   resources :events
+  resources :placements
 
   resources :companies do
     resources :events
+    resources :placements
   end
 
   # Samples/Mockups

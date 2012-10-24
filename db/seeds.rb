@@ -22,7 +22,13 @@ end
 end
 
 Company.all.each do |company|
+  # Create events
   5.times do
     FactoryGirl.create(:event, :company => company)
+  end
+
+  # Create placements
+  5.times do
+    FactoryGirl.create(:placement, :company => company)
   end
 end
