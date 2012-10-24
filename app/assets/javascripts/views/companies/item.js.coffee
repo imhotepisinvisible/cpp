@@ -1,8 +1,9 @@
 class CPP.Views.CompaniesItem extends Backbone.View
   tagName: "tr"
   template: JST['companies/item']
-  
-  initialize: ->
+
+  initialize: (options) ->
+    @router = options.router
     @model.bind 'change', @render, @
   
   events: 
@@ -11,17 +12,17 @@ class CPP.Views.CompaniesItem extends Backbone.View
 
   render: ->
     $(@el).html(@template(company: @model))
-    console.log("model render")
     @
     
 
   editCompany: ->
-    console.log(@model)
-    @model.set {name : "EDIT"}
-    @model.save
-      wait: true
+    
+    @router.navigate("companies/" + @model.id, trigger: true)
+    
+    #@model.set {name : "EDIT"}
+    #@model.save
+    #  wait: true
 
   deleteCompany: ->
-    console.log("delete company " + @model.get("name"))
     @model.destroy
       wait: true
