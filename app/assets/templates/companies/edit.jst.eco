@@ -11,49 +11,8 @@
 </div>
 
 <div class="row">
-  <div class="span6">
-    <h1 class="section-header">
-      <i class="icon-calendar"></i>
-      Events
-      <div class="btn pull-right">Add New</div>
-    </h1>
-    <ul class="cpp-list">
-      <li>
-        <a href="#">
-          <div class="link-title">
-            Event 1
-            <div class="btn btn-mini pull-right">Edit</div>
-          </div>
-          <div class="link-description">
-            adsfas
-          </div>
-          
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <div class="link-title">
-            Event 2
-            <div class="btn btn-mini pull-right">Edit</div>
-          </div>
-          <div class="link-description">
-            dsfasdfsdfsdf
-          </div>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <div class="link-title">
-            Event 3
-            <div class="btn btn-mini pull-right">Edit</div>
-          </div>
-          <div class="link-description">
-            dfasdfsdfdsfd
-          </div>
-        </a>
-      </li>
-    </ul>
-    <div class="see-all-link">sdfsdfdf</div>
+  <div class="span6" id="events-partial">
+    
   </div>
   <div class="span6">
     <h1 class="section-header">
