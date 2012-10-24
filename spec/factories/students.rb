@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :student, parent: :user do
-    type "student"
+    type "Student"
   end
 end
