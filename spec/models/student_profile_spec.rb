@@ -17,7 +17,16 @@ describe StudentProfile do
     end
   end
 
-# TODO: How to check they can't enter a year above 4?
+  context "when assigning an unknown degree" do
+    subject {FactoryGirl.build(:student_profile, :first_year, degree: "degree")}
+    it {should be_invalid}
+  end
+
+  context "when assigning an invalid year year" do
+    student = FactoryGirl.build(:student_profile, :beng_student, year: 5)
+    it {should be_invalid}
+  end
+
   context "when assigning students with a year" do
     full_range = 1..4
 
