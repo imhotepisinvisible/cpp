@@ -1,5 +1,5 @@
 class StudentProfile < ActiveRecord::Base
-  belongs_to :student
+  belongs_to :student, :foreign_key => "id"
 
   # TODO: user_id?
   # validates :user_id,    :presence => true

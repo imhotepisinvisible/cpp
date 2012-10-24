@@ -13,7 +13,10 @@ Dir[Rails.root.join("spec/factories/*.rb")].each {|f| require f}
 # Sample Users
 team = %w( peter tom jack sarah )
 team.each do |team_member|
-  User.create([{email: "#{team_member}@cpp.com", :password => "cpp", :password_confirmation => "cpp"}])
+  s = FactoryGirl.create :student,  { email: "#{team_member}@cpp.com",
+                                      password: "cppcppcpp",
+                                      password_confirmation: "cppcppcpp"
+                                    }
 end
 
 # Sample Companies
