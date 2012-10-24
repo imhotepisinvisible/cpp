@@ -1,4 +1,4 @@
-class CPP.Views.EventsIndex extends Backbone.View
+class CPP.Views.EventsIndex extends CPP.Views.Base
   el: '#app'
   template: JST['events/index']
 

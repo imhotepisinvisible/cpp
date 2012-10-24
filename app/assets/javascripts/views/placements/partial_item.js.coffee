@@ -1,4 +1,4 @@
-class CPP.Views.PlacementsPartialItem extends Backbone.View
+class CPP.Views.PlacementsPartialItem extends CPP.Views.Base
   tagName: "li"
 
   template: JST['placements/partial_item']

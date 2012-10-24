@@ -1,4 +1,4 @@
-class CPP.Views.CompaniesView extends Backbone.View
+class CPP.Views.CompaniesView extends CPP.Views.Base
   el: "#app"
   template: JST['companies/view']
     

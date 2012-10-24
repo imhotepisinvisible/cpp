@@ -1,4 +1,4 @@
-class CPP.Views.CompaniesItem extends Backbone.View
+class CPP.Views.CompaniesItem extends CPP.Views.Base
   tagName: "tr"
   template: JST['companies/item']
 

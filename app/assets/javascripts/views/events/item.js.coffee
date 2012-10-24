@@ -1,4 +1,4 @@
-class CPP.Views.EventsItem extends Backbone.View
+class CPP.Views.EventsItem extends CPP.Views.Base
   tagName: "tr"
 
   template: JST['events/item']

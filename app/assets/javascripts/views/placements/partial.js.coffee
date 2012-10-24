@@ -1,4 +1,4 @@
-class CPP.Views.PlacementsPartial extends Backbone.View
+class CPP.Views.PlacementsPartial extends CPP.Views.Base
   template: JST['placements/partial']
 
   initialize: ->

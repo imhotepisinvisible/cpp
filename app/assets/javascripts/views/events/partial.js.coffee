@@ -1,4 +1,4 @@
-class CPP.Views.EventsPartial extends Backbone.View
+class CPP.Views.EventsPartial extends CPP.Views.Base
   template: JST['events/partial']
 
   initialize: ->
