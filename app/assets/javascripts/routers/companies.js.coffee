@@ -11,17 +11,17 @@ class CPP.Routers.Companies extends Backbone.Router
     companies.fetch()
 
   view: (id) ->
-    companies = new CPP.Collections.Companies
-    companies.fetch
+    company = new CPP.Models.Company id: id
+    company.fetch
       success: ->
-        new CPP.Views.CompaniesView model: companies.get(id)
+        new CPP.Views.CompaniesView model: company
       error: ->
-        console.log "Couldn't fetch companies"
+        notify "error", "Couldn't fetch companies"
 
   edit: (id) ->
-    companies = new CPP.Collections.Companies
-    companies.fetch
+    company = new CPP.Models.Company id: id
+    company.fetch
       success: ->
-        new CPP.Views.CompaniesEdit model: companies.get(id)
+        new CPP.Views.CompaniesEdit model: company
       error: ->
-        console.log "Couldn't fetch companies"
+        notify "error", "Couldn't fetch companies"

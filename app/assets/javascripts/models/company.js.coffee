@@ -6,4 +6,7 @@ class CPP.Models.Company extends Backbone.Model
 
     @placements = new CPP.Collections.Placements
     @placements.url = '/companies/' + this.id + '/placements'
-    @placements.fetch()   
+    @placements.fetch()
+
+  url: ->
+    "/companies/" + @id
