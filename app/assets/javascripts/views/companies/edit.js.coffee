@@ -1,11 +1,12 @@
 class CPP.Views.CompaniesEdit extends Backbone.View
   el: "#app"
   template: JST['companies/edit']
-    
+  
+  events:
+    "click .btn-edit" : "editCompany"
 
   initialize: ->
-    #@model.bind 'change', @render, @
-    # _.bindAll @, 'render'
+    @model.bind 'change', @render, @
     @render()
 
   render: ->
@@ -16,5 +17,7 @@ class CPP.Views.CompaniesEdit extends Backbone.View
       collection: @model.events
     @
 
-  log: ->
-    console.log "logging!!"
+  editCompany: ->
+    @model.set {name : "EDIT"}
+    @model.save
+      wait: true

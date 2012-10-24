@@ -16,12 +16,7 @@ class CPP.Views.CompaniesItem extends Backbone.View
     
 
   editCompany: ->
-    
     @router.navigate("companies/" + @model.id, trigger: true)
-    
-    #@model.set {name : "EDIT"}
-    #@model.save
-    #  wait: true
 
   deleteCompany: ->
     @model.destroy
