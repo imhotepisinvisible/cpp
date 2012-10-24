@@ -20,7 +20,7 @@ module AttributeValidators
     end
 
     def description
-      "model should be invalid for attribute #{attribute}"
+      "model should be invalid for attribute #{@attribute}"
     end
   end
 
@@ -45,7 +45,7 @@ module AttributeValidators
     end
 
     def description
-      "model should be valid for attribute #{attribute}"
+      "model should be valid for attribute #{@attribute}"
     end
 
   end
