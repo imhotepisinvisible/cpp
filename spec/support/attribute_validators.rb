@@ -18,6 +18,10 @@ module AttributeValidators
     def failure_message_for_should_not
       "#{@model.errors.full_messages} was invalid with #{@attribute}: #{@value}"
     end
+
+    def description
+      "model should be invalid for attribute #{attribute}"
+    end
   end
 
   class ValidMatcher
@@ -39,6 +43,11 @@ module AttributeValidators
     def failure_message_for_should_not
       "#{@model.errors.full_messages} was valid with #{@attribute}: #{@value}"
     end
+
+    def description
+      "model should be valid for attribute #{attribute}"
+    end
+
   end
 
 
