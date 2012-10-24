@@ -1,4 +1,4 @@
-guard 'spork', cucumber: false, cucumber_env: {'RAILS_ENV' => 'test'}, rspec_env: {'RAILS_ENV' => 'test'} do
+guard 'spork', rspec_env: {'RAILS_ENV' => 'test'} do
   watch('config/application.rb')
   watch('config/environment.rb')
   watch(%r{^config/environments/.+\.rb$})
@@ -10,7 +10,7 @@ guard 'spork', cucumber: false, cucumber_env: {'RAILS_ENV' => 'test'}, rspec_env
   watch(%r{features/support/}) { :cucumber }
 end
 
-guard 'rspec', cli: '--color --format nested --fail-fast --drb', all_after_pass: false, all_on_start: false do
+guard 'rspec', cli: '--color --format nested --fail-fast --drb', all_after_pass: false, all_on_start: true do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { 'spec' }
