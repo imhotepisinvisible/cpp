@@ -32,4 +32,5 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
         notify "success", "Event Saved"
       error: (model, company)->
         notify "error", "Event can not be saved"
+    Backbone.history.navigate('/companies', trigger: true)
         
