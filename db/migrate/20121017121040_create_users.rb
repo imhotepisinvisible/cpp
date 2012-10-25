@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration
 
       t.string :type
       t.integer :student_profile_id
+      t.integer :organisation_id
 
       t.timestamps
     end

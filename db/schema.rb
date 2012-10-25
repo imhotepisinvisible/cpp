@@ -11,14 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121018175110) do
+ActiveRecord::Schema.define(:version => 20121024163053) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
     t.string   "logo"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "organisation_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "events", :force => true do |t|
@@ -33,6 +34,19 @@ ActiveRecord::Schema.define(:version => 20121018175110) do
     t.string   "google_map_url"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+  end
+
+  create_table "organisation_domains", :force => true do |t|
+    t.integer  "organisation_id"
+    t.string   "domain"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "organisations", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "placements", :force => true do |t|
@@ -60,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20121018175110) do
     t.string   "password_digest"
     t.string   "type"
     t.integer  "student_profile_id"
+    t.integer  "organisation_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end

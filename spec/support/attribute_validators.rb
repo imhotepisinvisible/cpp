@@ -11,12 +11,13 @@ module AttributeValidators
       model.invalid?
     end
 
+    # TODO there will be no errors
     def failure_message_for_should
-      "#{@model.errors.full_messages} was valid with #{@attribute}: #{@value}"
+      "#{@model.errors.full_messages} was valid with #{@attribute}: #{@value.inspect}"
     end
 
     def failure_message_for_should_not
-      "#{@model.errors.full_messages} was invalid with #{@attribute}: #{@value}"
+      "#{@model.errors.full_messages} was invalid with #{@attribute}: #{@value.inspect}"
     end
 
     def description
