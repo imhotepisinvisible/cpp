@@ -1,4 +1,10 @@
-<h1 class="section-header">Create a New Event</h1>
+<h1 class="section-header">
+  <% if @event.isNew(): %>
+    Create a New Event
+  <% else: %>
+    <%= @event.get 'title' %>
+  <% end %>
+</h1>
 <div class="row">
   <div class="span4">
     <div class="company-logo-large">
