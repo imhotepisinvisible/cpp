@@ -21,36 +21,42 @@
         <label class="control-label" for="title">Event Title</label>
         <div class="controls">
           <input type="text" id="title" placeholder="e.g. CV Workshop">
+          <span class="help-inline"></span>
         </div>
       </div>
       <div class="control-group">
         <label class="control-label" for="start_date">Start Date</label>
         <div class="controls">
           <input type="text" id="start_date" placeholder="DD/MM/YYYY">
+          <span class="help-inline"></span>
         </div>
       </div>
       <div class="control-group">
         <label class="control-label" for="end_date">End Date</label>
         <div class="controls">
           <input type="text" id="end_date" placeholder="DD/MM/YYYY">
+          <span class="help-inline"></span>
         </div>
       </div>
       <div class="control-group">
         <label class="control-label" for="deadline">Sign Up Before</label>
         <div class="controls">
           <input type="text" id="deadline" placeholder="DD/MM/YYYY">
+          <span class="help-inline"></span>
         </div>
       </div>
       <div class="control-group">
         <label class="control-label" for="description">Description</label>
         <div class="controls">
           <textarea rows="3" id="description" placeholder="e.g. Get CV feedback"></textarea>
+          <span class="help-inline"></span>
         </div>
       </div>
       <div class="control-group">
         <label class="control-label" for="location">Location</label>
         <div class="controls">
           <input type="text" id="location" placeholder="e.g. 311 Huxley">
+          <span class="help-inline"></span>
         </div>
       </div>
 
@@ -58,18 +64,21 @@
         <label class="control-label" for="capacity">Capacity</label>
         <div class="controls">
           <input type="text" id="capacity" placeholder="e.g. 100">
+          <span class="help-inline"></span>
         </div>
       </div>      
       <div class="control-group">
         <label class="control-label" for="google_map_url">Map</label>
         <div class="controls">
           <input type="text" id="google_map_url" placeholder="Map">
+          <span class="help-inline"></span>
         </div>
       </div>
       <div class="control-group">
         <label class="control-label" for="company_id">Co ID!</label>
         <div class="controls">
           <input type="text" id="company_id" placeholder="123">
+          <span class="help-inline"></span>
         </div>
       </div>
       <div class="control-group">

@@ -25,6 +25,8 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
     @
 
   submitEvent: ->
+    $('.control-group').removeClass('error')
+    $('.help-inline').html('')
     @model.save {},
       wait: true
       success: (model, response) ->
@@ -33,6 +35,8 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
         errors = JSON.parse response.responseText
         errorText = "<h5>Event cannot be saved, please fix the following errors:</h5>"
         for field, error of errors
+          $('#' + field).parent().parent().addClass('error')
+          $('#' + field).parent().append("<span class=\"help-inline\">#{error}</span>")
           errorText += "<li>#{field} - #{error}</li>"
 
         notify "error", errorText
