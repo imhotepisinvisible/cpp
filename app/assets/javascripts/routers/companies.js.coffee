@@ -6,9 +6,11 @@ class CPP.Routers.Companies extends Backbone.Router
 
   index: ->
     companies = new CPP.Collections.Companies
-    new CPP.Views.CompaniesIndex
-      collection: companies
-    companies.fetch()
+    companies.fetch
+      success: ->
+        new CPP.Views.CompaniesIndex collection: companies
+      error: ->
+        notify "error", "Couldn't fetch companies"
 
   view: (id) ->
     company = new CPP.Models.Company id: id
@@ -16,7 +18,7 @@ class CPP.Routers.Companies extends Backbone.Router
       success: ->
         new CPP.Views.CompaniesView model: company
       error: ->
-        notify "error", "Couldn't fetch companies"
+        notify "error", "Couldn't fetch company"
 
   edit: (id) ->
     company = new CPP.Models.Company id: id
@@ -24,4 +26,4 @@ class CPP.Routers.Companies extends Backbone.Router
       success: ->
         new CPP.Views.CompaniesEdit model: company
       error: ->
-        notify "error", "Couldn't fetch companies"
+        notify "error", "Couldn't fetch company"

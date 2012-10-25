@@ -9,4 +9,4 @@ class CPP.Models.Company extends Backbone.Model
     @placements.fetch()
 
   url: ->
-    "/companies/" + @id
+    '/companies' + (if @isNew() then '' else '/' + @id)
