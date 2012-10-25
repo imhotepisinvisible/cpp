@@ -2,7 +2,7 @@ class CPP.Views.EventsPartial extends CPP.Views.Base
   template: JST['events/partial']
 
   events:
-    "click .btn-add" : "addCompany"
+    "click .btn-add" : "addEvent"
 
   initialize: ->
     @collection.bind 'reset', @render, @
@@ -16,5 +16,6 @@ class CPP.Views.EventsPartial extends CPP.Views.Base
       @$('#events').append(view.render().el)
     @
 
-  addCompany: ->
+  addEvent: ->
+    
     Backbone.history.navigate("events/new", trigger: true)

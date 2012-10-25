@@ -1,7 +1,7 @@
-<a href="#">
+<a>
   <div class="link-title">
     <%= @event.get 'title' %>
-    <div class="btn btn-mini pull-right">Edit</div>
+    <div class="btn btn-mini pull-right btn-edit">Edit</div>
   </div>
   <div class="link-description">
     <%= @event.get 'description' %>
