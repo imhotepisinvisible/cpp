@@ -2,7 +2,8 @@ class Company < ActiveRecord::Base
 	has_many :events
   has_many :placements
 
-  validates :name,        :presence => true
+  validates :name, :presence => true
+  validates :logo, :presence => true
 
   # TODO: test the messages
   validates :description, :length => {

@@ -2,8 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.1'
 
-
-
 # Twitter Bootstrapping
 gem 'twitter-bootstrap-rails'
 
@@ -23,6 +21,11 @@ gem 'bootstrap-will_paginate'
 gem 'cantango' # Nice role based access control
 gem 'bcrypt-ruby' # For password encryption
 
+gem 'backbone-on-rails' # Nice client side JS framework
+gem 'underscore' # Templating for backboneJS
+
+gem 'thin' # Better server :)
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -34,27 +37,37 @@ gem 'haml-rails'
 gem 'simple_form'       # Nice forms
 gem 'rufus-scheduler'   # Task Scheduling
 
+group :production do
+  gem 'pg' # Required by postgres
+end
+
 group :development do
   gem 'rails3-generators' # for factory_girl_rails and simple_form
   gem 'heroku'            # Useful for deploying for demos
   gem 'sqlite3'           # Local development
   gem 'lorem'
   gem 'rails-erd'
-end
 
-group :production do
-  gem 'pg' # Required by postgres
+  # Auto-Run tests
+  gem 'guard-rspec'
+  gem 'guard-spork'
+  gem 'rb-fsevent'
 end
 
 group :test, :development do
   gem 'rspec-rails'
   gem 'rspec-instafail'
-  gem 'shoulda'
+
+  gem 'factory_girl_rails', :require => false # Easy fixtures
+  gem 'shoulda-matchers'
 
   gem 'pry' # Awesome developer console http://pryrepl.org/
-  gem 'factory_girl_rails' # Easy fixtures
-  gem 'ffaker' # For faking data
+  gem 'faker' # For faking data
   gem 'database_cleaner'
+end
+
+group :test do
+  gem 'spork-rails'
 end
 
 # To use ActiveModel has_secure_password

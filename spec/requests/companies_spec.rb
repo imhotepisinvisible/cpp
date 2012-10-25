@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe SiteController do
+describe "Companies" do
 
 end

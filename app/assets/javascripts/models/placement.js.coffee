@@ -1,0 +1,1 @@
+class CPP.Models.Placement extends Backbone.Model
