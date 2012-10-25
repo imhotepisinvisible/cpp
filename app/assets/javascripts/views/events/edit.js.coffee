@@ -27,10 +27,12 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
   submitEvent: ->
     @model.save {},
       wait: true
-      success: (model, company) ->
-        console.log "sent"
+      success: (model, response) ->
         notify "success", "Event Saved"
-      error: (model, company)->
-        notify "error", "Event can not be saved"
-    Backbone.history.navigate('/companies', trigger: true)
-        
+      error: (model, response)->
+        errors = JSON.parse response.responseText
+        errorText = "<h5>Event cannot be saved, please fix the following errors:</h5>"
+        for field, error of errors
+          errorText += "<li>#{field} - #{error}</li>"
+
+        notify "error", errorText
