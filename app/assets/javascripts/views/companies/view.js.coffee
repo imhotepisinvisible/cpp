@@ -1,11 +1,8 @@
 class CPP.Views.CompaniesView extends CPP.Views.Base
   el: "#app"
   template: JST['companies/view']
-    
 
   initialize: ->
-    #@model.bind 'change', @render, @
-    # _.bindAll @, 'render'
     @render()
 
   render: ->
@@ -19,6 +16,3 @@ class CPP.Views.CompaniesView extends CPP.Views.Base
       el: $(@el).find('#placements-partial')
       collection: @model.placements
     @
-
-  log: ->
-    console.log "logging!!"

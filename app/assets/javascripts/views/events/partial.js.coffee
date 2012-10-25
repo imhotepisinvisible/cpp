@@ -4,7 +4,8 @@ class CPP.Views.EventsPartial extends CPP.Views.Base
   events:
     "click .btn-add" : "addEvent"
 
-  initialize: ->
+  initialize: (options) ->
+    @editable = options.editable
     @collection.bind 'reset', @render, @
     @render()
 
@@ -13,7 +14,7 @@ class CPP.Views.EventsPartial extends CPP.Views.Base
 
     @collection.each (event) =>
       view = new CPP.Views.EventsPartialItem model: event
-      @$('#events').append(view.render().el)
+      @$('#events').append(view.render(editable: @editable).el)
     @
 
   addEvent: ->
