@@ -6,10 +6,7 @@ class CompaniesController < ApplicationController
   def index
     @companies = Company.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @companies }
-    end
+    respond_with @company
   end
 
   # GET /companies/1
@@ -26,11 +23,6 @@ class CompaniesController < ApplicationController
     @company = Company.new
 
     respond_with @company
-  end
-
-  # GET /companies/1/edit
-  def edit
-    @company = Company.find(params[:id])
   end
 
   # POST /companies

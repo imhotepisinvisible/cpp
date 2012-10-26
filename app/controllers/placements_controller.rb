@@ -8,37 +8,23 @@ class PlacementsController < ApplicationController
       @placements = Placement.all
     end
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @placements }
-    end
+    respond_with @placements
   end
 
   # GET /placements/1
   # GET /placements/1.json
   def show
     @placement = Placement.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @placement }
-    end
+    
+    respond_with @placement
   end
 
   # GET /placements/new
   # GET /placements/new.json
   def new
     @placement = Placement.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @placement }
-    end
-  end
-
-  # GET /placements/1/edit
-  def edit
-    @placement = Placement.find(params[:id])
+    
+    respond_with @placement
   end
 
   # POST /placements
@@ -46,14 +32,10 @@ class PlacementsController < ApplicationController
   def create
     @placement = Placement.new(params[:placement])
 
-    respond_to do |format|
-      if @placement.save
-        format.html { redirect_to @placement, notice: 'Placement was successfully created.' }
-        format.json { render json: @placement, status: :created, location: @placement }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @placement.errors, status: :unprocessable_entity }
-      end
+    if @placement.save
+      respond_with @placement, status: :created, location: @placement
+    else
+      respond_with @placement.errors, status: :unprocessable_entity
     end
   end
 
@@ -62,14 +44,10 @@ class PlacementsController < ApplicationController
   def update
     @placement = Placement.find(params[:id])
 
-    respond_to do |format|
-      if @placement.update_attributes(params[:placement])
-        format.html { redirect_to @placement, notice: 'Placement was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @placement.errors, status: :unprocessable_entity }
-      end
+    if @placement.update_attributes(params[:placement])
+      head :no_content
+    else
+      respond_with @placement.errors, status: :unprocessable_entity
     end
   end
 
@@ -78,10 +56,6 @@ class PlacementsController < ApplicationController
   def destroy
     @placement = Placement.find(params[:id])
     @placement.destroy
-
-    respond_to do |format|
-      format.html { redirect_to placements_url }
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 end
