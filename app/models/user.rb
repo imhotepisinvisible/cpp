@@ -8,9 +8,6 @@ class User < ActiveRecord::Base
   validates :email,           :presence => true
   validates :password_digest, :presence => true, :on => :create
 
-  # validates :type, :inclusion => { :in => %w(Student),
-  #   :message => "%{type} is not a valid user type" }
-
   validates :password, :length =>{
     :minimum => 8,
     :too_short => "password is too short, must be at least %{count} characters"
