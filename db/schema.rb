@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(:version => 20121024163053) do
   end
 
   create_table "student_profiles", :force => true do |t|
-    t.integer  "user_id"
+    t.integer  "student_id"
     t.integer  "year"
     t.text     "bio"
     t.text     "degree"
@@ -72,11 +72,11 @@ ActiveRecord::Schema.define(:version => 20121024163053) do
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "password_digest"
-    t.string   "type"
-    t.integer  "student_profile_id"
     t.integer  "organisation_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.integer  "profile_id"
+    t.string   "type"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
 end
