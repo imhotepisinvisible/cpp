@@ -14,6 +14,6 @@ class User < ActiveRecord::Base
   validates :password, :length =>{
     :minimum => 8,
     :too_short => "password is too short, must be at least %{count} characters"
-  }
+  }, :on => :create
 
 end
