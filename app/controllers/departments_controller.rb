@@ -1,0 +1,52 @@
+class DepartmentsController < ApplicationController
+  # GET /departments
+  # GET /departments.json
+  def index
+    @departments = Department.all
+    respond_with @departments
+  end
+
+  # GET /departments/1
+  # GET /departments/1.json
+  def show
+    @department = Department.find(params[:id])
+    respond_with @department
+  end
+
+  # GET /departments/new
+  # GET /departments/new.json
+  def new
+    @department = Department.new
+    respond_with @department
+  end
+
+  # POST /departments
+  # POST /departments.json
+  def create
+    @department = Department.new(params[:department])
+    if @department.save
+      respond_with @department, status: :created, location: @department
+    else
+      respond_with @department.errors, status: :unprocessable_entity
+    end
+  end
+
+  # PUT /departments/1
+  # PUT /departments/1.json
+  def update
+    @department = Department.find(params[:id])
+    if @department.update_attributes(params[:department])
+      head :no_content
+    else
+      respond_with @department.errors, status: :unprocessable_entity
+    end
+  end
+
+  # DELETE /departments/1
+  # DELETE /departments/1.json
+  def destroy
+    @department = Department.find(params[:id])
+    @department.destroy
+    head :no_content
+  end
+end
