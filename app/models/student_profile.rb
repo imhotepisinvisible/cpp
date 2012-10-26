@@ -2,7 +2,8 @@ class StudentProfile < ActiveRecord::Base
   belongs_to :student, :foreign_key => "profile_id"
 
   # TODO: user_id?
-  # validates :user_id,    :presence => true
+  validates :user_id,    :presence => true
+  validates :profile_id, :presence => true
   validates :year,       :presence => true
   validates :bio,        :presence => true
   validates :degree,     :presence => true
