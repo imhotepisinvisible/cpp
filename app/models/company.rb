@@ -1,6 +1,7 @@
 class Company < ActiveRecord::Base
 	has_many :events
   has_many :placements
+  has_and_belongs_to_many :departments
 
   validates :name, :presence => true
   validates :logo, :presence => true
