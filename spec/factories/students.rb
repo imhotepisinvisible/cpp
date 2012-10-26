@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :student, parent: :user, :class => "Student" do
-
+    association :profile, factory: :student_profile
   end
 end
