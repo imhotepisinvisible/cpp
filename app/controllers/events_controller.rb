@@ -25,11 +25,6 @@ class EventsController < ApplicationController
     respond_with @event
   end
 
-  # GET /events/1/edit
-  def edit
-    @event = Event.find(params[:id])
-  end
-
   # POST /events
   # POST /events.json
   def create
