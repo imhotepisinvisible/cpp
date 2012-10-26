@@ -4,7 +4,7 @@ class CreateCompanies < ActiveRecord::Migration
       t.string :name
       t.string :logo
       t.text :description
-      t.integer :organisation_id
+      t.references :organisation
 
       t.timestamps
     end

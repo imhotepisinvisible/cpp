@@ -2,7 +2,7 @@ class CreateDepartments < ActiveRecord::Migration
   def change
     create_table :departments do |t|
       t.string :name
-      t.integer :organisation_id
+      t.references :organisation
 
       t.timestamps
     end

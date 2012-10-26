@@ -1,7 +1,7 @@
 class CreatePlacements < ActiveRecord::Migration
   def change
     create_table :placements do |t|
-      t.integer :company_id
+      t.references :company
       t.string :position
       t.text :description
       t.string :duration

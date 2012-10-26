@@ -3,9 +3,9 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.string :email
       t.string :password_digest
-      t.integer :department_id
+      t.references :department
 
-      t.integer :profile_id
+      t.references :profile
 
       t.string :type
 

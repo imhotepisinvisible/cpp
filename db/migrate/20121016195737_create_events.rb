@@ -1,7 +1,7 @@
 class CreateEvents < ActiveRecord::Migration
   def change
     create_table :events do |t|
-      t.integer :company_id
+      t.references :company
       t.string :title
       t.datetime :start_date
       t.datetime :end_date
