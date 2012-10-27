@@ -1,4 +1,6 @@
 class DepartmentsController < ApplicationController
+  respond_to :json
+
   # GET /departments
   # GET /departments.json
   def index

@@ -1,4 +1,6 @@
 class OrganisationDomainsController < ApplicationController
+  respond_to :json
+
   # GET /organisation_domains
   # GET /organisation_domains.json
   def index

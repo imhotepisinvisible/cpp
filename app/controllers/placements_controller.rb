@@ -1,4 +1,6 @@
 class PlacementsController < ApplicationController
+  respond_to :json
+
   # GET /placements
   # GET /placements.json
   def index
