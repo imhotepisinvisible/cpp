@@ -17,14 +17,4 @@ describe StudentProfile do
       end
     end
   end
-
-  context "when assigning an unknown degree" do
-    subject {FactoryGirl.build(:student_profile, :first_year, degree: "degree")}
-    it {should be_invalid}
-  end
-
-  context "when assigning an invalid year year" do
-    student_profile = FactoryGirl.build(:student_profile, :beng_student, year: 5)
-    it {should be_invalid}
-  end
 end

@@ -6,10 +6,8 @@ class Company < ActiveRecord::Base
   validates :name, :presence => true
   validates :logo, :presence => true
 
-  # TODO: test the messages
   validates :description, :length => {
     :in => 1..500,
-    # :tokenizer => lambda { |str| str.scan(/\w+/) },
     :too_short => "must have at least %{count} characters",
     :too_long  => "must have at most %{count} characters"
   }
