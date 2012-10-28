@@ -5,8 +5,6 @@ class CreateUsers < ActiveRecord::Migration
       t.string :password_digest
       t.references :department
 
-      t.references :profile
-
       t.string :type
 
       t.timestamps

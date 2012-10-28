@@ -95,10 +95,10 @@ ActiveRecord::Schema.define(:version => 20121026184345) do
     t.string   "email"
     t.string   "password_digest"
     t.integer  "department_id"
-    t.integer  "profile_id"
     t.string   "type"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.integer  "profile_id"
   end
 
 end
