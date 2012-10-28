@@ -1,5 +1,6 @@
 class StudentProfile < ActiveRecord::Base
-  belongs_to :student, :foreign_key => "profile_id"
+  belongs_to :student
+  validates :student,  :presence => true
 
   # TODO: Can't test this using a factory as each point
   # to each other. How to fix?

@@ -2,6 +2,8 @@
 
 FactoryGirl.define do
   factory :student_profile do
+    student
+
     standard_bio
     beng_student
     first_year
