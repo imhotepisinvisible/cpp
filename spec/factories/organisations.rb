@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :organisaton do
+  factory :organisation do
     name "IC DoC"
   end
 end
