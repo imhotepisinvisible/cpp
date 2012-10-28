@@ -7,5 +7,5 @@ class Department < ActiveRecord::Base
   validates :name,         :presence => true
 
   # TODO do we need this with a belongs to?
-  validates :organisation, :presence => true
+  validates :organisation_id, :presence => true
 end

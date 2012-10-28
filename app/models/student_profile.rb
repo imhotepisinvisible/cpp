@@ -1,10 +1,7 @@
 class StudentProfile < ActiveRecord::Base
   belongs_to :student
-  validates :student,  :presence => true
 
-  # TODO: Can't test this using a factory as each point
-  # to each other. How to fix?
-  # validates :student_id, :presence => true
+  validates :student_id,  :presence => true
   validates :year,       :presence => true
   validates :bio,        :presence => true
   validates :degree,     :presence => true
@@ -16,5 +13,6 @@ class StudentProfile < ActiveRecord::Base
     :too_short => "must have at least %{count} characters",
     :too_long  => "must have at most %{count} characters"
   }
+
 
 end

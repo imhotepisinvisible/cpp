@@ -4,10 +4,11 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  validates :organisation_id, :presence => true
   validates :email,           :presence => true
   validates :password_digest, :presence => true, :on => :create
 
-  validates :password, :length =>{
+  validates :password, :length => {
     :minimum => 8,
     :too_short => "password is too short, must be at least %{count} characters"
   }, :on => :create

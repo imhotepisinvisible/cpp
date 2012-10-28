@@ -11,4 +11,6 @@ class Student < User
   default_scope :include => :profile
 
   delegate :year, :year=, :bio, :bio=, :degree, :degree=, :to => :profile
+
+  validates :department_id, :presence => true
 end
