@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Organisation do
   include AttributeValidators
-  subject { FactoryGirl.build :organisation }
+  subject { FactoryGirl.build(:organisation) }
 
   it {should be_valid}
 
