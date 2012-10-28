@@ -54,6 +54,8 @@ group :development do
   gem 'guard-rspec'
   gem 'guard-spork'
   gem 'rb-fsevent'
+
+  gem 'terminal-notifier-guard' # Notification center for test runs :)
 end
 
 group :test, :development do
