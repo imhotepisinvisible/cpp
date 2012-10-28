@@ -16,6 +16,7 @@
 //= require site
 //= require underscore
 //= require backbone
+//= require backbone-forms-bootstrap
 //
 //= require .//cpp
 //

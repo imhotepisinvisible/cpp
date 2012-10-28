@@ -11,5 +11,6 @@
  *= require_self
  *= require bootstrap_and_overrides.css.less
  *= require font-awesome
+ *= require backbone-forms-bootstrap
  *= require_tree .
 */

@@ -1,0 +1,30 @@
+<h1 class="section-header">
+  <% if @event.isNew(): %>
+    Create a New Event
+  <% else: %>
+    <%= @event.get 'title' %>
+  <% end %>
+</h1>
+<div class="row">
+  <div class="span4">
+    <div class="company-logo-large">
+    </div>
+  </div>
+  <div class="span8">
+  </div>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <div class="form"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="span12">
+    <div class="control-group">
+      <div class="controls">
+        <div class="btn btn-submit">Save</div>
+      </div>
+    </div>
+  </div>
+</div>
