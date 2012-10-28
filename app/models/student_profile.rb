@@ -1,3 +1,15 @@
+# app/models/student_profile.rb
+#
+# Students all have a profile which stores additional information about them.
+#
+# Schema Fields
+#   t.integer  "student_id"
+#   t.integer  "year"
+#   t.text     "bio"
+#   t.text     "degree"
+#   t.datetime "created_at", :null => false
+#   t.datetime "updated_at", :null => false
+
 class StudentProfile < ActiveRecord::Base
   belongs_to :student
 

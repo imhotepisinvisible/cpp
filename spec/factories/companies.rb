@@ -7,3 +7,4 @@ FactoryGirl.define do
     description { Faker::Company.bs }
   end
 end
+
