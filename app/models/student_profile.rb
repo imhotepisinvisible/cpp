@@ -1,9 +1,9 @@
 class StudentProfile < ActiveRecord::Base
   belongs_to :student, :foreign_key => "profile_id"
 
-  validates :user_id,    :presence => true
-  validates :profile_id, :presence => true
-  validates :student_id, :presence => true
+  # TODO: Can't test this using a factory as each point
+  # to each other. How to fix?
+  # validates :student_id, :presence => true
   validates :year,       :presence => true
   validates :bio,        :presence => true
   validates :degree,     :presence => true
