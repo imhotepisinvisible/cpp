@@ -1,9 +1,9 @@
 class StudentProfile < ActiveRecord::Base
   belongs_to :student, :foreign_key => "profile_id"
 
-  # TODO: user_id?
   validates :user_id,    :presence => true
   validates :profile_id, :presence => true
+  validates :student_id, :presence => true
   validates :year,       :presence => true
   validates :bio,        :presence => true
   validates :degree,     :presence => true
@@ -18,7 +18,7 @@ class StudentProfile < ActiveRecord::Base
 
   validate :year_must_be_valid_for_degree
 
-  # TOOD: What are all the degrees?
+  # TOOD: How can we get degree only degrees?
   def year_must_be_valid_for_degree
     range = nil
     case degree
