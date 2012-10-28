@@ -2,8 +2,7 @@ shared_examples_for "a user" do
   include AttributeValidators
 
   context "for an existing user" do
-    subject{ user }
-
+    subject{ saved }
     it { should be_valid }
 
     it {should respond_to(:password_digest)}
@@ -12,8 +11,7 @@ shared_examples_for "a user" do
   end
 
   context "for a new user" do
-    subject{ FactoryGirl.build :user }
-
+    subject{ unsaved }
     it {should be_invalid_for_nil_field(:email)}
 
     its(:password) { should have_at_least(8).items }
