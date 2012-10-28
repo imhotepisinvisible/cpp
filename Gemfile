@@ -70,6 +70,8 @@ end
 
 group :test do
   gem 'spork-rails'
+  # Mocking for unit tests
+  gem 'mocha', :require => false
 end
 
 # To use ActiveModel has_secure_password

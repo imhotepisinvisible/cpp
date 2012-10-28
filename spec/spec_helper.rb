@@ -20,6 +20,8 @@ Spork.prefork do
   require 'rspec/rails'
   require 'rspec/autorun'
 
+  require 'mocha'
+
   require 'database_cleaner'
   require 'support/factory_helper'
   require 'support/attribute_validators'
@@ -32,7 +34,7 @@ Spork.prefork do
   Dir[Rails.root.join("spec/support/**/*.rb")].each { |file| require file }
 
   RSpec.configure do |config|
-    config.mock_with :rspec
+    config.mock_with :mocha
     config.use_transactional_fixtures = true
 
     # If you're using Devise, you can uncomment the following:
