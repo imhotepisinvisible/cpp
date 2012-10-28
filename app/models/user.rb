@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
-  # TODO: Validate students have only IC/other email addresses.
   validates :email,           :presence => true
   validates :password_digest, :presence => true, :on => :create
 
