@@ -6,15 +6,15 @@ describe StudentProfile do
     subject { FactoryGirl.build(:student_profile,
                                    :beng_student,
                                    :first_year) }
-    
+
     it {should be_valid}
 
     context "when attributes are not set" do
-      it {should be_invalid_for_nil_field(:year)}
+      fields = [:year, :bio, :degree]
 
-      it {should be_invalid_for_nil_field(:bio)}
-
-      it {should be_invalid_for_nil_field(:degree)}
+      fields.each do |field|
+        it {should be_invalid_for_nil_field(field)}
+      end
     end
   end
 

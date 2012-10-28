@@ -8,13 +8,11 @@ describe Event do
   it {should be_valid}
 
   context "when attributes are not set" do
-    it {should be_invalid_for_nil_field(:title)}
+    fields = [:title, :description, :start_date, :end_date]
 
-    it {should be_invalid_for_nil_field(:description)}
-
-    it {should be_invalid_for_nil_field(:start_date)}
-
-    it {should be_invalid_for_nil_field(:end_date)}
+    fields.each do |field|
+      it {should be_invalid_for_nil_field(field)}
+    end
   end
 
   context "when start_date is before the current time" do
@@ -22,8 +20,6 @@ describe Event do
   end
 
   context "when end_date is before start date" do
-    it {should be_invalid_for_given_field(:end_date, event.start_date - 1.day)}
-
     it {should be_invalid_for_given_field(:end_date, event.start_date - 1.day)}
 
     it {should be_invalid_for_given_field(:end_date, event.start_date)}

@@ -7,13 +7,11 @@ describe Placement do
   it {should be_valid}
 
   context "when attributes are not set" do
-    it {should be_invalid_for_nil_field(:position)}
+    fields = [:position, :description, :location, :deadline]
 
-    it {should be_invalid_for_nil_field(:description)}
-
-    it {should be_invalid_for_nil_field(:location)}
-
-    it {should be_invalid_for_nil_field(:deadline)}
+    fields.each do |field|
+      it {should be_invalid_for_nil_field(field)}
+    end
   end
 
   context "when deadline is before the current date" do
