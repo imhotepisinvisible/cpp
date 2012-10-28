@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :department do
-    name "MyString"
-    organisation_id 1
+    organisation
+    name "Department of Computing"
   end
 end

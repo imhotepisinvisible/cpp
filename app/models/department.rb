@@ -4,5 +4,8 @@ class Department < ActiveRecord::Base
   #has_many :admins
   has_and_belongs_to_many :companies
 
-  validates :name, :presence => true
+  validates :name,         :presence => true
+
+  # TODO do we need this with a belongs to?
+  validates :organisation_id, :presence => true
 end
