@@ -1,4 +1,5 @@
 $ ->
+  console.log "Custom templates"
   Backbone.Form.setTemplates
     # form: '
     #   <form class="form-horizontal">{{fieldsets}}</form>
@@ -43,26 +44,32 @@ $ ->
     # '
 
     date: '
-        <input type="text" data-behaviour="datepicker"/>
-    '
-
-    dateTimePicker: '
-      <div class="control-group field-{{key}}">
-        <label class="control-label" for="{{id}}">{{title}}</label>
-        <div class="controls">
-          {{editor}}
-          <!-- TIME HERE !-->
-          <span class="help-inline">{{help}}</span>
-        </div>
+      <div class="bbf-date">
+        <select data-type="date" class="bbf-date">{{dates}}</select>
+        <select data-type="month" class="bbf-month">{{months}}</select>
+        <select data-type="year" class="bbf-year">{{years}}</select>
       </div>
-    '
+    ',
 
     dateTime: '
       <div class="bbf-datetime">
-          {{date}}
-          &nbsp;&nbsp;
+        <p>{{date}}</p>
+        <p>
           <select data-type="hour" style="width: 4em">{{hours}}</select>
           :
           <select data-type="min" style="width: 4em">{{mins}}</select>
+        </p>
+      </div>
+    ',
+
+    'list.Modal': '
+      <div class="bbf-list-modal">
+        {{summary}}
       </div>
     '
+
+    dateTimePicker: '
+      <div class="bbf-dtpicker">
+        {{editor}}
+      </div>
+    ',
