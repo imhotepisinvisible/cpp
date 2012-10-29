@@ -13,6 +13,7 @@
 class Company < ActiveRecord::Base
 	has_many :events
   has_many :placements
+  belongs_to :organisation
   has_and_belongs_to_many :departments
 
   validates :name, :presence => true
