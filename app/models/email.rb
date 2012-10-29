@@ -1,7 +1,7 @@
 # app/models/email.rb
 #
 # Emails which are sent out by companies to students in various departments
-# e.g. "ARM is Hiring!" could be sent out to "Computing" and "EEE" students if 
+# e.g. "ARM is Hiring!" could be sent out to "Computing" and "EEE" students if
 #      ARM was signed up to both those departments
 #
 # Schema Fields
@@ -14,7 +14,10 @@
 #   t.datetime "updated_at", :null => false
 
 class Email < ActiveRecord::Base
-  has_one :company
+  belongs_to :company
 
   validates :company_id, :presence => true
+  validates :subject,    :presence => true
+  validates :body,       :presence => true
+
 end

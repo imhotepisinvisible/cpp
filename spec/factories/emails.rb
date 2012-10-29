@@ -2,7 +2,8 @@
 
 FactoryGirl.define do
   factory :email do
-    subject "MyString"
-    body "MyString"
+    company
+    subject "Subject"
+    body "Body"
   end
 end
