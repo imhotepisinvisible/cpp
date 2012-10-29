@@ -16,12 +16,12 @@ class Company < ActiveRecord::Base
   belongs_to :organisation
   has_and_belongs_to_many :departments
 
-  validates :name, :presence => true
-  validates :logo, :presence => true
+  validates :name,        :presence => true
+  validates :logo,        :presence => true
+  validates :description, :presence => true
 
   validates :description, :length => {
-    :in => 1..500,
-    :too_short => "must have at least %{count} characters",
-    :too_long  => "must have at most %{count} characters"
+    :maximum => 500
+    # :too_long  => "must have at most %{count} characters"
   }
 end
