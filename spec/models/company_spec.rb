@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Company do
-  include AttributeValidators
   let(:company) { FactoryGirl.build :company }
   subject { company }
 

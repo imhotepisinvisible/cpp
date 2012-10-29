@@ -24,7 +24,6 @@ Spork.prefork do
 
   require 'database_cleaner'
   require 'support/factory_helper'
-  require 'support/attribute_validators'
   require 'support/behaviours'
 
   DatabaseCleaner.strategy = :truncation

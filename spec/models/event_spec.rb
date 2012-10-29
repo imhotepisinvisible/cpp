@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Event do
-  include AttributeValidators
   let(:event) { FactoryGirl.build :event }
   subject { event }
 

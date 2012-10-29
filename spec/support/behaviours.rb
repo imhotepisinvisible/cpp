@@ -1,5 +1,4 @@
 shared_examples_for "a user" do
-  include AttributeValidators
 
   context "for an existing user" do
     subject{ saved }

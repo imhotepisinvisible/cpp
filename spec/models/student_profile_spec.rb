@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe StudentProfile do
-  include AttributeValidators
   context "when validating any student profile" do
     subject { FactoryGirl.build(:student_profile,
                                    :beng_student,

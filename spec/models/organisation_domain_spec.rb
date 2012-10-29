@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe OrganisationDomain do
-  include AttributeValidators
   subject { FactoryGirl.build :organisation_domain }
 
   it {should be_valid}

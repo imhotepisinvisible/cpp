@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Placement do
-  include AttributeValidators
   subject { FactoryGirl.build :placement }
 
   it {should be_valid}
