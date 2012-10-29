@@ -16,7 +16,8 @@ describe Event do
   end
 
   context "when start_date is before the current time" do
-    it {should be_invalid_for_given_field(:start_date, Time.now - 1.day)}
+    it {should_not allow_value(1.day.ago).
+        for(:start_date)}
   end
 
   context "when end_date is before start date" do

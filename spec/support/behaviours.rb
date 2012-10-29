@@ -7,14 +7,23 @@ shared_examples_for "a user" do
 
     it {should respond_to(:password_digest)}
 
+    it {should validate_presence_of(:password_digest)}
+
     it {should respond_to(:authenticate)}
   end
 
   context "for a new user" do
     subject{ unsaved }
-    it {should be_invalid_for_nil_field(:email)}
 
-    its(:password) { should have_at_least(8).items }
+    fields = [:email]
+    fields.each do |field|
+      it {should validate_presence_of(field)}
+    end
+
+    it { should ensure_length_of(:password).
+      is_at_least(8).
+      with_message(/password is too short/)
+    }
   end
 
 end

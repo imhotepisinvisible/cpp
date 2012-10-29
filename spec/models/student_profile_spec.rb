@@ -9,11 +9,11 @@ describe StudentProfile do
 
     it {should be_valid}
 
-    context "when attributes are not set" do
+    context "when creating or saving" do
       fields = [:year, :bio, :degree]
 
       fields.each do |field|
-        it {should be_invalid_for_nil_field(field)}
+        it {should validate_presence_of(field)}
       end
     end
   end

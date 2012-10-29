@@ -11,7 +11,7 @@ describe Student do
   it "should have a valid email domain" do
     org = subject.department.organisation
     org.organisation_domains.each do |domain|
-      it {should be_valid_for_given_field(:email, "student@" + domain)}
+      it {should allow_value(:email, "student@" + domain)}
     end
   end
 

@@ -6,20 +6,22 @@ describe Placement do
 
   it {should be_valid}
 
-  context "when attributes are not set" do
-    fields = [:position, :description, :location, :deadline]
+  context "when creating or saving a student" do
+    fields = [:position, :description, :location]
 
     fields.each do |field|
-      it {should be_invalid_for_nil_field(field)}
+      it {should validate_presence_of(field)}
     end
   end
 
   context "when deadline is before the current date" do
-    it {should be_invalid_for_given_field(:deadline, Time.at(Time.now.to_i - 1.day.to_i))}
+    it {should_not allow_value(1.day.ago).
+        for(:deadline)}
   end
 
   context "when the deadline is after the current date" do
-    it {should be_valid_for_given_field(:deadline, Time.at(Time.now.to_i + 1.day.to_i))}
+    it {should allow_value(1.day.from_now).
+        for(:deadline)}
   end
 
 end

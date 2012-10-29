@@ -6,8 +6,6 @@ describe Organisation do
 
   it {should be_valid}
 
-  context "when attributes are not set" do
-    it {should be_invalid_for_nil_field(:name)}
-  end
+  it {should validate_presence_of(:name)}
 
 end
