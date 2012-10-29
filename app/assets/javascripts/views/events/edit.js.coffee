@@ -44,11 +44,10 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
         wait: true
         success: (model, response) ->
           notify "success", "Event Saved"
-        error: (model, response)->
-      #     errors = JSON.parse response.responseText
-      #     errorText = "<h5>Event cannot be saved, please fix the following errors:</h5>"
-      #     for field, error of errors
-      #       $('#' + field).parent().parent().addClass('error')
-      #       $('#' + field).parent().append("<span class=\"help-inline\">#{error}</span>")
-      #       errorText += "<li>#{field} - #{error}</li>"
-         notify "error", "wrong"
+        error: (model, response) =>
+          errorlist = JSON.parse response.responseText
+          console.log errorlist
+          for field, errors of errorlist.errors
+            @form.fields[field].setError(errors.join ', ')
+
+         notify "error", "Unable to save event, please resolve issues below."

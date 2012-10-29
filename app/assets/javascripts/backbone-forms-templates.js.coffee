@@ -43,30 +43,31 @@ $ ->
     #   </li>
     # '
 
-    date: '
-      <div class="bbf-date">
-        <select data-type="date" class="bbf-date">{{dates}}</select>
-        <select data-type="month" class="bbf-month">{{months}}</select>
-        <select data-type="year" class="bbf-year">{{years}}</select>
-      </div>
-    ',
+    # date: '
+    #   <div class="bbf-date">
+    #     <select data-type="date" class="bbf-date">{{dates}}</select>
+    #     <select data-type="month" class="bbf-month">{{months}}</select>
+    #     <select data-type="year" class="bbf-year">{{years}}</select>
+    #   </div>
+    # ',
 
     dateTime: '
-      <div class="bbf-datetime">
-        <p>{{date}}</p>
-        <p>
+      <span class="bbf-datetime">
+        <span>{{date}}</span>
+        &nbsp;
+        <span>
           <select data-type="hour" style="width: 4em">{{hours}}</select>
           :
           <select data-type="min" style="width: 4em">{{mins}}</select>
-        </p>
-      </div>
+        </span>
+      </span>
     ',
 
-    'list.Modal': '
-      <div class="bbf-list-modal">
-        {{summary}}
-      </div>
-    '
+    # 'list.Modal': '
+    #   <div class="bbf-list-modal">
+    #     {{summary}}
+    #   </div>
+    # '
 
     dateTimePicker: '
       <div class="bbf-dtpicker">

@@ -15,7 +15,11 @@ class CPP.Models.Event extends Backbone.Model
     deadline:
       type: "DateTime"
       DateEditor: "DatePicker"
-    description: "Text"
-    location: "Text"
+    description: 
+      type: "Text"
+      validators: ["required"]
+    location:
+      type: "Text"
+      validators: ["required"]
     capacity: "Text"
     google_map_url: "Text"
