@@ -14,6 +14,7 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
 
     new CPP.Views.EventsPartial
       el: $(@el).find('#events-partial')
+      model: @model
       collection: @model.events
       editable: true
     

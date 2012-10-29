@@ -2,7 +2,8 @@ class CPP.Views.EventsPartial extends CPP.Views.Base
   template: JST['events/partial']
 
   events:
-    "click .btn-add" : "addEvent"
+    "click .btn-add"      : "addEvent"
+    "click .btn-view-all" : "viewAllEvents"
 
   initialize: (options) ->
     @editable = options.editable
@@ -18,5 +19,7 @@ class CPP.Views.EventsPartial extends CPP.Views.Base
     @
 
   addEvent: ->
-    
-    Backbone.history.navigate("events/new", trigger: true)
+    Backbone.history.navigate("companies/" + @model.id + "/events/new", trigger: true)
+
+  viewAllEvents: ->
+    Backbone.history.navigate('events', trigger: true)

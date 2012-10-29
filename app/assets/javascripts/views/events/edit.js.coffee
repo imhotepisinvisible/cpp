@@ -1,5 +1,6 @@
 class CPP.Views.EventsEdit extends CPP.Views.Base
   el: "#app"
+
   template: JST['events/editval']
 
   events:
@@ -22,6 +23,7 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
 
   render: ->
     $(@el).html(@template(event: @model))
+    # Super called as extending we are extending CPP.Views.Base
     super
     $('.form').append(@form.el)
     @form.on "change", ->
@@ -43,5 +45,5 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
           $('#' + field).parent().parent().addClass('error')
           $('#' + field).parent().append("<span class=\"help-inline\">#{error}</span>")
           errorText += "<li>#{field} - #{error}</li>"
-
         notify "error", errorText
+        

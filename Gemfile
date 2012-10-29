@@ -26,7 +26,7 @@ gem 'underscore' # Templating for backboneJS
 
 gem 'thin' # Better server :)
 
-gem 'rails-backbone-forms'
+gem 'rails-backbone-forms' # Client side form validation
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

@@ -5,4 +5,4 @@
 </h1>
 <ul id="events" class="cpp-list">
 </ul>
-<div class="see-all-link">See all</div>
+<div class="btn pull-right btn-view-all">View All</div>
