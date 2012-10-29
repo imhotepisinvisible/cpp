@@ -10,18 +10,22 @@ Dir[Rails.root.join("spec/factories/*.rb")].each {|f| require f}
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+organisation = FactoryGirl.create :organisation
+
+department = FactoryGirl.create :department, :organisation => organisation 
+
 # Sample Users
-team = %w( peter tom jack sarah )
-team.each do |team_member|
-  s = FactoryGirl.create :student,  { email: "#{team_member}@cpp.com",
-                                      password: "cppcppcpp",
-                                      password_confirmation: "cppcppcpp"
-                                    }
+students =  %w( peter tom jack sarah ).map do |name|
+  FactoryGirl.create :student,  { email: "#{name}@cpp.com",
+                                  password: "cppcppcpp",
+                                  password_confirmation: "cppcppcpp",
+                                  department: department
+                                }
 end
 
 # Sample Companies
 10.times do
-  FactoryGirl.create :company
+  FactoryGirl.create :company, :organisation => organisation
 end
 
 Company.all.each do |company|
