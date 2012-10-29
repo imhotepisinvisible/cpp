@@ -7,11 +7,11 @@ describe Event do
 
   it {should be_valid}
 
-  context "when attributes are not set" do
+  context "when saving or creating a company" do
     fields = [:title, :description, :start_date, :end_date]
 
     fields.each do |field|
-      it {should be_invalid_for_nil_field(field)}
+      it {should validate_presence_of(field)}
     end
   end
 
@@ -20,13 +20,16 @@ describe Event do
   end
 
   context "when end_date is before start date" do
-    it {should be_invalid_for_given_field(:end_date, event.start_date - 1.day)}
+    it {should_not allow_value(event.start_date - 1.day).
+        for(:end_date)}
 
-    it {should be_invalid_for_given_field(:end_date, event.start_date)}
+    it {should_not allow_value(event.start_date).
+        for(:end_date)}
   end
 
   context "when the end_date is after the start_date" do
-    it {should be_valid_for_given_field(:end_date, event.start_date + 1.day)}
+    it {should allow_value(event.start_date + 1.day).
+        for(:end_date)}
   end
 
 end

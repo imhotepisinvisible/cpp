@@ -23,6 +23,8 @@ class Event < ActiveRecord::Base
 	validates :title,        :presence => true
 	validates :description,  :presence => true
 	validates :location,     :presence => true
+  validates :start_date,   :presence => true
+  validates :end_date,     :presence => true
 
   validates_datetime :start_date, :after => :today
   validates_datetime :end_date,   :after => :start_date
