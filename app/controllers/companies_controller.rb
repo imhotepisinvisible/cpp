@@ -33,7 +33,7 @@ class CompaniesController < ApplicationController
     if @company.save
       respond_with @company, status: :created, location: @company
     else
-      respond_with @company.errors, status: :unprocessable_entity
+      respond_with @company, status: :unprocessable_entity
     end
   end
 
@@ -45,7 +45,7 @@ class CompaniesController < ApplicationController
     if @company.update_attributes(params[:company])
       head :no_content
     else
-      render @company.errors, status: :unprocessable_entity
+      render @company, status: :unprocessable_entity
     end
   end
 

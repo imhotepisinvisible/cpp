@@ -29,7 +29,7 @@ class OrganisationsController < ApplicationController
     if @organisation.save
       respond_with @organisation, status: :created, location: @organisation
     else
-      respond_with @organisation.errors, status: :unprocessable_entity
+      respond_with @organisation, status: :unprocessable_entity
     end
   end
 
@@ -40,7 +40,7 @@ class OrganisationsController < ApplicationController
     if @organisation.update_attributes(params[:organisation])
       head :no_content
     else
-      respond_with @organisation.errors, status: :unprocessable_entity
+      respond_with @organisation, status: :unprocessable_entity
     end
   end
 

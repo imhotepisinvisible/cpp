@@ -33,7 +33,7 @@ class EventsController < ApplicationController
     if @event.save
       respond_with @event, status: :created, location: @event
     else
-      respond_with @event.errors, status: :unprocessable_entity
+      respond_with @event, status: :unprocessable_entity
     end
   end
 
@@ -44,7 +44,7 @@ class EventsController < ApplicationController
     if @event.update_attributes(params[:event])
       head :no_content
     else
-      respond_with @event.errors, status: :unprocessable_entity
+      respond_with @event, status: :unprocessable_entity
     end
   end
 

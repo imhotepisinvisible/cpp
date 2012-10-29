@@ -29,7 +29,7 @@ class OrganisationDomainsController < ApplicationController
     if @organisation_domain.save
       respond_with @organisation_domain, status: :created, location: @organisation_domain
     else
-      respond_with @organisation_domain.errors, status: :unprocessable_entity
+      respond_with @organisation_domain, status: :unprocessable_entity
     end
   end
 
@@ -40,7 +40,7 @@ class OrganisationDomainsController < ApplicationController
     if @organisation_domain.update_attributes(params[:organisation_domain])
       head :no_content
     else
-      respond_with @organisation_domain.errors, status: :unprocessable_entity
+      respond_with @organisation_domain, status: :unprocessable_entity
     end
   end
 

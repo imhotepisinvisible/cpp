@@ -37,7 +37,7 @@ class PlacementsController < ApplicationController
     if @placement.save
       respond_with @placement, status: :created, location: @placement
     else
-      respond_with @placement.errors, status: :unprocessable_entity
+      respond_with @placement, status: :unprocessable_entity
     end
   end
 
@@ -49,7 +49,7 @@ class PlacementsController < ApplicationController
     if @placement.update_attributes(params[:placement])
       head :no_content
     else
-      respond_with @placement.errors, status: :unprocessable_entity
+      respond_with @placement, status: :unprocessable_entity
     end
   end
 

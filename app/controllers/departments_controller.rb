@@ -29,7 +29,7 @@ class DepartmentsController < ApplicationController
     if @department.save
       respond_with @department, status: :created, location: @department
     else
-      respond_with @department.errors, status: :unprocessable_entity
+      respond_with @department, status: :unprocessable_entity
     end
   end
 
@@ -40,7 +40,7 @@ class DepartmentsController < ApplicationController
     if @department.update_attributes(params[:department])
       head :no_content
     else
-      respond_with @department.errors, status: :unprocessable_entity
+      respond_with @department, status: :unprocessable_entity
     end
   end
 
