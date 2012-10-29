@@ -13,13 +13,15 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require date
 //= require site
 //= require underscore
 //= require backbone
 //= require backbone-forms-bootstrap
 //= require backbone-forms-templates
-//= require bootstrap-datepicker
-//
+//= require cpp-date-picker
+
+//=
 //= require .//cpp
 //
 //= require_tree ../templates/

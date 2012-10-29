@@ -27,23 +27,27 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
     super
     $('.form').append(@form.el)
     @form.on "change", ->
-      @commit() 
+      console.log @model.get 'description'
+      console.log @model.get "start_date"
+      # commit the form
+      @commit()
+    # $('#c0_start_date').datepicker().on "changeDate", =>
+    #   @model.set "start_date" ,"10/10/2020"
   @
 
   submitEvent: ->
     @form.commit()
-    $('.control-group').removeClass('error')
-    $('.help-inline').html('')
+    # $('.control-group').removeClass('error')
+    # $('.help-inline').html('')
     @model.save {},
       wait: true
       success: (model, response) ->
         notify "success", "Event Saved"
       error: (model, response)->
-        errors = JSON.parse response.responseText
-        errorText = "<h5>Event cannot be saved, please fix the following errors:</h5>"
-        for field, error of errors
-          $('#' + field).parent().parent().addClass('error')
-          $('#' + field).parent().append("<span class=\"help-inline\">#{error}</span>")
-          errorText += "<li>#{field} - #{error}</li>"
-        notify "error", errorText
-        
+    #     errors = JSON.parse response.responseText
+    #     errorText = "<h5>Event cannot be saved, please fix the following errors:</h5>"
+    #     for field, error of errors
+    #       $('#' + field).parent().parent().addClass('error')
+    #       $('#' + field).parent().append("<span class=\"help-inline\">#{error}</span>")
+    #       errorText += "<li>#{field} - #{error}</li>"
+       notify "error", "wrong"

@@ -28,6 +28,7 @@ gem 'thin' # Better server :)
 
 gem 'rails-backbone-forms' # Client side form validation
 gem 'bootstrap-datepicker-rails' # Date picker
+gem 'datejs-rails'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
