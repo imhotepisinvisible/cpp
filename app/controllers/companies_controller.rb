@@ -6,7 +6,7 @@ class CompaniesController < ApplicationController
   def index
     @companies = Company.all
 
-    respond_with @company
+    respond_with @companies
   end
 
   # GET /companies/1
