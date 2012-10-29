@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Student do
   subject { FactoryGirl.build :student }
 
+  it {should belong_to :department}
+
   it_should_behave_like "a user" do
     let(:unsaved) { FactoryGirl.build :student }
     let(:saved) { FactoryGirl.create :student }

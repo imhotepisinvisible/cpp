@@ -8,6 +8,8 @@ describe StudentProfile do
 
     it {should be_valid}
 
+    it {should belong_to :student}
+
     context "when creating or saving" do
       fields = [:year, :bio, :degree]
 

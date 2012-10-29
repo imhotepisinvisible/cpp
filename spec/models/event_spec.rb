@@ -6,6 +6,8 @@ describe Event do
 
   it {should be_valid}
 
+  it {should belong_to :company}
+
   context "when saving or creating a company" do
     fields = [:title, :description, :start_date, :end_date]
 

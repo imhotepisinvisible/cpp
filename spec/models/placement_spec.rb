@@ -5,6 +5,8 @@ describe Placement do
 
   it {should be_valid}
 
+  it {should belong_to :company}
+
   context "when creating or saving a student" do
     fields = [:position, :description, :location]
 

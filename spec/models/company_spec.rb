@@ -6,6 +6,14 @@ describe Company do
 
   it { should be_valid }
 
+  many = [:events, :placements]
+  many.each do |association|
+    it {should have_many association}
+  end
+
+  it {should belong_to :organisation}
+  it {should have_and_belong_to_many :departments}
+
   context "when saving or creating a company" do
     fields = [:name, :description, :logo]
 
