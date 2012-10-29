@@ -6,9 +6,9 @@ class CPP.Models.Event extends Backbone.Model
     title:
     	type: "Text"
     	validators: ["required"]
-   	start_date: "Date"
-   	end_date: "Date"
-    deadline: "Date"
+   	start_date: "DateTime"
+   	end_date: "DateTime"
+    deadline: "DateTime"
     desctiption: "Text"
     location: "Text"
     capacity: "Text"

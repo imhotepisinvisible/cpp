@@ -17,7 +17,8 @@
 //= require underscore
 //= require backbone
 //= require backbone-forms-bootstrap
-//= require .//backbone-forms-templates
+//= require backbone-forms-templates
+//= require bootstrap-datepicker
 //
 //= require .//cpp
 //

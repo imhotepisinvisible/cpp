@@ -43,21 +43,16 @@ $ ->
     #   </li>
     # '
 
-    # date: '
-    #   <div class="bbf-date">
-    #     <select data-type="date" class="bbf-date">{{dates}}</select>
-    #     <select data-type="month" class="bbf-month">{{months}}</select>
-    #     <select data-type="year" class="bbf-year">{{years}}</select>
-    #   </div>
-    # '
+    date: '
+        <input type="text" data-behaviour="datepicker"/>
+    '
 
-    # dateTime: '
-    #   <div class="bbf-datetime">
-    #     <p>{{date}}</p>
-    #     <p>
-    #       <select data-type="hour" style="width: 4em">{{hours}}</select>
-    #       :
-    #       <select data-type="min" style="width: 4em">{{mins}}</select>
-    #     </p>
-    #   </div>
-    # '
+    dateTime: '
+      <div class="bbf-datetime">
+          {{date}}
+          &nbsp;&nbsp;
+          <select data-type="hour" style="width: 4em">{{hours}}</select>
+          :
+          <select data-type="min" style="width: 4em">{{mins}}</select>
+      </div>
+    '

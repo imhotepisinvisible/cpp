@@ -17,6 +17,13 @@ window.notify = (alert_class, message) ->
   n.slideDown().delay(2000).slideUp()
 
 $(document).ready ->
+  # Bind DatePickers
+  $(document).on "focus", "[data-behaviour~='datepicker']", (e) ->
+    $(this).datepicker
+      "format":     "yyyy-mm-dd"
+      "weekStart":  1
+      "autoclose":  true
+
   $.ajaxSetup
     statusCode:
         401: ->

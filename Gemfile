@@ -27,6 +27,7 @@ gem 'underscore' # Templating for backboneJS
 gem 'thin' # Better server :)
 
 gem 'rails-backbone-forms' # Client side form validation
+gem 'bootstrap-datepicker-rails' # Date picker
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
