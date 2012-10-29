@@ -16,6 +16,7 @@ guard 'rspec', cli: '--color --format nested --fail-fast --drb', all_after_pass:
   watch('spec/spec_helper.rb')  { 'spec' }
 
   # Rails example
+  watch('app/models/user.rb')                         { ['user', 'student'].map { |m| "spec/models/#{m}_spec.rb"} }
   watch(%r{^app/(.+)\.rb$})                           { |m| "spec/#{m[1]}_spec.rb" }
   watch(%r{^app/(.*)(\.erb|\.haml)$})                 { |m| "spec/#{m[1]}#{m[2]}_spec.rb" }
   watch(%r{^app/controllers/(.+)_(controller)\.rb$})  { |m| ["spec/routing/#{m[1]}_routing_spec.rb", "spec/#{m[2]}s/#{m[1]}_#{m[2]}_spec.rb", "spec/acceptance/#{m[1]}_spec.rb"] }
