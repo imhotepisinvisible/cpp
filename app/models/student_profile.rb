@@ -21,9 +21,7 @@ class StudentProfile < ActiveRecord::Base
   # TODO: How much do we want to limit it to? Also do we want to force them to
   # have a bio? Should we make :in be 0..500?
   validates :bio, :length => {
-    :in => 1..500,
-    :too_short => "must have at least %{count} characters",
-    :too_long  => "must have at most %{count} characters"
+    :maximum => 500
   }
 
 

@@ -10,7 +10,11 @@ describe Department do
   it {should have_many :students}
 
   context "when creating and saving" do
-    it {should validate_presence_of :name}
+    fields = [:name, :organisation_id]
+
+    fields.each do |field|
+      it {should validate_presence_of field}
+    end
   end
 
 end

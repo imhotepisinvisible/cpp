@@ -9,8 +9,10 @@ describe Email do
   it { should validate_presence_of :company_id }
 
   context "when creating or saving" do
-    it { should validate_presence_of :subject }
-    it { should validate_presence_of :body }
+    fields = [:subject, :body, :company_id]
+    fields.each do |field|
+      it { should validate_presence_of field }
+    end
   end
 
 end
