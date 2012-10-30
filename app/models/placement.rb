@@ -19,5 +19,8 @@ class Placement < ActiveRecord::Base
   validates :position,          :presence => true
   validates :location,          :presence => true
   validates :description,       :presence => true
-  validates_datetime :deadline, :after => :today
+  validates_datetime :deadline,
+    :after => :now,
+    :after_message => "Cannot be in the past"
+
 end
