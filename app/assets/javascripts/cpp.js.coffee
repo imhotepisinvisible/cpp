@@ -6,7 +6,8 @@ window.CPP =
   init: ->
     new CPP.Routers.Companies
     new CPP.Routers.Events
-    Backbone.history.start({pushState: true})
+    # Backbone.history.start({pushState: true})
+    Backbone.history.start()
 
 window.notify = (alert_class, message) ->
   n = $("#notifications")
