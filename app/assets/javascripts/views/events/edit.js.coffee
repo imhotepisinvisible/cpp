@@ -6,17 +6,6 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
   events:
     'click .btn-submit': 'submitEvent'
 
-#  modelBindings:
-#    "change form input#title"           : "title"
-#    "change form input#start_date"      : "start_date"
-#    "change form input#end_date"        : "end_date"
-#    "change form input#deadline"        : "deadline"
-#    "change form textarea#description"  : "description"
-#    "change form input#location"        : "location"
-#    "change form input#capacity"        : "capacity"
-#    "change form input#google_map_url"  : "google_map_url"
-#    "change form input#company_id"      : "company_id"
-
   initialize: ->
     @form = new Backbone.Form(model: @model).render()
     @render()
