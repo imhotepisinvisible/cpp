@@ -61,6 +61,11 @@ group :development do
 end
 
 group :test, :development do
+  gem 'jasmine'
+  gem 'jasminerice'
+  gem 'guard-jasmine'
+
+
   gem 'rspec-rails'
   gem 'rspec-instafail'
 
