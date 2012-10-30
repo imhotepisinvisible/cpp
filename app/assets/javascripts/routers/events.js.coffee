@@ -21,7 +21,7 @@ class CPP.Routers.Events extends Backbone.Router
       success: ->
         new CPP.Views.EventsEdit model: event
       error: ->
-        notify "error", "Counld't fetch event"
+        notify "error", "Couldn't fetch event"
 
   view: (id) ->
     event = new CPP.Models.Event id: id

@@ -6,6 +6,7 @@ class CPP.Views.EventsItem extends CPP.Views.Base
   events: 
     "click .btn-edit" : "editEvent"
     "click .btn-delete" : "deleteEvent"
+    "click .btn-view" : "viewEvent"
 
   editEvent: ->
     Backbone.history.navigate("events/" + @model.get('id') + "/edit", trigger: true)
@@ -17,6 +18,9 @@ class CPP.Views.EventsItem extends CPP.Views.Base
         notify "success", "Event deleted"
       error: (model, response) ->
         notify "error", "Event could not be deleted"
+
+  viewEvent: ->
+    Backbone.history.navigate("events/" + @model.get('id'), trigger: true)
 
   render: ->
     $(@el).html(@template(event: @model))
