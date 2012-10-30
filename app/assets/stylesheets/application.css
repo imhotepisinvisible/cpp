@@ -13,5 +13,6 @@
  *= require font-awesome
  *= require backbone-forms-bootstrap
  *= require bootstrap-datepicker
+ *= require events
  *= require_tree .
 */
