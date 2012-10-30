@@ -1,0 +1,15 @@
+<h1 class="section-header">
+  <%= @event.get 'title' %>
+  <div class="company-logo-header">
+    <img src="/assets/company_logos/<%= @event.company.get 'logo' %>">
+  </div>
+</h1>
+
+<div class="row">
+  <div class="span6">
+    
+  </div>
+  <div class="span6" >
+    
+  </div>
+</div>

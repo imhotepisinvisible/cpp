@@ -31,6 +31,13 @@ h1 {
   margin-bottom: 15px;
 }
 
+.company-logo-header{
+  float: right;
+  img{
+    max-height: 40px;
+  }
+}
+
 .cpp-list{
   list-style: none;
   margin: 0px;
