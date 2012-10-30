@@ -10,6 +10,7 @@ class CPP.Views.CompaniesView extends CPP.Views.Base
 
     events_partial = new CPP.Views.EventsPartial
       el: $(@el).find('#events-partial')
+      model: @model
       collection: @model.events
 
     placements_partial = new CPP.Views.PlacementsPartial

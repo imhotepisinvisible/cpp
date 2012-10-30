@@ -3,16 +3,15 @@ class CPP.Views.EventsPartial extends CPP.Views.Base
 
   events:
     "click .btn-add"      : "addEvent"
-    "click .btn-view-all" : "viewAllEvents"
+    "click .btn-view-all" : "viewCompaniesEvents"
 
   initialize: (options) ->
     @editable = options.editable
     @collection.bind 'reset', @render, @
-    @render()
+    @render(editable: @editable)
 
-  render: ->
-    $(@el).html(@template())
-
+  render: (options) ->
+    $(@el).html(@template(editable: @editable))
     @collection.each (event) =>
       view = new CPP.Views.EventsPartialItem model: event
       @$('#events').append(view.render(editable: @editable).el)
@@ -21,5 +20,5 @@ class CPP.Views.EventsPartial extends CPP.Views.Base
   addEvent: ->
     Backbone.history.navigate("companies/" + @model.id + "/events/new", trigger: true)
 
-  viewAllEvents: ->
-    Backbone.history.navigate('events', trigger: true)
+  viewCompaniesEvents: ->
+    Backbone.history.navigate("companies/" + @model.id + "/events", trigger: true)

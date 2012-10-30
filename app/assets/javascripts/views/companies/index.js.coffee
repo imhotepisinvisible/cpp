@@ -5,6 +5,7 @@ class CPP.Views.CompaniesIndex extends CPP.Views.Base
   initialize: (options) ->
     @collection.bind 'reset', @render, @
     @collection.bind 'change', @render, @
+    # bind to model change so backbone view update on destroy    
     @collection.bind 'destroy', @render, @
     @render()
 

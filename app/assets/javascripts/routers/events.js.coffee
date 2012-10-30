@@ -1,16 +1,16 @@
 class CPP.Routers.Events extends Backbone.Router
   routes:
-      'events': 'index'
-      'companies/:company_id/events/new' : 'new'
-      'events/:id/edit' : 'edit'
+      'companies/:company_id/events'      : 'index'
+      'companies/:company_id/events/new'  : 'new'
+      'events/:id/edit'                   : 'edit'
 
-  index: ->
+  index: (company_id) ->
     events = new CPP.Collections.Events
     new CPP.Views.EventsIndex collection: events
-    events.fetch()
+    events.fetch({ data: $.param({ company_id: company_id}) })
 
-  new: (id) ->
-    event = new CPP.Models.Event company_id: id
+  new: (company_id) ->
+    event = new CPP.Models.Event company_id: company_id
     event.collection = new CPP.Collections.Events
     new CPP.Views.EventsEdit model: event
 

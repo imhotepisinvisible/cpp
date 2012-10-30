@@ -3,6 +3,7 @@ class CPP.Views.CompaniesItem extends CPP.Views.Base
   template: JST['companies/item']
 
   initialize: ->
+    # bind to model change so backbone view update on destroy
     @model.bind 'change', @render, @
   
   events: 

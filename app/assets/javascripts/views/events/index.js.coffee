@@ -4,6 +4,9 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
 
   initialize: ->
     @collection.bind 'reset', @render, @
+    @collection.bind 'change', @render, @
+    # bind to model destroy so backbone view updates on destroy
+    @collection.bind 'destroy', @render, @
 
   render: ->
     $(@el).html(@template())
