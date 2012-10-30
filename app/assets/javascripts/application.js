@@ -14,15 +14,10 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require date
-//
-//TODO: Remove me eventually
-//= require site
-//
 //= require underscore
 //= require backbone
 //= require backbone-forms-bootstrap
-//= require backbone-forms-templates
-//= require cpp-date-picker
+//= require_tree .//backbone_forms_custom
 //
 //= require .//cpp
 //
