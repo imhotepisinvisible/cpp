@@ -9,14 +9,16 @@ class CPP.Models.Event extends Backbone.Model
    	start_date:
       type: "DateTime"
       DateEditor: "DatePicker"
+      validators: ["required"]
    	end_date: 
       type: "DateTime"
       DateEditor: "DatePicker"
+      validators: ["required"]
     deadline:
       type: "DateTime"
       DateEditor: "DatePicker"
     description: 
-      type: "Text"
+      type: "TextArea"
       validators: ["required"]
     location:
       type: "Text"
