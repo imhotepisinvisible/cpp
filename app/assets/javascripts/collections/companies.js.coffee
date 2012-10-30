@@ -1,3 +1,3 @@
-class CPP.Collections.Companies extends Backbone.Collection
+class CPP.Collections.Companies extends CPP.Collections.Base
   url: '/companies'
   model: CPP.Models.Company
