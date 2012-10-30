@@ -28,17 +28,11 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
     $('.form').append(@form.el)
     @form.on "change", ->
       console.log @model.get 'description'
-      console.log @model.get "start_date"
-      # commit the form
-      @commit()
-    # $('#c0_start_date').datepicker().on "changeDate", =>
-    #   @model.set "start_date" ,"10/10/2020"
+      console.log @model.get 'start_date'
   @
 
   submitEvent: ->
     @form.commit()
-    # $('.control-group').removeClass('error')
-    # $('.help-inline').html('')
     if @form.validate() == null 
       @model.save {},
         wait: true
