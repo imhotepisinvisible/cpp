@@ -15,5 +15,6 @@ class CPP.Views.CompaniesView extends CPP.Views.Base
 
     placements_partial = new CPP.Views.PlacementsPartial
       el: $(@el).find('#placements-partial')
+      model: @model
       collection: @model.placements
     @

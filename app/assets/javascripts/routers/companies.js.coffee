@@ -14,6 +14,10 @@ class CPP.Routers.Companies extends Backbone.Router
 
   view: (id) ->
     company = new CPP.Models.Company id: id
+
+    company.events.fetch({ data: $.param({ limit: 3}) })
+    company.placements.fetch({ data: $.param({ limit: 3}) })
+    
     company.fetch
       success: ->
         new CPP.Views.CompaniesView model: company
@@ -22,6 +26,10 @@ class CPP.Routers.Companies extends Backbone.Router
 
   edit: (id) ->
     company = new CPP.Models.Company id: id
+
+    company.events.fetch({ data: $.param({ limit: 3}) })
+    company.placements.fetch({ data: $.param({ limit: 3}) })
+    
     company.fetch
       success: ->
         new CPP.Views.CompaniesEdit model: company

@@ -4,10 +4,14 @@ class PlacementsController < ApplicationController
   # GET /placements
   # GET /placements.json
   def index
+    @placements = Placement.scoped
+
     if params.keys.include? "company_id"
-      @placements = Placement.find_all_by_company_id(params[:company_id], :limit => 3)
-    else
-      @placements = Placement.all
+      @placements = @placements.where(:company_id => params[:company_id])
+    end
+
+    if params.keys.include? "limit"
+      @placements = @placements.limit(params[:limit])
     end
 
     respond_with @placements

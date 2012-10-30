@@ -4,11 +4,16 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
+    @events = Event.scoped
+
     if params.keys.include? "company_id"
-      @events = Event.find_all_by_company_id(params[:company_id], :limit => 3)
-    else
-      @events = Event.all
+      @events = @events.where(:company_id => params[:company_id])
     end
+
+    if params.keys.include? "limit"
+      @events = @events.limit(params[:limit])
+    end
+
     respond_with @events
   end
 
