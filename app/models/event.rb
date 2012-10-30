@@ -26,7 +26,12 @@ class Event < ActiveRecord::Base
   validates :start_date,   :presence => true
   validates :end_date,     :presence => true
 
-  validates_datetime :start_date, :after => :today
-  validates_datetime :end_date,   :after => :start_date
+  validates_datetime :start_date,
+    :after => :now,
+    :after_message => "Event cannot start in the past"
+
+  validates_datetime :end_date,
+    :after => :start_date,
+    :after_message => "End time cannot be before start time"
 
 end

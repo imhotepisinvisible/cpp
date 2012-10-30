@@ -21,7 +21,9 @@ class Company < ActiveRecord::Base
   validates :logo,            :presence => true
   validates :description,     :presence => true
   validates :organisation_id, :presence => true
+
   validates :description, :length => {
-    :maximum => 500
+    :maximum => 500,
+    :too_long => "%{count} characters is the maximum allowed"
   }
 end

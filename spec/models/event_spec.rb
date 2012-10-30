@@ -25,12 +25,18 @@ describe Event do
     it {should_not allow_value(event.start_date - 1.day).
         for(:end_date)}
 
+    it {should_not allow_value(event.start_date - 1.second).
+        for(:end_date)}
+
     it {should_not allow_value(event.start_date).
         for(:end_date)}
   end
 
   context "when the end_date is after the start_date" do
     it {should allow_value(event.start_date + 1.day).
+        for(:end_date)}
+
+    it {should allow_value(event.start_date + 1.second).
         for(:end_date)}
   end
 
