@@ -47,7 +47,6 @@ end
 
 group :development do
   gem 'rails3-generators' # for factory_girl_rails and simple_form
-  gem 'heroku'            # Useful for deploying for demos
   gem 'sqlite3'           # Local development
   gem 'lorem'
   gem 'rails-erd'
