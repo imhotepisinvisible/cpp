@@ -4,7 +4,7 @@ class CPP.Views.EventsPartialItem extends CPP.Views.Base
 
   events:
     'click .btn-edit' : 'editEvent'
-    'click' : 'viewEvent'
+    'click'           : 'viewEvent'
 
   template: JST['events/partial_item']
 
