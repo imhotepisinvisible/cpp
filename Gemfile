@@ -63,6 +63,8 @@ group :test, :development do
   gem 'jasmine'
   gem 'jasminerice'
   gem 'guard-jasmine'
+  gem 'sinon-rails'
+  gem 'jasmine-sinon-rails', :git => 'git://github.com/PeterHamilton/jasmine-sinon-rails'
 
 
   gem 'rspec-rails'

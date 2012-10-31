@@ -18,6 +18,8 @@
 //= require backbone
 //= require backbone-forms-bootstrap
 //= require_tree .//backbone_forms_custom
+//= require sinon
+//= require jasmine-sinon
 //
 //= require .//cpp
 //
