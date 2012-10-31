@@ -1,9 +1,10 @@
 class CPP.Views.EventsPartialItem extends CPP.Views.Base
   tagName: "li"
+  className: "event-item"
 
   events:
     'click .btn-edit' : 'editEvent'
-    'click .link-description' : 'viewEvent'
+    'click' : 'viewEvent'
 
   template: JST['events/partial_item']
 
@@ -11,7 +12,9 @@ class CPP.Views.EventsPartialItem extends CPP.Views.Base
     $(@el).html(@template(event: @model, editable: options.editable))
     @
 
-  editEvent: ->
+  editEvent: (e) ->
+    e.stopPropagation()
+
     Backbone.history.navigate('events/' + @model.id + '/edit', trigger: true)
 
   viewEvent: ->
