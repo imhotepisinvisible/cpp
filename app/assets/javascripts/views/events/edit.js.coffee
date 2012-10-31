@@ -21,8 +21,8 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
   @
 
   submitEvent: ->
-    @form.commit()
     if @form.validate() == null 
+      @form.commit()
       @model.save {},
         wait: true
         success: (model, response) =>
@@ -34,4 +34,4 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
           for field, errors of errorlist.errors
             @form.fields[field].setError(errors.join ', ')
 
-         notify "error", "Unable to save event, please resolve issues below."
+          notify "error", "Unable to save event, please resolve issues below."
