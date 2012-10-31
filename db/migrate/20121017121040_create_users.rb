@@ -5,7 +5,9 @@ class CreateUsers < ActiveRecord::Migration
       t.string :last_name
       t.string :email
       t.string :password_digest
-      t.references :department
+      
+      t.references :department # Department for Student
+      t.references :company # Company for Company Admin
 
       t.string :type
 

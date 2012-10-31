@@ -12,11 +12,13 @@ Dir[Rails.root.join("spec/factories/*.rb")].each {|f| require f}
 
 organisation = FactoryGirl.create :organisation
 
-department = FactoryGirl.create :department, :organisation => organisation 
+department = FactoryGirl.create :department, :organisation => organisation
 
 # Sample Users
 students =  %w( peter tom jack sarah ).map do |name|
-  FactoryGirl.create :student,  { email: "#{name}@cpp.com",
+  FactoryGirl.create :student,  { first_name: "#{name}",
+                                  last_name: "cpp",
+                                  email: "#{name}@cpp.com",
                                   password: "cppcppcpp",
                                   password_confirmation: "cppcppcpp",
                                   department: department
@@ -37,5 +39,13 @@ Company.all.each do |company|
   # Create placements
   5.times do
     FactoryGirl.create(:placement, :company => company)
+  end
+
+  1.times do
+    FactoryGirl.create :company_administrator, {
+      password: "cppcppcpp",
+      password_confirmation: "cppcppcpp",
+      company: company
+    }
   end
 end
