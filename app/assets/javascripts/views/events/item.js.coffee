@@ -1,5 +1,6 @@
 class CPP.Views.EventsItem extends CPP.Views.Base
   tagName: "tr"
+  className: "cpp-tbl-row"
 
   template: JST['events/item']
 
@@ -7,14 +8,16 @@ class CPP.Views.EventsItem extends CPP.Views.Base
     #@render()
 
   events: 
-    "click .btn-edit" : "editEvent"
+    "click .btn-edit"   : "editEvent"
     "click .btn-delete" : "deleteEvent"
-    "click .btn-view" : "viewEvent"
+    "click"             : "viewEvent"
 
-  editEvent: ->
+  editEvent: (e) ->
+    e.stopPropagation()
     Backbone.history.navigate("events/" + @model.get('id') + "/edit", trigger: true)
 
-  deleteEvent: ->
+  deleteEvent: (e) ->
+    e.stopPropagation()
     @model.destroy
       wait: true
       success: (model, response) ->
@@ -22,9 +25,9 @@ class CPP.Views.EventsItem extends CPP.Views.Base
       error: (model, response) ->
         notify "error", "Event could not be deleted"
 
-  viewEvent: ->
-    Backbone.history.navigate("events/" + @model.get('id'), trigger: true)
-
   render: ->
     $(@el).html(@template(event: @model))
     @
+
+  viewEvent: ->
+    Backbone.history.navigate("events/" + @model.get('id'), trigger: true)

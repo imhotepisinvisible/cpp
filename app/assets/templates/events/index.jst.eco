@@ -30,7 +30,7 @@
           <th></th>
         </tr>
       </thead>
-      <tbody id="events">
+      <tbody class="cpp-tbl" id="events">
       </tbody>
     </table>
   </div>

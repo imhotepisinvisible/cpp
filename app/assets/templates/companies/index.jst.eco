@@ -21,7 +21,7 @@
           <th></th>
         </tr>
       </thead>
-      <tbody id="companies">
+      <tbody id="companies" class="cpp-tbl">
       </tbody>
     </table>
   </div>

@@ -87,6 +87,17 @@ h1 {
   }
 }
 
+.cpp-tbl {
+  tr {
+    cursor: pointer;
+    color: #444;
+    &:hover{
+      background: #efefef;
+      text-decoration: none;
+    }
+  }
+}
+
 .see-all-link{
   float: right;
 }

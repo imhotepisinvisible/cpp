@@ -1,9 +1,5 @@
-<td>
-	<a href="#companies/<%= @company.get 'id' %>">
-		<img class="img-logo" width="150px" src="/assets/company_logos/<%= @company.get 'logo' %>">
-	</a>
-</td>
-<td><a href="#companies/<%= @company.get 'id' %>"><%= @company.get 'name' %></a></td>
+<td><img class="img-logo" width="150px" src="/assets/company_logos/<%= @company.get 'logo' %>"></td>
+<td><%= @company.get 'name' %></td>
 <td><%= @company.get 'description' %></td>
 <td>
   <div class="btn btn-edit">Edit</div>

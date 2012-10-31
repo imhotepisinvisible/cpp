@@ -7,20 +7,26 @@ class CPP.Views.CompaniesItem extends CPP.Views.Base
     @model.bind 'change', @render, @
   
   events: 
-    "click .btn-edit" : "editCompany"
+    "click .btn-edit"   : "editCompany"
     "click .btn-delete" : "deleteCompany"
+    "click"             : "viewCompany"
 
   render: ->
     $(@el).html(@template(company: @model))
     @
 
-  editCompany: ->
+  editCompany: (e) ->
+    e.stopPropagation()
     Backbone.history.navigate("companies/" + @model.id + "/edit", trigger: true)
 
-  deleteCompany: ->
+  deleteCompany: (e) ->
+    e.stopPropagation()
     @model.destroy
       wait: true
       success: (model, response) ->
         notify "success", "Company deleted"
       error: (model, response) ->
         notify "error", "Company could not be deleted"
+
+  viewCompany: ->
+    Backbone.history.navigate("companies/" + @model.id, trigger: true)
