@@ -1,19 +1,30 @@
 describe "Placement", ->
-  describe "when instantiated", ->
+  beforeEach ->
+    @position = "SDE Intern"
+    @location = "Barbican, London"
+    @description = "Work on Amazon Instant Video"
+    @deadline = new Date()
+
+
+    @placement = new CPP.Models.Placement {
+      position: @position
+      location: @location
+      description: @description
+      deadline: @deadline
+    }
+
+
+  describe "when saving", ->
     beforeEach ->
-      @position = "SDE Intern"
-      @location = "Barbican, London"
-      @description = "Work on Amazon Instant Video"
-      @deadline = new Date()
+      console.log "SINON:", sinon
+      @spy = sinon.spy()
+      @placement.bind("error", @spy)
 
+    it "should not save when position is empty", ->
+      @placement.save({"position": ""})
+      expect(@spy.calledOnce).toHaveBeenCalledOnce
 
-      @placement = new CPP.Models.Placement {
-        position: @position
-        location: @location
-        description: @description
-        deadline: @deadline
-      }
-
+  describe "when instantiated", ->
     it "should exhibit position attribute", ->
       expect(@placement.get("position")).toEqual @position
 
@@ -25,3 +36,4 @@ describe "Placement", ->
 
     it "should exhibit deadline attribute", ->
       expect(@placement.get("deadline")).toEqual @deadline
+
