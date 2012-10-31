@@ -8,6 +8,8 @@ class Backbone.Form.editors.Datepicker extends Backbone.Form.editors.Base
   events:
     'change' : -> 
       @trigger 'change', @
+    'changeDate' : ->
+      @trigger 'change', @
     'focus' : -> 
       @trigger 'focus', @
     'blur' : -> 

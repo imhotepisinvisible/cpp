@@ -15,6 +15,9 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
     # Super called as extending we are extending CPP.Views.Base
     super
     $('.form').append(@form.el)
+    @form.on "change", =>
+      console.log 'changed'
+      @form.validate()
   @
 
   submitEvent: ->
