@@ -3,6 +3,9 @@ class CPP.Views.EventsItem extends CPP.Views.Base
 
   template: JST['events/item']
 
+  initialize: ->
+    #@render()
+
   events: 
     "click .btn-edit" : "editEvent"
     "click .btn-delete" : "deleteEvent"

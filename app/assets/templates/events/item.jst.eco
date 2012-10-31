@@ -1,7 +1,6 @@
-<td>A Company</td>
+<td><%= @event.company.get 'name' %></td>
 <td><%= @event.get 'title' %></td>
 <td><%= @event.get 'deadline' %></td>
-<td><%= @event.get 'description' %></td>
 <td><%= @event.get 'location' %></td>
 <td><%= @event.get 'capacity' %></td>
 <td><a href="<%= @event.get 'google_map_url' %>"><i class="icon-map-marker"></a></td>

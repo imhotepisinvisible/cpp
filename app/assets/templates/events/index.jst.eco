@@ -4,7 +4,14 @@
     <div><button class="filterbutton" type="button">Click Me</button></div>
   </div>
   <div class="span9">
-    <h1 class="section-header">Events</h1>
+    <h1 class="section-header">
+      Events
+      <% if @events.company: %>
+        <div class="company-logo-header">
+          <img src="/assets/company_logos/<%= @events.company.get 'logo' %>">
+        </div>
+      <% end %>
+    </h1>
     <div class="table-toolbar">
       <div class="btn pull-right">
         Add Event
@@ -17,7 +24,6 @@
           <th>Company</th>
           <th>Event</th>
           <th>Apply By</th>
-          <th>Details</th>
           <th>Location</th>
           <th>Capacity</th>
           <th>Map</th>
