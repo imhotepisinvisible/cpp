@@ -5,7 +5,7 @@ FactoryGirl.define do
     logo { %w(amazon facebook google
               ibm intel microsoft netcraft
               nextjump palantir vmware).sample + "_logo.jpg" }
-    description { Faker::Lorem.characters(80) }
+    description { 80.times.map{ Faker::Lorem.words(1) }.join(" ").truncate(80) }
   end
 end
 
