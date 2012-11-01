@@ -1,22 +1,32 @@
 describe "Event", ->
+  beforeEach ->
+    @title = "Google interview techniques"
+    @description = "Ace our interviews"
+    @location = "Victoria, London"
+    @start_date = new Date()
+    @end_date = new Date()
+    @end_date.setDate(@start_date.getDate() + 1)
+
+
+    @event = new CPP.Models.Event {
+      title: @title
+      description: @description
+      location: @location
+      start_date: @start_date
+      end_date: @end_date
+    }
+
+  describe "url", ->
+    describe "when no id is set", ->
+      it "should return the collection URL", ->
+        expect(@event.url()).toEqual("/events")
+
+    describe "when id is set", ->
+      it "should return the collection URL and id", ->
+        @event.id = 1
+        expect(@event.url()).toEqual("/events/1")
+
   describe "when instantiated", ->
-    beforeEach ->
-      @title = "Google interview techniques"
-      @description = "Ace our interviews"
-      @location = "Victoria, London"
-      @start_date = new Date()
-      @end_date = new Date()
-      @end_date.setDate(@start_date.getDate() + 1)
-
-
-      @event = new CPP.Models.Event {
-        title: @title
-        description: @description
-        location: @location
-        start_date: @start_date
-        end_date: @end_date
-      }
-
     it "should exhibit title attribute", ->
       expect(@event.get("title")).toEqual @title
 
