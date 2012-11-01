@@ -1,9 +1,11 @@
-<h1 class="section-header">
-  <%= @event.get 'title' %>
+<div class="row section-header">
+  <div class="span6">
+     <h1><%= @event.get 'title' %></h1>
+  </div>
   <div class="company-logo-header">
     <img src="/assets/company_logos/<%= @event.company.get 'logo' %>">
   </div>
-</h1>
+</div>
 
 <div class="row">
   <div class="span6">
