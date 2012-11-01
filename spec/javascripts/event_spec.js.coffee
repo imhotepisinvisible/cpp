@@ -47,31 +47,32 @@ describe "Event", ->
   describe "when used in form", ->
 
     form = new Backbone.Form(model: new CPP.Models.Event).render()
-    errors = form.validate
+    errors = form.validate()
+    console.log errors
 
     describe "when saving required fields", ->
       it "should not save when title is empty", ->
-        expect(errors.hasOwnProperty 'title').toBeTruthy
+        expect(errors.hasOwnProperty 'title').toBeTruthy()
 
       it "should not save when start_date is empty", ->
-        expect(errors.hasOwnProperty 'start_date').toBeTruthy
+        expect(errors.hasOwnProperty 'start_date').toBeTruthy()
 
       it "should not save when end_date is empty", ->
-        expect(errors.hasOwnProperty 'end_date').toBeTruthy
+        expect(errors.hasOwnProperty 'end_date').toBeTruthy()
 
       it "should not save when description is empty", ->
-        expect(errors.hasOwnProperty 'description').toBeTruthy
+        expect(errors.hasOwnProperty 'description').toBeTruthy()
 
       it "should not save when location is empty", ->
-        expect(errors.hasOwnProperty 'location').toBeTruthy
+        expect(errors.hasOwnProperty 'location').toBeTruthy()
 
 
     describe "when saving optional fields", ->
       it "should save when deadline is empty", ->
-        expect(errors.hasOwnProperty 'deadline').toBeFalsy
+        expect(errors.hasOwnProperty 'deadline').toBeFalsy()
 
       it "should save when capacity is empty", ->
-        expect(errors.hasOwnProperty 'capacity').toBeFalsy
+        expect(errors.hasOwnProperty 'capacity').toBeFalsy()
 
       it "should save when google_map_url is empty", ->
-        expect(errors.hasOwnProperty 'google_map_url').toBeFalsy
+        expect(errors.hasOwnProperty 'google_map_url').toBeFalsy()

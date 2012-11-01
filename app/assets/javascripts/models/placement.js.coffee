@@ -9,12 +9,11 @@ class CPP.Models.Placement extends Backbone.Model
     description:
       type: "Text"
       validators: ["required"]
-    duration: 
-      type: "Text"
-      validators: ["required"]
     location:
       type: "Text"
       validators: ["required"]
-    deadline: 
+    deadline:
       type: "DateTime"
       DateEditor: "DatePicker"
+    duration:
+      type: "Text"

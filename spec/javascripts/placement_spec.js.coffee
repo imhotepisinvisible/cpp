@@ -5,6 +5,7 @@ describe "Placement", ->
       @location = "Barbican, London"
       @description = "Work on Amazon Instant Video"
       @deadline = new Date
+      @duration = "3 months"
 
 
       @placement = new CPP.Models.Placement {
@@ -12,6 +13,7 @@ describe "Placement", ->
         location: @location
         description: @description
         deadline: @deadline
+        duration: @duration
       }
 
     describe "url", ->
@@ -37,29 +39,28 @@ describe "Placement", ->
       it "should exhibit deadline attribute", ->
         expect(@placement.get 'deadline').toEqual @deadline
 
+      it "should exhibit duration attribute", ->
+        expect(@placement.get 'duration').toEqual @duration
+
   describe "when used in form", ->
 
-    form = new Backbone.Form(model: new CPP.Models.Event).render()
-    errors = form.validate
+    form = new Backbone.Form(model: new CPP.Models.Placement).render()
+    errors = form.validate()
 
     describe "when saving required fields", ->
       it "should not save when position is empty", ->
-        expect(errors.hasOwnProperty 'position').toBeTruthy
+        expect(errors.hasOwnProperty 'position').toBeTruthy()
 
       it "should not save when description is empty", ->
-        expect(errors.hasOwnProperty 'description').toBeTruthy
-
-      it "should not save when duration is empty", ->
-        expect(errors.hasOwnProperty 'duration').toBeTruthy
-
-      it "should not save when description is empty", ->
-        expect(errors.hasOwnProperty 'description').toBeTruthy
+        expect(errors.hasOwnProperty 'description').toBeTruthy()
 
       it "should not save when location is empty", ->
-        expect(errors.hasOwnProperty 'location').toBeTruthy
-
+        expect(errors.hasOwnProperty 'location').toBeTruthy()
 
     describe "when saving optional fields", ->
       it "should save when deadline is empty", ->
-        expect(errors.hasOwnProperty 'deadline').toBeFalsy
+        expect(errors.hasOwnProperty 'deadline').toBeFalsy()
+
+      it "should save when duration is empty", ->
+        expect(errors.hasOwnProperty 'duration').toBeFalsy()
 
