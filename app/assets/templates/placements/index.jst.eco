@@ -27,7 +27,7 @@
           <th>Duration</th>
           <th>Location</th>
           <th>Deadline</th>
-          <th></th>
+          <th class="btn-column"></th>
         </tr>
       </thead>
       <tbody class="cpp-tbl" id="placements">

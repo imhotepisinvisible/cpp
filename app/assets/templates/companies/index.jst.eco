@@ -18,7 +18,7 @@
           <th>Logo</th>
           <th>Name</th>
           <th>Description</th>
-          <th></th>
+          <th class="btn-column"></th>
         </tr>
       </thead>
       <tbody id="companies" class="cpp-tbl">

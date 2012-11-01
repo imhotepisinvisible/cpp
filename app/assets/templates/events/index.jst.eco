@@ -27,7 +27,7 @@
           <th>Location</th>
           <th>Capacity</th>
           <th>Map</th>
-          <th></th>
+          <th class="btn-column"></th>
         </tr>
       </thead>
       <tbody class="cpp-tbl" id="events">
