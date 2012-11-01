@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.wysiwyg
 //= require twitter/bootstrap
 //= require date
 //= require underscore

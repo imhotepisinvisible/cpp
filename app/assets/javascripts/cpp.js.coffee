@@ -33,3 +33,5 @@ $(document).ready ->
         404: ->
           console.log "Got 404"
   CPP.init()
+
+
