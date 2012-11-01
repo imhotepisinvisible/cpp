@@ -18,14 +18,9 @@ window.notify = (alert_class, message) ->
   n.html(message)
   n.slideDown().delay(2000).slideUp()
 
+
 $(document).ready ->
   Backbone.Form.editors.DateTime.DateEditor = Backbone.Form.editors.Datepicker
-  # Bind DatePickers
-# $(document).on "focus", "[data-behaviour~='datepicker']", (e) ->
-#    $(this).datepicker
-#      "format":     "dd/mm/yyyy"
-#      "weekStart":  1
-#      "autoclose":  true
 
   $.ajaxSetup
     statusCode:
