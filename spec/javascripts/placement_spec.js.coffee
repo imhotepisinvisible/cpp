@@ -1,38 +1,28 @@
 describe "Placement", ->
-  beforeEach ->
-    @position = "SDE Intern"
-    @location = "Barbican, London"
-    @description = "Work on Amazon Instant Video"
-    @deadline = new Date
+  describe "when used alone", ->
+    beforeEach ->
+      @position = "SDE Intern"
+      @location = "Barbican, London"
+      @description = "Work on Amazon Instant Video"
+      @deadline = new Date
 
 
-    @placement = new CPP.Models.Placement {
-      position: @position
-      location: @location
-      description: @description
-      deadline: @deadline
-    }
+      @placement = new CPP.Models.Placement {
+        position: @position
+        location: @location
+        description: @description
+        deadline: @deadline
+      }
 
-  describe "url", ->
-    describe "when no id is set", ->
-      it "should return the collection URL", ->
-        expect(@placement.url()).toEqual '/placements'
+    describe "url", ->
+      describe "when no id is set", ->
+        it "should return the collection URL", ->
+          expect(@placement.url()).toEqual '/placements'
 
     describe "when id is set", ->
       it "should return the collection URL and id", ->
         @placement.id = 1
         expect(@placement.url()).toEqual '/placements/1'
-
-  describe "validation", ->
-
-    describe "when saving", ->
-      beforeEach ->
-        @spy = sinon.spy()
-        @placement.bind 'error', @spy
-
-      it "should not save when position is empty", ->
-        @placement.save({"position": ""})
-        expect(@spy.calledOnce).toHaveBeenCalledOnce
 
     describe "when instantiated", ->
       it "should exhibit position attribute", ->
@@ -46,4 +36,30 @@ describe "Placement", ->
 
       it "should exhibit deadline attribute", ->
         expect(@placement.get 'deadline').toEqual @deadline
+
+  describe "when used in form", ->
+
+    form = new Backbone.Form(model: new CPP.Models.Event).render()
+    errors = form.validate
+
+    describe "when saving required fields", ->
+      it "should not save when position is empty", ->
+        expect(errors.hasOwnProperty 'position').toBeTruthy
+
+      it "should not save when description is empty", ->
+        expect(errors.hasOwnProperty 'description').toBeTruthy
+
+      it "should not save when duration is empty", ->
+        expect(errors.hasOwnProperty 'duration').toBeTruthy
+
+      it "should not save when description is empty", ->
+        expect(errors.hasOwnProperty 'description').toBeTruthy
+
+      it "should not save when location is empty", ->
+        expect(errors.hasOwnProperty 'location').toBeTruthy
+
+
+    describe "when saving optional fields", ->
+      it "should save when deadline is empty", ->
+        expect(errors.hasOwnProperty 'deadline').toBeFalsy
 
