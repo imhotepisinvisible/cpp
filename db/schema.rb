@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20121026184345) do
     t.string   "location"
     t.integer  "capacity"
     t.string   "google_map_url"
+    t.string   "requirements"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end

@@ -7,6 +7,8 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
     'click .btn-submit': 'submitEvent'
 
   initialize: ->
+    if (@model.get "requirements") == ""
+      @model.set "requirementsEnabled", false
     @form = new Backbone.Form(model: @model).render()
     @render()
 
@@ -15,9 +17,13 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
     # Super called as extending we are extending CPP.Views.Base
     super
     $('.form').append(@form.el)
+    # Initial check for rendering requirementes box
+    if (@model.get "requirements") != ""
+      @form.fields["requirements"].$el.slideDown()
     @form.on "change", =>
-      console.log 'changed'
       @form.validate()
+    @form.on "requirementsEnabled:change", =>
+      @form.fields["requirements"].$el.slideToggle()
   @
 
   submitEvent: ->

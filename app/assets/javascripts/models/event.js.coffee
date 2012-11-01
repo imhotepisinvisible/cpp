@@ -25,3 +25,16 @@ class CPP.Models.Event extends Backbone.Model
       validators: ["required"]
     capacity: "Text"
     google_map_url: "Text"
+    requirementsEnabled:
+      type: "Checkboxes"
+      options: [""]
+      title: "Requirements"
+      editorAttrs:
+        style: "list-style: none"
+    requirements: 
+      type: "TextArea"
+      title: ""
+      fieldAttrs:
+        style: "display: none"
+
+
