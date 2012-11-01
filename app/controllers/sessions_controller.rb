@@ -1,15 +1,17 @@
 class SessionsController < ApplicationController
+  respond_to :json
   def new
+    @session = Session.new
+    respond_with @session
   end
   
   def create
     user = User.find_by_email(params[:session][:email])
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
-      redirect_to root_url, :notice => "Logged in!"
+      respond_with @session, location: nil
     else
-      flash.now.alert = "Invalid email or password"
-      render "new"
+      respond_with @session, status: :unprocessable_entity, location: nil
     end
   end
 

@@ -7,6 +7,7 @@ window.CPP =
     new CPP.Routers.Companies
     new CPP.Routers.Events
     new CPP.Routers.Placements
+    new CPP.Views.LoginUser
     # Backbone.history.start({pushState: true})
     Backbone.history.start()
 

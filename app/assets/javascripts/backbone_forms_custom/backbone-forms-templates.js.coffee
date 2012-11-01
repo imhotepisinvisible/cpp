@@ -5,6 +5,10 @@ $ ->
     #   <form class="form-horizontal">{{fieldsets}}</form>
     # '
 
+    loginform: '
+      <form class="navbar-form pull-right">{{fieldsets}}</form>
+    '
+
     # fieldset: '
     #   <fieldset>
     #     <legend>{{legend}}</legend>

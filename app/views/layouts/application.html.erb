@@ -54,10 +54,10 @@
           </ul>
 
           <% if !current_user %>
-            <%= form_for :session, :url => sessions_path, :html => { :class => "navbar-form pull-right" } do |f| %>
+            <%= form_for :session, :url => "#", :html => { :class => "navbar-form pull-right" } do |f| %>
               <%= f.text_field :email, { :class => "input-small", :placeholder => "Email"} %>
               <%= f.password_field :password, { :class => "input-small", :placeholder => "Password"} %>
-              <%= f.submit "Sign in", { :class => "btn" } %>
+              <div class="btn login-submit" >Login</div>
             <% end %>
           <% else %>
             <div class="pull-right">
