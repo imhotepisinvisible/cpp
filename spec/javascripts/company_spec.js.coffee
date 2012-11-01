@@ -14,22 +14,22 @@ describe "Company", ->
   describe "url", ->
     describe "when no id is set", ->
       it "should return the collection URL", ->
-        expect(@company.url()).toEqual("/companies")
+        expect(@company.url()).toEqual '/companies'
 
     describe "when id is set", ->
       it "should return the collection URL and id", ->
         @company.id = 1
-        expect(@company.url()).toEqual("/companies/1")
+        expect(@company.url()).toEqual '/companies/1'
 
   describe "when instantiated", ->
 
     it "should exhibit name attribute", ->
-      expect(@company.get("name")).toEqual @name
+      expect(@company.get 'name').toEqual @name
 
     it "should exhibit logo attribute", ->
-      expect(@company.get("logo")).toEqual @logo
+      expect(@company.get 'logo').toEqual @logo
 
     it "should exhibit description attribute", ->
-     expect(@company.get("description")).toEqual @description
+     expect(@company.get 'description').toEqual @description
 
 
