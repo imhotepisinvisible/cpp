@@ -2,6 +2,6 @@
 <td><%= @company.get 'name' %></td>
 <td><%= @company.get 'description' %></td>
 <td>
-  <div class="btn btn-edit">Edit</div>
-  <div class="btn btn-danger btn-delete">Delete</div>
+  <div class="btn btn-small btn-edit">Edit</div>
+  <div class="btn btn-small btn-danger btn-delete">Delete</div>
 </td>
