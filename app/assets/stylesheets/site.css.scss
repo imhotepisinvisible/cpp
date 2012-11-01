@@ -180,3 +180,17 @@ footer {
 .btn-column{
   width: 100px;
 }
+
+.user_details{
+  float: right;
+  display: block;
+  padding-top: 8px;
+  font-weight: 200;
+  line-height: 30px;
+  // color: white;
+  
+  a{
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
