@@ -1,4 +1,4 @@
-<a>
+<div class="item">
   <div class="link-title">
     <%= @event.get 'title' %>
     <% if @editable: %>
@@ -9,4 +9,4 @@
     <% d = Date.parse(@event.get('start_date')) %>
     <%= d.toString('dXXX MMMM yyyy - H:mm').replace('XXX', d.getOrdinal()) %>
   </div>
-</a>
+</div>

@@ -20,6 +20,7 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
     
     new CPP.Views.PlacementsPartial
       el: $(@el).find('#placements-partial')
+      model: @model
       collection: @model.placements
       editable: true
     @

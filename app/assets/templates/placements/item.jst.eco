@@ -1,0 +1,10 @@
+<td><%= @placement.company.get 'name' %></td>
+<td><%= @placement.get 'position' %></td>
+<td><%= @placement.get 'description' %></td>
+<td><%= @placement.get 'duration' %></td>
+<td><%= @placement.get 'location' %></td>
+<td><%= @placement.get 'deadline' %></td>
+<td>
+  <div class="btn btn-small btn-edit">Edit</div>
+  <div class="btn btn-small btn-danger btn-delete">Delete</div>
+</td>

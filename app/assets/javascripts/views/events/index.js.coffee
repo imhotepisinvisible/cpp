@@ -3,6 +3,7 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
   template: JST['events/index']
 
   events:
+    "click .btn-add"      : "addEvent"
     'click .company-logo-header' : 'viewCompany'
 
   initialize: ->
@@ -25,6 +26,9 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
         error: ->
           notify "error", "Couldn't fetch company for event"
     @
+
+  addEvent: ->
+    Backbone.history.navigate("companies/" + @collection.company.id + "/events/new", trigger: true)
 
   viewCompany: ->
     if @collection.company 

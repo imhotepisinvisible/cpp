@@ -21,7 +21,6 @@ class PlacementsController < ApplicationController
   # GET /placements/1.json
   def show
     @placement = Placement.find(params[:id])
-    
     respond_with @placement
   end
 
@@ -29,7 +28,6 @@ class PlacementsController < ApplicationController
   # GET /placements/new.json
   def new
     @placement = Placement.new
-    
     respond_with @placement
   end
 

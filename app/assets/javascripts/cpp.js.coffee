@@ -6,6 +6,7 @@ window.CPP =
   init: ->
     new CPP.Routers.Companies
     new CPP.Routers.Events
+    new CPP.Routers.Placements
     # Backbone.history.start({pushState: true})
     Backbone.history.start()
 

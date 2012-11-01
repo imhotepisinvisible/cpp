@@ -1,8 +1,8 @@
 <h1 class="section-header">
-  <% if @event.isNew(): %>
-    Create a New Event
+  <% if @placement.isNew(): %>
+    Create a New Placement
   <% else: %>
-    <%= @event.get 'title' %> (Editing)
+    <%= @placement.get 'position' %> (Editing)
   <% end %>
 </h1>
 <div class="row">

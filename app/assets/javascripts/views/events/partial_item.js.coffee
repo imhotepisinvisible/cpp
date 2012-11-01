@@ -14,7 +14,6 @@ class CPP.Views.EventsPartialItem extends CPP.Views.Base
 
   editEvent: (e) ->
     e.stopPropagation()
-
     Backbone.history.navigate('events/' + @model.id + '/edit', trigger: true)
 
   viewEvent: ->

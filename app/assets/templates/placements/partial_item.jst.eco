@@ -1,9 +1,9 @@
-<a href="#">
+<div class="item">
   <div class="link-title">
     <%= @placement.get 'position' %>
-    <div class="btn btn-mini pull-right">Edit</div>
+    <div class="btn btn-mini pull-right btn-edit">Edit</div>
   </div>
   <div class="link-description">
     <%= @placement.get 'description' %>
   </div>
-</a>
+</div>
