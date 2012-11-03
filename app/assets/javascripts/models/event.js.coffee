@@ -20,7 +20,6 @@ class CPP.Models.Event extends Backbone.Model
     description: 
       type: "TextArea"
       validators: ["required"]
-      editorClass: "wysiwyg"
     location:
       type: "Text"
       validators: ["required"]

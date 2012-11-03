@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.wysiwyg
 //= require twitter/bootstrap
 //= require date
 //= require underscore
@@ -21,6 +20,7 @@
 //= require_tree .//backbone_forms_custom
 //= require sinon
 //= require jasmine-sinon
+//= require tinymce-jquery
 //
 //= require .//cpp
 //

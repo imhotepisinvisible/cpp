@@ -1,10 +1,10 @@
-class CPP.Views.EventsView extends CPP.Views.Base
+class CPP.Views.EmailsView extends CPP.Views.Base
   el: "#app"
-  template: JST['events/view']
+  template: JST['emails/view']
 
   initialize: ->
     @render()
 
   render: ->
-    $(@el).html(@template(event: @model))
+    $(@el).html(@template(email: @model))
     @

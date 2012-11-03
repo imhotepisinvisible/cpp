@@ -1,20 +1,20 @@
-class CPP.Views.EventsPartialItem extends CPP.Views.Base
+class CPP.Views.EmailsPartialItem extends CPP.Views.Base
   tagName: "li"
-  className: "event-item"
+  className: "email-item"
 
   events:
-    'click .btn-edit' : 'editEvent'
-    'click'           : 'viewEvent'
+    'click .btn-edit' : 'editEmail'
+    'click'           : 'viewEmail'
 
-  template: JST['events/partial_item']
+  template: JST['emails/partial_item']
 
   render: (options) ->
-    $(@el).html(@template(event: @model, editable: options.editable))
+    $(@el).html(@template(email: @model, editable: options.editable))
     @
 
-  editEvent: (e) ->
+  editEmail: (e) ->
     e.stopPropagation()
-    Backbone.history.navigate('events/' + @model.id + '/edit', trigger: true)
+    Backbone.history.navigate('emails/' + @model.id + '/edit', trigger: true)
 
-  viewEvent: ->
-    Backbone.history.navigate('events/' + @model.id, trigger: true)
+  viewEmail: ->
+    Backbone.history.navigate('emails/' + @model.id, trigger: true)

@@ -14,6 +14,9 @@ gem "google_visualr", ">= 2.1"
 # Date and time validation plugin for ActiveModel and Rails.
 gem 'validates_timeliness', '~> 3.0'
 
+# WYSIWYG editor for emails
+gem 'tinymce-rails'
+
 # Pagination
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'

@@ -18,7 +18,6 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
     @form.on "change", =>
       console.log 'changed'
       @form.validate()
-    $('.wysiwyg').wysiwyg()
   @
 
   submitEvent: ->

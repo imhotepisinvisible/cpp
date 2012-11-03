@@ -3,7 +3,7 @@ class CPP.Views.EmailsEdit extends CPP.Views.Base
 
   template: JST['emails/editval']
 
-  emails:
+  events:
     'click .btn-submit': 'submitEmail'
 
   initialize: ->
@@ -19,11 +19,11 @@ class CPP.Views.EmailsEdit extends CPP.Views.Base
     @form.on "change", =>
       console.log 'changed'
       @form.validate()
-    $('.wysiwyg').hide
-    console.log "hello" + $('.wysiwyg')
+    tiny_mce_init()
   @
 
   submitEmail: ->
+    tiny_mce_save()
     if @form.validate() == null 
       @form.commit()
       @model.save {},

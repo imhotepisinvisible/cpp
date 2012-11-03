@@ -1,9 +1,9 @@
-class CPP.Views.EventsIndex extends CPP.Views.Base
+class CPP.Views.EmailsIndex extends CPP.Views.Base
   el: '#app'
-  template: JST['events/index']
+  template: JST['emails/index']
 
   events:
-    "click .btn-add"      : "addEvent"
+    "click .btn-add"      : "addEmail"
     'click .company-logo-header' : 'viewCompany'
 
   initialize: ->
@@ -14,21 +14,21 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
     @render()
 
   render: ->
-    $(@el).html(@template(events: @collection))
+    $(@el).html(@template(emails: @collection))
 
-    @collection.each (event) =>
-      event.company = new CPP.Models.Company id: event.get("company_id")
-      event.company.fetch
+    @collection.each (email) =>
+      email.company = new CPP.Models.Company id: email.get("company_id")
+      email.company.fetch
         success: ->
-          # Render the event if we can get its company
-          view = new CPP.Views.EventsItem model: event
-          @$('#events').append(view.render().el)
+          # Render the email if we can get its company
+          view = new CPP.Views.EmailsItem model: email
+          @$('#emails').append(view.render().el)
         error: ->
-          notify "error", "Couldn't fetch company for event"
+          notify "error", "Couldn't fetch company for email"
     @
 
-  addEvent: ->
-    Backbone.history.navigate("companies/" + @collection.company.id + "/events/new", trigger: true)
+  addEmail: ->
+    Backbone.history.navigate("companies/" + @collection.company.id + "/emails/new", trigger: true)
 
   viewCompany: ->
     if @collection.company 

@@ -59,10 +59,12 @@ CPP::Application.routes.draw do
   resources :companies
   resources :events
   resources :placements
+  resources :emails
 
   resources :companies do
     resources :events
     resources :placements
+    resources :emails
   end
 
   # Samples/Mockups

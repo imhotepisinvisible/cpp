@@ -1,33 +1,33 @@
-class CPP.Views.EventsItem extends CPP.Views.Base
+class CPP.Views.EmailsItem extends CPP.Views.Base
   tagName: "tr"
   className: "cpp-tbl-row"
 
-  template: JST['events/item']
+  template: JST['emails/item']
 
   initialize: ->
     #@render()
 
   events: 
-    "click .btn-edit"   : "editEvent"
-    "click .btn-delete" : "deleteEvent"
-    "click"             : "viewEvent"
+    "click .btn-edit"   : "editEmail"
+    "click .btn-delete" : "deleteEmail"
+    "click"             : "viewEmail"
 
-  editEvent: (e) ->
+  editEmail: (e) ->
     e.stopPropagation()
-    Backbone.history.navigate("events/" + @model.get('id') + "/edit", trigger: true)
+    Backbone.history.navigate("emails/" + @model.get('id') + "/edit", trigger: true)
 
-  deleteEvent: (e) ->
+  deleteEmail: (e) ->
     e.stopPropagation()
     @model.destroy
       wait: true
       success: (model, response) ->
-        notify "success", "Event deleted"
+        notify "success", "Email deleted"
       error: (model, response) ->
-        notify "error", "Event could not be deleted"
+        notify "error", "Email could not be deleted"
 
   render: ->
-    $(@el).html(@template(event: @model))
+    $(@el).html(@template(email: @model))
     @
 
-  viewEvent: ->
-    Backbone.history.navigate("events/" + @model.get('id'), trigger: true)
+  viewEmail: ->
+    Backbone.history.navigate("emails/" + @model.get('id'), trigger: true)

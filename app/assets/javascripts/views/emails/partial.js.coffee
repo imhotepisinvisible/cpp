@@ -1,9 +1,9 @@
-class CPP.Views.EventsPartial extends CPP.Views.Base
-  template: JST['events/partial']
+class CPP.Views.EmailsPartial extends CPP.Views.Base
+  template: JST['emails/partial']
 
   events:
-    "click .btn-add"      : "addEvent"
-    "click .btn-view-all" : "viewCompaniesEvents"
+    "click .btn-add"      : "addEmail"
+    "click .btn-view-all" : "viewCompaniesEmails"
 
   initialize: (options) ->
     @editable = options.editable
@@ -12,13 +12,13 @@ class CPP.Views.EventsPartial extends CPP.Views.Base
 
   render: () ->
     $(@el).html(@template(editable: @editable))
-    @collection.each (event) =>
-      view = new CPP.Views.EventsPartialItem model: event
-      @$('#events').append(view.render(editable: @editable).el)
+    @collection.each (email) =>
+      view = new CPP.Views.EmailsPartialItem model: email
+      @$('#emails').append(view.render(editable: @editable).el)
     @
 
-  addEvent: ->
-    Backbone.history.navigate("companies/" + @model.id + "/events/new", trigger: true)
+  addEmail: ->
+    Backbone.history.navigate("companies/" + @model.id + "/emails/new", trigger: true)
 
-  viewCompaniesEvents: ->
-    Backbone.history.navigate("companies/" + @model.id + "/events", trigger: true)
+  viewCompaniesEmails: ->
+    Backbone.history.navigate("companies/" + @model.id + "/emails", trigger: true)
