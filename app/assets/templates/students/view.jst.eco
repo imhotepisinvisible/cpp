@@ -1,0 +1,162 @@
+<div class="row">
+  <div class="span9">
+    <h1 class="section-header">
+      <i class="icon-user"></i>
+      Jack Stevenson
+    </h1>
+    <div class="row">
+      <div class="span2">
+        <div class="student-profile-picture">
+          image!
+        </div>
+      </div>
+      <div class="span3">
+        <dl class="dl-horizontal">
+          <dt>Department:</dt> <dd>Computing</dd>
+          <dt>Course:</dt> <dd>MEng</dd>
+          <dt>Year:</dt> <dd>3</dd>
+        </dl>
+      </div>
+      <div class="span4">
+        profiley!
+      </div>
+    </div>
+  </div>
+  <div class="span3">
+    <h1 class="section-header">
+      <i class="icon-list-alt"></i>
+      My C.V
+    </h1>
+    <form class="form-inline no-cv-form">
+      <div class="row">
+        <div class="span2">
+          <input type="file" name="datafile" size="20">
+        </div>
+        <div class="span1">
+        <div class="btn">Upload</div>
+        </div>
+      </div>
+    </form>
+
+    <div class="alert alert-error">
+      You haven't yet uploaded a C.V!
+      Please do this A.S.A.P
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span9">
+    <h1 class="section-header">
+      <i class="icon-tags"></i>
+      My Interests
+    </h1>
+    <div class="row">
+      <div class="span3">
+        <form class="form-inline">
+          <div class="input-append">
+            <input type="text" class="span2 typeahead" size="16" data-provide="typeahead" data-source="">
+            <button class="btn typeahead" type="button">Add</button>
+          </div>
+        </form>
+      </div>
+      <div class="span6">
+        Something!
+      </div>
+    </div>
+  </div>
+  <div class="span3">
+    <h1 class="section-header">
+      <i class="icon-thumbs-up"></i>
+      Status
+    </h1>
+    <div class="span3">
+      <dl class="dl-horizontal">
+        <dt>Status:</dt> <dd>Confirmed</dd>
+        <dt>Position:</dt> <dd>Developer</dd>
+        <dt>Company:</dt> <dd>Google</dd>
+      </dl>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="span6">
+    <h1 class="section-header">
+      <i class="icon-calendar"></i>
+      Events
+    </h1>
+    <ul class="cpp-list">
+      <li>
+        <a href="#">
+          <div class="link-title">
+            Event 1
+          </div>
+          <div class="link-description">
+            descriptionio!
+          </div>
+          
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <div class="link-title">
+            Event 2
+          </div>
+          <div class="link-description">
+            asdfasfasf
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <div class="link-title">
+            Event 3
+          </div>
+          <div class="link-description">
+            asdfasdfsdf
+          </div>
+        </a>
+      </li>
+    </ul>
+    <div class="see-all-link"><%= link_to "See All" %></div>
+  </div>
+  <div class="span6">
+    <h1 class="section-header">
+      <i class="icon-briefcase"></i>
+      Placements
+    </h1>
+    <ul class="cpp-list">
+      <li>
+        <a href="#">
+          <div class="link-title">
+            Placement 1
+          </div>
+          <div class="link-description">
+            asdfasdfadssdsdsds
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <div class="link-title">
+            Placement 2
+          </div>
+          <div class="link-description">
+            asdfsdfdsd
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <div class="link-title">
+            Placement 3
+          </div>
+          <div class="link-description">
+            fdfdfdfd
+          </div>
+        </a>
+      </li>
+    </ul>
+    <div class="see-all-link"><%= link_to "See All" %></div>
+  </div>
+</div>
