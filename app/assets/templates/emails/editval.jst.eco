@@ -1,0 +1,30 @@
+<h1 class="section-header">
+  <% if @email.isNew(): %>
+    Create a New Email
+  <% else: %>
+    <%= @email.get 'title' %> (Editing)
+  <% end %>
+</h1>
+<div class="row">
+  <div class="span4">
+    <div class="company-logo-large">
+    </div>
+  </div>
+  <div class="span8">
+  </div>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <div class="form"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="span12">
+    <div class="control-group">
+      <div class="controls">
+        <div class="btn btn-submit">Submit for approval</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<h1 class="section-header">
+  <i class="icon-calendar"></i>
+  Emails
+  <% if @editable: %>
+    <div class="btn pull-right btn-add">Add New</div>
+  <% end %>
+</h1>
+<ul id="emails" class="cpp-list">
+</ul>
+<div class="btn pull-right btn-view-all">View All</div>

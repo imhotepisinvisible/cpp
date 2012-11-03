@@ -1,0 +1,12 @@
+<div class="item">
+  <div class="link-title">
+    <%= @email.get 'title' %>
+    <% if @editable: %>
+      <div class="btn btn-mini pull-right btn-edit">Edit</div>
+    <% end %>
+  </div>
+  <div class="link-description">
+    <% d = Date.parse(@email.get('start_date')) %>
+    <%= d.toString('dXXX MMMM yyyy - H:mm').replace('XXX', d.getOrdinal()) %>
+  </div>
+</div>

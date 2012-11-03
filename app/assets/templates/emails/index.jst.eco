@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="span3">
+    <h1 class="section-header">Filters</h1>
+    <div><button class="filterbutton" type="button">Click Me</button></div>
+  </div>
+  <div class="span9">
+    <h1 class="section-header">
+      Emails
+      <% if @emails.company: %>
+        <div class="company-logo-header">
+          <img src="/assets/company_logos/<%= @emails.company.get 'logo' %>">
+        </div>
+      <% end %>
+    </h1>
+    <div class="table-toolbar">
+      <div class="btn pull-right btn-add">
+        Add Email
+      </div>
+      <div class="clear"></div>
+    </div>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Email</th>
+          <th>Apply By</th>
+          <th>Location</th>
+          <th>Capacity</th>
+          <th>Map</th>
+          <th class="btn-column"></th>
+        </tr>
+      </thead>
+      <tbody class="cpp-tbl" id="emails">
+      </tbody>
+    </table>
+  </div>
+</div>
