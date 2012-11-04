@@ -190,6 +190,11 @@ footer {
   border: 1px solid transparent !important;
 }
 
+.mceLayout {
+  border: 1px solid #ccc !important;
+  border-radius: 3px !important;
+}
+
 .mceToolbar {
   background-color: #fafafa !important;
   background-image: -moz-linear-gradient(top, #ffffff, #f2f2f2) !important;
@@ -198,4 +203,16 @@ footer {
   background-image: -o-linear-gradient(top, #ffffff, #f2f2f2) !important;
   background-image: linear-gradient(to bottom, #ffffff, #f2f2f2) !important;
   background-repeat: repeat-x !important;
+  border-top-left-radius: 3px !important;
+  border-top-right-radius: 3px !important;
+  border: none !important;
+}
+
+.mceIframeContainer {
+  border-bottom: none !important;
+}
+
+.mceIframeContainer iframe {
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
