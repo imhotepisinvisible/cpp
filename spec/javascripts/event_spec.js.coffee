@@ -61,7 +61,6 @@ describe "Event", ->
 
     it "should not save when title is empty", ->
       @event.save 'title': ""
-      console.log @error_spy
       expect(@error_spy).toHaveBeenCalledOnce();
 
     it "should not save when start_date is empty", ->

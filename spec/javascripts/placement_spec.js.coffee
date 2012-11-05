@@ -16,8 +16,6 @@ describe "Placement", ->
         duration: @duration
       }
 
-      console.log @placement
-
     describe "url", ->
       describe "when no id is set", ->
         it "should return the collection URL", ->
