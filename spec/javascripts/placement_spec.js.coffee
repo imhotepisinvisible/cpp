@@ -16,15 +16,17 @@ describe "Placement", ->
         duration: @duration
       }
 
+      console.log @placement
+
     describe "url", ->
       describe "when no id is set", ->
         it "should return the collection URL", ->
           expect(@placement.url()).toEqual '/placements'
 
-    describe "when id is set", ->
-      it "should return the collection URL and id", ->
-        @placement.id = 1
-        expect(@placement.url()).toEqual '/placements/1'
+      describe "when id is set", ->
+        it "should return the collection URL and id", ->
+          @placement.id = 1
+          expect(@placement.url()).toEqual '/placements/1'
 
     describe "when instantiated", ->
       it "should exhibit position attribute", ->
@@ -42,25 +44,55 @@ describe "Placement", ->
       it "should exhibit duration attribute", ->
         expect(@placement.get 'duration').toEqual @duration
 
-  # describe "when used in form", ->
+  describe "when saving required fields", ->
+    beforeEach ->
+      spy = @error_spy = sinon.spy();
+      init = CPP.Models.Event::initialize
+      CPP.Models.Placement::initialize = ->
+        spy(@, "validated:invalid")
+        init.call this
 
-  #   form = new Backbone.Form(model: new CPP.Models.Placement).render()
-  #   errors = form.validate()
+      @placement = new CPP.Models.Placement {
+        title: @title
+        description: @description
+        location: @location
+        start_date: @start_date
+        end_date: @end_date
+      }
 
-  #   describe "when saving required fields", ->
-  #     it "should not save when position is empty", ->
-  #       expect(errors.hasOwnProperty 'position').toBeTruthy()
+    it "should not save when position is empty", ->
+      @placement.save 'position': ""
+      expect(@error_spy).toHaveBeenCalledOnce();
 
-  #     it "should not save when description is empty", ->
-  #       expect(errors.hasOwnProperty 'description').toBeTruthy()
+    it "should not save when description is empty", ->
+      @placement.save 'description': ""
+      expect(@error_spy).toHaveBeenCalledOnce();
 
-  #     it "should not save when location is empty", ->
-  #       expect(errors.hasOwnProperty 'location').toBeTruthy()
+    it "should not save when description is empty", ->
+      @placement.save 'location': ""
+      expect(@error_spy).toHaveBeenCalledOnce();
 
-  #   describe "when saving optional fields", ->
-  #     it "should save when deadline is empty", ->
-  #       expect(errors.hasOwnProperty 'deadline').toBeFalsy()
+  describe "when saving optional fields", ->
+    beforeEach ->
+      spy = @success_spy = sinon.spy();
+      init = CPP.Models.Event::initialize
+      CPP.Models.Placement::initialize = ->
+        spy(@, "validated:valid")
+        init.call this
 
-  #     it "should save when duration is empty", ->
-  #       expect(errors.hasOwnProperty 'duration').toBeFalsy()
+      @placement = new CPP.Models.Placement {
+        title: @title
+        description: @description
+        location: @location
+        start_date: @start_date
+        end_date: @end_date
+      }
+
+    it "should save when deadline is empty", ->
+      @placement.save 'deadline': ""
+      expect(@success_spy).toHaveBeenCalledOnce();
+
+    it "should save when duration is empty", ->
+      @placement.save 'duration': ""
+      expect(@success_spy).toHaveBeenCalledOnce();
 
