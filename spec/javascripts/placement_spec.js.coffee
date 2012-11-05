@@ -96,3 +96,27 @@ describe "Placement", ->
       @placement.save 'duration': ""
       expect(@success_spy).toHaveBeenCalledOnce();
 
+    it "should save when open_to is empty", ->
+      @placement.save 'open_to': ""
+      expect(@success_spy).toHaveBeenCalledOnce();
+
+    it "should save when salary is empty", ->
+      @placement.save 'salary': ""
+      expect(@success_spy).toHaveBeenCalledOnce();
+
+    it "should save when benefits is empty", ->
+      @placement.save 'benefits': ""
+      expect(@success_spy).toHaveBeenCalledOnce();
+
+    it "should save when application_procedure is empty", ->
+      @placement.save 'application_procedure': ""
+      expect(@success_spy).toHaveBeenCalledOnce();
+
+    it "should save when interview_date is empty", ->
+      @placement.save 'interview_date': ""
+      expect(@success_spy).toHaveBeenCalledOnce();
+
+    it "should save when other is empty", ->
+      @placement.save 'other': ""
+      expect(@success_spy).toHaveBeenCalledOnce();
+

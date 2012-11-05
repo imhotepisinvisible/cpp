@@ -20,9 +20,6 @@ class Placement < ActiveRecord::Base
   validates :location,    :presence => true
   validates :description, :presence => true
 
-  # TODO What's the best way to validate open_to?
-  validates :open_to,     :presence => true
-
   validates_datetime :deadline,
     :after => :now,
     :after_message => "Cannot be in the past"

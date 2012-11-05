@@ -22,3 +22,18 @@ class CPP.Models.Placement extends Backbone.Model
       DateEditor: "DatePicker"
     duration:
       type: "Text"
+    open_to:
+      type: "Text"
+    salary:
+      type: "Text"
+    benefits:
+      type: "Text"
+    application_procedure:
+      type: "Text"
+    interview_date:
+      type: "DateTime"
+      title: "Interview Date (If Known)"
+      DateEditor: "DatePicker"
+    other:
+      type: "Text"
+
