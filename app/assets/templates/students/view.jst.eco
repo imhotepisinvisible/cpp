@@ -2,23 +2,23 @@
   <div class="span9">
     <h1 class="section-header">
       <i class="icon-user"></i>
-      Jack Stevenson
+      <%= @student.get 'name' %>
     </h1>
     <div class="row">
       <div class="span2">
-        <div class="student-profile-picture">
-          image!
+        <div class="img-polaroid student-profile-picture">
+          <img src="/assets/<%= @student.get 'profile' %>">
         </div>
       </div>
       <div class="span3">
         <dl class="dl-horizontal">
-          <dt>Department:</dt> <dd>Computing</dd>
-          <dt>Course:</dt> <dd>MEng</dd>
-          <dt>Year:</dt> <dd>3</dd>
+          <dt>Department:</dt> <dd><%= @student.get 'department' %></dd>
+          <dt>Course:</dt> <dd><%= @student.get 'degree' %></dd>
+          <dt>Year:</dt> <dd><%= @student.get 'year' %></dd>
         </dl>
       </div>
       <div class="span4">
-        profiley!
+        <%= @student.get 'bio' %>
       </div>
     </div>
   </div>
@@ -80,83 +80,10 @@
   </div>
 </div>
 <div class="row">
-  <div class="span6">
-    <h1 class="section-header">
-      <i class="icon-calendar"></i>
-      Events
-    </h1>
-    <ul class="cpp-list">
-      <li>
-        <a href="#">
-          <div class="link-title">
-            Event 1
-          </div>
-          <div class="link-description">
-            descriptionio!
-          </div>
-          
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <div class="link-title">
-            Event 2
-          </div>
-          <div class="link-description">
-            asdfasfasf
-          </div>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <div class="link-title">
-            Event 3
-          </div>
-          <div class="link-description">
-            asdfasdfsdf
-          </div>
-        </a>
-      </li>
-    </ul>
-    <div class="see-all-link"><%= link_to "See All" %></div>
+  <div class="span6" id="events-partial">
+    
   </div>
-  <div class="span6">
-    <h1 class="section-header">
-      <i class="icon-briefcase"></i>
-      Placements
-    </h1>
-    <ul class="cpp-list">
-      <li>
-        <a href="#">
-          <div class="link-title">
-            Placement 1
-          </div>
-          <div class="link-description">
-            asdfasdfadssdsdsds
-          </div>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <div class="link-title">
-            Placement 2
-          </div>
-          <div class="link-description">
-            asdfsdfdsd
-          </div>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <div class="link-title">
-            Placement 3
-          </div>
-          <div class="link-description">
-            fdfdfdfd
-          </div>
-        </a>
-      </li>
-    </ul>
-    <div class="see-all-link"><%= link_to "See All" %></div>
+  <div class="span6" id="placements-partial">
+    
   </div>
 </div>

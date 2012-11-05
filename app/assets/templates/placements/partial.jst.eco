@@ -1,6 +1,6 @@
 <h1 class="section-header">
   <i class="icon-briefcase"></i>
-  Placement
+  Placements
   <div class="btn pull-right">Add New</div>
 </h1>
 <ul id="placements" class="cpp-list">
