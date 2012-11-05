@@ -1,23 +1,30 @@
 class CPP.Models.Event extends Backbone.Model
   url: ->
-    '/events' + (if @isNew() then '' else '/' + @id) 
+    '/events' + (if @isNew() then '' else '/' + @id)
+
+  validation:
+    title:
+      required: true
+    #   msg: 'Please enter a valid email'
+    # title: (value) ->
+    #   "Error message" unless value?
 
   schema:
     title:
     	type: "Text"
-    	validators: ["required"]
+    	# validators: ["required"]
    	start_date:
       type: "DateTime"
       DateEditor: "DatePicker"
       validators: ["required"]
-   	end_date: 
+   	end_date:
       type: "DateTime"
       DateEditor: "DatePicker"
       validators: ["required"]
     deadline:
       type: "DateTime"
       DateEditor: "DatePicker"
-    description: 
+    description:
       type: "TextArea"
       validators: ["required"]
     location:
@@ -31,7 +38,7 @@ class CPP.Models.Event extends Backbone.Model
       title: "Requirements"
       editorAttrs:
         style: "list-style: none"
-    requirements: 
+    requirements:
       type: "TextArea"
       title: ""
       fieldAttrs:

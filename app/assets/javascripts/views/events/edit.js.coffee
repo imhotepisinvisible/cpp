@@ -10,6 +10,8 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
     if (@model.get "requirements") == ""
       @model.set "requirementsEnabled", false
     @form = new Backbone.Form(model: @model).render()
+    console.log Backbone
+    Backbone.Validation.bind @form;
     @render()
 
   render: ->
@@ -27,7 +29,7 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
   @
 
   submitEvent: ->
-    if @form.validate() == null 
+    if @form.validate() == null
       @form.commit()
       @model.save {},
         wait: true

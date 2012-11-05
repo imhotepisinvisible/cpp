@@ -1,3 +1,5 @@
+_.extend Backbone.Model::, Backbone.Validation.mixin
+
 window.CPP =
   Models: {}
   Collections: {}

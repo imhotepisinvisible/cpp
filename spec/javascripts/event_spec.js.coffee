@@ -1,78 +1,99 @@
 describe "Event", ->
   # TODO, not sure if this is the best message...
-  describe "when used alone", ->
+  beforeEach ->
+    @title = "Google interview techniques"
+    @description = "Ace our interviews"
+    @location = "Victoria, London"
+    @start_date = new Date
+    @end_date = new Date
+    # @end_date.setDate(@start_date.getDate + 1)
+
+
+    @event = new CPP.Models.Event {
+      title: @title
+      description: @description
+      location: @location
+      start_date: @start_date
+      end_date: @end_date
+    }
+
+  # describe "url", ->
+  #   describe "when no id is set", ->
+  #     it "should return the collection URL", ->
+  #       expect(@event.url()).toEqual '/events'
+
+  #   describe "when id is set", ->
+  #     it "should return the collection URL and id", ->
+  #       @event.id = 1
+  #       expect(@event.url()).toEqual '/events/1'
+
+  # describe "when instantiated", ->
+  #   it "should exhibit title attribute", ->
+  #     expect(@event.get 'title').toEqual @title
+
+  #   it "should exhibit description attribute", ->
+  #     expect(@event.get 'description').toEqual @description
+
+  #   it "should exhibit location attribute", ->
+  #     expect(@event.get 'location').toEqual @location
+
+  #   it "should exhibit start_date attribute", ->
+  #     expect(@event.get 'start_date').toEqual @start_date
+
+  #   it "should exhibit end_date attribute", ->
+  #     expect(@event.get 'end_date').toEqual @end_date
+
+  describe "when saving required fields", ->
     beforeEach ->
-      @title = "Google interview techniques"
-      @description = "Ace our interviews"
-      @location = "Victoria, London"
-      @start_date = new Date
-      @end_date = new Date
-      @end_date.setDate(@start_date.getDate + 1)
-
-
-      @event = new CPP.Models.Event {
+      @error_spy = sinon.spy();
+      @event_2 = new CPP.Models.Event {
         title: @title
         description: @description
         location: @location
         start_date: @start_date
         end_date: @end_date
       }
+      @event_2.bind("validated:invalid", @error_spy)
+      # @event.bind("error", @error_spy)
+      @event_2.bind("all", -> console.log (arguments))
 
-    describe "url", ->
-      describe "when no id is set", ->
-        it "should return the collection URL", ->
-          expect(@event.url()).toEqual '/events'
+    it "should not save when title is empty", ->
+      @event_2.save 'title': ""
+      # console.log @error_spy.calledOnce
+      # expect(@error_spy).toHaveBeenCalledOnce();
+      # console.log "HERE"
 
-      describe "when id is set", ->
-        it "should return the collection URL and id", ->
-          @event.id = 1
-          expect(@event.url()).toEqual '/events/1'
+    # it "should not save when start_date is empty", ->
+    #   @event.save 'start_date': null
+    #   expect(@error_spy).toHaveBeenCalledOnce();
 
-    describe "when instantiated", ->
-      it "should exhibit title attribute", ->
-        expect(@event.get 'title').toEqual @title
+    # it "should not save when end_date is empty", ->
+    #   @event.save 'end_date': null
+    #   expect(@error_spy).toHaveBeenCalledOnce();
 
-      it "should exhibit description attribute", ->
-        expect(@event.get 'description').toEqual @description
+    # it "should not save when description is empty", ->
+    #   @event.save 'description': null
+    #   expect(@error_spy).toHaveBeenCalledOnce();
 
-      it "should exhibit location attribute", ->
-        expect(@event.get 'location').toEqual @location
-
-      it "should exhibit start_date attribute", ->
-        expect(@event.get 'start_date').toEqual @start_date
-
-      it "should exhibit end_date attribute", ->
-        expect(@event.get 'end_date').toEqual @end_date
-
-  describe "when used in form", ->
-
-    form = new Backbone.Form(model: new CPP.Models.Event).render()
-    errors = form.validate()
-    console.log errors
-
-    describe "when saving required fields", ->
-      it "should not save when title is empty", ->
-        expect(errors.hasOwnProperty 'title').toBeTruthy()
-
-      it "should not save when start_date is empty", ->
-        expect(errors.hasOwnProperty 'start_date').toBeTruthy()
-
-      it "should not save when end_date is empty", ->
-        expect(errors.hasOwnProperty 'end_date').toBeTruthy()
-
-      it "should not save when description is empty", ->
-        expect(errors.hasOwnProperty 'description').toBeTruthy()
-
-      it "should not save when location is empty", ->
-        expect(errors.hasOwnProperty 'location').toBeTruthy()
+    # it "should not save when location is empty", ->
+    #   @event.save 'location': null
+    #   expect(@error_spy).toHaveBeenCalledOnce();
 
 
-    describe "when saving optional fields", ->
-      it "should save when deadline is empty", ->
-        expect(errors.hasOwnProperty 'deadline').toBeFalsy()
+  # describe "when saving optional fields", ->
+  #   beforeEach ->
+  #     @success_spy = sinon.spy();
+  #     @event.bind('validated:valid', @success_spy)
 
-      it "should save when capacity is empty", ->
-        expect(errors.hasOwnProperty 'capacity').toBeFalsy()
+  #   it "should save when deadline is empty", ->
+  #     @event.save 'deadline': null
+  #     expect(@success_spy).toHaveBeenCalledOnce();
 
-      it "should save when google_map_url is empty", ->
-        expect(errors.hasOwnProperty 'google_map_url').toBeFalsy()
+  #   it "should save when capacity is empty", ->
+  #     @event.save 'capacity': null
+  #     expect(@success_spy).toHaveBeenCalledOnce();
+
+  #   it "should save when google_map_url is empty", ->
+  #     @event.save 'google_map_url': null
+  #     expect(@success_spy).toHaveBeenCalledOnce();
+

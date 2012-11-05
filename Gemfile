@@ -24,6 +24,8 @@ gem 'bcrypt-ruby' # For password encryption
 gem 'backbone-on-rails' # Nice client side JS framework
 gem 'underscore' # Templating for backboneJS
 
+gem 'backbone-validation-rails'
+
 gem 'thin' # Better server :)
 
 gem 'rails-backbone-forms' # Client side form validation

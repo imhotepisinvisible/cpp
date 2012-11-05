@@ -17,6 +17,7 @@
 //= require underscore
 //= require backbone
 //= require backbone-forms-bootstrap
+//= require backbone-validation
 //= require_tree .//backbone_forms_custom
 //= require sinon
 //= require jasmine-sinon
