@@ -2,7 +2,7 @@ class CPP.Models.Company extends Backbone.Model
   initialize: ->
     @events = new CPP.Collections.Events
     @events.url = '/companies/' + this.id + '/events'
-
+    @hidden = false;
     @placements = new CPP.Collections.Placements
     @placements.url = '/companies/' + this.id + '/placements'
 
