@@ -29,8 +29,20 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
             @$('#events').append(view.render().el)
           error: ->
             notify "error", "Couldn't fetch company for event"
-    @
-
+    console.log "init"
+    new CPP.Filter
+      el: $(@el).find('#event-filter')
+      filters: [
+        {name: "Capacity"
+        type: "text"
+        attribute: "capactiy"},
+        {name: "Event"
+        type: "tags"
+        attribute: "event"}
+      ]
+      data: @collection
+    @ 
+    
   addEvent: ->
     Backbone.history.navigate("companies/" + @collection.company.id + "/events/new", trigger: true)
 
