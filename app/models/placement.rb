@@ -15,12 +15,20 @@
 class Placement < ActiveRecord::Base
   belongs_to :company
 
-  validates :company_id,        :presence => true
-  validates :position,          :presence => true
-  validates :location,          :presence => true
-  validates :description,       :presence => true
+  validates :company_id,  :presence => true
+  validates :position,    :presence => true
+  validates :location,    :presence => true
+  validates :description, :presence => true
+
+  # TODO What's the best way to validate open_to?
+  validates :open_to,     :presence => true
+
   validates_datetime :deadline,
     :after => :now,
     :after_message => "Cannot be in the past"
+
+  validates_datetime :interview_date,
+    :after => :now,
+    :allow_nil => :true
 
 end

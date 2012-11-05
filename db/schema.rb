@@ -79,8 +79,14 @@ ActiveRecord::Schema.define(:version => 20121026184345) do
     t.string   "duration"
     t.string   "location"
     t.datetime "deadline"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string   "open_to"
+    t.string   "salary"
+    t.text     "benefits"
+    t.text     "application_procedure"
+    t.datetime "interview_date"
+    t.text     "other"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
   create_table "student_profiles", :force => true do |t|
@@ -93,6 +99,8 @@ ActiveRecord::Schema.define(:version => 20121026184345) do
   end
 
   create_table "users", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
     t.string   "email"
     t.string   "password_digest"
     t.integer  "department_id"

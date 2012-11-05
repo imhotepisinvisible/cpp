@@ -8,5 +8,11 @@ FactoryGirl.define do
     duration "6 months"
     location { Faker::Address.street_address }
     deadline { FactoryHelper.time_rand }
+
+    open_to { ["All years", "JMC only", "3rd year MEng"].sample }
+    salary { ['30000 pa', '2000 a month', '8.50 an hour'].sample }
+    benefits { ["None", "Free transport", "Free gym"].sample }
+    application_procedure { ["CV & Coverletter", "assessment day"].sample }
+
   end
 end
