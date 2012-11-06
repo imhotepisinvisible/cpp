@@ -5,7 +5,6 @@ class CPP.Routers.Students extends Backbone.Router
       'students/:id/edit': 'edit'
 
   index: ->
-  	console.log "index!"
 
   view: (id) ->
     # Temporary until student controller is implemented!
@@ -21,7 +20,6 @@ class CPP.Routers.Students extends Backbone.Router
     student.events.fetch({ data: $.param({ limit: 3}) })
     student.placements.fetch({ data: $.param({ limit: 3}) })
 
-    console.log student
     new CPP.Views.StudentsView model: student
     # student.fetch
     #   success: ->
@@ -30,4 +28,3 @@ class CPP.Routers.Students extends Backbone.Router
     #     notify "error", "Couldn't fetch student"
 
   edit: ->
-    console.log "edit!"

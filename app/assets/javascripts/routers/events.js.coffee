@@ -10,7 +10,7 @@ class CPP.Routers.Events extends Backbone.Router
     events = new CPP.Collections.Events
     # new CPP.Views.EventsIndex collection: events
     events.fetch
-      data: 
+      data:
         $.param({ company_id: company_id})
       success: ->
         events.company = new CPP.Models.Company id: company_id

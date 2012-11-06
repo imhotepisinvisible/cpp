@@ -10,7 +10,6 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
     if (@model.get "requirements") == ""
       @model.set "requirementsEnabled", false
     @form = new Backbone.Form(model: @model).render()
-    console.log Backbone
     Backbone.Validation.bind @form;
     @render()
 

@@ -29,7 +29,6 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
             @$('#events').append(view.render().el)
           error: ->
             notify "error", "Couldn't fetch company for event"
-    console.log "init"
     new CPP.Filter
       el: $(@el).find('#event-filter')
       filters: [
@@ -41,19 +40,18 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
         attribute: "event"}
       ]
       data: @collection
-    @ 
-    
+    @
+
   addEvent: ->
     Backbone.history.navigate("companies/" + @collection.company.id + "/events/new", trigger: true)
 
   viewCompany: ->
-    if @collection.company 
+    if @collection.company
       Backbone.history.navigate("companies/" + @collection.company.id, trigger: true)
-    
+
   search: ->
     @collection.each (model) ->
       model.set "visible", false
-      console.log model
       for k,v of model.company.attributes
         if (model.company.get k) == $("#search-input").val()
           model.set "visible", true

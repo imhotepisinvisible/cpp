@@ -79,7 +79,6 @@
       <!-- TODO: Move this into the model !-->
       <% a = Math.floor(Math.random() * @event.get("capacity")) + 1 %>
       <% percentage = 100 * parseFloat(a) / parseFloat(@event.get("capacity")) %>
-      <% console.log percentage %>
       <% pclass = "info" %>
       <% pclass = "warning" if percentage > 60 %>
       <% pclass = "danger" if percentage > 90 %>

@@ -16,13 +16,11 @@ class CPP.Views.PlacementsEdit extends CPP.Views.Base
     super
     $('.form').append(@form.el)
     @form.on "change", =>
-      console.log 'changed'
       @form.validate()
   @
 
   submitPlacement: ->
-    console.log "SOMETHING"
-    if @form.validate() == null 
+    if @form.validate() == null
       @form.commit()
       @model.save {},
         wait: true
