@@ -1,4 +1,9 @@
-<h1 class="section-header">
-  Filter
-</h1>
-<div class="btn pull-right btn-view-all">Filter</div>
+<div class="row">
+  <div class="span3">
+    <h3 for="fltr-search"><%= @filter.name %></h3>
+    <input id="fltr-search" type="text">
+    <button type="button" id="fltr-search-close" class="close">x</button>
+    </input>
+    <div class="btn pull-left btn-view-all search-btn">Search</div>
+  </div>
+</div>
