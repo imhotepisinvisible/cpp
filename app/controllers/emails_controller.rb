@@ -24,6 +24,11 @@ class EmailsController < ApplicationController
     respond_with @email
   end
 
+  def preview
+    @email = Email.find(params[:id])
+    render :text => @email.body
+  end
+
   # GET /emails/new
   # GET /emails/new.json
   def new

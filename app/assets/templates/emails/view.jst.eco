@@ -8,7 +8,7 @@
 <div class="row">
   <div class="span12" id="description">
     <h1 class="section-header"><i class="icon-info-sign"></i>  Contents</h1>
-    <%= @email.get 'body' %>
+    <iframe class="email-preview" src="/emails/<%= @email.id %>/preview"></iframe>
   </div>
 </div>
 
