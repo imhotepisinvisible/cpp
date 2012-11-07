@@ -2,7 +2,7 @@
   <div class="span9">
     <h1 class="section-header">
       <i class="icon-user"></i>
-      <%= @student.get 'name' %>
+      <%= (@student.get 'first_name') + ' ' + (@student.get 'last_name') %>
     </h1>
     <div class="row">
       <div class="span2">
@@ -27,7 +27,7 @@
       <i class="icon-list-alt"></i>
       My C.V
     </h1>
-    <form class="form-inline no-cv-form">
+    <form class="form-inline no-cv-form" data-remote="true" enctype="multipart/form-data">
       <div class="row">
         <div class="span2">
           <input type="file" name="datafile" size="20">

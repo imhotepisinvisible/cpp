@@ -25,6 +25,15 @@ students =  %w( peter tom jack sarah ).map do |name|
                                 }
 end
 
+Student.all.each do |student|
+  FactoryGirl.create :student_profile, {
+    student: student,
+    year: 1,
+    bio: "Jack is the best!",
+    degree: 'MEng in Awesome'
+  }
+end
+
 # Sample Companies
 10.times do
   FactoryGirl.create :company, :organisation => organisation
