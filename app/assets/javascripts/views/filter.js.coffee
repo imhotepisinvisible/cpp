@@ -32,13 +32,10 @@ class CPP.Filter extends CPP.Views.Base
         when "text"
           @data.each (model) ->
             model.set "visible", false
-            #ma = model.get filter.attribute
+            ma = model.get filter.attribute
             tb = $("#fltr-search").val()
-            for k,v of model.attributes
-              if v != null
-                if v.toString() == tb || $("#fltr-search").val() == ""
-                  model.set "visible", true
-                  break
+            if ma.toString() == tb || $("#fltr-search").val() == ""
+              model.set "visible", true
     @data.trigger('filter')
 
   clearSearch: ->

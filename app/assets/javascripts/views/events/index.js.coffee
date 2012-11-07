@@ -42,11 +42,8 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
       filters: [
         {name: "Capacity Search"
         type: "text"
-        attribute: "capacity"
-        scope: "company"},
-        {name: "Event"
-        type: "tags"
-        attribute: "event"}
+        attribute: "location"
+        scope: "company"}
       ]
       data: @collection
   @ 
