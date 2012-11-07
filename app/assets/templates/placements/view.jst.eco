@@ -8,6 +8,45 @@
 </div>
 
 <div class="row">
-  <div class="span6">
+  <div class="span8" id="description">
+    <h1 class="section-header"><i class="icon-info-sign"></i>  Description</h1>
+    <%= @placement.get 'description' %>
+  </div>
+  <div class="span4" id="details">
+    <h1 class="section-header"><i class="icon-time"></i>  Details</h1>
+    <table class="table table-striped">
+      <tr>
+        <td>
+          Position:
+        </td>
+        <td>
+          <%= @placement.get 'position' %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Location:
+        </td>
+        <td>
+          <%= @placement.get 'location' %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Deadline:
+        </td>
+        <td>
+          <%= Date.parse(@placement.get('deadline')).toString("dd/mm/yyyy hh:mm") %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Duration:
+        </td>
+        <td>
+          <%= @placement.get 'duration' %>
+        </td>
+      </tr>
+    </table>
   </div>
 </div>
