@@ -12,7 +12,6 @@ class StudentsController < ApplicationController
   # GET /students/1.json
   def show
     @student = Student.find(params[:id])
-    @student.profile = StudentProfiles.find(@student.profile_id)
     respond_with @student
   end
 
