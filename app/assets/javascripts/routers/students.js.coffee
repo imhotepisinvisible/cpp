@@ -9,7 +9,6 @@ class CPP.Routers.Students extends Backbone.Router
     students = new CPP.Collections.Students
     students.fetch
       success: ->
-        console.log students
       error: ->
         notify "error", "Couldn't fetch students"
 
@@ -20,14 +19,22 @@ class CPP.Routers.Students extends Backbone.Router
 
     student.fetch
       success: ->
-        console.log student
         new CPP.Views.StudentsView model: student
       error: ->
         notify "error", "Couldn't fetch student"
 
 
   edit: (id) ->
-    console.log "edit student #{id}"
+    student = new CPP.Models.Student id: id
+    student.events.fetch({ data: $.param({ limit: 3}) })
+    student.placements.fetch({ data: $.param({ limit: 3}) })
+
+    student.fetch
+      success: ->
+        console.log student
+        new CPP.Views.StudentsEdit model: student
+      error: ->
+        notify "error", "Couldn't fetch student"
 
   signup: (department_id) ->
     student = new CPP.Models.Student department_id: department_id

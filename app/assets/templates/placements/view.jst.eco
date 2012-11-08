@@ -18,7 +18,7 @@
 
     <div class="row">
       <div class="span6" id="date">
-        <h1 class="section-header"><i class="icon-time"></i>  Placement Dates</h1>
+        <h1 class="section-header"><i class="icon-calendar"></i>  Dates</h1>
         <table class="table table-striped">
           <tr>
             <td>
@@ -39,7 +39,17 @@
         </table>
       </div>
     </div>
+
+    <div class="row">
+      <div class="span6" id="description">
+        <h1 class="section-header"><i class="icon-time"></i>  Countdown</h1>
+          <div class="btn pull-right">Apply Now</div>
+          <div id="jcountdown"></div>
+      </div>
+    </div>
+
   </div>
+
   <div class="span6" >
     <div class="row">
       <div class="span6">

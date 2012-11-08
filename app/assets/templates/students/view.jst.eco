@@ -1,50 +1,42 @@
 <div class="row">
   <div class="span9">
-    <h1 class="section-header">
-      <i class="icon-user"></i>
-      <%= (@student.get 'first_name') + ' ' + (@student.get 'last_name') %>
-    </h1>
     <div class="row">
-      <div class="span2">
+      <div class="span3">
         <div class="img-polaroid student-profile-picture">
-          <img src="/assets/<%= @student.get 'profile' %>">
+          <% if @student.get 'profile': %>
+            <img src="/assets/<%= @student.get 'profile' %>">
+          <% else: %>
+            <img src="/assets/default_profile.png" class="student-profile-picture">
+          <% end %>
         </div>
       </div>
-      <div class="span3">
-        <dl class="dl-horizontal">
-          <dt>Department:</dt> <dd><%= @student.get 'department' %></dd>
-          <dt>Course:</dt> <dd><%= @student.get 'degree' %></dd>
-          <dt>Year:</dt> <dd><%= @student.get 'year' %></dd>
-        </dl>
-      </div>
-      <div class="span4">
-        <%= @student.get 'bio' %>
+      <div class="span6">
+        <p class="student-profile-text">
+          <%= @student.get 'first_name' %>
+          is a 
+          <%= @student.get 'year' %>
+          rd year 
+          <%= @student.get 'degree' %>
+          student, looking for love.
+        </p>
       </div>
     </div>
   </div>
   <div class="span3">
     <h1 class="section-header">
       <i class="icon-list-alt"></i>
-      My C.V
+      My CV
     </h1>
-    <form class="form-inline no-cv-form">
+
       <div class="row">
-        <div class="span2">
-          <input id="file-cv" type="file" name="files[]" size="20">
-        </div>
-        <div class="span1">
-        <div class="btn" id="btn-upload">Upload</div>
+        <div class="span3">
+          <% if @student.get 'cv_location': %>
+            <div class="btn" id="btn-download-cv">Download</div>
+          <% else: %>
+            <div class="alert alert-info">No CV uploaded.</div>
+          <% end %>
         </div>
       </div>
-    </form>
-
-    <div class="progress progress-info">
-      <div id="upload-bar" class="bar">
-    </div>
-    <!--<div class="alert alert-error">
-      You haven't yet uploaded a C.V!
-      Please do this A.S.A.P
-    </div>-->
   </div>
 </div>
 
@@ -64,7 +56,7 @@
         </form>
       </div>
       <div class="span6">
-        Something!
+        Interests go here.
       </div>
     </div>
   </div>
@@ -75,18 +67,18 @@
     </h1>
     <div class="span3">
       <dl class="dl-horizontal">
-        <dt>Status:</dt> <dd>Confirmed</dd>
-        <dt>Position:</dt> <dd>Developer</dd>
-        <dt>Company:</dt> <dd>Google</dd>
+        <dt>Status:</dt> <dd>N/A</dd>
+        <dt>Position:</dt> <dd>N/A</dd>
+        <dt>Company:</dt> <dd>N/A</dd>
       </dl>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="span6" id="events-partial">
-    
+
   </div>
   <div class="span6" id="placements-partial">
-    
+
   </div>
 </div>

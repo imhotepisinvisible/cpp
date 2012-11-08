@@ -1,9 +1,6 @@
 <div class="row">
   <div class="span3">
     <h3 for="fltr-search"><%= @filter.name %></h3>
-    <input class="fltr-search" id="<%= @filter.attribute %>" type="text">
-    <button type="button" id="fltr-search-close" class="close">x</button>
-    </input>
-    <div class="btn pull-left btn-view-all search-btn">Search</div>
+    <input class="fltr-search" id="<%= @filter.attribute %>" type="text"></input>
   </div>
 </div>
