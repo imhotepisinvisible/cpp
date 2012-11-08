@@ -17,7 +17,6 @@ class CPP.Views.EmailsEdit extends CPP.Views.Base
     super
     $('.form').append(@form.el)
     @form.on "change", =>
-      console.log 'changed'
       @form.validate()
     tiny_mce_init()
   @
@@ -31,7 +30,7 @@ class CPP.Views.EmailsEdit extends CPP.Views.Base
         success: (model, response) =>
           notify "success", "Email Saved"
           Backbone.history.navigate('companies/' + @model.get('company_id') + '/emails', trigger: true)
-          @undelegateEmails()
+          @undelegateEvents()
         error: (model, response) =>
           errorlist = JSON.parse response.responseText
           for field, errors of errorlist.errors
