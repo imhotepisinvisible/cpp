@@ -52,6 +52,7 @@ class EmailsController < ApplicationController
   def update
     @email = Email.find(params[:id])
     if @email.update_attributes(params[:email])
+      UserMailer.bulk_email(@email.id).deliver
       head :no_content
     else
       respond_with @email, status: :unprocessable_entity
