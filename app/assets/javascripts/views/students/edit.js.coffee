@@ -4,6 +4,8 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
 
   events:
     'click #btn-upload-cv': 'uploadCV'
+    'change #file-cv': 'changeCV'
+    'click #btn-download-cv': 'downloadCV'
 
   initialize: ->
     @render()
@@ -23,24 +25,30 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     @
 
   uploadCV: ->
-    
     # Prepare the file uploader
     $('#file-cv').fileupload
       url: '/students/' + @model.id + '/upload_cv'
       dataType: 'json'
+      fileInput: null # do not bind to change event
       progressall: (e, data) ->
         # Update progress bar
         progress = parseInt(data.loaded / data.total * 100, 10)
         $('#upload-bar').width(progress + '%')
+        false
 
       done: (e, data) ->
         notify 'success', 'CV Uploaded Successfully'
-        console.log data.result.cv_location
-
-        # Add in the download link
         $('#cv-location').html(data.result.cv_location)
         $('#uploaded-cv').removeClass('hidden')
+        false
 
     # Upload the file!
     $('#file-cv').fileupload 'send',
       files: $('#file-cv').get(0).files
+
+  changeCV: ->
+    # Reset progress bar
+    $('#upload-bar').width('0%')
+
+  downloadCV: ->
+    window.location = '/students/' + @model.id + '/download_cv'

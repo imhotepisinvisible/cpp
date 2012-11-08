@@ -63,6 +63,7 @@ CPP::Application.routes.draw do
   
   resources :students do
     post 'upload_cv'
+    get 'download_cv'
   end
 
   resources :emails
