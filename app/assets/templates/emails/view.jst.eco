@@ -16,30 +16,36 @@
   <div class="span6" id="date">
     <h1 class="section-header"><i class="icon-time"></i> History</h1>
     <table class="table table-striped">
+      <% if @email.get 'created': %>
       <tr>
         <td>
           Submitted:
         </td>
         <td>
-          21/20/2012 12:30
+          <%= @email.get 'created' %>
         </td>
       </tr>
+      <% end %>
+      <% if @email.get 'sent': %>
       <tr>
         <td>
           Approved:
         </td>
         <td>
-          21/20/2012 12:30
+          <%= @email.get 'sent' %>
         </td>
       </tr>
+      <% end %>
+      <% if @email.get 'sent': %>
       <tr>
         <td>
           Sent:
         </td>
         <td>
-          21/20/2012 12:30
+          <%= @email.get 'sent' %>
         </td>
       </tr>
+      <% end %>
     </table>
   </div>
   <div class="span6" >
