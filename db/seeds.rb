@@ -21,17 +21,11 @@ students =  %w( peter tom jack sarah ).map do |name|
                                   email: "#{name}@cpp.com",
                                   password: "cppcppcpp",
                                   password_confirmation: "cppcppcpp",
-                                  department: department
+                                  year: 1,
+                                  bio: "Jack is the best!",
+                                  degree: 'MEng in Awesome',
+                                  department: department,
                                 }
-end
-
-Student.all.each do |student|
-  FactoryGirl.create :student_profile, {
-    student: student,
-    year: 1,
-    bio: "Jack is the best!",
-    degree: 'MEng in Awesome'
-  }
 end
 
 # Sample Companies

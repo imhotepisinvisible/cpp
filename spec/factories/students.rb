@@ -7,10 +7,6 @@ FactoryGirl.define do
     beng_student
     first_year
 
-    factory :student_with_profile do
-      association :profile, factory: :student_profile
-    end
-
     trait :beng_student do
       degree "BEng"
     end
