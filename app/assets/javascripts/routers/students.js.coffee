@@ -25,4 +25,5 @@ class CPP.Routers.Students extends Backbone.Router
         notify "error", "Couldn't fetch student"
 
 
-  edit: ->
+  edit: (id) ->
+    console.log "edit student #{id}"
