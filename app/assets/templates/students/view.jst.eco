@@ -1,11 +1,7 @@
 <div class="row">
   <div class="span9">
-    <h1 class="section-header">
-      <i class="icon-user"></i>
-      <%= (@student.get 'first_name') + ' ' + (@student.get 'last_name') %>
-    </h1>
     <div class="row">
-      <div class="span2">
+      <div class="span3">
         <div class="img-polaroid student-profile-picture">
           <% if @student.get 'profile': %>
             <img src="/assets/<%= @student.get 'profile' %>">
@@ -14,36 +10,15 @@
           <% end %>
         </div>
       </div>
-      <div class="span3">
-        <dl class="dl-horizontal">
-          <dt>Department:</dt>
-          <% if @student.get 'department': %>
-            <dd><%= @student.get 'department' %></dd>
-          <% else: %>
-            <dd>N/A</dd>
-          <% end %>
-
-          <dt>Course:</dt> 
-          <% if @student.get 'degree': %>
-            <dd><%= @student.get 'degree' %></dd>
-          <% else: %>
-            <dd>N/A</dd>
-          <% end %>
-
-          <dt>Year:</dt> 
-          <% if @student.get 'year': %>
-            <dd><%= @student.get 'year' %></dd>
-          <% else: %>
-            <dd>N/A</dd>
-          <% end %>
-        </dl>
-      </div>
-      <div class="span4">
-        <% if @student.get 'bio': %>
-            <%= @student.get 'bio' %>
-        <% else: %>
-          N/A
-        <% end %>
+      <div class="span6">
+        <p class="student-profile-text">
+          <%= @student.get 'first_name' %>
+          is a 
+          <%= @student.get 'year' %>
+          rd year 
+          <%= @student.get 'degree' %>
+          student, looking for love.
+        </p>
       </div>
     </div>
   </div>

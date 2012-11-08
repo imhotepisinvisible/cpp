@@ -15,8 +15,14 @@ h1 {
   border-bottom: 1px solid #444;
 }
 
+.student-profile-text{
+  font-size: 50pt;
+  line-height: 50pt;
+}
+
 .student-profile-picture{
-  height: 100%;
+  width: 100%;
+  max-height: 280px;
 }
 
 .centre-span{
@@ -159,12 +165,6 @@ footer {
     margin-bottom: 0px;
   }
 
-}
-
-.student-profile-picture {
-  width: 100px;
-  height: 100px;
-  margin: 0 auto;
 }
 
 .student-profile-buttons {
