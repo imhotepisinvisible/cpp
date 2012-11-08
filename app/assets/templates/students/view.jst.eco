@@ -27,21 +27,24 @@
       <i class="icon-list-alt"></i>
       My C.V
     </h1>
-    <form class="form-inline no-cv-form" data-remote="true" enctype="multipart/form-data">
+    <form class="form-inline no-cv-form">
       <div class="row">
         <div class="span2">
-          <input type="file" name="datafile" size="20">
+          <input id="file-cv" type="file" name="files[]" size="20">
         </div>
         <div class="span1">
-        <div class="btn">Upload</div>
+        <div class="btn" id="btn-upload">Upload</div>
         </div>
       </div>
     </form>
 
-    <div class="alert alert-error">
+    <div class="progress progress-info">
+      <div id="upload-bar" class="bar">
+    </div>
+    <!--<div class="alert alert-error">
       You haven't yet uploaded a C.V!
       Please do this A.S.A.P
-    </div>
+    </div>-->
   </div>
 </div>
 

@@ -60,6 +60,7 @@ CPP::Application.routes.draw do
   resources :events
   resources :placements
   resources :students
+  resources :cv
 
   resources :companies do
     resources :events
