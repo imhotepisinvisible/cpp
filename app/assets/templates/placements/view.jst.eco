@@ -8,45 +8,59 @@
 </div>
 
 <div class="row">
-  <div class="span8" id="description">
-    <h1 class="section-header"><i class="icon-info-sign"></i>  Description</h1>
-    <%= @placement.get 'description' %>
+  <div class="span6">
+    <div class="row">
+      <div class="span6" id="description">
+        <h1 class="section-header"><i class="icon-info-sign"></i>  Description</h1>
+        <%= @placement.get 'description' %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span6" id="date">
+        <h1 class="section-header"><i class="icon-time"></i>  Placement Dates</h1>
+        <table class="table table-striped">
+          <tr>
+            <td>
+              Apply By:
+            </td>
+            <td>
+              <%= Date.parse(@placement.get('deadline')).toString("dd/mm/yyyy hh:mm") %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Duration:
+            </td>
+            <td>
+              <%= Date.parse(@placement.get('duration')).toString("dd/mm/yyyy hh:mm") %>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
-  <div class="span4" id="details">
-    <h1 class="section-header"><i class="icon-time"></i>  Details</h1>
-    <table class="table table-striped">
-      <tr>
-        <td>
-          Position:
-        </td>
-        <td>
-          <%= @placement.get 'position' %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Location:
-        </td>
-        <td>
-          <%= @placement.get 'location' %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Deadline:
-        </td>
-        <td>
-          <%= Date.parse(@placement.get('deadline')).toString("dd/mm/yyyy hh:mm") %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Duration:
-        </td>
-        <td>
-          <%= @placement.get 'duration' %>
-        </td>
-      </tr>
-    </table>
+  <div class="span6" >
+    <div class="row">
+      <div class="span6">
+        <h1 class="section-header"><i class="icon-map-marker"></i> Location</h1>
+        <iframe width="100%"
+                height="350"
+                frameborder="0"
+                scrolling="no"
+                marginheight="0"
+                marginwidth="0"
+                src="https://maps.google.com/maps?q=SW6+7DT&amp;hl=en&amp;ll=51.4803,-0.200973&amp;spn=0.00598,0.012531&amp;sll=37.0625,-95.677068&amp;sspn=61.19447,102.65625&amp;t=m&amp;hnear=London+SW6+7DT,+United+Kingdom&amp;z=17&amp;output=embed&amp;iwloc=near">
+          </iframe>
+      </div>
+      <div class="span6">
+        <div class="event-location">
+          <dl>
+            <dt>Address</dt>
+            <dd><%= @placement.get 'location' %></dd>
+          </dl>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
