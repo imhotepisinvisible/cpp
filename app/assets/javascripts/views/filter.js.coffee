@@ -26,19 +26,16 @@ class CPP.Filter extends CPP.Views.Base
   @
 
   setFilter: ->
+    curdata = @data
     for filter in @filters
       fa = filter.attribute
-      console.log fa
       tb =  $("#"+fa).val()
-      console.log tb
-      console.log tb
-      fCollection = @data
       if (tb != "")
         # Update collection
-        fCollection = new CPP.Collections.Events(@data.filter((model) ->
+        curdata = new CPP.Collections.Events(curdata.filter((model) ->
           model.get(filter.attribute).toString() is tb 
         ))
-    @data.trigger('filter', fCollection)
+    @data.trigger('filter', curdata)
 
   unsetFilter: ->
     $("#capacity").val("")

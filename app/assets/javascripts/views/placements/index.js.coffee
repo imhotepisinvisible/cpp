@@ -3,8 +3,8 @@ class CPP.Views.PlacementsIndex extends CPP.Views.Base
   template: JST['placements/index']
 
   events:
-    "click .btn-add"      : "addPlacement"
-    'click .company-logo-header' : 'viewCompany'
+    "click .btn-add"              : "addPlacement"
+    'click .company-logo-header'  : 'viewCompany'
 
   initialize: ->
     @collection.bind 'reset', @render, @

@@ -23,7 +23,7 @@
 //= require jasmine-sinon
 //= require jquery-fileupload/basic
 //= require tinymce-jquery
-
+//= require jcountdown
 //
 //= require .//cpp
 //

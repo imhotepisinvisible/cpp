@@ -8,8 +8,8 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
 
 
   initialize: ->
-    @collection.each (model) ->
-      model.set "visible", true
+    #@collection.each (model) ->
+      #model.set "visible", true
     @collection.bind 'reset', @render, @
     @collection.bind 'filter', @renderEvents, @
     # Bind to model destroy so backbone view updates on destroy
@@ -28,7 +28,7 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
         error: ->
           notify "error", "Couldn't fetch company for event"
     #console.log eventCounter
-    #@fetchCompany() until (eventCounter == @collection.length)
+    #continue until (eventCounter == @collection.length)
     #console.log @collection.length
     @render()
 
@@ -40,6 +40,7 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
 
   renderEvents: (col) ->
     @$('#events').html("")
+    console.log "renderEvents", col
     col.each (event) ->
       #if (event.get "visible")
         # Render the event if we can get its company
@@ -55,6 +56,10 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
         {name: "Capacity Search"
         type: "text"
         attribute: "capacity"
+        scope: "company"},
+        {name: "Location Search"
+        type: "text"
+        attribute: "location"
         scope: "company"}
       ]
       data: @collection
