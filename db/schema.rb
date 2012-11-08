@@ -89,26 +89,19 @@ ActiveRecord::Schema.define(:version => 20121026184345) do
     t.datetime "updated_at",            :null => false
   end
 
-  create_table "student_profiles", :force => true do |t|
-    t.integer  "student_id"
-    t.integer  "year"
-    t.text     "bio"
-    t.text     "degree"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "users", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
     t.string   "password_digest"
     t.integer  "department_id"
+    t.integer  "year"
+    t.text     "bio"
+    t.text     "degree"
     t.integer  "company_id"
     t.string   "type"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.integer  "profile_id"
   end
 
 end

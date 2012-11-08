@@ -14,16 +14,16 @@
 class Student < User
   belongs_to :department
 
-  has_one :profile,
-          :class_name => "StudentProfile",
-          :foreign_key => "student_id",
-          :autosave => true,
-          :dependent => :destroy,
-          :inverse_of => :student
-
-  default_scope :include => :profile
-
-  delegate :year, :year=, :bio, :bio=, :degree, :degree=, :to => :profile
-
   validates :department_id, :presence => true
+  # validates :year,       :presence => true
+  # validates :bio,        :presence => true
+  # validates :degree,     :presence => true
+
+  # TODO: How much do we want to limit it to? Also do we want to force them to
+  # have a bio? Should we make :in be 0..500?
+  validates :bio, :length => {
+    :maximum => 500,
+  }
+
+  attr_accessible :department_id, :year, :bio, :degree
 end
