@@ -3,6 +3,7 @@ class CPP.Routers.Students extends Backbone.Router
       'students': 'index'
       'students/:id': 'view'
       'students/:id/edit': 'edit'
+      'departments/:id/students/signup': 'signup'
 
   index: ->
     students = new CPP.Collections.Students
@@ -27,3 +28,8 @@ class CPP.Routers.Students extends Backbone.Router
 
   edit: (id) ->
     console.log "edit student #{id}"
+
+  signup: (department_id) ->
+    student = new CPP.Models.Student department_id: department_id
+    student.collection = new CPP.Collections.Students
+    new CPP.Views.StudentsSignup model: student

@@ -8,3 +8,19 @@ class CPP.Models.Student extends Backbone.Model
 
   url: ->
     '/students' + (if @isNew() then '' else '/' + @id)
+
+  schema:
+    first_name:
+      type: "Text"
+      title: "First Name"
+    last_name:
+      type: "Text"
+      title: "Last Name"
+    email:
+      type: "Text"
+      title: "Email"
+    password:
+      type: "Password"
+    password_confirmation:
+      type: "Password"
+      title: "Password Confirmation"

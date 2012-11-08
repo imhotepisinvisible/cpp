@@ -1,0 +1,20 @@
+<h1 class="section-header">
+  <% if @student.isNew(): %>
+    Sign Up
+  <% end %>
+</h1>
+
+<div class="row">
+  <div class="span12">
+    <div class="form"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="span12">
+    <div class="control-group">
+      <div class="controls">
+        <div class="btn btn-submit">Save</div>
+      </div>
+    </div>
+  </div>
+</div>
