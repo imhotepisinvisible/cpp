@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(:version => 20121026184345) do
     t.integer  "year"
     t.text     "bio"
     t.text     "degree"
+    t.string   "cv_location"
     t.integer  "company_id"
     t.string   "type"
     t.datetime "created_at",      :null => false

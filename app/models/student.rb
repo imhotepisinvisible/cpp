@@ -25,5 +25,5 @@ class Student < User
     :maximum => 500,
   }
 
-  attr_accessible :department_id, :year, :bio, :degree
+  attr_accessible :department_id, :year, :bio, :degree, :cv_location
 end

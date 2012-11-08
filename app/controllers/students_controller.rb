@@ -36,6 +36,25 @@ class StudentsController < ApplicationController
     end
   end
 
+  def upload_cv
+    @student = Student.find(params[:student_id])
+    # File saved in /tmp
+    tempfile = params[:files][0].tempfile
+
+    # Make new file name for the CV
+    file = File.join('cvs', params[:files][0].original_filename)
+
+    # Copy temporary file to new place /cvs
+    FileUtils.cp tempfile.path, file
+
+    @student.cv_location = file
+    if @student.save
+      respond_with @student
+    else
+      respond_with student, status: :unprocessable_entity
+    end
+  end
+
   # PUT /students/1
   # PUT /students/1.json
   def update

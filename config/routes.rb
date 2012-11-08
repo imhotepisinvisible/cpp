@@ -60,8 +60,11 @@ CPP::Application.routes.draw do
   resources :companies
   resources :events
   resources :placements
-  resources :students
-  resources :cv
+  
+  resources :students do
+    post 'upload_cv'
+  end
+
   resources :emails
 
   resources :students do

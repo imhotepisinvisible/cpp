@@ -25,7 +25,16 @@ class CPP.Routers.Students extends Backbone.Router
 
 
   edit: (id) ->
-    console.log "edit student #{id}"
+    student = new CPP.Models.Student id: id
+    student.events.fetch({ data: $.param({ limit: 3}) })
+    student.placements.fetch({ data: $.param({ limit: 3}) })
+
+    student.fetch
+      success: ->
+        console.log student
+        new CPP.Views.StudentsEdit model: student
+      error: ->
+        notify "error", "Couldn't fetch student"
 
   signup: (department_id) ->
     student = new CPP.Models.Student department_id: department_id

@@ -53,15 +53,33 @@
       My C.V
     </h1>
 
-      <div class="row">
-        <div class="span3">
-          <% if @student.get 'cv_location': %>
+      <div class="alert alert-success <% if not @student.get 'cv_location': %>hidden<% end %>" id="uploaded-cv">
+        <div class="row">
+          <div class="span1">
+            <div id="cv-location">
+              <%= @student.get 'cv_location' %>
+            </div>
+          </div>
+          <div class="span1">
             <div class="btn" id="btn-download-cv">Download</div>
-          <% else: %>
-            <div class="alert alert-info">No CV uploaded.</div>
-          <% end %>
+          </div>
         </div>
       </div>
+
+    <form class="form-inline no-cv-form">
+      <div class="row">
+        <div class="span2">
+          <input id="file-cv" type="file" name="files[]" size="20">
+        </div>
+        <div class="span1">
+          <div class="btn" id="btn-upload-cv">Upload</div>
+        </div>
+      </div>
+    </form>
+
+    <div class="progress progress-info">
+      <div id="upload-bar" class="bar">
+    </div>
   </div>
 </div>
 
@@ -81,7 +99,7 @@
         </form>
       </div>
       <div class="span6">
-        Interests go here.
+        Something!
       </div>
     </div>
   </div>
@@ -92,18 +110,18 @@
     </h1>
     <div class="span3">
       <dl class="dl-horizontal">
-        <dt>Status:</dt> <dd>N/A</dd>
-        <dt>Position:</dt> <dd>N/A</dd>
-        <dt>Company:</dt> <dd>N/A</dd>
+        <dt>Status:</dt> <dd>Confirmed</dd>
+        <dt>Position:</dt> <dd>Developer</dd>
+        <dt>Company:</dt> <dd>Google</dd>
       </dl>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="span6" id="events-partial">
-
+    
   </div>
   <div class="span6" id="placements-partial">
-
+    
   </div>
 </div>
