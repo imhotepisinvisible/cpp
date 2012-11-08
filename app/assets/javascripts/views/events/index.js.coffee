@@ -40,13 +40,10 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
 
   renderEvents: (col) ->
     @$('#events').html("")
-    console.log "renderEvents", col
     col.each (event) ->
-      #if (event.get "visible")
-        # Render the event if we can get its company
-        view = new CPP.Views.EventsItem model: event
-        @$('#events').append(view.render().el)
-    #console.log eventCounter
+      # Render the event if we can get its company
+      view = new CPP.Views.EventsItem model: event
+      @$('#events').append(view.render().el)
   @
 
   renderFilters: ->
@@ -54,7 +51,7 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
       el: $(@el).find('#event-filter')
       filters: [
         {name: "Capacity Search"
-        type: "text"
+        type: "number"
         attribute: "capacity"
         scope: "company"},
         {name: "Location Search"
