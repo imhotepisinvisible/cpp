@@ -5,6 +5,10 @@ gem 'rails', '3.2.1'
 # Twitter Bootstrapping
 gem 'twitter-bootstrap-rails'
 
+# Bootstrap Dependencies
+gem 'therubyracer'
+gem 'less-rails'
+
 # Font Awesome = Icons via Font!
 gem 'font-awesome-rails'
 
