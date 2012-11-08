@@ -1,0 +1,141 @@
+<h1 class="section-header">
+  <% if @email.isNew(): %>
+    Create a New Mailing
+  <% else: %>
+    <%= @email.get 'subject' %> (Editing)
+  <% end %>
+</h1>
+<div class="row">
+  <div class="span4">
+    <div class="company-logo-large">
+    </div>
+  </div>
+  <div class="span8">
+  </div>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <div class="form"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="span6">
+    <h2 class="section-header">Select Recipients by Tag</h2>
+  </div>
+  <div class="span6">
+    <h2 class="section-header">Selected Recipients</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="span6">
+    <div class="row">
+      <div class="span2">
+        Year Groups
+      </div>
+      <div class="span4">
+        <span class="label label-info interest-tag">
+          <span class="label-text">1st Year</span>
+                  </span>
+        <span class="label label-info interest-tag">
+          <span class="label-text">2nd Year</span>
+                  </span>
+        <span class="label label-info interest-tag">
+          <span class="label-text">3rd Year</span>
+                  </span>
+        <span class="label label-info interest-tag">
+          <span class="label-text">4th Year</span>
+                  </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span2">
+        Interests
+      </div>
+      <div class="span4">
+        <span class="label label-warning interest-tag">
+          <span class="label-text">Web Development</span>
+                  </span>
+        <span class="label label-warning interest-tag">
+          <span class="label-text">Banking</span>
+                  </span>
+        <span class="label label-warning interest-tag">
+          <span class="label-text">Games Industry</span>
+                  </span>
+        <span class="label label-warning interest-tag">
+          <span class="label-text">Business</span>
+                  </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span2">
+        Programming languages
+      </div>
+      <div class="span4">
+        <span class="label label-success interest-tag">
+          <span class="label-text">C</span>
+                  </span>
+        <span class="label label-success interest-tag">
+          <span class="label-text">C++</span>
+                  </span>
+        <span class="label label-success interest-tag">
+          <span class="label-text">Java</span>
+                  </span>
+        <span class="label label-success interest-tag">
+          <span class="label-text">Ruby</span>
+                  </span>
+      </div>
+    </div>
+  </div>
+    <div class="span6">
+    <div class="row">
+      <div class="span2">
+        Year Groups
+      </div>
+      <div class="span4">
+        <span class="label label-info interest-tag">
+          <span class="label-text">3rd Year</span>
+          <button type="button" class="close" data-dismiss="alert">×</button>
+                  </span>
+        <span class="label label-info interest-tag">
+          <span class="label-text">4th Year</span>
+          <button type="button" class="close" data-dismiss="alert">×</button>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span2">
+        Interests
+      </div>
+      <div class="span4">
+        <span class="label label-warning interest-tag">
+          <span class="label-text">Web Development</span>
+          <button type="button" class="close" data-dismiss="alert">×</button>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span2">
+        Programming languages
+      </div>
+      <div class="span4">
+        <span class="label label-success interest-tag">
+          <span class="label-text">Ruby</span>
+          <button type="button" class="close" data-dismiss="alert">×</button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="span12">
+    <h2 class="section-header">Review and submit for approval</h2>
+    <p>Email will be sent to 47 recipients</p>
+    <div class="control-group">
+      <div class="controls">
+        <div class="btn btn-submit">Submit for approval</div>
+        <a href="#">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>

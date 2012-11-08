@@ -1,0 +1,10 @@
+<td><%= @email.company.get 'name' %></td>
+<td><%= @email.get 'title' %></td>
+<td><%= @email.get 'deadline' %></td>
+<td><%= @email.get 'location' %></td>
+<td><%= @email.get 'capacity' %></td>
+<td><a href="<%= @email.get 'google_map_url' %>"><i class="icon-map-marker"></a></td>
+<td>
+  <div class="btn btn-small btn-edit">Edit</div>
+  <div class="btn btn-small btn-danger btn-delete">Delete</div>
+</td>

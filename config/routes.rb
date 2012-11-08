@@ -52,6 +52,7 @@ CPP::Application.routes.draw do
 
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
+  get "emails/:id/preview" => "emails#preview"
 
   resources :users
   resources :sessions
@@ -61,10 +62,12 @@ CPP::Application.routes.draw do
   resources :placements
   resources :students
   resources :cv
+  resources :emails
 
   resources :companies do
     resources :events
     resources :placements
+    resources :emails
   end
 
   # Samples/Mockups

@@ -22,6 +22,8 @@
 //= require sinon
 //= require jasmine-sinon
 //= require jquery-fileupload/basic
+//= require tinymce-jquery
+
 //
 //= require .//cpp
 //

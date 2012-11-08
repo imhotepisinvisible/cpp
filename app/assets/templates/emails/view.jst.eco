@@ -1,0 +1,61 @@
+<h1 class="section-header">
+  Email - <%= @email.get 'subject' %>
+  <div class="company-logo-header">
+    <img src="/assets/company_logos/<%= @email.company.get 'logo' %>">
+  </div>
+</h1>
+
+<div class="row">
+  <div class="span12" id="description">
+    <h1 class="section-header"><i class="icon-info-sign"></i>  Contents</h1>
+    <iframe class="email-preview" src="/emails/<%= @email.id %>/preview"></iframe>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span6" id="date">
+    <h1 class="section-header"><i class="icon-time"></i> History</h1>
+    <table class="table table-striped">
+      <% if @email.get 'created': %>
+      <tr>
+        <td>
+          Submitted:
+        </td>
+        <td>
+          <%= @email.get 'created' %>
+        </td>
+      </tr>
+      <% end %>
+      <% if @email.get 'sent': %>
+      <tr>
+        <td>
+          Approved:
+        </td>
+        <td>
+          <%= @email.get 'sent' %>
+        </td>
+      </tr>
+      <% end %>
+      <% if @email.get 'sent': %>
+      <tr>
+        <td>
+          Sent:
+        </td>
+        <td>
+          <%= @email.get 'sent' %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+  <div class="span6" >
+    <div class="row">
+      <div class="span6">
+        <h1 class="section-header"><i class="icon-map-marker"></i> Audience</h1>
+        <p>
+          Received by 47 students.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

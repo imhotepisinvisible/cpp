@@ -13,7 +13,7 @@ class CompaniesController < ApplicationController
   # GET /companies/1.json
   def show
     @company = Company.find(params[:id])
-
+    
     respond_with @company
   end
 
