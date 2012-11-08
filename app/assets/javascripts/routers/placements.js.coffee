@@ -47,7 +47,7 @@ class CPP.Routers.Placements extends Backbone.Router
     placement = new CPP.Models.Placement id: id
     placement.fetch
       success: ->
-        placement.company = new CPP.Models.Company id: placement.get("company_id")
+        placement.company = new CPP.Models.Company id: placement.company_id
         placement.company.fetch
           success: ->
             new CPP.Views.PlacementsView model: placement

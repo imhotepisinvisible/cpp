@@ -47,7 +47,7 @@ class CPP.Routers.Events extends Backbone.Router
     event = new CPP.Models.Event id: id
     event.fetch
       success: ->
-        event.company = new CPP.Models.Company id: event.get("company_id")
+        event.company = new CPP.Models.Company id: event.company_id
         event.company.fetch
           success: ->
             new CPP.Views.EventsView model: event
