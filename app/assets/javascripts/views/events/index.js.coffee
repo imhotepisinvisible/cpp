@@ -12,28 +12,40 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
       model.set "visible", true
     @collection.bind 'reset', @render, @
     @collection.bind 'filter', @renderEvents, @
-    # bind to model destroy so backbone view updates on destroy
+    # Bind to model destroy so backbone view updates on destroy
     @collection.bind 'destroy', @render, @
+    
+    # Get company for each event
+    #x=0
+    #eventCounter = 0
+    @collection.each (event) =>
+      #if (event.get "visible")
+      event.company = new CPP.Models.Company id: event.get("company_id")
+      event.company.fetch
+        success: ->
+          # Render the event if we can get its company
+          #eventCounter++
+        error: ->
+          notify "error", "Couldn't fetch company for event"
+    #console.log eventCounter
+    #@fetchCompany() until (eventCounter == @collection.length)
+    #console.log @collection.length
     @render()
 
   render: ->
     $(@el).html(@template(events: @collection))
-    @renderEvents()
+    @renderEvents(@collection)
     @renderFilters()
   @
 
-  renderEvents: ->
+  renderEvents: (col) ->
     @$('#events').html("")
-    @collection.each (event) =>
-      if (event.get "visible")
-        event.company = new CPP.Models.Company id: event.get("company_id")
-        event.company.fetch
-          success: ->
-            # Render the event if we can get its company
-            view = new CPP.Views.EventsItem model: event
-            @$('#events').append(view.render().el)
-          error: ->
-            notify "error", "Couldn't fetch company for event"
+    col.each (event) ->
+      #if (event.get "visible")
+        # Render the event if we can get its company
+        view = new CPP.Views.EventsItem model: event
+        @$('#events').append(view.render().el)
+    #console.log eventCounter
   @
 
   renderFilters: ->
@@ -42,7 +54,7 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
       filters: [
         {name: "Capacity Search"
         type: "text"
-        attribute: "location"
+        attribute: "capacity"
         scope: "company"}
       ]
       data: @collection

@@ -4,8 +4,8 @@ class CPP.Filter extends CPP.Views.Base
   templateTags: JST['filters/filter_tag']
 
   events:
-    "click .search-btn"         : "search"
-    "click #fltr-search-close"  : "clearSearch"
+    "click .search-btn"         : "setFilter"
+    "click #fltr-search-close"  : "unsetFilter"
 
 
   sub_el: "#filters"
@@ -25,19 +25,21 @@ class CPP.Filter extends CPP.Views.Base
           $(@sub_el).append(@templateTags(filter: filter))
   @
 
-  search: ->
-    # Filter on all filters
+  setFilter: ->
     for filter in @filters
-      switch filter.type
-        when "text"
-          @data.each (model) ->
-            model.set "visible", false
-            ma = model.get filter.attribute
-            tb = $("#fltr-search").val()
-            if ma.toString() == tb || $("#fltr-search").val() == ""
-              model.set "visible", true
-    @data.trigger('filter')
+      fa = filter.attribute
+      console.log fa
+      tb =  $("#"+fa).val()
+      console.log tb
+      console.log tb
+      fCollection = @data
+      if (tb != "")
+        # Update collection
+        fCollection = new CPP.Collections.Events(@data.filter((model) ->
+          model.get(filter.attribute).toString() is tb 
+        ))
+    @data.trigger('filter', fCollection)
 
-  clearSearch: ->
-    $("#fltr-search").val("")
-    @search()
+  unsetFilter: ->
+    $("#capacity").val("")
+    @setFilter()
