@@ -23,23 +23,39 @@ class CPP.Filter extends CPP.Views.Base
         when "number"
           $(@sub_el).append(@templateText(filter: filter))
         when "tags"
-          $(@sub_el).append(@templateTags(filter: filter))
+          $(@sub_el).append(@templateTags(filter: filter ))
   @
 
   setFilter: ->
     fCollection = @data
     for filter in @filters 
       tb =  $("#"+filter.attribute).val()
+      # Dont filter when nothing in text box
       if (tb != "")
         # Update collection
         switch filter.type
           when "text"
             fCollection = new CPP.Collections.Events(fCollection.filter((model) ->
-              ((model.get(filter.attribute).toString().indexOf tb) != -1)
+              res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
+              (res.toString().indexOf tb) != -1
             ))
           when "number"
             fCollection = new CPP.Collections.Events(fCollection.filter((model) ->
-              model.get(filter.attribute).toString() is tb
+              res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
+              res.toString() is tb
             ))
+          when "tags"
+            #console.log "tags", (@getTagNames(filter))
     @data.trigger('filter', fCollection)
+  @
 
+  getTagNames: (filter) ->
+    tags = []
+    @data.each (model) =>
+      console.log filter
+      console.log model
+      tag = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
+      console.log tag
+      if ((tags.indexOf tag) == -1)
+        tags.push tag
+    tags

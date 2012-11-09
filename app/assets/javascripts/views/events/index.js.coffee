@@ -18,15 +18,8 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
     # Get company for each event
     #x=0
     #eventCounter = 0
-    @collection.each (event) =>
+    #@collection.each (event) =>
       #if (event.get "visible")
-      event.company = new CPP.Models.Company id: event.get("company_id")
-      event.company.fetch
-        success: ->
-          # Render the event if we can get its company
-          #eventCounter++
-        error: ->
-          notify "error", "Couldn't fetch company for event"
     #console.log eventCounter
     #continue until (eventCounter == @collection.length)
     #console.log @collection.length
@@ -34,14 +27,26 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
 
   render: ->
     $(@el).html(@template(events: @collection))
-    @renderEvents(@collection)
+    @collection.each (event) =>
+      event.company = new CPP.Models.Company id: event.get("company_id")
+      event.company.fetch
+        success: ->
+          #@allComplaniesFetched
+          view = new CPP.Views.EventsItem model: event
+          @$('#events').append(view.render().el)
+        error: ->
+          notify "error", "Couldn't fetch company for event"
     @renderFilters()
   @
+
+  #allComplaniesFetched:
+  #  _.after(3, =>
+  #    @renderEvents()
+  #    @renderFilters())
 
   renderEvents: (col) ->
     @$('#events').html("")
     col.each (event) ->
-      # Render the event if we can get its company
       view = new CPP.Views.EventsItem model: event
       @$('#events').append(view.render().el)
   @
@@ -53,11 +58,16 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
         {name: "Capacity Search"
         type: "number"
         attribute: "capacity"
-        scope: "company"},
+        scope: ""},
         {name: "Location Search"
         type: "text"
         attribute: "location"
-        scope: "company"}
+        scope: ""},
+        {name: "Company"
+        type: "tags"
+        attribute: "name"
+        scope: ".company"
+        }
       ]
       data: @collection
   @ 
