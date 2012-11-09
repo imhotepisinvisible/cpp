@@ -12,7 +12,7 @@
 <% @tags.each do |tag| %>
   <tr>
     <td><%= tag.name %></td>
-    <td><%= tag.tag_category %></td>
+    <td><%= link_to tag.tag_category.name, tag.tag_category %></td>
     <td><%= link_to 'Show', tag %></td>
     <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
     <td><%= link_to 'Destroy', tag, confirm: 'Are you sure?', method: :delete %></td>
