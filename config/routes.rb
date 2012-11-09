@@ -1,4 +1,6 @@
 CPP::Application.routes.draw do
+  resources :tags
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -78,6 +80,7 @@ CPP::Application.routes.draw do
     resources :placements
     resources :emails
   end
+  resources :tag_categories
 
   # Samples/Mockups
   match 'student_dash' => 'site#sample_student_dashboard'

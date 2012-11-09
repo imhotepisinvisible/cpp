@@ -14,6 +14,27 @@ organisation = FactoryGirl.create :organisation
 
 department = FactoryGirl.create :department, :organisation => organisation
 
+# Tags
+year_group_category = FactoryGirl.create :tag_category, :name => "Year Groups"
+programming_category = FactoryGirl.create :tag_category, :name => "Programming Languages"
+segment_category = FactoryGirl.create :tag_category, :name => "Industry Segments"
+
+year_group_tags = [ '1st Year', '2nd Year', '3rd Year', '4th Year' ]
+programming_tags = [ 'C', 'C++', 'Java', 'Ruby', 'Haskell' ]
+segment_tags = [ 'Web Development', 'Banking', 'Games Development', 'Business' ]
+
+year_group_tags.map do |name|
+  FactoryGirl.create :tag, { name: "#{name}", tag_category: year_group_category }
+end
+
+programming_tags.map do |name|
+  FactoryGirl.create :tag, { name: "#{name}", tag_category: programming_category }
+end
+
+segment_tags.map do |name|
+  FactoryGirl.create :tag, { name: "#{name}", tag_category: segment_category }
+end
+
 # Sample Users
 students =  %w( peter tom jack sarah ).map do |name|
   FactoryGirl.create :student,  { first_name: "#{name}",
