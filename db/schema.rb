@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121026184345) do
+ActiveRecord::Schema.define(:version => 20121109193653) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -89,6 +89,21 @@ ActiveRecord::Schema.define(:version => 20121026184345) do
     t.datetime "updated_at",            :null => false
   end
 
+  create_table "tag_categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string   "name"
+    t.integer  "tag_category_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "tags", ["tag_category_id"], :name => "index_tags_on_tag_category_id"
+
   create_table "users", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -98,7 +113,6 @@ ActiveRecord::Schema.define(:version => 20121026184345) do
     t.integer  "year"
     t.text     "bio"
     t.text     "degree"
-    t.string   "cv_location"
     t.integer  "company_id"
     t.string   "type"
     t.datetime "created_at",      :null => false
