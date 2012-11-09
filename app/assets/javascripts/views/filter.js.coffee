@@ -44,7 +44,7 @@ class CPP.Filter extends CPP.Views.Base
               res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
               res.toString() is tb
             ))
-          when "tags"
+          #when "tags"
             #console.log "tags", (@getTagNames(filter))
     @data.trigger('filter', fCollection)
   @
