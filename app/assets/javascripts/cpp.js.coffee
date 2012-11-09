@@ -30,7 +30,8 @@ window.tiny_mce_init = ->
     theme_advanced_toolbar_location: "top"
     theme_advanced_toolbar_align: "left"
     theme_advanced_statusbar_location: "none"
-    theme_advanced_buttons1: "bold,italic,underline,|,fontselect,fontsizeselect,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,link,unlink,image,code"
+    # http://www.tinymce.com/wiki.php/Buttons/controls shows all available buttons
+    theme_advanced_buttons1: "bold,italic,underline,|,fontselect,fontsizeselect,forecolor,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,link,unlink,image,code"
     theme_advanced_buttons2: ""
     theme_advanced_buttons3: ""
 
