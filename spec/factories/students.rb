@@ -6,6 +6,7 @@ FactoryGirl.define do
     standard_bio
     beng_student
     first_year
+    email {["st809", "peh10", "tw810", "tw310", "js410"].sample + "@imperial.ac.uk"}
 
     trait :beng_student do
       degree "BEng"

@@ -2,7 +2,8 @@
 
 FactoryGirl.define do
   factory :department do
-    organisation
+    association :organisation, factory: :organisation_with_domains
+    # organisation
     name "Department of Computing"
   end
 end
