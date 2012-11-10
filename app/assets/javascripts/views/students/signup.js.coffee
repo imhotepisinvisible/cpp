@@ -7,15 +7,15 @@ class CPP.Views.StudentsSignup extends CPP.Views.Base
 
   initialize: ->
     @form = new Backbone.Form(model: @model).render()
-    console.log @form
-    Backbone.Validation.bind @form;
     @render()
 
   render: ->
     $(@el).html(@template(student: @model))
     super
     $('.form').append(@form.el)
-    @
+    @form.on "change", =>
+      @form.validate()
+  @
 
   submitEvent: ->
     if @form.validate() == null

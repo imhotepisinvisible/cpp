@@ -9,6 +9,21 @@ class CPP.Models.Student extends Backbone.Model
   url: ->
     '/students' + (if @isNew() then '' else '/' + @id)
 
+  validation:
+    first_name:
+      required: true
+    last_name:
+      required: true
+    email:
+      required: true
+      pattern: 'email'
+    password:
+      required: true
+      minLength: 8
+    password_confirmation:
+      required: true
+      minLength: 8
+
   schema:
     first_name:
       type: "Text"
@@ -24,3 +39,4 @@ class CPP.Models.Student extends Backbone.Model
     password_confirmation:
       type: "Password"
       title: "Password Confirmation"
+
