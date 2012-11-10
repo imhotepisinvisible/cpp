@@ -5,9 +5,8 @@ class CPP.Models.Event extends Backbone.Model
   validation:
     title:
       required: true
-    #   msg: 'Please enter a valid email'
-    # title: (value) ->
-    #   "Error message" unless value?
+    google_map_url:
+      pattern: 'url'
 
   schema:
     title:
@@ -43,5 +42,3 @@ class CPP.Models.Event extends Backbone.Model
       title: ""
       fieldAttrs:
         style: "display: none"
-
-
