@@ -29,7 +29,7 @@ gem 'cantango' # Nice role based access control
 gem 'bcrypt-ruby' # For password encryption
 
 gem 'backbone-on-rails' # Nice client side JS framework
-gem 'underscore' # Templating for backboneJS
+gem 'underscore-rails' # Templating for backboneJS
 
 gem 'backbone-validation-rails'
 
