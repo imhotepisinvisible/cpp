@@ -52,7 +52,11 @@ describe "Event Routing", ->
                                 .returns(@collection)
 
       @eventEditViewStub = sinon.stub(window.CPP.Views, "EventsEdit")
-                            .returns(new Backbone.View())
+                              .returns(new Backbone.View())
+
+
+      @eventIndexViewStub = sinon.stub(window.CPP.Views, "EventsIndex")
+                              .returns(new Backbone.View())
 
       @model = new (Backbone.Model.extend(
                    schema:
@@ -64,18 +68,20 @@ describe "Event Routing", ->
       @eventModelStub = sinon.stub(window.CPP.Models, "Event")
                           .returns(@model)
 
+      @company = new Backbone.Model()
+      @company.url = "/companies"
+
+      @companyModelStub = sinon.stub(window.CPP.Models, "Company")
+                          .returns(@company)
+
     afterEach ->
       window.CPP.Views.EventsEdit.restore()
+      window.CPP.Views.EventsIndex.restore()
       window.CPP.Collections.Events.restore()
       window.CPP.Models.Event.restore()
+      window.CPP.Models.Company.restore()
 
     describe "Index handler", ->
-      beforeEach ->
-        @eventIndexViewStub = sinon.stub(window.CPP.Views, "EventsIndex")
-                               .returns(new Backbone.View())
-      afterEach ->
-        window.CPP.Views.EventsIndex.restore()
-
       it "should create an Event collection", ->
         @router.index()
         expect(@eventsCollectionStub).toHaveBeenCalledOnce()
@@ -105,7 +111,7 @@ describe "Event Routing", ->
 
       it "should create an Event collection", ->
         expect(@eventsCollectionStub).toHaveBeenCalledOnce()
-        expect(@eventsCollectionStub).toHaveBeenCalledWithExactly()
+        expect(@eventsCollectionStub).toHaveBeenCalledWith()
 
       it "should create an Event model", ->
         expect(@eventModelStub).toHaveBeenCalledOnce()
@@ -143,18 +149,10 @@ describe "Event Routing", ->
 
     describe "View handler", ->
       beforeEach ->
-        @company = new Backbone.Model()
-        @company.url = "/companies"
-
-        @companyModelStub = sinon.stub(window.CPP.Models, "Company")
-                            .returns(@company)
-
         @eventsViewStub = sinon.stub(window.CPP.Views, "EventsView")
                             .returns(new Backbone.View())
 
-
       afterEach ->
-        window.CPP.Models.Company.restore()
         window.CPP.Views.EventsView.restore()
 
       it "should create an Event model", ->
@@ -187,6 +185,33 @@ describe "Event Routing", ->
         @router.edit(1)
         expect(@eventsViewStub.callCount).toBe 0
 
+    describe "IndexCompany Handler", ->
+      it "should create an Event collection", ->
+        @router.indexCompany(1)
+        expect(@eventsCollectionStub).toHaveBeenCalledOnce()
+        expect(@eventsCollectionStub).toHaveBeenCalledWith()
 
+      it "should create a Company Model on fetch success", ->
+        sinon.stub(@collection, "fetch").yieldsTo "success"
+        @router.indexCompany(1)
+        expect(@companyModelStub).toHaveBeenCalledOnce()
+        expect(@companyModelStub).toHaveBeenCalledWith id: 1
 
+      it "should not create a Company Model on fetch error", ->
+        sinon.stub(@collection, "fetch").yieldsTo "error"
+        @router.indexCompany(1)
+        expect(@companyModelStub.callCount).toBe 0
+
+      it "should create an EventsIndex on company fetch success", ->
+        sinon.stub(@collection, "fetch").yieldsTo "success"
+        sinon.stub(@company, "fetch").yieldsTo "success"
+        @router.indexCompany(1)
+        expect(@eventIndexViewStub).toHaveBeenCalledOnce()
+        expect(@eventIndexViewStub).toHaveBeenCalledWith collection: @collection
+
+      it "should not create an EventsIndex on company fetch error", ->
+        sinon.stub(@model, "fetch").yieldsTo "success"
+        sinon.stub(@company, "fetch").yieldsTo "error"
+        @router.indexCompany(1)
+        expect(@eventIndexViewStub.callCount).toBe 0
 
