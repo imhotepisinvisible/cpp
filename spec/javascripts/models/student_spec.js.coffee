@@ -38,7 +38,6 @@ describe "Student", ->
 
     describe "when instantiated", ->
       it "should exhibit first name attribute", ->
-        console.log @student
         expect(@student.get 'first_name').toEqual @firstName
 
       it "should exhibit last_name attribute", ->
