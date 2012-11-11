@@ -15,7 +15,7 @@ class CPP.Views.StudentsSignup extends CPP.Views.Base
     $('.form').append(@form.el)
     @form.on "change", =>
       @form.validate()
-  @
+    @
 
   submitEvent: ->
     if @form.validate() == null
