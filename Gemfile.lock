@@ -85,6 +85,9 @@ GEM
       execjs
     eco-source (1.1.0.rc.1)
     ejs (1.1.1)
+    em-websocket (0.3.8)
+      addressable (>= 2.1.1)
+      eventmachine (>= 0.12.9)
     erubis (2.7.0)
     eventmachine (1.0.0)
     execjs (1.4.0)
@@ -110,6 +113,10 @@ GEM
       guard (>= 1.1.0)
       multi_json
       thor
+    guard-livereload (1.1.0)
+      em-websocket (>= 0.2.0)
+      guard (>= 1.5.0)
+      multi_json (~> 1.0)
     guard-rspec (2.1.1)
       guard (>= 1.1)
       rspec (~> 2.11)
@@ -301,6 +308,7 @@ DEPENDENCIES
   font-awesome-rails
   google_visualr (>= 2.1)
   guard-jasmine
+  guard-livereload
   guard-rspec
   guard-spork
   haml-rails

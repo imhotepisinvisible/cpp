@@ -14,5 +14,7 @@
  *= require backbone-forms-bootstrap
  *= require bootstrap-datepicker
  *= require events
- *= require_tree .
+ *= require site
+
+ *= require cpp
 */

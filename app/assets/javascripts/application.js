@@ -24,6 +24,7 @@
 //= require jquery-fileupload/basic
 //= require tinymce-jquery
 //= require jcountdown
+//= require utils
 //
 //= require .//cpp
 //

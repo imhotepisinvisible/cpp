@@ -68,6 +68,8 @@ group :development do
   gem 'rb-fsevent'
 
   gem 'terminal-notifier-guard' # Notification center for test runs :)
+
+  gem 'guard-livereload'
 end
 
 group :test, :development do
