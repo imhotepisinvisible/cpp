@@ -20,7 +20,7 @@ class Student < User
     :maximum => 500,
   }
 
-  attr_accessible :department_id, :year, :bio, :degree, :cv_location
+  attr_accessible :department_id, :year, :bio, :degree, :cv_location, :transcript_location, :covering_letter_location, :profile_picture_location
 
   validate :valid_email?
 

@@ -12,6 +12,9 @@ class CreateUsers < ActiveRecord::Migration
       t.text :bio
       t.text :degree
       t.string :cv_location
+      t.string :transcript_location
+      t.string :covering_letter_location
+      t.string :profile_picture_location
 
       # Company Admin Fields
       t.references :company # Company for Company Admin
