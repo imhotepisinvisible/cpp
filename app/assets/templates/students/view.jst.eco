@@ -1,8 +1,8 @@
 <div class="row">
   <div class="span12" id="student-profile-header">
     <div id="student-profile-img-container" class="img-polaroid">
-      <% if @student.get 'profile': %>
-        <img src="/assets/<%= @student.get 'profile' %>" id="student-profile-img">
+      <% if @student.get 'profile_picture_location': %>
+        <img src="<%= @student.get 'profile_picture_location' %>" id="student-profile-img">
       <% else: %>
         <img src="/assets/default_profile.png" id="student-profile-img">
       <% end %>
@@ -18,7 +18,7 @@
         Looking for an Industrial Placement
       </p>
     </div>
-  </div> 
+  </div>
 </div>
 
 <div class="row">
@@ -30,7 +30,7 @@
           <i class="icon-file"></i> Paper
         </h1>
 
-        <% if @student.get 'cv_location' and @student.get 'transcript_location' and @student.get 'covering_letter_location': %>
+        <% if @student.get 'cv_location' or @student.get 'transcript_location' or @student.get 'covering_letter_location': %>
           <div class="row">
             <div class="span4">
               <table class="table table-striped">
@@ -59,7 +59,7 @@
                   </tr>
                 <% end %>
               </table>
-              
+
             </div>
           </div>
         <% else: %>
@@ -76,8 +76,8 @@
 
         <div class="row">
           <div class="span4">
-            <% if false and @student.get 'bio': %>
-              <%= @student.get 'bio' %>
+            <% if @student.get 'bio': %>
+              <%- @student.get 'bio' %>
             <% else: %>
               <div class="empty-student-profile-field-container">
                 <i class="icon-user empty-student-profile-field"/>
@@ -95,7 +95,6 @@
         <div class="row">
           <div class="span4">
             <% if true or @student.get 'interests': %>
-              <div class="row">
                 <span class="label label-warning interest-tag">
                   <span class="label-text">Web Dev</span>
                 </span>
@@ -122,8 +121,6 @@
                 <span class="label label-success interest-tag">
                   <span class="label-text">Ruby</span>
                 </span>
-
-              </div>
             <% else: %>
               <div class="empty-student-profile-field-container">
                 <i class="icon-heart empty-student-profile-field"/>
@@ -135,12 +132,12 @@
     </div>
   </div>
 </div>
-<!-- 
+
 <div class="row" id="opportunities-container">
-  <div class="span6">
-    Events
+  <div class="span6" id="events-partial">
+
   </div>
-  <div class="span6">
-    placements
+  <div class="span6" id="placements-partial">
+
   </div>
-</div> -->
+</div>
