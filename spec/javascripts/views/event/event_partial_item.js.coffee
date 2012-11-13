@@ -1,10 +1,14 @@
 describe "Events Partial Item", ->
   beforeEach ->
     setFixtures(sandbox id: "events")
-    @event = new (Backbone.Model.extend
-                start_date: '2011-10-10T14:48:00'
-                id: 1
-                title: "Foo")()
+    # @event = new (Backbone.Model.extend
+                # start_date: '2011-10-10T14:48:00'
+                # id: 1
+                # title: "Foo")()
+    @event = new Backbone.Model id: 1
+    eventStub = sinon.stub(@event, 'get')
+    eventStub.withArgs('start_date').returns('2011-10-10T14:48:00')
+    eventStub.withArgs('title').returns('Foo')
 
     @eventsPartialItem = new CPP.Views.EventsPartialItem
                               el: "#events"

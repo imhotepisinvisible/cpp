@@ -6,7 +6,7 @@
     <% end %>
   </div>
   <div class="link-description">
-    <% d = Date.parse(@event.start_date) %>
+    <% d = Date.parse(@event.get('start_date')) %>
     <%= d.toString('dXXX MMMM yyyy - H:mm').replace('XXX', d.getOrdinal()) %>
   </div>
 </a>

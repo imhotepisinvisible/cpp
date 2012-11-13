@@ -1,14 +1,15 @@
 describe "Placement Partial Item", ->
   beforeEach ->
     setFixtures(sandbox id: "placements")
-    @event = new (Backbone.Model.extend
-                position: 'Intern'
-                id: 1
-                description: 'Awesome backend job')()
+    @placement = new Backbone.Model id: 1
+
+    placementStub = sinon.stub(@placement, 'get')
+    placementStub.withArgs('position').returns('Intern')
+    placementStub.withArgs('description').returns('Awesome backend job')
 
     @placementsPartialItem = new CPP.Views.PlacementsPartialItem
                               el: "#placements"
-                              model: @event
+                              model: @placement
 
     # Uneditable by default for tests
     @options = {editable: false}
