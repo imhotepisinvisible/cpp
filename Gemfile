@@ -80,7 +80,7 @@ group :test, :development do
   gem 'guard-jasmine'
   gem 'sinon-rails'
   gem 'jasmine-sinon-rails', :git => 'git://github.com/PeterHamilton/jasmine-sinon-rails'
-
+  gem 'jasmine-jquery-rails'
 
   gem 'rspec-rails'
   gem 'rspec-instafail'
