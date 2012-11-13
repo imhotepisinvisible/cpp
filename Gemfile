@@ -41,16 +41,18 @@ gem 'datejs-rails'
 gem 'jquery-fileupload-rails' # File upload
 gem 'jcountdown-rails', :git => 'http://github.com/rezwyi/jcountdown-rails.git' #Countdown timer
 
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
-end
+gem 'bourbon' # Nice SCSS mixins
 
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'simple_form'       # Nice forms
 gem 'rufus-scheduler'   # Task Scheduling
+
+group :assets do
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
+  gem 'uglifier', '>= 1.0.3'
+end
 
 group :production do
   gem 'pg' # Required by postgres
@@ -93,21 +95,5 @@ end
 
 group :test do
   gem 'spork-rails'
-  # Mocking for unit tests
-  gem 'mocha', :require => false
+  gem 'mocha', :require => false # Mocking for unit tests
 end
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'

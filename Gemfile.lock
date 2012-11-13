@@ -54,6 +54,9 @@ GEM
       railties (>= 3.0)
     bootstrap-will_paginate (0.0.9)
       will_paginate
+    bourbon (2.1.2)
+      sass (>= 3.2)
+      thor
     builder (3.0.4)
     cancan (1.6.8)
     cantango (0.9.4.7)
@@ -299,6 +302,7 @@ DEPENDENCIES
   bcrypt-ruby
   bootstrap-datepicker-rails
   bootstrap-will_paginate
+  bourbon
   cantango
   coffee-rails (~> 3.2.1)
   database_cleaner
