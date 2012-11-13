@@ -28,3 +28,18 @@ describe "Email Partial Item", ->
     it "Shouldn't display edit button if not editable", ->
       @eventsPartialItem.render(@options)
       expect(@eventsPartialItem.$el.find 'div').not.toHaveClass('btn-edit')
+
+  describe "On edit click", ->
+    it "should navigate to edit screen", ->
+      @options.editable = true
+      @eventsPartialItem.render(@options)
+      spyEvent = spyOnEvent('#edit-button', 'click');
+      navigationStub = sinon.spy(Backbone.history, 'navigate')
+                          .withArgs('emails/1/edit', trigger: true)
+      $('#edit-button').click()
+      expect('click').toHaveBeenTriggeredOn('#edit-button')
+      expect(spyEvent).toHaveBeenTriggered()
+      expect(navigationStub).toHaveBeenCalledOnce()
+
+
+
