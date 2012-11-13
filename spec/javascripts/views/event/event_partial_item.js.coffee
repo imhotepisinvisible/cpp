@@ -1,4 +1,4 @@
-describe "EventsPartial", ->
+describe "Events Partial Item", ->
   beforeEach ->
     setFixtures(sandbox id: "events")
     @event = new (Backbone.Model.extend
