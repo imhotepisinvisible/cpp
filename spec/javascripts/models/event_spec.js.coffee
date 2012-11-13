@@ -45,7 +45,7 @@ describe "Event", ->
 
   describe "when saving required fields", ->
     beforeEach ->
-      spy = @error_spy = sinon.spy();
+      spy = @errorSpy = sinon.spy()
       init = CPP.Models.Event::initialize
       CPP.Models.Event::initialize = ->
         spy(@, "validated:invalid")
@@ -61,31 +61,33 @@ describe "Event", ->
 
     it "should not save when title is empty", ->
       @event.save 'title': ""
-      expect(@error_spy).toHaveBeenCalledOnce();
+      expect(@errorSpy).toHaveBeenCalledOnce()
 
     it "should not save when start_date is empty", ->
       @event.save 'start_date': null
-      expect(@error_spy).toHaveBeenCalledOnce();
+      expect(@errorSpy).toHaveBeenCalledOnce()
 
     it "should not save when end_date is empty", ->
       @event.save 'end_date': null
-      expect(@error_spy).toHaveBeenCalledOnce();
+      expect(@errorSpy).toHaveBeenCalledOnce()
 
     it "should not save when description is empty", ->
       @event.save 'description': null
-      expect(@error_spy).toHaveBeenCalledOnce();
+      expect(@errorSpy).toHaveBeenCalledOnce()
 
     it "should not save when location is empty", ->
       @event.save 'location': null
-      expect(@error_spy).toHaveBeenCalledOnce();
+      expect(@errorSpy).toHaveBeenCalledOnce()
 
 
   describe "when saving optional fields", ->
     beforeEach ->
-      spy = @success_spy = sinon.spy();
+      successSpy = @successSpy = sinon.spy()
+      errorSpy = @errorSpy = sinon.spy()
       init = CPP.Models.Event::initialize
       CPP.Models.Event::initialize = ->
-        spy(@, "validated:valid")
+        successSpy(@, "validated:valid")
+        errorSpy(@, "validated:invalid")
         init.call this
 
       @event = new CPP.Models.Event {
@@ -99,13 +101,22 @@ describe "Event", ->
 
     it "should save when deadline is empty", ->
       @event.save 'deadline': null
-      expect(@success_spy).toHaveBeenCalledOnce();
+      expect(@successSpy).toHaveBeenCalledOnce()
 
     it "should save when capacity is empty", ->
       @event.save 'capacity': null
-      expect(@success_spy).toHaveBeenCalledOnce();
+      expect(@successSpy).toHaveBeenCalledOnce()
 
     it "should save when google_map_url is empty", ->
       @event.save 'google_map_url': null
-      expect(@success_spy).toHaveBeenCalledOnce();
+      expect(@successSpy).toHaveBeenCalledOnce()
+
+    it "should not allow an invalid url for google_map_url", ->
+      @event.save 'google_map_url' : "url"
+      @expect(@errorSpy).toHaveBeenCalledOnce()
+
+    # TODO investigate getting Faker.js as a gem?
+    it "should allow a valid url for google_map_url", ->
+      @event.save 'google_map_url' : 'https://www.google.co.uk'
+      expect(@successSpy).toHaveBeenCalledOnce()
 

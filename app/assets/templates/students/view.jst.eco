@@ -1,80 +1,139 @@
 <div class="row">
-  <div class="span9">
-    <div class="row">
-      <div class="span3">
-        <div class="img-polaroid student-profile-picture">
-          <% if @student.get 'profile': %>
-            <img src="/assets/<%= @student.get 'profile' %>">
-          <% else: %>
-            <img src="/assets/default_profile.png" class="student-profile-picture">
-          <% end %>
-        </div>
-      </div>
-      <div class="span6">
-        <p class="student-profile-text">
-          <%= @student.get 'first_name' %>
-          is a 
-          <%= @student.get 'year' %>
-          rd year 
-          <%= @student.get 'degree' %>
-          student, looking for love.
-        </p>
-      </div>
+  <div class="span12" id="student-profile-header">
+    <div id="student-profile-img-container" class="img-polaroid">
+      <% if @student.get 'profile_picture_location': %>
+        <img src="<%= @student.get 'profile_picture_location' %>" id="student-profile-img">
+      <% else: %>
+        <img src="/assets/default_profile.png" id="student-profile-img">
+      <% end %>
     </div>
-  </div>
-  <div class="span3">
-    <h1 class="section-header">
-      <i class="icon-list-alt"></i>
-      My CV
-    </h1>
 
-      <div class="row">
-        <div class="span3">
-          <% if @student.get 'cv_location': %>
-            <div class="btn" id="btn-download-cv">Download</div>
-          <% else: %>
-            <div class="alert alert-info">No CV uploaded.</div>
-          <% end %>
-        </div>
-      </div>
+    <div id="student-profile-intro">
+      <p id="student-profile-intro-name">
+        <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
+      </p>
+      <p id="student-profile-intro-status">
+        <%= getOrdinal(@student.get 'year') %> Year <%= @student.get 'degree' %>
+        <br>
+        Looking for an Industrial Placement
+      </p>
+    </div>
   </div>
 </div>
 
 <div class="row">
-  <div class="span9">
-    <h1 class="section-header">
-      <i class="icon-tags"></i>
-      My Interests
-    </h1>
+  <div class="span12" id="student-profile-body">
+
     <div class="row">
-      <div class="span3">
-        <form class="form-inline">
-          <div class="input-append">
-            <input type="text" class="span2 typeahead" size="16" data-provide="typeahead" data-source="">
-            <button class="btn typeahead" type="button">Add</button>
+      <div class="span4">
+        <h1 class="section-header">
+          <i class="icon-file"></i> Paper
+        </h1>
+
+        <% if @student.get 'cv_location' or @student.get 'transcript_location' or @student.get 'covering_letter_location': %>
+          <div class="row">
+            <div class="span4">
+              <table class="table table-striped">
+                <% if @student.get 'cv_location': %>
+                  <tr>
+                    <td>Curriculum Vitae</td>
+                    <td>
+                      <div class="btn pull-right"><i class="icon-download-alt"/></div>
+                    </td>
+                  </tr>
+                <% end %>
+                <% if @student.get 'transcript_location': %>
+                  <tr>
+                    <td>Transcript</td>
+                    <td>
+                      <div class="btn pull-right"><i class="icon-download-alt"/></div>
+                    </td>
+                  </tr>
+                <% end %>
+                <% if @student.get 'covering_letter_location': %>
+                  <tr>
+                    <td>Covering Letter</td>
+                    <td>
+                      <div class="btn pull-right"><i class="icon-download-alt"/></div>
+                    </td>
+                  </tr>
+                <% end %>
+              </table>
+
+            </div>
           </div>
-        </form>
+        <% else: %>
+          <div class="empty-student-profile-field-container">
+            <i class="icon-file empty-student-profile-field"/>
+          </div>
+        <% end %>
       </div>
-      <div class="span6">
-        Interests go here.
+
+      <div class="span4">
+        <h1 class="section-header">
+          <i class="icon-user"></i> Person
+        </h1>
+
+        <div class="row">
+          <div class="span4">
+            <% if @student.get 'bio': %>
+              <%- @student.get 'bio' %>
+            <% else: %>
+              <div class="empty-student-profile-field-container">
+                <i class="icon-user empty-student-profile-field"/>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="span3">
-    <h1 class="section-header">
-      <i class="icon-thumbs-up"></i>
-      Status
-    </h1>
-    <div class="span3">
-      <dl class="dl-horizontal">
-        <dt>Status:</dt> <dd>N/A</dd>
-        <dt>Position:</dt> <dd>N/A</dd>
-        <dt>Company:</dt> <dd>N/A</dd>
-      </dl>
+
+      <div class="span4">
+        <h1 class="section-header">
+          <i class="icon-heart"></i> Passions
+        </h1>
+
+        <div class="row">
+          <div class="span4">
+            <% if true or @student.get 'interests': %>
+                <span class="label label-warning interest-tag">
+                  <span class="label-text">Web Dev</span>
+                </span>
+                <span class="label label-warning interest-tag">
+                  <span class="label-text">Banking</span>
+                </span>
+                <span class="label label-warning interest-tag">
+                  <span class="label-text">Games Industry</span>
+                </span>
+                <span class="label label-warning interest-tag">
+                  <span class="label-text">Business</span>
+                </span>
+
+
+                <span class="label label-success interest-tag">
+                  <span class="label-text">C</span>
+                </span>
+                <span class="label label-success interest-tag">
+                  <span class="label-text">C++</span>
+                </span>
+                <span class="label label-success interest-tag">
+                  <span class="label-text">Java</span>
+                </span>
+                <span class="label label-success interest-tag">
+                  <span class="label-text">Ruby</span>
+                </span>
+            <% else: %>
+              <div class="empty-student-profile-field-container">
+                <i class="icon-heart empty-student-profile-field"/>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<div class="row">
+
+<div class="row" id="opportunities-container">
   <div class="span6" id="events-partial">
 
   </div>

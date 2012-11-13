@@ -8,7 +8,7 @@ describe OrganisationDomain do
   it {should belong_to :organisation}
 
   context "when creating or saving" do
-    fields = [:domain, :organisation_id]
+    fields = [:domain]
 
     fields.each do |field|
       it { should validate_presence_of(field) }

@@ -26,17 +26,21 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
     @render()
 
   render: ->
+    lcompanies = []
+    ready = $.Deferred()
     $(@el).html(@template(events: @collection))
     @collection.each (event) =>
       event.company = new CPP.Models.Company id: event.get("company_id")
       event.company.fetch
-        success: ->
-          #@allComplaniesFetched
-          view = new CPP.Views.EventsItem model: event
-          @$('#events').append(view.render().el)
+        success: =>
+          lcompanies.push(event.company)
+          if (lcompanies.length == @collection.length)
+            ready.resolve()
         error: ->
           notify "error", "Couldn't fetch company for event"
-    @renderFilters()
+    ready.done =>
+      @renderEvents(@collection)
+      @renderFilters()     
   @
 
   #allComplaniesFetched:
@@ -45,6 +49,7 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
   #    @renderFilters())
 
   renderEvents: (col) ->
+    console.log "render"
     @$('#events').html("")
     col.each (event) ->
       view = new CPP.Views.EventsItem model: event

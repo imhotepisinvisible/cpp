@@ -21,9 +21,11 @@
 //= require_tree .//backbone_forms_custom
 //= require sinon
 //= require jasmine-sinon
+//= require jasmine-jquery
 //= require jquery-fileupload/basic
 //= require tinymce-jquery
 //= require jcountdown
+//= require utils
 //
 //= require .//cpp
 //

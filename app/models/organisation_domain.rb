@@ -1,8 +1,8 @@
 # app/models/organisation_domain.rb
 #
 # A URL domain to validate emails of users signing up to departments.
-# e.g. A student 
-# 
+# e.g. A student
+#
 # Schema Fields
 #   t.integer  "organisation_id"
 #   t.string   "domain"
@@ -12,7 +12,7 @@
 class OrganisationDomain < ActiveRecord::Base
   belongs_to :organisation
 
-  validates :organisation_id, :presence => true
+  # validates :organisation_id, :presence => true, :on => :create
   validates :domain,          :presence => true
 
 end

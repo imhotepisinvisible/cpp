@@ -15,15 +15,32 @@ class Student < User
   belongs_to :department
 
   validates :department_id, :presence => true
-  # validates :year,       :presence => true
-  # validates :bio,        :presence => true
-  # validates :degree,     :presence => true
 
-  # TODO: How much do we want to limit it to? Also do we want to force them to
-  # have a bio? Should we make :in be 0..500?
   validates :bio, :length => {
     :maximum => 500,
   }
 
-  attr_accessible :department_id, :year, :bio, :degree, :cv_location
+  attr_accessible :department_id, :year, :bio, :degree, :cv_location, :transcript_location, :covering_letter_location, :profile_picture_location
+
+  validate :valid_email?
+
+  def valid_email?
+    if department.organisation.organisation_domains.any?
+      match = false
+      department.organisation.organisation_domains.each do |org_domain|
+        unless /\A([^@\s]+)@#{org_domain.domain}/.match(email).nil?
+          match = true
+          break
+        end
+      end
+
+      if !match
+        domains = []
+        department.organisation.organisation_domains.each do |org_domain|
+          domains << org_domain.domain
+        end
+        errors.add(:email, "Email domain must be one of #{domains.join(", ")}")
+      end
+    end
+  end
 end

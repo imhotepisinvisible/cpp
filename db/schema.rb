@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121109193653) do
+ActiveRecord::Schema.define(:version => 20121109213402) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -114,10 +114,13 @@ ActiveRecord::Schema.define(:version => 20121109193653) do
     t.text     "bio"
     t.text     "degree"
     t.string   "cv_location"
+    t.string   "transcript_location"
+    t.string   "covering_letter_location"
+    t.string   "profile_picture_location"
     t.integer  "company_id"
     t.string   "type"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
 end
