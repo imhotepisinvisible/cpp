@@ -55,7 +55,6 @@ group :development do
   gem 'rb-fsevent'        # Watch file system events (for Guard)
 
   gem 'terminal-notifier-guard' # Notification center for test runs :)
-
 end
 
 group :test, :development do
