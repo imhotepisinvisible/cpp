@@ -7,7 +7,7 @@ describe "Email Partial Item", ->
     emailStub.withArgs('created_at').returns new Date()
     emailStub.withArgs('updated_at').returns new Date()
 
-    @eventsPartialItem = new CPP.Views.EmailsPartialItem
+    @emailsPartialItem = new CPP.Views.EmailsPartialItem
                               el: "#emails"
                               model: @email
 
@@ -17,22 +17,22 @@ describe "Email Partial Item", ->
 
   describe "Partial Item", ->
     it "Should link to email on events page", ->
-      @eventsPartialItem.render(@options)
-      expect(@eventsPartialItem.$el.find('a')).toHaveAttr('href', '#emails/1')
+      @emailsPartialItem.render(@options)
+      expect(@emailsPartialItem.$el.find('a')).toHaveAttr('href', '#emails/1')
 
     it "Should display edit button if editable", ->
       @options.editable = true
-      @eventsPartialItem.render(@options)
-      expect(@eventsPartialItem.$el.find 'div').toHaveClass('btn-edit')
+      @emailsPartialItem.render(@options)
+      expect(@emailsPartialItem.$el.find 'div').toHaveClass('btn-edit')
 
     it "Shouldn't display edit button if not editable", ->
-      @eventsPartialItem.render(@options)
-      expect(@eventsPartialItem.$el.find 'div').not.toHaveClass('btn-edit')
+      @emailsPartialItem.render(@options)
+      expect(@emailsPartialItem.$el.find 'div').not.toHaveClass('btn-edit')
 
   describe "On edit click", ->
     it "should navigate to edit screen", ->
       @options.editable = true
-      @eventsPartialItem.render(@options)
+      @emailsPartialItem.render(@options)
       spyEvent = spyOnEvent('#edit-button', 'click');
       navigationStub = sinon.spy(Backbone.history, 'navigate')
                           .withArgs('emails/1/edit', trigger: true)
