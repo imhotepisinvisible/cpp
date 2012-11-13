@@ -1,12 +1,16 @@
-<div class="item">
-  <div class="link-title">
-    <%= @email.get 'title' %>
-    <% if @editable: %>
-      <div class="btn btn-mini pull-right btn-edit">Edit</div>
+<a href="#emails/<%= @email.id %>" class="item email-item">
+  <tr>
+    <% d = Date.parse(@email.get('created_date')) %>
+    <td>d.toString('dXXX MMMM yyyy - H:mm').replace('XXX', d.getOrdinal())</td>
+    <td>@email.get('subject')</td>
+    <% if @email.get('updated_date'): %>
+      <% d = Date.parse(@email.get('updated_date')) %>
+      <td><i class="icon-ok"></i> .toString('dXXX MMMM yyyy - H:mm').replace('XXX', d.getOrdinal())</i></td>
+    <% else: %>
+      <td><i class="icon-remove"></i></td>
     <% end %>
-  </div>
-  <div class="link-description">
-    <% d = Date.parse(@email.get('start_date')) %>
-    <%= d.toString('dXXX MMMM yyyy - H:mm').replace('XXX', d.getOrdinal()) %>
-  </div>
+  </tr>
+ <% if @editable: %>
+    <div class="btn btn-mini pull-right btn-edit">Edit</div>
+  <% end %>
 </div>
