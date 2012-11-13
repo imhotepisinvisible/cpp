@@ -40,6 +40,6 @@ describe "Email Partial Item", ->
       expect('click').toHaveBeenTriggeredOn('#edit-button')
       expect(spyEvent).toHaveBeenTriggered()
       expect(navigationStub).toHaveBeenCalledOnce()
-
+      Backbone.history.navigate.restore()
 
 

@@ -20,11 +20,29 @@ describe "Placement Partial Item", ->
       @placementsPartialItem.render(@options)
       expect(@placementsPartialItem.$el.find('a')).toHaveAttr('href', '#placements/1')
 
-    it "Should display edit button if editable", ->
-      @options.editable = true
-      @placementsPartialItem.render(@options)
-      expect(@placementsPartialItem.$el.find 'div').toHaveClass('btn-edit')
 
-    it "Shouldn't display edit button if not editable", ->
-      @placementsPartialItem.render(@options)
-      expect(@placementsPartialItem.$el.find 'div').not.toHaveClass('btn-edit')
+  describe "edit button", ->
+    describe "when editable", ->
+      beforeEach ->
+        @options.editable = true
+        @placementsPartialItem.render(@options)
+
+      it "Should display edit button", ->
+        expect(@placementsPartialItem.$el.find 'div').toHaveClass('btn-edit')
+
+      it "should navigate to edit screen", ->
+        spyEvent = spyOnEvent('#edit-button', 'click');
+        navigationStub = sinon.spy(Backbone.history, 'navigate')
+                            .withArgs('placements/1/edit', trigger: true)
+        $('#edit-button').click()
+        expect('click').toHaveBeenTriggeredOn('#edit-button')
+        expect(spyEvent).toHaveBeenTriggered()
+        expect(navigationStub).toHaveBeenCalledOnce()
+        Backbone.history.navigate.restore()
+
+    describe "when not editable", ->
+      it "Should not display edit button", ->
+        @placementsPartialItem.render(@options)
+        expect(@placementsPartialItem.$el.find 'div').not.toHaveClass('btn-edit')
+
+
