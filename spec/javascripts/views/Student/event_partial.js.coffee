@@ -10,19 +10,20 @@ describe "EventsPartial", ->
                               el: "#events"
                               model: @event
 
+    # Uneditable by default for tests
+    @options = {editable: false}
+
 
   describe "Partial Item", ->
     it "Should link to event on events page", ->
-      @options = {editable: false}
       @eventsPartialItem.render(@options)
       expect(@eventsPartialItem.$el.find('a')).toHaveAttr('href', '#events/1')
 
     it "Should display edit button if editable", ->
-      @options = {editable: true}
+      @options.editable = true
       @eventsPartialItem.render(@options)
       expect(@eventsPartialItem.$el.find 'div').toHaveClass('btn-edit')
 
     it "Shouldn't display edit button if not editable", ->
-      @options = {editable: false}
       @eventsPartialItem.render(@options)
       expect(@eventsPartialItem.$el.find 'div').not.toHaveClass('btn-edit')
