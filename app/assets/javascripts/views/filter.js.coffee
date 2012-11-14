@@ -6,24 +6,23 @@ class CPP.Filter extends CPP.Views.Base
   templateFilterHeaderTag: JST['filters/filter_header_tag']
 
   events:
-    "keyup .fltr-search" : "setFilter"
-    "blur .fltr-search" : "setFilter" 
-    "click .fltr-tags" : "setFilter"
-    "click #tag-close" : "removeTag"
+    "keyup .fltr-search"    : "setFilter"
+    "blur .fltr-search"     : "setFilter" 
+    "click .fltr-tags"      : "setFilter"
+    "click #tag-close"      : "removeTag"
     "click #tag-label-text" : "removeTag"
+    "click #add-tag"        : "addTag"
 
   sub_el: "#filters"
 
   @tags = []
 
   initialize: (options) ->
-    console.log "init"
     @filters = options.filters
     @data = options.data
     @render()
 
   render: ->
-    console.log "ren"
     $(@el).html(@template())
     for filter in @filters
       switch filter.type
@@ -36,7 +35,6 @@ class CPP.Filter extends CPP.Views.Base
         when "tags"
           $(@sub_el).append(@templateFilterHeaderTag(filter: filter))
           @getTagNames(filter)
-          console.log "tags", @tags
           @renderTags()
   @
 
@@ -68,14 +66,20 @@ class CPP.Filter extends CPP.Views.Base
               res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
               res.toString() in @tags
             ))        
-    @data.trigger('filter', fCollection, true)
+    @data.trigger('filter', fCollection)
   @
 
   removeTag: (e) =>
     @tags = @tags.filter((tag) =>
-      tag isnt ($(e.target).prev().html())
+      tag isnt $(e.target).prev().html()
     )
     @setFilter()
+
+  addTag: (e) ->
+    tag = $(e.target).prev().val()
+    @tags.push tag
+    # Need tag module to generate a tag
+
 
   getTagNames: (filter) ->
     tags = []
