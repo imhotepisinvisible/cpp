@@ -1,6 +1,6 @@
 describe "Email Partial Item", ->
   beforeEach ->
-    setFixtures(sandbox id: "emails")
+    setFixtures(sandbox id: 'partial')
     @email = new Backbone.Model id: 1
     emailStub = sinon.stub(@email, "get")
     emailStub.withArgs('subject').returns 'Subject'
@@ -8,7 +8,7 @@ describe "Email Partial Item", ->
     emailStub.withArgs('updated_at').returns new Date()
 
     @emailsPartialItem = new CPP.Views.EmailsPartialItem
-                              el: "#emails"
+                              el: "#partial"
                               model: @email
 
     # Uneditable by default for tests
@@ -17,8 +17,15 @@ describe "Email Partial Item", ->
 
   describe "Partial Item", ->
     it "Should link to email on events page", ->
-      @emailsPartialItem.render(@options)
-      expect(@emailsPartialItem.$el.find('a')).toHaveAttr('href', '#emails/1')
+        spyEvent = spyOnEvent('#partial', 'click');
+        navigationStub = sinon.spy(Backbone.history, 'navigate')
+                            .withArgs('emails/1', trigger: true)
+
+        $('#partial').click()
+        expect('click').toHaveBeenTriggeredOn('#partial')
+        expect(spyEvent).toHaveBeenTriggered()
+        expect(navigationStub).toHaveBeenCalledOnce()
+        Backbone.history.navigate.restore()
 
     it "Should display edit button if editable", ->
       @options.editable = true

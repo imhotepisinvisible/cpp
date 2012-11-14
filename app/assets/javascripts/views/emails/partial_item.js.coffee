@@ -4,6 +4,7 @@ class CPP.Views.EmailsPartialItem extends CPP.Views.Base
 
   events:
     'click .btn-edit' : 'editEmail'
+    'click'           : 'viewEmail'
 
   template: JST['emails/partial_item']
 
@@ -14,3 +15,6 @@ class CPP.Views.EmailsPartialItem extends CPP.Views.Base
   editEmail: (e) ->
     e.stopPropagation()
     Backbone.history.navigate('emails/' + @model.id + '/edit', trigger: true)
+
+  viewEmail: ->
+    Backbone.history.navigate('emails/' + @model.id, trigger :true)
