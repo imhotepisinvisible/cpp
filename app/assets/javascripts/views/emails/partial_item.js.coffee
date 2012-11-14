@@ -1,5 +1,5 @@
 class CPP.Views.EmailsPartialItem extends CPP.Views.Base
-  tagName: "li"
+  tagName: "tr"
   className: "email-item"
 
   events:

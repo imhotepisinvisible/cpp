@@ -44,6 +44,8 @@ describe "Company Routing", ->
       @model.events.url = "/events"
       @model.placements = new Backbone.Model()
       @model.placements.url = "/placements"
+      @model.emails = new Backbone.Model()
+      @model.emails.url = "/emails"
 
       @companyModelStub = sinon.stub(window.CPP.Models, "Company")
                             .returns(@model)

@@ -101,6 +101,11 @@ Company.all.each do |company|
     FactoryGirl.create(:placement, :company => company)
   end
 
+  # Create emails
+  5.times do
+    FactoryGirl.create(:email, :company => company)
+  end
+
   1.times do
     FactoryGirl.create :company_administrator, {
       password: "cppcppcpp",
