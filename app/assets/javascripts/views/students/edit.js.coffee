@@ -28,7 +28,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
   uploadInitialize: (documentType) ->
     # Prepare the file uploader
     $('#file-' + documentType).fileupload
-      url: '/students/' + @model.id + '/upload_' + documentType
+      url: '/students/' + @model.id + '/upload_document/' + documentType
       dataType: 'json'
       #fileInput: null # do not bind to change event
       progressall: (e, data) ->

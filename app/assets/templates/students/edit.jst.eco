@@ -43,7 +43,7 @@
                       </form>
                       <div class="pull-right">
                         <div class="btn upload-document" id="upload-cv"><i class="icon-upload-alt"/></div>
-                        <a class="btn" id="download-cv" href="<%= '/students/' + @student.id + '/download_cv' %>"><i class="icon-download-alt"/></a>
+                        <a class="btn" id="download-cv" href="<%= '/students/' + @student.id + '/download_document/cv' %>"><i class="icon-download-alt"/></a>
                       </div>
                     </div>
                     <div class="clearfix"></div>
@@ -64,7 +64,7 @@
                       </form>
                       <div class="pull-right">
                         <div class="btn upload-document" id="upload-transcript"><i class="icon-upload-alt"/></div>
-                        <a class="btn" id="download-transcript" href="<%= '/students/' + @student.id + '/download_transcript' %>"><i class="icon-download-alt"/></a>
+                        <a class="btn" id="download-transcript" href="<%= '/students/' + @student.id + '/download_document/transcript' %>"><i class="icon-download-alt"/></a>
                       </div>
                     </div>
                     <div class="clearfix"></div>
@@ -85,7 +85,7 @@
                       </form>
                       <div class="pull-right">
                         <div class="btn upload-document" id="upload-coveringletter"><i class="icon-upload-alt"/></div>
-                        <a class="btn" id="download-coveringletter" href="<%= '/students/' + @student.id + '/download_coveringletter' %>"><i class="icon-download-alt"/></a>
+                        <a class="btn" id="download-coveringletter" href="<%= '/students/' + @student.id + '/download_document/coveringletter' %>"><i class="icon-download-alt"/></a>
                       </div>
                     </div>
                     <div class="clearfix"></div>
