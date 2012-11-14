@@ -165,7 +165,7 @@ ActiveRecord::Schema.define(:version => 20121113175639) do
     t.text     "degree"
     t.string   "cv_location"
     t.string   "transcript_location"
-    t.string   "covering_letter_location"
+    t.string   "coveringletter_location"
     t.string   "profile_picture_location"
     t.integer  "company_id"
     t.string   "type"

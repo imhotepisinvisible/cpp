@@ -35,7 +35,7 @@
               <table class="table table-striped">
                 
                 <tr>
-                  <td>
+                  <td id="table-cv">
                     <div>
                       Curriculum Vitae
                       <form class="form-inline hidden">
@@ -56,7 +56,7 @@
                 </tr>
 
                 <tr>
-                  <td>
+                  <td id="table-transcript">
                     <div>
                       Transcript
                       <form class="form-inline hidden">
@@ -77,7 +77,7 @@
                 </tr>
 
                 <tr>
-                  <td>
+                  <td id="table-coveringletter">
                     <div>
                       Covering Letter
                       <form class="form-inline hidden">
@@ -108,13 +108,17 @@
 
         <div class="row">
           <div class="span4">
-            <% if @student.get 'bio': %>
-              <%- @student.get 'bio' %>
-            <% else: %>
-              <div class="empty-student-profile-field-container">
-                <i class="icon-user empty-student-profile-field"/>
-              </div>
-            <% end %>
+            <div id="bio-textarea-container" style="display:none">
+              <textarea id="student-bio-editor">
+                <%= @student.get 'bio' %>
+              </textarea>
+            </div>
+
+            <div id="bio-container">
+              <p id="student-bio">
+                <%= @student.get 'bio' %>
+              </p>
+            </div>
           </div>
         </div>
       </div>

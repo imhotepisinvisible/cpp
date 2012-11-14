@@ -64,3 +64,14 @@
 .progress-upload {
   margin: 5px 0 0;
 }
+
+#student-bio-editor {
+  width: 100%;
+  min-height: 150px;
+  @include box-sizing(border-box);
+}
+
+.missing-document {
+  background-color: #f2dede!important;
+  color: #b94a48;
+}

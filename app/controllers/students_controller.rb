@@ -48,7 +48,7 @@ class StudentsController < ApplicationController
     directory = File.join('documents', document_type)
 
     # Make new file name for the CV
-    file = File.join(directory, "#{@student.last_name}_#{@student.first_name}_#{document_type}#{extension}")
+    file = File.join(directory, "#{@student.id}#{extension}")
 
     # Copy temporary file to new place /cvs
     FileUtils.cp tempfile.path, file
@@ -60,7 +60,7 @@ class StudentsController < ApplicationController
     when 'transcript'
       @student.transcript_location = file
     when 'coveringletter'
-      @student.covering_letter_location = file
+      @student.coveringletter_location = file
     else
       respond_with @student, status: :unprocessable_entity
     end
@@ -86,13 +86,15 @@ class StudentsController < ApplicationController
     when 'transcript'
       location = @student.transcript_location
     when 'coveringletter'
-      location = @student.covering_letter_location
+      location = @student.coveringletter_location
     else
       respond_with @student, status: :unprocessable_entity
     end
 
+    extension = File.extname location
+
     if location and File.exists?(location)
-      send_file location
+      send_file location, :filename => "#{@student.last_name}_#{@student.first_name}_#{document_type}#{extension}"
     else
       head :no_content
     end
