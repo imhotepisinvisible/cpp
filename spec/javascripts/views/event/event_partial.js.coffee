@@ -21,11 +21,11 @@ describe "Events Partial", ->
           expect(@eventsPartial.$el.find 'div').toHaveClass('btn-add')
 
         it "should navigate to add screen when clicked", ->
-          spyEvent = spyOnEvent('#add-button', 'click');
+          spyEvent = spyOnEvent('.btn-add', 'click');
           navigationStub = sinon.spy(Backbone.history, 'navigate')
                               .withArgs('companies/1/events/new', trigger: true)
-          $('#add-button').click()
-          expect('click').toHaveBeenTriggeredOn('#add-button')
+          $('.btn-add').click()
+          expect('click').toHaveBeenTriggeredOn('.btn-add')
           expect(spyEvent).toHaveBeenTriggered()
           expect(navigationStub).toHaveBeenCalledOnce()
           Backbone.history.navigate.restore()
@@ -35,11 +35,11 @@ describe "Events Partial", ->
           expect(@eventsPartial.$el.find 'div').toHaveClass('btn-view-all')
 
         it "should navigate to view all screen", ->
-          spyEvent = spyOnEvent('#view-all-button', 'click');
+          spyEvent = spyOnEvent('.btn-view-all', 'click');
           navigationStub = sinon.spy(Backbone.history, 'navigate')
                               .withArgs('companies/1/events', trigger: true)
-          $('#view-all-button').click()
-          expect('click').toHaveBeenTriggeredOn('#view-all-button')
+          $('.btn-view-all').click()
+          expect('click').toHaveBeenTriggeredOn('.btn-view-all')
           expect(spyEvent).toHaveBeenTriggered()
           expect(navigationStub).toHaveBeenCalledOnce()
           Backbone.history.navigate.restore()
@@ -57,11 +57,11 @@ describe "Events Partial", ->
           expect(@eventsPartial.$el.find 'div').toHaveClass('btn-view-all')
 
         it "should navigate to view all screen", ->
-          spyEvent = spyOnEvent('#view-all-button', 'click');
+          spyEvent = spyOnEvent('.btn-view-all', 'click');
           navigationStub = sinon.spy(Backbone.history, 'navigate')
                               .withArgs('companies/1/events', trigger: true)
-          $('#view-all-button').click()
-          expect('click').toHaveBeenTriggeredOn('#view-all-button')
+          $('.btn-view-all').click()
+          expect('click').toHaveBeenTriggeredOn('.btn-view-all')
           expect(spyEvent).toHaveBeenTriggered()
           expect(navigationStub).toHaveBeenCalledOnce()
           Backbone.history.navigate.restore()

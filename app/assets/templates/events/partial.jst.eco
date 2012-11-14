@@ -2,9 +2,9 @@
   <i class="icon-calendar"></i>
   Events
   <% if @editable: %>
-    <div class="btn pull-right btn-add" id = "add-button">Add New</div>
+    <div class="btn pull-right btn-add">Add New</div>
   <% end %>
-  <div class="btn pull-right btn-view-all" id="view-all-button">View All</div>
+  <div class="btn pull-right btn-view-all">View All</div>
 </h1>
 <ul id="events" class="opportunity-list">
 </ul>

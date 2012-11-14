@@ -16,6 +16,6 @@
     <i class="icon-remove"></i>
   <% end %>
   <% if @editable: %>
-      <div class="btn btn-mini pull-right btn-edit" id="edit-button">Edit</div>
+      <div class="btn btn-mini pull-right btn-edit">Edit</div>
   <% end %>
 </td>

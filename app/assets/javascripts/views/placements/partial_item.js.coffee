@@ -2,6 +2,8 @@ class CPP.Views.PlacementsPartialItem extends CPP.Views.Base
   tagName: "li"
   className: "placement-item-container"
 
+  editable: false
+
   events:
     'click .btn-edit' : 'editPlacement'
 

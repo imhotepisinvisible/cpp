@@ -1,6 +1,5 @@
 describe "Email Partial Item", ->
   beforeEach ->
-    setFixtures(sandbox id: 'partial')
     @email = new Backbone.Model id: 1
     emailStub = sinon.stub(@email, "get")
     emailStub.withArgs('subject').returns 'Subject'
@@ -8,21 +7,22 @@ describe "Email Partial Item", ->
     emailStub.withArgs('updated_at').returns new Date()
 
     @emailsPartialItem = new CPP.Views.EmailsPartialItem
-                              el: "#partial"
                               model: @email
                               editable: false
+                              id: "partial"
 
   describe "Partial Item", ->
     it "Should link to email on events page", ->
-        spyEvent = spyOnEvent('#partial', 'click');
-        navigationStub = sinon.spy(Backbone.history, 'navigate')
-                            .withArgs('emails/1', trigger: true)
+      @emailsPartialItem.render()
+      spyEvent = spyOnEvent(@emailsPartialItem.$el, 'click');
+      navigationStub = sinon.spy(Backbone.history, 'navigate')
+                          .withArgs('emails/1', trigger: true)
 
-        $('#partial').click()
-        expect('click').toHaveBeenTriggeredOn('#partial')
-        expect(spyEvent).toHaveBeenTriggered()
-        expect(navigationStub).toHaveBeenCalledOnce()
-        Backbone.history.navigate.restore()
+      @emailsPartialItem.$el.click()
+      expect('click').toHaveBeenTriggeredOn(@emailsPartialItem.$el)
+      expect(spyEvent).toHaveBeenTriggered()
+      expect(navigationStub).toHaveBeenCalledOnce()
+      Backbone.history.navigate.restore()
 
     it "Should display edit button if editable", ->
       @emailsPartialItem.editable = true
@@ -37,11 +37,11 @@ describe "Email Partial Item", ->
     it "should navigate to edit screen", ->
       @emailsPartialItem.editable = true
       @emailsPartialItem.render()
-      spyEvent = spyOnEvent('#edit-button', 'click');
+      spyEvent = spyOnEvent((@emailsPartialItem.$el.find '.btn-edit'), 'click');
       navigationStub = sinon.spy(Backbone.history, 'navigate')
                           .withArgs('emails/1/edit', trigger: true)
-      $('#edit-button').click()
-      expect('click').toHaveBeenTriggeredOn('#edit-button')
+      $(@emailsPartialItem.$el.find '.btn-edit').click()
+      expect('click').toHaveBeenTriggeredOn(@emailsPartialItem.$el.find '.btn-edit')
       expect(spyEvent).toHaveBeenTriggered()
       expect(navigationStub).toHaveBeenCalledOnce()
       Backbone.history.navigate.restore()

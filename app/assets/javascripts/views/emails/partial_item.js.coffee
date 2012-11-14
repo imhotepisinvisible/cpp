@@ -7,6 +7,7 @@ class CPP.Views.EmailsPartialItem extends CPP.Views.Base
     'click'           : 'viewEmail'
 
   template: JST['emails/partial_item']
+
   initialize: (options) ->
     @editable = options.editable
 

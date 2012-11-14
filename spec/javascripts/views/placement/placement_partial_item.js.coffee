@@ -28,11 +28,11 @@ describe "Placement Partial Item", ->
         expect(@placementsPartialItem.$el.find 'div').toHaveClass('btn-edit')
 
       it "should navigate to edit screen", ->
-        spyEvent = spyOnEvent('#edit-button', 'click');
+        spyEvent = spyOnEvent('.btn-edit', 'click');
         navigationStub = sinon.spy(Backbone.history, 'navigate')
                             .withArgs('placements/1/edit', trigger: true)
-        $('#edit-button').click()
-        expect('click').toHaveBeenTriggeredOn('#edit-button')
+        $('.btn-edit').click()
+        expect('click').toHaveBeenTriggeredOn('.btn-edit')
         expect(spyEvent).toHaveBeenTriggered()
         expect(navigationStub).toHaveBeenCalledOnce()
         Backbone.history.navigate.restore()
