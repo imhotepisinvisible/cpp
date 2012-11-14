@@ -2,13 +2,39 @@ describe "Events Partial", ->
   beforeEach ->
     setFixtures(sandbox id: "events")
     @event = new Backbone.Model id: 1
-    @collection = new Backbone.Collection
+
+    @model = new Backbone.Model()
+    @collection = new Backbone.Collection()
+    @collection.add @model
+
+    @partialView = new Backbone.View()
+    @partialView.el = '<div "id=item"></div>'
+
+    @renderStub = sinon.stub(@partialView, "render").returns(@partialView)
+
+    @partialStub = sinon.stub(window.CPP.Views, "EventsPartialItem")
+                      .returns(@partialView)
+
 
     @eventsPartial = new CPP.Views.EventsPartial
                               el: "#events"
                               model: @event
                               collection: @collection
-                              editable: false
+
+  afterEach ->
+    window.CPP.Views.EventsPartialItem.restore()
+
+  describe "initialize", ->
+    it "should have editable attribute default to false", ->
+      expect(@eventsPartial.editable).toBeFalsy()
+
+  describe "render", ->
+    it "should add collection items", ->
+      expect(@partialStub).toHaveBeenCalledOnce()
+      expect(@partialStub).toHaveBeenCalledWith model: @model, editable: false
+
+    it "should render partial items", ->
+      @expect(@renderStub).toHaveBeenCalledOnce()
 
   describe "buttons", ->
     describe "when editable", ->
