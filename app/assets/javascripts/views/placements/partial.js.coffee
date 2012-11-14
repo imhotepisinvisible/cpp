@@ -9,7 +9,7 @@ class CPP.Views.PlacementsPartial extends CPP.Views.Base
 
   initialize: (options) ->
     @collection.bind 'reset', @render, @
-    @render(editable: @editable)
+    @render()
 
   render: () ->
     $(@el).html(@template(editable: @editable))
