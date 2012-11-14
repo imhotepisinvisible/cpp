@@ -3,12 +3,13 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
   template: JST['students/edit']
 
   events:
-    'click #btn-upload-cv': 'uploadCV'
-    'change #file-cv': 'changeCV'
-    'click #btn-download-cv': 'downloadCV'
+    'click .upload-document': 'uploadDocument'
 
   initialize: ->
     @render()
+    @uploadInitialize 'cv'
+    @uploadInitialize 'transcript'
+    @uploadInitialize 'coveringletter'
 
   render: ->
     $(@el).html(@template(student: @model))
@@ -24,31 +25,29 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
       collection: @model.placements
     @
 
-  uploadCV: ->
+  uploadInitialize: (documentType) ->
     # Prepare the file uploader
-    $('#file-cv').fileupload
-      url: '/students/' + @model.id + '/upload_cv'
+    $('#file-' + documentType).fileupload
+      url: '/students/' + @model.id + '/upload_' + documentType
       dataType: 'json'
-      fileInput: null # do not bind to change event
+      #fileInput: null # do not bind to change event
       progressall: (e, data) ->
         # Update progress bar
         progress = parseInt(data.loaded / data.total * 100, 10)
-        $('#upload-bar').width(progress + '%')
+        $('#progress-' + documentType).width(progress + '%')
         false
 
       done: (e, data) ->
-        notify 'success', 'CV Uploaded Successfully'
-        $('#cv-location').html(data.result.cv_location)
-        $('#uploaded-cv').removeClass('hidden')
+        console.log data
+        notify 'success', 'Uploaded Successfully'
+        # Three parents up is td
+        $(e.target).parent().parent().parent().find('.progress-upload').delay(1000).slideUp('slow', (->
+          $(this).find('.bar').width('0%')))
+
+        #$('#cv-location').html(data.result.cv_location)
+        #$('#uploaded-cv').removeClass('hidden')
         false
 
-    # Upload the file!
-    $('#file-cv').fileupload 'send',
-      files: $('#file-cv').get(0).files
-
-  changeCV: ->
-    # Reset progress bar
-    $('#upload-bar').width('0%')
-
-  downloadCV: ->
-    window.location = '/students/' + @model.id + '/download_cv'
+  uploadDocument: (e) ->
+    $(e.currentTarget).parent().parent().parent().find('.progress-upload').slideDown()
+    $(e.currentTarget).parent().parent().find('.file-input').click()
