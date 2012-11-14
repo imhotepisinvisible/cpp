@@ -13,7 +13,6 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
     @collection.bind 'reset', @render, @
     @collection.bind 'filter', @renderEvents, @
     # Bind to model destroy so backbone view updates on destroy
-    @collection.bind 'destroy', @render, @
     
     # Get company for each event
     #x=0
@@ -43,13 +42,7 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
       @renderFilters()     
   @
 
-  #allComplaniesFetched:
-  #  _.after(3, =>
-  #    @renderEvents()
-  #    @renderFilters())
-
   renderEvents: (col) ->
-    console.log "render"
     @$('#events').html("")
     col.each (event) ->
       view = new CPP.Views.EventsItem model: event
@@ -75,7 +68,7 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
         }
       ]
       data: @collection
-  @ 
+  @
     
   addEvent: ->
     Backbone.history.navigate("companies/" + @collection.company.id + "/events/new", trigger: true)
