@@ -1,12 +1,13 @@
 class CPP.Views.EmailsPartial extends CPP.Views.Base
   template: JST['emails/partial']
 
+  editable: false
+
   events:
     "click .btn-add"      : "addEmail"
     "click .btn-view-all" : "viewCompaniesEmails"
 
   initialize: (options) ->
-    @editable = options.editable
     @collection.bind 'reset', @render, @
     @render()
 
