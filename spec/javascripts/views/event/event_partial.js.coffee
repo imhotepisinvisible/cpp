@@ -8,7 +8,6 @@ describe "Events Partial", ->
                               el: "#events"
                               model: @event
                               collection: @collection
-
                               editable: false
 
   describe "buttons", ->

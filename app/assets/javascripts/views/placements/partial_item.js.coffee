@@ -7,8 +7,11 @@ class CPP.Views.PlacementsPartialItem extends CPP.Views.Base
 
   template: JST['placements/partial_item']
 
-  render: (options) ->
-    $(@el).html(@template(placement: @model, editable: options.editable))
+  initialize: (options) ->
+    @editable = options.editable
+
+  render: ->
+    $(@el).html(@template(placement: @model, editable: @editable))
     @
 
   editPlacement: (e) ->

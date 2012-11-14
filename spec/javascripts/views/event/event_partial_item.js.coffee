@@ -9,21 +9,18 @@ describe "Events Partial Item", ->
     @eventsPartialItem = new CPP.Views.EventsPartialItem
                               el: "#events"
                               model: @event
-
-    # Uneditable by default for tests
-    @options = {editable: false}
-
+                              editable: false
 
   describe "Partial Item", ->
     it "Should link to event on events page", ->
-      @eventsPartialItem.render(@options)
+      @eventsPartialItem.render()
       expect(@eventsPartialItem.$el.find('a')).toHaveAttr('href', '#events/1')
 
   describe "edit button", ->
     describe "when editable", ->
       beforeEach ->
-        @options.editable = true
-        @eventsPartialItem.render(@options)
+        @eventsPartialItem.editable = true
+        @eventsPartialItem.render()
 
       it "Should display edit button", ->
         expect(@eventsPartialItem.$el.find 'div').toHaveClass('btn-edit')
@@ -40,7 +37,7 @@ describe "Events Partial Item", ->
 
     describe "when not editable", ->
       it "Should not display edit button", ->
-        @eventsPartialItem.render(@options)
+        @eventsPartialItem.render()
         expect(@eventsPartialItem.$el.find 'div').not.toHaveClass('btn-edit')
 
 

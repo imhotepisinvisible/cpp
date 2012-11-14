@@ -1,7 +1,7 @@
 class CPP.Views.CompaniesEdit extends CPP.Views.Base
   el: "#app"
   template: JST['companies/edit']
-  
+
   events:
     "click .btn-edit" : "editCompany"
 
@@ -17,11 +17,17 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
       model: @model
       collection: @model.events
       editable: true
-    
+
     new CPP.Views.PlacementsPartial
       el: $(@el).find('#placements-partial')
       model: @model
       collection: @model.placements
+      editable: true
+
+    new CPP.Emails.PlacementsPartiail
+      el: $(@el).find('#emails-partial')
+      model: @model
+      collection: @model.emails
       editable: true
     @
 

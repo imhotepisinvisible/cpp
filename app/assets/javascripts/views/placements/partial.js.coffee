@@ -15,8 +15,10 @@ class CPP.Views.PlacementsPartial extends CPP.Views.Base
 
     if @collection.length > 0
       @collection.each (placement) =>
-        view = new CPP.Views.PlacementsPartialItem model: placement
-        @$('#placements').append(view.render(editable: @editable).el)
+        view = new CPP.Views.PlacementsPartialItem
+                    model: placement
+                    editable: @editable
+        @$('#placements').append(view.render().el)
     else
       @$('#placements').append "No events right now!"
     @

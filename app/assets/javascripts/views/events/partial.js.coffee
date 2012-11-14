@@ -14,8 +14,10 @@ class CPP.Views.EventsPartial extends CPP.Views.Base
     $(@el).html(@template(editable: @editable))
     if @collection.length > 0
       @collection.each (event) =>
-        view = new CPP.Views.EventsPartialItem model: event
-        @$('#events').append(view.render(editable: @editable).el)
+        view = new CPP.Views.EventsPartialItem
+                      model: event
+                      editable: @editable
+        @$('#events').append(view.render().el)
     else
       @$('#events').append "No events right now!"
     @

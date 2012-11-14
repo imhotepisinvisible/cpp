@@ -10,10 +10,7 @@ describe "Email Partial Item", ->
     @emailsPartialItem = new CPP.Views.EmailsPartialItem
                               el: "#partial"
                               model: @email
-
-    # Uneditable by default for tests
-    @options = {editable: false}
-
+                              editable: false
 
   describe "Partial Item", ->
     it "Should link to email on events page", ->
@@ -28,18 +25,18 @@ describe "Email Partial Item", ->
         Backbone.history.navigate.restore()
 
     it "Should display edit button if editable", ->
-      @options.editable = true
-      @emailsPartialItem.render(@options)
+      @emailsPartialItem.editable = true
+      @emailsPartialItem.render()
       expect(@emailsPartialItem.$el.find 'div').toHaveClass('btn-edit')
 
     it "Shouldn't display edit button if not editable", ->
-      @emailsPartialItem.render(@options)
+      @emailsPartialItem.render()
       expect(@emailsPartialItem.$el.find 'div').not.toHaveClass('btn-edit')
 
   describe "On edit click", ->
     it "should navigate to edit screen", ->
-      @options.editable = true
-      @emailsPartialItem.render(@options)
+      @emailsPartialItem.editable = true
+      @emailsPartialItem.render()
       spyEvent = spyOnEvent('#edit-button', 'click');
       navigationStub = sinon.spy(Backbone.history, 'navigate')
                           .withArgs('emails/1/edit', trigger: true)

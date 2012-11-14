@@ -10,10 +10,7 @@ describe "Placement Partial Item", ->
     @placementsPartialItem = new CPP.Views.PlacementsPartialItem
                               el: "#placements"
                               model: @placement
-
-    # Uneditable by default for tests
-    @options = {editable: false}
-
+                              editable: false
 
   describe "Partial Item", ->
     it "Should link to event on events page", ->
@@ -24,7 +21,7 @@ describe "Placement Partial Item", ->
   describe "edit button", ->
     describe "when editable", ->
       beforeEach ->
-        @options.editable = true
+        @placementsPartialItem.editable = true
         @placementsPartialItem.render(@options)
 
       it "Should display edit button", ->
