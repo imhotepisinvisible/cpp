@@ -79,3 +79,12 @@
 .document-table {
   border-top: 2px solid #efefef!important;
 }
+
+#student-name-editor {
+  font-family: 'Arvo', serif;
+  font-size: 70px;
+  line-height: 75px;
+  width: 800px;
+  max-height: 90px;
+  @include box-sizing(border-box);
+}

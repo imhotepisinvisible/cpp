@@ -9,11 +9,30 @@
     </div>
 
     <div id="student-profile-intro">
-      <p id="student-profile-intro-name">
-        <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
-      </p>
+
+      <div id="name-textarea-container" style="display:none">
+        <textarea id="student-name-editor">
+          <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
+        </textarea>
+      </div>
+
+      <div id="name-container">
+        <p id="student-profile-intro-name">
+          <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
+        </p>
+      </div>
+
       <p id="student-profile-intro-status">
-        <%= getOrdinal(@student.get 'year') %> Year <%= @student.get 'degree' %>
+        <% if @student.get('year'): %>
+          <%= getOrdinal(@student.get 'year') %> Year
+        <% else: %>
+          Year N/A
+        <% end %>
+        <% if @student.get('degree'): %>
+          <%= @student.get('degree') %>
+        <% else: %>
+          Degree N/A
+        <% end %>
         <br>
         Looking for an Industrial Placement
       </p>
@@ -119,8 +138,11 @@
 
             <div id="bio-container">
               <p id="student-bio">
-                <% console.log @student.get('bio') %>
-                <%- @student.get('bio').replace(/\n/g, "<br/>") %>
+                <% if @student.get 'bio': %>
+                  <%- @student.get('bio').replace(/\n/g, "<br/>") %>
+                <% else: %>
+                  Click here to edit your bio!
+                <% end %>
               </p>
             </div>
           </div>

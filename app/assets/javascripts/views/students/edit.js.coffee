@@ -7,6 +7,8 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     'click .delete-document': 'deleteDocument'
     'click #bio-container': 'bioEdit'
     'blur #bio-textarea-container': 'bioStopEdit'
+    'click #name-container': 'nameEdit'
+    'blur #name-textarea-container': 'nameStopEdit'
 
   initialize: ->
     @render()
@@ -76,10 +78,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
         )
 
   bioEdit: ->
-    $('#bio-container').hide()
-    $('#student-bio-editor').html @model.get('bio')
-    $('#bio-textarea-container').show()
-    $('#student-bio-editor').focus()
+    @edit 'bio'
 
   bioStopEdit: ->
     bio = $('#student-bio-editor').val()
@@ -89,14 +88,49 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
       @model.set 'bio', bio
       @model.save {},
           wait: true
-          success: (model, response) ->
+          success: (model, response) =>
             notify "success", "Updated profile"
             $('#student-bio').html model.get('bio').replace(/\n/g, "<br/>")
+            @model.set 'bio', model.get('bio')
             $('#bio-container').show()
           error: (model, response) ->
             notify "error", "Failed to update profile"
     else
       $('#bio-container').show()
+
+  edit: (attribute) ->
+    $('#' + attribute + '-container').hide()
+    $('#student-' + attribute + '-editor').html(@model.get attribute)
+    $('#' + attribute + '-textarea-container').show()
+    $('#student-' + attribute + '-editor').focus()
+
+  nameEdit: ->
+    $('#name-container').hide()
+    $('#student-name-editor').html(@model.get('first_name') + ' ' + @model.get('last_name'))
+    $('#name-textarea-container').show()
+    $('#student-name-editor').focus()
+
+  nameStopEdit: ->
+    name = $('#student-name-editor').val()
+    lastName = name.substring(name.indexOf(' ') + 1)
+    firstName = name.substring(0, name.indexOf(' '))
+    $('#name-textarea-container').hide()
+
+    if not ((firstName == @model.get 'first_name') and (lastName == @model.get 'last_name'))
+      @model.set 'first_name', firstName
+      @model.set 'last_name', lastName
+      @model.save {},
+          wait: true
+          success: (model, response) =>
+            notify "success", "Updated profile"
+            $('#student-profile-intro-name').html(model.get('first_name') + ' ' + model.get('last_name'))
+            @model.set 'first_name', model.get('first_name')
+            @model.set 'last_name', model.get('last_name')
+            $('#name-container').show()
+          error: (model, response) ->
+            notify "error", "Failed to update profile"
+    else
+      $('#name-container').show()
 
   checkAllDocuments: ->
     @checkDocument 'cv'
