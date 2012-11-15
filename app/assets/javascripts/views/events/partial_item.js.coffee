@@ -7,8 +7,11 @@ class CPP.Views.EventsPartialItem extends CPP.Views.Base
 
   template: JST['events/partial_item']
 
-  render: (options) ->
-    $(@el).html(@template(event: @model, editable: options.editable))
+  initialize: (options) ->
+    @editable = options.editable
+
+  render: ->
+    $(@el).html(@template(event: @model, editable: @editable))
     @
 
   editEvent: (e) ->

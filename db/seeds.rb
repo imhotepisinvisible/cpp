@@ -60,11 +60,11 @@ FactoryGirl.create :student,  {
   password: "cppcppcpp",
   password_confirmation: "cppcppcpp",
   year: 3,
-  bio: "<p>Quite simply, I'm passionate about building awesome things with exciting technology.</p><p>I can usually be found hacking away on my latest project or evangelising  Ruby,  Rails, Git,  CoffeeScript,  Backbone.js,  TDD using RSpec or an API I've recently fallen in love with.</p>",
+  bio: "Quite simply, I'm passionate about building awesome things with exciting technology.<br><br>I can usually be found hacking away on my latest project or evangelising  Ruby,  Rails, Git,  CoffeeScript,  Backbone.js,  TDD using RSpec or an API I've recently fallen in love with.",
   degree: 'MEng Computing',
-  cv_location: "#fakecvlocation",
-  transcript_location: "#faketranscriptlocation",
-  covering_letter_location: "#fakecoveringletterlocation",
+  cv_location: "",
+  transcript_location: "",
+  coveringletter_location: "",
   profile_picture_location: "/assets/pete_profile.jpg",
   department: department
 }
@@ -76,11 +76,11 @@ FactoryGirl.create :student,  {
   password: "cppcppcpp",
   password_confirmation: "cppcppcpp",
   year: 3,
-  bio: "<p>Hi, I'm Jack Stevenson, you may remember me from such towns as Trowbridge, Hilperton, Frome and Bath. I'm 17 years old, 5ft 10 , am a 1st Dan Blackbelt in Taekwondo and am also a certified and qualified assistant instructor. I am happiest when at Taekwondo, with my friends, on my stilts (which broke! Should be fixed soon (fingers crossed)) and, of course, when not awake or thinking.</p>",
+  bio: "Hi, I'm Jack Stevenson, you may remember me from such towns as Trowbridge, Hilperton, Frome and Bath. I'm 17 years old, 5ft 10 , am a 1st Dan Blackbelt in Taekwondo and am also a certified and qualified assistant instructor. I am happiest when at Taekwondo, with my friends, on my stilts (which broke! Should be fixed soon (fingers crossed)) and, of course, when not awake or thinking.",
   degree: 'MEng Computing',
-  cv_location: "#fakecvlocation",
-  transcript_location: "#faketranscriptlocation",
-  covering_letter_location: "#fakecoveringletterlocation",
+  cv_location: "",
+  transcript_location: "",
+  coveringletter_location: "",
   profile_picture_location: "/assets/jack_profile.jpg",
   department: department
 }
@@ -99,6 +99,11 @@ Company.all.each do |company|
   # Create placements
   5.times do
     FactoryGirl.create(:placement, :company => company)
+  end
+
+  # Create emails
+  5.times do
+    FactoryGirl.create(:email, :company => company)
   end
 
   1.times do

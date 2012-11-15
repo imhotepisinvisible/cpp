@@ -2,13 +2,18 @@ class CPP.Views.PlacementsPartialItem extends CPP.Views.Base
   tagName: "li"
   className: "placement-item-container"
 
+  editable: false
+
   events:
     'click .btn-edit' : 'editPlacement'
 
   template: JST['placements/partial_item']
 
-  render: (options) ->
-    $(@el).html(@template(placement: @model, editable: options.editable))
+  initialize: (options) ->
+    @editable = options.editable
+
+  render: ->
+    $(@el).html(@template(placement: @model, editable: @editable))
     @
 
   editPlacement: (e) ->

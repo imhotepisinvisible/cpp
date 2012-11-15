@@ -36,23 +36,35 @@ class StudentsController < ApplicationController
     end
   end
 
-  # POST /students/1/upload_cv
-  def upload_cv
-    @student = Student.find(params[:student_id])
+  # POST /students/1/upload_document/:document_type
+  def upload_document
+    @student = Student.find(params[:id])
+    document_type = params[:document_type]
+
     # File saved in /tmp
     tempfile = params[:files][0].tempfile
+    extension = File.extname(params[:files][0].original_filename)
 
-    # Create folder for student id if required
-    cv_directory = File.join('cvs', @student.id.to_s())
-    Dir.mkdir(cv_directory) unless File.exists?(cv_directory)
+    directory = File.join('documents', document_type)
 
     # Make new file name for the CV
-    file = File.join(cv_directory, params[:files][0].original_filename)
+    file = File.join(directory, "#{@student.id}#{extension}")
 
     # Copy temporary file to new place /cvs
     FileUtils.cp tempfile.path, file
 
-    @student.cv_location = params[:files][0].original_filename
+    # Set the correct model attribute
+    case document_type
+    when 'cv'
+      @student.cv_location = file
+    when 'transcript'
+      @student.transcript_location = file
+    when 'coveringletter'
+      @student.coveringletter_location = file
+    else
+      respond_with @student, status: :unprocessable_entity
+    end
+
     if @student.save
       respond_with @student
     else
@@ -60,12 +72,29 @@ class StudentsController < ApplicationController
     end
   end
 
-  # GET /students/1/download_cv
-  def download_cv
-    @student = Student.find(params[:student_id])
-    filename = File.join('cvs', @student.id.to_s(), @student.cv_location)
-    if @student.cv_location and File.exists?(filename)
-      send_file filename
+  # GET /students/1/download_document/:document_type
+  def download_document
+    @student = Student.find(params[:id])
+    document_type = params[:document_type]
+
+    location = ''
+
+    # Get the correct model attribute
+    case document_type
+    when 'cv'
+      location = @student.cv_location
+    when 'transcript'
+      location = @student.transcript_location
+    when 'coveringletter'
+      location = @student.coveringletter_location
+    else
+      respond_with @student, status: :unprocessable_entity
+    end
+
+    extension = File.extname location
+
+    if location and File.exists?(location)
+      send_file location, :filename => "#{@student.last_name}_#{@student.first_name}_#{document_type}#{extension}"
     else
       head :no_content
     end

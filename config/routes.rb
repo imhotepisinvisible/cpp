@@ -64,8 +64,8 @@ CPP::Application.routes.draw do
   resources :placements
   
   resources :students do
-    post 'upload_cv'
-    get 'download_cv'
+    post 'upload_document/:document_type', :on => :member, :action => :upload_document
+    get 'download_document/:document_type', :on => :member, :action => :download_document
   end
 
   resources :emails

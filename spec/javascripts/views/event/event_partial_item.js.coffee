@@ -9,38 +9,35 @@ describe "Events Partial Item", ->
     @eventsPartialItem = new CPP.Views.EventsPartialItem
                               el: "#events"
                               model: @event
-
-    # Uneditable by default for tests
-    @options = {editable: false}
-
+                              editable: false
 
   describe "Partial Item", ->
     it "Should link to event on events page", ->
-      @eventsPartialItem.render(@options)
+      @eventsPartialItem.render()
       expect(@eventsPartialItem.$el.find('a')).toHaveAttr('href', '#events/1')
 
   describe "edit button", ->
     describe "when editable", ->
       beforeEach ->
-        @options.editable = true
-        @eventsPartialItem.render(@options)
+        @eventsPartialItem.editable = true
+        @eventsPartialItem.render()
 
       it "Should display edit button", ->
         expect(@eventsPartialItem.$el.find 'div').toHaveClass('btn-edit')
 
       it "should navigate to edit screen", ->
-        spyEvent = spyOnEvent('#edit-button', 'click');
+        spyEvent = spyOnEvent('.btn-edit', 'click');
         navigationStub = sinon.spy(Backbone.history, 'navigate')
                             .withArgs('events/1/edit', trigger: true)
-        $('#edit-button').click()
-        expect('click').toHaveBeenTriggeredOn('#edit-button')
+        $('.btn-edit').click()
+        expect('click').toHaveBeenTriggeredOn('.btn-edit')
         expect(spyEvent).toHaveBeenTriggered()
         expect(navigationStub).toHaveBeenCalledOnce()
         Backbone.history.navigate.restore()
 
     describe "when not editable", ->
       it "Should not display edit button", ->
-        @eventsPartialItem.render(@options)
+        @eventsPartialItem.render()
         expect(@eventsPartialItem.$el.find 'div').not.toHaveClass('btn-edit')
 
 

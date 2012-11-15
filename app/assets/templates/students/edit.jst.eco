@@ -1,127 +1,179 @@
 <div class="row">
-  <div class="span9">
-    <h1 class="section-header">
-      <i class="icon-user"></i>
-      <%= (@student.get 'first_name') + ' ' + (@student.get 'last_name') %>
-    </h1>
-    <div class="row">
-      <div class="span2">
-        <div class="img-polaroid student-profile-picture">
-          <% if @student.get 'profile': %>
-            <img src="/assets/<%= @student.get 'profile' %>">
-          <% else: %>
-            <img src="/assets/default_profile.png" class="student-profile-picture">
-          <% end %>
-        </div>
-      </div>
-      <div class="span3">
-        <dl class="dl-horizontal">
-          <dt>Department:</dt>
-          <% if @student.get 'department': %>
-            <dd><%= @student.get 'department' %></dd>
-          <% else: %>
-            <dd>N/A</dd>
-          <% end %>
+  <div class="span12" id="student-profile-header">
+    <div id="student-profile-img-container" class="img-polaroid">
+      <% if @student.get 'profile_picture_location': %>
+        <img src="<%= @student.get 'profile_picture_location' %>" id="student-profile-img">
+      <% else: %>
+        <img src="/assets/default_profile.png" id="student-profile-img">
+      <% end %>
+    </div>
 
-          <dt>Course:</dt> 
-          <% if @student.get 'degree': %>
-            <dd><%= @student.get 'degree' %></dd>
-          <% else: %>
-            <dd>N/A</dd>
-          <% end %>
-
-          <dt>Year:</dt> 
-          <% if @student.get 'year': %>
-            <dd><%= @student.get 'year' %></dd>
-          <% else: %>
-            <dd>N/A</dd>
-          <% end %>
-        </dl>
-      </div>
-      <div class="span4">
-        <% if @student.get 'bio': %>
-            <%= @student.get 'bio' %>
-        <% else: %>
-          N/A
-        <% end %>
-      </div>
+    <div id="student-profile-intro">
+      <p id="student-profile-intro-name">
+        <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
+      </p>
+      <p id="student-profile-intro-status">
+        <%= getOrdinal(@student.get 'year') %> Year <%= @student.get 'degree' %>
+        <br>
+        Looking for an Industrial Placement
+      </p>
     </div>
   </div>
-  <div class="span3">
-    <h1 class="section-header">
-      <i class="icon-list-alt"></i>
-      My CV
-    </h1>
+</div>
 
-      <div class="alert alert-success <% if not @student.get 'cv_location': %>hidden<% end %>" id="uploaded-cv">
+<div class="row">
+  <div class="span12" id="student-profile-body">
+
+    <div class="row">
+      <div class="span4">
+        <h1 class="section-header">
+          <i class="icon-file"></i> Paper
+        </h1>
+
+          <div class="row">
+            <div class="span4">
+              <table class="table table-striped">
+                
+                <tr>
+                  <td id="table-cv">
+                    <div>
+                      Curriculum Vitae
+                      <form class="form-inline hidden">
+                        <input class="file-input" id="file-cv" type="file" name="files[]" size="20">
+                      </form>
+                      <div class="pull-right">
+                        <div class="btn upload-document" id="upload-cv"><i class="icon-upload-alt"/></div>
+                        <a class="btn" id="download-cv" href="<%= '/students/' + @student.id + '/download_document/cv' %>"><i class="icon-download-alt"/></a>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="progress progress-info progress-upload" style="display:none">
+                      <div id="progress-cv" class="bar">
+                    </div>
+
+                  </td>
+                </tr>
+
+                <tr>
+                  <td id="table-transcript">
+                    <div>
+                      Transcript
+                      <form class="form-inline hidden">
+                        <input class="file-input" id="file-transcript" type="file" name="files[]" size="20">
+                      </form>
+                      <div class="pull-right">
+                        <div class="btn upload-document" id="upload-transcript"><i class="icon-upload-alt"/></div>
+                        <a class="btn" id="download-transcript" href="<%= '/students/' + @student.id + '/download_document/transcript' %>"><i class="icon-download-alt"/></a>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="progress progress-info progress-upload" style="display:none">
+                      <div id="progress-transcript" class="bar">
+                    </div>
+
+                  </td>
+                </tr>
+
+                <tr>
+                  <td id="table-coveringletter">
+                    <div>
+                      Covering Letter
+                      <form class="form-inline hidden">
+                        <input class="file-input" id="file-coveringletter" type="file" name="files[]" size="20">
+                      </form>
+                      <div class="pull-right">
+                        <div class="btn upload-document" id="upload-coveringletter"><i class="icon-upload-alt"/></div>
+                        <a class="btn" id="download-coveringletter" href="<%= '/students/' + @student.id + '/download_document/coveringletter' %>"><i class="icon-download-alt"/></a>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="progress progress-info progress-upload" style="display:none">
+                      <div id="progress-coveringletter" class="bar">
+                    </div>
+
+                  </td>
+                </tr>
+              </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="span4">
+        <h1 class="section-header">
+          <i class="icon-user"></i> Person
+        </h1>
+
         <div class="row">
-          <div class="span1">
-            <div id="cv-location">
-              <%= @student.get 'cv_location' %>
+          <div class="span4">
+            <div id="bio-textarea-container" style="display:none">
+              <textarea id="student-bio-editor">
+                <%= @student.get 'bio' %>
+              </textarea>
+            </div>
+
+            <div id="bio-container">
+              <p id="student-bio">
+                <%= @student.get 'bio' %>
+              </p>
             </div>
           </div>
-          <div class="span1">
-            <div class="btn" id="btn-download-cv">Download</div>
+        </div>
+      </div>
+
+      <div class="span4">
+        <h1 class="section-header">
+          <i class="icon-heart"></i> Passions
+        </h1>
+
+        <div class="row">
+          <div class="span4">
+            <% if true or @student.get 'interests': %>
+                <span class="label label-warning interest-tag">
+                  <span class="label-text">Web Dev</span>
+                </span>
+                <span class="label label-warning interest-tag">
+                  <span class="label-text">Banking</span>
+                </span>
+                <span class="label label-warning interest-tag">
+                  <span class="label-text">Games Industry</span>
+                </span>
+                <span class="label label-warning interest-tag">
+                  <span class="label-text">Business</span>
+                </span>
+
+
+                <span class="label label-success interest-tag">
+                  <span class="label-text">C</span>
+                </span>
+                <span class="label label-success interest-tag">
+                  <span class="label-text">C++</span>
+                </span>
+                <span class="label label-success interest-tag">
+                  <span class="label-text">Java</span>
+                </span>
+                <span class="label label-success interest-tag">
+                  <span class="label-text">Ruby</span>
+                </span>
+            <% else: %>
+              <div class="empty-student-profile-field-container">
+                <i class="icon-heart empty-student-profile-field"/>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
-
-    <form class="form-inline no-cv-form">
-      <div class="row">
-        <div class="span2">
-          <input id="file-cv" type="file" name="files[]" size="20">
-        </div>
-        <div class="span1">
-          <div class="btn" id="btn-upload-cv">Upload</div>
-        </div>
-      </div>
-    </form>
-
-    <div class="progress progress-info">
-      <div id="upload-bar" class="bar">
     </div>
   </div>
 </div>
 
-<div class="row">
-  <div class="span9">
-    <h1 class="section-header">
-      <i class="icon-tags"></i>
-      My Interests
-    </h1>
-    <div class="row">
-      <div class="span3">
-        <form class="form-inline">
-          <div class="input-append">
-            <input type="text" class="span2 typeahead" size="16" data-provide="typeahead" data-source="">
-            <button class="btn typeahead" type="button">Add</button>
-          </div>
-        </form>
-      </div>
-      <div class="span6">
-        Something!
-      </div>
-    </div>
-  </div>
-  <div class="span3">
-    <h1 class="section-header">
-      <i class="icon-thumbs-up"></i>
-      Status
-    </h1>
-    <div class="span3">
-      <dl class="dl-horizontal">
-        <dt>Status:</dt> <dd>Confirmed</dd>
-        <dt>Position:</dt> <dd>Developer</dd>
-        <dt>Company:</dt> <dd>Google</dd>
-      </dl>
-    </div>
-  </div>
-</div>
-<div class="row">
+<div class="row" id="opportunities-container">
   <div class="span6" id="events-partial">
-    
+
   </div>
   <div class="span6" id="placements-partial">
-    
+
   </div>
 </div>

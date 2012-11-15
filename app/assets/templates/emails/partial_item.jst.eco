@@ -1,16 +1,21 @@
-<a href="#emails/<%= @email.id %>" class="item email-item">
-  <tr>
-    <% d = Date.parse(@email.get('created_date')) %>
-    <td>d.toString('dXXX MMMM yyyy - H:mm').replace('XXX', d.getOrdinal())</td>
-    <td>@email.get('subject')</td>
-    <% if @email.get('updated_date'): %>
-      <% d = Date.parse(@email.get('updated_date')) %>
-      <td><i class="icon-ok"></i> .toString('dXXX MMMM yyyy - H:mm').replace('XXX', d.getOrdinal())</i></td>
-    <% else: %>
-      <td><i class="icon-remove"></i></td>
-    <% end %>
-  </tr>
- <% if @editable: %>
-    <div class="btn btn-mini pull-right btn-edit" id="edit-button">Edit</div>
+<td>
+  <% if @email.get('created'): %>
+    <% d = Date.parse(@email.get('created')) %>
+    <%= d.toString('dXXX MMMM yyyy - H:mm').replace('XXX', d.getOrdinal()) %>
   <% end %>
-</div>
+</td>
+<td>
+  <%= @email.get('subject') %>
+</td>
+<td>
+  <% if @email.get('sent'): %>
+    <% d = Date.parse(@email.get('sent')) %>
+    <i class="icon-ok"></i>
+    <%= d.toString('dXXX MMMM yyyy - H:mm').replace('XXX', d.getOrdinal())%>
+  <% else: %>
+    <i class="icon-remove"></i>
+  <% end %>
+  <% if @editable: %>
+      <div class="btn btn-mini pull-right btn-edit">Edit</div>
+  <% end %>
+</td>

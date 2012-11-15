@@ -10,10 +10,7 @@ describe "Placement Partial Item", ->
     @placementsPartialItem = new CPP.Views.PlacementsPartialItem
                               el: "#placements"
                               model: @placement
-
-    # Uneditable by default for tests
-    @options = {editable: false}
-
+                              editable: false
 
   describe "Partial Item", ->
     it "Should link to event on events page", ->
@@ -24,18 +21,18 @@ describe "Placement Partial Item", ->
   describe "edit button", ->
     describe "when editable", ->
       beforeEach ->
-        @options.editable = true
+        @placementsPartialItem.editable = true
         @placementsPartialItem.render(@options)
 
       it "Should display edit button", ->
         expect(@placementsPartialItem.$el.find 'div').toHaveClass('btn-edit')
 
       it "should navigate to edit screen", ->
-        spyEvent = spyOnEvent('#edit-button', 'click');
+        spyEvent = spyOnEvent('.btn-edit', 'click');
         navigationStub = sinon.spy(Backbone.history, 'navigate')
                             .withArgs('placements/1/edit', trigger: true)
-        $('#edit-button').click()
-        expect('click').toHaveBeenTriggeredOn('#edit-button')
+        $('.btn-edit').click()
+        expect('click').toHaveBeenTriggeredOn('.btn-edit')
         expect(spyEvent).toHaveBeenTriggered()
         expect(navigationStub).toHaveBeenCalledOnce()
         Backbone.history.navigate.restore()

@@ -1,10 +1,19 @@
 <h1 class="section-header">
-  <i class="icon-calendar"></i>
-  Emails
+  <i class="icon-envelope"></i>
+  Mailings
   <% if @editable: %>
     <div class="btn pull-right btn-add">Add New</div>
   <% end %>
+  <div class="btn pull-right btn-view-all">View All</div>
 </h1>
-<ul id="emails" class="cpp-list">
-</ul>
-<div class="btn pull-right btn-view-all">View All</div>
+<table class="table sortable">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Subject</th>
+      <th>Approved?</th>
+    </tr>
+  </thead>
+  <tbody id="emails">
+  </tbody>
+</table>
