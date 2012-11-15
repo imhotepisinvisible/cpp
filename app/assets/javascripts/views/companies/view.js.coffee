@@ -1,7 +1,7 @@
 class CPP.Views.CompaniesView extends CPP.Views.Base
   el: "#app"
   template: JST['companies/view']
-
+  
   initialize: ->
     @render()
 
@@ -23,5 +23,8 @@ class CPP.Views.CompaniesView extends CPP.Views.Base
       model: @model
       collection: @model.emails
     @
+
+  activate: ->
+    console.log "activate"
 
 

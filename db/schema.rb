@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(:version => 20121115112137) do
     t.string   "transcript_location"
     t.string   "coveringletter_location"
     t.string   "profile_picture_location"
+    t.boolean  "active"
     t.integer  "company_id"
     t.string   "type"
     t.datetime "created_at",               :null => false

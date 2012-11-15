@@ -13,6 +13,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     'blur #year-textarea-container': 'yearStopEdit'
     'click #degree-container': 'degreeEdit'
     'blur #degree-textarea-container': 'degreeStopEdit'
+    'click .activate'  : 'activate'
 
   initialize: ->
     @render()
@@ -169,3 +170,14 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
       $('#table-' + documentType).addClass('missing-document')
       $('#download-' + documentType).hide()
       $('#delete-' + documentType).hide()
+
+  activate: (e) ->
+    @model.set "active", (!@model.get "active");
+    if (!@model.get "active")
+      $('#student-profile-img-container').removeClass('profile-deactivated')
+      $('#student-profile-intro').removeClass('profile-deactivated')
+      $(e.target).html("Deactivate")
+    else
+      $('#student-profile-img-container').addClass('profile-deactivated')
+      $('#student-profile-intro').addClass('profile-deactivated')
+      $(e.target).html("Activate")
