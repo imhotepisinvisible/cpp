@@ -38,6 +38,9 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     @uploadInitialize 'transcript'
     @uploadInitialize 'coveringletter'
 
+    # $.getJSON("/")
+    # $("#add-tag-input").autocomplete('/all_tags', {}).result (event, data, formatted) ->
+    #   console.log event, data, formatted
     @
 
   uploadInitialize: (documentType) ->
