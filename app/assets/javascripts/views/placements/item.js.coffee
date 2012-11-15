@@ -17,6 +17,7 @@ class CPP.Views.PlacementsItem extends CPP.Views.Base
     Backbone.history.navigate("placements/" + @model.get('id') + "/edit", trigger: true)
 
   deletePlacement: (e) ->
+    $(e.target).parent().parent().remove();
     e.stopPropagation()
     @model.destroy
       wait: true

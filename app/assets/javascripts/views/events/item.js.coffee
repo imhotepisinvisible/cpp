@@ -17,7 +17,7 @@ class CPP.Views.EventsItem extends CPP.Views.Base
     Backbone.history.navigate("events/" + @model.get('id') + "/edit", trigger: true)
 
   deleteEvent: (e) ->
-    console.log "clicked del"
+    # Remove item from view
     $(e.target).parent().parent().remove();
     e.stopPropagation()
     @model.destroy

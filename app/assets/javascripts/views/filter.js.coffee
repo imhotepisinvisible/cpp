@@ -43,8 +43,8 @@ class CPP.Filter extends CPP.Views.Base
 
 
   setFilter: ->
-    console.log "setFilters"
     fCollection = @data
+    # find type of collection
     for filter in @filters 
       tb =  $("#"+filter.attribute).val()
       # Dont filter when nothing in text box
@@ -52,20 +52,20 @@ class CPP.Filter extends CPP.Views.Base
         # Update collection
         switch filter.type
           when "text"
-            fCollection = new CPP.Collections.Events(fCollection.filter((model) ->
+            fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
               res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
               (res.toString().indexOf tb) != -1
             ))
           when "number"
-            fCollection = new CPP.Collections.Events(fCollection.filter((model) ->
+            fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
               res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
               res.toString() is tb
             ))
           when "tags"
-            fCollection = new CPP.Collections.Events(fCollection.filter((model) =>
+            fCollection = new (fCollection.constructor)(fCollection.filter((model) =>
               res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
               res.toString() in @tags
-            ))        
+            ))    
     @data.trigger('filter', fCollection)
   @
 
