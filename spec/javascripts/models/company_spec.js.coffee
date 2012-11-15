@@ -4,6 +4,17 @@ describe "Company", ->
     @logo = "Logo.jpg"
     @description = "Super cool"
 
+    @eventsCollection = new Backbone.Collection()
+    @eventsStub = sinon.stub(window.CPP.Collections, "Events")
+                    .returns(@eventsCollection)
+
+    @placementsCollection = new Backbone.Collection()
+    @placementsStub = sinon.stub(window.CPP.Collections, "Placements")
+                    .returns(@placementsCollection)
+
+    @emailsCollection = new Backbone.Collection()
+    @emailsStub = sinon.stub(window.CPP.Collections, "Emails")
+                    .returns(@emailsCollection)
 
     @company = new CPP.Models.Company {
       name: @name
@@ -11,6 +22,11 @@ describe "Company", ->
       description: @description
       id: 1
     }
+
+  afterEach ->
+    window.CPP.Collections.Events.restore()
+    window.CPP.Collections.Placements.restore()
+    window.CPP.Collections.Emails.restore()
 
   describe "url", ->
     describe "when no id is set", ->
@@ -47,5 +63,26 @@ describe "Company", ->
 
     it "should exhibit description attribute", ->
      expect(@company.get 'description').toEqual @description
+
+    describe "events collection", ->
+      it "should be exhibited", ->
+        expect(@eventsStub).toHaveBeenCalledOnce()
+
+      it "should have a url of /companies/{id}/events", ->
+        expect(@eventsCollection.url).toBe '/companies/1/events'
+
+    describe "placements collection", ->
+      it "should be exhibited", ->
+        expect(@placementsStub).toHaveBeenCalledOnce()
+
+      it "should have a url of /companies/{id}/placements", ->
+        expect(@placementsCollection.url).toBe '/companies/1/placements'
+
+    describe "emails collection", ->
+      it "should be exhibited", ->
+        expect(@emailsStub).toHaveBeenCalledOnce()
+
+      it "should have a url of /companies/{id}/emails", ->
+        expect(@emailsCollection.url).toBe '/companies/1/emails'
 
 
