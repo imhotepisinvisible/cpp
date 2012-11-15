@@ -11,25 +11,10 @@ Dir[Rails.root.join("spec/factories/*.rb")].each {|f| require f}
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Tags
-year_group_category = FactoryGirl.create :tag_category, :name => "Year Groups"
-programming_category = FactoryGirl.create :tag_category, :name => "Programming Languages"
-segment_category = FactoryGirl.create :tag_category, :name => "Industry Segments"
-
 year_group_tags = [ '1st Year', '2nd Year', '3rd Year', '4th Year' ]
 programming_tags = [ 'C', 'C++', 'Java', 'Ruby', 'Haskell' ]
 segment_tags = [ 'Web Development', 'Banking', 'Games Development', 'Business' ]
 
-year_group_tags.map do |name|
-  FactoryGirl.create :tag, { name: "#{name}", tag_category: year_group_category }
-end
-
-programming_tags.map do |name|
-  FactoryGirl.create :tag, { name: "#{name}", tag_category: programming_category }
-end
-
-segment_tags.map do |name|
-  FactoryGirl.create :tag, { name: "#{name}", tag_category: segment_category }
-end
 
 # Imperial Organisation
 organisation = FactoryGirl.create :organisation, {
