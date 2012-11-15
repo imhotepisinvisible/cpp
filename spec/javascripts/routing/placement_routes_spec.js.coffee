@@ -47,6 +47,7 @@ describe "Placement Routing", ->
     beforeEach ->
       @collection = new Backbone.Collection()
       @collection.url = "/placements"
+      @fetchStub = sinon.stub(@collection, "fetch").yieldsTo "success"
 
       @placementsCollectionStub = sinon.stub(window.CPP.Collections, "Placements")
                                    .returns(@collection)
@@ -59,7 +60,7 @@ describe "Placement Routing", ->
 
       @model = new Backbone.Model()
       @model.url = "/placements"
-
+      sinon.stub(@model, "fetch").yieldsTo "success"
       sinon.stub(@model, "get").withArgs("company_id").returns(1)
 
       @placementModelStub = sinon.stub(window.CPP.Models, "Placement")
@@ -86,22 +87,21 @@ describe "Placement Routing", ->
         expect(@placementsCollectionStub).toHaveBeenCalledWith()
 
       it "should create a PlacementIndex view on fetch success", ->
-        sinon.stub(@collection, "fetch").yieldsTo "success"
         @router.index()
         expect(@placementsIndexViewStub).toHaveBeenCalledOnce()
         expect(@placementsIndexViewStub).toHaveBeenCalledWith collection: @collection
 
 
       it "should not create a PlacementIndex view on fetch error", ->
+        @collection.fetch.restore()
         sinon.stub(@collection, "fetch").yieldsTo "error"
         @router.index()
         expect(@placementsIndexViewStub.callCount).toBe 0
 
       it "should fetch the event data from the server", ->
-        fetch_stub = sinon.stub(@collection, "fetch").returns(null)
         @router.index()
-        expect(fetch_stub).toHaveBeenCalledOnce()
-        expect(fetch_stub).toHaveBeenCalledWith()
+        expect(@fetchStub).toHaveBeenCalledOnce()
+        expect(@fetchStub).toHaveBeenCalledWith()
 
     describe "New handler", ->
       it "should create a Placement collection", ->
@@ -126,19 +126,20 @@ describe "Placement Routing", ->
         expect(@placementModelStub).toHaveBeenCalledWith id: 1
 
       it "should create a PlacementIndex view on fetch success", ->
-        sinon.stub(@model, "fetch").yieldsTo "success"
         @router.edit(1)
         expect(@placementsEditViewStub).toHaveBeenCalledOnce()
         expect(@placementsEditViewStub).toHaveBeenCalledWith model: @model
 
 
       it "should not create a PlacementIndex view on fetch error", ->
+        @model.fetch.restore()
         sinon.stub(@model, "fetch").yieldsTo "error"
         @router.edit(1)
         expect(@placementsEditViewStub.callCount).toBe 0
 
     describe "View Handler", ->
       beforeEach ->
+        sinon.stub(@company, "fetch").yieldsTo "success"
         @placementsViewStub = sinon.stub(window.CPP.Views, "PlacementsView")
                                 .returns(new Backbone.View())
 
@@ -153,30 +154,31 @@ describe "Placement Routing", ->
       it "should create a Company model on placement fetch success", ->
         company_id = 2
         @model.company_id = company_id
-        sinon.stub(@model, "fetch").yieldsTo "success"
         @router.view(1)
         expect(@companyModelStub).toHaveBeenCalledOnce()
         expect(@companyModelStub).toHaveBeenCalledWith id: company_id
 
       it "should not create a Company model on placement fetch error", ->
+        @model.fetch.restore()
         sinon.stub(@model, "fetch").yieldsTo "error"
         @router.view(1)
         expect(@companyModelStub.callCount).toBe 0
 
       it "should create a PlacementsView on company fetch success", ->
-        sinon.stub(@model, "fetch").yieldsTo "success"
-        sinon.stub(@company, "fetch").yieldsTo "success"
         @router.view(1)
         expect(@placementsViewStub).toHaveBeenCalledOnce()
         expect(@placementsViewStub).toHaveBeenCalledWith model: @model
 
       it "should not create a PlacementsView on company fetch error", ->
-        sinon.stub(@model, "fetch").yieldsTo "success"
+        @company.fetch.restore()
         sinon.stub(@company, "fetch").yieldsTo "error"
         @router.view(1)
         expect(@placementsViewStub.callCount).toBe 0
 
     describe "IndexCompany Handler", ->
+      beforeEach ->
+        sinon.stub(@company, "fetch").yieldsTo "success"
+
       it "should create a Placement collection", ->
         @router.indexCompany(1)
         expect(@placementsCollectionStub).toHaveBeenCalledOnce()
@@ -184,25 +186,23 @@ describe "Placement Routing", ->
 
 
       it "should create a Company Model on collection fetch success", ->
-        sinon.stub(@collection, "fetch").yieldsTo "success"
         @router.indexCompany(1)
         expect(@companyModelStub).toHaveBeenCalledOnce()
         expect(@companyModelStub).toHaveBeenCalledWith id: 1
 
       it "should not create a Company model on placement fetch error", ->
+        @collection.fetch.restore()
         sinon.stub(@collection, "fetch").yieldsTo "error"
         @router.indexCompany(1)
         expect(@companyModelStub.callCount).toBe 0
 
       it "should create a PlacementIndex on company fetch success", ->
-        sinon.stub(@collection, "fetch").yieldsTo "success"
-        sinon.stub(@company, "fetch").yieldsTo "success"
         @router.indexCompany(1)
         expect(@placementsIndexViewStub).toHaveBeenCalledOnce()
         expect(@placementsIndexViewStub).toHaveBeenCalledWith collection: @collection
 
       it "should not create a PlacementIndex on company fetch error", ->
-        sinon.stub(@collection, "fetch").yieldsTo "success"
+        @company.fetch.restore()
         sinon.stub(@company, "fetch").yieldsTo "error"
         @router.indexCompany(1)
         expect(@placementsIndexViewStub.callCount).toBe 0
