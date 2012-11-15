@@ -5,30 +5,33 @@ class CPP.Models.Event extends Backbone.Model
   validation:
     title:
       required: true
+    start_date:
+      required: true
+    end_date:
+      required: true
     google_map_url:
       pattern: 'url'
+    description:
+      required: true
+    location:
+      required: true
 
   schema:
     title:
     	type: "Text"
-    	# validators: ["required"]
    	start_date:
       type: "DateTime"
       DateEditor: "DatePicker"
-      validators: ["required"]
    	end_date:
       type: "DateTime"
       DateEditor: "DatePicker"
-      validators: ["required"]
     deadline:
       type: "DateTime"
       DateEditor: "DatePicker"
     description:
       type: "TextArea"
-      validators: ["required"]
     location:
       type: "Text"
-      validators: ["required"]
     capacity: "Text"
     google_map_url: "Text"
     requirementsEnabled:

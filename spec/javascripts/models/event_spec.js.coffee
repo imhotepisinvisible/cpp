@@ -64,19 +64,19 @@ describe "Event", ->
       expect(@errorSpy).toHaveBeenCalledOnce()
 
     it "should not save when start_date is empty", ->
-      @event.save 'start_date': null
+      @event.save 'start_date': ""
       expect(@errorSpy).toHaveBeenCalledOnce()
 
     it "should not save when end_date is empty", ->
-      @event.save 'end_date': null
+      @event.save 'end_date': ""
       expect(@errorSpy).toHaveBeenCalledOnce()
 
     it "should not save when description is empty", ->
-      @event.save 'description': null
+      @event.save 'description': ""
       expect(@errorSpy).toHaveBeenCalledOnce()
 
     it "should not save when location is empty", ->
-      @event.save 'location': null
+      @event.save 'location': ""
       expect(@errorSpy).toHaveBeenCalledOnce()
 
 
@@ -100,15 +100,15 @@ describe "Event", ->
 
 
     it "should save when deadline is empty", ->
-      @event.save 'deadline': null
+      @event.save 'deadline': ""
       expect(@successSpy).toHaveBeenCalledOnce()
 
     it "should save when capacity is empty", ->
-      @event.save 'capacity': null
+      @event.save 'capacity': ""
       expect(@successSpy).toHaveBeenCalledOnce()
 
     it "should save when google_map_url is empty", ->
-      @event.save 'google_map_url': null
+      @event.save 'google_map_url': ""
       expect(@successSpy).toHaveBeenCalledOnce()
 
     it "should not allow an invalid url for google_map_url", ->
