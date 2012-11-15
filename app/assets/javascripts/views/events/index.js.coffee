@@ -37,6 +37,7 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
             ready.resolve()
         error: ->
           notify "error", "Couldn't fetch company for event"
+          ready.resolver()
     ready.done =>
       @renderEvents(@collection)
       @renderFilters()     
