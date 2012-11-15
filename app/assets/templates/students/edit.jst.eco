@@ -35,7 +35,7 @@
               <table class="table table-striped">
 
                 <tr>
-                  <td id="table-cv">
+                  <td class="document-table" id="table-cv">
                     <div>
                       Curriculum Vitae
                       <form class="form-inline hidden">
@@ -57,7 +57,7 @@
                 </tr>
 
                 <tr>
-                  <td id="table-transcript">
+                  <td class="document-table" id="table-transcript">
                     <div>
                       Transcript
                       <form class="form-inline hidden">
@@ -79,7 +79,7 @@
                 </tr>
 
                 <tr>
-                  <td id="table-coveringletter">
+                  <td class="document-table" id="table-coveringletter">
                     <div>
                       Covering Letter
                       <form class="form-inline hidden">
