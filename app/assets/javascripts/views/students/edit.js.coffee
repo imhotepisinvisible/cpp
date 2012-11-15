@@ -9,6 +9,10 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     'blur #bio-textarea-container': 'bioStopEdit'
     'click #name-container': 'nameEdit'
     'blur #name-textarea-container': 'nameStopEdit'
+    'click #year-container': 'yearEdit'
+    'blur #year-textarea-container': 'yearStopEdit'
+    'click #degree-container': 'degreeEdit'
+    'blur #degree-textarea-container': 'degreeStopEdit'
 
   initialize: ->
     @render()
@@ -97,6 +101,51 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
             notify "error", "Failed to update profile"
     else
       $('#bio-container').show()
+
+  yearEdit: ->
+    @edit 'year'
+
+  yearStopEdit: ->
+    year = parseInt($('#student-year-editor').val())
+    $('#year-textarea-container').hide()
+
+    if year != @model.get 'year'
+      @model.set 'year', year
+      @model.save {},
+          wait: true
+          success: (model, response) =>
+            notify "success", "Updated profile"
+            $('#student-year').html (getOrdinal(model.get('year')) + ' Year')
+            @model.set 'year', model.get('year')
+            $('#year-container').show()
+          error: (model, response) ->
+            notify "error", "Failed to update profile"
+    else
+      $('#year-container').show()
+
+  degreeEdit: ->
+    @edit 'degree'
+
+  degreeStopEdit: ->
+    @stopEdit 'degree'
+
+  stopEdit: (attribute) ->
+    value = $('#student-' + attribute + '-editor').val()
+    $('#' + attribute + '-textarea-container').hide()
+
+    if value != @model.get attribute
+      @model.set attribute, value
+      @model.save {},
+          wait: true
+          success: (model, response) =>
+            notify "success", "Updated profile"
+            $('#student-' + attribute + '').html model.get(attribute).replace(/\n/g, "<br/>")
+            @model.set attribute, model.get(attribute)
+            $('#' + attribute + '-container').show()
+          error: (model, response) ->
+            notify "error", "Failed to update profile"
+    else
+      $('#' + attribute + '-container').show()
 
   edit: (attribute) ->
     $('#' + attribute + '-container').hide()

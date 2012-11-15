@@ -31,7 +31,7 @@
       line-height: 75px;
     }
 
-    #student-profile-intro-status {
+    .student-profile-intro-status {
       color: #444;
     }
   }
@@ -86,5 +86,23 @@
   line-height: 75px;
   width: 800px;
   max-height: 90px;
+  @include box-sizing(border-box);
+}
+
+#student-year-editor {
+  font-family: 'Arvo', serif;
+  font-size: 40px;
+  line-height: 45px;
+  width: 100px;
+  max-height: 55px;
+  @include box-sizing(border-box);
+}
+
+#student-degree-editor {
+  font-family: 'Arvo', serif;
+  font-size: 40px;
+  line-height: 45px;
+  width: 500px;
+  max-height: 55px;
   @include box-sizing(border-box);
 }
