@@ -15,6 +15,8 @@
 class Placement < ActiveRecord::Base
   belongs_to :company
 
+  acts_as_taggable_on :skills, :interests, :year_groups
+
   validates :company_id,  :presence => true
   validates :position,    :presence => true
   validates :location,    :presence => true
@@ -28,4 +30,7 @@ class Placement < ActiveRecord::Base
     :after => :now,
     :allow_nil => :true
 
+  def as_json(options={})
+    super(:include => [:skills, :interests, :year_groups])
+  end
 end

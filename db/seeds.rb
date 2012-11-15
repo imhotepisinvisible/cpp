@@ -11,25 +11,10 @@ Dir[Rails.root.join("spec/factories/*.rb")].each {|f| require f}
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Tags
-year_group_category = FactoryGirl.create :tag_category, :name => "Year Groups"
-programming_category = FactoryGirl.create :tag_category, :name => "Programming Languages"
-segment_category = FactoryGirl.create :tag_category, :name => "Industry Segments"
-
 year_group_tags = [ '1st Year', '2nd Year', '3rd Year', '4th Year' ]
-programming_tags = [ 'C', 'C++', 'Java', 'Ruby', 'Haskell' ]
-segment_tags = [ 'Web Development', 'Banking', 'Games Development', 'Business' ]
+skills_tags = [ 'C', 'C++', 'Java', 'Ruby', 'Haskell' ]
+interests_tags = [ 'Web Development', 'Banking', 'Games Development', 'Business' ]
 
-year_group_tags.map do |name|
-  FactoryGirl.create :tag, { name: "#{name}", tag_category: year_group_category }
-end
-
-programming_tags.map do |name|
-  FactoryGirl.create :tag, { name: "#{name}", tag_category: programming_category }
-end
-
-segment_tags.map do |name|
-  FactoryGirl.create :tag, { name: "#{name}", tag_category: segment_category }
-end
 
 # Imperial Organisation
 organisation = FactoryGirl.create :organisation, {
@@ -53,7 +38,7 @@ department = FactoryGirl.create :department, {
   organisation: organisation
 }
 
-FactoryGirl.create :student,  {
+jack = FactoryGirl.create :student,  {
   first_name: "Peter",
   last_name: "Hamilton",
   email: "peter.hamilton10@imperial.ac.uk",
@@ -69,7 +54,12 @@ FactoryGirl.create :student,  {
   department: department
 }
 
-FactoryGirl.create :student,  {
+jack.skill_list = skills_tags
+jack.interest_list = interests_tags
+jack.year_group_list = ["3rd Year", "MEng"]
+jack.save
+
+pete = FactoryGirl.create :student,  {
   first_name: "Jack",
   last_name: "Stevenson",
   email: "js3509@ic.ac.uk",
@@ -84,6 +74,11 @@ FactoryGirl.create :student,  {
   profile_picture_location: "/assets/jack_profile.jpg",
   department: department
 }
+
+pete.skill_list = ["Ruby", "Backbone", "Rails"]
+pete.interest_list = ["Web Development"]
+pete.year_group_list = ["3rd Year", "MEng"]
+pete.save
 
 # Sample Companies
 10.times do

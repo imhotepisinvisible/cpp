@@ -15,9 +15,10 @@ class Company < ActiveRecord::Base
   has_many :placements
   has_many :emails
   has_many :company_administrators
-  
   belongs_to :organisation
   has_and_belongs_to_many :departments
+
+  acts_as_taggable_on :languages, :interests, :year_groups
 
   validates :name,            :presence => true
   validates :logo,            :presence => true
@@ -27,4 +28,8 @@ class Company < ActiveRecord::Base
   validates :description, :length => {
     :maximum => 500,
   }
+
+  def as_json(options={})
+    super(:include => [:skills, :interests, :year_groups])
+  end
 end
