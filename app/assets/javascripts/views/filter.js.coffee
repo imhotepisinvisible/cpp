@@ -54,7 +54,7 @@ class CPP.Filter extends CPP.Views.Base
           when "text"
             fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
               res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
-              (res.toString().indexOf tb) != -1
+              (res.toString().toLowerCase().indexOf tb.toLowerCase()) != -1
             ))
           when "number"
             fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
