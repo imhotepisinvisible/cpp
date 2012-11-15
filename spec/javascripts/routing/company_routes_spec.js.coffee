@@ -34,6 +34,7 @@ describe "Company Routing", ->
     beforeEach ->
       @collection = new Backbone.Collection()
       @collection.url = "/companies"
+      @collectionFetchStub = sinon.stub(@collection, "fetch").yieldsTo "success"
 
       @companiesCollectionStub = sinon.stub(window.CPP.Collections, "Companies")
                                   .returns(@collection)
@@ -46,6 +47,8 @@ describe "Company Routing", ->
       @model.placements.url = "/placements"
       @model.emails = new Backbone.Model()
       @model.emails.url = "/emails"
+
+      sinon.stub(@model, "fetch").yieldsTo "success"
 
       @companyModelStub = sinon.stub(window.CPP.Models, "Company")
                             .returns(@model)
@@ -69,22 +72,21 @@ describe "Company Routing", ->
         expect(@companiesCollectionStub).toHaveBeenCalledWithExactly()
 
       it "should create an EventIndex view on fetch success", ->
-        sinon.stub(@collection, "fetch").yieldsTo "success"
         @router.index()
         expect(@companiesIndexViewStub).toHaveBeenCalledOnce()
         expect(@companiesIndexViewStub).toHaveBeenCalledWith collection: @collection
 
 
       it "should not create an EventIndex view on fetch error", ->
+        @collection.fetch.restore()
         sinon.stub(@collection, "fetch").yieldsTo "error"
         @router.index()
         expect(@companiesIndexViewStub.callCount).toBe 0
 
       it "should fetch the event data from the server", ->
-        fetch_stub = sinon.stub(@collection, "fetch").returns(null)
         @router.index()
-        expect(fetch_stub).toHaveBeenCalledOnce()
-        expect(fetch_stub).toHaveBeenCalledWith()
+        expect(@collectionFetchStub).toHaveBeenCalledOnce()
+        expect(@collectionFetchStub).toHaveBeenCalledWith()
 
     describe "View handler", ->
       beforeEach ->
@@ -99,13 +101,13 @@ describe "Company Routing", ->
         expect(@companyModelStub).toHaveBeenCalledWith id: 1
 
       it "should create an CompaniesView on fetch success", ->
-        sinon.stub(@model, "fetch").yieldsTo "success"
         @router.view(1)
         expect(@companiesViewStub).toHaveBeenCalledOnce()
         expect(@companiesViewStub).toHaveBeenCalledWith model: @model
 
 
       it "should not create an CompaniesView on fetch error", ->
+        @model.fetch.restore()
         sinon.stub(@model, "fetch").yieldsTo "error"
         @router.view()
         expect(@companiesViewStub.callCount).toBe 0
@@ -123,13 +125,13 @@ describe "Company Routing", ->
         expect(@companyModelStub).toHaveBeenCalledWith id: 1
 
       it "should create an EditView view on fetch success", ->
-        sinon.stub(@model, "fetch").yieldsTo "success"
         @router.edit(1)
         expect(@companiesEditViewStub).toHaveBeenCalledOnce()
         expect(@companiesEditViewStub).toHaveBeenCalledWith model: @model
 
 
       it "should not create an EditView view on fetch error", ->
+        @model.fetch.restore()
         sinon.stub(@model, "fetch").yieldsTo "error"
         @router.edit(1)
         expect(@companiesEditViewStub.callCount).toBe 0

@@ -24,7 +24,7 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
       collection: @model.placements
       editable: true
 
-    new CPP.Emails.PlacementsPartiail
+    new CPP.Views.EmailsPartial
       el: $(@el).find('#emails-partial')
       model: @model
       collection: @model.emails
