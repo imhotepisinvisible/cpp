@@ -129,8 +129,16 @@ class StudentsController < ApplicationController
   # PUT /students/1.json
   def update
     @student = Student.find(params[:id])
+    @student.update_attributes(params[:student])
+    @student.skill_list = params[:skills].map{|t| t["name"]}
+    @student.year_group_list = params[:year_groups].map{|t| t["name"]}
+    @student.interest_list = params[:interests].map{|t| t["name"]}
+    # params[:student][:year_group_list] = params[:year_groups]
     #student profile bits in here.
-    if @student.update_attributes(params[:student])
+    if @student.save
+      logger.info "UPDATING *************"
+      logger.info @student.inspect
+      logger.info @student.year_group_list
       head :no_content
     else
       respond_with @student, status: :unprocessable_entity

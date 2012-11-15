@@ -116,7 +116,7 @@
                       </div>
                       <% for i, tag of @student.get('skills'): %>
                         <span class="label tag skill-tag">
-                          <span class="label-text" id="interest_tag_<%= tag.id %>"><%= tag.name %></span>
+                          <%= tag.name %>
                         </span>
                       <% end %>
                     </div>
@@ -131,7 +131,7 @@
                       </div>
                       <% for i, tag of @student.get('interests'): %>
                         <span class="label tag interest-tag">
-                          <span class="label-text" id="interest_tag_<%= tag.id %>"><%= tag.name %></span>
+                          <%= tag.name %>
                         </span>
                       <% end %>
                     </div>
@@ -146,7 +146,7 @@
                       </div>
                       <% for i, tag of @student.get('year_groups'): %>
                         <span class="label tag year-group-tag">
-                          <div class="label-text" id="interest_tag_<%= tag.id %>"><%= tag.name %></div>
+                          <%= tag.name %>
                         </span>
                       <% end %>
                     </div>

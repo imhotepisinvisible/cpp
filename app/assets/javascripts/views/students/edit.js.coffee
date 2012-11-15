@@ -6,6 +6,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     'click .upload-document': 'uploadDocument'
     'click .delete-document': 'deleteDocument'
     'click #bio-container': 'bioEdit'
+    'click .remove-tag': 'removeTag'
     'blur #bio-textarea-container': 'bioStopEdit'
     'click #name-container': 'nameEdit'
     'blur #name-textarea-container': 'nameStopEdit'
@@ -83,7 +84,10 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
         )
 
   bioEdit: ->
-    @edit 'bio'
+    $('#bio-container').hide()
+    $('#student-bio-editor').html @model.get('bio')
+    $('#bio-textarea-container').show()
+    $('#student-bio-editor').focus()
 
   bioStopEdit: ->
     @stopEdit 'bio', 'string', ((bio) ->
@@ -181,3 +185,22 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
       $('#student-profile-img-container').addClass('profile-deactivated')
       $('#student-profile-intro').addClass('profile-deactivated')
       $(e.target).html("Activate")
+
+  removeTag: (e) ->
+    close_div = $(e.currentTarget)
+    tag_div = close_div.parent()
+    tag_id = close_div.find("input").val()
+
+    # Remove tag from lists
+    @model.set 'skills', (tag for tag in @model.get('skills') when parseInt(tag.id) != parseInt(tag_id))
+    @model.set 'interests', (tag for tag in @model.get('interests') when parseInt(tag.id) != parseInt(tag_id))
+    @model.set 'year_groups', (tag for tag in @model.get('year_groups') when parseInt(tag.id) != parseInt(tag_id))
+    console.log @model.get('year_groups')
+    console.log(parseInt(tag.id), parseInt(tag_id)) for tag in @model.get('year_groups')
+    @model.save {},
+        wait: true
+        success: (model, response) =>
+          notify "success", "Removed Tag"
+          tag_div.remove()
+        error: (model, response) ->
+          notify "error", "Failed to remove tag"
