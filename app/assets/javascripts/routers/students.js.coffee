@@ -31,7 +31,6 @@ class CPP.Routers.Students extends Backbone.Router
 
     student.fetch
       success: ->
-        console.log student
         new CPP.Views.StudentsEdit model: student
       error: ->
         notify "error", "Couldn't fetch student"
