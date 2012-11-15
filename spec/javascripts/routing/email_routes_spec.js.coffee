@@ -47,7 +47,7 @@ describe "Email Routing", ->
     beforeEach ->
       @collection = new Backbone.Collection()
       @collection.url = "/emails"
-
+      @collectionFetchStub = sinon.stub(@collection, "fetch").yieldsTo "success"
       @emailsCollectionStub = sinon.stub(window.CPP.Collections, "Emails")
                                   .returns(@collection)
 
@@ -61,11 +61,13 @@ describe "Email Routing", ->
       @emailModel.url = "/emails"
       @emailModelStub = sinon.stub(window.CPP.Models, "Email")
                             .returns(@emailModel)
+      sinon.stub(@emailModel, "fetch").yieldsTo "success"
 
       @companyModel = new Backbone.Model()
       @companyModel.url = '/companies'
       @companyModelStub = sinon.stub(window.CPP.Models, "Company")
                             .returns(@companyModel)
+      sinon.stub(@companyModel, "fetch").yieldsTo "success"
 
     afterEach ->
         window.CPP.Collections.Emails.restore()
@@ -81,22 +83,21 @@ describe "Email Routing", ->
         expect(@emailsCollectionStub).toHaveBeenCalledWith()
 
       it "should create an EmailsIndex view on fetch success", ->
-        sinon.stub(@collection, "fetch").yieldsTo "success"
         @router.index()
         expect(@emailsIndexViewStub).toHaveBeenCalledOnce()
         expect(@emailsIndexViewStub).toHaveBeenCalledWith collection: @collection
 
 
       it "should not create an EventIndex view on fetch error", ->
+        @collection.fetch.restore()
         sinon.stub(@collection, "fetch").yieldsTo "error"
         @router.index()
         expect(@emailsIndexViewStub.callCount).toBe 0
 
       it "should fetch the event data from the server", ->
-        fetchStub = sinon.stub(@collection, "fetch").returns(null)
         @router.index()
-        expect(fetchStub).toHaveBeenCalledOnce()
-        expect(fetchStub).toHaveBeenCalledWith()
+        expect(@collectionFetchStub).toHaveBeenCalledOnce()
+        expect(@collectionFetchStub).toHaveBeenCalledWith()
 
     describe "View handler", ->
       beforeEach ->
@@ -112,26 +113,24 @@ describe "Email Routing", ->
         expect(@emailModelStub).toHaveBeenCalledWith id: 1
 
       it "should create a Company Model on fetch success", ->
-        sinon.stub(@emailModel, "fetch").yieldsTo "success"
         @emailModel.company_id = 2
         @router.view 1
         expect(@companyModelStub).toHaveBeenCalledOnce()
         expect(@companyModelStub).toHaveBeenCalledWith id: 2
 
       it "should create an EmailsView on company fetch success", ->
-        sinon.stub(@emailModel, "fetch").yieldsTo "success"
-        sinon.stub(@companyModel, "fetch").yieldsTo "success"
         @router.view 1
         expect(@emailsViewStub).toHaveBeenCalledOnce()
         expect(@emailsViewStub).toHaveBeenCalledWith model: @emailModel
 
       it "should not create an EmailsView on company fetch error", ->
-        sinon.stub(@emailModel, "fetch").yieldsTo "success"
+        @companyModel.fetch.restore()
         sinon.stub(@companyModel, "fetch").yieldsTo "error"
         @router.view 1
         expect(@emailsViewStub.callCount).toBe 0
 
       it "should not create a Company Model on fetch error", ->
+        @emailModel.fetch.restore()
         sinon.stub(@emailModel, "fetch").yieldsTo "error"
         @router.view 1
         expect(@companyModelStub.callCount).toBe 0
@@ -143,13 +142,13 @@ describe "Email Routing", ->
         expect(@emailModelStub).toHaveBeenCalledWith id: 1
 
       it "should create an EmailsEdit view on fetch success", ->
-        sinon.stub(@emailModel, "fetch").yieldsTo "success"
         @router.edit 1
         expect(@emailsEditViewStub).toHaveBeenCalledOnce()
         expect(@emailsEditViewStub).toHaveBeenCalledWith model: @emailModel
 
 
       it "should not create an EmailsEdit view on fetch error", ->
+        @emailModel.fetch.restore()
         sinon.stub(@emailModel, "fetch").yieldsTo "error"
         @router.edit 1
         expect(@emailsEditViewStub.callCount).toBe 0
@@ -177,25 +176,23 @@ describe "Email Routing", ->
         expect(@emailsCollectionStub).toHaveBeenCalledWith()
 
       it "should create a Company Model on fetch success", ->
-        sinon.stub(@collection, "fetch").yieldsTo "success"
         @router.indexCompany 1
         expect(@companyModelStub).toHaveBeenCalledOnce()
         expect(@companyModelStub).toHaveBeenCalledWith id: 1
 
       it "should create an EmailsIndex on company fetch success", ->
-        sinon.stub(@collection, "fetch").yieldsTo "success"
-        sinon.stub(@companyModel, "fetch").yieldsTo "success"
         @router.indexCompany 1
         expect(@emailsIndexViewStub).toHaveBeenCalledOnce()
         expect(@emailsIndexViewStub).toHaveBeenCalledWith collection: @collection
 
       it "should not create an EmailsView on company fetch error", ->
-        sinon.stub(@collection, "fetch").yieldsTo "success"
+        @companyModel.fetch.restore()
         sinon.stub(@companyModel, "fetch").yieldsTo "error"
         @router.indexCompany 1
         expect(@emailsIndexViewStub.callCount).toBe 0
 
       it "should not create a Company Model on fetch error", ->
+        @collection.fetch.restore()
         sinon.stub(@collection, "fetch").yieldsTo "error"
         @router.indexCompany 1
         expect(@companyModelStub.callCount).toBe 0

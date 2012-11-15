@@ -50,6 +50,7 @@ describe "Student Routing", ->
                 type: "Text"
           ))()
       @student.url = "/students/1"
+      sinon.stub(@student, "fetch").yieldsTo "success"
 
       @student.events = new Backbone.Model()
       @student.placements = new Backbone.Model()
@@ -85,12 +86,12 @@ describe "Student Routing", ->
 
 
       it "should create a StudentsView on student fetch success", ->
-        sinon.stub(@student, "fetch").yieldsTo "success"
         @router.view()
         expect(@studentViewStub).toHaveBeenCalledOnce()
         expect(@studentViewStub).toHaveBeenCalledWith model: @student
 
       it "should not create a StudentsView on student fetch error", ->
+        @student.fetch.restore()
         sinon.stub(@student, "fetch").yieldsTo "error"
         @router.view()
         expect(@studentViewStub.callCount).toBe 0
