@@ -12,6 +12,7 @@ gem 'bcrypt-ruby'                 # For password encryption
 gem 'haml-rails'                  # Support HAML Templates in Rails
 gem 'simple_form'                 # Nicer forms in rails
 gem 'rufus-scheduler'             # Task Scheduling
+gem 'acts-as-taggable-on'         # Tagging framework
 
 # UI/Appearance Related Gems
 gem 'less-rails'                  # Less required for Bootstrap

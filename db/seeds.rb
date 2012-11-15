@@ -12,8 +12,8 @@ Dir[Rails.root.join("spec/factories/*.rb")].each {|f| require f}
 
 # Tags
 year_group_tags = [ '1st Year', '2nd Year', '3rd Year', '4th Year' ]
-programming_tags = [ 'C', 'C++', 'Java', 'Ruby', 'Haskell' ]
-segment_tags = [ 'Web Development', 'Banking', 'Games Development', 'Business' ]
+skills_tags = [ 'C', 'C++', 'Java', 'Ruby', 'Haskell' ]
+interests_tags = [ 'Web Development', 'Banking', 'Games Development', 'Business' ]
 
 
 # Imperial Organisation
@@ -38,7 +38,7 @@ department = FactoryGirl.create :department, {
   organisation: organisation
 }
 
-FactoryGirl.create :student,  {
+jack = FactoryGirl.create :student,  {
   first_name: "Peter",
   last_name: "Hamilton",
   email: "peter.hamilton10@imperial.ac.uk",
@@ -54,7 +54,12 @@ FactoryGirl.create :student,  {
   department: department
 }
 
-FactoryGirl.create :student,  {
+jack.skill_list = skills_tags
+jack.interest_list = interests_tags
+jack.year_group_list = ["3rd Year", "MEng"]
+jack.save
+
+pete = FactoryGirl.create :student,  {
   first_name: "Jack",
   last_name: "Stevenson",
   email: "js3509@ic.ac.uk",
@@ -69,6 +74,11 @@ FactoryGirl.create :student,  {
   profile_picture_location: "/assets/jack_profile.jpg",
   department: department
 }
+
+pete.skill_list = ["Ruby", "Backbone", "Rails"]
+pete.interest_list = ["Web Development"]
+pete.year_group_list = ["3rd Year", "MEng"]
+pete.save
 
 # Sample Companies
 10.times do

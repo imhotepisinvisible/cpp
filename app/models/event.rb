@@ -19,6 +19,8 @@
 class Event < ActiveRecord::Base
 	belongs_to :company
 
+  acts_as_taggable_on :skills, :interests, :year_groups
+
 	validates :company_id,   :presence => true
 	validates :title,        :presence => true
 	validates :description,  :presence => true
@@ -34,4 +36,7 @@ class Event < ActiveRecord::Base
     :after => :start_date,
     :after_message => "End time cannot be before start time"
 
+  def as_json(options={})
+    super(:include => [:skills, :interests, :year_groups])
+  end
 end

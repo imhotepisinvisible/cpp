@@ -14,15 +14,13 @@
 class Student < User
   belongs_to :department
 
-  validates :department_id, :presence => true
+  acts_as_taggable_on :skills, :interests, :year_groups
 
-  validates :bio, :length => {
-    :maximum => 500,
-  }
+  validates :department_id, :presence => true
+  validates :bio, :length => { :maximum => 500 }
+  validate :valid_email?
 
   attr_accessible :department_id, :year, :bio, :degree, :cv_location, :transcript_location, :covering_letter_location, :profile_picture_location
-
-  validate :valid_email?
 
   def valid_email?
     if department.organisation.organisation_domains.any?
@@ -42,5 +40,9 @@ class Student < User
         errors.add(:email, "Email domain must be one of #{domains.join(", ")}")
       end
     end
+  end
+
+  def as_json(options={})
+    super(:include => [:skills, :interests, :year_groups])
   end
 end
