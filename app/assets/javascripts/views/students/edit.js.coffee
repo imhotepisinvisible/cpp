@@ -4,6 +4,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
 
   events:
     'click .upload-document': 'uploadDocument'
+    'click .delete-document': 'deleteDocument'
     'click #bio-container': 'bioEdit'
     'blur #bio-textarea-container': 'bioStopEdit'
 
@@ -62,6 +63,18 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
   uploadDocument: (e) ->
     $(e.currentTarget).parent().parent().find('.file-input').click()
 
+  deleteDocument: (e) ->
+    id = $(e.currentTarget).attr('id')
+    documentType = id.substring(id.lastIndexOf('-') + 1)
+    
+    if confirm('Are you sure you wish to delete your ' + documentType + '?')
+      $.get('/students/' + @model.id + '/delete_document/' + documentType, (data) =>
+        @model.set('cv_location', data.cv_location)
+        @model.set('transcript_location', data.transcript_location)
+        @model.set('coveringletter_location', data.coveringletter_location)
+        @checkAllDocuments()
+        )
+
   bioEdit: ->
     $('#bio-container').hide()
     $('#student-bio-editor').html(@model.get 'bio')
@@ -94,6 +107,8 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     if @model.get "#{documentType}_location"
       $('#table-' + documentType).removeClass('missing-document')
       $('#download-' + documentType).show()
+      $('#delete-' + documentType).show()
     else
       $('#table-' + documentType).addClass('missing-document')
       $('#download-' + documentType).hide()
+      $('#delete-' + documentType).hide()

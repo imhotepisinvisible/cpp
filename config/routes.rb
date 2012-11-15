@@ -66,6 +66,7 @@ CPP::Application.routes.draw do
   resources :students do
     post 'upload_document/:document_type', :on => :member, :action => :upload_document
     get 'download_document/:document_type', :on => :member, :action => :download_document
+    get 'delete_document/:document_type', :on => :member, :action => :delete_document
   end
 
   resources :emails

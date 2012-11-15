@@ -54,16 +54,7 @@ class StudentsController < ApplicationController
     FileUtils.cp tempfile.path, file
 
     # Set the correct model attribute
-    case document_type
-    when 'cv'
-      @student.cv_location = file
-    when 'transcript'
-      @student.transcript_location = file
-    when 'coveringletter'
-      @student.coveringletter_location = file
-    else
-      respond_with @student, status: :unprocessable_entity
-    end
+    set_document_location document_type, @student, file
 
     if @student.save
       respond_with @student
@@ -77,19 +68,8 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
     document_type = params[:document_type]
 
-    location = ''
-
     # Get the correct model attribute
-    case document_type
-    when 'cv'
-      location = @student.cv_location
-    when 'transcript'
-      location = @student.transcript_location
-    when 'coveringletter'
-      location = @student.coveringletter_location
-    else
-      respond_with @student, status: :unprocessable_entity
-    end
+    location = get_document_location document_type, @student
 
     extension = File.extname location
 
@@ -97,6 +77,51 @@ class StudentsController < ApplicationController
       send_file location, :filename => "#{@student.last_name}_#{@student.first_name}_#{document_type}#{extension}"
     else
       head :no_content
+    end
+  end
+
+  # GET /students/1/delete_document/:document_type
+  def delete_document
+    @student = Student.find(params[:id])
+    document_type = params[:document_type]
+
+    # Get the correct model attribute
+    location = get_document_location document_type, @student
+
+    if location and File.exists?(location)
+      FileUtils.rm(location)
+      set_document_location document_type, @student, ''
+      if @student.save
+        respond_with @student
+      else
+        head :no_content
+      end
+    else
+      head :no_content
+    end
+  end
+
+  def get_document_location(document_type, student)
+    location = ''
+    case document_type
+    when 'cv'
+      location = student.cv_location
+    when 'transcript'
+      location = student.transcript_location
+    when 'coveringletter'
+      location = student.coveringletter_location
+    end
+    location
+  end
+
+  def set_document_location(document_type, student, location)
+    case document_type
+    when 'cv'
+      @student.cv_location = location
+    when 'transcript'
+      @student.transcript_location = location
+    when 'coveringletter'
+      @student.coveringletter_location = location
     end
   end
 

@@ -30,7 +30,7 @@
           <i class="icon-file"></i> Paper
         </h1>
 
-        <% if @student.get 'cv_location' or @student.get 'transcript_location' or @student.get 'covering_letter_location': %>
+        <% if ((@student.get 'cv_location') or (@student.get 'transcript_location') or (@student.get 'coveringletter_location')): %>
           <div class="row">
             <div class="span4">
               <table class="table table-striped">
