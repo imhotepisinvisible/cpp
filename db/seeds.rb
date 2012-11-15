@@ -45,7 +45,7 @@ jack = FactoryGirl.create :student,  {
   password: "cppcppcpp",
   password_confirmation: "cppcppcpp",
   year: 3,
-  bio: "Quite simply, I'm passionate about building awesome things with exciting technology.<br><br>I can usually be found hacking away on my latest project or evangelising  Ruby,  Rails, Git,  CoffeeScript,  Backbone.js,  TDD using RSpec or an API I've recently fallen in love with.",
+  bio: "Quite simply, I'm passionate about building awesome things with exciting technology.\n\nI can usually be found hacking away on my latest project or evangelising  Ruby,  Rails, Git,  CoffeeScript,  Backbone.js,  TDD using RSpec or an API I've recently fallen in love with.",
   degree: 'MEng Computing',
   cv_location: "",
   transcript_location: "",
