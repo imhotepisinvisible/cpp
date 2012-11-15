@@ -18,7 +18,7 @@ class Company < ActiveRecord::Base
   belongs_to :organisation
   has_and_belongs_to_many :departments
 
-  acts_as_taggable_on :languages, :interests, :year_groups
+  acts_as_taggable_on :skills, :interests, :year_groups
 
   validates :name,            :presence => true
   validates :logo,            :presence => true
