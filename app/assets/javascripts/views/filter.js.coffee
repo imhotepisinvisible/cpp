@@ -7,7 +7,6 @@ class CPP.Filter extends CPP.Views.Base
 
   events:
     "keyup .fltr-search"    : "setFilter"
-    "blur .fltr-search"     : "setFilter" 
     "click .fltr-tags"      : "setFilter"
     "click #tag-close"      : "removeTag"
     "click #tag-label-text" : "removeTag"
@@ -44,6 +43,7 @@ class CPP.Filter extends CPP.Views.Base
 
 
   setFilter: ->
+    console.log "setFilters"
     fCollection = @data
     for filter in @filters 
       tb =  $("#"+filter.attribute).val()
