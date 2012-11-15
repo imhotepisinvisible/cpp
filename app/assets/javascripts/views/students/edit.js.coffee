@@ -85,52 +85,26 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     @edit 'bio'
 
   bioStopEdit: ->
-    bio = $('#student-bio-editor').val()
-    $('#bio-textarea-container').hide()
-
-    if bio != @model.get 'bio'
-      @model.set 'bio', bio
-      @model.save {},
-          wait: true
-          success: (model, response) =>
-            notify "success", "Updated profile"
-            $('#student-bio').html model.get('bio').replace(/\n/g, "<br/>")
-            @model.set 'bio', model.get('bio')
-            $('#bio-container').show()
-          error: (model, response) ->
-            notify "error", "Failed to update profile"
-    else
-      $('#bio-container').show()
+    @stopEdit 'bio', 'string', ((bio) ->
+      if bio then bio.replace(/\n/g, "<br/>") else 'Click here to edit your bio!')
 
   yearEdit: ->
     @edit 'year'
 
   yearStopEdit: ->
-    year = parseInt($('#student-year-editor').val())
-    $('#year-textarea-container').hide()
-
-    if year != @model.get 'year'
-      @model.set 'year', year
-      @model.save {},
-          wait: true
-          success: (model, response) =>
-            notify "success", "Updated profile"
-            $('#student-year').html (getOrdinal(model.get('year')) + ' Year')
-            @model.set 'year', model.get('year')
-            $('#year-container').show()
-          error: (model, response) ->
-            notify "error", "Failed to update profile"
-    else
-      $('#year-container').show()
+    @stopEdit 'year', 'int', getOrdinal
 
   degreeEdit: ->
     @edit 'degree'
 
   degreeStopEdit: ->
-    @stopEdit 'degree'
+    @stopEdit 'degree', 'string', _.identity
 
-  stopEdit: (attribute) ->
+  # displayFunction must take one argument - the value in the model and
+  # must output a string to display in the edit window
+  stopEdit: (attribute, type, displayFunction) ->
     value = $('#student-' + attribute + '-editor').val()
+    value = if type == 'int' then parseInt(value) else value
     $('#' + attribute + '-textarea-container').hide()
 
     if value != @model.get attribute
@@ -139,7 +113,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
           wait: true
           success: (model, response) =>
             notify "success", "Updated profile"
-            $('#student-' + attribute + '').html model.get(attribute).replace(/\n/g, "<br/>")
+            $('#student-' + attribute + '').html displayFunction(model.get(attribute))
             @model.set attribute, model.get(attribute)
             $('#' + attribute + '-container').show()
           error: (model, response) ->

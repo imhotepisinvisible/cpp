@@ -31,12 +31,14 @@
       <span id="year-container">
         <span id="student-year" class="student-profile-intro-status">
           <% if @student.get('year'): %>
-            <%= getOrdinal(@student.get 'year') %> Year
+            <%= getOrdinal(@student.get 'year') %>
           <% else: %>
-            Year N/A
+            N/A
           <% end %>
         </span>
       </span>
+
+      <span>Year</span>
 
       <span id="degree-textarea-container" style="display:none">
         <textarea id="student-degree-editor">
@@ -49,7 +51,7 @@
           <% if @student.get('degree'): %>
             <%= @student.get('degree') %>
           <% else: %>
-            Degree N/A
+            N/A Degree
           <% end %>
         </span>
       </span>
