@@ -96,7 +96,6 @@
 
         <div class="row">
           <div class="span4">
-            <% console.log @student %>
             <% if @student.get('interests').length == 0 and @student.get('skills').length == 0 and @student.get('year_groups').length == 0: %>
               <div class="empty-student-profile-field-container">
                 <i class="icon-heart empty-student-profile-field"/>
