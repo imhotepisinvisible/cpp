@@ -66,7 +66,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
   deleteDocument: (e) ->
     id = $(e.currentTarget).attr('id')
     documentType = id.substring(id.lastIndexOf('-') + 1)
-    
+
     if confirm('Are you sure you wish to delete your ' + documentType + '?')
       $.get('/students/' + @model.id + '/delete_document/' + documentType, (data) =>
         @model.set('cv_location', data.cv_location)
@@ -77,7 +77,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
 
   bioEdit: ->
     $('#bio-container').hide()
-    $('#student-bio-editor').html(@model.get 'bio')
+    $('#student-bio-editor').html @model.get('bio')
     $('#bio-textarea-container').show()
     $('#student-bio-editor').focus()
 
@@ -91,7 +91,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
           wait: true
           success: (model, response) ->
             notify "success", "Updated profile"
-            $('#student-bio').html(model.get 'bio')
+            $('#student-bio').html model.get('bio').replace(/\n/g, "<br/>")
             $('#bio-container').show()
           error: (model, response) ->
             notify "error", "Failed to update profile"

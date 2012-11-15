@@ -113,13 +113,14 @@
           <div class="span4">
             <div id="bio-textarea-container" style="display:none">
               <textarea id="student-bio-editor">
-                <%= @student.get 'bio' %>
+                <%= @student.get('bio') %>
               </textarea>
             </div>
 
             <div id="bio-container">
               <p id="student-bio">
-                <%= @student.get 'bio' %>
+                <% console.log @student.get('bio') %>
+                <%- @student.get('bio').replace(/\n/g, "<br/>") %>
               </p>
             </div>
           </div>
