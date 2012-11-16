@@ -1,62 +1,70 @@
 <div class="row">
   <div class="span12" id="student-profile-header">
-    <div id="student-profile-img-container" class="img-polaroid">
-      <% if @student.get 'profile_picture_location': %>
-        <img src="<%= @student.get 'profile_picture_location' %>" id="student-profile-img">
-      <% else: %>
-        <img src="/assets/default_profile.png" id="student-profile-img">
-      <% end %>
+    <div class="span3">  
+      <div id="student-profile-img-container" class="img-polaroid">
+        <% if @student.get 'profile_picture_location': %>
+          <img src="<%= @student.get 'profile_picture_location' %>" id="student-profile-img">
+        <% else: %>
+          <img src="/assets/default_profile.png" id="student-profile-img">
+        <% end %>
+      </div>
     </div>
 
-    <div id="student-profile-intro">
+    <div class="span7">
+      <div id="student-profile-intro">
+        <div id="name-textarea-container" style="display:none">
+          <textarea id="student-name-editor">
+            <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
+          </textarea>
+        </div>
 
-      <div id="name-textarea-container" style="display:none">
-        <textarea id="student-name-editor">
-          <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
-        </textarea>
-      </div>
+        <div id="name-container">
+          <p id="student-profile-intro-name">
+            <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
+          </p>
+        </div>
 
-      <div id="name-container">
-        <p id="student-profile-intro-name">
-          <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
-        </p>
-      </div>
-
-      <span id="year-textarea-container" style="display:none">
-        <textarea id="student-year-editor">
-          <%= @student.get 'year' %>
-        </textarea>
-      </span>
-
-      <span id="year-container">
-        <span id="student-year" class="student-profile-intro-status">
-          <% if @student.get('year'): %>
-            <%= getOrdinal(@student.get 'year') %> Year
-          <% else: %>
-            Year N/A
-          <% end %>
+        <span id="year-textarea-container" style="display:none">
+          <textarea id="student-year-editor">
+            <%= @student.get 'year' %>
+          </textarea>
         </span>
-      </span>
 
-      <span id="degree-textarea-container" style="display:none">
-        <textarea id="student-degree-editor">
-          <%= @student.get 'degree' %>
-        </textarea>
-      </span>
-
-      <span id="degree-container">
-        <span id="student-degree" class="student-profile-intro-status">
-          <% if @student.get('degree'): %>
-            <%= @student.get('degree') %>
-          <% else: %>
-            Degree N/A
-          <% end %>
+        <span id="year-container">
+          <span id="student-year" class="student-profile-intro-status">
+            <% if @student.get('year'): %>
+              <%= getOrdinal(@student.get 'year') %>
+            <% else: %>
+              N/A
+            <% end %>
+          </span>
         </span>
-      </span>
-      <span>
-        <br>
-        Looking for an Industrial Placement
-      </span>
+
+        <span>Year</span>
+
+        <span id="degree-textarea-container" style="display:none">
+          <textarea id="student-degree-editor">
+            <%= @student.get 'degree' %>
+          </textarea>
+        </span>
+
+        <span id="degree-container">
+          <span id="student-degree" class="student-profile-intro-status">
+            <% if @student.get('degree'): %>
+              <%= @student.get('degree') %>
+            <% else: %>
+              N/A Degree
+            <% end %>
+          </span>
+        </span>
+        <span>
+          <br>
+          Looking for an Industrial Placement
+        </span>
+      </div>
+    </div>
+    <div class="span1">
+        <div class="btn btn-add activate">Deactivate</div>
     </div>
   </div>
 </div>

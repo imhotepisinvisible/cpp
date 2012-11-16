@@ -1,22 +1,28 @@
 <div class="row">
   <div class="span12" id="student-profile-header">
-    <div id="student-profile-img-container" class="img-polaroid">
-      <% if @student.get 'profile_picture_location': %>
-        <img src="<%= @student.get 'profile_picture_location' %>" id="student-profile-img">
-      <% else: %>
-        <img src="/assets/default_profile.png" id="student-profile-img">
-      <% end %>
+    <div class="span3">
+      <div id="student-profile-img-container" class="img-polaroid">
+        <% if @student.get 'profile_picture_location': %>
+          <img src="<%= @student.get 'profile_picture_location' %>" id="student-profile-img">
+        <% else: %>
+          <img src="/assets/default_profile.png" id="student-profile-img">
+        <% end %>
+      </div>
     </div>
-
-    <div id="student-profile-intro">
-      <p id="student-profile-intro-name">
-        <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
-      </p>
-      <p id="student-profile-intro-status">
-        <%= getOrdinal(@student.get 'year') %> Year <%= @student.get 'degree' %>
-        <br>
-        Looking for an Industrial Placement
-      </p>
+    <div class="span7">
+      <div id="student-profile-intro">
+        <p id="student-profile-intro-name">
+          <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
+        </p>
+        <p id="student-profile-intro-status">
+          <%= getOrdinal(@student.get 'year') %> Year <%= @student.get 'degree' %>
+          <br>
+          Looking for an Industrial Placement
+        </p>
+      </div>
+    </div>
+    <div class="span1">
+        <div class="btn btn-add activate">Deactivate</div>
     </div>
   </div>
 </div>

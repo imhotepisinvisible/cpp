@@ -20,6 +20,7 @@ class CPP.Views.CompaniesItem extends CPP.Views.Base
     Backbone.history.navigate("companies/" + @model.id + "/edit", trigger: true)
 
   deleteCompany: (e) ->
+    $(e.target).parent().parent().remove();
     e.stopPropagation()
     @model.destroy
       wait: true

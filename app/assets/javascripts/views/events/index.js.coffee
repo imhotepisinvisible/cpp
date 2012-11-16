@@ -54,13 +54,13 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
     new CPP.Filter
       el: $(@el).find('#event-filter')
       filters: [
-        {name: "Capacity Search"
-        type: "number"
-        attribute: "capacity"
-        scope: ""},
         {name: "Location Search"
         type: "text"
         attribute: "location"
+        scope: ""},
+        {name: "Capacity Search"
+        type: "number"
+        attribute: "capacity"
         scope: ""},
         {name: "Company"
         type: "tags"

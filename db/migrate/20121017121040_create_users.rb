@@ -15,6 +15,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :transcript_location
       t.string :coveringletter_location
       t.string :profile_picture_location
+      t.boolean :active
 
       # Company Admin Fields
       t.references :company # Company for Company Admin

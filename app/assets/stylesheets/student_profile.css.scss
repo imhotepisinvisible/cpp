@@ -1,5 +1,6 @@
 #student-profile-header {
   margin-bottom: 15px;
+  font-family: 'Arvo', serif;
 
   #student-profile-img-container {
     margin-right: 25px;
@@ -21,7 +22,6 @@
   }
 
   #student-profile-intro {
-    font-family: 'Arvo', serif;
     font-size: 40px;
     line-height: 45px;
 
@@ -35,6 +35,10 @@
       color: #444;
     }
   }
+}
+
+.profile-deactivated {
+  opacity: 0.5;
 }
 
 #student-profile-body {
@@ -93,7 +97,7 @@
   font-family: 'Arvo', serif;
   font-size: 40px;
   line-height: 45px;
-  width: 100px;
+  width: 50px;
   max-height: 55px;
   @include box-sizing(border-box);
 }
