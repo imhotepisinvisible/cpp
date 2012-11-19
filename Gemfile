@@ -35,6 +35,9 @@ gem 'datejs-rails'                # Nicer date manipulation in Javascript
 gem 'jquery-fileupload-rails'     # File upload
 gem 'jcountdown-rails', :git => 'http://github.com/rezwyi/jcountdown-rails.git' #Countdown timer
 
+gem 'paperclip' # Nice model attachment
+gem 'obscenity'
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3' # SASS for nicer CSS
   gem 'coffee-rails', '~> 3.2.1' # Coffeescript is the bomb
