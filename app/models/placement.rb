@@ -22,6 +22,9 @@ class Placement < ActiveRecord::Base
   validates :location,    :presence => true
   validates :description, :presence => true
 
+  validates :description, obscenity: {message: "Profanity is not allowed!"}
+  validates :position, obscenity: {message: "Profanity is not allowed!"}
+
   validates_datetime :deadline,
     :after => :now,
     :after_message => "Cannot be in the past"

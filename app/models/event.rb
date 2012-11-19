@@ -28,6 +28,9 @@ class Event < ActiveRecord::Base
   validates :start_date,   :presence => true
   validates :end_date,     :presence => true
 
+  validates :description, obscenity: {message: "Profanity is not allowed!"}
+  validates :title, obscenity: {message: "Profanity is not allowed!"}
+
   validates_datetime :start_date,
     :after => :now,
     :after_message => "Event cannot start in the past"

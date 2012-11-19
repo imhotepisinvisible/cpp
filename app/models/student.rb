@@ -20,7 +20,13 @@ class Student < User
   validates :bio, :length => { :maximum => 500 }
   validate :valid_email?
 
-  attr_accessible :department_id, :year, :bio, :degree, :cv_location, :transcript_location, :coveringletter_location, :profile_picture_location
+  validates :bio, obscenity: {message: "Profanity is not allowed!"}
+  validates :first_name, obscenity: {message: "Profanity is not allowed!"}
+  validates :last_name, obscenity: {message: "Profanity is not allowed!"}
+
+  attr_accessible :department_id, :year, :bio, :degree, :cv_location,
+                  :transcript_location, :coveringletter_location,
+                  :profile_picture_location
 
   def valid_email?
     if department.organisation.organisation_domains.any?
