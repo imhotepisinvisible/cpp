@@ -83,15 +83,15 @@
               <table class="table table-striped">
 
                 <tr>
-                  <td id="table-cv">
+                  <td id="table-cv" class="<%= "missing-document" unless @student.get('cv_file_name') %>">
                     <div>
                       Curriculum Vitae
                       <form class="form-inline hidden">
-                        <input class="file-input" id="file-cv" type="file" name="files[]" size="20">
+                        <input class="file-input" id="file-cv" type="file" name="student[cv]" size="20">
                       </form>
                       <div class="pull-right">
                         <div class="btn upload-document" id="upload-cv"><i class="icon-upload-alt"/></div>
-                        <a class="btn" id="download-cv" href="<%= '/students/' + @student.id + '/download_document/cv' %>"><i class="icon-download-alt"/></a>
+                        <a class="btn download-document" id="download-cv" href="<%= '/students/' + @student.id + '/cv' %>"><i class="icon-download-alt"/></a>
                         <div class="btn btn-danger delete-document" id="delete-cv"><i class="icon-trash" /></div>
                       </div>
                     </div>
@@ -105,15 +105,17 @@
                 </tr>
 
                 <tr>
-                  <td id="table-transcript">
+                  <td id="table-transcript" class="<%= "missing-document" unless @student.get('transcript_file_name') %>">
                     <div>
                       Transcript
                       <form class="form-inline hidden">
-                        <input class="file-input" id="file-transcript" type="file" name="files[]" size="20">
+                        <input class="file-input" id="file-transcript" type="file" name="student[transcript]" size="20">
                       </form>
                       <div class="pull-right">
                         <div class="btn upload-document" id="upload-transcript"><i class="icon-upload-alt"/></div>
-                        <a class="btn" id="download-transcript" href="<%= '/students/' + @student.id + '/download_document/transcript' %>"><i class="icon-download-alt"/></a>
+                        <a class="btn download-document" id="download-transcript" href="<%= '/students/' + @student.id + '/transcript' %>">
+                          <i class="icon-download-alt"/>
+                        </a>
                         <div class="btn btn-danger delete-document" id="delete-transcript"><i class="icon-trash" /></div>
                       </div>
                     </div>
@@ -127,22 +129,24 @@
                 </tr>
 
                 <tr>
-                  <td id="table-coveringletter">
+                  <td id="table-covering_letter" class="<%= "missing-document" unless @student.get('covering_letter_file_name') %>">
                     <div>
                       Covering Letter
                       <form class="form-inline hidden">
-                        <input class="file-input" id="file-coveringletter" type="file" name="files[]" size="20">
+                        <input class="file-input" id="file-covering-letter" type="file" name="student[covering_letter]" size="20">
                       </form>
                       <div class="pull-right">
-                        <div class="btn upload-document" id="upload-coveringletter"><i class="icon-upload-alt"/></div>
-                        <a class="btn" id="download-coveringletter" href="<%= '/students/' + @student.id + '/download_document/coveringletter' %>"><i class="icon-download-alt"/></a>
-                        <div class="btn btn-danger delete-document" id="delete-coveringletter"><i class="icon-trash" /></div>
+                        <div class="btn upload-document" id="upload-covering-letter"><i class="icon-upload-alt"/></div>
+                        <a class="btn download-document" id="download-covering-letter" href="<%= '/students/' + @student.id + '/covering-letter' %>">
+                          <i class="icon-download-alt"/>
+                        </a>
+                        <div class="btn btn-danger delete-document" id="delete-covering-letter"><i class="icon-trash" /></div>
                       </div>
                     </div>
                     <div class="clearfix"></div>
 
                     <div class="progress progress-info progress-upload" style="display:none">
-                      <div id="progress-coveringletter" class="bar">
+                      <div id="progress-covering-letter" class="bar">
                     </div>
 
                   </td>
@@ -182,55 +186,61 @@
 
         <div class="row">
           <div class="span4">
-            <form class="form-inline">
-              <input id="add-tag-input" type="text" class="input-large" placeholder="Type to Add Tag"  data-provide="typeahead" data-source='["Python", "Javascript", "jQuery", "Backbone", "Assembly", "C#", "Java", "Open Source", "iOS", "Algorithms"]'/>
-            </form>
-          </div>
-          <div class="span4">
-            <% if @student.get('interests').length == 0 and @student.get('skills').length == 0 and @student.get('year_groups').length == 0: %>
+            <% if false and @student.get('interests').length == 0 and @student.get('skills').length == 0 and @student.get('year_groups').length == 0: %>
               <div class="empty-student-profile-field-container">
                 <i class="icon-heart empty-student-profile-field"/>
               </div>
             <% else: %>
               <div class="row">
-                <% if @student.get('skills').length > 0: %>
                   <div class="span4">
                     <div class="tag-category">
                       <div class="tag-category-header">
                         Skills
+
+                        <form id="skill-tag-form" class="pull-right form-inline" style="padding: 0px; margin:0px">
+                          <input id="add-skill-tag-input" type="text" class="input-medium" placeholder="Type to Add Skill" />
+                        </form>
+                        <div class="clearfix"/>
                       </div>
-                      <% for i, tag of @student.get('skills'): %>
-                        <span class="label tag skill-tag"><%= tag.name %><a class="close remove-tag">×<input type="hidden" value="<%= tag.id %>"></a></span>
-                      <% end %>
+                      <div id="skill-tag-container">
+                        <% for i, tag of @student.get('skills'): %>
+                          <span class="label tag skill-tag"><span class="tag-text"><%= tag.name %></span><a class="close remove-tag">×<input type="hidden" value="<%= tag.id %>"></a></span>
+                        <% end %>
+                      </div>
                     </div>
                   </div>
-                <% end %>
 
-                <% if @student.get('skills').length > 0: %>
                   <div class="span4">
                     <div class="tag-category">
                       <div class="tag-category-header">
                         Interests
+
+                        <form class="pull-right form-inline" style="padding: 0px; margin:0px">
+                          <input type="text" class="input-medium" placeholder="Type to Add Interests" />
+                        </form>
+                        <div class="clearfix"/>
                       </div>
                       <% for i, tag of @student.get('interests'): %>
-                        <span class="label tag interest-tag"><%= tag.name %><a class="close remove-tag">×<input type="hidden" value="<%= tag.id %>"></a></span>
+                        <span class="label tag interest-tag"><span class="tag-text"><%= tag.name %></span><a class="close remove-tag">×<input type="hidden" value="<%= tag.id %>"></a></span>
                       <% end %>
                     </div>
                   </div>
-                <% end %>
 
-                <% if @student.get('year_groups').length > 0: %>
                   <div class="span4">
                     <div class="tag-category">
                       <div class="tag-category-header">
                         Year Groups
+
+                        <form class="pull-right form-inline" style="padding: 0px; margin:0px">
+                          <input  type="text" class="input-medium" placeholder="Type to Add Groups" />
+                        </form>
+                        <div class="clearfix"/>
                       </div>
                       <% for i, tag of @student.get('year_groups'): %>
-                        <span class="label tag year-group-tag"><%= tag.name %><a class="close remove-tag">×<input type="hidden" value="<%= tag.id %>"></a></span>
+                        <span class="label tag year-group-tag"><span class="tag-text"><%= tag.name %></span><a class="close remove-tag">×<input type="hidden" value="<%= tag.id %>"></a></span>
                       <% end %>
                     </div>
                   </div>
-                <% end %>
               </div>
             <% end %>
           </div>

@@ -2,8 +2,8 @@
   <div class="span12" id="student-profile-header">
     <div class="span3">
       <div id="student-profile-img-container" class="img-polaroid">
-        <% if @student.get 'profile_picture_location': %>
-          <img src="<%= @student.get 'profile_picture_location' %>" id="student-profile-img">
+        <% if @student.get 'profile_picture_file_name': %>
+          <img src="<%= @student.get 'profile_picture_file_name' %>" id="student-profile-img">
         <% else: %>
           <img src="/assets/default_profile.png" id="student-profile-img">
         <% end %>
@@ -36,11 +36,11 @@
           <i class="icon-file"></i> Paper
         </h1>
 
-        <% if ((@student.get 'cv_location') or (@student.get 'transcript_location') or (@student.get 'coveringletter_location')): %>
+        <% if ((@student.get 'cv_file_name') or (@student.get 'transcript_file_name') or (@student.get 'covering_letter_file_name')): %>
           <div class="row">
             <div class="span4">
               <table class="table table-striped">
-                <% if @student.get 'cv_location': %>
+                <% if @student.get 'cv_file_name': %>
                   <tr>
                     <td>Curriculum Vitae</td>
                     <td>
@@ -48,7 +48,7 @@
                     </td>
                   </tr>
                 <% end %>
-                <% if @student.get 'transcript_location': %>
+                <% if @student.get 'transcript_file_name': %>
                   <tr>
                     <td>Transcript</td>
                     <td>
@@ -56,11 +56,11 @@
                     </td>
                   </tr>
                 <% end %>
-                <% if @student.get 'coveringletter_location': %>
+                <% if @student.get 'covering-letter_file_name': %>
                   <tr>
                     <td>Covering Letter</td>
                     <td>
-                      <a class="btn pull-right" href="<%= '/students/' + @student.id + '/download_document/coveringletter' %>"><i class="icon-download-alt"/></a>
+                      <a class="btn pull-right" href="<%= '/students/' + @student.id + '/download_document/covering-letter' %>"><i class="icon-download-alt"/></a>
                     </td>
                   </tr>
                 <% end %>

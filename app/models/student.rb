@@ -24,9 +24,25 @@ class Student < User
   validates :first_name, obscenity: {message: "Profanity is not allowed!"}
   validates :last_name, obscenity: {message: "Profanity is not allowed!"}
 
-  attr_accessible :department_id, :year, :bio, :degree, :cv_location,
-                  :transcript_location, :coveringletter_location,
-                  :profile_picture_location
+  has_attached_file :cv,
+    :path => ':rails_root/documents/cvs/:id/:basename.:extension',
+    :url => '/:class/:id/cv'
+
+  has_attached_file :transcript,
+    :path => ':rails_root/documents/transcripts/:id/:basename.:extension',
+    :url => '/:class/:id/transcript'
+
+  has_attached_file :covering_letter,
+    :path => ':rails_root/documents/covering_letters/:id/:basename.:extension',
+    :url => '/:class/:id/covering_letter'
+
+  has_attached_file :profile_picture,
+    :path => ':rails_root/documents/profile_pictures/:id/:basename.:extension',
+    :url => '/:class/:id/profile_picture'
+
+  attr_accessible :department_id, :year, :bio, :degree,
+                    :cv, :transcript, :covering_letter, :profile_picture
+
 
   def valid_email?
     if department.organisation.organisation_domains.any?

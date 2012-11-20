@@ -36,110 +36,17 @@ class StudentsController < ApplicationController
     end
   end
 
-  # POST /students/1/upload_document/:document_type
-  def upload_document
-    @student = Student.find(params[:id])
-    document_type = params[:document_type]
-
-    # File saved in /tmp
-    tempfile = params[:files][0].tempfile
-    extension = File.extname(params[:files][0].original_filename)
-
-    directory = File.join('documents', document_type)
-
-    # Make new file name for the CV
-    file = File.join(directory, "#{@student.id}#{extension}")
-
-    # Copy temporary file to new place /cvs
-    FileUtils.cp tempfile.path, file
-
-    # Set the correct model attribute
-    set_document_location document_type, @student, file
-
-    if @student.save
-      respond_with @student
-    else
-      respond_with @student, status: :unprocessable_entity
-    end
-  end
-
-  # GET /students/1/download_document/:document_type
-  def download_document
-    @student = Student.find(params[:id])
-    document_type = params[:document_type]
-
-    # Get the correct model attribute
-    location = get_document_location document_type, @student
-
-    extension = File.extname location
-
-    if location and File.exists?(location)
-      send_file location, :filename => "#{@student.last_name}_#{@student.first_name}_#{document_type}#{extension}"
-    else
-      head :no_content
-    end
-  end
-
-  # GET /students/1/delete_document/:document_type
-  def delete_document
-    @student = Student.find(params[:id])
-    document_type = params[:document_type]
-
-    # Get the correct model attribute
-    location = get_document_location document_type, @student
-
-    if location and File.exists?(location)
-      FileUtils.rm(location)
-      set_document_location document_type, @student, ''
-      if @student.save
-        respond_with @student
-      else
-        head :no_content
-      end
-    else
-      head :no_content
-    end
-  end
-
-  def get_document_location(document_type, student)
-    location = ''
-    case document_type
-    when 'cv'
-      location = student.cv_location
-    when 'transcript'
-      location = student.transcript_location
-    when 'coveringletter'
-      location = student.coveringletter_location
-    end
-    location
-  end
-
-  def set_document_location(document_type, student, location)
-    case document_type
-    when 'cv'
-      @student.cv_location = location
-    when 'transcript'
-      @student.transcript_location = location
-    when 'coveringletter'
-      @student.coveringletter_location = location
-    end
-  end
-
   # PUT /students/1
   # PUT /students/1.json
   def update
     @student = Student.find(params[:id])
-    @student.update_attributes(params[:student])
-    @student.skill_list = params[:skills].map{|t| t["name"]}
-    @student.year_group_list = params[:year_groups].map{|t| t["name"]}
-    @student.interest_list = params[:interests].map{|t| t["name"]}
-    # params[:student][:year_group_list] = params[:year_groups]
-    #student profile bits in here.
-    if @student.save
-      logger.info "UPDATING *************"
-      logger.info @student.inspect
-      logger.info @student.year_group_list
-      head :no_content
+
+    params[:skill_list] = params[:skills].map{|t| t["name"]} if params.has_key? "skills"
+    params[:year_groups] = params[:year_groups].map{|t| t["name"]} if params.has_key? "year_groups"
+    params[:interests] = params[:interests].map{|t| t["name"]} if params.has_key? "interests"
+
+    if @student.update_attributes(params[:student])
+    head :no_content
     else
       respond_with @student, status: :unprocessable_entity
     end
@@ -153,5 +60,33 @@ class StudentsController < ApplicationController
     @student.destroy
     @studentProfile.destroy
     head :no_content
+  end
+
+  # GET /students/1/:document_type
+  def download_document
+    @student = Student.find(params[:id])
+    document_type = params[:document_type]
+    document = (@student.send "#{document_type}".to_sym).path
+    ext = File.extname document
+
+    unless document.nil?
+      send_file document, :filename => "#{@student.last_name}_#{@student.first_name}_#{document_type}#{ext}"
+    else
+      head :no_content
+    end
+  end
+
+  # DELETE /students/1/:document_type
+  def delete_document
+    @student = Student.find(params[:id])
+    document_type = params[:document_type]
+    @student.send "#{document_type}=".to_sym, nil
+
+    puts @student.inspect
+    if @student.save
+      respond_with @student
+    else
+      respond_with @student, status: :unprocessable_entity
+    end
   end
 end

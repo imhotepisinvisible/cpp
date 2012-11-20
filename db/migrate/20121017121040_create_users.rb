@@ -8,13 +8,9 @@ class CreateUsers < ActiveRecord::Migration
 
       # Student Fields
       t.references :department
-      t.integer :year
-      t.text :bio
-      t.text :degree
-      t.string :cv_location
-      t.string :transcript_location
-      t.string :coveringletter_location
-      t.string :profile_picture_location
+      t.integer :year, :default => "?"
+      t.text :bio, :default => "Click to Add Bio"
+      t.text :degree, :default => ""
       t.boolean :active
 
       # Company Admin Fields

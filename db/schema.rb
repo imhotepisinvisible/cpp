@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121116101931) do
+ActiveRecord::Schema.define(:version => 20121119184645) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -162,18 +162,30 @@ ActiveRecord::Schema.define(:version => 20121116101931) do
     t.string   "email"
     t.string   "password_digest"
     t.integer  "department_id"
-    t.integer  "year"
-    t.text     "bio"
-    t.text     "degree"
-    t.string   "cv_location"
-    t.string   "transcript_location"
-    t.string   "coveringletter_location"
-    t.string   "profile_picture_location"
+    t.integer  "year",                         :default => 0
+    t.text     "bio",                          :default => "Click to Add Bio"
+    t.text     "degree",                       :default => ""
     t.boolean  "active"
     t.integer  "company_id"
     t.string   "type"
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
+    t.datetime "created_at",                                                   :null => false
+    t.datetime "updated_at",                                                   :null => false
+    t.string   "cv_file_name"
+    t.string   "cv_content_type"
+    t.integer  "cv_file_size"
+    t.datetime "cv_updated_at"
+    t.string   "transcript_file_name"
+    t.string   "transcript_content_type"
+    t.integer  "transcript_file_size"
+    t.datetime "transcript_updated_at"
+    t.string   "profile_picture_file_name"
+    t.string   "profile_picture_content_type"
+    t.integer  "profile_picture_file_size"
+    t.datetime "profile_picture_updated_at"
+    t.string   "covering_letter_file_name"
+    t.string   "covering_letter_content_type"
+    t.integer  "covering_letter_file_size"
+    t.datetime "covering_letter_updated_at"
   end
 
   create_table "users_events", :force => true do |t|

@@ -5,6 +5,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
   events:
     'click .upload-document': 'uploadDocument'
     'click .delete-document': 'deleteDocument'
+
     'click #bio-container': 'bioEdit'
     'click .remove-tag': 'removeTag'
     'blur #bio-textarea-container': 'bioStopEdit'
@@ -15,10 +16,13 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     'click #degree-container': 'degreeEdit'
     'blur #degree-textarea-container': 'degreeStopEdit'
     'click .activate'  : 'activate'
+    'submit #skill-tag-form': 'addSkill'
 
   initialize: ->
     @render()
-    @checkAllDocuments()
+    @uploadInitialize 'cv'
+    @uploadInitialize 'transcript'
+    @uploadInitialize 'covering-letter'
 
   render: ->
     super
@@ -34,57 +38,52 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
       model: @model
       collection: @model.placements
 
-    @uploadInitialize 'cv'
-    @uploadInitialize 'transcript'
-    @uploadInitialize 'coveringletter'
+    $('#add-skill-tag-input').typeahead
+      source: (query, process) =>
+        $.get '/tags/skills', {student_id: @model.id}, (data) ->
+          tagnames = (tag.name for tag in data)
+          process(tagnames)
 
-    # $.getJSON("/")
-    # $("#add-tag-input").autocomplete('/all_tags', {}).result (event, data, formatted) ->
-    #   console.log event, data, formatted
     @
 
   uploadInitialize: (documentType) ->
-    # Prepare the file uploader
     $('#file-' + documentType).fileupload
-      url: '/students/' + @model.id + '/upload_document/' + documentType
+      url: '/students/' + @model.id
       dataType: 'json'
-      #fileInput: null # do not bind to change event
-      progressall: (e, data) ->
-        # Update progress bar
-        progress = parseInt(data.loaded / data.total * 100, 10)
-        $('#progress-' + documentType).width(progress + '%')
-        false
+      type: "PUT"
 
-      done: (e, data) =>
-        notify 'success', 'Uploaded successfully'
-        @model.set 'cv_location', data.result.cv_location
-        @model.set 'transcript_location', data.result.transcript_location
-        @model.set 'coveringletter_location', data.result.coveringletter_location
-        # Three parents up is td
-        $(e.target).parent().parent().parent().find('.progress-upload').delay(1000).slideUp('slow', (->
-          $(this).find('.bar').width('0%')))
-
-        @checkAllDocuments()
-        #$('#cv-location').html(data.result.cv_location)
-        #$('#uploaded-cv').removeClass('hidden')
-        false
     .bind "fileuploadstart", (e, data) ->
       $(e.currentTarget).parent().parent().parent().find('.progress-upload').slideDown()
 
+    .bind "fileuploadprogress", (e, data) ->
+      progress = parseInt(data.loaded / data.total * 100, 10)
+      $('#progress-' + documentType).width(progress + '%')
+
+    .bind "fileuploaddone", (e, data) ->
+      td = $(e.target).closest('td')
+      td.find('.progress-upload').delay(250).slideUp 'slow', ->
+        td.find('.bar').width('0%')
+        td.removeClass('missing-document')
+        notify 'success', 'Uploaded successfully'
+
+    .bind "fileuploadfail", (e, data) ->
+      notify('error', "Document couldn't be uploaded")
+
   uploadDocument: (e) ->
-    $(e.currentTarget).parent().parent().find('.file-input').click()
+    $(e.currentTarget).closest('td').find('.file-input').click()
 
   deleteDocument: (e) ->
     id = $(e.currentTarget).attr('id')
-    documentType = id.substring(id.lastIndexOf('-') + 1)
+    documentType = id.substring(id.indexOf('-') + 1).replace("-","_")
 
-    if confirm('Are you sure you wish to delete your ' + documentType + '?')
-      $.get('/students/' + @model.id + '/delete_document/' + documentType, (data) =>
-        @model.set('cv_location', data.cv_location)
-        @model.set('transcript_location', data.transcript_location)
-        @model.set('coveringletter_location', data.coveringletter_location)
-        @checkAllDocuments()
-        )
+    if confirm "Are you sure you wish to delete your #{documentType}?"
+      $.ajax
+        url: "/students/#{@model.id}/#{documentType}"
+        type: 'DELETE'
+        success: (data) ->
+          $(e.currentTarget).closest('td').addClass('missing-document')
+        error: (data) ->
+          notify('error', "couldn't remove document")
 
   bioEdit: ->
     $('#bio-container').hide()
@@ -174,21 +173,6 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
 
     $('#name-container').show()
 
-  checkAllDocuments: ->
-    @checkDocument 'cv'
-    @checkDocument 'transcript'
-    @checkDocument 'coveringletter'
-
-  checkDocument: (documentType) ->
-    if @model.get "#{documentType}_location"
-      $('#table-' + documentType).removeClass('missing-document')
-      $('#download-' + documentType).show()
-      $('#delete-' + documentType).show()
-    else
-      $('#table-' + documentType).addClass('missing-document')
-      $('#download-' + documentType).hide()
-      $('#delete-' + documentType).hide()
-
   activate: (e) ->
     @model.set "active", (!@model.get "active");
     if (!@model.get "active")
@@ -203,12 +187,16 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
   removeTag: (e) ->
     close_div = $(e.currentTarget)
     tag_div = close_div.parent()
+    tag_name = tag_div.find(".tag-text").html().trim()
     tag_id = close_div.find("input").val()
 
+    console.log tag_name
+
     # Remove tag from lists
-    @model.set 'skills', (tag for tag in @model.get('skills') when parseInt(tag.id) != parseInt(tag_id))
-    @model.set 'interests', (tag for tag in @model.get('interests') when parseInt(tag.id) != parseInt(tag_id))
-    @model.set 'year_groups', (tag for tag in @model.get('year_groups') when parseInt(tag.id) != parseInt(tag_id))
+    @model.set 'skills', (tag for tag in @model.get('skills') when tag.name != tag_name)
+    @model.set 'interests', (tag for tag in @model.get('interests') when tag.name != tag_name)
+    @model.set 'year_groups', (tag for tag in @model.get('year_groups') when tag.name != tag_name)
+
     console.log @model.get('year_groups')
     console.log(parseInt(tag.id), parseInt(tag_id)) for tag in @model.get('year_groups')
     @model.save {},
@@ -218,3 +206,21 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
           tag_div.remove()
         error: (model, response) ->
           notify "error", "Failed to remove tag"
+
+  addSkill: (e) ->
+    e.preventDefault()
+    tagname = $("#add-skill-tag-input").val()
+    $("#skill-tag-container").append('<span class="label tag skill-tag"><span class="tag-text">' + tagname + '</span><a class="close remove-tag">×<input type="hidden" value=""></a></span>')
+
+    skilltags = @model.get("skills")
+    skilltags.push {id:0, name: tagname}
+    @model.set 'skills', skilltags
+
+    console.log @model.get("skills")
+    @model.save {},
+      wait: true
+      success: (model, response) =>
+        notify "success", "Added Tag"
+        tag_div.remove()
+      error: (model, response) ->
+        notify "error", "Failed to add tag"

@@ -78,6 +78,14 @@
 .missing-document {
   background-color: #f2dede!important;
   color: #b94a48;
+
+  .download-document {
+    display: none;
+  }
+
+  .delete-document {
+    display: none;
+  }
 }
 
 .document-table {
