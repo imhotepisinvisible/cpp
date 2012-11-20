@@ -125,7 +125,9 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
             @model.set attribute, model.get(attribute)
             $('#' + attribute + '-container').show()
           error: (model, response) ->
-            notify "error", "Failed to update profile"
+            errorlist = JSON.parse response.responseText
+            msg = errorlist.errors.bio.join('\n')
+            notify "error", msg
             $('#' + attribute + '-container').show()
     else
       $('#' + attribute + '-container').show()
