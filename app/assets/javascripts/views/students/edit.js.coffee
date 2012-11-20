@@ -160,7 +160,6 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
             $('#student-profile-intro-name').html(model.get('first_name') + ' ' + model.get('last_name'))
             @model.set 'first_name', model.get('first_name')
             @model.set 'last_name', model.get('last_name')
-            $('#name-container').show()
           error: (model, response) ->
             errorlist = JSON.parse response.responseText
 
@@ -174,10 +173,8 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
                 msg.push error
 
             notify "error", msg.join('\n')
-            $('#name-container').show()
 
-    else
-      $('#name-container').show()
+    $('#name-container').show()
 
   checkAllDocuments: ->
     @checkDocument 'cv'
