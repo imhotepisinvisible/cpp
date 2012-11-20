@@ -162,7 +162,20 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
             @model.set 'last_name', model.get('last_name')
             $('#name-container').show()
           error: (model, response) ->
-            notify "error", "Failed to update profile"
+            errorlist = JSON.parse response.responseText
+
+            if errorlist.errors.first_name
+              msg = errorlist.errors.first_name
+            else
+              msg = []
+
+            for error in errorlist.errors.last_name
+              if !(error in msg)
+                msg.push error
+
+            notify "error", msg.join('\n')
+            $('#name-container').show()
+
     else
       $('#name-container').show()
 
