@@ -38,7 +38,7 @@ department = FactoryGirl.create :department, {
   organisation: organisation
 }
 
-jack = FactoryGirl.create :student,  {
+pete = FactoryGirl.create :student,  {
   first_name: "Peter",
   last_name: "Hamilton",
   email: "peter.hamilton10@imperial.ac.uk",
@@ -50,12 +50,12 @@ jack = FactoryGirl.create :student,  {
   department: department
 }
 
-jack.skill_list = skills_tags
-jack.interest_list = interests_tags
-jack.year_group_list = ["3rd Year", "MEng"]
-jack.save
+pete.skill_list = ["Ruby on Rails", "Backbone.js", "Java" "Python", "Coffeescript", "Javascript", "HTML", "CSS", ]
+pete.interest_list = ["Web Dev", "Startups", "iOS Dev", "Open Source"]
+pete.year_group_list = ["3rd Year", "MEng"]
+pete.save!
 
-pete = FactoryGirl.create :student,  {
+jack = FactoryGirl.create :student,  {
   first_name: "Jack",
   last_name: "Stevenson",
   email: "js3509@ic.ac.uk",
@@ -67,10 +67,10 @@ pete = FactoryGirl.create :student,  {
   department: department
 }
 
-pete.skill_list = ["Ruby", "Backbone", "Rails"]
-pete.interest_list = ["Web Development"]
-pete.year_group_list = ["3rd Year", "MEng"]
-pete.save
+jack.skill_list = skills_tags
+jack.interest_list = interests_tags
+jack.year_group_list = ["3rd Year", "MEng"]
+jack.save!
 
 # Sample Companies
 10.times do
