@@ -113,7 +113,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
 
     if confirm "Are you sure you wish to delete your #{documentType}?"
       $.ajax
-        url: "/students/#{@model.id}/#{documentType}"
+        url: "/students/#{@model.id}/documents/#{documentType}"
         type: 'DELETE'
         success: (data) ->
           $(e.currentTarget).closest('.upload-container').addClass('missing-document')

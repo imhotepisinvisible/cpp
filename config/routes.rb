@@ -63,8 +63,8 @@ CPP::Application.routes.draw do
   resources :placements
 
   resources :students do
-    delete ':document_type', :on => :member, :action => :delete_document
-    get ':document_type', :on => :member, :action => :download_document
+    delete '/documents/:document_type', :on => :member, :action => :delete_document
+    get '/documents/:document_type', :on => :member, :action => :download_document
   end
 
   resources :emails
