@@ -9,6 +9,7 @@ class CPP.Routers.Students extends Backbone.Router
     students = new CPP.Collections.Students
     students.fetch
       success: ->
+        new CPP.Views.StudentsIndex collection: students
       error: ->
         notify "error", "Couldn't fetch students"
 

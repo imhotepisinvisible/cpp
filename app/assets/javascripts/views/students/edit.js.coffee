@@ -176,13 +176,22 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
   activate: (e) ->
     @model.set "active", (!@model.get "active");
     if (!@model.get "active")
-      $('#student-profile-img-container').removeClass('profile-deactivated')
-      $('#student-profile-intro').removeClass('profile-deactivated')
-      $(e.target).html("Deactivate")
-    else
       $('#student-profile-img-container').addClass('profile-deactivated')
       $('#student-profile-intro').addClass('profile-deactivated')
       $(e.target).html("Activate")
+    else
+      $('#student-profile-img-container').removeClass('profile-deactivated')
+      $('#student-profile-intro').removeClass('profile-deactivated')
+      $(e.target).html("Deactivate")
+    @model.save {},
+        wait: true
+        success: (model, response) =>
+          if @model.get "active"
+            notify "success", "Profile Active"
+          else
+            notify "success", "Profile Inactive"
+        error: (model, response) ->
+          notify "error", "Failed to change profile active status"
 
   removeTag: (e) ->
     close_div = $(e.currentTarget)

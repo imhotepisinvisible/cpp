@@ -1,0 +1,4 @@
+<td><%= @student.get 'first_name' %></td>
+<td><%= @student.get 'last_name' %></td>
+<td><%= @student.get 'year' %></td>
+<td><%= @student.get 'degree' %></td>
