@@ -28,6 +28,8 @@ class Student < User
     :path => ':rails_root/documents/cvs/:id/:basename.:extension',
     :url => '/:class/:id/cv'
 
+  validates_attachment :cv, :content_type => { :content_type => "application/pdf" }
+
   has_attached_file :transcript,
     :path => ':rails_root/documents/transcripts/:id/:basename.:extension',
     :url => '/:class/:id/transcript'

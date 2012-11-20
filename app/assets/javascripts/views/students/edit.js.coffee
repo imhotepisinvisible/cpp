@@ -67,6 +67,9 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
         notify 'success', 'Uploaded successfully'
 
     .bind "fileuploadfail", (e, data) ->
+      td = $(e.target).closest('td')
+      td.find('.progress-upload').delay(250).slideUp 'slow', ->
+        td.find('.bar').width('0%')
       notify('error', "Document couldn't be uploaded")
 
   uploadDocument: (e) ->
