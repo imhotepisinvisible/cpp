@@ -33,7 +33,7 @@
     <div class="row">
       <div class="span4">
         <h1 class="section-header">
-          <i class="icon-file"></i> Paper
+          <i class="icon-file"></i> Documents
         </h1>
 
         <% if ((@student.get 'cv_file_name') or (@student.get 'transcript_file_name') or (@student.get 'covering_letter_file_name')): %>
@@ -77,7 +77,7 @@
 
       <div class="span4">
         <h1 class="section-header">
-          <i class="icon-user"></i> Person
+          <i class="icon-user"></i> About Me
         </h1>
 
         <div class="row">
