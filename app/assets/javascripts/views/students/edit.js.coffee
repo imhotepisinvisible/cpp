@@ -123,13 +123,11 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
             notify "success", "Updated profile"
             $('#student-' + attribute + '').html displayFunction(model.get(attribute))
             @model.set attribute, model.get(attribute)
-            $('#' + attribute + '-container').show()
           error: (model, response) ->
             errorlist = JSON.parse response.responseText
             msg = errorlist.errors.bio.join('\n')
             notify "error", msg
-            $('#' + attribute + '-container').show()
-    else
+
       $('#' + attribute + '-container').show()
 
   edit: (attribute) ->
