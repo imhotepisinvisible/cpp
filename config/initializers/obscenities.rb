@@ -1,5 +1,5 @@
 Obscenity.configure do |config|
-  # config.blacklist   = "path/to/blacklist/file.yml"
+  config.blacklist   = ["boob", "cock", "poo"]
   config.whitelist   = ["safe", "word"]
   config.replacement = :stars
 end
