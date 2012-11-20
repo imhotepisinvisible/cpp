@@ -126,6 +126,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
             $('#' + attribute + '-container').show()
           error: (model, response) ->
             notify "error", "Failed to update profile"
+            $('#' + attribute + '-container').show()
     else
       $('#' + attribute + '-container').show()
 
