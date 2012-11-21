@@ -46,6 +46,15 @@ textarea {
   }
 }
 
+.link {
+  color: #08C;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 /* Notifications */
 .centre-span{
   margin:0 auto;
@@ -56,6 +65,12 @@ textarea {
 
 .centre-text{
   text-align:center;
+}
+
+/* Forms */
+
+.form-cancel {
+  margin-left: 10px;
 }
 
 /* Event/Placement Lists */
