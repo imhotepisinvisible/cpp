@@ -96,7 +96,6 @@ class StudentsController < ApplicationController
     degrees = []
     @students.each do |student|
       if (not student.degree.to_s.empty?) and (not degrees.include? student.degree)
-        logger.info student.degree
         degrees.push student.degree
       end
     end
