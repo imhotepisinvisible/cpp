@@ -13,7 +13,7 @@ class CPP.Views.CompaniesStudentIndex extends CPP.Views.Base
     $(@el).html(@template())
     @renderCompanies(@collection)
     @renderFilters()
-   
+
   renderCompanies: (collection) ->
     $('#company-tiles').html("")
 
@@ -21,16 +21,24 @@ class CPP.Views.CompaniesStudentIndex extends CPP.Views.Base
     # so that best is first
 
     if collection.length > 0
-      topCompanyTile = new CPP.Views.CompanyTopTile(model: collection.first())
-      $('#company-tiles').append(topCompanyTile.retrieveTemplate())
+      $('#company-tiles').append('<div id="company-tile-container-0"></div>')
+      topCompanyTile = new CPP.Views.CompanyTile
+        model: collection.first()
+        el: '#company-tile-container-0'
+        big: true
       $('#company-tiles').append(@rowDiv)
 
-      for index in [1..(collection.length - 1)]
-        # Every third company, add a new row
-        if index % 3 == 1
-          $('#current-tile-row').removeAttr('id')
-          $('#company-tiles').append(@rowDiv)
-        $('#current-tile-row').append(@tileTemplate(company: collection.at(index)))
+      if collection.length > 1
+        for index in [1..(collection.length - 1)]
+          # Every third company, add a new row
+          if index % 3 == 1
+            $('#current-tile-row').removeAttr('id')
+            $('#company-tiles').append(@rowDiv)
+          $('#current-tile-row').append('<div id="company-tile-container-' + index + '"></div>')
+          companyTile = new CPP.Views.CompanyTile
+            model: collection.at(index)
+            el: '#company-tile-container-' + index
+            big: false
     @
 
   renderFilters: ->
