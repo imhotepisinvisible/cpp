@@ -1,14 +1,25 @@
 class CPP.Routers.Companies extends Backbone.Router
   routes:
       'companies': 'index'
+      'companies_student': 'studentIndex'
       'companies/:id': 'view'
       'companies/:id/edit': 'edit'
 
+  # The company index page that admins will see
   index: ->
     companies = new CPP.Collections.Companies
     companies.fetch
       success: ->
         new CPP.Views.CompaniesIndex collection: companies
+      error: ->
+        notify "error", "Couldn't fetch companies"
+
+  # The company index page that students will see
+  studentIndex: ->
+    companies = new CPP.Collections.Companies
+    companies.fetch
+      success: ->
+        new CPP.Views.CompaniesStudentIndex collection: companies
       error: ->
         notify "error", "Couldn't fetch companies"
 
