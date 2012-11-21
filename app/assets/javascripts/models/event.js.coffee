@@ -40,6 +40,7 @@ class CPP.Models.Event extends Backbone.Model
       title: "Requirements"
       editorAttrs:
         style: "list-style: none"
+      editorClass: "requirements-checkbox"
     requirements:
       type: "TextArea"
       title: ""
