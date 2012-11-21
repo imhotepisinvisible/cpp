@@ -1,13 +1,12 @@
 class CPP.Views.PlacementsPartial extends CPP.Views.Base
   template: JST['placements/partial']
 
-  editable: false
-
   events:
     "click .btn-add"      : "addPlacement"
     "click .btn-view-all" : "viewCompaniesPlacements"
 
   initialize: (options) ->
+    @editable = options.editable || false
     @collection.bind 'reset', @render, @
     @render()
 

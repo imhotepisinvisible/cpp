@@ -1,13 +1,12 @@
 class CPP.Views.EventsPartial extends CPP.Views.Base
   template: JST['events/partial']
 
-  editable: false
-
   events:
     "click .btn-add"      : "addEvent"
     "click .btn-view-all" : "viewCompaniesEvents"
 
   initialize: (options) ->
+    @editable = options.editable || false
     @collection.bind 'reset', @render, @
     @render()
 
