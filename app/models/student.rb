@@ -73,6 +73,6 @@ class Student < User
   end
 
   def as_json(options={})
-    super(:include => [:skills, :interests, :year_groups])
+    super(:methods => [:skill_list, :interest_list, :year_group_list])
   end
 end
