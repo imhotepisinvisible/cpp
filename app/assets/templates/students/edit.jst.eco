@@ -31,7 +31,7 @@
         </span>
 
         <span id="year-container">
-          <span id="student-year" class="student-profile-intro-status">
+          <span id="student-year" class="student-profile-intro-status <%= if not @student.get('year') then 'missing' %>">
             <% if @student.get('year'): %>
               <%= getOrdinal(@student.get 'year') %>
             <% else: %>
@@ -40,7 +40,7 @@
           </span>
         </span>
 
-        <span>Year</span>
+        <span> Year</span>
 
         <span id="degree-textarea-container" style="display:none">
           <textarea id="student-degree-editor">
@@ -49,7 +49,7 @@
         </span>
 
         <span id="degree-container">
-          <span id="student-degree" class="student-profile-intro-status">
+          <span id="student-degree" class="student-profile-intro-status <%= if not @student.get('degree') then 'missing' %>">
             <% if @student.get('degree'): %>
               <%= @student.get('degree') %>
             <% else: %>
@@ -170,7 +170,7 @@
             </div>
 
             <div id="bio-container">
-              <p id="student-bio">
+              <p id="student-bio" class="<%= if not @student.get('bio') then 'missing' %>">
                 <% if @student.get('bio'): %>
                   <%- @student.get('bio').replace(/\n/g, "<br/>") %>
                 <% else: %>

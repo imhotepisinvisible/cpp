@@ -92,28 +92,27 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     $('#student-bio-editor').focus()
 
   bioStopEdit: ->
-    @stopEdit 'bio', 'string', ((bio) ->
-      if bio then bio.replace(/\n/g, "<br/>") else 'Click here to add an About Me!')
+    @stopEdit 'bio', 'string', 'Click here to add an About Me!', ((bio) ->
+      bio.replace(/\n/g, "<br/>"))
 
   yearEdit: ->
     @edit 'year'
 
   yearStopEdit: ->
-    @stopEdit 'year', 'int', ((year) ->
-      if year then getOrdinal year else 'N/A')
+    @stopEdit 'year', 'int', 'N/A', ((year) ->
+      if year then getOrdinal year else '')
 
   degreeEdit: ->
     @edit 'degree'
 
   degreeStopEdit: ->
-    @stopEdit 'degree', 'string', ((degree) ->
-      if degree then degree else 'N/A')
+    @stopEdit 'degree', 'string', 'N/A degree', _.identity
 
   # displayFunction must take one argument - the value in the model and
   # must output a string to display in the edit window
-  stopEdit: (attribute, type, displayFunction) ->
+  stopEdit: (attribute, type, defaultValue, displayFunction) ->
     value = $('#student-' + attribute + '-editor').val()
-    value = if type == 'int' then parseInt(value) else value
+    #value = if type == 'int' then parseInt(value) else value
     $('#' + attribute + '-textarea-container').hide()
 
     if value != @model.get attribute
@@ -122,7 +121,14 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
           wait: true
           success: (model, response) =>
             notify "success", "Updated profile"
-            $('#student-' + attribute + '').html displayFunction(model.get(attribute))
+            display = displayFunction(model.get(attribute))
+            if display
+              $('#student-' + attribute).html display
+              $('#student-' + attribute).removeClass('missing')
+            else
+              $('#student-' + attribute).html defaultValue
+              $('#student-' + attribute).addClass('missing')
+
             @model.set attribute, model.get(attribute)
           error: (model, response) ->
             errorlist = JSON.parse response.responseText

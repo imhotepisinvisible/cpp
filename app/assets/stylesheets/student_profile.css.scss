@@ -75,6 +75,10 @@
   @include box-sizing(border-box);
 }
 
+.missing {
+  background-color: #f2dede!important;
+}
+
 .missing-document {
   background-color: #f2dede!important;
   color: #b94a48;
