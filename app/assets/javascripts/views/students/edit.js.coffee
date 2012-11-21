@@ -239,15 +239,11 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     tag_name = tag_div.find(".tag-text").html().trim()
     tag_id = close_div.find("input").val()
 
-    console.log tag_name
-
     # Remove tag from lists
     @model.set 'skills', (tag for tag in @model.get('skills') when tag.name != tag_name)
     @model.set 'interests', (tag for tag in @model.get('interests') when tag.name != tag_name)
     @model.set 'year_groups', (tag for tag in @model.get('year_groups') when tag.name != tag_name)
 
-    console.log @model.get('year_groups')
-    console.log(parseInt(tag.id), parseInt(tag_id)) for tag in @model.get('year_groups')
     @model.save {},
         wait: true
         success: (model, response) =>
@@ -265,7 +261,6 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     skilltags.push {id:0, name: tagname}
     @model.set 'skills', skilltags
 
-    console.log @model.get("skills")
     @model.save {},
       wait: true
       success: (model, response) =>

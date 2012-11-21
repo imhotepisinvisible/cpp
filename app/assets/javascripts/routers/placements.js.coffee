@@ -50,7 +50,6 @@ class CPP.Routers.Placements extends Backbone.Router
         placement.company = new CPP.Models.Company id: placement.get 'company_id'
         placement.company.fetch
           success: ->
-            console.log "Fetched company", placement.company
             new CPP.Views.PlacementsView model: placement
           error: ->
             notify "error", "Couldn't fetch company for placement"
