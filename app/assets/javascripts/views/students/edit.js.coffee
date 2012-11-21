@@ -23,6 +23,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     @uploadInitialize 'cv'
     @uploadInitialize 'transcript'
     @uploadInitialize 'covering-letter'
+    @profileUploadInitialize()
 
   render: ->
     super
@@ -46,11 +47,25 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
 
     @
 
+  profileUploadInitialize: ->
+    $('#file-profile-picture').fileupload
+      url: '/students/' + @model.id
+      dataType: 'json'
+      type: "PUT"
+
+    .bind "fileuploaddone", (e, data) =>
+      notify 'success', 'Uploaded successfully'
+      $('#student-profile-img').attr('src', '/students/' + @model.id + '/profile_picture')
+
+    .bind "fileuploadfail", (e, data) ->
+      notify('error', "Document couldn't be uploaded")
+
   uploadInitialize: (documentType) ->
     $('#file-' + documentType).fileupload
       url: '/students/' + @model.id
       dataType: 'json'
       type: "PUT"
+
 
     .bind "fileuploadstart", (e, data) ->
       $(e.currentTarget).parent().parent().parent().find('.progress-upload').slideDown()
@@ -73,7 +88,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
       notify('error', "Document couldn't be uploaded")
 
   uploadDocument: (e) ->
-    $(e.currentTarget).closest('td').find('.file-input').click()
+    $(e.currentTarget).closest('.upload-container').find('.file-input').click()
 
   deleteDocument: (e) ->
     id = $(e.currentTarget).attr('id')

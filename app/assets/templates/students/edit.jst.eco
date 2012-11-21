@@ -1,9 +1,15 @@
 <div class="row">
   <div class="span12" id="student-profile-header">
     <div class="span3">
-      <div id="student-profile-img-container" class="img-polaroid">
-        <% if @student.get 'profile_picture_location': %>
-          <img src="<%= @student.get 'profile_picture_location' %>" id="student-profile-img">
+      <div id="student-profile-img-container" class="upload-container img-polaroid">
+
+        <form class="form-inline hidden">
+            <input class="file-input" id="file-profile-picture" type="file" name="student[profile_picture]" size="20">
+        </form>
+        <div class="btn upload-document" id="upload-profile-picture"><i class="icon-upload-alt"/></div>
+
+        <% if @student.get 'profile_picture_file_name': %>
+          <img src="/students/<%= @student.get 'id' %>/profile_picture" id="student-profile-img">
         <% else: %>
           <img src="/assets/default_profile.png" id="student-profile-img">
         <% end %>
@@ -77,7 +83,7 @@
               <table class="table table-striped">
 
                 <tr>
-                  <td id="table-cv" class="<%= "missing-document" unless @student.get('cv_file_name') %>">
+                  <td id="table-cv" class="upload-container <%= "missing-document" unless @student.get('cv_file_name') %>">
                     <div>
                       Curriculum Vitae
                       <form class="form-inline hidden">
@@ -99,7 +105,7 @@
                 </tr>
 
                 <tr>
-                  <td id="table-transcript" class="<%= "missing-document" unless @student.get('transcript_file_name') %>">
+                  <td id="table-transcript" class="upload-container <%= "missing-document" unless @student.get('transcript_file_name') %>">
                     <div>
                       Transcript
                       <form class="form-inline hidden">
@@ -123,7 +129,7 @@
                 </tr>
 
                 <tr>
-                  <td id="table-covering_letter" class="<%= "missing-document" unless @student.get('covering_letter_file_name') %>">
+                  <td id="table-covering_letter" class="upload-container <%= "missing-document" unless @student.get('covering_letter_file_name') %>">
                     <div>
                       Covering Letter
                       <form class="form-inline hidden">
