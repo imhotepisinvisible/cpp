@@ -15,12 +15,25 @@
 class Placement < ActiveRecord::Base
   belongs_to :company
 
-  validates :company_id,        :presence => true
-  validates :position,          :presence => true
-  validates :location,          :presence => true
-  validates :description,       :presence => true
+  acts_as_taggable_on :skills, :interests, :year_groups
+
+  validates :company_id,  :presence => true
+  validates :position,    :presence => true
+  validates :location,    :presence => true
+  validates :description, :presence => true
+
+  validates :description, obscenity: {message: "Profanity is not allowed!"}
+  validates :position, obscenity: {message: "Profanity is not allowed!"}
+
   validates_datetime :deadline,
     :after => :now,
     :after_message => "Cannot be in the past"
 
+  validates_datetime :interview_date,
+    :after => :now,
+    :allow_nil => :true
+
+  def as_json(options={})
+    super(:include => [:skills, :interests, :year_groups])
+  end
 end

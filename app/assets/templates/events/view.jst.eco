@@ -1,9 +1,11 @@
-<h1 class="section-header">
-  <%= @event.get 'title' %>
+<div class="row section-header">
+  <div class="span6">
+     <h1><%= @event.get 'title' %></h1>
+  </div>
   <div class="company-logo-header">
     <img src="/assets/company_logos/<%= @event.company.get 'logo' %>">
   </div>
-</h1>
+</div>
 
 <div class="row">
   <div class="span6">
@@ -23,7 +25,7 @@
               Start Date:
             </td>
             <td>
-              <%= Date.parse(@event.get('start_date')).toString("dd/mm/yyyy hh:mm") %>
+              <%= Date.parse(@event.get('start_date')).toString("dd/MM/yyyy HH:mm") %>
             </td>
           </tr>
           <tr>
@@ -31,7 +33,7 @@
               End Date:
             </td>
             <td>
-              <%= Date.parse(@event.get('end_date')).toString("dd/mm/yyyy hh:mm") %>
+              <%= Date.parse(@event.get('end_date')).toString("dd/MM/yyyy HH:mm") %>
             </td>
           </tr>
           <tr>
@@ -39,7 +41,7 @@
               Deadline:
             </td>
             <td>
-              <%= Date.parse(@event.get('deadline')).toString("dd/mm/yyyy hh:mm") %>
+              <%= Date.parse(@event.get('deadline')).toString("dd/MM/yyyy HH:mm") %>
             </td>
           </tr>
         </table>
@@ -77,7 +79,6 @@
       <!-- TODO: Move this into the model !-->
       <% a = Math.floor(Math.random() * @event.get("capacity")) + 1 %>
       <% percentage = 100 * parseFloat(a) / parseFloat(@event.get("capacity")) %>
-      <% console.log percentage %>
       <% pclass = "info" %>
       <% pclass = "warning" if percentage > 60 %>
       <% pclass = "danger" if percentage > 90 %>

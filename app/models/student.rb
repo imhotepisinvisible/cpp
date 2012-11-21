@@ -14,16 +14,57 @@
 class Student < User
   belongs_to :department
 
-  has_one :profile,
-          :class_name => "StudentProfile",
-          :foreign_key => "student_id",
-          :autosave => true,
-          :dependent => :destroy,
-          :inverse_of => :student
-
-  default_scope :include => :profile
-
-  delegate :year, :year=, :bio, :bio=, :degree, :degree=, :to => :profile
+  acts_as_taggable_on :skills, :interests, :year_groups
 
   validates :department_id, :presence => true
+  validates :bio, :length => { :maximum => 500 }
+  validate :valid_email?
+
+  validates :bio, obscenity: {message: "Profanity is not allowed!"}
+  validates :first_name, obscenity: {message: "Profanity is not allowed!"}
+  validates :last_name, obscenity: {message: "Profanity is not allowed!"}
+
+  has_attached_file :cv,
+    :path => ':rails_root/documents/cvs/:id/:basename.:extension',
+    :url => '/:class/:id/cv'
+
+  has_attached_file :transcript,
+    :path => ':rails_root/documents/transcripts/:id/:basename.:extension',
+    :url => '/:class/:id/transcript'
+
+  has_attached_file :covering_letter,
+    :path => ':rails_root/documents/covering_letters/:id/:basename.:extension',
+    :url => '/:class/:id/covering_letter'
+
+  has_attached_file :profile_picture,
+    :path => ':rails_root/documents/profile_pictures/:id/:basename.:extension',
+    :url => '/:class/:id/profile_picture'
+
+  attr_accessible :department_id, :year, :bio, :degree,
+                    :cv, :transcript, :covering_letter, :profile_picture
+
+
+  def valid_email?
+    if department.organisation.organisation_domains.any?
+      match = false
+      department.organisation.organisation_domains.each do |org_domain|
+        unless /\A([^@\s]+)@#{org_domain.domain}/.match(email).nil?
+          match = true
+          break
+        end
+      end
+
+      if !match
+        domains = []
+        department.organisation.organisation_domains.each do |org_domain|
+          domains << org_domain.domain
+        end
+        errors.add(:email, "Email domain must be one of #{domains.join(", ")}")
+      end
+    end
+  end
+
+  def as_json(options={})
+    super(:include => [:skills, :interests, :year_groups])
+  end
 end

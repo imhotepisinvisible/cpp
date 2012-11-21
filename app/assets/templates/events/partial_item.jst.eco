@@ -1,4 +1,4 @@
-<div class="item">
+<div class="item event-item">
   <div class="link-title">
     <%= @event.get 'title' %>
     <% if @editable: %>

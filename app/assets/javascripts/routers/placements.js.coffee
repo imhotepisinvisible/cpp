@@ -10,7 +10,7 @@ class CPP.Routers.Placements extends Backbone.Router
     placements = new CPP.Collections.Placements
     # new CPP.Views.PlacementsIndex collection: placements
     placements.fetch
-      data: 
+      data:
         $.param({ company_id: company_id})
       success: ->
         placements.company = new CPP.Models.Company id: company_id
@@ -44,11 +44,10 @@ class CPP.Routers.Placements extends Backbone.Router
         notify "error", "Couldn't fetch placement"
 
   view: (id) ->
-    console.log id
     placement = new CPP.Models.Placement id: id
     placement.fetch
       success: ->
-        placement.company = new CPP.Models.Company id: placement.get("company_id")
+        placement.company = new CPP.Models.Company id: placement.company_id
         placement.company.fetch
           success: ->
             new CPP.Views.PlacementsView model: placement

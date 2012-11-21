@@ -2,19 +2,38 @@ class CPP.Models.Placement extends Backbone.Model
   url: ->
     '/placements' + (if @isNew() then '' else '/' + @id)
 
+  validation:
+    position:
+      required: true
+    description:
+      required: true
+    location:
+      required: true
+
   schema:
     position:
       type: "Text"
-      validators: ["required"]
     description:
       type: "Text"
-      validators: ["required"]
-    duration: 
-      type: "Text"
-      validators: ["required"]
     location:
       type: "Text"
-      validators: ["required"]
-    deadline: 
+    deadline:
       type: "DateTime"
       DateEditor: "DatePicker"
+    duration:
+      type: "Text"
+    open_to:
+      type: "Text"
+    salary:
+      type: "Text"
+    benefits:
+      type: "Text"
+    application_procedure:
+      type: "Text"
+    interview_date:
+      type: "DateTime"
+      title: "Interview Date (If Known)"
+      DateEditor: "DatePicker"
+    other:
+      type: "Text"
+

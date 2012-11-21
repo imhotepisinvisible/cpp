@@ -25,4 +25,9 @@ describe Placement do
         for(:deadline)}
   end
 
+  context "when interview_date is before the current date" do
+    it {should_not allow_value(1.day.ago).
+        for(:interview_date)}
+  end
+
 end

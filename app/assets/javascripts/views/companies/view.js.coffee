@@ -1,7 +1,7 @@
 class CPP.Views.CompaniesView extends CPP.Views.Base
   el: "#app"
   template: JST['companies/view']
-
+  
   initialize: ->
     @render()
 
@@ -17,4 +17,14 @@ class CPP.Views.CompaniesView extends CPP.Views.Base
       el: $(@el).find('#placements-partial')
       model: @model
       collection: @model.placements
+
+    emails_partial = new CPP.Views.EmailsPartial
+      el: $(@el).find('#emails-partial')
+      model: @model
+      collection: @model.emails
     @
+
+  activate: ->
+    console.log "activate"
+
+

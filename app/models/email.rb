@@ -16,8 +16,16 @@
 class Email < ActiveRecord::Base
   belongs_to :company
 
+  acts_as_taggable_on :skills, :interests, :year_groups
+
   validates :company_id, :presence => true
   validates :subject,    :presence => true
   validates :body,       :presence => true
 
+  validates :body, obscenity: {message: "Profanity is not allowed!"}
+  validates :subject, obscenity: {message: "Profanity is not allowed!"}
+
+  def as_json(options={})
+    super(:include => [:skills, :interests, :year_groups])
+  end
 end

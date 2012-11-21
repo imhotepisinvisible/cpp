@@ -5,7 +5,7 @@ class CPP.Views.EventsItem extends CPP.Views.Base
   template: JST['events/item']
 
   initialize: ->
-    #@render()
+    id = @model.get('id')
 
   events: 
     "click .btn-edit"   : "editEvent"
@@ -17,6 +17,8 @@ class CPP.Views.EventsItem extends CPP.Views.Base
     Backbone.history.navigate("events/" + @model.get('id') + "/edit", trigger: true)
 
   deleteEvent: (e) ->
+    # Remove item from view
+    $(e.target).parent().parent().remove();
     e.stopPropagation()
     @model.destroy
       wait: true

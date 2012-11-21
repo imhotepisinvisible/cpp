@@ -1,0 +1,124 @@
+#student-profile-header {
+  margin-bottom: 15px;
+  font-family: 'Arvo', serif;
+
+  #student-profile-img-container {
+    margin-right: 25px;
+    float: left;
+    border: 1px solid #DDD;
+    @include border-radius($border_radius);
+    @include box-shadow(0 1px 2px rgba(0, 0, 0, .075));
+  }
+
+  #student-profile-img {
+    $size: 170px;
+
+    width: $size;
+    height: $size;
+
+    border: 1px solid #DDD;
+    @include border-radius($border_radius);
+    @include box-shadow(0 1px 2px rgba(0, 0, 0, .075));
+  }
+
+  #student-profile-intro {
+    font-size: 40px;
+    line-height: 45px;
+
+
+    #student-profile-intro-name {
+      font-size: 70px;
+      line-height: 75px;
+    }
+
+    .student-profile-intro-status {
+      color: #444;
+    }
+  }
+}
+
+.profile-deactivated {
+  opacity: 0.5;
+}
+
+#student-profile-body {
+  background: #efefef;
+  padding: 15px 16px;
+  margin-left: 14px;
+  @include box-shadow(inset 0  10px 10px -10px rgba(104, 104, 104, 0.5),
+                      inset 0 -10px 10px -10px rgba(104, 104, 104, 0.5));
+}
+
+#opportunities-container {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.empty-student-profile-field-container {
+  text-align: center;
+
+  .empty-student-profile-field {
+    line-height: 200px;
+    font-size: 200px;
+    color: #ddd;
+    text-shadow: 0 1px 0 #fff;
+  }
+}
+
+.progress-upload {
+  margin: 5px 0 0;
+}
+
+#student-bio-editor {
+  width: 100%;
+  min-height: 150px;
+  @include box-sizing(border-box);
+}
+
+.missing {
+  background-color: #f2dede!important;
+}
+
+.missing-document {
+  background-color: #f2dede!important;
+  color: #b94a48;
+
+  .download-document {
+    display: none;
+  }
+
+  .delete-document {
+    display: none;
+  }
+}
+
+.document-table {
+  border-top: 2px solid #efefef!important;
+}
+
+#student-name-editor {
+  font-family: 'Arvo', serif;
+  font-size: 70px;
+  line-height: 75px;
+  width: 800px;
+  max-height: 90px;
+  @include box-sizing(border-box);
+}
+
+#student-year-editor {
+  font-family: 'Arvo', serif;
+  font-size: 40px;
+  line-height: 45px;
+  width: 50px;
+  max-height: 55px;
+  @include box-sizing(border-box);
+}
+
+#student-degree-editor {
+  font-family: 'Arvo', serif;
+  font-size: 40px;
+  line-height: 45px;
+  width: 500px;
+  max-height: 55px;
+  @include box-sizing(border-box);
+}

@@ -6,15 +6,20 @@ class CPP.Views.EventsPartial extends CPP.Views.Base
     "click .btn-view-all" : "viewCompaniesEvents"
 
   initialize: (options) ->
-    @editable = options.editable
+    @editable = options.editable || false
     @collection.bind 'reset', @render, @
     @render()
 
-  render: () ->
+  render: ->
     $(@el).html(@template(editable: @editable))
-    @collection.each (event) =>
-      view = new CPP.Views.EventsPartialItem model: event
-      @$('#events').append(view.render(editable: @editable).el)
+    if @collection.length > 0
+      @collection.each (event) =>
+        view = new CPP.Views.EventsPartialItem
+                      model: event
+                      editable: @editable
+        @$('#events').append(view.render().el)
+    else
+      @$('#events').append "No events right now!"
     @
 
   addEvent: ->

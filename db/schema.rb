@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121026184345) do
+ActiveRecord::Schema.define(:version => 20121119184645) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -27,12 +27,32 @@ ActiveRecord::Schema.define(:version => 20121026184345) do
     t.integer "department_id"
   end
 
+  create_table "company_tag_links", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "tag_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "company_tag_links", ["company_id"], :name => "index_company_tag_links_on_company_id"
+  add_index "company_tag_links", ["tag_id"], :name => "index_company_tag_links_on_tag_id"
+
   create_table "departments", :force => true do |t|
     t.string   "name"
     t.integer  "organisation_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
+
+  create_table "email_tag_links", :force => true do |t|
+    t.integer  "email_id"
+    t.integer  "tag_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "email_tag_links", ["email_id"], :name => "index_email_tag_links_on_email_id"
+  add_index "email_tag_links", ["tag_id"], :name => "index_email_tag_links_on_tag_id"
 
   create_table "emails", :force => true do |t|
     t.string   "subject"
@@ -44,6 +64,16 @@ ActiveRecord::Schema.define(:version => 20121026184345) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "event_tag_links", :force => true do |t|
+    t.integer  "event_id"
+    t.integer  "tag_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "event_tag_links", ["event_id"], :name => "index_event_tag_links_on_event_id"
+  add_index "event_tag_links", ["tag_id"], :name => "index_event_tag_links_on_tag_id"
+
   create_table "events", :force => true do |t|
     t.integer  "company_id"
     t.string   "title"
@@ -54,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20121026184345) do
     t.string   "location"
     t.integer  "capacity"
     t.string   "google_map_url"
+    t.string   "requirements"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
@@ -71,6 +102,16 @@ ActiveRecord::Schema.define(:version => 20121026184345) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "placement_tag_links", :force => true do |t|
+    t.integer  "placement_id"
+    t.integer  "tag_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "placement_tag_links", ["placement_id"], :name => "index_placement_tag_links_on_placement_id"
+  add_index "placement_tag_links", ["tag_id"], :name => "index_placement_tag_links_on_tag_id"
+
   create_table "placements", :force => true do |t|
     t.integer  "company_id"
     t.string   "position"
@@ -78,27 +119,83 @@ ActiveRecord::Schema.define(:version => 20121026184345) do
     t.string   "duration"
     t.string   "location"
     t.datetime "deadline"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string   "open_to"
+    t.string   "salary"
+    t.text     "benefits"
+    t.text     "application_procedure"
+    t.datetime "interview_date"
+    t.text     "other"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
-  create_table "student_profiles", :force => true do |t|
-    t.integer  "student_id"
-    t.integer  "year"
-    t.text     "bio"
-    t.text     "degree"
+  create_table "taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       :limit => 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "user_tag_links", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "tag_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
+  add_index "user_tag_links", ["tag_id"], :name => "index_user_tag_links_on_tag_id"
+  add_index "user_tag_links", ["user_id"], :name => "index_user_tag_links_on_user_id"
+
   create_table "users", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
     t.string   "email"
     t.string   "password_digest"
     t.integer  "department_id"
+    t.integer  "year",                         :default => 0
+    t.text     "bio",                          :default => ""
+    t.text     "degree",                       :default => ""
+    t.boolean  "active",                       :default => true
+    t.integer  "company_id"
     t.string   "type"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-    t.integer  "profile_id"
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
+    t.string   "cv_file_name"
+    t.string   "cv_content_type"
+    t.integer  "cv_file_size"
+    t.datetime "cv_updated_at"
+    t.string   "transcript_file_name"
+    t.string   "transcript_content_type"
+    t.integer  "transcript_file_size"
+    t.datetime "transcript_updated_at"
+    t.string   "profile_picture_file_name"
+    t.string   "profile_picture_content_type"
+    t.integer  "profile_picture_file_size"
+    t.datetime "profile_picture_updated_at"
+    t.string   "covering_letter_file_name"
+    t.string   "covering_letter_content_type"
+    t.integer  "covering_letter_file_size"
+    t.datetime "covering_letter_updated_at"
   end
+
+  create_table "users_events", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "users_events", ["event_id"], :name => "index_users_events_on_event_id"
+  add_index "users_events", ["user_id"], :name => "index_users_events_on_user_id"
 
 end

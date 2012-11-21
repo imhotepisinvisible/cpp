@@ -1,5 +1,5 @@
 class CPP.Views.EmailsPartialItem extends CPP.Views.Base
-  tagName: "li"
+  tagName: "tr"
   className: "email-item"
 
   events:
@@ -8,8 +8,11 @@ class CPP.Views.EmailsPartialItem extends CPP.Views.Base
 
   template: JST['emails/partial_item']
 
-  render: (options) ->
-    $(@el).html(@template(email: @model, editable: options.editable))
+  initialize: (options) ->
+    @editable = options.editable
+
+  render: ->
+    $(@el).html(@template(email: @model, editable: @editable))
     @
 
   editEmail: (e) ->
@@ -17,4 +20,4 @@ class CPP.Views.EmailsPartialItem extends CPP.Views.Base
     Backbone.history.navigate('emails/' + @model.id + '/edit', trigger: true)
 
   viewEmail: ->
-    Backbone.history.navigate('emails/' + @model.id, trigger: true)
+    Backbone.history.navigate('emails/' + @model.id, trigger :true)

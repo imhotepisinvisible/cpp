@@ -1,0 +1,87 @@
+@import url(http://fonts.googleapis.com/css?family=Titillium+Web:400,300,300italic,400italic,600,700);
+@import url(http://fonts.googleapis.com/css?family=Give+You+Glory);
+@import url(http://fonts.googleapis.com/css?family=Arvo);
+
+/* Site Settings */
+$border_radius: 6px;
+
+/* Main Site Styles (tags etc) */
+body {
+  background-color: #d0d0d0;
+  background-image: url('/assets/navy_blue.png');
+}
+
+h1 {
+  font-family: 'Arvo', serif;
+}
+
+textarea {
+  resize: none;
+}
+
+.section-header {
+  border-bottom: 1px solid #444;
+}
+
+/* Layout */
+#main-container {
+  padding: 15px 15px 0px 15px;
+  background-color: #ffffff;
+  border: 1px solid #DDD;
+  overflow: hidden;
+  @include border-radius($border_radius);
+  @include box-shadow(0 1px 2px rgba(0, 0, 0, .075));
+}
+
+/* Notifications */
+.centre-span{
+  margin:0 auto;
+  float:none;
+  height:0;
+  position:relative;
+}
+
+.centre-text{
+  text-align:center;
+}
+
+/* Event/Placement Lists */
+.opportunity-list{
+  list-style: none;
+  margin: 0px 0px 10px 0px;
+  padding: 0px;
+
+  li {
+    .item {
+      padding: 10px 5px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      display: block;
+      text-decoration: none;
+      color: #444;
+
+      .btn {
+        display: none;
+      }
+
+      .link-title {
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+
+      .link-description{
+        margin-top: 5px;
+      }
+
+
+      &:hover{
+        background: #efefef;
+        text-decoration: none;
+
+        .btn{
+          display: block;
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,4 @@
 $ ->
-  console.log "Custom templates"
   Backbone.Form.setTemplates
     # form: '
     #   <form class="form-horizontal">{{fieldsets}}</form>

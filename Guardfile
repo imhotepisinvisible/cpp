@@ -33,3 +33,17 @@ guard :jasmine, all_on_start: true  do
   watch(%r{spec/javascripts/.+_spec\.(js\.coffee|js|coffee)$})
   watch(%r{app/assets/javascripts/(.+?)\.(js\.coffee|js|coffee)(?:\.\w+)*$}) { |m| "spec/javascripts/#{ m[1] }_spec.#{ m[2] }" }
 end
+
+guard 'livereload' do
+  watch(%r{app/helpers/.+\.rb})
+  watch(%r{app/views/.+\.(erb|haml)})
+  watch(%r{(public/).+\.(css|js|html)})
+  watch(%r{app/assets/stylesheets/(.+\.css).*$})    { |m| "assets/#{m[1]}" }
+  watch(%r{app/assets/javascripts/(.+\.js).*$}) { |m| "assets/#{m[1]}" }
+  watch(%r{app/assets/templates/*})
+  watch(%r{lib/assets/stylesheets/(.+\.css).*$})    { |m| "assets/#{m[1]}" }
+  watch(%r{lib/assets/javascripts/(.+\.js).*$}) { |m| "assets/#{m[1]}" }
+  watch(%r{vendor/assets/stylesheets/(.+\.css).*$}) { |m| "assets/#{m[1]}" }
+  watch(%r{vendor/assets/javascripts/(.+\.js).*$})  { |m| "assets/#{m[1]}" }
+  watch(%r{config/locales/.+\.yml})
+end

@@ -6,15 +6,21 @@ class CPP.Views.PlacementsPartial extends CPP.Views.Base
     "click .btn-view-all" : "viewCompaniesPlacements"
 
   initialize: (options) ->
-    @editable = options.editable
+    @editable = options.editable || false
     @collection.bind 'reset', @render, @
-    @render(editable: @editable)
+    @render()
 
   render: () ->
     $(@el).html(@template(editable: @editable))
-    @collection.each (placement) =>
-      view = new CPP.Views.PlacementsPartialItem model: placement
-      @$('#placements').append(view.render(editable: @editable).el)
+
+    if @collection.length > 0
+      @collection.each (placement) =>
+        view = new CPP.Views.PlacementsPartialItem
+                    model: placement
+                    editable: @editable
+        @$('#placements').append(view.render().el)
+    else
+      @$('#placements').append "No events right now!"
     @
 
   addPlacement: ->

@@ -1,0 +1,168 @@
+<div class="row">
+  <div class="span12" id="student-profile-header">
+    <div class="span3">
+      <div id="student-profile-img-container" class="img-polaroid">
+        <% if @student.get 'profile_picture_file_name': %>
+          <img src="<%= @student.get 'profile_picture_file_name' %>" id="student-profile-img">
+        <% else: %>
+          <img src="/assets/default_profile.png" id="student-profile-img">
+        <% end %>
+      </div>
+    </div>
+    <div class="span7">
+      <div id="student-profile-intro">
+        <p id="student-profile-intro-name">
+          <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
+        </p>
+        <p id="student-profile-intro-status">
+          <%= getOrdinal(@student.get 'year') %> Year <%= @student.get 'degree' %>
+          <br>
+          Looking for an Industrial Placement
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span12" id="student-profile-body">
+
+    <div class="row">
+      <div class="span4">
+        <h1 class="section-header">
+          <i class="icon-file"></i> Documents
+        </h1>
+
+        <% if ((@student.get 'cv_file_name') or (@student.get 'transcript_file_name') or (@student.get 'covering_letter_file_name')): %>
+          <div class="row">
+            <div class="span4">
+              <table class="table table-striped">
+                <% if @student.get 'cv_file_name': %>
+                  <tr>
+                    <td>Curriculum Vitae</td>
+                    <td>
+                      <a class="btn pull-right" href="<%= '/students/' + @student.id + '/download_document/cv' %>"><i class="icon-download-alt"/></a>
+                    </td>
+                  </tr>
+                <% end %>
+                <% if @student.get 'transcript_file_name': %>
+                  <tr>
+                    <td>Transcript</td>
+                    <td>
+                      <a class="btn pull-right" href="<%= '/students/' + @student.id + '/download_document/transcript' %>"><i class="icon-download-alt"/></a>
+                    </td>
+                  </tr>
+                <% end %>
+                <% if @student.get 'covering-letter_file_name': %>
+                  <tr>
+                    <td>Covering Letter</td>
+                    <td>
+                      <a class="btn pull-right" href="<%= '/students/' + @student.id + '/download_document/covering-letter' %>"><i class="icon-download-alt"/></a>
+                    </td>
+                  </tr>
+                <% end %>
+              </table>
+
+            </div>
+          </div>
+        <% else: %>
+          <div class="empty-student-profile-field-container">
+            <i class="icon-file empty-student-profile-field"/>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="span4">
+        <h1 class="section-header">
+          <i class="icon-user"></i> About Me
+        </h1>
+
+        <div class="row">
+          <div class="span4">
+            <% if @student.get('bio'): %>
+              <p>
+                <%- @student.get('bio').replace(/\n/g, "<br/>") %>
+              </p>
+            <% else: %>
+              <div class="empty-student-profile-field-container">
+                <i class="icon-user empty-student-profile-field"/>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="span4">
+        <h1 class="section-header">
+          <i class="icon-heart"></i> Passions
+        </h1>
+
+        <div class="row">
+          <div class="span4">
+            <% if @student.get('interests').length == 0 and @student.get('skills').length == 0 and @student.get('year_groups').length == 0: %>
+              <div class="empty-student-profile-field-container">
+                <i class="icon-heart empty-student-profile-field"/>
+              </div>
+            <% else: %>
+              <div class="row">
+                <% if @student.get('skills').length > 0: %>
+                  <div class="span4">
+                    <div class="tag-category">
+                      <div class="tag-category-header">
+                        Skills
+                      </div>
+                      <% for i, tag of @student.get('skills'): %>
+                        <span class="label tag skill-tag">
+                          <%= tag.name %>
+                        </span>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+
+                <% if @student.get('skills').length > 0: %>
+                  <div class="span4">
+                    <div class="tag-category">
+                      <div class="tag-category-header">
+                        Interests
+                      </div>
+                      <% for i, tag of @student.get('interests'): %>
+                        <span class="label tag interest-tag">
+                          <%= tag.name %>
+                        </span>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+
+                <% if @student.get('year_groups').length > 0: %>
+                  <div class="span4">
+                    <div class="tag-category">
+                      <div class="tag-category-header">
+                        Year Groups
+                      </div>
+                      <% for i, tag of @student.get('year_groups'): %>
+                        <span class="label tag year-group-tag">
+                          <%= tag.name %>
+                        </span>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" id="opportunities-container">
+  <div class="span6" id="events-partial">
+
+  </div>
+  <div class="span6" id="placements-partial">
+
+  </div>
+</div>

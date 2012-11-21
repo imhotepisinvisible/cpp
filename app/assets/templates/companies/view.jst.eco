@@ -11,49 +11,13 @@
 </div>
 
 <div class="row">
-  <div class="span6" id="events-partial">
-    
-  </div>
-  <div class="span6" id="placements-partial">
-    
-  </div>
+  <div class="span6" id="events-partial"></div>
+  <div class="span6" id="placements-partial"></div>
 </div>
 
 <div class="row">
-  <div class="span6">
-    <h1 class="section-header">
-      <i class="icon-envelope"></i>
-      Mailings
-      <div class="btn pull-right">Add New</div>
-    </h1>
-    <table class="table sortable">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Subject</th>
-          <th>Approved?</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>10/10/2012</td>
-          <td>Work For Us!!</td>
-          <td><i class="icon-ok"></i> 12/10/2012</td>
-        </tr>
-        <tr>
-          <td>06/10/2012</td>
-          <td>WE IS AWESOME!!!11!1</td>
-          <td><i class="icon-remove"></i> 10/10/2012</td>
-        </tr>
-        <tr>
-          <td>01/10/2012</td>
-          <td>YO KIDZ</td>
-          <td><i class="icon-remove"></i> 06/10/2012</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="see-all-link">sdfsdfd</div>
-  </div>
+  <div class="span6" id="emails-partial"></div>
+
   <div class="span6">
     <h1 class="section-header">
       <i class="icon-tasks"></i>

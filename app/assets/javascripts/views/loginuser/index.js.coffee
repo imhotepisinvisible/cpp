@@ -26,5 +26,4 @@ class CPP.Views.LoginUser extends CPP.Views.Base
         @undelegateEvents()
         Backbone.history.navigate("companies", trigger: true)
       error: (model, response) =>
-        console.log response.responseText
         notify "error", "Password fail. Retry"

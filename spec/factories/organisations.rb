@@ -4,11 +4,10 @@ FactoryGirl.define do
 
     factory :organisation_with_domains do
       after(:build) do |org|
-        ["imperial.ac.uk", "ic.ac.uk"].each do |domain|
-          domain = FactoryGirl.build(:organisation_domain,
+        ["imperial.ac.uk", "ic.ac.uk", "inspiredpixel.net"].each do |domain|
+          org.organisation_domains << FactoryGirl.build(:organisation_domain,
                                         :organisation => org,
                                         :domain => domain)
-          org.organisation_domains << domain
         end
       end
     end

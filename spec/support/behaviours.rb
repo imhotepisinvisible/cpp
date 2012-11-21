@@ -14,7 +14,7 @@ shared_examples_for "a user" do
   context "for a new user" do
     subject{ unsaved }
 
-    fields = [:email]
+    fields = [:email, :first_name, :last_name]
     fields.each do |field|
       it {should validate_presence_of(field)}
     end

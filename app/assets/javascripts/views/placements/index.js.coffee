@@ -3,29 +3,60 @@ class CPP.Views.PlacementsIndex extends CPP.Views.Base
   template: JST['placements/index']
 
   events:
-    "click .btn-add"      : "addPlacement"
-    'click .company-logo-header' : 'viewCompany'
+    "click .btn-add"              : "addPlacement"
+    'click .company-logo-header'  : 'viewCompany'
 
   initialize: ->
     @collection.bind 'reset', @render, @
-    @collection.bind 'change', @render, @
-    # bind to model destroy so backbone view updates on destroy
-    @collection.bind 'destroy', @render, @
+    @collection.bind 'filter', @renderPlacements, @
     @render()
 
   render: ->
+    lcompanies = []
+    ready = $.Deferred()
     $(@el).html(@template(placements: @collection))
-
-    @collection.each (placement) =>
-      placement.company = new CPP.Models.Company id: placement.get("company_id")
-      placement.company.fetch
-        success: ->
-          # Render the placement if we can get its company
-          view = new CPP.Views.PlacementsItem model: placement
-          @$('#placements').append(view.render().el)
+    @collection.each (event) =>
+      event.company = new CPP.Models.Company id: event.get("company_id")
+      event.company.fetch
+        success: =>
+          lcompanies.push(event.company)
+          if (lcompanies.length == @collection.length)
+            ready.resolve()
         error: ->
           notify "error", "Couldn't fetch company for placement"
-    @
+          ready.resolver()
+    ready.done =>
+      @renderPlacements(@collection)
+      @renderFilters()     
+  @
+
+  renderPlacements: (col) ->
+    @$('#placements').html("")
+    col.each (placement) ->
+      view = new CPP.Views.PlacementsItem model: placement
+      @$('#placements').append(view.render().el)
+  @
+
+  renderFilters: ->
+    new CPP.Filter
+      el: $(@el).find('#placement-filter')
+      filters: [
+        {name: "Position Search"
+        type: "text"
+        attribute: "position"
+        scope: ""},
+        {name: "Location Search"
+        type: "text"
+        attribute: "location"
+        scope: ""},
+        {name: "Company"
+        type: "tags"
+        attribute: "name"
+        scope: ".company"
+        }
+      ]
+      data: @collection
+  @
 
   addPlacement: ->
     Backbone.history.navigate("companies/" + @collection.company.id + "/placements/new", trigger: true)

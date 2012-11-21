@@ -1,4 +1,5 @@
 CPP::Application.routes.draw do
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -60,7 +61,18 @@ CPP::Application.routes.draw do
   resources :companies
   resources :events
   resources :placements
+
+  resources :students do
+    delete ':document_type', :on => :member, :action => :delete_document
+    get ':document_type', :on => :member, :action => :download_document
+  end
+
   resources :emails
+
+  resources :students do
+    resources :events
+    resources :placements
+  end
 
   resources :companies do
     resources :events
@@ -83,6 +95,10 @@ CPP::Application.routes.draw do
   match 'admin_emails' => 'site#sample_admin_emails'
   match 'admin_stats' => 'site#sample_admin_stats'
   match 'admin_events' => 'site#sample_admin_events'
+
+  match 'tags/skills' => 'tags#skills'
+  match 'tags/interests' => 'tags#interests'
+  match 'tags/year_groups' => 'tags#year_groups'
 
   # See how all your routes lay out with "rake routes"
 

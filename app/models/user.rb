@@ -10,16 +10,18 @@
 #   t.datetime "updated_at",      :null => false
 
 class User < ActiveRecord::Base
-  attr_accessible :email, :password, :password_confirmation
-
   has_secure_password
 
   validates :email,           :presence => true
   validates :password_digest, :presence => true, :on => :create
+  validates :first_name,      :presence => true
+  validates :last_name,       :presence => true
+
 
   validates :password, :length => {
     :minimum => 8,
     :too_short => "password is too short, must be at least %{count} characters"
   }, :on => :create
 
+  attr_accessible :email, :first_name, :last_name, :password, :password_confirmation
 end
