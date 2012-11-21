@@ -47,7 +47,7 @@ class CPP.Routers.Emails extends Backbone.Router
     email = new CPP.Models.Email id: id
     email.fetch
       success: ->
-        email.company = new CPP.Models.Company id: email.company_id
+        email.company = new CPP.Models.Company id: email.get 'company_id'
         email.company.fetch
           success: ->
             new CPP.Views.EmailsView model: email
