@@ -56,6 +56,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     .bind "fileuploaddone", (e, data) =>
       notify 'success', 'Uploaded successfully'
       $('#student-profile-img').attr('src', '/students/' + @model.id + '/profile_picture')
+      $(e.target).closest('.upload-container').removeClass('missing-document')
 
     .bind "fileuploadfail", (e, data) ->
       notify('error', "Document couldn't be uploaded")
@@ -99,7 +100,10 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
         url: "/students/#{@model.id}/#{documentType}"
         type: 'DELETE'
         success: (data) ->
-          $(e.currentTarget).closest('td').addClass('missing-document')
+          $(e.currentTarget).closest('.upload-container').addClass('missing-document')
+          if documentType == 'profile_picture'
+            $('#student-profile-img').attr('src', '/assets/default_profile.png')
+
         error: (data) ->
           notify('error', "couldn't remove document")
 
