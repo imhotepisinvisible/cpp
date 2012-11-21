@@ -23,6 +23,9 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     @uploadInitialize 'cv'
     @uploadInitialize 'transcript'
     @uploadInitialize 'covering-letter'
+    # Displays 'Click here to add an About Me!' if no bio
+    if not @model.get('bio')
+      $('#student-bio').html 'Click here to add an About Me!'
 
   render: ->
     super
@@ -93,19 +96,21 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
 
   bioStopEdit: ->
     @stopEdit 'bio', 'string', ((bio) ->
-      if bio then bio.replace(/\n/g, "<br/>") else 'Click here to edit your bio!')
+      if bio then bio.replace(/\n/g, "<br/>") else 'Click here to add an About Me!')
 
   yearEdit: ->
     @edit 'year'
 
   yearStopEdit: ->
-    @stopEdit 'year', 'int', getOrdinal
+    @stopEdit 'year', 'int', ((year) ->
+      if year then getOrdinal year else 'N/A')
 
   degreeEdit: ->
     @edit 'degree'
 
   degreeStopEdit: ->
-    @stopEdit 'degree', 'string', _.identity
+    @stopEdit 'degree', 'string', ((degree) ->
+      if degree then degree else 'N/A')
 
   # displayFunction must take one argument - the value in the model and
   # must output a string to display in the edit window
@@ -127,7 +132,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
             msg = errorlist.errors.bio.join('\n')
             notify "error", msg
 
-      $('#' + attribute + '-container').show()
+    $('#' + attribute + '-container').show()
 
   edit: (attribute) ->
     $('#' + attribute + '-container').hide()

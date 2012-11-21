@@ -163,13 +163,13 @@ ActiveRecord::Schema.define(:version => 20121119184645) do
     t.string   "password_digest"
     t.integer  "department_id"
     t.integer  "year",                         :default => 0
-    t.text     "bio",                          :default => "Click to Add Bio"
+    t.text     "bio",                          :default => ""
     t.text     "degree",                       :default => ""
     t.boolean  "active"
     t.integer  "company_id"
     t.string   "type"
-    t.datetime "created_at",                                                   :null => false
-    t.datetime "updated_at",                                                   :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.string   "cv_file_name"
     t.string   "cv_content_type"
     t.integer  "cv_file_size"

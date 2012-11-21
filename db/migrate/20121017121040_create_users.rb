@@ -9,7 +9,7 @@ class CreateUsers < ActiveRecord::Migration
       # Student Fields
       t.references :department
       t.integer :year, :default => "?"
-      t.text :bio, :default => "Click to Add Bio"
+      t.text :bio, :default => ""
       t.text :degree, :default => ""
       t.boolean :active
 

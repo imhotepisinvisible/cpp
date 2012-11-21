@@ -171,7 +171,6 @@
 
             <div id="bio-container">
               <p id="student-bio">
-                <% console.log @student.get('bio') %>
                 <%- @student.get('bio').replace(/\n/g, "<br/>") %>
               </p>
             </div>
