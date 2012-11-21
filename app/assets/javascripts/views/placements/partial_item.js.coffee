@@ -5,7 +5,8 @@ class CPP.Views.PlacementsPartialItem extends CPP.Views.Base
   editable: false
 
   events:
-    'click .btn-edit' : 'editPlacement'
+    'click .btn-edit'       : 'editPlacement'
+    'click .placement-item' : 'viewPlacement'
 
   template: JST['placements/partial_item']
 
@@ -19,3 +20,7 @@ class CPP.Views.PlacementsPartialItem extends CPP.Views.Base
   editPlacement: (e) ->
     e.stopPropagation()
     Backbone.history.navigate('placements/' + @model.id + '/edit', trigger: true)
+
+  viewPlacement: (e) ->
+    e.stopPropagation()
+    Backbone.history.navigate('placements/' + @model.id, trigger: true)
