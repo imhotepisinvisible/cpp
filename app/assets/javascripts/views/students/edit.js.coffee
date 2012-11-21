@@ -59,7 +59,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
 
     .bind "fileuploaddone", (e, data) =>
       notify 'success', 'Uploaded successfully'
-      $('#student-profile-img').attr('src', '/students/' + @model.id + '/profile_picture')
+      $('#student-profile-img').attr('src', '/students/' + @model.id + '/documents/profile_picture')
       $(e.target).closest('.upload-container').removeClass('missing-document')
 
     .bind "fileuploadfail", (e, data) =>
