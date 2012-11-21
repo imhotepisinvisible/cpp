@@ -28,7 +28,13 @@ class Student < User
     :path => ':rails_root/documents/cvs/:id/:basename.:extension',
     :url => '/:class/:id/cv'
 
-  validates_attachment :cv, :content_type => { :content_type => "application/pdf" }
+  validates_attachment :cv, :transcript, :covering_letter,
+      :content_type => { :content_type => ["application/pdf", "text/plain"],
+                         message: "Must be a pdf or text file" }
+
+  validates_attachment :profile_picture,
+      :content_type => { :content_type => ["image/jpeg", "image/png"],
+                          message: "Must be a jpeg or png file"}
 
   has_attached_file :transcript,
     :path => ':rails_root/documents/transcripts/:id/:basename.:extension',

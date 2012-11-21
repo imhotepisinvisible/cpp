@@ -58,8 +58,8 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
       $('#student-profile-img').attr('src', '/students/' + @model.id + '/profile_picture')
       $(e.target).closest('.upload-container').removeClass('missing-document')
 
-    .bind "fileuploadfail", (e, data) ->
-      notify('error', "Document couldn't be uploaded")
+    .bind "fileuploadfail", (e, data) =>
+      @displayJQXHRErrorMessage data
 
   uploadInitialize: (documentType) ->
     $('#file-' + documentType).fileupload
@@ -83,24 +83,26 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
 
       notify 'success', 'Uploaded successfully'
 
-    .bind "fileuploadfail", (e, data) ->
+    .bind "fileuploadfail", (e, data) =>
       upload = $(e.target).closest('.upload-container')
       upload.find('.progress-upload').delay(250).slideUp 'slow', ->
         upload.find('.bar').width('0%')
+      @displayJQXHRErrorMessage data
 
-      # Try to get messages, if can't just display that it didn't work
-      response = JSON.parse data.jqXHR.responseText
-      if response.errors
-        messages = []
-        for attr, error of response.errors
-          messages.push error
 
-      if !messages
-        msg = 'Cannot upload file'
-      else
-        msg = messages.join(', ')
+  displayJQXHRErrorMessage: (data) ->
+    response = JSON.parse data.jqXHR.responseText
+    if response.errors
+      messages = []
+      for attr, error of response.errors
+        messages.push error
 
-      notify('error', msg)
+    if !messages
+      msg = 'Error'
+    else
+      msg = messages.join(', ')
+
+    notify('error', msg)
 
   uploadDocument: (e) ->
     $(e.currentTarget).closest('.upload-container').find('.file-input').click()
