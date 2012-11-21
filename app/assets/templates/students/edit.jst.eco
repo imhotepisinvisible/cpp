@@ -12,10 +12,8 @@
 
     <div class="span7">
       <div id="student-profile-intro">
-        <div id="name-textarea-container" style="display:none">
-          <textarea id="student-name-editor">
-            <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
-          </textarea>
+        <div id="name-input-container" style="display:none">
+          <input type="text" id="student-name-editor" value="<%= @student.get 'first_name' %> <%= @student.get 'last_name' %>">
         </div>
 
         <div id="name-container">
@@ -24,10 +22,8 @@
           </p>
         </div>
 
-        <span id="year-textarea-container" style="display:none">
-          <textarea id="student-year-editor">
-            <%= @student.get 'year' %>
-          </textarea>
+        <span id="year-input-container" style="display:none">
+          <input type="text" id="student-year-editor" value="<%= @student.get 'year' %>">
         </span>
 
         <span id="year-container">
@@ -42,10 +38,8 @@
 
         <span> Year</span>
 
-        <span id="degree-textarea-container" style="display:none">
-          <textarea id="student-degree-editor">
-            <%= @student.get 'degree' %>
-          </textarea>
+        <span id="degree-input-container" style="display:none">
+          <input type="text" id="student-degree-editor" value="<%= @student.get 'degree' %>">
         </span>
 
         <span id="degree-container">
@@ -163,7 +157,7 @@
 
         <div class="row">
           <div class="span4">
-            <div id="bio-textarea-container" style="display:none">
+            <div id="bio-input-container" style="display:none">
               <textarea id="student-bio-editor">
                 <%= @student.get('bio') %>
               </textarea>

@@ -8,13 +8,13 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
 
     'click #bio-container': 'bioEdit'
     'click .remove-tag': 'removeTag'
-    'blur #bio-textarea-container': 'bioStopEdit'
+    'blur #bio-input-container': 'bioStopEdit'
     'click #name-container': 'nameEdit'
-    'blur #name-textarea-container': 'nameStopEdit'
+    'blur #name-input-container': 'nameStopEdit'
     'click #year-container': 'yearEdit'
-    'blur #year-textarea-container': 'yearStopEdit'
+    'blur #year-input-container': 'yearStopEdit'
     'click #degree-container': 'degreeEdit'
-    'blur #degree-textarea-container': 'degreeStopEdit'
+    'blur #degree-input-container': 'degreeStopEdit'
     'click .activate'  : 'activate'
     'submit #skill-tag-form': 'addSkill'
 
@@ -86,34 +86,30 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
           notify('error', "couldn't remove document")
 
   bioEdit: ->
-    $('#bio-container').hide()
-    $('#student-bio-editor').html @model.get('bio')
-    $('#bio-textarea-container').show()
-    $('#student-bio-editor').focus()
+    @edit 'bio'
 
   bioStopEdit: ->
-    @stopEdit 'bio', 'string', 'Click here to add an About Me!', ((bio) ->
+    @stopEdit 'bio', 'Click here to add an About Me!', ((bio) ->
       bio.replace(/\n/g, "<br/>"))
 
   yearEdit: ->
     @edit 'year'
 
   yearStopEdit: ->
-    @stopEdit 'year', 'int', 'N/A', ((year) ->
+    @stopEdit 'year', 'N/A', ((year) ->
       if year then getOrdinal year else '')
 
   degreeEdit: ->
     @edit 'degree'
 
   degreeStopEdit: ->
-    @stopEdit 'degree', 'string', 'N/A degree', _.identity
+    @stopEdit 'degree', 'N/A degree', _.identity
 
   # displayFunction must take one argument - the value in the model and
   # must output a string to display in the edit window
-  stopEdit: (attribute, type, defaultValue, displayFunction) ->
+  stopEdit: (attribute, defaultValue, displayFunction) ->
     value = $('#student-' + attribute + '-editor').val()
-    #value = if type == 'int' then parseInt(value) else value
-    $('#' + attribute + '-textarea-container').hide()
+    $('#' + attribute + '-input-container').hide()
 
     if value != @model.get attribute
       @model.set attribute, value
@@ -140,20 +136,20 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
   edit: (attribute) ->
     $('#' + attribute + '-container').hide()
     $('#student-' + attribute + '-editor').html(@model.get attribute)
-    $('#' + attribute + '-textarea-container').show()
+    $('#' + attribute + '-input-container').show()
     $('#student-' + attribute + '-editor').focus()
 
   nameEdit: ->
     $('#name-container').hide()
     $('#student-name-editor').html(@model.get('first_name') + ' ' + @model.get('last_name'))
-    $('#name-textarea-container').show()
+    $('#name-input-container').show()
     $('#student-name-editor').focus()
 
   nameStopEdit: ->
     name = $('#student-name-editor').val()
     lastName = name.substring(name.indexOf(' ') + 1)
     firstName = name.substring(0, name.indexOf(' '))
-    $('#name-textarea-container').hide()
+    $('#name-input-container').hide()
 
     if not ((firstName == @model.get 'first_name') and (lastName == @model.get 'last_name'))
       @model.set 'first_name', firstName
