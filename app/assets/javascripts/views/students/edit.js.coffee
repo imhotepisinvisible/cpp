@@ -85,8 +85,21 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     .bind "fileuploadfail", (e, data) ->
       td = $(e.target).closest('td')
       td.find('.progress-upload').delay(250).slideUp 'slow', ->
-        td.find('.bar').width('0%')
-      notify('error', "Document couldn't be uploaded")
+      td.find('.bar').width('0%')
+
+      # Try to get messages, if can't just display that it didn't work
+      response = JSON.parse data.jqXHR.responseText
+      if response.errors
+        messages = []
+        for attr, error of response.errors
+          messages.push error
+
+      if !messages
+        msg = 'Cannot upload file'
+      else
+        msg = messages.join(', ')
+
+      notify('error', msg)
 
   uploadDocument: (e) ->
     $(e.currentTarget).closest('.upload-container').find('.file-input').click()
