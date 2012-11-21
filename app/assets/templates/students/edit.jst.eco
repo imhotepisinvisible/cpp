@@ -171,7 +171,11 @@
 
             <div id="bio-container">
               <p id="student-bio">
-                <%- @student.get('bio').replace(/\n/g, "<br/>") %>
+                <% if @student.get('bio'): %>
+                  <%- @student.get('bio').replace(/\n/g, "<br/>") %>
+                <% else: %>
+                  Click here to add an About Me!
+                <% end %>
               </p>
             </div>
           </div>

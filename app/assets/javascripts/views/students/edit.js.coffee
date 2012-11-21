@@ -23,9 +23,6 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     @uploadInitialize 'cv'
     @uploadInitialize 'transcript'
     @uploadInitialize 'covering-letter'
-    # Displays 'Click here to add an About Me!' if no bio
-    if not @model.get('bio')
-      $('#student-bio').html 'Click here to add an About Me!'
 
   render: ->
     super
