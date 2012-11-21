@@ -1,4 +1,4 @@
-<a href="#placements/<%= @placement.id %>" class="item placement-item">
+<div class="item placement-item">
   <div class="link-title">
     <%= @placement.get 'position' %>
     <% if @editable: %>
@@ -8,4 +8,4 @@
   <div class="link-description">
     <%= @placement.get 'description' %>
   </div>
-</a>
+</div>
