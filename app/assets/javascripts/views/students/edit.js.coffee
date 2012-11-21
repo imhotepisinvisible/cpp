@@ -69,24 +69,24 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
 
 
     .bind "fileuploadstart", (e, data) ->
-      $(e.currentTarget).parent().parent().parent().find('.progress-upload').slideDown()
+      $(e.currentTarget).closest('.upload-container').find('.progress-upload').slideDown()
 
     .bind "fileuploadprogress", (e, data) ->
       progress = parseInt(data.loaded / data.total * 100, 10)
       $('#progress-' + documentType).width(progress + '%')
 
     .bind "fileuploaddone", (e, data) ->
-      td = $(e.target).closest('td')
-      td.find('.progress-upload').delay(250).slideUp 'slow', ->
-        td.find('.bar').width('0%')
-        td.removeClass('missing-document')
+      upload = $(e.target).closest('.upload-container')
+      upload.find('.progress-upload').delay(250).slideUp 'slow', ->
+        upload.find('.bar').width('0%')
+        upload.removeClass('missing-document')
 
       notify 'success', 'Uploaded successfully'
 
     .bind "fileuploadfail", (e, data) ->
-      td = $(e.target).closest('td')
-      td.find('.progress-upload').delay(250).slideUp 'slow', ->
-        td.find('.bar').width('0%')
+      upload = $(e.target).closest('.upload-container')
+      upload.find('.progress-upload').delay(250).slideUp 'slow', ->
+        upload.find('.bar').width('0%')
 
       # Try to get messages, if can't just display that it didn't work
       response = JSON.parse data.jqXHR.responseText
