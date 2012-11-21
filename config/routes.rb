@@ -63,6 +63,7 @@ CPP::Application.routes.draw do
   resources :placements
 
   resources :students do
+    get 'suggested_degrees', :on => :collection, :action => :suggested_degrees
     delete '/documents/:document_type', :on => :member, :action => :delete_document
     get '/documents/:document_type', :on => :member, :action => :download_document
   end

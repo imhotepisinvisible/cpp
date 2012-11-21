@@ -89,4 +89,17 @@ class StudentsController < ApplicationController
       respond_with @student, status: :unprocessable_entity
     end
   end
+
+  # GET /students/suggested_degrees
+  def suggested_degrees
+    @students = Student.all
+    degrees = []
+    @students.each do |student|
+      if (not student.degree.to_s.empty?) and (not degrees.include? student.degree)
+        logger.info student.degree
+        degrees.push student.degree
+      end
+    end
+    respond_with degrees
+  end
 end

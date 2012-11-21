@@ -45,6 +45,10 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
           tagnames = (tag.name for tag in data)
           process(tagnames)
 
+    $('#student-degree-editor').typeahead
+      source: (query, process) =>
+        $.get '/students/suggested_degrees', {}, (data) ->
+          process(data)
     @
 
   profileUploadInitialize: ->
