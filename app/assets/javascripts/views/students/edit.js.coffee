@@ -80,12 +80,13 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
       td.find('.progress-upload').delay(250).slideUp 'slow', ->
         td.find('.bar').width('0%')
         td.removeClass('missing-document')
-        notify 'success', 'Uploaded successfully'
+
+      notify 'success', 'Uploaded successfully'
 
     .bind "fileuploadfail", (e, data) ->
       td = $(e.target).closest('td')
       td.find('.progress-upload').delay(250).slideUp 'slow', ->
-      td.find('.bar').width('0%')
+        td.find('.bar').width('0%')
 
       # Try to get messages, if can't just display that it didn't work
       response = JSON.parse data.jqXHR.responseText
