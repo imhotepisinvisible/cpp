@@ -173,7 +173,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
 
     $('#name-container').show()
 
-  activate: (e) ->
+  activate: (e)->
     @model.set "active", (!@model.get "active");
     if (!@model.get "active")
       $('#student-profile-img-container').addClass('profile-deactivated')

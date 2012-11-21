@@ -162,29 +162,14 @@ ActiveRecord::Schema.define(:version => 20121119184645) do
     t.string   "email"
     t.string   "password_digest"
     t.integer  "department_id"
-<<<<<<< HEAD
     t.integer  "year",                         :default => 0
     t.text     "bio",                          :default => ""
     t.text     "degree",                       :default => ""
-    t.boolean  "active"
-    t.integer  "company_id"
-    t.string   "type"
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
-=======
-    t.integer  "year"
-    t.text     "bio"
-    t.text     "degree"
-    t.string   "cv_location"
-    t.string   "transcript_location"
-    t.string   "coveringletter_location"
-    t.string   "profile_picture_location"
     t.boolean  "active",                       :default => true
     t.integer  "company_id"
     t.string   "type"
     t.datetime "created_at",                                     :null => false
     t.datetime "updated_at",                                     :null => false
->>>>>>> Added all students view and changed Active
     t.string   "cv_file_name"
     t.string   "cv_content_type"
     t.integer  "cv_file_size"

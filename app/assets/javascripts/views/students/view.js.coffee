@@ -4,7 +4,6 @@ class CPP.Views.StudentsView extends CPP.Views.Base
 
   events:
     'click #btn-download-cv': 'downloadCV'
-    'click .activate' : 'activate'
 
   initialize: ->
     @render()
@@ -25,14 +24,3 @@ class CPP.Views.StudentsView extends CPP.Views.Base
 
   downloadCV: ->
     window.location = '/students/' + @model.id + '/download_cv'
-
-  activate: (e) ->
-    @model.set "active", (!@model.get "active");
-    if (!@model.get "active")
-      $('#student-profile-img-container').removeClass('profile-deactivated')
-      $('#student-profile-intro').removeClass('profile-deactivated')
-      $(e.target).html("Deactivate")
-    else
-      $('#student-profile-img-container').addClass('profile-deactivated')
-      $('#student-profile-intro').addClass('profile-deactivated')
-      $(e.target).html("Activate")

@@ -11,7 +11,7 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :year, :default => "?"
       t.text :bio, :default => ""
       t.text :degree, :default => ""
-      t.boolean :active
+      t.boolean :active, :default => true
 
       # Company Admin Fields
       t.references :company # Company for Company Admin
