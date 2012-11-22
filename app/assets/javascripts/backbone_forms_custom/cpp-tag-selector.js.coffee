@@ -20,6 +20,11 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
     if options.tag_class?
       @tag_class = options.tag_class
 
+    @tag_change_callback = ->
+      return
+    if options.tag_change_callback?
+      @tag_change_callback = options.tag_change_callback
+
     @setValue(@value)
 
 
@@ -37,7 +42,7 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
 
     @$input.typeahead
       source: (query, process) =>
-        $.get '/tags/skills', {exclude_tags: @tags}, (data) ->
+        $.get @autocomplete_url, {exclude_tags: @tags}, (data) ->
           process(data)
       updater: (item) =>
         @$input.val('')
@@ -99,34 +104,24 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
     _.reject @tags, (tag) -> tag == ''
 
   renderTag: (tag) =>
-    "<span class=\"label tag skill-tag #{@tag_class}\"><span class=\"tag-text\">#{tag}</span><a class=\"close remove-tag\">×</a></span>"
+    "<span class=\"label tag #{@tag_class}\"><span class=\"tag-text\">#{tag}</span><a class=\"close remove-tag\">×</a></span>"
 
   removeTag: (tag) =>
     @tags = _.without(@tags, tag)
     @commit()
-    @saveModel()
+    @tag_change_callback()
     @render()
 
   addTag: (tag) =>
     if tag && !@hasTag(tag)
       @tags.push tag
       @commit()
-      @saveModel()
+      @tag_change_callback()
       @render()
       return ""
     else
       # ERROR HERE
       return tag
-
-  saveModel: ->
-    @model.save {},
-      wait: true
-      success: (model, response) =>
-        notify "success", "Updated Profile"
-      error: (model, response) ->
-        # Notify tag-specific errors here (profanity etc)
-        errorlist = JSON.parse response.responseText
-        notify "error", "Couldn't Update Profile"
 
   hasTag: (value) =>
     jQuery.inArray(value, @tags) >= 0
