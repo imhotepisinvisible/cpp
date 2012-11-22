@@ -1,4 +1,13 @@
-<h1 class="section-header"><%= @company.get 'name' %> (Editing)</h1>
+<div id="name-input-container" style="display:none">
+  <h1 class="section-header">
+    <input type="text" id="company-name-editor" value="<%= @company.get 'name' %>">
+  </h1>
+</div>
+
+<div id="name-container">
+  <h1 id="company-name" class="section-header"><%= @company.get 'name' %></h1>
+</div>
+
 <div class="row">
   <div class="span4">
     <div class="company-logo-large">

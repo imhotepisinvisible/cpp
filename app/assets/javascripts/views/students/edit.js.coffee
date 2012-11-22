@@ -175,58 +175,24 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
           notify('error', "couldn't remove document")
 
   bioEdit: ->
-    @edit 'bio'
+    window.inPlaceEdit @model, 'student', 'bio'
 
   bioStopEdit: ->
-    @stopEdit 'bio', 'Click here to add an About Me!', ((bio) ->
+    window.inPlaceStopEdit @model, 'student', 'bio', 'Click here to add an About Me!', ((bio) ->
       bio.replace(/\n/g, "<br/>"))
 
   yearEdit: ->
-    @edit 'year'
+    window.inPlaceEdit @model, 'student', 'year'
 
   yearStopEdit: ->
-    @stopEdit 'year', 'N/A', ((year) ->
+    window.inPlaceStopEdit @model, 'student', 'year', 'N/A', ((year) ->
       if year then getOrdinal year else '')
 
   degreeEdit: ->
-    @edit 'degree'
+    window.inPlaceEdit @model, 'student', 'degree'
 
   degreeStopEdit: ->
-    @stopEdit 'degree', 'N/A degree', _.identity
-
-  # displayFunction must take one argument - the value in the model and
-  # must output a string to display in the edit window
-  stopEdit: (attribute, defaultValue, displayFunction) ->
-    value = $('#student-' + attribute + '-editor').val()
-    $('#' + attribute + '-input-container').hide()
-
-    if value != @model.get attribute
-      @model.set attribute, value
-      @model.save {},
-          wait: true
-          success: (model, response) =>
-            notify "success", "Updated profile"
-            display = displayFunction(model.get(attribute))
-            if display
-              $('#student-' + attribute).html display
-              $('#student-' + attribute).removeClass('missing')
-            else
-              $('#student-' + attribute).html defaultValue
-              $('#student-' + attribute).addClass('missing')
-
-            @model.set attribute, model.get(attribute)
-          error: (model, response) ->
-            errorlist = JSON.parse response.responseText
-            msg = errorlist.errors.bio.join('\n')
-            notify "error", msg
-
-    $('#' + attribute + '-container').show()
-
-  edit: (attribute) ->
-    $('#' + attribute + '-container').hide()
-    $('#student-' + attribute + '-editor').html(@model.get attribute)
-    $('#' + attribute + '-input-container').show()
-    $('#student-' + attribute + '-editor').focus()
+    window.inPlaceStopEdit @model, 'student', 'degree', 'N/A degree', _.identity
 
   nameEdit: ->
     $('#name-container').hide()

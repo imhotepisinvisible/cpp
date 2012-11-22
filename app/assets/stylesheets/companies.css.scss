@@ -6,3 +6,12 @@
     cursor: pointer;
   }
 }
+
+#company-name-editor {
+  font-family: 'Arvo', serif;
+  font-size: 38.5px;
+  line-height: 40px;
+  width: 700px;
+  height: 60px;
+  @include box-sizing(border-box);
+}

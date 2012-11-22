@@ -43,9 +43,9 @@ class CompaniesController < ApplicationController
     @company = Company.find(params[:id])
 
     if @company.update_attributes(params[:company])
-      head :no_content
+      respond_with @company
     else
-      render @company, status: :unprocessable_entity
+      respond_with @company, status: :unprocessable_entity
     end
   end
 
