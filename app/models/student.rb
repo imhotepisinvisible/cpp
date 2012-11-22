@@ -50,7 +50,7 @@ class Student < User
 
   attr_accessible :department_id, :year, :bio, :degree,
                     :cv, :transcript, :covering_letter, :profile_picture,
-                    :skill_list, :interest_list, :year_group_list
+                    :skill_list, :interest_list, :year_group_list, :active
 
 
   def valid_email?

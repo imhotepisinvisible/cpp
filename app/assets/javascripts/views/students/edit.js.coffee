@@ -20,15 +20,15 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
 
   initialize: ->
 
-    saveModel = ->
-      @model.save {},
-        wait: true
-        success: (model, response) =>
-          notify "success", "Updated Profile"
-        error: (model, response) ->
-          # Notify tag-specific errors here (profanity etc)
-          errorlist = JSON.parse response.responseText
-          notify "error", "Couldn't Update Profile"
+  saveModel = ->
+    @model.save {},
+      wait: true
+      success: (model, response) =>
+        notify "success", "Updated Profile"
+      error: (model, response) ->
+        # Notify tag-specific errors here (profanity etc)
+        errorlist = JSON.parse response.responseText
+        notify "error", "Couldn't Update Profile"
 
     @skill_list_tags_form = new Backbone.Form.editors.TagEditor
       model: @model
@@ -58,6 +58,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
       additions: true
 
     @render()
+    @updateActiveView()
     @uploadInitialize 'cv'
     @uploadInitialize 'transcript'
     @uploadInitialize 'covering-letter'
@@ -247,8 +248,6 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
           success: (model, response) =>
             notify "success", "Updated profile"
             $('#student-profile-intro-name').html(model.get('first_name') + ' ' + model.get('last_name'))
-            @model.set 'first_name', model.get('first_name')
-            @model.set 'last_name', model.get('last_name')
           error: (model, response) ->
             errorlist = JSON.parse response.responseText
             if errorlist.errors.first_name
@@ -265,14 +264,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
 
   activate: (e)->
     @model.set "active", (!@model.get "active");
-    if (!@model.get "active")
-      $('#student-profile-img-container').addClass('profile-deactivated')
-      $('#student-profile-intro').addClass('profile-deactivated')
-      $(e.target).html("Activate")
-    else
-      $('#student-profile-img-container').removeClass('profile-deactivated')
-      $('#student-profile-intro').removeClass('profile-deactivated')
-      $(e.target).html("Deactivate")
+    @updateActiveView();
     @model.save {},
         wait: true
         success: (model, response) =>
@@ -282,6 +274,16 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
             notify "success", "Profile Inactive"
         error: (model, response) ->
           notify "error", "Failed to change profile active status"
+
+  updateActiveView: ->
+    if (!@model.get "active")
+      $('#student-profile-img-container').addClass('profile-deactivated')
+      $('#student-profile-intro').addClass('profile-deactivated')
+      $('.activate').html("Activate")
+    else
+      $('#student-profile-img-container').removeClass('profile-deactivated')
+      $('#student-profile-intro').removeClass('profile-deactivated')
+      $('.activate').html("Deactivate")
 
   removeTag: (e) ->
     close_div = $(e.currentTarget)
