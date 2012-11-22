@@ -49,7 +49,8 @@ class Student < User
     :url => '/:class/:id/profile_picture'
 
   attr_accessible :department_id, :year, :bio, :degree,
-                    :cv, :transcript, :covering_letter, :profile_picture
+                    :cv, :transcript, :covering_letter, :profile_picture,
+                    :skill_list, :interest_list, :year_group_list
 
 
   def valid_email?

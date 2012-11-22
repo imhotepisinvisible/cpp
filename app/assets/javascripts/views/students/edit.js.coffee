@@ -19,15 +19,40 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     'submit #skill-tag-form': 'addSkill'
 
   initialize: ->
+    console.log @model
+    @skill_list_tags_form = new Backbone.Form.editors.TagEditor
+      model: @model
+      key: 'skill_list'
+      title: 'Skills'
+      url: '/tags/skills'
+    @interest_list_tags_form = new Backbone.Form.editors.TagEditor
+      model: @model
+      key: 'interest_list'
+      title: 'Interests'
+      url: '/tags/interests'
+    @year_group_list_tags_form = new Backbone.Form.editors.TagEditor
+      model: @model
+      key: 'year_group_list'
+      title: 'Year Groups'
+      url: '/tags/year_groups'
+
     @render()
     @uploadInitialize 'cv'
     @uploadInitialize 'transcript'
     @uploadInitialize 'covering-letter'
     @profileUploadInitialize()
 
+
   render: ->
     super
     $(@el).html(@template(student: @model))
+
+    @skill_list_tags_form.render()
+    $('.skill-tags-form').append(@skill_list_tags_form.el)
+    @interest_list_tags_form.render()
+    $('.interest-tags-form').append(@interest_list_tags_form.el)
+    @year_group_list_tags_form.render()
+    $('.year-group-tags-form').append(@year_group_list_tags_form.el)
 
     events_partial = new CPP.Views.EventsPartial
       el: $(@el).find('#events-partial')

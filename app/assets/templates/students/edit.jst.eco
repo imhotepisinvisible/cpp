@@ -198,51 +198,19 @@
               <div class="row">
                   <div class="span4">
                     <div class="tag-category">
-                      <div class="tag-category-header">
-                        Skills
-
-                        <form id="skill-tag-form" class="pull-right form-inline" style="padding: 0px; margin:0px">
-                          <input id="add-skill-tag-input" type="text" class="input-medium" placeholder="Type to Add Skill" />
-                        </form>
-                        <div class="clearfix"/>
-                      </div>
-                      <div id="skill-tag-container">
-                        <% for i, tag of @student.get('skills'): %>
-                          <span class="label tag skill-tag"><span class="tag-text"><%= tag.name %></span><a class="close remove-tag">×<input type="hidden" value="<%= tag.id %>"></a></span>
-                        <% end %>
-                      </div>
+                        <div class="skill-tags-form"></div>
                     </div>
                   </div>
 
                   <div class="span4">
                     <div class="tag-category">
-                      <div class="tag-category-header">
-                        Interests
-
-                        <form class="pull-right form-inline" style="padding: 0px; margin:0px">
-                          <input type="text" class="input-medium" placeholder="Type to Add Interests" />
-                        </form>
-                        <div class="clearfix"/>
-                      </div>
-                      <% for i, tag of @student.get('interests'): %>
-                        <span class="label tag interest-tag"><span class="tag-text"><%= tag.name %></span><a class="close remove-tag">×<input type="hidden" value="<%= tag.id %>"></a></span>
-                      <% end %>
+                        <div class="interest-tags-form"></div>
                     </div>
                   </div>
 
                   <div class="span4">
                     <div class="tag-category">
-                      <div class="tag-category-header">
-                        Year Groups
-
-                        <form class="pull-right form-inline" style="padding: 0px; margin:0px">
-                          <input  type="text" class="input-medium" placeholder="Type to Add Groups" />
-                        </form>
-                        <div class="clearfix"/>
-                      </div>
-                      <% for i, tag of @student.get('year_groups'): %>
-                        <span class="label tag year-group-tag"><span class="tag-text"><%= tag.name %></span><a class="close remove-tag">×<input type="hidden" value="<%= tag.id %>"></a></span>
-                      <% end %>
+                        <div class="year-group-tags-form"></div>
                     </div>
                   </div>
               </div>
