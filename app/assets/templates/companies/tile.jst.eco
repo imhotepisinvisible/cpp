@@ -4,7 +4,7 @@
       <img src="/assets/company_logos/<%= @company.get 'logo' %>">
     </div>
     <div class="company-tile-blurb">
-      <%= @company.get 'description' %>
+      <%= @company.get('description').substring(0, 100) + '...' %>
     </div>
   </div>
 </div>

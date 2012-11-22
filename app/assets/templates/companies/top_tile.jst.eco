@@ -7,7 +7,7 @@
         </div>
         <div class="span6">
           <div class="company-tile-blurb">
-            <%= @company.get 'description' %>
+            <%= @company.get('description').substring(0, 400) + '...' %>
           </div>
         </div>
       </div>

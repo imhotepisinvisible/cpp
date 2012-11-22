@@ -72,10 +72,84 @@ jack.interest_list = interests_tags
 jack.year_group_list = ["3rd Year", "MEng"]
 jack.save!
 
+FactoryGirl.create :company, {
+  organisation: organisation,
+  name: 'Google',
+  logo: 'google_logo.jpg',
+  description: 'At Google, you have the opportunity to do impactful and challenging work no matter where you are. Our engineers work on exciting, cutting-edge computer science problems. We are also looking for the brightest minds in media, sales, marketing, finance and product management to help us change the world. We hire at all levels of academic experience for opportunities throughout Europe, Middle East and Africa including Dublin, London, Tel Aviv, Wroclaw and Zurich.'
+}
+
+FactoryGirl.create :company, {
+  organisation: organisation,
+  name: 'Amazon',
+  logo: 'amazon_logo.jpg',
+  description: "Technological innovation drives the growth of Amazon and we're delighted to be offering exciting internship and graduate opportunities for Software Development Engineers. Whether it's in our UK Headquarters or Development Centres (Edinburgh, Dublin, Central London) or Seattle, you could be working on a number of initiatives for Amazons global websites and services. For ambitious graduates, like you, intent on developing a successful career, the result is a technical learning environment quite unlike any other. Work Hard. Have Fun. Make History. To find out more see our UK Opportunities and our US Opportunities."
+}
+
+FactoryGirl.create :company, {
+  organisation: organisation,
+  name: 'Facebook',
+  logo: 'facebook_logo.jpg',
+  description: "At Facebook our development cycle is extremely fast, and we've built tools to keep it that way. It's common to write code and have it running on the live site a few days later. This comes as a pleasant surprise to engineers who have worked at other companies where code takes months or years to see the light of day. You can help build the next-generation systems behind Facebook's products, create web applications that reach millions of people, build high volume servers and be a part of a team that's working to help people connect with each other around the globe. Join us!"
+}
+
+FactoryGirl.create :company, {
+  organisation: organisation,
+  name: 'IBM',
+  logo: 'ibm_logo.jpg',
+  description: "IBM is the world leader in IT services and consultancy. Across industries including business, finance, health, retail, sport, media and entertainment, it's likely that an IBM system or solution is helping to provide the service. We offer a Graduate Scheme, Industrial Trainee Placement Scheme and Extreme Blue Summer Internship programme. Applications are now being accepted on our recruitment website for Graduate Software Development roles and Graduate Information Developer roles, as well as our 12-week Extreme Blue Summer internships. We will be in touch with all students who register interest with us through the website."
+}
+
+FactoryGirl.create :company, {
+  organisation: organisation,
+  name: 'Intel',
+  logo: 'intel_logo.jpg',
+  description: "Intel, the world leader in silicon innovation, develops technologies, products, and initiatives to continually advance how people work and live. Founded in 1968 to build semiconductor memory products, Intel introduced the world's first microprocessor in 1971, and had a net revenue of $54 billion in 2011. Intel's mission this decade is to create and extend computing technology to connect and enrich the lives of every person on earth. Intel's European research and development network, Intel Labs Europe, consists of more than 40 labs employing more than 3700 R&D professionals working on subjects from semi-conductor physics to mobile-phone user-experience research, so whatever your area of interest you'll find people at Intel who want your expertise. As an Intel employee you will be able to contribute to real innovation in products that everyone uses."
+}
+
+FactoryGirl.create :company, {
+  organisation: organisation,
+  name: 'Microsoft',
+  logo: 'microsoft_logo.jpg',
+  description: "Microsoft Research Cambridge is one of the largest computer science research laboratories in Europe, the Middle East and Africa (EMEA). With over 100 leading researchers from around the world across various disciplines, we work hard to provide a world-class academic environment that promotes creativity and independent thinking, while providing a challenging and open work environment."
+}
+
+FactoryGirl.create :company, {
+  organisation: organisation,
+  name: 'Netcraft',
+  logo: 'netcraft_logo.jpg',
+  description: "Netcraft is an Internet services company based in Bath which provides Internet data mining, defences against fraud and phishing, web application security testing, and automated penetration testing. Clients include many of the world's leading Internet infrastructure and financial companies, and in particular, Netcraft's anti-phishing services are very widely licensed, ultimately protecting hundreds of millions of people."
+}
+
+FactoryGirl.create :company, {
+  organisation: organisation,
+  name: 'NextJump',
+  logo: 'nextjump_logo.jpg',
+  description: "Next Jump are a world leading web development company, providing corporate reward sites for most of the largest and most prestigious organisations in the FTSE100 including BT, HSBC, RBS, GSK and many more. We are looking for technology rockstars who are driven and enthusiastic and have a passion for cutting edge technology. Based in London, you'll be joining a fast-paced and rapidly-growing company that aims to make itself the best place to work in the world and therefore offer great perks such as free healthy breakfast, snacks and dinner every day, at least two trips a year to the head office in New York, private healthcare, gym membership, free laundry service etc."
+}
+
+FactoryGirl.create :company, {
+  organisation: organisation,
+  name: 'Palantir',
+  logo: 'palantir_logo.jpg',
+  description: "Palantir is inspired by a simple idea: that with good technology and enough data, intelligent people can find new solutions to hard problems and change the world for the better. For organizations addressing many of today's most critical challenges, the necessary information is already out there, waiting to be understood. We build technology that allows people to make sense of their data, equipping them with the intelligence they need for their missions to succeed. Palantir's current customers are a mix of government agencies, financial institutions and non-profits. Collectively, their impact on the world is so large it's difficult to measure, and we're proud that our work contributes to that impact. We change the world for the better by writing software that reveals intelligence hidden within hairy, complex systems - but the software is merely the means to our end of solving the world's biggest problems."
+}
+
+FactoryGirl.create :company, {
+  organisation: organisation,
+  name: 'VMware',
+  logo: 'vmware_logo.jpg',
+  description: "VMware, the global leader in virtualization and cloud infrastructure, delivers customer-proven solutions that accelerate IT by reducing complexity and enabling more flexible, agile service delivery. VMware enables enterprises to adopt a cloud model that addresses their unique business challenges. VMware's approach accelerates the transition to cloud computing while preserving existing investments and improving security and control. With more than 350,000 customers and 50,000 partners, VMware solutions help organizations of all sizes lower costs, increase business agility and ensure freedom of choice."
+}
+
+# logo { %w(amazon facebook google
+#           ibm intel microsoft netcraft
+#           nextjump palantir vmware).sample + "_logo.jpg" }
+
 # Sample Companies
-10.times do
-  FactoryGirl.create :company, :organisation => organisation
-end
+# 10.times do
+#   FactoryGirl.create :company, :organisation => organisation
+# end
 
 Company.all.each do |company|
   # Create events
