@@ -19,21 +19,21 @@
 
     <div class="span7">
       <div id="student-profile-intro">
-        <div id="name-input-container" style="display:none">
+        <div id="student-name-input-container" style="display:none">
           <input type="text" id="student-name-editor" value="<%= @student.get 'first_name' %> <%= @student.get 'last_name' %>">
         </div>
 
-        <div id="name-container">
+        <div id="student-name-container">
           <p id="student-profile-intro-name">
             <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
           </p>
         </div>
 
-        <span id="year-input-container" style="display:none">
+        <span id="student-year-input-container" style="display:none">
           <input type="text" id="student-year-editor" value="<%= @student.get 'year' %>">
         </span>
 
-        <span id="year-container">
+        <span id="student-year-container">
           <span id="student-year" class="student-profile-intro-status <%= if not @student.get('year') then 'missing' %>">
             <% if @student.get('year'): %>
               <%= getOrdinal(@student.get 'year') %>
@@ -45,11 +45,11 @@
 
         <span> Year</span>
 
-        <span id="degree-input-container" style="display:none">
+        <span id="student-degree-input-container" style="display:none">
           <input type="text" id="student-degree-editor" value="<%= @student.get 'degree' %>">
         </span>
 
-        <span id="degree-container">
+        <span id="student-degree-container">
           <span id="student-degree" class="student-profile-intro-status <%= if not @student.get('degree') then 'missing' %>">
             <% if @student.get('degree'): %>
               <%= @student.get('degree') %>
@@ -164,13 +164,13 @@
 
         <div class="row">
           <div class="span4">
-            <div id="bio-input-container" style="display:none">
+            <div id="student-bio-input-container" style="display:none">
               <textarea id="student-bio-editor">
                 <%= @student.get('bio') %>
               </textarea>
             </div>
 
-            <div id="bio-container">
+            <div id="student-bio-container">
               <p id="student-bio" class="<%= if not @student.get('bio') then 'missing' %>">
                 <% if @student.get('bio'): %>
                   <%- @student.get('bio').replace(/\n/g, "<br/>") %>

@@ -15,3 +15,9 @@
   height: 60px;
   @include box-sizing(border-box);
 }
+
+#company-description-editor {
+  width: 100%;
+  min-height: 120px;
+  @include box-sizing(border-box);
+}

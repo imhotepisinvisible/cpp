@@ -6,15 +6,15 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     'click .upload-document': 'uploadDocument'
     'click .delete-document': 'deleteDocument'
 
-    'click #bio-container': 'bioEdit'
+    'click #student-bio-container': 'bioEdit'
     'click .remove-tag': 'removeTag'
-    'blur #bio-input-container': 'bioStopEdit'
-    'click #name-container': 'nameEdit'
-    'blur #name-input-container': 'nameStopEdit'
-    'click #year-container': 'yearEdit'
-    'blur #year-input-container': 'yearStopEdit'
-    'click #degree-container': 'degreeEdit'
-    'blur #degree-input-container': 'degreeStopEdit'
+    'blur #student-bio-input-container': 'bioStopEdit'
+    'click #student-name-container': 'nameEdit'
+    'blur #student-name-input-container': 'nameStopEdit'
+    'click #student-year-container': 'yearEdit'
+    'blur #student-year-input-container': 'yearStopEdit'
+    'click #student-degree-container': 'degreeEdit'
+    'blur #student-degree-input-container': 'degreeStopEdit'
     'click .activate'  : 'activate'
     'submit #skill-tag-form': 'addSkill'
 
@@ -195,18 +195,24 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     window.inPlaceStopEdit @model, 'student', 'degree', 'N/A degree', _.identity
 
   nameEdit: ->
-    $('#name-container').hide()
+    $('#student-name-container').hide()
     $('#student-name-editor').html(@model.get('first_name') + ' ' + @model.get('last_name'))
-    $('#name-input-container').show()
+    $('#student-name-input-container').show()
     $('#student-name-editor').focus()
 
   nameStopEdit: ->
+    originalName = @model.get('first_name') + ' ' + @model.get('last_name')
     name = $('#student-name-editor').val()
     lastName = name.substring(name.indexOf(' ') + 1)
     firstName = name.substring(0, name.indexOf(' '))
-    $('#name-input-container').hide()
 
-    if not ((firstName == @model.get 'first_name') and (lastName == @model.get 'last_name'))
+    $('#student-name-input-container').hide()
+
+    if not lastName or not firstName
+      notify "error", 'Must specify first name and last name separated by a space.'
+      $('#student-profile-intro-name').html originalName
+      $('#student-name-editor').val(originalName)
+    else if not ((firstName == @model.get 'first_name') and (lastName == @model.get 'last_name'))
       @model.set 'first_name', firstName
       @model.set 'last_name', lastName
       @model.save {},
@@ -214,7 +220,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
           success: (model, response) =>
             notify "success", "Updated profile"
             $('#student-profile-intro-name').html(model.get('first_name') + ' ' + model.get('last_name'))
-          error: (model, response) ->
+          error: (model, response) =>
             errorlist = JSON.parse response.responseText
             if errorlist.errors.first_name
               msg = errorlist.errors.first_name
@@ -225,8 +231,9 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
                 if !(error in msg)
                   msg.push error
             notify "error", msg.join('\n')
+            $('#student-profile-intro-name').html originalName
 
-    $('#name-container').show()
+    $('#student-name-container').show()
 
   activate: (e)->
     @model.set "active", (!@model.get "active");

@@ -3,8 +3,10 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
   template: JST['companies/edit']
 
   events:
-    'click #name-container': 'nameEdit'
-    'blur #name-input-container': 'nameStopEdit'
+    'click #company-name-container': 'companyNameEdit'
+    'blur #company-name-input-container': 'companyNameStopEdit'
+    'click #company-description-container': 'descriptionEdit'
+    'blur #company-description-input-container': 'descriptionStopEdit'
 
   initialize: ->
     @model.bind 'change', @render, @
@@ -32,10 +34,10 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
       editable: true
     @
 
-  nameEdit: ->
+  companyNameEdit: ->
     window.inPlaceEdit @model, 'company', 'name'
 
-  nameStopEdit: ->
+  companyNameStopEdit: ->
     window.inPlaceStopEdit @model, 'company', 'name', 'Click here to add a name!', _.identity
 
   descriptionEdit: ->
