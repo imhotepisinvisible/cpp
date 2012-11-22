@@ -12,8 +12,13 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
     if options.url? and options.url?
       @autocomplete_url = options.url
 
+    @title = ""
     if options.title?
       @title = options.title
+
+    @tag_class = ""
+    if options.tag_class?
+      @tag_class = options.tag_class
 
     @setValue(@value)
 
@@ -94,7 +99,7 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
     _.reject @tags, (tag) -> tag == ''
 
   renderTag: (tag) =>
-    "<span class=\"label tag skill-tag\"><span class=\"tag-text\">#{tag}</span><a class=\"close remove-tag\">×</a></span>"
+    "<span class=\"label tag skill-tag #{@tag_class}\"><span class=\"tag-text\">#{tag}</span><a class=\"close remove-tag\">×</a></span>"
 
   removeTag: (tag) =>
     @tags = _.without(@tags, tag)
