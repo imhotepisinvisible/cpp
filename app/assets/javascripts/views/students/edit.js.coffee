@@ -19,22 +19,40 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     'submit #skill-tag-form': 'addSkill'
 
   initialize: ->
-    console.log @model
+
+    saveModel = ->
+      @model.save {},
+        wait: true
+        success: (model, response) =>
+          notify "success", "Updated Profile"
+        error: (model, response) ->
+          # Notify tag-specific errors here (profanity etc)
+          errorlist = JSON.parse response.responseText
+          notify "error", "Couldn't Update Profile"
+
     @skill_list_tags_form = new Backbone.Form.editors.TagEditor
       model: @model
       key: 'skill_list'
       title: 'Skills'
       url: '/tags/skills'
+      tag_class: 'label-success'
+      tag_change_callback: saveModel
+
     @interest_list_tags_form = new Backbone.Form.editors.TagEditor
       model: @model
       key: 'interest_list'
       title: 'Interests'
       url: '/tags/interests'
+      tag_class: 'label-warning'
+      tag_change_callback: saveModel
+
     @year_group_list_tags_form = new Backbone.Form.editors.TagEditor
       model: @model
       key: 'year_group_list'
       title: 'Year Groups'
       url: '/tags/year_groups'
+      tag_class: 'label-info'
+      tag_change_callback: saveModel
 
     @render()
     @uploadInitialize 'cv'
