@@ -24,6 +24,8 @@ class Email < ActiveRecord::Base
 
   validates :body, obscenity: {message: "Profanity is not allowed!"}
   validates :subject, obscenity: {message: "Profanity is not allowed!"}
+  attr_accessible :subject, :body,
+                  :skill_list, :interest_list, :year_group_list
 
   def as_json(options={})
     super(:include => [:skills, :interests, :year_groups])
