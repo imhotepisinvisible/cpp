@@ -1,0 +1,13 @@
+<ul id="contacts" class="contact-list">
+  <% for contact in @contacts: %>
+    <li>
+      <div class="item">
+        <div>
+          <span class="contact-role pull-right"><%= contact.role %></span>
+          <span class="contact-name"><%= contact.name %></span>
+        </div>
+        <a class="contact-email" href="mailto:<%= contact.email %>"> <%= contact.email %></a>
+      </div>
+    </li>
+  <% end %>
+</ul>
