@@ -18,6 +18,8 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     'click .activate'  : 'activate'
     'submit #skill-tag-form': 'addSkill'
 
+    'click .toggle' : 'toggle'
+
   initialize: ->
 
     saveModel = ->
@@ -293,3 +295,14 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
         tag_div.remove()
       error: (model, response) ->
         notify "error", "Failed to add tag"
+
+  toggle: (e) ->
+    $('#student-profile-body').slideToggle 'fast', ->
+      toggle = $('#student-profile-toggle')
+      if $('#student-profile-body').is ":hidden"
+        toggle.find('i').removeClass('icon-caret-up')
+        toggle.find('i').addClass('icon-caret-down')
+      else
+        toggle.find('i').removeClass('icon-caret-down')
+        toggle.find('i').addClass('icon-caret-up')
+        icon = 'icon-caret-up'
