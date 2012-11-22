@@ -16,11 +16,8 @@ class TagsController < ApplicationController
   private
 
   def get_available_tags_for_context(context, excluded_tags)
-    excluded_tags ||= []
+    excluded_tags = [] if excluded_tags.blank?
     tags = get_tags_for_context context
-    puts "TAGS: #{tags.inspect}"
-    puts "EXCLUDEDTAGS: #{excluded_tags.inspect}"
-    puts "RETTAGS: #{(tags - excluded_tags).inspect}"
     return tags - excluded_tags
   end
 

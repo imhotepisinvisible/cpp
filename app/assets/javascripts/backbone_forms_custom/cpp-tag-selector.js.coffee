@@ -83,6 +83,8 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
     @tags
 
   setValue: (tags) =>
+    if tags == "" or tags == null
+      tags = []
     @tags = tags
 
   focus: ->
