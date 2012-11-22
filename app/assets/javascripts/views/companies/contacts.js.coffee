@@ -5,4 +5,5 @@ class CPP.Views.ContactsPartial extends CPP.Views.Base
     @render()
 
   render: ->
-    $(@el).html(@template(contacts: @collection))
+    # Should be @model.get 'contacts'
+    $(@el).html(@template(contacts: @model))
