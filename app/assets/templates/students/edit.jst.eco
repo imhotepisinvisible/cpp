@@ -10,7 +10,7 @@
         <div class="btn upload-document" id="upload-profile-picture"><i class="icon-upload-alt"/></div>
         <div class="btn btn-danger delete-document" id="delete-profile-picture"><i class="icon-trash" /></div>
         <% if @student.get 'profile_picture_file_name': %>
-          <img src="/students/<%= @student.get 'id' %>/documents/profile-picture" id="student-profile-img">
+          <img src="/students/<%= @student.get 'id' %>/documents/profile_picture" id="student-profile-img">
         <% else: %>
           <img src="/assets/default_profile.png" id="student-profile-img">
         <% end %>
