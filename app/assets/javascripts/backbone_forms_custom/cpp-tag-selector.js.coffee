@@ -5,6 +5,7 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
 
   events:
     'click .tag .remove-tag' : 'onRemoveTagClick'
+    'keypress input' : 'onInputKeypress'
 
   initialize: (options) =>
     super(options)
@@ -20,13 +21,16 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
     if options.tag_class?
       @tag_class = options.tag_class
 
+    @additions = false
+    if options.additions?
+      @additions = options.additions
+
     @tag_change_callback = ->
       return
     if options.tag_change_callback?
       @tag_change_callback = options.tag_change_callback
 
     @setValue(@value)
-
 
     @$tagsList = $('<div> </div>').addClass('tageditor').hide()
     @$input = $('<input type="text" placeholder="Type to Add"/>').attr('name', @getName()).addClass("input-medium pull-right")
@@ -67,11 +71,10 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
   #   # unless @$input.val() == ''
   #   #   @addTag @sanitizedInputValue()
 
-  # onInputKeypress: (event) =>
-  #   return
-  #   # if event.charCode == 44 || event.charCode == 13 # , or <CR>
-  #   #   @addTag @sanitizedInputValue()
-  #   #   event.preventDefault()
+  onInputKeypress: (event) =>
+    if event.charCode == 44 || event.charCode == 13 # , or <CR>
+      @addTag @$input.val()
+      event.preventDefault()
 
   # onInputKeydown: (event) =>
   #   return

@@ -37,6 +37,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
       url: '/tags/skills'
       tag_class: 'label-success'
       tag_change_callback: saveModel
+      additions: true
 
     @interest_list_tags_form = new Backbone.Form.editors.TagEditor
       model: @model
@@ -45,6 +46,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
       url: '/tags/interests'
       tag_class: 'label-warning'
       tag_change_callback: saveModel
+      additions: true
 
     @year_group_list_tags_form = new Backbone.Form.editors.TagEditor
       model: @model
@@ -53,6 +55,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
       url: '/tags/year_groups'
       tag_class: 'label-info'
       tag_change_callback: saveModel
+      additions: true
 
     @render()
     @uploadInitialize 'cv'
