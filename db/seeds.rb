@@ -50,7 +50,7 @@ pete = FactoryGirl.create :student,  {
   department: department
 }
 
-pete.skill_list = ["Ruby on Rails", "Backbone.js", "Java" "Python", "Coffeescript", "Javascript", "HTML", "CSS", ]
+pete.skill_list = ["Ruby on Rails", "Backbone.js", "Java", "Python", "Coffeescript", "Javascript", "HTML", "CSS"]
 pete.interest_list = ["Web Dev", "Startups", "iOS Dev", "Open Source"]
 pete.year_group_list = ["3rd Year", "MEng"]
 pete.save!
