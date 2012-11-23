@@ -31,7 +31,7 @@ class Company < ActiveRecord::Base
 
 
   validates :description, :length => {
-    :maximum => 500,
+    :maximum => 1000,
   }
 
   def as_json(options={})

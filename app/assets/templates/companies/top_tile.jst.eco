@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="span9">
+    <div class="thumbnail company-tile">
+      <div class="row-fluid">
+        <div class="span6">
+          <img src="/assets/company_logos/<%= @company.get 'logo' %>">
+        </div>
+        <div class="span6">
+          <div class="company-tile-blurb">
+            <%= @company.get('description').substring(0, 400) + '...' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

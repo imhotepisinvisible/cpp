@@ -28,6 +28,14 @@ class Student < User
     :path => ':rails_root/documents/cvs/:id/:basename.:extension',
     :url => '/:class/:id/cv'
 
+  validates_attachment :cv, :transcript, :covering_letter,
+      :content_type => { :content_type => ["application/pdf", "text/plain"],
+                         message: "Must be a pdf or text file" }
+
+  validates_attachment :profile_picture,
+      :content_type => { :content_type => ["image/jpeg", "image/png"],
+                          message: "Must be a jpeg or png file"}
+
   has_attached_file :transcript,
     :path => ':rails_root/documents/transcripts/:id/:basename.:extension',
     :url => '/:class/:id/transcript'
@@ -41,7 +49,8 @@ class Student < User
     :url => '/:class/:id/profile_picture'
 
   attr_accessible :department_id, :year, :bio, :degree,
-                    :cv, :transcript, :covering_letter, :profile_picture
+                    :cv, :transcript, :covering_letter, :profile_picture,
+                    :skill_list, :interest_list, :year_group_list, :active
 
 
   def valid_email?
@@ -65,6 +74,6 @@ class Student < User
   end
 
   def as_json(options={})
-    super(:include => [:skills, :interests, :year_groups])
+    super(:methods => [:skill_list, :interest_list, :year_group_list])
   end
 end

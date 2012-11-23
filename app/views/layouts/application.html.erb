@@ -16,58 +16,7 @@
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
-        <a class="brand" href="/"><%= image_tag "imperial.png" %> CPP 2.0</a>
-        <div class="nav-collapse">
-          <ul class="nav">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Student<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><%= link_to "Dashboard", "/student_dash" %></li>
-                <li><%= link_to "Companies", "/student_companies"%></li>
-                <li><%= link_to "Company", "/student_company"%></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Company<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><%= link_to "Dashboard", "/company_dash"%></li>
-                <li><%= link_to "Students", "/company_students"%></li>
-                <li><%= link_to "Student", "/company_student"%></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><%=link_to "Students", "/admin_students"%></li>
-                <li><%=link_to "Companies", "/admin_companies"%></li>
-                <li><%=link_to "Placements", "/admin_placements"%></li>
-                <li><%=link_to "Events", "/admin_events"%></li>
-                <li><%= link_to "Emails", "/admin_emails" %></li>
-                <li><%= link_to "Stats", "/admin_stats" %></li>
-              </ul>
-            </li>
-          </ul>
-
-          <% if !current_user %>
-            <%= form_for :session, :url => "#", :html => { :class => "navbar-form pull-right" } do |f| %>
-              <%= f.text_field :email, { :class => "input-small", :placeholder => "Email"} %>
-              <%= f.password_field :password, { :class => "input-small", :placeholder => "Password"} %>
-              <div class="btn login-submit" >Login</div>
-            <% end %>
-          <% else %>
-            <div class="user_details pull-right">
-              <%# Display account dropdown + Use name %>
-              Logged in as: <%= current_user.email %>,
-              <%= link_to "Logout", logout_url %>
-            </div>
-          <% end %>
-
-        </div>
+        <%= render 'layouts/navigation' %>
       </div>
     </div>
     <div class="span5 centre-span centre-text">
@@ -90,7 +39,7 @@
   <footer class="container">
     <div class="row footer">
       <div class="span12">
-        &copy; <%= Time.now.year %>. Developed by <a href="http://tomwilshere.com">Tom Wilshere</a>, Peter Hamilton, Sarah Tattersall, Jack Stevenson and Tom Wilding
+        &copy; <%= Time.now.year %> Developed by Peter Hamilton, Jack Stevenson, Sarah Tattersall, Tom Wilding and <a href="http://tomwilshere.com">Tom Wilshere</a>
       </div>
     </div>
   </footer>

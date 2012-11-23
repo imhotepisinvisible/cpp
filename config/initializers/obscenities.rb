@@ -1,5 +1,4 @@
 Obscenity.configure do |config|
-  config.blacklist   = ["boob", "cock", "poo"]
-  config.whitelist   = ["safe", "word"]
+  config.whitelist   = ["hell"]
   config.replacement = :stars
 end

@@ -28,7 +28,6 @@ class CPP.Views.StudentsSignup extends CPP.Views.Base
           @undelegateEvents()
         error: (model, response) =>
           errorlist = JSON.parse response.responseText
-          console.log @form.fields
           for field, errors of errorlist.errors
             if field of @form.fields
               @form.fields[field].setError(errors.join ', ')

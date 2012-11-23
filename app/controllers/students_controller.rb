@@ -4,7 +4,7 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @students = Student.all
+    @students = Student.where(:active => true)
     respond_with @students
   end
 
@@ -40,13 +40,10 @@ class StudentsController < ApplicationController
   # PUT /students/1.json
   def update
     @student = Student.find(params[:id])
-
-    params[:skill_list] = params[:skills].map{|t| t["name"]} if params.has_key? "skills"
-    params[:year_groups] = params[:year_groups].map{|t| t["name"]} if params.has_key? "year_groups"
-    params[:interests] = params[:interests].map{|t| t["name"]} if params.has_key? "interests"
-
     if @student.update_attributes(params[:student])
-    head :no_content
+      puts @student.inspect
+      puts @student.interest_list.inspect
+      head :no_content
     else
       respond_with @student, status: :unprocessable_entity
     end
@@ -88,5 +85,17 @@ class StudentsController < ApplicationController
     else
       respond_with @student, status: :unprocessable_entity
     end
+  end
+
+  # GET /students/suggested_degrees
+  def suggested_degrees
+    @students = Student.all
+    degrees = []
+    @students.each do |student|
+      if (not student.degree.to_s.empty?) and (not degrees.include? student.degree)
+        degrees.push student.degree
+      end
+    end
+    respond_with degrees
   end
 end

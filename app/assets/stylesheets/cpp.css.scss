@@ -19,6 +19,10 @@ textarea {
   resize: none;
 }
 
+input {
+  width: 95%;
+}
+
 .section-header {
   border-bottom: 1px solid #444;
 }
@@ -33,6 +37,28 @@ textarea {
   @include box-shadow(0 1px 2px rgba(0, 0, 0, .075));
 }
 
+.footer{
+  color: #ccc;
+  padding-top: 10px;
+  font-weight: 300;
+
+  a {
+    color: #ccc;
+    &:hover {
+      color: #ccc;
+    }
+  }
+}
+
+.link {
+  color: #08C;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 /* Notifications */
 .centre-span{
   margin:0 auto;
@@ -43,6 +69,12 @@ textarea {
 
 .centre-text{
   text-align:center;
+}
+
+/* Forms */
+
+.form-cancel {
+  margin-left: 10px;
 }
 
 /* Event/Placement Lists */

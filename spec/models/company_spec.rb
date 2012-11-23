@@ -22,7 +22,7 @@ describe Company do
     end
 
     it { should ensure_length_of(:description).
-         is_at_most(500).
+         is_at_most(1000).
          with_message("Description must have at most %{count} characters")
     }
   end

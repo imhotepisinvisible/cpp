@@ -3,12 +3,11 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
 
   template: JST['events/editval']
 
-  events:
+  _.extend {}, CPP.Views.Base::events,
     'click .btn-submit': 'submitEvent'
 
   initialize: ->
-    if (@model.get "requirements") == ""
-      @model.set "requirementsEnabled", false
+    @model.set "requirementsEnabled", false
     @form = new Backbone.Form(model: @model).render()
     Backbone.Validation.bind @form;
     @render()
@@ -19,7 +18,10 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
     super
     $('.form').append(@form.el)
     # Initial check for rendering requirementes box
-    if (@model.get "requirements") != ""
+    if ((@model.get "requirements") != (null || ""))
+      @model.set "requirementsEnabled", true
+      # Tick Checkbox
+      $(".requirements-checkbox").children()[0].children[0].checked = true;
       @form.fields["requirements"].$el.slideDown()
     @form.on "change", =>
       @form.validate()

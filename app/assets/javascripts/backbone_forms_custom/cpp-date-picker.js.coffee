@@ -6,13 +6,13 @@ class Backbone.Form.editors.Datepicker extends Backbone.Form.editors.Base
     type: "text"
 
   events:
-    'change' : -> 
+    'change' : ->
       @trigger 'change', @
     'changeDate' : ->
       @trigger 'change', @
-    'focus' : -> 
+    'focus' : ->
       @trigger 'focus', @
-    'blur' : -> 
+    'blur' : ->
       @trigger 'blur', @
 
 
@@ -28,7 +28,7 @@ class Backbone.Form.editors.Datepicker extends Backbone.Form.editors.Base
       @$el.datepicker("hide")
     @setValue(@value)
 
-  
+
   getValue: =>
     Date.parseExact(@$el.val(), "d/M/yyyy")
 

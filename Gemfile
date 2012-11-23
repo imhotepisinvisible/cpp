@@ -74,7 +74,7 @@ group :test, :development do
   gem 'rspec-instafail'       # Add instafail so broken/failing tests don't take ages
   gem 'shoulda-matchers'      # Helpful for RSpec testing
 
-  gem 'pry'                   # Awesome developer console http://pryrepl.org/
+  gem 'pry-rails'             # Awesome developer console http://pryrepl.org/
   gem 'faker'                 # For faking data
   gem 'database_cleaner'      # For tests, wipe database between tests
 

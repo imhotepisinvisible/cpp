@@ -3,7 +3,10 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
   template: JST['companies/edit']
 
   events:
-    "click .btn-edit" : "editCompany"
+    'click #company-name-container': 'companyNameEdit'
+    'blur #company-name-input-container': 'companyNameStopEdit'
+    'click #company-description-container': 'descriptionEdit'
+    'blur #company-description-input-container': 'descriptionStopEdit'
 
   initialize: ->
     @model.bind 'change', @render, @
@@ -29,9 +32,22 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
       model: @model
       collection: @model.emails
       editable: true
+
+    new CPP.Views.ContactsPartialEdit
+      el: $(@el).find('#contacts-partial')
+      model:  [{name: 'Johnny Robinson', role: 'Developer', email: 'jon_robinson@google.biz'},
+               {name: 'Daniel Simonson', role: 'Recruiter', email: 'dan.simonson@google.biz'}]
     @
 
-  editCompany: ->
-    @model.set {name : "EDIT"}
-    @model.save
-      wait: true
+  companyNameEdit: ->
+    window.inPlaceEdit @model, 'company', 'name'
+
+  companyNameStopEdit: ->
+    window.inPlaceStopEdit @model, 'company', 'name', 'Click here to add a name!', _.identity
+
+  descriptionEdit: ->
+    window.inPlaceEdit @model, 'company', 'description'
+
+  descriptionStopEdit: ->
+    window.inPlaceStopEdit @model, 'company', 'description', 'Click here to add a description!', ((desc) ->
+      desc.replace(/\n/g, "<br/>"))
