@@ -243,6 +243,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     @model.save {},
         wait: true
         success: (model, response) =>
+          $("#profile-inactive-warning").slideToggle()
           if @model.get "active"
             notify "success", "Profile Active"
           else
