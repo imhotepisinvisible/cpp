@@ -16,8 +16,6 @@
 class Email < ActiveRecord::Base
   belongs_to :company
 
-  acts_as_taggable_on :skills, :interests, :year_groups
-
   validates :company_id, :presence => true
   validates :subject,    :presence => true
   validates :body,       :presence => true
@@ -27,7 +25,6 @@ class Email < ActiveRecord::Base
   attr_accessible :subject, :body,
                   :skill_list, :interest_list, :year_group_list
 
-  def as_json(options={})
-    super(:include => [:skills, :interests, :year_groups])
-  end
+  attr_accessible :company_id, :subject, :body
+
 end
