@@ -19,8 +19,10 @@ textarea {
   resize: none;
 }
 
-input {
-  width: 95%;
+#filters {
+  input {
+    width: 95%;
+  }
 }
 
 .section-header {
@@ -75,16 +77,6 @@ input {
 
 .form-cancel {
   margin-left: 10px;
-}
-
-/* Highlight all table rows */
-tbody {
-  tr {
-    &:hover{
-    background: #efefef;
-    text-decoration: none;
-    }
-  }
 }
 
 /* Event/Placement Lists */

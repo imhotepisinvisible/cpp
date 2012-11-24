@@ -9,7 +9,7 @@
     <div class="table-toolbar">
       <div class="clear"></div>
     </div>
-    <table class="table table-bordered">
+    <table class="table table-bordered table-hover">
       <thead>
         <tr>
           <th>Logo</th>
