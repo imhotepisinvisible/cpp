@@ -2,8 +2,13 @@
   <div class="span9">
     <div class="thumbnail company-tile">
       <div class="row-fluid">
-        <div class="span6">
-          <img src="/assets/company_logos/<%= @company.get 'logo' %>">
+        <div class="span6">      
+          <% if @company.get 'logo_file_name': %>
+            <% src="/companies/#{@company.get 'id'}/documents/logo" %>
+          <% else: %>
+            <% src="/assets/default_profile.png" %>
+          <% end %>
+          <img src="<%= src %>">
         </div>
         <div class="span6">
           <div class="company-tile-blurb">

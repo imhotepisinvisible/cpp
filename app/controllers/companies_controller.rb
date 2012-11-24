@@ -5,7 +5,6 @@ class CompaniesController < ApplicationController
   # GET /companies.json
   def index
     @companies = Company.all
-
     respond_with @companies
   end
 
@@ -13,7 +12,6 @@ class CompaniesController < ApplicationController
   # GET /companies/1.json
   def show
     @company = Company.find(params[:id])
-    
     respond_with @company
   end
 
@@ -57,4 +55,33 @@ class CompaniesController < ApplicationController
     
     head :no_content
   end
+
+  # TODO: THis is repeated in the student controller
+  # GET /students/1/:document_type
+  def download_document
+    @company = Company.find(params[:id])
+    document_type = params[:document_type]
+    document = (@company.send "#{document_type}".to_sym).path
+    ext = File.extname document
+
+    unless document.nil?
+      send_file document, :filename => "#{@company.name}_#{document_type}#{ext}"
+    else
+      head :no_content
+    end
+  end
+
+  # DELETE /students/1/:document_type
+  def delete_document
+    @company = Company.find(params[:id])
+    document_type = params[:document_type]
+    @company.send "#{document_type}=".to_sym, nil
+
+    if @company.save
+      respond_with @company
+    else
+      respond_with @company, status: :unprocessable_entity
+    end
+  end
+
 end

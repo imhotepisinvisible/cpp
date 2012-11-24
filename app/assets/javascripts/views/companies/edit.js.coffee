@@ -8,9 +8,48 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
     'click #company-description-container': 'descriptionEdit'
     'blur #company-description-input-container': 'descriptionStopEdit'
 
+
+    'click .upload-document': 'uploadDocument'
+    'click .delete-document': 'deleteDocument'
+
   initialize: ->
     @model.bind 'change', @render, @
     @render()
+    @logoUploadInitialize()
+
+
+  logoUploadInitialize: ->
+    $('#file-logo').fileupload
+      url: '/companies/' + @model.id
+      dataType: 'json'
+      type: "PUT"
+
+    .bind "fileuploaddone", (e, data) =>
+      console.log "Success"
+      notify 'success', 'Uploaded successfully'
+      $('#company-logo-img').attr('src', '/companies/' + @model.id + '/documents/logo')
+      $(e.target).closest('.upload-container').removeClass('missing-document')
+
+    .bind "fileuploadfail", (e, data) =>
+      console.log "Failure"
+      displayJQZHRErrors data
+
+  deleteDocument: (e) ->
+    id = $(e.currentTarget).attr('id')
+    if confirm "Are you sure you wish to delete your logo?"
+      $.ajax
+        url: "/companies/#{@model.id}/documents/logo"
+        type: 'DELETE'
+        success: (data) ->
+          $(e.currentTarget).closest('.upload-container').addClass('missing-document')
+          $('#company-logo-img').attr('src', '/assets/default_profile.png')
+          notify('success', 'logo removed')
+
+        error: (data) ->
+          notify('error', "couldn't remove document")
+
+  uploadDocument: (e) ->
+    $(e.currentTarget).closest('.upload-container').find('.file-input').click()
 
   render: ->
     $(@el).html(@template(company: @model))

@@ -22,8 +22,15 @@ class Company < ActiveRecord::Base
 
   acts_as_taggable_on :skills, :interests, :year_groups
 
+  has_attached_file :logo,
+    :path => ':rails_root/documents/logos/:id/:basename.:extension',
+    :url => '/:class/:id/logo'
+
+  validates_attachment :logo,
+    :content_type => { :content_type => ["image/jpeg", "image/jpg", "image/png"],
+                        message: "Must be a jpeg or png file"}
+
   validates :name,            :presence => true
-  validates :logo,            :presence => true
   validates :description,     :presence => true
   validates :organisation_id, :presence => true
 

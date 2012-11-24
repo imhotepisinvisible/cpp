@@ -15,11 +15,14 @@ ActiveRecord::Schema.define(:version => 20121124183637) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
-    t.string   "logo"
     t.text     "description"
     t.integer  "organisation_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
   end
 
   create_table "companies_departments", :id => false, :force => true do |t|
