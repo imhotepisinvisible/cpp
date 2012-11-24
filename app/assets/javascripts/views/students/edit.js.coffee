@@ -5,7 +5,6 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
   events:
     'click .upload-document': 'uploadDocument'
     'click .delete-document': 'deleteDocument'
-
     'click #student-bio-container': 'bioEdit'
     'click .remove-tag': 'removeTag'
     'blur #student-bio-input-container': 'bioStopEdit'

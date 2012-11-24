@@ -39,10 +39,4 @@ class CPP.Models.Student extends Backbone.Model
     password_confirmation:
       type: "Password"
       title: "Password Confirmation"
-    skill_list:
-      type: "Tag"
-    interest_list:
-      type: "Tag"
-    year_group_list:
-      type: "Tag"
-
+      
