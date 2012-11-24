@@ -302,10 +302,8 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
       if $('#student-profile-body').is ":hidden"
         tt.html("Edit My Profile")
         ttContainer.find('i').show()
-        ttContainer.addClass 'btn-primary'
       else
         tt.html("Close")
         ttContainer.find('i').hide()
-        ttContainer.removeClass 'btn-primary'
 
 
