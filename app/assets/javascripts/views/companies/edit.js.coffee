@@ -35,8 +35,7 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
 
     new CPP.Views.ContactsPartialEdit
       el: $(@el).find('#contacts-partial')
-      model:  [{name: 'Johnny Robinson', role: 'Developer', email: 'jon_robinson@google.biz'},
-               {name: 'Daniel Simonson', role: 'Recruiter', email: 'dan.simonson@google.biz'}]
+      collection: @model.company_contacts
     @
 
   companyNameEdit: ->

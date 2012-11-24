@@ -1,31 +1,31 @@
 <ul id="contacts" class="contact-list">
-  <% for contact in @contacts: %>
+  <% for contact in @contacts.models: %>
     <li>
       <div class="item">
         <div>
           <span class="contact-role-input-container" style="display:none">
-            <input class="contact-role-editor pull-right" type="text" value="<%= contact.role %>">
+            <input class="contact-role-editor pull-right" type="text" value="<%= contact.get 'role' %>">
           </span>
 
           <span class="contact-role-container">
-            <span class="contact-role pull-right"><%= contact.role %></span>
+            <span class="contact-role pull-right"><%= contact.get 'role' %></span>
           </span>
 
           <span class="contact-name-input-container" style="display:none">
-            <input class="contact-name-editor" type="text" value="<%= contact.name %>">
+            <input class="contact-name-editor" type="text" value="<%= contact.get 'first_name' %>">
           </span>
 
           <span class="contact-name-container">
-            <span class="contact-name"><%= contact.name %></span>
+            <span class="contact-name"><%= contact.get 'first_name' %></span>
           </span>
         </div>
 
         <div class="contact-email-input-container" style="display:none">
-          <input class="contact-email-editor" type="text" value="<%= contact.email %>">
+          <input class="contact-email-editor" type="text" value="<%= contact.get 'email' %>">
         </div>
 
         <div class="contact-email-container">
-          <div class="contact-email"> <%= contact.email %></div>
+          <div class="contact-email"> <%= contact.get 'email' %></div>
         </div>
       </div>
     </li>
