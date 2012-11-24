@@ -4,13 +4,17 @@ window.getOrdinal = (n) ->
    n + (s[(v - 20) % 10] || s[v] || s[0])
 
 
-window.notify = (alert_class, message) ->
+window.notify = (alert_class, message, time = 2000) ->
   n = $("#notifications")
   n.hide()
   n.removeClass()
   n.addClass("alert alert-" + alert_class)
+
+  if window.notificationAnimation
+    window.notificationAnimation.stop()
+
   n.html(message)
-  n.slideDown().delay(2000).slideUp()
+  window.notificationAnimation = n.slideDown().delay(time).slideUp()
 
 window.tiny_mce_init = ->
   tinyMCE.init
