@@ -7,7 +7,7 @@ class CPP.Views.EventsItem extends CPP.Views.Base
   initialize: ->
     id = @model.get('id')
 
-  events: 
+  events: -> _.extend {}, CPP.Views.Base::events, 
     "click .btn-edit"   : "editEvent"
     "click .btn-delete" : "deleteEvent"
     "click"             : "viewEvent"

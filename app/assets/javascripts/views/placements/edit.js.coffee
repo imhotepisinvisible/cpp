@@ -3,7 +3,7 @@ class CPP.Views.PlacementsEdit extends CPP.Views.Base
 
   template: JST['placements/editval']
 
-  events:
+  events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-submit': 'submitPlacement'
 
   initialize: ->

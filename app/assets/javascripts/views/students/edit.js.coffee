@@ -2,7 +2,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
   el: "#app"
   template: JST['students/edit']
 
-  events:
+  events: -> _.extend {}, CPP.Views.Base::events,
     'click .upload-document': 'uploadDocument'
     'click .delete-document': 'deleteDocument'
     'click #student-bio-container': 'bioEdit'

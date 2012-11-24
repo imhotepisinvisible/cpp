@@ -3,7 +3,7 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
 
   template: JST['events/editval']
 
-  _.extend {}, CPP.Views.Base::events,
+  events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-submit': 'submitEvent'
 
   initialize: ->

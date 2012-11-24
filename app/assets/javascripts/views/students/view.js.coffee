@@ -2,7 +2,7 @@ class CPP.Views.StudentsView extends CPP.Views.Base
   el: "#app"
   template: JST['students/view']
 
-  events:
+  events: -> _.extend {}, CPP.Views.Base::events,
     'click #btn-download-cv': 'downloadCV'
 
   initialize: ->

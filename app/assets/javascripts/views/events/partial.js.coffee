@@ -1,7 +1,7 @@
 class CPP.Views.EventsPartial extends CPP.Views.Base
   template: JST['events/partial']
 
-  events:
+  events: -> _.extend {}, CPP.Views.Base::events,
     "click .btn-add"      : "addEvent"
     "click .btn-view-all" : "viewCompaniesEvents"
 

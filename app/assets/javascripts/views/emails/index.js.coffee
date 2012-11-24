@@ -2,7 +2,7 @@ class CPP.Views.EmailsIndex extends CPP.Views.Base
   el: '#app'
   template: JST['emails/index']
 
-  events:
+  events: -> _.extend {}, CPP.Views.Base::events,
     "click .btn-add"      : "addEmail"
     'click .company-logo-header' : 'viewCompany'
 

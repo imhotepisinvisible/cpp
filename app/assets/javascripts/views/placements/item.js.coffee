@@ -7,7 +7,7 @@ class CPP.Views.PlacementsItem extends CPP.Views.Base
   initialize: ->
     #@render()
 
-  events: 
+  events: -> _.extend {}, CPP.Views.Base::events, 
     "click .btn-edit"   : "editPlacement"
     "click .btn-delete" : "deletePlacement"
     "click"             : "viewPlacement"

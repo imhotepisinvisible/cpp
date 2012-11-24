@@ -7,7 +7,7 @@ class CPP.Views.EmailsItem extends CPP.Views.Base
   initialize: ->
     #@render()
 
-  events: 
+  events: -> _.extend {}, CPP.Views.Base::events, 
     "click .btn-edit"   : "editEmail"
     "click .btn-delete" : "deleteEmail"
     "click"             : "viewEmail"

@@ -3,7 +3,7 @@ class CPP.Views.EmailsPartial extends CPP.Views.Base
 
   editable: false
 
-  events:
+  events: -> _.extend {}, CPP.Views.Base::events,
     "click .btn-add"      : "addEmail"
     "click .btn-view-all" : "viewCompaniesEmails"
 

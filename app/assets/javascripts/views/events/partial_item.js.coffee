@@ -2,7 +2,7 @@ class CPP.Views.EventsPartialItem extends CPP.Views.Base
   tagName: "li"
   className: "event-item-container"
 
-  events:
+  events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-edit' : 'editEvent'
     'click .event-item' : 'viewEvent'
 

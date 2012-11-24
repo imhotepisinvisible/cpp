@@ -1,6 +1,6 @@
 class CPP.Views.LoginUser extends CPP.Views.Base
   el: ".navbar-form"
-  events:
+  events: -> _.extend {}, CPP.Views.Base::events,
     "click .login-submit": "saveForm"
 
   initialize: ->

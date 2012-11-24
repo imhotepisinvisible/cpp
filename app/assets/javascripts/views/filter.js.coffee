@@ -5,7 +5,7 @@ class CPP.Filter extends CPP.Views.Base
   templateFilterHeaderText: JST['filters/filter_header_text']
   templateFilterHeaderTag: JST['filters/filter_header_tag']
 
-  events:
+  events: -> _.extend {}, CPP.Views.Base::events,
     "keyup .fltr-search"    : "setFilter"
     "click .fltr-tags"      : "setFilter"
     "click #tag-close"      : "removeTag"

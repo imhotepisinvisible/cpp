@@ -1,7 +1,7 @@
 class CPP.Views.CompanyTile extends CPP.Views.Base
   template: JST['companies/tile']
 
-  events:
+  events: -> _.extend {}, CPP.Views.Base::events,
     "click .company-tile" : "viewCompany"
 
   initialize: (options) ->

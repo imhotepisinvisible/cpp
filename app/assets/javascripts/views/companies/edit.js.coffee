@@ -2,7 +2,7 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
   el: "#app"
   template: JST['companies/edit']
 
-  events:
+  events: -> _.extend {}, CPP.Views.Base::events,
     'click #company-name-container': 'companyNameEdit'
     'blur #company-name-input-container': 'companyNameStopEdit'
     'click #company-description-container': 'descriptionEdit'

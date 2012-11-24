@@ -2,7 +2,7 @@ class CPP.Views.StudentsSignup extends CPP.Views.Base
   el: "#app"
   template: JST['students/signup']
 
-  events:
+  events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-submit': 'submitEvent'
 
   initialize: ->
