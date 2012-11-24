@@ -151,7 +151,7 @@
                       <div class="tag-category-header">
                         Year Groups
                       </div>
-                      <% for i, tag of @student.get('year_groups_list'): %>
+                      <% for i, tag of @student.get('year_group_list'): %>
                         <span class="label label-info tag year-group-tag">
                           <%= tag %>
                         </span>
