@@ -78,6 +78,16 @@
     <div class="span12" id="student-profile-body-container">
       <div class="row">
 
+        <div class="span12" id="student-profile-toggle">
+          <div class="btn btn-primary" id="btn-toggle-profile">
+            <i class="icon-pencil"></i>
+            <span id="student-profile-toggle-text">
+              Edit My Profile
+            </span>
+          </div>
+        </div>
+
+
         <div class="span12" id="student-profile-body" style="display:none">
           <div class="row">
             <div class="span4">
@@ -218,16 +228,6 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-
-        <div class="span12" id="student-profile-toggle">
-          <div class="btn btn-primary" id="student-profile-toggle-text-container">
-            <i class="icon-pencil"></i>
-            <span id="student-profile-toggle-text">
-              Edit My Profile
-            </span>
           </div>
         </div>
 

@@ -16,7 +16,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     'blur #student-degree-input-container': 'degreeStopEdit'
     'click #activate-button'  : 'activate'
     'submit #skill-tag-form': 'addSkill'
-    'click #student-profile-toggle' : 'toggleProfile'
+    'click #btn-toggle-profile' : 'toggleProfile'
 
   initialize: ->
 
