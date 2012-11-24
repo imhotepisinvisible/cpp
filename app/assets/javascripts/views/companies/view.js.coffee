@@ -23,10 +23,11 @@ class CPP.Views.CompaniesView extends CPP.Views.Base
       model: @model
       collection: @model.emails
 
+
     contacts_partial = new CPP.Views.ContactsPartial
       el: $(@el).find('#contacts-partial')
-      model: [{name: 'Johnny Robinson', role: 'Developer', email: 'jon_robinson@google.biz'},
-              {name: 'Daniel Simonson', role: 'Recruiter', email: 'dan.simonson@google.biz'}]
+      model: @model
+      collection: @model.company_contacts
     @
 
   activate: ->

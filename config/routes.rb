@@ -61,6 +61,7 @@ CPP::Application.routes.draw do
   resources :companies
   resources :events
   resources :placements
+  resources :company_contacts
 
   resources :students do
     get 'suggested_degrees', :on => :collection, :action => :suggested_degrees
@@ -79,6 +80,7 @@ CPP::Application.routes.draw do
     resources :events
     resources :placements
     resources :emails
+    resources :company_contacts
   end
 
   # Samples/Mockups

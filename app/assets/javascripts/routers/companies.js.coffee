@@ -29,6 +29,7 @@ class CPP.Routers.Companies extends Backbone.Router
     company.events.fetch({ data: $.param({ limit: 3}) })
     company.placements.fetch({ data: $.param({ limit: 3}) })
     company.emails.fetch({ data: $.param({ limit: 3}) })
+    company.company_contacts.fetch({ data: $.param({ limit: 3}) })
 
     company.fetch
       success: ->

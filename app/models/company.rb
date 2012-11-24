@@ -15,6 +15,8 @@ class Company < ActiveRecord::Base
   has_many :placements
   has_many :emails
   has_many :company_administrators
+  has_many :company_contacts
+
   belongs_to :organisation
   has_and_belongs_to_many :departments
 
@@ -27,8 +29,6 @@ class Company < ActiveRecord::Base
 
   validates :name, obscenity: {message: "Profanity is not allowed!"}
   validates :description, obscenity: {message: "Profanity is not allowed!"}
-
-
 
   validates :description, :length => {
     :maximum => 1000,

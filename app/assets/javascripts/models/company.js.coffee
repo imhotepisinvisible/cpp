@@ -11,5 +11,8 @@ class CPP.Models.Company extends Backbone.Model
     @emails = new CPP.Collections.Emails
     @emails.url = '/companies/' + this.id + '/emails'
 
+    @company_contacts = new CPP.Collections.CompanyContacts
+    @company_contacts.url = '/companies/' + this.id + '/company_contacts'
+    
   url: ->
     '/companies' + (if @isNew() then '' else '/' + @id)

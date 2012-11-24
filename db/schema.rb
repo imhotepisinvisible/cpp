@@ -27,6 +27,16 @@ ActiveRecord::Schema.define(:version => 20121122210010) do
     t.integer "department_id"
   end
 
+  create_table "company_contacts", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "role"
+    t.integer  "company_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "company_tag_links", :force => true do |t|
     t.integer  "company_id"
     t.integer  "tag_id"

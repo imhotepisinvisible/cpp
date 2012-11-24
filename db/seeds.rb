@@ -174,4 +174,11 @@ Company.all.each do |company|
       company: company
     }
   end
+
+  3.times do
+    google.company_contacts << (FactoryGirl.create :company_contact, {
+      :company => company
+    })
+  end
+
 end
