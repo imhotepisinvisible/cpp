@@ -9,7 +9,6 @@
     <div class="span3">
       <div id="student-profile-img-container"
            class="upload-container img-polaroid <%= "missing-document" unless @student.get('profile_picture_file_name') %>">
-
         <form class="form-inline hidden">
             <input class="file-input" id="file-profile-picture" type="file" name="student[profile_picture]" size="20">
         </form>
@@ -23,7 +22,8 @@
       </div>
     </div>
 
-    <div class="span7">
+    <div class="span8">
+      <div id="activate-button" class="btn btn-add pull-right">Deactivate</div>
       <div id="student-profile-intro">
         <div id="student-name-input-container" style="display:none">
           <input type="text" id="student-name-editor" value="<%= @student.get 'first_name' %> <%= @student.get 'last_name' %>">
@@ -69,9 +69,6 @@
           Looking for an Industrial Placement
         </span>
       </div>
-    </div>
-    <div class="span1">
-        <div id="activate-button" class="btn btn-add">Deactivate</div>
     </div>
   </div>
 </div>
