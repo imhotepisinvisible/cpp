@@ -122,7 +122,7 @@
                         Skills
                       </div>
                       <% for i, tag of @student.get('skill_list'): %>
-                        <span class="label tag skill-tag">
+                        <span class="label label-success tag skill-tag">
                           <%= tag %>
                         </span>
                       <% end %>
@@ -137,7 +137,7 @@
                         Interests
                       </div>
                       <% for i, tag of @student.get('interest_list'): %>
-                        <span class="label tag interest-tag">
+                        <span class="label label-warning tag interest-tag">
                           <%= tag %>
                         </span>
                       <% end %>
@@ -152,7 +152,7 @@
                         Year Groups
                       </div>
                       <% for i, tag of @student.get('year_groups_list'): %>
-                        <span class="label tag year-group-tag">
+                        <span class="label label-info tag year-group-tag">
                           <%= tag %>
                         </span>
                       <% end %>
