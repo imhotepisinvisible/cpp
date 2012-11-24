@@ -17,7 +17,9 @@
             <img src="/assets/default_profile.png" id="student-profile-img">
           <% end %>
         </div>
+        <div class="clearfix"></div>
       </div>
+
       <div class="span9">
         <div id="student-profile-intro">
           <p id="student-profile-intro-name">
