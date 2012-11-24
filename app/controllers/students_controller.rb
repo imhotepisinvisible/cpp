@@ -19,8 +19,6 @@ class StudentsController < ApplicationController
   # GET /students/new.json
   def new
     @student = Student.new
-    @studentProfile = StudentProfile.new
-    @student.profile = @studentProfile
     respond_with @student
   end
 
@@ -41,8 +39,6 @@ class StudentsController < ApplicationController
   def update
     @student = Student.find(params[:id])
     if @student.update_attributes(params[:student])
-      puts @student.inspect
-      puts @student.interest_list.inspect
       head :no_content
     else
       respond_with @student, status: :unprocessable_entity
@@ -53,9 +49,7 @@ class StudentsController < ApplicationController
   # DELETE /students/1.json
   def destroy
     @student = Student.find(params[:id])
-    @studentProfile = StudentProfile.find(@student.profile_id)
     @student.destroy
-    @studentProfile.destroy
     head :no_content
   end
 

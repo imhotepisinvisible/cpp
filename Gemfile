@@ -13,6 +13,7 @@ gem 'haml-rails'                  # Support HAML Templates in Rails
 gem 'simple_form'                 # Nicer forms in rails
 gem 'rufus-scheduler'             # Task Scheduling
 gem 'acts-as-taggable-on'         # Tagging framework
+gem 'rails3_acts_as_paranoid'     # Hides records instead of deleting them, being able to recover them.
 
 # UI/Appearance Related Gems
 gem 'less-rails'                  # Less required for Bootstrap

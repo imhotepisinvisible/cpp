@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121119184645) do
+ActiveRecord::Schema.define(:version => 20121122210010) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -161,6 +161,7 @@ ActiveRecord::Schema.define(:version => 20121119184645) do
     t.string   "last_name"
     t.string   "email"
     t.string   "password_digest"
+    t.datetime "deleted_at"
     t.integer  "department_id"
     t.integer  "year",                         :default => 0
     t.text     "bio",                          :default => ""

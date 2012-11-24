@@ -205,6 +205,8 @@ GEM
       ruby-graphviz (~> 1.0.4)
     rails3-generators (1.0.0)
       railties (>= 3.0.0)
+    rails3_acts_as_paranoid (0.2.4)
+      activerecord (~> 3.2)
     railties (3.2.1)
       actionpack (= 3.2.1)
       activesupport (= 3.2.1)
@@ -338,6 +340,7 @@ DEPENDENCIES
   rails-backbone-forms
   rails-erd
   rails3-generators
+  rails3_acts_as_paranoid
   rb-fsevent
   rspec-instafail
   rspec-rails

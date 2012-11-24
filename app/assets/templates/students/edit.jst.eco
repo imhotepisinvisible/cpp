@@ -72,6 +72,10 @@
         </span>
       </div>
     </div>
+    <div class="span1">
+        <div class="btn btn-add delete-student">Delete Account</div>
+    </div>
+  </div>
 </div>
 
 
