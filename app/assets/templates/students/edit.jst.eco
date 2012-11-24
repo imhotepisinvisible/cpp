@@ -1,5 +1,5 @@
-<div class="row" <%- if (@student.get "active") then 'style="display:none"'%>>
-  <div id="profile-inactive-warning" class="span11 alert alert-error">
+<div class="row" id="profile-inactive-warning" <%- if (@student.get "active") then 'style="display:none"'%>>
+  <div class="span11 alert alert-error">
     <p> Profile Inactive! You need to active your profile to enable companies to view it!</p>
   </div>
 </div>
