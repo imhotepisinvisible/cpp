@@ -15,6 +15,7 @@ window.CPP =
     # Backbone.history.start({pushState: true})
     Backbone.history.start()
 
+
 $(document).ready ->
   Backbone.Form.editors.DateTime.DateEditor = Backbone.Form.editors.Datepicker
 
