@@ -16,7 +16,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     'blur #student-degree-input-container': 'degreeStopEdit'
     'click #activate-button'  : 'activate'
     'submit #skill-tag-form': 'addSkill'
-    'click .toggle' : 'toggle'
+    'click #student-profile-toggle' : 'toggleProfile'
 
   initialize: ->
 
@@ -295,13 +295,17 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
       error: (model, response) ->
         notify "error", "Failed to add tag"
 
-  toggle: (e) ->
+  toggleProfile: (e) ->
+    tt = $('#student-profile-toggle-text')
+    ttContainer = $('#student-profile-toggle-text-container')
     $('#student-profile-body').slideToggle 'fast', ->
-      toggle = $('#student-profile-toggle')
       if $('#student-profile-body').is ":hidden"
-        toggle.find('i').removeClass('icon-caret-up')
-        toggle.find('i').addClass('icon-caret-down')
+        tt.html("Edit My Profile")
+        ttContainer.find('i').show()
+        ttContainer.addClass 'btn-primary'
       else
-        toggle.find('i').removeClass('icon-caret-down')
-        toggle.find('i').addClass('icon-caret-up')
-        icon = 'icon-caret-up'
+        tt.html("Close")
+        ttContainer.find('i').hide()
+        ttContainer.removeClass 'btn-primary'
+
+
