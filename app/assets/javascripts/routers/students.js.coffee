@@ -37,6 +37,6 @@ class CPP.Routers.Students extends Backbone.Router
         notify "error", "Couldn't fetch student"
 
   signup: (department_id) ->
-    student = new CPP.Models.Student department_id: department_id
+    student = new CPP.Models.Student departments: [department_id]
     student.collection = new CPP.Collections.Students
     new CPP.Views.StudentsSignup model: student

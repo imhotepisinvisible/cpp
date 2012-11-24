@@ -47,7 +47,7 @@ pete = FactoryGirl.create :student,  {
   year: 3,
   bio: "Quite simply, I'm passionate about building awesome things with exciting technology.\n\nI can usually be found hacking away on my latest project or evangelising  Ruby,  Rails, Git,  CoffeeScript,  Backbone.js,  TDD using RSpec or an API I've recently fallen in love with.",
   degree: 'MEng Computing',
-  department: department
+  departments: [department]
 }
 
 pete.skill_list = ["Ruby on Rails", "Backbone.js", "Java", "Coffeescript", "Javascript", "HTML", "CSS"]
@@ -64,7 +64,7 @@ jack = FactoryGirl.create :student,  {
   year: 3,
   bio: "Hi, I'm Jack Stevenson, you may remember me from such towns as Trowbridge, Hilperton, Frome and Bath. I'm 17 years old, 5ft 10 , am a 1st Dan Blackbelt in Taekwondo and am also a certified and qualified assistant instructor. I am happiest when at Taekwondo, with my friends, on my stilts (which broke! Should be fixed soon (fingers crossed)) and, of course, when not awake or thinking.",
   degree: 'MEng Computing',
-  department: department
+  departments: [department]
 }
 
 jack.skill_list = skills_tags

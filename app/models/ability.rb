@@ -6,8 +6,9 @@ class Ability
     #
     user ||= User.new # guest user (not logged in)
     case user.type
+    when nil
+      can :create, Student
     when "Student"
-      puts user.inspect
       can :manage, Student, :id => user.id
     when "CompanyAdministrator"
     end

@@ -27,7 +27,10 @@ class StudentsController < ApplicationController
   # POST /students.json
   def create
     @student = Student.new(params[:student])
-    #Student profile bits in here.
+
+    departments = params[:departments].map{ |id| Department.find(id) }
+    @student.departments = departments
+
     if @student.save
       respond_with @student, status: :created, location: @student
     else
