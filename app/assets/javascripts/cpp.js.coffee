@@ -23,9 +23,9 @@ $(document).ready ->
     statusCode:
         401: ->
           console.log "Got 401"
-          notify("error", "Twas an error!")
-        403: ->
+        403: (data) ->
           console.log "Got 403"
+          notify("error", data.responseText, 4000)
         404: ->
           console.log "Got 404"
   CPP.init()
