@@ -120,19 +120,29 @@ textarea {
   }
 }
 
-.fav-icon {
+.rating > span:hover:before {
+   content: "\2605";
+   position: absolute;
+   color: #FDD017;
+}
+
+.ban-icon {
   padding-top: 8px;
   font-size: 20px;
   color: #6D6968;
 }
 
-#star {
-  padding-right: 4px;
-  &:hover {
-
-  }
+.star-icon {
+  padding-top: 8px;
+  font-size: 25px;
+  color: #6D6968;
+  padding-right: 5px;
 }
 
 .company-tile-blurb {
   padding-top: 4px;
+}
+
+.goldenStar {
+  color: #FDD017;
 }

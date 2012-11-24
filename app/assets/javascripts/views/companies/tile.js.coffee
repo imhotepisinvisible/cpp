@@ -18,4 +18,5 @@ class CPP.Views.CompanyTile extends CPP.Views.Base
 
   companyHighlight: (e) ->
     e.stopPropagation()
-    $(e.currentTarget).addClass("highlighted-company")
+    $(e.currentTarget).html("&#9733")
+    $(e.currentTarget).addClass('goldenStar')
