@@ -171,12 +171,3 @@
     </div>
   </div>
 </div>
-
-<div class="row" id="opportunities-container">
-  <div class="span6" id="events-partial">
-
-  </div>
-  <div class="span6" id="placements-partial">
-
-  </div>
-</div>
