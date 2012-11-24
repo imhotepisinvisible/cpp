@@ -71,7 +71,7 @@
       </div>
     </div>
     <div class="span1">
-        <div class="btn btn-add activate">Deactivate</div>
+        <div id="activate-button" class="btn btn-add">Deactivate</div>
     </div>
   </div>
 </div>

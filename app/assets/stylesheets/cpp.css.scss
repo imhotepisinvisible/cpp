@@ -77,6 +77,16 @@ input {
   margin-left: 10px;
 }
 
+/* Highlight all table rows */
+tbody {
+  tr {
+    &:hover{
+    background: #efefef;
+    text-decoration: none;
+    }
+  }
+}
+
 /* Event/Placement Lists */
 .opportunity-list{
   list-style: none;

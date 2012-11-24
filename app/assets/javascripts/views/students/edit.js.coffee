@@ -15,7 +15,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     'blur #student-year-input-container': 'yearStopEdit'
     'click #student-degree-container': 'degreeEdit'
     'blur #student-degree-input-container': 'degreeStopEdit'
-    'click .activate'  : 'activate'
+    'click #activate-button'  : 'activate'
     'submit #skill-tag-form': 'addSkill'
     'click .toggle' : 'toggle'
 
@@ -254,11 +254,11 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     if (!@model.get "active")
       $('#student-profile-img-container').addClass('profile-deactivated')
       $('#student-profile-intro').addClass('profile-deactivated')
-      $('.activate').html("Activate")
+      $('#activate-button').html("Activate")
     else
       $('#student-profile-img-container').removeClass('profile-deactivated')
       $('#student-profile-intro').removeClass('profile-deactivated')
-      $('.activate').html("Deactivate")
+      $('#activate-button').html("Deactivate")
 
   removeTag: (e) ->
     close_div = $(e.currentTarget)
