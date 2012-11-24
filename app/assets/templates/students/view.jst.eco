@@ -102,51 +102,51 @@
 
         <div class="row">
           <div class="span4">
-            <% if @student.get('interests').length == 0 and @student.get('skills').length == 0 and @student.get('year_groups').length == 0: %>
+            <% if @student.get('interest_list').length == 0 and @student.get('skill_list').length == 0 and @student.get('year_group_list').length == 0: %>
               <div class="empty-student-profile-field-container">
                 <i class="icon-heart empty-student-profile-field"/>
               </div>
             <% else: %>
               <div class="row">
-                <% if @student.get('skills').length > 0: %>
+                <% if @student.get('skill_list').length > 0: %>
                   <div class="span4">
                     <div class="tag-category">
                       <div class="tag-category-header">
                         Skills
                       </div>
-                      <% for i, tag of @student.get('skills'): %>
+                      <% for i, tag of @student.get('skill_list'): %>
                         <span class="label tag skill-tag">
-                          <%= tag.name %>
+                          <%= tag %>
                         </span>
                       <% end %>
                     </div>
                   </div>
                 <% end %>
 
-                <% if @student.get('skills').length > 0: %>
+                <% if @student.get('interest_list').length > 0: %>
                   <div class="span4">
                     <div class="tag-category">
                       <div class="tag-category-header">
                         Interests
                       </div>
-                      <% for i, tag of @student.get('interests'): %>
+                      <% for i, tag of @student.get('interest_list'): %>
                         <span class="label tag interest-tag">
-                          <%= tag.name %>
+                          <%= tag %>
                         </span>
                       <% end %>
                     </div>
                   </div>
                 <% end %>
 
-                <% if @student.get('year_groups').length > 0: %>
+                <% if @student.get('year_group_list').length > 0: %>
                   <div class="span4">
                     <div class="tag-category">
                       <div class="tag-category-header">
                         Year Groups
                       </div>
-                      <% for i, tag of @student.get('year_groups'): %>
+                      <% for i, tag of @student.get('year_groups_list'): %>
                         <span class="label tag year-group-tag">
-                          <%= tag.name %>
+                          <%= tag %>
                         </span>
                       <% end %>
                     </div>
