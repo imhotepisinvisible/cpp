@@ -176,7 +176,7 @@ Company.all.each do |company|
   end
 
   3.times do
-    google.company_contacts << (FactoryGirl.create :company_contact, {
+    company.company_contacts << (FactoryGirl.create :company_contact, {
       :company => company
     })
   end
