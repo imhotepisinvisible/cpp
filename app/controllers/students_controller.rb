@@ -73,7 +73,6 @@ class StudentsController < ApplicationController
     document_type = params[:document_type]
     @student.send "#{document_type}=".to_sym, nil
 
-    puts @student.inspect
     if @student.save
       respond_with @student
     else
