@@ -111,7 +111,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
       $(e.target).closest('.upload-container').removeClass('missing-document')
 
     .bind "fileuploadfail", (e, data) =>
-      @displayJQXHRErrorMessage data
+      displayJQXHRErrors data
 
   uploadInitialize: (documentType) ->
     $('#file-' + documentType).fileupload
@@ -139,22 +139,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
       upload = $(e.target).closest('.upload-container')
       upload.find('.progress-upload').delay(250).slideUp 'slow', ->
         upload.find('.bar').width('0%')
-      @displayJQXHRErrorMessage data
-
-
-  displayJQXHRErrorMessage: (data) ->
-    response = JSON.parse data.jqXHR.responseText
-    if response.errors
-      messages = []
-      for attr, error of response.errors
-        messages.push error
-
-    if !messages
-      msg = 'Error'
-    else
-      msg = messages.join(', ')
-
-    notify('error', msg)
+      displayJQXHRErrors data
 
   uploadDocument: (e) ->
     $(e.currentTarget).closest('.upload-container').find('.file-input').click()
