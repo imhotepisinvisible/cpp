@@ -4,8 +4,7 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="span12" id="student-profile-header">
+<div id="student-profile-header" class="row">
     <div class="span3">
       <div id="student-profile-img-container"
            class="upload-container img-polaroid <%= "missing-document" unless @student.get('profile_picture_file_name') %>">
@@ -22,7 +21,7 @@
       </div>
     </div>
 
-    <div class="span8">
+    <div class="span9">
       <div id="activate-button" class="btn btn-add pull-right">Deactivate</div>
       <div id="student-profile-intro">
         <div id="student-name-input-container" style="display:none">
@@ -70,7 +69,6 @@
         </span>
       </div>
     </div>
-  </div>
 </div>
 
 
