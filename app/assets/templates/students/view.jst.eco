@@ -11,7 +11,6 @@
         </div>
       </div>
       <div class="span9">
-        <div class="btn btn-add pull-right activate">Deactivate</div>
         <div id="student-profile-intro">
           <p id="student-profile-intro-name">
             <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
