@@ -6,7 +6,7 @@
       <% else: %>
         <% src="/assets/default_profile.png" %>
       <% end %>
-      <img src="<%= src%>">
+      <img class="company-logo-img" src="<%= src%>">
     </div>
     <div class="company-tile-blurb">
       <%= @company.get('description').substring(0, 100) + '...' %>

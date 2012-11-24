@@ -27,7 +27,7 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
     .bind "fileuploaddone", (e, data) =>
       console.log "Success"
       notify 'success', 'Uploaded successfully'
-      $('#company-logo-img').attr('src', '/companies/' + @model.id + '/documents/logo')
+      $('.company-logo-img').attr('src', '/companies/' + @model.id + '/documents/logo')
       $(e.target).closest('.upload-container').removeClass('missing-document')
 
     .bind "fileuploadfail", (e, data) =>
@@ -42,7 +42,7 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
         type: 'DELETE'
         success: (data) ->
           $(e.currentTarget).closest('.upload-container').addClass('missing-document')
-          $('#company-logo-img').attr('src', '/assets/default_profile.png')
+          $('.company-logo-img').attr('src', '/assets/default_profile.png')
           notify('success', 'logo removed')
 
         error: (data) ->

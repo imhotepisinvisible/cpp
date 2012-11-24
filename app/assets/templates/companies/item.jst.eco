@@ -4,7 +4,7 @@
   <% else: %>
     <% src="/assets/default_profile.png" %>
   <% end %>
-  <img class="img-logo" width="150px" src="<%=src%>">
+  <img class="img-logo company-logo-img" width="150px" src="<%=src%>">
 </td>
 <td><%= @company.get 'name' %></td>
 <td><%= @company.get 'description' %></td>

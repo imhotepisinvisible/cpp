@@ -21,7 +21,7 @@
           <div class="btn upload-document" id="upload-logo"><i class="icon-upload-alt"/></div>
           <div class="btn btn-danger delete-document" id="delete-logo"><i class="icon-trash" /></div>
           <% if @company.get 'logo_file_name': %>
-            <img src="/companies/<%= @company.get 'id' %>/documents/logo" id="company-logo-img">
+            <img class='company-logo-img' src="/companies/<%= @company.get 'id' %>/documents/logo">
           <% else: %>
             <img src="/assets/default_profile.png" id="company-logo-img">
           <% end %>

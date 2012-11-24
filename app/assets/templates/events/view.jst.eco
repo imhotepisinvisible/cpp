@@ -8,7 +8,7 @@
     <% else: %>
       <% src="/assets/default_profile.png" %>
     <% end %>
-    <img src="<%= src%>">
+    <img class="company-logo-img" src="<%= src%>">
   </div>
 </div>
 
