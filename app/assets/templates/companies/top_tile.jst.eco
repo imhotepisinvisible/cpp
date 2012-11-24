@@ -15,6 +15,7 @@
             <%= @company.get('description').substring(0, 400) + '...' %>
           </div>
         </div>
+        <div><i class="icon-star-empty"></i></div>
       </div>
     </div>
   </div>

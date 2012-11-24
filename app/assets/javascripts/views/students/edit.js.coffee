@@ -248,12 +248,12 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
 
   updateActiveView: ->
     if (!@model.get "active")
-      $('#student-profile-img-container').addClass('profile-deactivated')
-      $('#student-profile-intro').addClass('profile-deactivated')
+      $('#student-profile-img-container').addClass('profile-image-deactivated')
+      $('#student-profile-intro').addClass('profile-text-deactivated')
       $('#activate-button').html("Activate")
     else
-      $('#student-profile-img-container').removeClass('profile-deactivated')
-      $('#student-profile-intro').removeClass('profile-deactivated')
+      $('#student-profile-img-container').removeClass('profile-image-deactivated')
+      $('#student-profile-intro').removeClass('profile-text-deactivated')
       $('#activate-button').html("Deactivate")
 
   removeTag: (e) ->

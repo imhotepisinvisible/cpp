@@ -11,5 +11,6 @@
     <div class="company-tile-blurb">
       <%= @company.get('description').substring(0, 100) + '...' %>
     </div>
+    <div><i class="fav-icon icon-star-empty"></i></div>
   </div>
 </div>
