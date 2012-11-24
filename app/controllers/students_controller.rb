@@ -57,15 +57,18 @@ class StudentsController < ApplicationController
     head :no_content
   end
 
-  # GET /students/1/:document_type
+  # GET /students/1/:document_type/:view_type
   def download_document
     @student = Student.find(params[:id])
     document_type = params[:document_type]
     document = (@student.send "#{document_type}".to_sym).path
     ext = File.extname document
-
     unless document.nil?
-      send_file document, :filename => "#{@student.last_name}_#{@student.first_name}_#{document_type}#{ext}"
+      if (params.has_key? :preview)
+        send_file document, :filename => "#{@student.last_name}_#{@student.first_name}_#{document_type}#{ext}", :disposition => 'inline'
+      else
+        send_file document, :filename => "#{@student.last_name}_#{@student.first_name}_#{document_type}#{ext}"
+      end
     else
       head :no_content
     end

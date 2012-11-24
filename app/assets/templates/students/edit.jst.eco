@@ -159,7 +159,7 @@
                             </form>
                             <div class="pull-right">
                               <div class="btn upload-document" id="upload-covering-letter"><i class="icon-upload-alt"/></div>
-                              <a class="btn download-document" id="download-covering-letter" href="<%= '/students/' + @student.id + '/documents/covering-letter' %>">
+                              <a class="btn download-document" id="download-covering-letter" href="<%= '/students/' + @student.id + '/documents/covering_letter' %>">
                                 <i class="icon-download-alt"/>
                               </a>
                               <div class="btn btn-danger delete-document" id="delete-covering-letter"><i class="icon-trash" /></div>

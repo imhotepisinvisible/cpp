@@ -55,7 +55,8 @@
                         <tr>
                           <td>Curriculum Vitae</td>
                           <td>
-                            <a class="btn pull-right" href="<%= '/students/' + @student.id + '/download_document/cv' %>"><i class="icon-download-alt"/></a>
+                            <a class="btn pull-right" href="<%= '/students/' + @student.id + '/documents/cv' %>"><i class="icon-download-alt"/></a>
+                            <a class="btn pull-right" id="preview-cv" href="<%= '/students/' + @student.id + '/documents/cv?preview=1' %>"><i class="icon-eye-open"/></a>
                           </td>
                         </tr>
                       <% end %>
@@ -63,15 +64,17 @@
                         <tr>
                           <td>Transcript</td>
                           <td>
-                            <a class="btn pull-right" href="<%= '/students/' + @student.id + '/download_document/transcript' %>"><i class="icon-download-alt"/></a>
+                            <a class="btn pull-right" href="<%= '/students/' + @student.id + '/documents/transcript' %>"><i class="icon-download-alt"/></a>
+                            <a class="btn pull-right" id="preview-cv" href="<%= '/students/' + @student.id + '/documents/transcript?preview=1' %>"><i class="icon-eye-open"/></a>
                           </td>
                         </tr>
                       <% end %>
-                      <% if @student.get 'covering-letter_file_name': %>
+                      <% if @student.get 'covering_letter_file_name': %>
                         <tr>
                           <td>Covering Letter</td>
                           <td>
-                            <a class="btn pull-right" href="<%= '/students/' + @student.id + '/download_document/covering-letter' %>"><i class="icon-download-alt"/></a>
+                            <a class="btn pull-right" href="<%= '/students/' + @student.id + '/documents/covering_letter' %>"><i class="icon-download-alt"/></a>
+                            <a class="btn pull-right" id="preview-cv" href="<%= '/students/' + @student.id + '/documents/covering_letter?preview=1' %>"><i class="icon-eye-open"/></a>
                           </td>
                         </tr>
                       <% end %>

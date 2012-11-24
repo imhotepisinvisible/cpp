@@ -120,7 +120,19 @@ textarea {
   }
 }
 
-.fav-icon{
+.fav-icon {
+  padding-top: 8px;
   font-size: 20px;
-  opacity: 0.5;
+  color: #6D6968;
+}
+
+#star {
+  padding-right: 4px;
+  &:hover {
+
+  }
+}
+
+.company-tile-blurb {
+  padding-top: 4px;
 }

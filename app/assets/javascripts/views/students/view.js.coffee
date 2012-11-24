@@ -2,9 +2,6 @@ class CPP.Views.StudentsView extends CPP.Views.Base
   el: "#app"
   template: JST['students/view']
 
-  events: -> _.extend {}, CPP.Views.Base::events,
-    'click #btn-download-cv': 'downloadCV'
-
   initialize: ->
     @render()
 
@@ -21,8 +18,4 @@ class CPP.Views.StudentsView extends CPP.Views.Base
       el: $(@el).find('#placements-partial')
       model: @model
       collection: @model.placements
-
     @
-
-  downloadCV: ->
-    window.location = '/students/' + @model.id + '/download_cv'

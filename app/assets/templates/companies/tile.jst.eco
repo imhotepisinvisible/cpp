@@ -11,9 +11,10 @@
     <div class="company-tile-blurb">
       <%= @company.get('description').substring(0, 100) + '...' %>
     </div>
-      <div>
-        <i class="fav-icon icon-star-empty"></i>
-        <i class="fav-icon icon-ban-circle pull-right"></i></div>
+      <div class="company-highlight">
+        <span><i id="ban" class="fav-icon icon-ban-circle pull-right"></i></span>
+        <span><i id="star" class="fav-icon icon-star-empty pull-right"></i></span>
+        <div class="clearfix"></div>
       </div>
   </div>
 </div>
