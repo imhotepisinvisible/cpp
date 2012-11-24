@@ -45,4 +45,4 @@ class CPP.Models.Event extends Backbone.Model
       type: "TextArea"
       title: ""
       fieldAttrs:
-        style: "display: none"
+        style: "display:none"

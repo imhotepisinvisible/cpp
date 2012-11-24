@@ -18,7 +18,9 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
     super
     $('.form').append(@form.el)
     # Initial check for rendering requirementes box
-    if ((@model.get "requirements") != (null || ""))
+    if (((@model.get "requirements") != null) and
+        ((@model.get "requirements") != ""))
+      console.log "huh"
       @model.set "requirementsEnabled", true
       # Tick Checkbox
       $(".requirements-checkbox").children()[0].children[0].checked = true;
