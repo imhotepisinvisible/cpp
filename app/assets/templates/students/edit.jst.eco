@@ -25,7 +25,16 @@
     </div>
 
     <div class="span9">
-      <div id="activate-button" class="btn btn-add pull-right">Deactivate</div>
+      <div class="btn-group pull-right">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+          <i class="icon-cog"></i>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a id="activate-button">Deactivate</a></li>
+          <li><a class="delete-student">Delete Account</a></li>
+        </ul>
+      </div>
       <div id="student-profile-intro">
         <div id="student-name-input-container" style="display:none">
           <input type="text" id="student-name-editor" value="<%= @student.get 'first_name' %> <%= @student.get 'last_name' %>">
@@ -71,9 +80,6 @@
           Looking for an Industrial Placement
         </span>
       </div>
-    </div>
-    <div class="span1">
-        <div class="btn btn-add delete-student">Delete Account</div>
     </div>
   </div>
 </div>
