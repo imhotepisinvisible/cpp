@@ -11,7 +11,7 @@ window.CPP =
     new CPP.Routers.Events
     new CPP.Routers.Placements
     new CPP.Routers.Emails
-    new CPP.Views.LoginUser
+    # new CPP.Views.NavLogin {model: new CPP.Models.LoginStatus()}
     # Backbone.history.start({pushState: true})
     Backbone.history.start()
 
