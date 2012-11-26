@@ -31,7 +31,6 @@ class CPP.Routers.Companies extends Backbone.Router
     deferreds.push(company.events.fetch({ data: $.param({ limit: 3}) }))
     deferreds.push(company.placements.fetch({ data: $.param({ limit: 3}) }))
     deferreds.push(company.emails.fetch({ data: $.param({ limit: 3}) }))
-    deferreds.push(company.company_contacts.fetch({ data: $.param({ limit: 3}) }))
 
     $.when.apply($, deferreds).done(->
       company.fetch
@@ -49,7 +48,6 @@ class CPP.Routers.Companies extends Backbone.Router
     deferreds.push(company.events.fetch({ data: $.param({ limit: 3}) }))
     deferreds.push(company.placements.fetch({ data: $.param({ limit: 3}) }))
     deferreds.push(company.emails.fetch({ data: $.param({ limit: 3}) }))
-    deferreds.push(company.company_contacts.fetch({ data: $.param({ limit: 3}) }))
 
     $.when.apply($, deferreds).done(->
       company.fetch

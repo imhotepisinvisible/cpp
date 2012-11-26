@@ -74,7 +74,9 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
 
     new CPP.Views.ContactsPartialEdit
       el: $(@el).find('#contacts-partial')
-      collection: @model.company_contacts
+      company: @model
+      company_id: @model.id
+      limit: 3
     @
 
   companyNameEdit: ->

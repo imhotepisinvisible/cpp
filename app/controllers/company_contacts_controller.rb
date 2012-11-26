@@ -7,7 +7,7 @@ class CompanyContactsController < ApplicationController
     @contacts = CompanyContact.scoped
 
     if params.keys.include? "company_id"
-      @contacts = @contacts.where(:company_id => params[:company_id])
+      @contacts = @contacts.where(:company_id => params[:company_id]).order('id DESC')
     end
 
     if params.keys.include? "limit"

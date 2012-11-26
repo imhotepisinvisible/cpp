@@ -64,25 +64,20 @@
       }
     }
 
-    .btn-delete{
-      margin-left: 3px;
-    }
-
     .btn-container{
       position: absolute;
       right: 0px;
     }
 
     .hoverable{
-      .btn-hover {
+      .btn-container {
         display: none;
       }
 
       &:hover{
         background: #efefef;
-        text-decoration: none;
 
-        .btn-hover{
+        .btn-container{
           display: block;
         }
       }

@@ -55,8 +55,10 @@
                         <tr>
                           <td>Curriculum Vitae</td>
                           <td>
-                            <a class="btn pull-right" href="<%= '/students/' + @student.id + '/documents/cv' %>"><i class="icon-download-alt"/></a>
-                            <a class="btn pull-right" id="preview-cv" href="<%= '/students/' + @student.id + '/documents/cv?preview=1' %>"><i class="icon-eye-open"/></a>
+                            <div class="btn-group pull-right">
+                              <a class="btn" href="<%= '/students/' + @student.id + '/documents/cv' %>"><i class="icon-download-alt"/></a>
+                              <a class="btn" id="preview-cv" href="<%= '/students/' + @student.id + '/documents/cv?preview=1' %>"><i class="icon-eye-open"/></a>
+                            </div>
                           </td>
                         </tr>
                       <% end %>
@@ -64,8 +66,10 @@
                         <tr>
                           <td>Transcript</td>
                           <td>
-                            <a class="btn pull-right" href="<%= '/students/' + @student.id + '/documents/transcript' %>"><i class="icon-download-alt"/></a>
-                            <a class="btn pull-right" id="preview-cv" href="<%= '/students/' + @student.id + '/documents/transcript?preview=1' %>"><i class="icon-eye-open"/></a>
+                            <div class="btn-group pull-right">
+                              <a class="btn" href="<%= '/students/' + @student.id + '/documents/transcript' %>"><i class="icon-download-alt"/></a>
+                              <a class="btn" id="preview-cv" href="<%= '/students/' + @student.id + '/documents/transcript?preview=1' %>"><i class="icon-eye-open"/></a>
+                            </div>
                           </td>
                         </tr>
                       <% end %>
@@ -73,8 +77,10 @@
                         <tr>
                           <td>Covering Letter</td>
                           <td>
-                            <a class="btn pull-right" href="<%= '/students/' + @student.id + '/documents/covering_letter' %>"><i class="icon-download-alt"/></a>
-                            <a class="btn pull-right" id="preview-cv" href="<%= '/students/' + @student.id + '/documents/covering_letter?preview=1' %>"><i class="icon-eye-open"/></a>
+                            <div class="btn-group pull-right">
+                              <a class="btn" href="<%= '/students/' + @student.id + '/documents/covering_letter' %>"><i class="icon-download-alt"/></a>
+                              <a class="btn" id="preview-cv" href="<%= '/students/' + @student.id + '/documents/covering_letter?preview=1' %>"><i class="icon-eye-open"/></a>
+                            </div>
                           </td>
                         </tr>
                       <% end %>

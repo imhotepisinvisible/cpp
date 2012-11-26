@@ -162,7 +162,7 @@ Company.all.each do |company|
     }
   end
 
-  3.times do
+  10.times do
     company.company_contacts << (FactoryGirl.create :company_contact, {
       :company => company
     })
