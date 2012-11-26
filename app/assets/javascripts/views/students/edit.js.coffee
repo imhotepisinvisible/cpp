@@ -17,7 +17,6 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     'click #activate-button'  : 'activate'
     'submit #skill-tag-form': 'addSkill'
     'click #btn-toggle-profile' : 'toggleProfile'
-    'click .delete-student' : 'deleteStudent'
 
   initialize: ->
 
@@ -159,17 +158,6 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
 
         error: (data) ->
           notify('error', "couldn't remove document")
-
-  deleteStudent: (e) ->
-    if confirm "Are you sure you wish to delete your profile?\nThis cannot be undone."
-      $.ajax
-        url: "/students/#{@model.id}"
-        type: 'DELETE'
-        success: (data) ->
-          Backbone.history.navigate('/')
-        error: (data) ->
-          notify('error', "Couldn't delete your account!\nPlease contact administrator.")
-
 
   bioEdit: ->
     window.inPlaceEdit @model, 'student', 'bio'

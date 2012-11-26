@@ -32,7 +32,6 @@
         </a>
         <ul class="dropdown-menu">
           <li><a href="#" id="activate-button">Deactivate</a></li>
-          <li><a href="#" class="delete-student">Delete Account</a></li>
         </ul>
       </div>
       <div id="student-profile-intro">
