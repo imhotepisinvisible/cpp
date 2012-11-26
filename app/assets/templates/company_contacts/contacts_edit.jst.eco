@@ -14,10 +14,13 @@
           </span>
         </div>
 
-        <div class="btn btn-mini btn-delete btn-hover btn-danger pull-right"><i class="icon-trash"></i></div>
-        <div class="btn btn-mini btn-edit btn-hover pull-right">Edit</div>
-        
+        <div class="btn-container">
+          <div class="btn btn-mini btn-hover btn-delete btn-danger pull-right"><i class="icon-trash"></i></div>
+          <div class="btn btn-mini btn-hover btn-edit pull-right">Edit</div>
+        </div>
+
         <div class="btn btn-mini btn-save" style="display:none">Save</div>
+        <div class="btn btn-mini btn-cancel" style="display:none">Cancel</div>
 
         <div class="contact-display-container contact-email-container">
           <div class="contact-email"> <%= contact.get 'email' %></div>

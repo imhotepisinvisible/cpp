@@ -5,6 +5,7 @@ class CPP.Views.ContactsPartialEdit extends CPP.Views.Base
     'click .btn-edit' : 'edit'
     'click .btn-save' : 'save'
     'click .btn-delete' : 'delete'
+    'click .btn-cancel' : 'cancel'
 
   initialize: ->
     @render()
@@ -20,11 +21,12 @@ class CPP.Views.ContactsPartialEdit extends CPP.Views.Base
     $(@el).html(@template(contacts: @collection))
 
   edit: (e) ->
-    $(e.currentTarget).parent().find('.btn-edit').hide()
-    $(e.currentTarget).parent().find('.btn-save').show()
-    $(e.currentTarget).parent().removeClass('hoverable')
-    $(e.currentTarget).parent().find('.contact-display-container').hide()
-    $(e.currentTarget).parent().find('.contact-form').show()
+    $(e.currentTarget).parent().parent().find('.btn-edit').hide()
+    $(e.currentTarget).parent().parent().find('.btn-save').show()
+    $(e.currentTarget).parent().parent().find('.btn-cancel').show()
+    $(e.currentTarget).parent().parent().removeClass('hoverable')
+    $(e.currentTarget).parent().parent().find('.contact-display-container').hide()
+    $(e.currentTarget).parent().parent().find('.contact-form').show()
 
   save: (e) ->
     index = $(e.currentTarget).parent().attr('id')
@@ -42,22 +44,26 @@ class CPP.Views.ContactsPartialEdit extends CPP.Views.Base
         error: ->
           notify 'error', 'Unable to save contact'
 
-      # Allow css to control style of btn-edit again
-      $(e.currentTarget).parent().find('.btn-edit').attr('style', '')
+      @cancel(e)
 
-      $(e.currentTarget).parent().find('.btn-save').hide()
-      $(e.currentTarget).parent().addClass('hoverable')
-      $(e.currentTarget).parent().find('.contact-display-container').show()
-      $(e.currentTarget).parent().find('.contact-form').hide()
+  cancel: (e) ->
+    # Allow css to control style of btn-edit again
+    $(e.currentTarget).parent().find('.btn-edit').attr('style', '')
+
+    $(e.currentTarget).parent().find('.btn-save').hide()
+    $(e.currentTarget).parent().find('.btn-cancel').hide()
+    $(e.currentTarget).parent().addClass('hoverable')
+    $(e.currentTarget).parent().find('.contact-display-container').show()
+    $(e.currentTarget).parent().find('.contact-form').hide()
 
   delete: (e) ->
-    index = $(e.currentTarget).parent().attr('id')
+    index = $(e.currentTarget).parent().parent().attr('id')
     model = @collection.at(index)
 
     model.destroy
       wait: true
       success: (model, response) =>
-        $(e.currentTarget).parent().parent().remove();
+        $(e.currentTarget).parent().parent().parent().remove();
         notify "success", "Contact deleted"
       error: (model, response) ->
         notify "error", "Contact could not be deleted"

@@ -48,6 +48,8 @@
       text-decoration: none;
       color: #444;
 
+      position: relative;
+
       .contact-name {
         font-weight: bold;
         font-size: 1.2em;
@@ -64,6 +66,11 @@
 
     .btn-delete{
       margin-left: 3px;
+    }
+
+    .btn-container{
+      position: absolute;
+      right: 0px;
     }
 
     .hoverable{

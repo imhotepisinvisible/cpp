@@ -19,7 +19,7 @@
   </div>
 
   <div class="span3">
-    <h1 class="section-header"><i class="icon-envelope"></i> Contacts</h1>
+    <h1 class="section-header"><i class="icon-user"></i> Contacts</h1>
     <div id="contacts-partial"></div>
   </div>
 </div>
