@@ -3,16 +3,26 @@ class CPP.Models.CompanyContact extends Backbone.Model
     '/company_contacts' + (if @isNew() then '' else '/' + @id)
 
   validation:
-    name:
+    first_name:
+      required: true
+    last_name:
+      required: true
+    role:
       required: true
     email:
       required: true
       pattern: 'email'
 
   schema:
-    name:
+    first_name:
       type: "Text"
-      title: "Full Name"
+      title: "First Name"
+    last_name:
+      type: "Text"
+      title: "Last Name"
     email:
       type: "Text"
       title: "Email"
+    role:
+      type: "Text"
+      title: "Role"

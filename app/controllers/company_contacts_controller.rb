@@ -34,7 +34,7 @@ class CompanyContactsController < ApplicationController
   # POST /company_contacts
   # POST /company_contacts.json
   def create
-    @contact = CompanyContact.new(params[:event])
+    @contact = CompanyContact.new(params[:company_contact])
     if @contact.save
       respond_with @contact, status: :created, location: @contact
     else
@@ -46,7 +46,7 @@ class CompanyContactsController < ApplicationController
   # PUT /company_contacts/1.json
   def update
     @contact = CompanyContact.find(params[:id])
-    if @contact.update_attributes(params[:event])
+    if @contact.update_attributes(params[:company_contact])
       head :no_content
     else
       respond_with @contact, status: :unprocessable_entity

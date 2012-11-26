@@ -61,5 +61,24 @@
         margin-top: 5px;
       }
     }
+
+    .btn-delete{
+      margin-left: 3px;
+    }
+
+    .hoverable{
+      .btn-hover {
+        display: none;
+      }
+
+      &:hover{
+        background: #efefef;
+        text-decoration: none;
+
+        .btn-hover{
+          display: block;
+        }
+      }
+    }
   }
 }

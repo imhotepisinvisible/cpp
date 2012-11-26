@@ -19,6 +19,11 @@ window.CPP =
 $(document).ready ->
   Backbone.Form.editors.DateTime.DateEditor = Backbone.Form.editors.Datepicker
 
+  # Add standard template (does not have class form-horizontal with huge margins)
+  Backbone.Form.setTemplates(
+    standardForm: '<form>{{fieldsets}}</form>'
+  )
+
   $.ajaxSetup
     statusCode:
         401: ->
