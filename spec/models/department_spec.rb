@@ -7,7 +7,7 @@ describe Department do
 
   it {should have_and_belong_to_many :companies}
 
-  it {should have_many :students}
+  it {should have_and_belong_to_many :students}
 
   context "when creating and saving" do
     fields = [:name, :organisation_id]
