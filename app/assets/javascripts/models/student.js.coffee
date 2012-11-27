@@ -39,4 +39,10 @@ class CPP.Models.Student extends Backbone.Model
     password_confirmation:
       type: "Password"
       title: "Password Confirmation"
+      validators:
+        [
+          type: 'match'
+          field: 'password'
+          message: 'Passwords do not match'
+        ]
       

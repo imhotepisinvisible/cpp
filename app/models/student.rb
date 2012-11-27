@@ -48,7 +48,7 @@ class Student < User
     :path => ':rails_root/documents/profile_pictures/:id/:basename.:extension',
     :url => '/:class/:id/profile_picture'
 
-  attr_accessible :year, :bio, :degree,
+  attr_accessible :year, :bio, :degree, :email,
                     :cv, :transcript, :covering_letter, :profile_picture,
                     :skill_list, :interest_list, :year_group_list, :active
 
