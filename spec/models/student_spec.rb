@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Student do
   subject { FactoryGirl.build :student }
 
-  it {should belong_to :department}
+  it {should have_and_belong_to_many :departments}
 
   it "should not be valid for invalid email address" do
     subject.email = "student@blahblahblah.com"
