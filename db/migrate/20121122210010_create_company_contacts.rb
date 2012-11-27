@@ -5,6 +5,7 @@ class CreateCompanyContacts < ActiveRecord::Migration
       t.string :last_name
       t.string :email
       t.string :role
+      t.integer :position
       
       t.references :company
 

@@ -64,8 +64,10 @@ CPP::Application.routes.draw do
   resources :companies
   resources :events
   resources :placements
-  resources :company_contacts
   resources :departments
+  resources :company_contacts do
+    post :sort, :on => :collection
+  end
 
   resources :students do
     get 'suggested_degrees', :on => :collection, :action => :suggested_degrees

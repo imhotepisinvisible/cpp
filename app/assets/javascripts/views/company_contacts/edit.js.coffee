@@ -32,6 +32,25 @@ class CPP.Views.ContactsPartialEdit extends CPP.Views.Base
       @forms.push(new Backbone.Form(model: contact, template: 'standardForm').render())
       Backbone.Validation.bind @forms[index]
       $(@el).find('#' + index + '.item').find('.contact-form').html(@forms[index].el)
+
+    $('#contacts').sortable
+      axis: "y"
+      dropOnEmpty: false
+      handle: '.item'
+      cursor: 'crosshair'
+      items: 'li'
+      opacity: 0.4
+      scroll: true
+      update: ->
+        $.ajax
+          url: "/companies/#{@model.id}/company_contacts/sort"
+          type: 'POST'
+          data: $('#contacts').sortable('serialize')
+          dataType: 'script'
+          complete: (request) ->
+            $('#contacts').effect 'highlight'
+
+          
     
   render: ->
     $(@el).html(@template(contacts: @collection))

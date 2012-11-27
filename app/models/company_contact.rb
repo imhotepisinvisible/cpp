@@ -1,5 +1,6 @@
 class CompanyContact < ActiveRecord::Base
   belongs_to :company
+  acts_as_list :scope => :company
 
   validates :first_name, :presence => true
   validates :last_name, :presence => true

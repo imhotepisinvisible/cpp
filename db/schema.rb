@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20121128183459) do
     t.string   "last_name"
     t.string   "email"
     t.string   "role"
+    t.integer  "position"
     t.integer  "company_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

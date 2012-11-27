@@ -7,7 +7,7 @@ class CompanyContactsController < ApplicationController
     @contacts = CompanyContact.scoped
 
     if params.keys.include? "company_id"
-      @contacts = @contacts.where(:company_id => params[:company_id]).order('id DESC')
+      @contacts = @contacts.where(:company_id => params[:company_id]).order('position ASC')
     end
 
     if params.keys.include? "limit"
@@ -15,6 +15,13 @@ class CompanyContactsController < ApplicationController
     end
 
     respond_with @contacts
+  end
+
+  def sort
+    @contacts = CompanyContact.scoped
+    @contacts.each do |contact|
+    contact.position = params['contact'].index(contact.id.to_s) + 1
+    contact.save
   end
 
   # GET /company_contacts/1
