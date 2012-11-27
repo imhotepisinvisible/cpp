@@ -90,12 +90,14 @@ class CPP.Views.ContactsPartialEdit extends CPP.Views.Base
 
   delete: (e) ->
     index = $(e.currentTarget).parent().parent().attr('id')
+    console.log index
     model = @collection.at(index)
 
     model.destroy
       wait: true
       success: (model, response) =>
-        @reRender()
+        console.log 'success delete!!'
+        @reRender({})
         notify "success", "Contact deleted"
       error: (model, response) ->
         notify "error", "Contact could not be deleted"
@@ -123,4 +125,4 @@ class CPP.Views.ContactsPartialEdit extends CPP.Views.Base
           notify 'error', 'Unable to add new contact'
 
   cancelNew: (e) ->
-    @reRender()
+    @reRender({})
