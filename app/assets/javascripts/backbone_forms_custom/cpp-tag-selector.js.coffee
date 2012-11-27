@@ -12,6 +12,12 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
 
     if options.url? and options.url?
       @autocomplete_url = options.url
+    else
+      throw "Tag Editor Requires an Auto Complete URL"
+
+    @validation_url = "/tags/validate"
+    if options.validation_url? and options.validation_url?
+      @validation_url = options.validation_url
 
     @title = ""
     if options.title?
@@ -69,17 +75,39 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
   #   return
   #   # return if @$suggestions.isSuggesting()
   #   # unless @$input.val() == ''
-  #   #   @addTag @sanitizedInputValue()
+  #   #   @addTag @sanitizedIndputValue()
 
   onInputKeypress: (event) =>
     if event.charCode == 44 || event.charCode == 13 # , or <CR>
-      @addTag @$input.val()
       event.preventDefault()
 
-  # onInputKeydown: (event) =>
-  #   return
-  #   # if @$input.val() == '' && event.keyCode == 8 # backspace
-  #   #   @removeLastTag()
+      tag = @$input.val()
+      console.log tag, @validation_url
+      if @validation_url
+        $.ajax
+          url: @validation_url,
+          dataType: 'json'
+          type: "GET"
+          data:
+            tag: tag
+          success: (data) =>
+            @addTag tag
+          error: (data) =>
+            response = JSON.parse data.responseText
+            # TODO: DRY This with Sarah's Student Edit Code
+            # See https://github.com/PeterHamilton/cpp/issues/82
+            if response
+              messages = []
+              for attr, errors of response
+                messages.push errors.join(', ')
+
+            if !messages
+              msg = 'Error'
+            else
+              msg = messages.join(', ')
+            notify("error", msg)
+      else
+        @addTag tag
 
   # backbone form interface
   getValue: =>

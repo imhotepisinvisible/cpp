@@ -2,7 +2,7 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
   el: '#app'
   template: JST['events/index']
 
-  events:
+  events: -> _.extend {}, CPP.Views.Base::events,
     "click .btn-add"                  : "addEvent"
     "click .company-logo-header"      : "viewCompany"
 

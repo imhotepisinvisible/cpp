@@ -5,16 +5,16 @@ class CreateUsers < ActiveRecord::Migration
       t.string :last_name
       t.string :email
       t.string :password_digest
+      t.datetime :deleted_at
 
       # Student Fields
-      t.references :department
       t.integer :year, :default => "?"
       t.text :bio, :default => ""
       t.text :degree, :default => ""
       t.boolean :active, :default => true
 
       # Company Admin Fields
-      t.references :company # Company for Company Admin
+      t.references :company
 
       t.string :type
 

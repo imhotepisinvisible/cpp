@@ -1,8 +1,9 @@
 class CPP.Views.CompanyTile extends CPP.Views.Base
   template: JST['companies/tile']
 
-  events:
-    "click .company-tile" : "viewCompany"
+  events: -> _.extend {}, CPP.Views.Base::events,
+    'click .company-tile' : 'viewCompany'
+    'click #company-highlight' : 'companyHighlight'
 
   initialize: (options) ->
     if options.big
@@ -14,3 +15,8 @@ class CPP.Views.CompanyTile extends CPP.Views.Base
 
   viewCompany: (e) ->
     Backbone.history.navigate('companies/' + @model.id, trigger: true)
+
+  companyHighlight: (e) ->
+    e.stopPropagation()
+    $(e.currentTarget).html("&#9733")
+    $(e.currentTarget).addClass('goldenStar')

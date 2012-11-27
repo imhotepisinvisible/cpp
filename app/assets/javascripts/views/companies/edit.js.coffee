@@ -2,15 +2,54 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
   el: "#app"
   template: JST['companies/edit']
 
-  events:
+  events: -> _.extend {}, CPP.Views.Base::events,
     'click #company-name-container': 'companyNameEdit'
     'blur #company-name-input-container': 'companyNameStopEdit'
     'click #company-description-container': 'descriptionEdit'
     'blur #company-description-input-container': 'descriptionStopEdit'
 
+
+    'click .upload-document': 'uploadDocument'
+    'click .delete-document': 'deleteDocument'
+
   initialize: ->
     @model.bind 'change', @render, @
     @render()
+    @logoUploadInitialize()
+
+
+  logoUploadInitialize: ->
+    $('#file-logo').fileupload
+      url: '/companies/' + @model.id
+      dataType: 'json'
+      type: "PUT"
+
+    .bind "fileuploaddone", (e, data) =>
+      console.log "Success"
+      notify 'success', 'Uploaded successfully'
+      $('.company-logo-img').attr('src', '/companies/' + @model.id + '/documents/logo')
+      $(e.target).closest('.upload-container').removeClass('missing-document')
+
+    .bind "fileuploadfail", (e, data) =>
+      console.log "Failure"
+      displayJQZHRErrors data
+
+  deleteDocument: (e) ->
+    id = $(e.currentTarget).attr('id')
+    if confirm "Are you sure you wish to delete your logo?"
+      $.ajax
+        url: "/companies/#{@model.id}/documents/logo"
+        type: 'DELETE'
+        success: (data) ->
+          $(e.currentTarget).closest('.upload-container').addClass('missing-document')
+          $('.company-logo-img').attr('src', '/assets/default_profile.png')
+          notify('success', 'logo removed')
+
+        error: (data) ->
+          notify('error', "couldn't remove document")
+
+  uploadDocument: (e) ->
+    $(e.currentTarget).closest('.upload-container').find('.file-input').click()
 
   render: ->
     $(@el).html(@template(company: @model))
@@ -35,8 +74,9 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
 
     new CPP.Views.ContactsPartialEdit
       el: $(@el).find('#contacts-partial')
-      model:  [{name: 'Johnny Robinson', role: 'Developer', email: 'jon_robinson@google.biz'},
-               {name: 'Daniel Simonson', role: 'Recruiter', email: 'dan.simonson@google.biz'}]
+      company: @model
+      company_id: @model.id
+      limit: 3
     @
 
   companyNameEdit: ->

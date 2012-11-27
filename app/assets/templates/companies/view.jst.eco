@@ -1,20 +1,24 @@
 <div class="row">
-  <div class="span9">
+  <div class="span8">
     <h1 class="section-header"><%= @company.get 'name' %></h1>
     <div class="row">
       <div class="span4">
         <div class="company-logo-large">
-          <img src="/assets/company_logos/<%= @company.get 'logo' %>">
+          <% if @company.get 'logo_file_name': %>
+            <% src="/companies/#{@company.get 'id'}/documents/logo" %>
+          <% else: %>
+            <% src="/assets/default_profile.png" %>
+          <% end %>
+          <img class="company-logo-img" src="<%= src %>">
         </div>
       </div>
-      <div class="span5">
+      <div class="span4">
         <%= @company.get 'description' %>
       </div>
     </div>
   </div>
 
-  <div class="span3">
-    <h1 class="section-header">Contacts</h1>
+  <div class="span4">
     <div id="contacts-partial"></div>
   </div>
 </div>

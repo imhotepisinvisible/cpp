@@ -7,7 +7,7 @@ class CPP.Views.StudentsItem extends CPP.Views.Base
   initialize: ->
     #@render()
 
-  events: 
+  events: -> _.extend {}, CPP.Views.Base::events, 
     "click" : "viewStudent"
 
 

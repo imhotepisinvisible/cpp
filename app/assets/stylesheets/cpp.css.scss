@@ -19,8 +19,10 @@ textarea {
   resize: none;
 }
 
-input {
-  width: 95%;
+#filters {
+  input {
+    width: 95%;
+  }
 }
 
 .section-header {
@@ -75,6 +77,7 @@ input {
 
 .form-cancel {
   margin-left: 10px;
+  cursor: pointer;
 }
 
 /* Event/Placement Lists */
@@ -116,4 +119,31 @@ input {
       }
     }
   }
+}
+
+.rating > span:hover:before {
+   content: "\2605";
+   position: absolute;
+   color: #FDD017;
+}
+
+.ban-icon {
+  padding-top: 8px;
+  font-size: 20px;
+  color: #6D6968;
+}
+
+.star-icon {
+  padding-top: 8px;
+  font-size: 25px;
+  color: #6D6968;
+  padding-right: 5px;
+}
+
+.company-tile-blurb {
+  padding-top: 4px;
+}
+
+.goldenStar {
+  color: #FDD017;
 }

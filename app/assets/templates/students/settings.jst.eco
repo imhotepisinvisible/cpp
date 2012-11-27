@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="span12">
+    <h1 class="section-header"><i class="icon-cog"></i> Settings</h1>
+    <div class="row">
+      <div class="span6">
+        <h1 class="section-header"><i class="icon-envelope"></i> Emails</h1>
+      </div>
+
+      <div class="span6">
+        <h1 class="section-header"><i class="icon-pencil"></i> Account</h1>
+        <div id="account-form"></div>
+        <div class="centre-div">
+          <div id="btn-account-save" class="btn">Save</div>
+          <span id="btn-account-cancel" class="link form-cancel">cancel</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span6">
+        <h1 class="section-header"><i class="icon-trash"></i> Delete Account</h1>
+        Permanently delete your account, this cannot be undone.
+        <div class="btn btn-danger pull-right" id="delete-student">Delete My Account</div>
+      </div>
+    </div>
+  </div>
+</div>

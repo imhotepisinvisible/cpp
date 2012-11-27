@@ -11,20 +11,33 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121119184645) do
+ActiveRecord::Schema.define(:version => 20121124183637) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
-    t.string   "logo"
     t.text     "description"
     t.integer  "organisation_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
   end
 
   create_table "companies_departments", :id => false, :force => true do |t|
     t.integer "company_id"
     t.integer "department_id"
+  end
+
+  create_table "company_contacts", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "role"
+    t.integer  "company_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "company_tag_links", :force => true do |t|
@@ -42,6 +55,11 @@ ActiveRecord::Schema.define(:version => 20121119184645) do
     t.integer  "organisation_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+  create_table "departments_students", :force => true do |t|
+    t.integer "user_id"
+    t.integer "department_id"
   end
 
   create_table "email_tag_links", :force => true do |t|
@@ -161,7 +179,7 @@ ActiveRecord::Schema.define(:version => 20121119184645) do
     t.string   "last_name"
     t.string   "email"
     t.string   "password_digest"
-    t.integer  "department_id"
+    t.datetime "deleted_at"
     t.integer  "year",                         :default => 0
     t.text     "bio",                          :default => ""
     t.text     "degree",                       :default => ""

@@ -1,7 +1,7 @@
 class CPP.Views.PlacementsPartial extends CPP.Views.Base
   template: JST['placements/partial']
 
-  events:
+  events: -> _.extend {}, CPP.Views.Base::events,
     "click .btn-add"      : "addPlacement"
     "click .btn-view-all" : "viewCompaniesPlacements"
 

@@ -2,7 +2,7 @@ class CPP.Views.PlacementsIndex extends CPP.Views.Base
   el: '#app'
   template: JST['placements/index']
 
-  events:
+  events: -> _.extend {}, CPP.Views.Base::events,
     "click .btn-add"              : "addPlacement"
     'click .company-logo-header'  : 'viewCompany'
 

@@ -13,6 +13,16 @@ class TagsController < ApplicationController
     respond_with get_available_tags_for_context("year_groups", params[:exclude_tags])
   end
 
+  def validate
+    t = ActsAsTaggableOn::Tag.new
+    t.name = params[:tag]
+    if t.valid?
+      head :no_content
+    else
+      respond_with t.errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def get_available_tags_for_context(context, excluded_tags)

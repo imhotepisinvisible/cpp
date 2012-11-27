@@ -1,0 +1,30 @@
+class CPP.Routers.CompanyContacts extends Backbone.Router
+  routes:
+    'companies/:id/company_contacts/edit' : 'edit'
+    'companies/:id/company_contacts'      : 'view'
+
+  edit: (id) ->
+    contacts = new CPP.Collections.CompanyContacts
+    contacts.fetch
+      data:
+        $.param({ company_id: id})
+      success: ->
+        new CPP.Views.ContactsPartialEdit
+          collection: contacts
+          company_id: id
+          el: '#app'
+      error: ->
+        notify "error", "Couldn't fetch contacts"
+
+  view: (id) ->
+    contacts = new CPP.Collections.CompanyContacts
+    contacts.fetch
+      data:
+        $.param({ company_id: id})
+      success: ->
+        new CPP.Views.ContactsPartial
+          collection: contacts
+          company_id: id
+          el: '#app'
+      error: ->
+        notify "error", "Couldn't fetch contacts"

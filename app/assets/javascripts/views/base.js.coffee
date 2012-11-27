@@ -5,6 +5,10 @@ class CPP.Views.Base extends Backbone.View
   render: ->
     super
     $(@el).unbind()
+
+    $("a[rel=popover]").popover()
+    $(".tooltip").tooltip()
+    $("a[rel=tooltip]").tooltip()
     @
 
   back: ->

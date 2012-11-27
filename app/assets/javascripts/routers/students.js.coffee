@@ -3,6 +3,7 @@ class CPP.Routers.Students extends Backbone.Router
       'students': 'index'
       'students/:id': 'view'
       'students/:id/edit': 'edit'
+      'students/:id/settings': 'settings'
       'departments/:id/students/signup': 'signup'
 
   index: ->
@@ -36,7 +37,18 @@ class CPP.Routers.Students extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch student"
 
+  settings: (id) ->
+    student = new CPP.Models.Student id: id
+    student.events.fetch({ data: $.param({ limit: 3}) })
+    student.placements.fetch({ data: $.param({ limit: 3}) })
+
+    student.fetch
+      success: ->
+        new CPP.Views.StudentsSettings model: student
+      error: ->
+        notify "error", "Couldn't fetch student"
+
   signup: (department_id) ->
-    student = new CPP.Models.Student department_id: department_id
+    student = new CPP.Models.Student departments: [department_id]
     student.collection = new CPP.Collections.Students
     new CPP.Views.StudentsSignup model: student

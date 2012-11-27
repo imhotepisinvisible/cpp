@@ -5,7 +5,12 @@
       Events
       <% if @events.company: %>
         <div class="company-logo-header">
-          <img src="/assets/company_logos/<%= @events.company.get 'logo' %>">
+          <% if @events.company.get 'logo_file_name': %>
+            <% src="/companies/#{@events.company.get 'id'}/documents/logo" %>
+          <% else: %>
+            <% src="/assets/default_profile.png" %>
+          <% end %>
+          <img class="company-logo-img" src="<%= src%>">
         </div>
       <% end %>
     </h1>
@@ -15,7 +20,7 @@
       </div>
       <div class="clear"></div>
     </div>
-    <table class="table table-bordered">
+    <table class="table table-bordered table-hover">
       <thead>
         <tr>
           <th>Company</th>

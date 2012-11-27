@@ -2,10 +2,9 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
   el: "#app"
   template: JST['students/edit']
 
-  events:
+  events: -> _.extend {}, CPP.Views.Base::events,
     'click .upload-document': 'uploadDocument'
     'click .delete-document': 'deleteDocument'
-
     'click #student-bio-container': 'bioEdit'
     'click .remove-tag': 'removeTag'
     'blur #student-bio-input-container': 'bioStopEdit'
@@ -15,10 +14,9 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     'blur #student-year-input-container': 'yearStopEdit'
     'click #student-degree-container': 'degreeEdit'
     'blur #student-degree-input-container': 'degreeStopEdit'
-    'click .activate'  : 'activate'
+    'click #activate-button'  : 'activate'
     'submit #skill-tag-form': 'addSkill'
-
-    'click .toggle' : 'toggle'
+    'click #btn-toggle-profile' : 'toggleProfile'
 
   initialize: ->
 
@@ -112,7 +110,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
       $(e.target).closest('.upload-container').removeClass('missing-document')
 
     .bind "fileuploadfail", (e, data) =>
-      @displayJQXHRErrorMessage data
+      displayJQXHRErrors data
 
   uploadInitialize: (documentType) ->
     $('#file-' + documentType).fileupload
@@ -140,22 +138,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
       upload = $(e.target).closest('.upload-container')
       upload.find('.progress-upload').delay(250).slideUp 'slow', ->
         upload.find('.bar').width('0%')
-      @displayJQXHRErrorMessage data
-
-
-  displayJQXHRErrorMessage: (data) ->
-    response = JSON.parse data.jqXHR.responseText
-    if response.errors
-      messages = []
-      for attr, error of response.errors
-        messages.push error
-
-    if !messages
-      msg = 'Error'
-    else
-      msg = messages.join(', ')
-
-    notify('error', msg)
+      displayJQXHRErrors data
 
   uploadDocument: (e) ->
     $(e.currentTarget).closest('.upload-container').find('.file-input').click()
@@ -253,13 +236,13 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
 
   updateActiveView: ->
     if (!@model.get "active")
-      $('#student-profile-img-container').addClass('profile-deactivated')
-      $('#student-profile-intro').addClass('profile-deactivated')
-      $('.activate').html("Activate")
+      $('#student-profile-img-container').addClass('profile-image-deactivated')
+      $('#student-profile-intro').addClass('profile-text-deactivated')
+      $('#activate-button').html("Activate")
     else
-      $('#student-profile-img-container').removeClass('profile-deactivated')
-      $('#student-profile-intro').removeClass('profile-deactivated')
-      $('.activate').html("Deactivate")
+      $('#student-profile-img-container').removeClass('profile-image-deactivated')
+      $('#student-profile-intro').removeClass('profile-text-deactivated')
+      $('#activate-button').html("Deactivate")
 
   removeTag: (e) ->
     close_div = $(e.currentTarget)
@@ -297,13 +280,15 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
       error: (model, response) ->
         notify "error", "Failed to add tag"
 
-  toggle: (e) ->
+  toggleProfile: (e) ->
+    tt = $('#student-profile-toggle-text')
+    ttContainer = $('#student-profile-toggle-text-container')
     $('#student-profile-body').slideToggle 'fast', ->
-      toggle = $('#student-profile-toggle')
       if $('#student-profile-body').is ":hidden"
-        toggle.find('i').removeClass('icon-caret-up')
-        toggle.find('i').addClass('icon-caret-down')
+        tt.html("Edit My Profile")
+        ttContainer.find('i').show()
       else
-        toggle.find('i').removeClass('icon-caret-down')
-        toggle.find('i').addClass('icon-caret-up')
-        icon = 'icon-caret-up'
+        tt.html("Close")
+        ttContainer.find('i').hide()
+
+

@@ -12,11 +12,11 @@
 #   t.datetime "updated_at",      :null => false
 
 class Student < User
-  belongs_to :department
+  has_and_belongs_to_many :departments, :foreign_key => :user_id
 
   acts_as_taggable_on :skills, :interests, :year_groups
 
-  validates :department_id, :presence => true
+  validates :departments, :presence => true
   validates :bio, :length => { :maximum => 500 }
   validate :valid_email?
 
@@ -48,12 +48,13 @@ class Student < User
     :path => ':rails_root/documents/profile_pictures/:id/:basename.:extension',
     :url => '/:class/:id/profile_picture'
 
-  attr_accessible :department_id, :year, :bio, :degree,
+  attr_accessible :year, :bio, :degree, :email,
                     :cv, :transcript, :covering_letter, :profile_picture,
                     :skill_list, :interest_list, :year_group_list, :active
 
 
   def valid_email?
+    department = departments.first
     if department.organisation.organisation_domains.any?
       match = false
       department.organisation.organisation_domains.each do |org_domain|

@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :student, parent: :user, :class => "Student" do
-    department
+    departments {[FactoryGirl.create(:department)]}
     standard_bio
     beng_student
     first_year

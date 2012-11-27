@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
+  load_and_authorize_resource
   respond_to :json
 
   # GET /students
@@ -19,8 +20,6 @@ class StudentsController < ApplicationController
   # GET /students/new.json
   def new
     @student = Student.new
-    @studentProfile = StudentProfile.new
-    @student.profile = @studentProfile
     respond_with @student
   end
 
@@ -28,7 +27,10 @@ class StudentsController < ApplicationController
   # POST /students.json
   def create
     @student = Student.new(params[:student])
-    #Student profile bits in here.
+
+    departments = params[:departments].map{ |id| Department.find(id) }
+    @student.departments = departments
+
     if @student.save
       respond_with @student, status: :created, location: @student
     else
@@ -41,8 +43,6 @@ class StudentsController < ApplicationController
   def update
     @student = Student.find(params[:id])
     if @student.update_attributes(params[:student])
-      puts @student.inspect
-      puts @student.interest_list.inspect
       head :no_content
     else
       respond_with @student, status: :unprocessable_entity
@@ -53,21 +53,22 @@ class StudentsController < ApplicationController
   # DELETE /students/1.json
   def destroy
     @student = Student.find(params[:id])
-    @studentProfile = StudentProfile.find(@student.profile_id)
     @student.destroy
-    @studentProfile.destroy
     head :no_content
   end
 
-  # GET /students/1/:document_type
+  # GET /students/1/:document_type/:view_type
   def download_document
     @student = Student.find(params[:id])
     document_type = params[:document_type]
     document = (@student.send "#{document_type}".to_sym).path
     ext = File.extname document
-
     unless document.nil?
-      send_file document, :filename => "#{@student.last_name}_#{@student.first_name}_#{document_type}#{ext}"
+      if (params.has_key? :preview)
+        send_file document, :filename => "#{@student.last_name}_#{@student.first_name}_#{document_type}#{ext}", :disposition => 'inline'
+      else
+        send_file document, :filename => "#{@student.last_name}_#{@student.first_name}_#{document_type}#{ext}"
+      end
     else
       head :no_content
     end
@@ -79,7 +80,6 @@ class StudentsController < ApplicationController
     document_type = params[:document_type]
     @student.send "#{document_type}=".to_sym, nil
 
-    puts @student.inspect
     if @student.save
       respond_with @student
     else

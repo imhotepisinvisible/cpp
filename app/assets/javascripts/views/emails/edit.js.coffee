@@ -3,7 +3,7 @@ class CPP.Views.EmailsEdit extends CPP.Views.Base
 
   template: JST['emails/editval']
 
-  events:
+  events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-submit': 'submitEmail'
 
   initialize: ->

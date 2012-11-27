@@ -1,17 +1,24 @@
 class SessionsController < ApplicationController
   respond_to :json
+
   def new
-    @session = Session.new
-    respond_with @session
+    @session = {email: nil, password:nil}
   end
-  
+
   def create
     user = User.find_by_email(params[:session][:email])
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
-      respond_with @session, location: nil
+
+      case user.type
+      when "Student"
+        redirect_to "/#students/#{user.id}/edit"
+      else
+        redirect_to root_url
+      end
+
     else
-      respond_with @session, status: :unprocessable_entity, location: nil
+      render "new"
     end
   end
 

@@ -26,25 +26,33 @@ class CPP.Routers.Companies extends Backbone.Router
   view: (id) ->
     company = new CPP.Models.Company id: id
 
-    company.events.fetch({ data: $.param({ limit: 3}) })
-    company.placements.fetch({ data: $.param({ limit: 3}) })
-    company.emails.fetch({ data: $.param({ limit: 3}) })
+    # Wait for all of these before fetching company
+    deferreds = []
+    deferreds.push(company.events.fetch({ data: $.param({ limit: 3}) }))
+    deferreds.push(company.placements.fetch({ data: $.param({ limit: 3}) }))
+    deferreds.push(company.emails.fetch({ data: $.param({ limit: 3}) }))
 
-    company.fetch
-      success: ->
-        new CPP.Views.CompaniesView model: company
-      error: ->
-        notify "error", "Couldn't fetch company"
+    $.when.apply($, deferreds).done(->
+      company.fetch
+        success: ->
+          new CPP.Views.CompaniesView model: company
+        error: ->
+          notify "error", "Couldn't fetch company"
+    )
 
   edit: (id) ->
     company = new CPP.Models.Company id: id
 
-    company.events.fetch({ data: $.param({ limit: 3}) })
-    company.placements.fetch({ data: $.param({ limit: 3}) })
-    company.emails.fetch({ data: $.param({ limit: 3}) })
+    # Wait for all of these before fetching company
+    deferreds = []
+    deferreds.push(company.events.fetch({ data: $.param({ limit: 3}) }))
+    deferreds.push(company.placements.fetch({ data: $.param({ limit: 3}) }))
+    deferreds.push(company.emails.fetch({ data: $.param({ limit: 3}) }))
 
-    company.fetch
-      success: ->
-        new CPP.Views.CompaniesEdit model: company
-      error: ->
-        notify "error", "Couldn't fetch company"
+    $.when.apply($, deferreds).done(->
+      company.fetch
+        success: ->
+          new CPP.Views.CompaniesEdit model: company
+        error: ->
+          notify "error", "Couldn't fetch company"
+    )

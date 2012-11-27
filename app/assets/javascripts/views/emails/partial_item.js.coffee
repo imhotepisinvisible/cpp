@@ -2,7 +2,7 @@ class CPP.Views.EmailsPartialItem extends CPP.Views.Base
   tagName: "tr"
   className: "email-item"
 
-  events:
+  events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-edit' : 'editEmail'
     'click'           : 'viewEmail'
 

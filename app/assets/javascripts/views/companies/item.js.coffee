@@ -6,7 +6,7 @@ class CPP.Views.CompaniesItem extends CPP.Views.Base
     # bind to model change so backbone view update on destroy
     @model.bind 'change', @render, @
   
-  events: 
+  events: -> _.extend {}, CPP.Views.Base::events, 
     "click .btn-edit"   : "editCompany"
     "click .btn-delete" : "deleteCompany"
     "click"             : "viewCompany"

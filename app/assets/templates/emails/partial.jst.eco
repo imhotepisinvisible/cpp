@@ -1,10 +1,12 @@
 <h1 class="section-header">
   <i class="icon-envelope"></i>
   Mailings
-  <% if @editable: %>
-    <div class="btn pull-right btn-add">Add New</div>
-  <% end %>
-  <div class="btn pull-right btn-view-all">View All</div>
+  <div class="btn-group pull-right">
+    <div class="btn btn-view-all">All</div>
+    <% if @editable: %>
+      <div class="btn btn-add"><i class="icon-plus"></i></div>
+    <% end %>
+  </div>
 </h1>
 <table class="table sortable">
   <thead>

@@ -3,7 +3,7 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
 
   template: JST['events/editval']
 
-  _.extend {}, CPP.Views.Base::events,
+  events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-submit': 'submitEvent'
 
   initialize: ->
@@ -18,7 +18,9 @@ class CPP.Views.EventsEdit extends CPP.Views.Base
     super
     $('.form').append(@form.el)
     # Initial check for rendering requirementes box
-    if ((@model.get "requirements") != (null || ""))
+    if (((@model.get "requirements") != null) and
+        ((@model.get "requirements") != ""))
+      console.log "huh"
       @model.set "requirementsEnabled", true
       # Tick Checkbox
       $(".requirements-checkbox").children()[0].children[0].checked = true;
