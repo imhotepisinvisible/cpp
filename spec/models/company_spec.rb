@@ -15,7 +15,7 @@ describe Company do
   it {should have_and_belong_to_many :departments}
 
   context "when saving or creating a company" do
-    fields = [:name, :description, :logo, :organisation_id]
+    fields = [:name, :description, :organisation_id]
 
     fields.each do |field|
       it { should validate_presence_of(field) }
