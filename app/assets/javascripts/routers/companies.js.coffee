@@ -4,6 +4,7 @@ class CPP.Routers.Companies extends Backbone.Router
       'companies_student': 'studentIndex'
       'companies/:id': 'view'
       'companies/:id/edit': 'edit'
+      'companies/:id/settings': 'settings'
 
   # The company index page that admins will see
   index: ->
@@ -53,6 +54,23 @@ class CPP.Routers.Companies extends Backbone.Router
       company.fetch
         success: ->
           new CPP.Views.CompaniesEdit model: company
+        error: ->
+          notify "error", "Couldn't fetch company"
+    )
+
+  settings: (id) ->
+    company = new CPP.Models.Company id: id
+
+    # Wait for all of these before fetching company
+    deferreds = []
+    deferreds.push(company.events.fetch({ data: $.param({ limit: 3}) }))
+    deferreds.push(company.placements.fetch({ data: $.param({ limit: 3}) }))
+    deferreds.push(company.emails.fetch({ data: $.param({ limit: 3}) }))
+
+    $.when.apply($, deferreds).done(->
+      company.fetch
+        success: ->
+          new CPP.Views.CompaniesSettings model: company
         error: ->
           notify "error", "Couldn't fetch company"
     )
