@@ -7,11 +7,11 @@
       </div>
 
       <div class="span6">
-        <h1 class="section-header"><i class="icon-pencil"></i> Account</h1>
-        <div id="account-form"></div>
+        <h1 class="section-header"><i class="icon-asterisk"></i> Change Password</h1>
+        <div id="password-form"></div>
         <div class="centre-div">
-          <div id="btn-account-save" class="btn">Save</div>
-          <span id="btn-account-cancel" class="link form-cancel">cancel</span>
+          <div id="btn-password-save" class="btn">Save</div>
+          <span id="btn-password-cancel" class="link form-cancel">cancel</span>
         </div>
       </div>
     </div>

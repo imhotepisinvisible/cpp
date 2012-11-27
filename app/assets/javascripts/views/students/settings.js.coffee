@@ -4,22 +4,43 @@ class CPP.Views.StudentsSettings extends CPP.Views.Base
 
   events: -> _.extend {}, CPP.Views.Base::events,
     'click #delete-student' : 'deleteStudent'
-    'click #btn-account-save' : 'saveAccount'
-    'click #btn-account-cancel' : 'cancelAccount'
+    'click #btn-password-save' : 'savePassword'
+    'click #btn-password-cancel' : 'cancelPassword'
 
   initialize: ->
-    @accountForm = new Backbone.Form
-      model: @model
-    .render()
-
+    @initPasswordForm()
     @render()
+
+  initPasswordForm: ->
+    @passwordForm = new Backbone.Form 
+      model: @model
+      schema:
+        old_password:
+          type: "Password"
+          title: "Old Password"
+        password:
+          type: "Password"
+          title: "New Password"
+        password_confirmation:
+          type: "Password"
+          title: "Confirm New Password"
+          validators:
+            [
+              type: 'match'
+              field: 'password'
+              message: 'Passwords do not match'
+            ]
+    .render()
+    @passwordForm.on "change", =>
+      @passwordForm.validate()
+    @
 
   render: ->
     $(@el).html(@template(student: @model))
-    $('#account-form').html(@accountForm.el)
-    @accountForm.on "change", =>
-      @accountForm.validate()
-    @
+    @renderPasswordForm()
+
+  renderPasswordForm: ->
+    $('#password-form').html(@passwordForm.el)
 
   deleteStudent: (e) ->
     if confirm "Are you sure you wish to delete your profile?\nThis cannot be undone."
@@ -31,20 +52,24 @@ class CPP.Views.StudentsSettings extends CPP.Views.Base
         error: (data) ->
           notify('error', "Couldn't delete your account!\nPlease contact administrator.")
 
-  cancelAccount: (e) ->
-    @accountForm.render()
-    $('#account-form').html(@accountForm.el)
+  cancelPassword: (e) ->
+    @initPasswordForm()
+    @renderPasswordForm()
 
-  saveAccount: (e) ->
-    if @accountForm.validate() == null
-      @accountForm.commit()
-      @model.save {},
-        wait: true
-        success: (model, response) ->
-          console.log response
-          console.log model
-          notify "success", "Account updated"
-        error: (model, response) ->
-          console.log response
-          console.log model
-          window.displayJQXHRErrors response
+  savePassword: (e) ->
+    if @passwordForm.validate() == null
+      data = @passwordForm.getValue()
+      data.email = @model.get 'email'
+
+      $.ajax
+        url: "/users/change_password"
+        data: data
+        type: 'PUT'
+        success: (data) ->
+          notify "success", "Password changed"
+        error: (data) ->
+          response = JSON.parse data.responseText
+          if response.errors
+            window.displayErrorMessages response.errors
+          else
+            notify 'error', 'Unable to change password'
