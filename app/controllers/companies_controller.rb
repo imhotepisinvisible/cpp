@@ -96,8 +96,6 @@ class CompaniesController < ApplicationController
     student_id = current_user.id
     company_id = params[:id]
     student_company_rating = StudentCompanyRating.find_or_create_by_student_id_and_company_id(student_id, company_id)
-    puts "SCR!!!@@@@@@@"
-    puts student_company_rating.inspect
     student_company_rating.rating = params[:rating]
     student_company_rating.save!
 

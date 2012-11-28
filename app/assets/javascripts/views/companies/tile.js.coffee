@@ -3,9 +3,11 @@ class CPP.Views.CompanyTile extends CPP.Views.Base
 
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .company-tile' : 'viewCompany'
-    'click #star-rating' : 'companyHighlight'
+    'click #star-rating' :   'companyHighlight'
 
   initialize: (options) ->
+    # Stop propagation of change of model to colleciton
+    @model.off()
     if options.big
       @template = JST['companies/top_tile']
     @render()
@@ -23,10 +25,10 @@ class CPP.Views.CompanyTile extends CPP.Views.Base
       rating = 2
     else
       rating = 1
-
+    @model.set("rating", rating)
     $.post "companies/#{@model.id}/set_rating",
       {rating: rating},
-      (data) ->
+      (data) =>
         # Update star
         if rating != 1
           $(e.currentTarget).removeClass('golden-star icon-star')
