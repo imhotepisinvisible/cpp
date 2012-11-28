@@ -5,7 +5,11 @@ class CompaniesController < ApplicationController
   # GET /companies.json
   def index
     @companies = Company.all
-    respond_with @companies
+    if current_user && current_user.type == "Student"
+      respond_with @companies.as_json({:student_id => current_user.id})
+    else
+      respond_with @companies
+    end
   end
 
   # GET /companies/1

@@ -15,6 +15,7 @@ class CPP.Views.CompaniesStudentIndex extends CPP.Views.Base
     @renderFilters()
 
   renderCompanies: (collection) ->
+    console.log @collection
     $('#company-tiles').html("")
 
     # TODO: Sort collection by relevence to student (maybe using tags?)

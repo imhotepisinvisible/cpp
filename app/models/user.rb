@@ -13,7 +13,6 @@ class User < ActiveRecord::Base
   acts_as_paranoid
   # :column => 'deleted_at'
 
-
   has_secure_password
 
   validates :email,           :presence => true
