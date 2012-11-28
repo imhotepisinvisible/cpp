@@ -88,4 +88,20 @@ class CompaniesController < ApplicationController
     end
   end
 
+  # POST /companies/1/set_rating
+  def set_rating
+    if !current_user
+      raise "MUST BE LOGGED IN"
+    end
+    student_id = current_user.id
+    company_id = params[:id]
+    student_company_rating = StudentCompanyRating.find_or_create_by_student_id_and_company_id(student_id, company_id)
+    puts "SCR!!!@@@@@@@"
+    puts student_company_rating.inspect
+    student_company_rating.rating = params[:rating]
+    student_company_rating.save!
+
+    head :no_content
+  end
+
 end
