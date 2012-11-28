@@ -24,6 +24,7 @@
 //= require jasmine-jquery
 //= require jquery-fileupload/basic
 //= require tinymce-jquery
+//= require jquery.ui.sortable
 //= require jcountdown
 //= require utils
 //

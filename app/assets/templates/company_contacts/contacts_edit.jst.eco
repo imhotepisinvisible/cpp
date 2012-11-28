@@ -7,7 +7,7 @@
 <div id="contact-list-container">
   <ul id="contacts" class="contact-list">
     <% for contact, index in @contacts.models: %>
-      <li class="contact-list-item">
+      <li id="contacts_<%= contact.get 'position' %>" class="contact-list-item">
         <div class="item hoverable" id="<%= index %>">
           <div class="contact-form" style="display:none"></div>
 

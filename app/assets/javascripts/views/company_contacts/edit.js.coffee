@@ -39,17 +39,18 @@ class CPP.Views.ContactsPartialEdit extends CPP.Views.Base
       handle: '.item'
       cursor: 'crosshair'
       items: 'li'
-      opacity: 0.4
+      opacity: 1
       scroll: true
-      update: ->
+      update: =>
+        console.log $('#contacts').sortable('serialize')
         $.ajax
-          url: "/companies/#{@model.id}/company_contacts/sort"
+          url: "/companies/#{@company_id}/company_contacts/sort"
           type: 'POST'
           data: $('#contacts').sortable('serialize')
           dataType: 'script'
           complete: (request) ->
-            $('#contacts').effect 'highlight'
-
+            $.each $('.contact-list-item'), (index, listItem) ->
+              $(listItem).attr('id', 'contacts_' + (index + 1))
           
     
   render: ->
@@ -66,7 +67,7 @@ class CPP.Views.ContactsPartialEdit extends CPP.Views.Base
     else
       if options.model
         @collection.unshift(options.model)
-      @render()
+      @initializeNoFetch()
 
   editAll: ->
     Backbone.history.navigate('/companies/' + @company_id + '/company_contacts/edit', trigger: true)
@@ -116,7 +117,23 @@ class CPP.Views.ContactsPartialEdit extends CPP.Views.Base
       wait: true
       success: (model, response) =>
         console.log 'success delete!!'
-        @reRender({})
+        defs = []
+        $.each $('.contact-list-item'), (index, listItem) =>
+          contact = @collection.at($(listItem).children(':first').attr('id'))
+          if contact
+            contact.set('position', index + 1)
+            defs.push(contact.save {},
+                wait: true
+                success: =>
+                  console.log 'yay'
+                error: ->
+                  console.log 'damn')
+
+        $.when.apply($, defs).done(=>
+          console.log 'wow'
+          @reRender({})
+          console.log 'rendered'
+        )
         notify "success", "Contact deleted"
       error: (model, response) ->
         notify "error", "Contact could not be deleted"

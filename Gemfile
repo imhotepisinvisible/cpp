@@ -25,6 +25,7 @@ gem "google_visualr", ">= 2.1"    # Google Charts
 gem 'tinymce-rails'               # WYSIWYG editor for emails
 gem 'will_paginate'               # Basic Pagination
 gem 'bootstrap-will_paginate'     # Bootstrap Pagination Integration
+gem 'jquery-ui-rails'             # JQuery user interface plugin
 
 # JS Frameworks/Plugins
 gem 'jquery-rails'                # Add jQuery goodness

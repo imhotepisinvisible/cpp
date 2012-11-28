@@ -7,5 +7,5 @@ class CompanyContact < ActiveRecord::Base
   validates :email,      :presence => true
   validates :role,       :presence => true
 
-  attr_accessible :first_name, :last_name, :email, :role, :company_id
+  attr_accessible :first_name, :last_name, :email, :role, :company_id, :position
 end

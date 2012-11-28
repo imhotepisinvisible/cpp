@@ -68,7 +68,6 @@ CPP::Application.routes.draw do
   resources :company_contacts do
     post :sort, :on => :collection
   end
-
   resources :students do
     get 'suggested_degrees', :on => :collection, :action => :suggested_degrees
     delete '/documents/:document_type', :on => :member, :action => :delete_document
@@ -88,7 +87,10 @@ CPP::Application.routes.draw do
     resources :events
     resources :placements
     resources :tagged_emails
-    resources :company_contacts
+    resources :company_contacts do
+      post :sort, :on => :collection
+      get :position_clean, :on => :collection
+    end
     delete '/documents/:document_type', :on => :member, :action => :delete_document
     get '/documents/:document_type', :on => :member, :action => :download_document
     post '/set_rating', :on => :member, :action => :set_rating
