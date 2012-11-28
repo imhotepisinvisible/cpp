@@ -121,10 +121,8 @@ textarea {
   }
 }
 
-.rating > span:hover:before {
-   content: "\2605";
-   position: absolute;
-   color: #FDD017;
+.rating > span:hover {
+  color:  #FDD017;
 }
 
 .ban-icon {
@@ -134,8 +132,7 @@ textarea {
 }
 
 .star-icon {
-  padding-top: 8px;
-  font-size: 25px;
+  padding-top: 8pxP  font-size: 25px;
   color: #6D6968;
   padding-right: 5px;
 }
