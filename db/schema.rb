@@ -53,8 +53,10 @@ ActiveRecord::Schema.define(:version => 20121128183459) do
   create_table "departments", :force => true do |t|
     t.string   "name"
     t.integer  "organisation_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.text     "settings_notifier_placement"
+    t.text     "settings_notifier_event"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   create_table "departments_students", :force => true do |t|

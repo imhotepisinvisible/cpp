@@ -5,5 +5,9 @@ FactoryGirl.define do
     association :organisation, factory: :organisation_with_domains
     # organisation
     name "Department of Computing"
+
+    settings_notifier_placement { Faker::Lorem.sentances(3) }
+    settings_notifier_event { Faker::Lorem.sentances(2) }
+    
   end
 end
