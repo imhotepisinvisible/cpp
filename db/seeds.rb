@@ -75,6 +75,23 @@ jack.interest_list = interests_tags
 jack.year_group_list = ["3rd Year", "MEng"]
 jack.save!
 
+tw310 = FactoryGirl.create :student,  {
+  first_name: "Tom",
+  last_name: "Wilshere",
+  email: "tw310@ic.ac.uk",
+  password: "cppcppcpp",
+  password_confirmation: "cppcppcpp",
+  year: 3,
+  bio: "Hi, I'm Tom Wilshere, you may remember me from such towns as Trowbridge, Hilperton, Frome and Bath. I'm 17 years old, 5ft 10 , am a 1st Dan Blackbelt in Taekwondo and am also a certified and qualified assistant instructor. I am happiest when at Taekwondo, with my friends, on my stilts (which broke! Should be fixed soon (fingers crossed)) and, of course, when not awake or thinking.",
+  degree: 'MEng Computing',
+  departments: [department]
+}
+
+tw310.skill_list = skills_tags
+tw310.interest_list = interests_tags
+tw310.year_group_list = ["3rd Year", "MEng"]
+tw310.save!
+
 g = FactoryGirl.create :company, {
   organisation: organisation,
   name: 'Google',
