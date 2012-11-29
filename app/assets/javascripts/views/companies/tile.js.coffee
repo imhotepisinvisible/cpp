@@ -8,7 +8,7 @@ class CPP.Views.CompanyTile extends CPP.Views.Base
 
   initialize: (options) ->
     # Stop propagation of change of model to colleciton
-    @model.off()
+    #@model.off()
     if options.big
       @template = JST['companies/top_tile']
     @render()
@@ -34,21 +34,21 @@ class CPP.Views.CompanyTile extends CPP.Views.Base
       {rating: rating},
       (data) =>
         # Update icon
-        if rating == 1
-          if (ct.hasClass('icon-star-empty'))
-            ct.addClass('golden-star icon-star')
-            ct.removeClass('icon-star-empty')
-            ct.prev().removeClass('red-ban')
-          if (ct.hasClass('icon-ban-circle'))
-            ct.addClass('red-ban')
-        else if rating == 3
-          if (ct.hasClass('icon-ban-circle'))
-            ct.addClass('red-ban')
-            ct.next().removeClass('golden-star icon-star')
-            ct.next().addClass('icon-star-empty')
-        else
-          if (ct.hasClass('icon-star'))
-            ct.addClass('icon-star-empty')
-            ct.removeClass('golden-star icon-star')
-          if (ct.hasClass('icon-ban-circle'))
-            ct.removeClass('red-ban')
+        # if rating == 1
+        #   if (ct.hasClass('icon-star-empty'))
+        #     ct.addClass('golden-star icon-star')
+        #     ct.removeClass('icon-star-empty')
+        #     ct.prev().removeClass('red-ban')
+        #   if (ct.hasClass('icon-ban-circle'))
+        #     ct.addClass('red-ban')
+        # else if rating == 3
+        #   if (ct.hasClass('icon-ban-circle'))
+        #     ct.addClass('red-ban')
+        #     ct.next().removeClass('golden-star icon-star')
+        #     ct.next().addClass('icon-star-empty')
+        # else
+        #   if (ct.hasClass('icon-star'))
+        #     ct.addClass('icon-star-empty')
+        #     ct.removeClass('golden-star icon-star')
+        #   if (ct.hasClass('icon-ban-circle'))
+        #     ct.removeClass('red-ban')

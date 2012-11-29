@@ -55,11 +55,7 @@ class TaggedEmailsController < ApplicationController
   # PUT /emails/1.json
   def update
     @email = TaggedEmail.find(params[:id])
-    puts "%%%%%%%%%%%%%%%%%%%%%"
-    puts @email.valid?
-    puts @email.errors.inspect
     if @email.update_attributes(params[:tagged_email])
-      puts @email.inspect
       @email.send_email
       head :no_content
     else
