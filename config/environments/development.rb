@@ -48,4 +48,11 @@ CPP::Application.configure do
     :address              => "localhost",
     :port                 => 25
   }
+
+  if ENV['NORLOG'] && ENV['NORLOG'] == 1
+    # Sends annoying query logs to /dev/null
+    # In Bash: `export NORLOG = 1` to disable or `export NORLOG = 0` to enable.
+    ActiveRecord::Base.logger = Logger.new('/dev/null')
+  end
+  
 end
