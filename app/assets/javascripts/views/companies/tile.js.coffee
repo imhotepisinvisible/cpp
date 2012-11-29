@@ -28,15 +28,12 @@ class CPP.Views.CompanyTile extends CPP.Views.Base
     else if (ct.hasClass('icon-ban-circle') && !ct.hasClass('red-ban'))
       rating = 3
     else
-      console.log "star"
       rating = 2
     @model.set("rating", rating)
-    console.log @model.get "rating"
     $.post "companies/#{@model.id}/set_rating",
       {rating: rating},
       (data) =>
         # Update icon
-        console.log ct.siblings()
         if rating == 1
           if (ct.hasClass('icon-star-empty'))
             ct.addClass('golden-star icon-star')
