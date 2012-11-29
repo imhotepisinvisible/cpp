@@ -82,6 +82,11 @@ ActiveRecord::Schema.define(:version => 20121128183459) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "emails_students", :force => true do |t|
+    t.integer "email_id"
+    t.integer "user_id"
+  end
+
   create_table "event_tag_links", :force => true do |t|
     t.integer  "event_id"
     t.integer  "tag_id"
