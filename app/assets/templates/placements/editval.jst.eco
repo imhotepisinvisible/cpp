@@ -9,7 +9,7 @@
   <% for department in @placement.company.departments.models: %>
     <% if department.get 'settings_notifier_placement': %>
       <div>
-        <%- department.get 'settings_notifier_placement' %>
+        <%= "Important notice from #{department.get 'name'} - #{department.get 'settings_notifier_placement'}" %>
       </div>
     <% end %>
   <% end %>
