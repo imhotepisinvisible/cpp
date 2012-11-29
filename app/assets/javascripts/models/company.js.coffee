@@ -16,3 +16,13 @@ class CPP.Models.Company extends Backbone.Model
     
   url: ->
     '/companies' + (if @isNew() then '' else '/' + @id)
+
+  getStarClass: ->
+    if @get('rating') == 1
+      return "golden-star icon-star"
+    return "icon-star-empty"
+
+  getBanClass: ->
+    if @get('rating') == 1
+      return "red-ban"
+    return ""    

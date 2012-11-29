@@ -121,8 +121,16 @@ textarea {
   }
 }
 
-.rating > span:hover {
-  color:  #FDD017;
+#star-rating {
+  &:hover{
+    color:  #FDD017;
+  }
+}
+
+#ban-rating {
+  &:hover{
+    color:  #B00000;
+  }
 }
 
 .ban-icon {
@@ -131,7 +139,7 @@ textarea {
   color: #6D6968;
 }
 
-.star-icon {
+.fav-icon {
   padding-top: 8px;  
   font-size: 25px;
   color: #6D6968;
@@ -142,6 +150,6 @@ textarea {
   padding-top: 4px;
 }
 
-.goldenStar {
+.golden-star {
   color: #FDD017;
 }

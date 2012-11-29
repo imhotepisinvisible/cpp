@@ -16,6 +16,7 @@ class Company < ActiveRecord::Base
   has_many :emails
   has_many :company_administrators
   has_many :company_contacts
+  has_many :student_company_ratings
 
   belongs_to :organisation
   has_and_belongs_to_many :departments
@@ -41,7 +42,22 @@ class Company < ActiveRecord::Base
     :maximum => 1000,
   }
 
+  def rating(student_id)
+    student_company_rating = student_company_ratings.find_by_student_id(student_id)
+    if student_company_rating
+      return student_company_rating.rating
+    else
+      return 2
+    end
+  end
+
   def as_json(options={})
-    super(:include => [:skills, :interests, :year_groups])
+    result = super(:methods => [:skill_list, :interest_list, :year_group_list])
+    
+    if options.has_key? :student_id
+      result[:rating] = rating(options[:student_id])
+    end
+    
+    return result
   end
 end

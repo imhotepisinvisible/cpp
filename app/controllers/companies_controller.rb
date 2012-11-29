@@ -5,7 +5,11 @@ class CompaniesController < ApplicationController
   # GET /companies.json
   def index
     @companies = Company.all
-    respond_with @companies
+    if current_user && current_user.type == "Student"
+      respond_with @companies.as_json({:student_id => current_user.id})
+    else
+      respond_with @companies
+    end
   end
 
   # GET /companies/1
@@ -82,6 +86,20 @@ class CompaniesController < ApplicationController
     else
       respond_with @company, status: :unprocessable_entity
     end
+  end
+
+  # POST /companies/1/set_rating
+  def set_rating
+    if !current_user
+      raise "MUST BE LOGGED IN"
+    end
+    student_id = current_user.id
+    company_id = params[:id]
+    student_company_rating = StudentCompanyRating.find_or_create_by_student_id_and_company_id(student_id, company_id)
+    student_company_rating.rating = params[:rating]
+    student_company_rating.save!
+
+    head :no_content
   end
 
 end

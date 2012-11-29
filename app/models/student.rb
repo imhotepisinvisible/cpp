@@ -13,6 +13,7 @@
 
 class Student < User
   has_and_belongs_to_many :departments, :foreign_key => :user_id
+  has_many :student_company_ratings
 
   acts_as_taggable_on :skills, :interests, :year_groups
 
@@ -77,4 +78,6 @@ class Student < User
   def as_json(options={})
     super(:methods => [:skill_list, :interest_list, :year_group_list])
   end
+
+
 end

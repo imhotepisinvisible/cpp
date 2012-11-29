@@ -86,6 +86,7 @@ CPP::Application.routes.draw do
     resources :company_contacts
     delete '/documents/:document_type', :on => :member, :action => :delete_document
     get '/documents/:document_type', :on => :member, :action => :download_document
+    post '/set_rating', :on => :member, :action => :set_rating
   end
 
   # Samples/Mockups
