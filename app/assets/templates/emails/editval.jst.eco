@@ -21,10 +21,10 @@
 </div>
 <div class="row">
   <div class="span6">
-    <h2 class="section-header">Select Recipients by Tag</h2>
+    <h2 class="section-header">Select Recipients</h2>
   </div>
   <div class="span6">
-    <h2 class="section-header">Selected Recipients</h2>
+    <h2 class="section-header">Recipient Stats</h2>
   </div>
 </div>
 <div class="row">
@@ -51,47 +51,12 @@
   </div>
   <div class="span6">
     <div class="row">
-      <div class="span2">
-        Year Groups
-      </div>
-      <div class="span4">
-        <span class="label label-info interest-tag">
-          <span class="label-text">3rd Year</span>
-          <button type="button" class="close" data-dismiss="alert">×</button>
-                  </span>
-        <span class="label label-info interest-tag">
-          <span class="label-text">4th Year</span>
-          <button type="button" class="close" data-dismiss="alert">×</button>
-        </span>
-      </div>
-    </div>
-    <div class="row">
-      <div class="span2">
-        Interests
-      </div>
-      <div class="span4">
-        <span class="label label-warning interest-tag">
-          <span class="label-text">Web Development</span>
-          <button type="button" class="close" data-dismiss="alert">×</button>
-        </span>
-      </div>
-    </div>
-    <div class="row">
-      <div class="span2">
-        Programming skills
-      </div>
-      <div class="span4">
-        <span class="label label-success interest-tag">
-          <span class="label-text">Ruby</span>
-          <button type="button" class="close" data-dismiss="alert">×</button>
-        </span>
-      </div>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="span12">
-    <h2 class="section-header">Review and submit for approval</h2>
+    <h2 class="section-header">Submit for approval</h2>
     <p>Email will be sent to 47 recipients</p>
     <div class="control-group">
       <div class="controls">

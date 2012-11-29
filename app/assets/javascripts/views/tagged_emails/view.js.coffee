@@ -1,4 +1,4 @@
-class CPP.Views.EmailsView extends CPP.Views.Base
+class CPP.Views.TaggedEmailsView extends CPP.Views.Base
   el: "#app"
   template: JST['emails/view']
 

@@ -8,8 +8,8 @@ class CPP.Models.Company extends Backbone.Model
     @placements = new CPP.Collections.Placements
     @placements.url = '/companies/' + this.id + '/placements'
 
-    @emails = new CPP.Collections.Emails
-    @emails.url = '/companies/' + this.id + '/emails'
+    @tagged_emails = new CPP.Collections.TaggedEmails
+    @tagged_emails.url = '/companies/' + this.id + '/tagged_emails'
 
     @company_contacts = new CPP.Collections.CompanyContacts
     @company_contacts.url = '/companies/' + this.id + '/company_contacts'

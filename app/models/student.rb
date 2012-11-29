@@ -12,6 +12,8 @@
 #   t.datetime "updated_at",      :null => false
 
 class Student < User
+  acts_as_paranoid
+
   has_and_belongs_to_many :departments, :foreign_key => :user_id
   has_many :student_company_ratings
 

@@ -1,4 +1,4 @@
-class CPP.Views.EmailsItem extends CPP.Views.Base
+class CPP.Views.TaggedEmailsItem extends CPP.Views.Base
   tagName: "tr"
   className: "cpp-tbl-row"
 
@@ -14,7 +14,7 @@ class CPP.Views.EmailsItem extends CPP.Views.Base
 
   editEmail: (e) ->
     e.stopPropagation()
-    Backbone.history.navigate("emails/" + @model.get('id') + "/edit", trigger: true)
+    Backbone.history.navigate("tagged_emails/" + @model.get('id') + "/edit", trigger: true)
 
   deleteEmail: (e) ->
     e.stopPropagation()
@@ -26,8 +26,8 @@ class CPP.Views.EmailsItem extends CPP.Views.Base
         notify "error", "Email could not be deleted"
 
   render: ->
-    $(@el).html(@template(email: @model))
+    $(@el).html(@template(tagged_email: @model))
     @
 
   viewEmail: ->
-    Backbone.history.navigate("emails/" + @model.get('id'), trigger: true)
+    Backbone.history.navigate("tagged_emails/" + @model.get('id'), trigger: true)

@@ -22,11 +22,8 @@
       <thead>
         <tr>
           <th>Company</th>
-          <th>Email</th>
-          <th>Apply By</th>
-          <th>Location</th>
-          <th>Capacity</th>
-          <th>Map</th>
+          <th>Subject</th>
+          <th>Status</th>
           <th class="btn-column"></th>
         </tr>
       </thead>

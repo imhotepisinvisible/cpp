@@ -12,6 +12,9 @@
 #   t.integer  "company_id"
 #   t.datetime "created_at", :null => false
 #   t.datetime "updated_at", :null => false
+#
+# Each email instantiation has a send_email function which queues the email
+# with the users who will receive it.
 
 class Email < ActiveRecord::Base
   belongs_to :company
@@ -22,9 +25,7 @@ class Email < ActiveRecord::Base
 
   validates :body, obscenity: {message: "Profanity is not allowed!"}
   validates :subject, obscenity: {message: "Profanity is not allowed!"}
-  attr_accessible :subject, :body,
-                  :skill_list, :interest_list, :year_group_list
 
-  attr_accessible :company_id, :subject, :body
+  attr_accessible :company_id, :subject, :body, :skill_list
 
 end

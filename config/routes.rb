@@ -72,7 +72,7 @@ CPP::Application.routes.draw do
     get '/documents/:document_type', :on => :member, :action => :download_document
   end
 
-  resources :emails
+  resources :tagged_emails
 
   resources :students do
     resources :events
@@ -82,7 +82,7 @@ CPP::Application.routes.draw do
   resources :companies do
     resources :events
     resources :placements
-    resources :emails
+    resources :tagged_emails
     resources :company_contacts
     delete '/documents/:document_type', :on => :member, :action => :delete_document
     get '/documents/:document_type', :on => :member, :action => :download_document

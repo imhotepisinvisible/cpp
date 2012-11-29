@@ -1,4 +1,4 @@
-class CPP.Views.EmailsIndex extends CPP.Views.Base
+class CPP.Views.TaggedEmailsIndex extends CPP.Views.Base
   el: '#app'
   template: JST['emails/index']
 
@@ -21,14 +21,14 @@ class CPP.Views.EmailsIndex extends CPP.Views.Base
       email.company.fetch
         success: ->
           # Render the email if we can get its company
-          view = new CPP.Views.EmailsItem model: email
+          view = new CPP.Views.TaggedEmailsItem model: email
           @$('#emails').append(view.render().el)
         error: ->
           notify "error", "Couldn't fetch company for email"
     @
 
   addEmail: ->
-    Backbone.history.navigate("companies/" + @collection.company.id + "/emails/new", trigger: true)
+    Backbone.history.navigate("companies/" + @collection.company.id + "/tagged_emails/new", trigger: true)
 
   viewCompany: ->
     if @collection.company 

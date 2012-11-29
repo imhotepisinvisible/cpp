@@ -15,7 +15,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     'click #student-degree-container': 'degreeEdit'
     'blur #student-degree-input-container': 'degreeStopEdit'
     'click #activate-button'  : 'activate'
-    'submit #skill-tag-form': 'addSkill'
+    #'submit #skill-tag-form': 'addSkill'
     'click #btn-toggle-profile' : 'toggleProfile'
 
   initialize: ->
@@ -68,7 +68,6 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
   render: ->
     super
     $(@el).html(@template(student: @model))
-
     @skill_list_tags_form.render()
     $('.skill-tags-form').append(@skill_list_tags_form.el)
     @interest_list_tags_form.render()

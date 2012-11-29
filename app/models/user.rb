@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   # :column => 'deleted_at'
 
   has_secure_password
+  has_many :users_events
+  has_many :events, :through => :users_events
 
   validates :email,           :presence => true
   validates :password_digest, :presence => true, :on => :create

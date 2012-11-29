@@ -1,4 +1,4 @@
-class CPP.Views.EmailsEdit extends CPP.Views.Base
+class CPP.Views.TaggedEmailsEdit extends CPP.Views.Base
   el: "#app"
 
   template: JST['emails/editval']
@@ -9,15 +9,24 @@ class CPP.Views.EmailsEdit extends CPP.Views.Base
   initialize: ->
     @form = new Backbone.Form(model: @model).render()
 
+    saveTagModel = ->
+      @model.save {},
+        wait: true
+        success: (model, response) =>
+          # notify "success", "Updated Profile TAG"
+        error: (model, response) ->
+          # Notify tag-specific errors here (profanity etc)
+          errorlist = JSON.parse response.responseText
+          notify "error", "Couldn't Update Tags"
+
     @skill_list_tags_form = new Backbone.Form.editors.TagEditor
       model: @model
       key: 'skill_list'
       title: 'Skills'
       url: '/tags/skills'
       tag_class: 'label-success'
-      tag_change_callback: =>
-        @skill_list_tags_form.commit()
-        console.log @
+      tag_change_callback: saveTagModel
+      additions: true
 
     @interest_list_tags_form = new Backbone.Form.editors.TagEditor
       model: @model
@@ -25,9 +34,8 @@ class CPP.Views.EmailsEdit extends CPP.Views.Base
       title: 'Interests'
       url: '/tags/interests'
       tag_class: 'label-warning'
-      tag_change_callback: =>
-        @interest_list_tags_form.commit()
-        console.log @
+      tag_change_callback: saveTagModel
+      additions: true
 
     @year_group_list_tags_form = new Backbone.Form.editors.TagEditor
       model: @model
@@ -35,9 +43,8 @@ class CPP.Views.EmailsEdit extends CPP.Views.Base
       title: 'Year Groups'
       url: '/tags/year_groups'
       tag_class: 'label-info'
-      tag_change_callback: =>
-        @year_group_list_tags_form.commit()
-        console.log @
+      tag_change_callback: saveTagModel
+      additions: true
 
     @render()
 
@@ -45,7 +52,6 @@ class CPP.Views.EmailsEdit extends CPP.Views.Base
   render: ->
     super
     $(@el).html(@template(email: @model))
-
     @skill_list_tags_form.render()
     $('.skill-tags-form').append(@skill_list_tags_form.el)
     @interest_list_tags_form.render()
@@ -57,6 +63,7 @@ class CPP.Views.EmailsEdit extends CPP.Views.Base
     @form.on "change", =>
       @form.validate()
     tiny_mce_init()
+     
   @
 
   submitEmail: ->
@@ -67,7 +74,7 @@ class CPP.Views.EmailsEdit extends CPP.Views.Base
         wait: true
         success: (model, response) =>
           notify "success", "Email Saved"
-          Backbone.history.navigate('companies/' + @model.get('company_id') + '/emails', trigger: true)
+          Backbone.history.navigate('companies/' + @model.get('company_id') + '/tagged_emails', trigger: true)
           @undelegateEvents()
         error: (model, response) =>
           errorlist = JSON.parse response.responseText

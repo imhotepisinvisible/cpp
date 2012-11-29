@@ -1,4 +1,4 @@
-class CPP.Views.EmailsPartial extends CPP.Views.Base
+class CPP.Views.TaggedEmailsPartial extends CPP.Views.Base
   template: JST['emails/partial']
 
   editable: false
