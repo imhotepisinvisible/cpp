@@ -23,6 +23,6 @@ class CPP.Models.Company extends Backbone.Model
     return "icon-star-empty"
 
   getBanClass: ->
-    if @get('rating') == 1
-      return "red-ban"
-    return ""    
+    if @get('rating') == 3
+      return "red-ban icon-ban-circle"
+    return "icon-ban-circle"    

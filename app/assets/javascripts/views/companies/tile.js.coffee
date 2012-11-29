@@ -3,7 +3,8 @@ class CPP.Views.CompanyTile extends CPP.Views.Base
 
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .company-tile' : 'viewCompany'
-    'click #star-rating' :   'companyHighlight'
+    'click #star-rating'  : 'companyHighlight'
+    'click #ban-rating'   : 'companyHighlight'  
 
   initialize: (options) ->
     # Stop propagation of change of model to colleciton
@@ -19,20 +20,38 @@ class CPP.Views.CompanyTile extends CPP.Views.Base
     Backbone.history.navigate('companies/' + @model.id, trigger: true)
 
   companyHighlight: (e) ->
+    ct = $(e.currentTarget)
     e.stopPropagation()
     # Set rating
-    if ($(e.currentTarget).hasClass('golden-star'))
-      rating = 2
-    else
+    if (ct.hasClass('icon-star-empty'))
       rating = 1
+    else if (ct.hasClass('icon-ban-circle') && !ct.hasClass('red-ban'))
+      rating = 3
+    else
+      console.log "star"
+      rating = 2
     @model.set("rating", rating)
+    console.log @model.get "rating"
     $.post "companies/#{@model.id}/set_rating",
       {rating: rating},
       (data) =>
-        # Update star
-        if rating != 1
-          $(e.currentTarget).removeClass('golden-star icon-star')
-          $(e.currentTarget).addClass('icon-star-empty')
+        # Update icon
+        console.log ct.siblings()
+        if rating == 1
+          if (ct.hasClass('icon-star-empty'))
+            ct.addClass('golden-star icon-star')
+            ct.removeClass('icon-star-empty')
+            ct.prev().removeClass('red-ban')
+          if (ct.hasClass('icon-ban-circle'))
+            ct.addClass('red-ban')
+        else if rating == 3
+          if (ct.hasClass('icon-ban-circle'))
+            ct.addClass('red-ban')
+            ct.next().removeClass('golden-star icon-star')
+            ct.next().addClass('icon-star-empty')
         else
-          $(e.currentTarget).addClass('golden-star icon-star')
-          $(e.currentTarget).removeClass('icon-star-empty')
+          if (ct.hasClass('icon-star'))
+            ct.addClass('icon-star-empty')
+            ct.removeClass('golden-star icon-star')
+          if (ct.hasClass('icon-ban-circle'))
+            ct.removeClass('red-ban')
