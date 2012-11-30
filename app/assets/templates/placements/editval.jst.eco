@@ -5,6 +5,15 @@
     <%= @placement.get 'position' %> (Editing)
   <% end %>
 </h1>
+<% if @placement.isNew(): %>
+  <% for department in @placement.company.departments.models: %>
+    <% if department.get 'settings_notifier_placement': %>
+      <div>
+        <%= "Important notice from #{department.get 'name'} - #{department.get 'settings_notifier_placement'}" %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
 <div class="row">
   <div class="span4">
     <div class="company-logo-large">

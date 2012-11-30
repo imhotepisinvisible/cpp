@@ -12,7 +12,7 @@
       <div class="span3">
         <div id="student-profile-img-container" class="img-polaroid">
           <% if @student.get 'profile_picture_file_name': %>
-            <img src="<%= @student.get 'profile_picture_file_name' %>" id="student-profile-img">
+            <img src="/students/<%= @student.get 'id' %>/documents/profile_picture" id="student-profile-img">
           <% else: %>
             <img src="/assets/default_profile.png" id="student-profile-img">
           <% end %>

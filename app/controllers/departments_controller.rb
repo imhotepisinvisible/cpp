@@ -4,7 +4,10 @@ class DepartmentsController < ApplicationController
   # GET /departments
   # GET /departments.json
   def index
-    @departments = Department.all
+    @departments = Department.scoped
+    if params.keys.include? "company_id"
+      @departments = @departments.all(:include => :companies, :conditions => ["companies.id = ?", params[:company_id]])
+    end
     respond_with @departments
   end
 

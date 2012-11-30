@@ -14,6 +14,9 @@ class CPP.Models.Company extends Backbone.Model
     @company_contacts = new CPP.Collections.CompanyContacts
     @company_contacts.url = '/companies/' + this.id + '/company_contacts'
     
+    @departments = new CPP.Collections.Departments
+    @departments.url = '/companies/' + this.id + '/departments'
+
   url: ->
     '/companies' + (if @isNew() then '' else '/' + @id)
 
@@ -23,6 +26,6 @@ class CPP.Models.Company extends Backbone.Model
     return "icon-star-empty"
 
   getBanClass: ->
-    if @get('rating') == 1
-      return "red-ban"
-    return ""    
+    if @get('rating') == 3
+      return "red-ban icon-ban-circle"
+    return "icon-ban-circle"    

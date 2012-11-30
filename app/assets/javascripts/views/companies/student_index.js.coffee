@@ -4,7 +4,7 @@ class CPP.Views.CompaniesStudentIndex extends CPP.Views.Base
   rowDiv: '<div class="row" id="current-tile-row"></div>'
 
   initialize: (options) ->
-    @collection.bind 'reset', @render, @
+    #@collection.bind 'reset', @render, @
     @collection.bind 'change', @render, @
     @collection.bind 'filter', @renderCompanies, @
     @render()
@@ -15,12 +15,9 @@ class CPP.Views.CompaniesStudentIndex extends CPP.Views.Base
     @renderFilters()
 
   renderCompanies: (collection) ->
-    console.log @collection
+    @collection.sort()
     $('#company-tiles').html("")
-
-    # TODO: Sort collection by relevence to student (maybe using tags?)
-    # so that best is first
-
+    # Sort collection by rating (has to be done before bind to reset)
     if collection.length > 0
       $('#company-tiles').append('<div id="company-tile-container-0"></div>')
       topCompanyTile = new CPP.Views.CompanyTile

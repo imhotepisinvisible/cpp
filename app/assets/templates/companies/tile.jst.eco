@@ -11,7 +11,7 @@
     <div class="company-tile-blurb">
       <%= @company.get('description').substring(0, 100) + '...' %>
     </div>
-      <span id="ban-rating" class="fav-icon pull-right <%= @company.getBanClass() %>"><i class="icon-ban-circle"></i></span>
+      <span id="ban-rating" class="fav-icon pull-right <%= @company.getBanClass() %>"></span>
       <span id="star-rating" class="fav-icon pull-right <%= @company.getStarClass() %>"></span>
       <div class="clearfix"></div>
     </div>

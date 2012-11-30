@@ -123,13 +123,13 @@ textarea {
 
 #star-rating {
   &:hover{
-    color:  #FDD017;
+    color: #FDD017;
   }
 }
 
 #ban-rating {
   &:hover{
-    color:  #B00000;
+    color: #B00000;
   }
 }
 
@@ -152,4 +152,8 @@ textarea {
 
 .golden-star {
   color: #FDD017;
+}
+
+.red-ban {
+  color: #B00000;
 }

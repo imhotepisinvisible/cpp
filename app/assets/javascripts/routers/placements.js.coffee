@@ -33,7 +33,17 @@ class CPP.Routers.Placements extends Backbone.Router
   new: (company_id) ->
     placement = new CPP.Models.Placement company_id: company_id
     placement.collection = new CPP.Collections.Placements
-    new CPP.Views.PlacementsEdit model: placement
+    placement.company = new CPP.Models.Company id: company_id
+    placement.company.fetch
+      success: ->
+        placement.company.departments = new CPP.Collections.Departments
+        placement.company.departments.fetch
+          data:
+            $.param({ company_id: placement.company.id})
+          success: ->
+            new CPP.Views.PlacementsEdit model: placement
+      error: ->
+        notify "error", "Couldn't fetch company for event"
 
   edit: (id) ->
     placement = new CPP.Models.Placement id: id

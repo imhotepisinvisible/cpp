@@ -38,7 +38,9 @@ FactoryGirl.create :organisation_domain, {
 # Department of Computing
 department = FactoryGirl.create :department, {
   name:"Department of Computing",
-  organisation: organisation
+  organisation: organisation,
+  settings_notifier_placement: "If this is your first placement you're offering, make sure you send back a placement performa and a health and saftey form which can be found on https://www.doc.ic.ac.uk/internal/industrialplacements/employers/IPproforma12-studentorganised.doc and https://www.doc.ic.ac.uk/internal/industrialplacements/employers/Placement_Provider_Information_Form_2012.doc",
+  settings_notifier_event: "Please note that at current an event must be scheduled at least two weeks in advance to be approved."
 }
 
 pete = FactoryGirl.create :student,  {
@@ -153,6 +155,8 @@ FactoryGirl.create :company, {
 }
 
 Company.all.each do |company|
+  department.companies << company
+
   # Upload Logo
   company.logo = File.open(File.join(Rails.root, "app", "assets", "images", "company_logos", "#{company.name.downcase}_logo.jpg" ))
 
