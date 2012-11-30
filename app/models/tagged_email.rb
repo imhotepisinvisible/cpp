@@ -11,12 +11,21 @@ class TaggedEmail < Email
     super(:methods => [:skill_list, :interest_list, :year_group_list])
   end
 
-  def send_email
-  	users = Student.tagged_with(self.skills + self.interests + self.year_groups, :any => true)
+  def get_matching_students
+    Student.tagged_with(self.skills + self.interests + self.year_groups, :any => true)
   end
 
-  def get_matching_students
-    users = Student.tagged_with(self.skills + self.interests + self.year_groups, :any => true)
-    users.length
+  def get_matching_students_count
+    users = get_matching_students
+    year_groups = Hash.new(0)
+    users.each do |user|
+      year_groups[user.year] += 1
+    end
+    year_groups
   end
+
+  def send_email
+    #email sending shiz to go here...
+  end
+
 end

@@ -50,7 +50,7 @@
     </div>
   </div>
   <div class="span6">
-    <div class="row">
+    <div id="email-stats">
     </div>
   </div>
 </div>

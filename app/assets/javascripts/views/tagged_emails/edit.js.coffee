@@ -9,11 +9,12 @@ class CPP.Views.TaggedEmailsEdit extends CPP.Views.Base
   initialize: ->
     @form = new Backbone.Form(model: @model).render()
 
-    saveTagModel = ->
+    saveTagModel = =>
       @model.save {},
         wait: true
         success: (model, response) =>
           # notify "success", "Updated Profile TAG"
+          @updateStats()
         error: (model, response) ->
           # Notify tag-specific errors here (profanity etc)
           errorlist = JSON.parse response.responseText
@@ -63,7 +64,7 @@ class CPP.Views.TaggedEmailsEdit extends CPP.Views.Base
     @form.on "change", =>
       @form.validate()
     tiny_mce_init()
-     
+    @updateStats()
   @
 
   submitEmail: ->
@@ -82,3 +83,24 @@ class CPP.Views.TaggedEmailsEdit extends CPP.Views.Base
             @form.fields[field].setError(errors.join ', ')
 
           notify "error", "Unable to save email, please resolve issues below."
+
+  updateStats: ->
+    $.get "/tagged_emails/" + @model.id + "/get_matching_students_count", (data) ->
+      console.log jQuery.isEmptyObject(data)
+      if !jQuery.isEmptyObject(data)
+        totalRecipients = 0
+        output = "<dl class=\"dl-horizontal\">\n"
+        for year in Object.keys(data)
+          totalRecipients += data[year]
+          output += "<dt>Year "+year+"</dt><dd>"+data[year]+" student"
+          if data[year] > 1
+            output += "s"
+          output += "</dd>\n"
+        output += "<dt>Total</dt><dd>" + totalRecipients + " student"
+        if totalRecipients > 1
+          output += "s"
+        output += "</dd></dl>\n"
+      else
+        output = "<h3 class=\"warning\">No students match these tags!</h3>"
+      $('#email-stats').empty()
+      $('#email-stats').append(output)

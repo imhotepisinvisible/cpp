@@ -21,8 +21,6 @@ class TaggedEmailsController < ApplicationController
   # GET /emails/1.json
   def show
     @email = TaggedEmail.find(params[:id])
-    puts "hello"
-    puts @email.inspect
     respond_with @email
 
   end
@@ -43,7 +41,6 @@ class TaggedEmailsController < ApplicationController
   # POST /emails.json
   def create
     @email = TaggedEmail.new(params[:email])
-    puts @email.inspect
     if @email.save
       respond_with @email, status: :created, location: @email
     else
@@ -55,16 +52,17 @@ class TaggedEmailsController < ApplicationController
   # PUT /emails/1.json
   def update
     @email = TaggedEmail.find(params[:id])
-    puts "%%%%%%%%%%%%%%%%%%%%%"
-    puts @email.valid?
-    puts @email.errors.inspect
     if @email.update_attributes(params[:tagged_email])
-      puts @email.inspect
       @email.send_email
       head :no_content
     else
       respond_with @email, status: :unprocessable_entity
     end
+  end
+
+  def get_matching_students_count
+    @email = TaggedEmail.find(params[:id])
+    respond_with @email.get_matching_students_count
   end
 
   # DELETE /emails/1
