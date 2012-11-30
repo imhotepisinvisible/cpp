@@ -1,6 +1,11 @@
 class CompaniesController < ApplicationController
   respond_to :json
 
+  # If the current user is a student, injects their company preferences into
+  # the company models as 'rating' else just returns all companies as JSON.
+  #
+  # TODO: This should only return companies the current student has access to
+  #      via their department(s)
   # GET /companies
   # GET /companies.json
   def index
@@ -23,7 +28,6 @@ class CompaniesController < ApplicationController
   # GET /companies/new.json
   def new
     @company = Company.new
-
     respond_with @company
   end
 
@@ -56,20 +60,22 @@ class CompaniesController < ApplicationController
   def destroy
     @company = Company.find(params[:id])
     @company.destroy
-    
+
     head :no_content
   end
 
-  # TODO: THis is repeated in the student controller
+  # TODO: This is repeated in the student controller
+  # TODO: User variable to symbol is BAD. Filter allowed doctypes
   # GET /students/1/:document_type
   def download_document
-    @company = Company.find(params[:id])
+    company = Company.find(params[:id])
     document_type = params[:document_type]
-    document = (@company.send "#{document_type}".to_sym).path
-    ext = File.extname document
+    document_path = (company.send "#{document_type}".to_sym).path
 
-    unless document.nil?
-      send_file document, :filename => "#{@company.name}_#{document_type}#{ext}"
+    unless document_path.nil?
+      document_extension = File.extname document_path
+      new_doc_name = "#{@company.name}_#{document_type}#{document_extension}"
+      send_file document, :filename => new_doc_name
     else
       head :no_content
     end
