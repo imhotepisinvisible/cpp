@@ -6,6 +6,9 @@ class CPP.Models.Student extends Backbone.Model
     @placements = new CPP.Collections.Placements
     @placements.url = '/students/' + this.id + '/placements'
 
+    @allDepartments = new CPP.Collections.Departments
+    @allDepartments.url = '/departments'
+
   url: ->
     '/students' + (if @isNew() then '' else '/' + @id)
 
@@ -13,6 +16,8 @@ class CPP.Models.Student extends Backbone.Model
     first_name:
       required: true
     last_name:
+      required: true
+    departments:
       required: true
     email:
       required: true
@@ -24,13 +29,16 @@ class CPP.Models.Student extends Backbone.Model
       required: true
       minLength: 8
 
-  schema:
+  schema: ->
     first_name:
       type: "Text"
       title: "First Name"
     last_name:
       type: "Text"
       title: "Last Name"
+    departments:
+      type: "Checkboxes"
+      options: @allDepartments
     email:
       type: "Text"
       title: "Email"
