@@ -1,0 +1,25 @@
+<div class="item hoverable">
+  <div class="contact-form" style="display:none"></div>
+
+  <div>
+    <span class="contact-display-container contact-role-container">
+      <span class="contact-role pull-right"><%= @contact.get 'role' %></span>
+    </span>
+
+    <span class="contact-display-container contact-name-container">
+      <span class="contact-name"><%= @contact.get 'first_name' %></span>
+    </span>
+  </div>
+
+  <div class="btn-container btn-group">
+    <div class="btn btn-mini btn-edit">Edit</div>
+    <div class="btn btn-mini btn-delete btn-danger"><i class="icon-trash"></i></div>
+  </div>
+
+  <div class="btn btn-save" style="display:none">Save</div>
+  <span class="link btn-cancel form-cancel" style="display:none">cancel</span>
+
+  <div class="contact-display-container contact-email-container">
+    <div class="contact-email"> <%= @contact.get 'email' %></div>
+  </div>
+</div>

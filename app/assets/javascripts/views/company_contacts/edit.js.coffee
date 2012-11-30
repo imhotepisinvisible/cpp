@@ -1,15 +1,12 @@
 class CPP.Views.ContactsPartialEdit extends CPP.Views.Base
   template: JST['company_contacts/contacts_edit']
-
-  events:
-    'click .btn-edit' : 'edit'
-    'click .btn-save' : 'save'
-    'click .btn-delete' : 'delete'
-    'click .btn-cancel' : 'cancel'
+  
+  events: -> _.extend {}, CPP.Views.Base::events,
     'click #btn-all' : 'editAll'
     'click #btn-new' : 'new'
     'click #btn-save-new' : 'saveNew'
     'click #btn-cancel-new' : 'cancelNew'
+    'update-sort' : 'updateSort'
 
   initialize: (options) ->
     @company_id = options.company_id
@@ -21,17 +18,14 @@ class CPP.Views.ContactsPartialEdit extends CPP.Views.Base
         success: =>
           @collection = options.company.company_contacts
           @initializeNoFetch()
+          @collection.bind 'destroy', @reRender, @
     else
       @initializeNoFetch()
+      @collection.bind 'destroy', @reRender, @
+
 
   initializeNoFetch: ->
     @render()
-    @forms = []
-
-    for contact, index in @collection.models
-      @forms.push(new Backbone.Form(model: contact, template: 'standardForm').render())
-      Backbone.Validation.bind @forms[index]
-      $(@el).find('#' + index + '.item').find('.contact-form').html(@forms[index].el)
 
     $('#contacts').sortable
       axis: "y"
@@ -41,22 +35,24 @@ class CPP.Views.ContactsPartialEdit extends CPP.Views.Base
       items: 'li'
       opacity: 1
       scroll: true
-      update: =>
-        console.log $('#contacts').sortable('serialize')
-        $.ajax
-          url: "/companies/#{@company_id}/company_contacts/sort"
-          type: 'POST'
-          data: $('#contacts').sortable('serialize')
-          dataType: 'script'
-          complete: (request) ->
-            $.each $('.contact-list-item'), (index, listItem) ->
-              $(listItem).attr('id', 'contacts_' + (index + 1))
-          
+      stop: (event, ui) -> 
+        ui.item.trigger('drop', ui.item.index()); 
     
   render: ->
     $(@el).html(@template(contacts: @collection))
+    if @collection.length > 0
+      @collection.each (contact) =>
+        view = new CPP.Views.CompanyContact
+                      model: contact
+                      editable: @editable
+        @$('#contacts').append(view.render().el)
+    else
+      @$('#contacts').append "No contacts right now!"
+    @
+
 
   reRender: (options) ->
+    console.log @collection
     if @company
       @undelegateEvents()
       new CPP.Views.ContactsPartialEdit
@@ -72,72 +68,6 @@ class CPP.Views.ContactsPartialEdit extends CPP.Views.Base
   editAll: ->
     Backbone.history.navigate('/companies/' + @company_id + '/company_contacts/edit', trigger: true)
 
-  edit: (e) ->
-    $(e.currentTarget).parent().parent().find('.btn-container').hide()
-    $(e.currentTarget).parent().parent().find('.btn-save').show()
-    $(e.currentTarget).parent().parent().find('.btn-cancel').show()
-    $(e.currentTarget).parent().parent().removeClass('hoverable')
-    $(e.currentTarget).parent().parent().find('.contact-display-container').hide()
-    $(e.currentTarget).parent().parent().find('.contact-form').show()
-
-  save: (e) ->
-    index = $(e.currentTarget).parent().attr('id')
-    model = @collection.at(index)
-
-    if @forms[index].validate() == null
-      @forms[index].commit()
-      @forms[index].model.save {},
-        wait: true
-        success: (_model) =>
-          $(e.currentTarget).parent().find('.contact-role').html(_model.get 'role')
-          $(e.currentTarget).parent().find('.contact-name').html(_model.get 'first_name')
-          $(e.currentTarget).parent().find('.contact-email').html(_model.get 'email')
-          notify 'success', 'Contact saved'
-        error: ->
-          notify 'error', 'Unable to save contact'
-
-      @cancel(e)
-
-  cancel: (e) ->
-    # Allow css to control style of btn-edit again
-    $(e.currentTarget).parent().find('.btn-container').attr('style', '')
-
-    $(e.currentTarget).parent().find('.btn-save').hide()
-    $(e.currentTarget).parent().find('.btn-cancel').hide()
-    $(e.currentTarget).parent().addClass('hoverable')
-    $(e.currentTarget).parent().find('.contact-display-container').show()
-    $(e.currentTarget).parent().find('.contact-form').hide()
-
-  delete: (e) ->
-    index = $(e.currentTarget).parent().parent().attr('id')
-    console.log index
-    model = @collection.at(index)
-
-    model.destroy
-      wait: true
-      success: (model, response) =>
-        console.log 'success delete!!'
-        defs = []
-        $.each $('.contact-list-item'), (index, listItem) =>
-          contact = @collection.at($(listItem).children(':first').attr('id'))
-          if contact
-            contact.set('position', index + 1)
-            defs.push(contact.save {},
-                wait: true
-                success: =>
-                  console.log 'yay'
-                error: ->
-                  console.log 'damn')
-
-        $.when.apply($, defs).done(=>
-          console.log 'wow'
-          @reRender({})
-          console.log 'rendered'
-        )
-        notify "success", "Contact deleted"
-      error: (model, response) ->
-        notify "error", "Contact could not be deleted"
-
   new: (e) ->
     $(@el).find('#btn-cancel-new').show()
     $(@el).find('#btn-save-new').show()
@@ -148,7 +78,7 @@ class CPP.Views.ContactsPartialEdit extends CPP.Views.Base
     @formNew = new Backbone.Form(model: contact, template: 'standardForm').render()
     Backbone.Validation.bind @formNew
     $(@el).find('#contact-list-container').html(@formNew.el)
-
+  
   saveNew: (e) ->
     if @formNew.validate() == null
       @formNew.commit()
@@ -162,3 +92,20 @@ class CPP.Views.ContactsPartialEdit extends CPP.Views.Base
 
   cancelNew: (e) ->
     @reRender({})
+
+  updateSort: (event, model, pos) ->
+    @collection.remove model
+    @collection.each (model, index) ->
+      position = index
+      position += 1  if index >= pos
+      model.set "position", position
+
+    model.set "position", pos
+
+    @collection.add model,
+      at: pos
+    
+    @collection.each (model) ->
+      model.save()
+
+    @initializeNoFetch()

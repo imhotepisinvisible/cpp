@@ -17,26 +17,6 @@ class CompanyContactsController < ApplicationController
     respond_with @contacts
   end
 
-  def sort
-    @contacts = CompanyContact.scoped.where(:company_id => params[:company_id]).order('position ASC')
-    @contacts.each_with_index do |contact, i|
-      contact.position = Integer(params[:contacts].index((i + 1).to_s)) + 1
-      contact.save
-    end
-
-    head :no_content
-  end
-
-  def position_clean
-    @contacts = CompanyContact.scoped.where(:company_id => params[:company_id]).order('position ASC')
-    @contacts.each_with_index do |contact, i|
-      contact.position = i + 1
-      contact.save
-    end
-
-    head :no_content
-  end
-
   # GET /company_contacts/1
   # GET /company_contacts/1.json
   def show
