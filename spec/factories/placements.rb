@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :placement do
     company
-    position { ["SDE", "SDET", "Web Development"].sample + " " + ["Intern", "Graduate"].sample}
+    position { ["SDE", "SDET", "Web Dev"].sample + " " + ["Intern", "Graduate"].sample}
     description { Faker::Company.bs }
     duration "6 months"
     location { Faker::Address.street_address }

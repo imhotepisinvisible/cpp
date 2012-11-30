@@ -57,10 +57,10 @@ class Student < User
 
 
   def valid_email?
-    department = departments.first
-    if department.organisation.organisation_domains.any?
+    organisation = departments.first.organisation
+    if organisation.organisation_domains.any?
       match = false
-      department.organisation.organisation_domains.each do |org_domain|
+      organisation.organisation_domains.each do |org_domain|
         unless /\A([^@\s]+)@#{org_domain.domain}/.match(email).nil?
           match = true
           break
@@ -69,7 +69,7 @@ class Student < User
 
       if !match
         domains = []
-        department.organisation.organisation_domains.each do |org_domain|
+        organisation.organisation_domains.each do |org_domain|
           domains << org_domain.domain
         end
         errors.add(:email, "Email domain must be one of #{domains.join(", ")}")

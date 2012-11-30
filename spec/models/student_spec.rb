@@ -16,8 +16,7 @@ describe Student do
   end
 
   it "should have a valid email domain" do
-    puts subject.department.organisation.organisation_domains.inspect
-    org = subject.department.organisation
+    org = subject.departments.first.organisation
       org.organisation_domains.each do |org_domain|
         subject.email = "student@" + org_domain.domain
         subject.should be_valid
