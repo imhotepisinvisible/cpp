@@ -101,6 +101,5 @@ class CPP.Views.TaggedEmailsEdit extends CPP.Views.Base
           output += "s"
         output += "</dd></dl>\n"
       else
-        output = "<h3 class=\"warning\">No students match these tags!</h3>"
-      $('#email-stats').empty()
-      $('#email-stats').append(output)
+        output = "<h4 class=\"warning\">No students match these tags!</h4>"
+      $('#email-stats').empty().append(output)

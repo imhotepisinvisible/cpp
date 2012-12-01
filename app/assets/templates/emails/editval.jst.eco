@@ -57,7 +57,6 @@
 <div class="row">
   <div class="span12">
     <h2 class="section-header">Submit for approval</h2>
-    <p>Email will be sent to 47 recipients</p>
     <div class="control-group">
       <div class="controls">
         <div class="btn btn-submit">Submit for approval</div>
