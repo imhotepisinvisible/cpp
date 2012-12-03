@@ -51,6 +51,7 @@
   </div>
   <div class="span6">
     <div id="email-stats">
+      <h4>Select some tags to see statistics</h4>
     </div>
   </div>
 </div>

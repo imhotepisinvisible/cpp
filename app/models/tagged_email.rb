@@ -14,7 +14,11 @@ class TaggedEmail < Email
   def get_matching_students
     contexts = ["skills","interests"]
     students = Student.where(:active => true)
-    contexts.each {|c| students -= Student.tagged_with(self.send c.to_sym, :on => c.to_sym, :exclude => true)}
+    puts students.inspect
+    contexts.each do |c|
+      reject_c = "reject_" + c
+      students -= Student.tagged_with(self.send(c).map{|t| t.name}, :on => reject_c.to_sym, :any => true)
+    end
     students
   end
 

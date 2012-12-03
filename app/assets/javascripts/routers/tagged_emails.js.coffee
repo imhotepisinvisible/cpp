@@ -31,7 +31,7 @@ class CPP.Routers.TaggedEmails extends Backbone.Router
         notify "error", "Couldn't fetch emails"
 
   new: (company_id) ->
-    email = new CPP.Models.TaggedEmail company_id: company_id
+    email = new CPP.Models.TaggedEmail company_id: company_id, subject: "Subject", body: "Email body"
     email.collection = new CPP.Collections.TaggedEmails
     new CPP.Views.TaggedEmailsEdit model: email
 
