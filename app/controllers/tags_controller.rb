@@ -2,15 +2,27 @@ class TagsController < ApplicationController
   respond_to :json
 
   def skills
-    respond_with get_available_tags_for_context("skills", params[:exclude_tags])
+    respond_with get_available_tags_for_context(["skills", "reject_skills"], params[:exclude_tags])
   end
 
   def interests
-    respond_with get_available_tags_for_context("interests", params[:exclude_tags])
+    respond_with get_available_tags_for_context(["interests", "reject_interests"], params[:exclude_tags])
   end
 
   def year_groups
-    respond_with get_available_tags_for_context("year_groups", params[:exclude_tags])
+    respond_with get_available_tags_for_context(["year_groups"], params[:exclude_tags])
+  end
+
+  def reject_skills
+    respond_with get_available_tags_for_context(["skills","reject_skills"], params[:exclude_tags])
+  end
+
+  def reject_skills
+    respond_with get_available_tags_for_context(["skills","reject_skills"], params[:exclude_tags])
+  end
+
+  def reject_interests
+    respond_with get_available_tags_for_context(["interests","reject_interests"], params[:exclude_tags])
   end
 
   def validate
@@ -25,10 +37,13 @@ class TagsController < ApplicationController
 
   private
 
-  def get_available_tags_for_context(context, excluded_tags)
+  def get_available_tags_for_context(contexts, excluded_tags)
     excluded_tags = [] if excluded_tags.blank?
-    tags = get_tags_for_context context
-    return tags - excluded_tags
+    if current_user.type == "Student"
+      excluded_tags += get_tags_for_user_for_contexts(current_user, contexts)
+    end
+    tags = contexts.map{|c| get_tags_for_context c }.flatten
+    tags = tags - excluded_tags
   end
 
   def get_tags_for_context(context)
@@ -36,5 +51,9 @@ class TagsController < ApplicationController
       .where("taggings.context = '#{context}'")
       .select("DISTINCT tags.*")
       .map(&:name)
+  end
+
+  def get_tags_for_user_for_contexts(user, contexts)
+    contexts.map{|c| user.send c.to_sym }.flatten.map(&:name)
   end
 end

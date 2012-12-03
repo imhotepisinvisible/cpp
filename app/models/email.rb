@@ -26,6 +26,6 @@ class Email < ActiveRecord::Base
   validates :body, obscenity: {message: "Profanity is not allowed!"}
   validates :subject, obscenity: {message: "Profanity is not allowed!"}
 
-  attr_accessible :company_id, :subject, :body, :skill_list
+  attr_accessible :company_id, :subject, :body
 
 end

@@ -8,6 +8,34 @@ class CPP.Views.StudentsSettings extends CPP.Views.Base
     'click #btn-password-cancel' : 'cancelPassword'
 
   initialize: ->
+    saveTagModel = ->
+      @model.save {},
+        wait: true
+        success: (model, response) =>
+          # notify "success", "Updated Profile TAG"
+        error: (model, response) ->
+          # Notify tag-specific errors here (profanity etc)
+          errorlist = JSON.parse response.responseText
+          notify "error", "Couldn't Update Tags"
+
+    @reject_skill_list_tags_form = new Backbone.Form.editors.TagEditor
+      model: @model
+      key: 'reject_skill_list'
+      title: "Skills I don't want to hear about"
+      url: '/tags/reject_skills'
+      tag_class: 'label-success'
+      tag_change_callback: saveTagModel
+      additions: true
+
+    @reject_interest_list_tags_form = new Backbone.Form.editors.TagEditor
+      model: @model
+      key: 'reject_interest_list'
+      title: "Interests I don't want to hear about"
+      url: '/tags/reject_interests'
+      tag_class: 'label-warning'
+      tag_change_callback: saveTagModel
+      additions: true
+
     @initPasswordForm()
     @render()
 
@@ -38,6 +66,10 @@ class CPP.Views.StudentsSettings extends CPP.Views.Base
   render: ->
     $(@el).html(@template(student: @model))
     @renderPasswordForm()
+    @reject_skill_list_tags_form.render()
+    $('.reject_skill-tags-form').append(@reject_skill_list_tags_form.el)
+    @reject_interest_list_tags_form.render()
+    $('.reject_interest-tags-form').append(@reject_interest_list_tags_form.el)
 
   renderPasswordForm: ->
     $('#password-form').html(@passwordForm.el)

@@ -22,7 +22,6 @@ class TaggedEmailsController < ApplicationController
   def show
     @email = TaggedEmail.find(params[:id])
     respond_with @email
-
   end
 
   def preview
@@ -40,7 +39,7 @@ class TaggedEmailsController < ApplicationController
   # POST /emails
   # POST /emails.json
   def create
-    @email = TaggedEmail.new(params[:email])
+    @email = TaggedEmail.new(params[:tagged_email])
     if @email.save
       respond_with @email, status: :created, location: @email
     else

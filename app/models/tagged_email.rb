@@ -12,7 +12,10 @@ class TaggedEmail < Email
   end
 
   def get_matching_students
-    Student.tagged_with(self.skills + self.interests + self.year_groups, :any => true)
+    contexts = ["skills","interests"]
+    students = Student.where(:active => true)
+    contexts.each {|c| students -= Student.tagged_with(self.send c.to_sym, :on => c.to_sym, :exclude => true)}
+    students
   end
 
   def get_matching_students_count

@@ -111,6 +111,8 @@ CPP::Application.routes.draw do
   match 'tags/skills' => 'tags#skills'
   match 'tags/interests' => 'tags#interests'
   match 'tags/year_groups' => 'tags#year_groups'
+  match 'tags/reject_skills' => 'tags#reject_skills'
+  match 'tags/reject_interests' => 'tags#reject_interests'
   match 'tags/validate' => 'tags#validate'
 
   # See how all your routes lay out with "rake routes"
