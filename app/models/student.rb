@@ -17,7 +17,7 @@ class Student < User
   has_and_belongs_to_many :departments, :foreign_key => :user_id
   has_many :student_company_ratings
 
-  acts_as_taggable_on :skills, :interests, :year_groups
+  acts_as_taggable_on :skills, :interests, :year_groups, :reject_skills, :reject_interests
 
   validates :departments, :presence => true
   validates :bio, :length => { :maximum => 500 }
