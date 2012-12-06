@@ -7,7 +7,7 @@
     </span>
 
     <span class="contact-display-container contact-name-container">
-      <span class="contact-name"><%= @contact.get 'first_name' %></span>
+      <span class="contact-name"><%= @contact.get 'first_name' %> <%= @contact.get 'last_name' %></span>
     </span>
   </div>
 

@@ -22,9 +22,9 @@
 //= require sinon
 //= require jasmine-sinon
 //= require jasmine-jquery
+//= require jquery.ui.sortable
 //= require jquery-fileupload/basic
 //= require tinymce-jquery
-//= require jquery.ui.sortable
 //= require jcountdown
 //= require utils
 //

@@ -117,7 +117,6 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
       dataType: 'json'
       type: "PUT"
 
-
     .bind "fileuploadstart", (e, data) ->
       $(e.currentTarget).closest('.upload-container').find('.progress-upload').slideDown()
 

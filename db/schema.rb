@@ -41,16 +41,6 @@ ActiveRecord::Schema.define(:version => 20121128183459) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "company_tag_links", :force => true do |t|
-    t.integer  "company_id"
-    t.integer  "tag_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "company_tag_links", ["company_id"], :name => "index_company_tag_links_on_company_id"
-  add_index "company_tag_links", ["tag_id"], :name => "index_company_tag_links_on_tag_id"
-
   create_table "departments", :force => true do |t|
     t.string   "name"
     t.integer  "organisation_id"
@@ -64,16 +54,6 @@ ActiveRecord::Schema.define(:version => 20121128183459) do
     t.integer "user_id"
     t.integer "department_id"
   end
-
-  create_table "email_tag_links", :force => true do |t|
-    t.integer  "email_id"
-    t.integer  "tag_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "email_tag_links", ["email_id"], :name => "index_email_tag_links_on_email_id"
-  add_index "email_tag_links", ["tag_id"], :name => "index_email_tag_links_on_tag_id"
 
   create_table "emails", :force => true do |t|
     t.string   "subject"
@@ -89,16 +69,6 @@ ActiveRecord::Schema.define(:version => 20121128183459) do
     t.integer "email_id"
     t.integer "user_id"
   end
-
-  create_table "event_tag_links", :force => true do |t|
-    t.integer  "event_id"
-    t.integer  "tag_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "event_tag_links", ["event_id"], :name => "index_event_tag_links_on_event_id"
-  add_index "event_tag_links", ["tag_id"], :name => "index_event_tag_links_on_tag_id"
 
   create_table "events", :force => true do |t|
     t.integer  "company_id"
@@ -127,16 +97,6 @@ ActiveRecord::Schema.define(:version => 20121128183459) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  create_table "placement_tag_links", :force => true do |t|
-    t.integer  "placement_id"
-    t.integer  "tag_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  add_index "placement_tag_links", ["placement_id"], :name => "index_placement_tag_links_on_placement_id"
-  add_index "placement_tag_links", ["tag_id"], :name => "index_placement_tag_links_on_tag_id"
 
   create_table "placements", :force => true do |t|
     t.integer  "company_id"
@@ -177,16 +137,6 @@ ActiveRecord::Schema.define(:version => 20121128183459) do
   create_table "tags", :force => true do |t|
     t.string "name"
   end
-
-  create_table "user_tag_links", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "tag_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "user_tag_links", ["tag_id"], :name => "index_user_tag_links_on_tag_id"
-  add_index "user_tag_links", ["user_id"], :name => "index_user_tag_links_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
