@@ -18,6 +18,9 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     'submit #skill-tag-form': 'addSkill'
     'click #btn-toggle-profile' : 'toggleProfile'
     'change #looking-for-select' : 'changeLookingFor'
+    'keyup #student-name-input-container' : 'stopEditOnEnter'
+    'keyup #student-year-input-container': 'stopEditOnEnter'
+    'keyup #student-degree-input-container': 'stopEditOnEnter'
 
   initialize: ->
 
@@ -304,3 +307,9 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
         notify "success", "Looking for updated"
       error: (model, response) =>
         notify "error", "Could not update looking for"
+
+  stopEditOnEnter: (e) ->
+    if (e.keyCode == 13)
+      @nameStopEdit()
+      @yearStopEdit()
+      @degreeStopEdit()
