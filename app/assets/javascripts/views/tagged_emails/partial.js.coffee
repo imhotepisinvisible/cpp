@@ -14,7 +14,7 @@ class CPP.Views.TaggedEmailsPartial extends CPP.Views.Base
   render: () ->
     $(@el).html(@template(editable: @editable))
     @collection.each (email) =>
-      view = new CPP.Views.EmailsPartialItem
+      view = new CPP.Views.TaggedEmailsPartialItem
                   model: email
                   editable: @editable
       @$('#emails').append(view.render().el)

@@ -15,12 +15,12 @@
   <div class="span">
     <div class="link-title">
       <%= @placement.get 'position' %>
-      <% if @editable: %>
-        <div class="btn btn-mini pull-right btn-edit">Edit</div>
-      <% end %>
     </div>
     <div class="link-description">
       <%= @placement.get 'description' %>
     </div>
   </div>
+  <% if @editable: %>
+    <div class="btn btn-mini pull-right btn-edit">Edit</div>
+  <% end %>
 </div>

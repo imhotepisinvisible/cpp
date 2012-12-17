@@ -18,10 +18,10 @@ class CPP.Views.CompaniesView extends CPP.Views.Base
       model: @model
       collection: @model.placements
 
-    emails_partial = new CPP.Views.EmailsPartial
+    emails_partial = new CPP.Views.TaggedEmailsPartial
       el: $(@el).find('#emails-partial')
       model: @model
-      collection: @model.emails
+      collection: @model.tagged_emails
 
     contacts_partial = new CPP.Views.ContactsPartial
       el: $(@el).find('#contacts-partial')
