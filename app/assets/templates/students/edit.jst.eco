@@ -40,9 +40,9 @@
         </div>
 
         <div id="student-name-container">
-          <p id="student-profile-intro-name">
+          <span id="student-profile-intro-name" class="student-editable">
             <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
-          </p>
+          </span>
         </div>
 
         <span id="student-year-input-container" style="display:none">
@@ -50,7 +50,7 @@
         </span>
 
         <span id="student-year-container">
-          <span id="student-year" class="student-profile-intro-status <%= if not @student.get('year') then 'missing' %>">
+          <span id="student-year" class="student-editable student-profile-intro-status <%= if not @student.get('year') then 'missing' %>">
             <% if @student.get('year'): %>
               <%= getOrdinal(@student.get 'year') %>
             <% else: %>
@@ -66,7 +66,7 @@
         </span>
 
         <span id="student-degree-container">
-          <span id="student-degree" class="student-profile-intro-status <%= if not @student.get('degree') then 'missing' %>">
+          <span id="student-degree" class="student-editable student-profile-intro-status <%= if not @student.get('degree') then 'missing' %>">
             <% if @student.get('degree'): %>
               <%= @student.get('degree') %>
             <% else: %>
@@ -74,10 +74,13 @@
             <% end %>
           </span>
         </span>
-        <span>
-          <br>
-          Looking for an Industrial Placement
-        </span>
+        <div id="student-looking-for-container">
+          <select id="looking-for-select" class="input-xxlarge select-looking-for">
+            <option>Looking for an Industrial Placement</option>
+            <option>Looking for a Summer Placement</option>
+            <option value="">Not looking for anything</option>
+          </select>
+        </div>
       </div>
     </div>
   </div>
@@ -197,7 +200,7 @@
                   </div>
 
                   <div id="student-bio-container">
-                    <p id="student-bio" class="<%= if not @student.get('bio') then 'missing' %>">
+                    <p id="student-bio" class="student-editable <%= if not @student.get('bio') then 'missing' %>">
                       <% if @student.get('bio'): %>
                         <%- @student.get('bio').replace(/\n/g, "<br/>") %>
                       <% else: %>

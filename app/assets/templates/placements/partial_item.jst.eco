@@ -1,11 +1,26 @@
-<div class="item placement-item">
-  <div class="link-title">
-    <%= @placement.get 'position' %>
-    <% if @editable: %>
-      <div class="btn btn-mini pull-right btn-edit">Edit</div>
+<div class="item placement-item row">
+  <div class="span1">
+    <% if @placement.company or true: %>
+      <div class="company-logo-header">
+        <% if false and @placement.company.get 'logo_file_name': %>
+          <% src="/companies/#{@placement.company.get 'id'}/documents/logo" %>
+        <% else: %>
+          <% src="/assets/default_profile.png" %>
+        <% end %>
+        <img src="<%= src %>">
+      </div>
     <% end %>
   </div>
-  <div class="link-description">
-    <%= @placement.get 'description' %>
+
+  <div class="span">
+    <div class="link-title">
+      <%= @placement.get 'position' %>
+    </div>
+    <div class="link-description">
+      <%= @placement.get 'description' %>
+    </div>
   </div>
+  <% if @editable: %>
+    <div class="btn btn-mini pull-right btn-edit">Edit</div>
+  <% end %>
 </div>

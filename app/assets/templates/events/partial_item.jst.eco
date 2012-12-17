@@ -1,12 +1,27 @@
-<div class="item event-item">
-  <div class="link-title">
-    <%= @event.get 'title' %>
-    <% if @editable: %>
-      <div class="btn btn-mini pull-right btn-edit">Edit</div>
+<div class="item event-item row">
+  <div class="span1">
+    <% if @event.company or true: %>
+      <div class="company-logo-header">
+        <% if false and @event.company.get 'logo_file_name': %>
+          <% src="/companies/#{@event.company.get 'id'}/documents/logo" %>
+        <% else: %>
+          <% src="/assets/default_profile.png" %>
+        <% end %>
+        <img src="<%= src %>">
+      </div>
     <% end %>
   </div>
-  <div class="link-description">
-    <% d = Date.parse(@event.get('start_date')) %>
-    <%= d.toString('dXXX MMMM yyyy - H:mm').replace('XXX', d.getOrdinal()) %>
+
+  <div class="span">
+    <div class="link-title">
+      <%= @event.get 'title' %>
+    </div>
+    <div class="link-description">
+      <% d = Date.parse(@event.get('start_date')) %>
+      <%= d.toString('dXXX MMMM yyyy - H:mm').replace('XXX', d.getOrdinal()) %>
+    </div>
   </div>
+  <% if @editable: %>
+    <div class="btn btn-mini pull-right btn-edit">Edit</div>
+  <% end %>
 </div>

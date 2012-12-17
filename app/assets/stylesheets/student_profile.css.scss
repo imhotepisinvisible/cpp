@@ -129,3 +129,21 @@
   @include box-sizing(border-box);
 }
 
+.select-looking-for {
+  font-size: 40px;
+  font-family: 'Arvo', serif;
+  line-height: 45px;
+  height: 55px;
+}
+
+.student-editable {
+  background-color: #FFFABF;
+}
+
+#student-name-container {
+  margin-bottom: 10px;
+}
+
+#student-looking-for-container {
+  margin-top: 10px;
+}

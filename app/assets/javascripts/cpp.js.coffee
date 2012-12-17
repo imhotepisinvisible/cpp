@@ -25,15 +25,21 @@ $(document).ready ->
     standardForm: '<form>{{fieldsets}}</form>'
   )
 
+  # Catch standard ajax errors
+  # 401 - Auth error, someone tried to access something they shouldn't!
+  # 403 - Forbidden, will never be allowed!
+  # 404 - Whatever you want, we don't have it
   $.ajaxSetup
     statusCode:
         401: ->
           console.log "Got 401"
+          notify("error", data.responseText, 4000)
         403: (data) ->
           console.log "Got 403"
-          notify("error", data.responseText, 4000)
         404: ->
           console.log "Got 404"
+
+  # Start the app <-- VERY important ;)
   CPP.init()
 
 

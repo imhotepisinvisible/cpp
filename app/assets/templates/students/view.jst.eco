@@ -28,7 +28,7 @@
           <p id="student-profile-intro-status">
             <%= getOrdinal(@student.get 'year') %> Year <%= @student.get 'degree' %>
             <br>
-            Looking for an Industrial Placement
+            <%= @student.get 'looking_for' %>
           </p>
         </div>
       </div>
