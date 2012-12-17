@@ -39,6 +39,7 @@ class CPP.Models.Student extends Backbone.Model
     departments:
       type: "Checkboxes"
       options: @allDepartments
+      editorClass: "departments-checkbox"
     email:
       type: "Text"
       title: "Email"

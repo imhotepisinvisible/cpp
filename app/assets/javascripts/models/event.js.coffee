@@ -1,4 +1,8 @@
 class CPP.Models.Event extends Backbone.Model
+  initialize: ->
+    @allDepartments = new CPP.Collections.Departments
+    @allDepartments.url = '/departments'
+
   url: ->
     '/events' + (if @isNew() then '' else '/' + @id)
 
@@ -15,8 +19,10 @@ class CPP.Models.Event extends Backbone.Model
       required: true
     location:
       required: true
+    depatments:
+      required: true
 
-  schema:
+  schema: ->
     title:
     	type: "Text"
    	start_date:
@@ -46,3 +52,7 @@ class CPP.Models.Event extends Backbone.Model
       title: ""
       fieldAttrs:
         style: "display:none"
+    departments:
+      type: "Checkboxes"
+      options: @allDepartments
+      editorClass: "departments-checkbox"

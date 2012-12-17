@@ -1,4 +1,4 @@
-# app/models/event.rb
+
 #
 # Events belong to a company
 # e.g. "Deutsche Bank Pizza Evening"
@@ -22,6 +22,7 @@ class Event < ActiveRecord::Base
   has_many :students, :through => :users_events
 
   acts_as_taggable_on :skills, :interests, :year_groups
+  attr_accessible :skill_list, :interest_list, :year_group_list
 
 	validates :company_id,   :presence => true
 	validates :title,        :presence => true
@@ -42,6 +43,6 @@ class Event < ActiveRecord::Base
     :after_message => "End time cannot be before start time"
 
   def as_json(options={})
-    super(:include => [:skills, :interests, :year_groups])
+    super(:methods => [:skill_list, :interest_list, :year_group_list])
   end
 end

@@ -157,3 +157,19 @@ textarea {
 .red-ban {
   color: #B00000;
 }
+
+.departments-checkbox {
+  list-style: none;
+  margin-left: 0px;
+  li {
+    label {
+      display: inline;
+      padding-left: 8px;
+      vertical-align: -4px;
+    }
+  }
+}
+
+.requirements-checkbox {
+  margin-left: 0px;
+}
