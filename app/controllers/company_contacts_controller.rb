@@ -1,6 +1,6 @@
 class CompanyContactsController < ApplicationController
   respond_to :json
-  
+
   # GET /company_contacts
   # GET /company_contacts.json
   def index
