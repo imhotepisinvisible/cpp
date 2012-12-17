@@ -74,8 +74,8 @@ class CompaniesController < ApplicationController
 
     unless document_path.nil?
       document_extension = File.extname document_path
-      new_doc_name = "#{@company.name}_#{document_type}#{document_extension}"
-      send_file document, :filename => new_doc_name
+      new_doc_name = "#{company.name}_#{document_type}#{document_extension}"
+      send_file document_path, :filename => new_doc_name
     else
       head :no_content
     end
