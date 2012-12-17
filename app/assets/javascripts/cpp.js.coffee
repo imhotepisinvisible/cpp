@@ -39,6 +39,7 @@ $(document).ready ->
         404: ->
           console.log "Got 404"
 
+  # Start the app <-- VERY important ;)
   CPP.init()
 
 
