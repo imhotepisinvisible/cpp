@@ -148,6 +148,7 @@ ActiveRecord::Schema.define(:version => 20121128183459) do
     t.text     "bio",                          :default => ""
     t.text     "degree",                       :default => ""
     t.boolean  "active",                       :default => true
+    t.string   "looking_for",                  :default => ""
     t.integer  "company_id"
     t.string   "type"
     t.datetime "created_at",                                     :null => false

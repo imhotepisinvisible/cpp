@@ -76,7 +76,11 @@
         </span>
         <span>
           <br>
-          Looking for an Industrial Placement
+          <select id="looking-for-select" class="input-xxlarge select-looking-for">
+            <option>Looking for an Industrial Placement</option>
+            <option>Looking for a Summer Placement</option>
+            <option value="">Not looking for anything</option>
+          </select>
         </span>
       </div>
     </div>

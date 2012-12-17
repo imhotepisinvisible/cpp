@@ -17,6 +17,7 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     'click #activate-button'  : 'activate'
     'submit #skill-tag-form': 'addSkill'
     'click #btn-toggle-profile' : 'toggleProfile'
+    'change #looking-for-select' : 'changeLookingFor'
 
   initialize: ->
 
@@ -95,6 +96,11 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
       source: (query, process) =>
         $.get '/students/suggested_degrees', {}, (data) ->
           process(data)
+
+    # Set the default selected looking_for
+    for option in $('#looking-for-select').children()
+      if $(option).val() == @model.get('looking_for')
+        $(option).attr('selected', 'selected')
     @
 
   profileUploadInitialize: ->
@@ -289,4 +295,12 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
         tt.html("Close")
         ttContainer.find('i').hide()
 
-
+  changeLookingFor: (e) ->
+    lookingFor = $(e.currentTarget.selectedOptions[0]).val()
+    @model.set 'looking_for', lookingFor
+    @model.save {},
+      wait: true
+      success: (model, response) =>
+        notify "success", "Looking for updated"
+      error: (model, response) =>
+        notify "error", "Could not update looking for"
