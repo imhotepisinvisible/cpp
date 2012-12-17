@@ -39,7 +39,7 @@ gem 'jquery-fileupload-rails'     # File upload
 gem 'jcountdown-rails', :git => 'http://github.com/rezwyi/jcountdown-rails.git' #Countdown timer
 
 gem 'paperclip' # Nice model attachment
-gem 'obscenity', :git => 'https://github.com/sarahtattersall/obscenity' #Obsenity with partial filtering
+gem 'obscenity' # Obscenity filter
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3' # SASS for nicer CSS
