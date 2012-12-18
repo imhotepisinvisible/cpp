@@ -8,7 +8,7 @@
     </div>
 
     <div id="company-name-container">
-      <h1 id="company-name" class="section-header"><%= @company.get 'name' %></h1>
+      <h1 id="company-name" class="section-header company-editable"><%= @company.get 'name' %></h1>
     </div>
 
     <div class="row">
@@ -39,7 +39,7 @@
         </div>
 
         <div id="company-description-container">
-          <p id="company-description" class="<%= if not @company.get('description') then 'missing' %>">
+          <p id="company-description" class="company-editable <%= if not @company.get('description') then 'missing' %>">
             <% if @company.get('description'): %>
               <%- @company.get('description').replace(/\n/g, "<br/>") %>
             <% else: %>

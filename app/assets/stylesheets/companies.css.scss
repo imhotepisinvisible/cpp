@@ -36,6 +36,10 @@
   @include border-right-radius($border_radius);
 }
 
+.company-editable {
+  background-color: #FFFABF;
+}
+
 .contact-list{
   list-style: none;
   margin: 0px 0px 10px 0px;
