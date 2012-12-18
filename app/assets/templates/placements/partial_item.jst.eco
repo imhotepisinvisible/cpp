@@ -1,15 +1,13 @@
 <div class="item placement-item row">
   <div class="span1">
-    <% if @placement.company or true: %>
       <div class="company-logo-header">
-        <% if false and @placement.company.get 'logo_file_name': %>
+        <% if @placement.company.get 'logo_file_name': %>
           <% src="/companies/#{@placement.company.get 'id'}/documents/logo" %>
         <% else: %>
           <% src="/assets/default_profile.png" %>
         <% end %>
         <img src="<%= src %>">
       </div>
-    <% end %>
   </div>
 
   <div class="span">

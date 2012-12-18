@@ -29,14 +29,30 @@ class CPP.Routers.Students extends Backbone.Router
 
   edit: (id) ->
     student = new CPP.Models.Student id: id
-    student.events.fetch({ data: $.param({ limit: 3}) })
-    student.placements.fetch({ data: $.param({ limit: 3}) })
+    deferreds = []
+    deferreds.push(student.events.fetch({ data: $.param({ limit: 3}) }))
+    deferreds.push(student.placements.fetch({ data: $.param({ limit: 3}) }))
 
-    student.fetch
-      success: ->
-        new CPP.Views.StudentsEdit model: student
-      error: ->
-        notify "error", "Couldn't fetch student"
+    $.when.apply($, deferreds).done(->
+      companydeferreds = []
+      for e in student.events.models
+        do (e) ->
+          e.company = new CPP.Models.Company id: e.get 'company_id'
+          companydeferreds.push(e.company.fetch())
+      for p in student.placements.models
+        do (p) ->
+          p.company = new CPP.Models.Company id: p.get 'company_id'
+          companydeferreds.push(p.company.fetch())
+
+      $.when.apply($, companydeferreds).done(->
+        student.fetch
+          success: ->
+            new CPP.Views.StudentsEdit model: student
+          error: ->
+            notify "error", "Couldn't fetch student"
+      )
+    )
+
 
   settings: (id) ->
     student = new CPP.Models.Student id: id
