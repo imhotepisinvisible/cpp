@@ -23,13 +23,22 @@ class CPP.Routers.Companies extends Backbone.Router
     deferreds.push(company.placements.fetch({ data: $.param({ limit: 3}) }))
     deferreds.push(company.tagged_emails.fetch({ data: $.param({ limit: 3}) }))
 
-    $.when.apply($, deferreds).done(->
+    $.when.apply($, deferreds).done(=>
+
+      @setCompany company.events.models, company
+      @setCompany company.placements.models, company   
+
       company.fetch
         success: ->
           new CPP.Views.CompaniesView model: company
         error: ->
           notify "error", "Couldn't fetch company"
     )
+
+  setCompany: (models, company) ->
+    for model in models
+      do (model) ->
+        model.company = company
 
   edit: (id) ->
     company = new CPP.Models.Company id: id
@@ -40,7 +49,10 @@ class CPP.Routers.Companies extends Backbone.Router
     deferreds.push(company.placements.fetch({ data: $.param({ limit: 3}) }))
     deferreds.push(company.tagged_emails.fetch({ data: $.param({ limit: 3}) }))
 
-    $.when.apply($, deferreds).done(->
+    $.when.apply($, deferreds).done(=>
+      @setCompany company.events.models, company
+      @setCompany company.placements.models, company          
+
       company.fetch
         success: ->
           new CPP.Views.CompaniesEdit model: company
