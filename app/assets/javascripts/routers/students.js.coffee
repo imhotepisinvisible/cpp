@@ -17,9 +17,6 @@ class CPP.Routers.Students extends Backbone.Router
 
   view: (id) ->
     student = new CPP.Models.Student id: id
-    student.events.fetch({ data: $.param({ limit: 3}) })
-    student.placements.fetch({ data: $.param({ limit: 3}) })
-
     student.fetch
       success: ->
         new CPP.Views.StudentsView model: student
