@@ -37,7 +37,6 @@ window.inPlaceStopEdit = (_model, prefix, attribute, defaultValue, displayFuncti
     originalValue = _model.get attribute
     value = $('#' + prefix + '-' + attribute + '-editor').val()
     $('#' + prefix + '-' + attribute + '-input-container').hide()
-
     if value != _model.get attribute
       _model.set attribute, value
       _model.save {},

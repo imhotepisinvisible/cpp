@@ -62,7 +62,7 @@
         <span> Year</span>
 
         <span id="student-degree-input-container" style="display:none">
-          <input type="text" id="student-degree-editor" value="<%= @student.get 'degree' %>">
+          <input type="text" id="student-degree-editor" value="<%= @student.get 'degree' %>" data-provide="typeahead">
         </span>
 
         <span id="student-degree-container">

@@ -99,6 +99,10 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
       source: (query, process) =>
         $.get '/students/suggested_degrees', {}, (data) ->
           process(data)
+          
+      updater: (item) =>
+        @model.set 'degree', item
+        return item
 
     # Set the default selected looking_for
     for option in $('#looking-for-select').children()
