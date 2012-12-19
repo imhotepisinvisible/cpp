@@ -49,7 +49,7 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
     @$el.html("")
     @$tagsList.attr('id', @id).attr('name', @name).show()
     @$tagsList.html @renderTags()
-
+    @$input.addClass("tag-input")
     @$input.typeahead
       source: (query, process) =>
         $.get @autocomplete_url, {exclude_tags: @tags}, (data) ->
@@ -68,6 +68,7 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
 
   # event handlers
   onRemoveTagClick: (event) =>
+    console.log "rt"
     $tag = $(event.target).siblings('.tag-text')
     @removeTag($tag.text())
 
@@ -82,7 +83,6 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
       event.preventDefault()
 
       tag = @$input.val()
-      console.log tag, @validation_url
       if @validation_url
         $.ajax
           url: @validation_url,

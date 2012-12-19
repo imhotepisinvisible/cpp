@@ -63,9 +63,14 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
         attribute: "capacity"
         scope: ""},
         {name: "Company"
-        type: "tags"
+        type: "text"
         attribute: "name"
         scope: ".company"
+        },
+        {name: "SkillsList"
+        type: "tags"
+        attribute: "skill_list"
+        scope: ""
         }
       ]
       data: @collection

@@ -6,19 +6,43 @@ class CPP.Filter extends CPP.Views.Base
   templateFilterHeaderTag: JST['filters/filter_header_tag']
 
   events: -> _.extend {}, CPP.Views.Base::events,
-    "keyup .fltr-search"    : "setFilter"
-    "click .fltr-tags"      : "setFilter"
-    "click #tag-close"      : "removeTag"
-    "click #tag-label-text" : "removeTag"
-    "click #add-tag"        : "addTag"
+    "keyup .fltr-search"        : "setFilter"
+    "blur .tag-input"           : "setFilter"
+
 
   sub_el: "#filters"
-
-  @tags = []
 
   initialize: (options) ->
     @filters = options.filters
     @data = options.data
+    @model = new CPP.Models.Event
+    @model.set("skill_list",[])
+    @model.bind 'change', @setFilter, @
+
+    @skill_list_tags_form = new Backbone.Form.editors.TagEditor
+      model: @model
+      key: 'skill_list'
+      title: 'Skills'
+      url: '/tags/skills'
+      tag_class: 'label-success'
+      additions: true
+
+    @interest_list_tags_form = new Backbone.Form.editors.TagEditor
+      model: @model
+      key: 'interest_list'
+      title: 'Interests'
+      url: '/tags/interests'
+      tag_class: 'label-warning'
+      additions: true
+
+    @year_group_list_tags_form = new Backbone.Form.editors.TagEditor
+      model: @model
+      key: 'year_group_list'
+      title: 'Year Groups'
+      url: '/tags/year_groups'
+      tag_class: 'label-info'
+      additions: true
+
     @render()
 
   render: ->
@@ -33,58 +57,48 @@ class CPP.Filter extends CPP.Views.Base
           $(@sub_el).append(@templateText(filter: filter))
         when "tags"
           $(@sub_el).append(@templateFilterHeaderTag(filter: filter))
-          @getTagNames(filter)
           @renderTags()
   @
 
   renderTags: ->
-    for t in @tags
-      $(@sub_el).append(@templateTags(tag: t))
+    @skill_list_tags_form.render()
+    $('.skill-tags-form').append(@skill_list_tags_form.el)
+    @interest_list_tags_form.render()
+    $('.interest-tags-form').append(@interest_list_tags_form.el)
+    @year_group_list_tags_form.render()
+    $('.year-group-tags-form').append(@year_group_list_tags_form.el) 
 
 
   setFilter: ->
+    console.log "sf"
     fCollection = @data
-    # find type of collection
-    for filter in @filters 
-      tb =  $("#"+filter.attribute).val()
-      # Dont filter when nothing in text box
-      if (tb != "")
-        # Update collection
-        switch filter.type
-          when "text"
-            fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
-              res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
-              (res.toString().toLowerCase().indexOf tb.toLowerCase()) != -1
-            ))
-          when "number"
-            fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
-              res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
-              res.toString() is tb
-            ))
-          when "tags"
-            fCollection = new (fCollection.constructor)(fCollection.filter((model) =>
-              res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
-              res.toString() in @tags
-            ))    
-    @data.trigger('filter', fCollection)
+    if filters
+      for filter in @filters 
+        tb =  $("#"+filter.attribute).val()
+        # Dont filter when nothing in text box
+        if (tb != "")
+          # Update collection
+          switch filter.type
+            when "text"
+              fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
+                res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
+                (res.toString().toLowerCase().indexOf tb.toLowerCase()) != -1
+              ))
+            when "number"
+              fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
+                res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
+                res.toString() is tb
+              ))
+            when "tags"
+              # Need to get tags for model and match to tags in the filter model
+              if (@model.get "skill_list").length > 0
+                fCollection = new (fCollection.constructor)(fCollection.filter((model) =>
+                  res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
+                  ret = false;
+                  for skill in @model.get "skill_list"
+                    ret |= skill in res
+                  ret
+                ))
+      @data.trigger('filter', fCollection)
   @
 
-  removeTag: (e) =>
-    @tags = @tags.filter((tag) =>
-      tag isnt $(e.target).prev().html()
-    )
-    @setFilter()
-
-  addTag: (e) ->
-    tag = $(e.target).prev().val()
-    @tags.push tag
-    # Need tag module to generate a tag
-
-
-  getTagNames: (filter) ->
-    tags = []
-    @data.each (model) =>
-      tag = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
-      if ((tags.indexOf tag) == -1)
-        tags.push tag
-    @tags = tags

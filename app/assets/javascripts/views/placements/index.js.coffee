@@ -9,6 +9,7 @@ class CPP.Views.PlacementsIndex extends CPP.Views.Base
   initialize: ->
     @collection.bind 'reset', @render, @
     @collection.bind 'filter', @renderPlacements, @
+
     @render()
 
   render: ->
@@ -27,7 +28,7 @@ class CPP.Views.PlacementsIndex extends CPP.Views.Base
           ready.resolver()
     ready.done =>
       @renderPlacements(@collection)
-      @renderFilters()     
+      @renderFilters()   
   @
 
   renderPlacements: (col) ->
@@ -50,9 +51,14 @@ class CPP.Views.PlacementsIndex extends CPP.Views.Base
         attribute: "location"
         scope: ""},
         {name: "Company"
-        type: "tags"
+        type: "text"
         attribute: "name"
         scope: ".company"
+        },
+        {name: "tags"
+        type: "tags"
+        attrublute: null
+        scopy: null
         }
       ]
       data: @collection

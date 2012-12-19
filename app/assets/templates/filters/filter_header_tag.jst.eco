@@ -1,9 +1,25 @@
 <div class="row">
-  <div class="span3">
+	<div class="span3">
     <h3 for="fltr-search"><%= @filter.name %></h3>
-    <div class="input-append">
-      <input id="add-tag-text"type="text" class="span2 typeahead" size="16" data-provide="typeahead">
-      <button id="add-tag" class="btn typeahead" type="button">Add</button>
-    </div>
   </div>
 </div>
+<div class="row">
+	<div class="span3">
+	  <div class="tag-category">
+	    <div class="skill-tags-form"></div>
+	  </div>
+	</div>
+</div>
+<div class="row">
+	<div class="span3">
+	  <div class="tag-category">
+	    <div class="interest-tags-form"></div>
+	  </div>
+	</div>
+</div>
+<div class="row">
+	<div class="span3">
+	  <div class="tag-category">
+	    <div class="year-group-tags-form"></div>
+	  </div>
+	</div> 
