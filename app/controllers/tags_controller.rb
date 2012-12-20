@@ -28,6 +28,7 @@ class TagsController < ApplicationController
   def validate
     tag = ActsAsTaggableOn::Tag.new
     tag.name = params[:tag]
+    tag.name.downcase!
     if tag.valid?
       head :no_content
     else
