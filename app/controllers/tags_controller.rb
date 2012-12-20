@@ -42,8 +42,15 @@ class TagsController < ApplicationController
     if current_user.type == "Student"
       excluded_tags += get_tags_for_user_for_contexts(current_user, contexts)
     end
-    tags = contexts.map{|c| get_tags_for_contexts c }.flatten
+    tags = contexts.map{|c| get_tags_for_context c }.flatten
     tags = tags - excluded_tags
+  end
+
+  def get_tags_for_context(context)
+    ActsAsTaggableOn::Tag.includes(:taggings)
+    .where("taggings.context = '#{context}'")
+    .select("DISTINCT tags.*")
+    .map(&:name)
   end
 
   def get_tags_for_user_for_contexts(user, contexts)
