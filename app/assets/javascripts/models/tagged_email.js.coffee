@@ -1,6 +1,6 @@
 class CPP.Models.TaggedEmail extends Backbone.Model
   url: ->
-    '/tagged_emails' + (if @isNew() then '' else '/' + @id) 
+    '/tagged_emails' + (if @isNew() then '' else '/' + @id)
 
   validation:
     subject:
@@ -11,6 +11,10 @@ class CPP.Models.TaggedEmail extends Backbone.Model
   schema:
     subject:
     	type: "Text"
-    body: 
+    body:
       type: "TextArea"
       editorClass: "tinymce"
+
+class CPP.Collections.TaggedEmails extends CPP.Collections.Base
+  url: '/tagged_emails'
+  model: CPP.Models.TaggedEmail

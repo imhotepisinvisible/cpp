@@ -54,4 +54,7 @@ class CPP.Models.Student extends Backbone.Model
           field: 'password'
           message: 'Passwords do not match'
         ]
-      
+
+class CPP.Collections.Students extends CPP.Collections.Base
+  url: '/students'
+  model: CPP.Models.Student

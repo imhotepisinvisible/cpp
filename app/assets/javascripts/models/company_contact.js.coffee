@@ -26,3 +26,7 @@ class CPP.Models.CompanyContact extends Backbone.Model
     role:
       type: "Text"
       title: "Role"
+
+class CPP.Collections.CompanyContacts extends CPP.Collections.Base
+  url: '/company_contacts'
+  model: CPP.Models.CompanyContact

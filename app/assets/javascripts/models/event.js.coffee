@@ -56,3 +56,7 @@ class CPP.Models.Event extends Backbone.Model
       type: "Checkboxes"
       options: @allDepartments
       editorClass: "departments-checkbox"
+
+class CPP.Collections.Events extends CPP.Collections.Base
+  url: '/events'
+  model: CPP.Models.Event

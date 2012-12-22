@@ -13,7 +13,7 @@ class CPP.Models.Company extends Backbone.Model
 
     @company_contacts = new CPP.Collections.CompanyContacts
     @company_contacts.url = '/companies/' + this.id + '/company_contacts'
-    
+
     @departments = new CPP.Collections.Departments
     @departments.url = '/companies/' + this.id + '/departments'
 
@@ -28,4 +28,10 @@ class CPP.Models.Company extends Backbone.Model
   getBanClass: ->
     if @get('rating') == 3
       return "red-ban icon-ban-circle"
-    return "icon-ban-circle"    
+    return "icon-ban-circle"
+
+class CPP.Collections.Companies extends CPP.Collections.Base
+  url: '/companies'
+  model: CPP.Models.Company
+  comparator: (company) ->
+    return company.get "rating"

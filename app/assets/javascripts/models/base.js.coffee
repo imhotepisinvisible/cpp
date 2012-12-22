@@ -1,7 +1,7 @@
 class CPP.Collections.Base extends Backbone.Collection
 
   # Search through the models in the collection
-  # e.g. 
+  # e.g.
   #  events = new CPP.Collections.Events
   #  events.fetch()
   #  ...

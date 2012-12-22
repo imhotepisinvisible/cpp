@@ -37,3 +37,6 @@ class CPP.Models.Placement extends Backbone.Model
     other:
       type: "Text"
 
+class CPP.Collections.Placements extends CPP.Collections.Base
+  url: '/placements'
+  model: CPP.Models.Placement
