@@ -14,4 +14,15 @@ module ApplicationHelper
       return ''
     end
   end
+
+  def profile_path
+    return '' unless current_user
+
+    case current_user.type
+    when 'Student'
+      return "#students/#{current_user.id}"
+    else
+      return ''
+    end
+  end
 end

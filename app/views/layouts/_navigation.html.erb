@@ -7,16 +7,13 @@
 <div class="nav-collapse">
   <ul class="nav">
     <li>
-      <a href="#">My Profile</a>
+      <a href="#companies">Companies</a>
     </li>
     <li>
-      <a href="#">Companies</a>
+      <a href="#events">Events</a>
     </li>
     <li>
-      <a href="#">Events</a>
-    </li>
-    <li>
-      <a href="#">Placements</a>
+      <a href="#placements">Placements</a>
     </li>
   </ul>
 
@@ -26,6 +23,7 @@
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.full_name %> <b class="caret"></b></a>
       <ul class="dropdown-menu">
+        <li><a href="<%= profile_path %>">My Profile</a></li>
         <li><a href="<%= settings_path %>">Account Settings</a></li>
         <li class="divider"></li>
         <li><a href="/logout">Log Out</a></li>
