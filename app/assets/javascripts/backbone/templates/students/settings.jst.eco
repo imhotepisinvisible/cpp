@@ -5,13 +5,13 @@
       <div class="span6">
         <h1 class="section-header"><i class="icon-envelope"></i> Emails</h1>
         <div class="row">
-          <div class="span4">
+          <div class="span6">
             <div class="tag-category">
                 <div class="reject_skill-tags-form"></div>
             </div>
           </div>
 
-          <div class="span4">
+          <div class="span6">
             <div class="tag-category">
                 <div class="reject_interest-tags-form"></div>
             </div>
