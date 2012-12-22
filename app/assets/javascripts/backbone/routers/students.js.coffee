@@ -65,13 +65,3 @@ class CPP.Routers.Students extends Backbone.Router
     student = new CPP.Models.Student departments: [department_id]
     student.collection = new CPP.Collections.Students
     new CPP.Views.Students.Signup model: student
-
-  # The company index page that students will see
-  companies: (id) ->
-    student = new CPP.Models.Student id: id
-    companies = new CPP.Collections.Companies
-    companies.fetch
-      success: ->
-        new CPP.Views.CompaniesStudentIndex collection: companies
-      error: ->
-        notify "error", "Couldn't fetch companies"

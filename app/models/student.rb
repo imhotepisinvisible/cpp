@@ -79,7 +79,7 @@ class Student < User
   end
 
   def as_json(options={})
-    super(:methods => [:skill_list, :interest_list, :year_group_list, :reject_skill_list, :reject_interest_list])
+    super(:methods => [:skill_list, :interest_list, :year_group_list, :reject_skill_list, :reject_interest_list, :type])
   end
 
 

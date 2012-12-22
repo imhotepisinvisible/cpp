@@ -1,0 +1,6 @@
+<script>
+<% if current_user %>
+window.CPP.CurrentUser = new CPP.Models.Student(<%= raw current_user.to_json %>)
+<% else %>
+<% end %>
+</script>

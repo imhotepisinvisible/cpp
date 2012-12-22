@@ -10,7 +10,10 @@ class CPP.Routers.Companies extends Backbone.Router
     companies = new CPP.Collections.Companies
     companies.fetch
       success: ->
-        new CPP.Views.CompaniesIndex collection: companies
+        if CPP.CurrentUser? && CPP.CurrentUser.get('type') == "Student"
+          view = new CPP.Views.CompaniesStudentIndex collection: companies
+        else
+          view = new CPP.Views.CompaniesIndex collection: companies
       error: ->
         notify "error", "Couldn't fetch companies"
 
@@ -26,7 +29,7 @@ class CPP.Routers.Companies extends Backbone.Router
     $.when.apply($, deferreds).done(=>
 
       @setCompany company.events.models, company
-      @setCompany company.placements.models, company   
+      @setCompany company.placements.models, company
 
       company.fetch
         success: ->
@@ -51,7 +54,7 @@ class CPP.Routers.Companies extends Backbone.Router
 
     $.when.apply($, deferreds).done(=>
       @setCompany company.events.models, company
-      @setCompany company.placements.models, company          
+      @setCompany company.placements.models, company
 
       company.fetch
         success: ->
