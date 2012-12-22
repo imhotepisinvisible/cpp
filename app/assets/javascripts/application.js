@@ -10,27 +10,27 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
+// JS FRAMEWORKS/LIBRARIES
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require date
 //= require underscore
+//
+// BACKBONE
 //= require backbone
 //= require backbone-forms-bootstrap
 //= require backbone-validation
-//= require_tree .//backbone_forms_custom
+//= require backbone/cpp
+//
+// TESTING
 //= require sinon
-//= require jasmine-sinon
-//= require jasmine-jquery
+//= #require jasmine-sinon
+//= #require jasmine-jquery
+//
+// JQUERY UI/WIDGETS
 //= require jquery.ui.sortable
 //= require jquery-fileupload/basic
 //= require tinymce-jquery
 //= require jcountdown
 //= require utils
-//
-//= require .//cpp
-//
-//= require_tree ../templates/
-//= require_tree .//models
-//= require_tree .//views
-//= require_tree .//routers
