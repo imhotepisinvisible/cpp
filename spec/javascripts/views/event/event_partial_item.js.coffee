@@ -6,7 +6,7 @@ describe "Events Partial Item", ->
     eventStub.withArgs('start_date').returns('2011-10-10T14:48:00')
     eventStub.withArgs('title').returns('Foo')
 
-    @eventsPartialItem = new CPP.Views.EventsPartialItem
+    @eventsPartialItem = new CPP.Views.Events.PartialItem
                               el: "#events"
                               model: @event
                               editable: false

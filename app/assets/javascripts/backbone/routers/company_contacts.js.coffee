@@ -9,7 +9,7 @@ class CPP.Routers.CompanyContacts extends Backbone.Router
       data:
         $.param({ company_id: id})
       success: ->
-        new CPP.Views.ContactsPartialEdit
+        new CPP.Views.Contacts.PartialEdit
           collection: contacts
           company_id: id
           el: '#app'
@@ -22,7 +22,7 @@ class CPP.Routers.CompanyContacts extends Backbone.Router
       data:
         $.param({ company_id: id})
       success: ->
-        new CPP.Views.ContactsPartial
+        new CPP.Views.Contacts.Partial
           collection: contacts
           company_id: id
           el: '#app'

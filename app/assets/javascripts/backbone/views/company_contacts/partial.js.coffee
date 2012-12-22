@@ -1,4 +1,6 @@
-class CPP.Views.ContactsPartial extends CPP.Views.Base
+CPP.Views.Contacts ||= {}
+
+class CPP.Views.Contacts.Partial extends CPP.Views.Base
   template: JST['backbone/templates/company_contacts/contacts']
 
   events:

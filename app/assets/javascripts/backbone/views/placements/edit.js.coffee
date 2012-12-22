@@ -1,4 +1,6 @@
-class CPP.Views.PlacementsEdit extends CPP.Views.Base
+CPP.Views.Placements ||= {}
+
+class CPP.Views.Placements.Edit extends CPP.Views.Base
   el: "#app"
 
   template: JST['backbone/templates/placements/editval']

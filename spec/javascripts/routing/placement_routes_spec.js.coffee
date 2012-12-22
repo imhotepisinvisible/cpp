@@ -77,8 +77,8 @@ describe "Placement Routing", ->
       window.CPP.Collections.Placements.restore()
       window.CPP.Models.Placement.restore()
       window.CPP.Models.Company.restore()
-      window.CPP.Views.PlacementsEdit.restore()
-      window.CPP.Views.PlacementsIndex.restore()
+      window.CPP.Views.Placements.Edit.restore()
+      window.CPP.Views.Placements.Index.restore()
 
     describe "Index handler", ->
       it "should create a Placement collection", ->
@@ -144,7 +144,7 @@ describe "Placement Routing", ->
                                 .returns(new Backbone.View())
 
       afterEach ->
-        window.CPP.Views.PlacementsView.restore()
+        window.CPP.Views.Placements.View.restore()
 
       it "should create a Placement Model", ->
         @router.view(1)

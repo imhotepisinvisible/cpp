@@ -78,8 +78,8 @@ describe "Event Routing", ->
                           .returns(@company)
 
     afterEach ->
-      window.CPP.Views.EventsEdit.restore()
-      window.CPP.Views.EventsIndex.restore()
+      window.CPP.Views.Events.Edit.restore()
+      window.CPP.Views.Events.Index.restore()
       window.CPP.Collections.Events.restore()
       window.CPP.Models.Event.restore()
       window.CPP.Models.Company.restore()
@@ -154,7 +154,7 @@ describe "Event Routing", ->
                             .returns(new Backbone.View())
 
       afterEach ->
-        window.CPP.Views.EventsView.restore()
+        window.CPP.Views.Events.View.restore()
 
       it "should create an Event model", ->
         @router.view(1)

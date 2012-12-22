@@ -16,13 +16,13 @@ describe "Events Partial", ->
                       .returns(@partialView)
 
 
-    @eventsPartial = new CPP.Views.EventsPartial
+    @eventsPartial = new CPP.Views.Events.Partial
                               el: "#events"
                               model: @event
                               collection: @collection
 
   afterEach ->
-    window.CPP.Views.EventsPartialItem.restore()
+    window.CPP.Views.Events.PartialItem.restore()
 
   describe "initialize", ->
     it "should have editable attribute default to false", ->

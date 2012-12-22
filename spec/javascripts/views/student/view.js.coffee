@@ -4,7 +4,7 @@ describe "Students Views", ->
     @model = new Backbone.Model()
     @model.events = new Backbone.Collection()
     @model.placements = new Backbone.Collection()
-    @view = new CPP.Views.StudentsView
+    @view = new CPP.Views.Students.View
                   model: @model
     @eventsPartialStub = sinon.stub(window.CPP.Views, "EventsPartial")
                             .returns(new Backbone.View())
@@ -14,8 +14,8 @@ describe "Students Views", ->
     @elFindStub = sinon.stub($(@view.el), "find").withArgs('#events-partial', '#placements-partial')
 
   afterEach ->
-    window.CPP.Views.EventsPartial.restore()
-    window.CPP.Views.PlacementsPartial.restore()
+    window.CPP.Views.Events.Partial.restore()
+    window.CPP.Views.Placements.Partial.restore()
 
   # describe "blah", ->
   #   it "blah blah", ->

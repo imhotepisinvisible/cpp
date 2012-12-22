@@ -8,7 +8,7 @@ class CPP.Routers.Events extends Backbone.Router
 
   indexCompany: (company_id) ->
     events = new CPP.Collections.Events
-    # new CPP.Views.EventsIndex collection: events
+    # new CPP.Views.Events.Index collection: events
     events.fetch
       data:
         $.param({ company_id: company_id})
@@ -16,7 +16,7 @@ class CPP.Routers.Events extends Backbone.Router
         events.company = new CPP.Models.Company id: company_id
         events.company.fetch
           success: ->
-            new CPP.Views.EventsIndex collection: events
+            new CPP.Views.Events.Index collection: events
           error: ->
             notify "error", "Couldn't fetch company for event"
       error: ->
@@ -26,7 +26,7 @@ class CPP.Routers.Events extends Backbone.Router
     events = new CPP.Collections.Events
     events.fetch
       success: ->
-        new CPP.Views.EventsIndex collection: events
+        new CPP.Views.Events.Index collection: events
       error: ->
         notify "error", "Couldn't fetch events"
 
@@ -41,7 +41,7 @@ class CPP.Routers.Events extends Backbone.Router
           data:
             $.param({ company_id: event.company.id})
           success: ->
-            new CPP.Views.EventsEdit model: event
+            new CPP.Views.Events.Edit model: event
       error: ->
         notify "error", "Couldn't fetch company for event"
 
@@ -49,7 +49,7 @@ class CPP.Routers.Events extends Backbone.Router
     event = new CPP.Models.Event id: id
     event.fetch
       success: ->
-        new CPP.Views.EventsEdit model: event
+        new CPP.Views.Events.Edit model: event
       error: ->
         notify "error", "Couldn't fetch event"
 
@@ -60,7 +60,7 @@ class CPP.Routers.Events extends Backbone.Router
         event.company = new CPP.Models.Company id: event.get 'company_id'
         event.company.fetch
           success: ->
-            new CPP.Views.EventsView model: event
+            new CPP.Views.Events.View model: event
           error: ->
             notify "error", "Couldn't fetch company for event"
       error: ->

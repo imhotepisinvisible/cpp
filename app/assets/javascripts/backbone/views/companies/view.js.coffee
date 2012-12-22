@@ -8,22 +8,22 @@ class CPP.Views.CompaniesView extends CPP.Views.Base
   render: ->
     $(@el).html(@template(company: @model))
 
-    events_partial = new CPP.Views.EventsPartial
+    events_partial = new CPP.Views.Events.Partial
       el: $(@el).find('#events-partial')
-      model: @model
+      company: @model
       collection: @model.events
 
-    placements_partial = new CPP.Views.PlacementsPartial
+    placements_partial = new CPP.Views.Placements.Partial
       el: $(@el).find('#placements-partial')
-      model: @model
+      company: @model
       collection: @model.placements
 
-    emails_partial = new CPP.Views.TaggedEmailsPartial
+    emails_partial = new CPP.Views.TaggedEmails.Partial
       el: $(@el).find('#emails-partial')
-      model: @model
+      company: @model
       collection: @model.tagged_emails
 
-    contacts_partial = new CPP.Views.ContactsPartial
+    contacts_partial = new CPP.Views.Contacts.Partial
       el: $(@el).find('#contacts-partial')
       company: @model
       company_id: @model.id

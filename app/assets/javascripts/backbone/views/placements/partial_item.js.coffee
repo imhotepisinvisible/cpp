@@ -1,4 +1,6 @@
-class CPP.Views.PlacementsPartialItem extends CPP.Views.Base
+CPP.Views.Placements ||= {}
+
+class CPP.Views.Placements.PartialItem extends CPP.Views.Base
   tagName: "li"
   className: "placement-item-container"
 
@@ -14,12 +16,11 @@ class CPP.Views.PlacementsPartialItem extends CPP.Views.Base
     @editable = options.editable
 
   render: ->
-    $(@el).html(@template(placement: @model, editable: @editable))
+    $(@el).html(@template(model: @model, editable: @editable))
     @
 
   editPlacement: (e) ->
     e.stopPropagation()
-    Backbone.history.navigate('placements/' + @model.id + '/edit', trigger: true)
 
   viewPlacement: (e) ->
     e.stopPropagation()

@@ -1,29 +1,26 @@
-class CPP.Views.EventsPartial extends CPP.Views.Base
+CPP.Views.Events ||= {}
+
+class CPP.Views.Events.Partial extends CPP.Views.Base
   template: JST['backbone/templates/events/partial']
 
-  events: -> _.extend {}, CPP.Views.Base::events,
-    "click .btn-add"      : "addEvent"
-    "click .btn-view-all" : "viewCompaniesEvents"
-
-  initialize: (options) ->
-    @editable = options.editable || false
-    @collection.bind 'reset', @render, @
+  initialize: () ->
+    @editable = @editable? && @editable
+    @collection.bind('reset', @addAll)
     @render()
 
-  render: ->
-    $(@el).html(@template(editable: @editable))
+  addTopThree: () ->
+    _.each(@collection.first(3), @addOne)
+
+  addOne: (placement) =>
+    view = new CPP.Views.Events.PartialItem
+      model: placement
+      editable: @options.editable
+    @$("#events").append(view.render().el)
+
+  render: () ->
+    @$el.html(@template(company: @options.company, editable: @options.editable))
     if @collection.length > 0
-      @collection.each (event) =>
-        view = new CPP.Views.EventsPartialItem
-                      model: event
-                      editable: @editable
-        @$('#events').append(view.render().el)
+      @addTopThree()
     else
-      @$('#events').append "No events right now!"
+      @$('#events').html("No events right now!")
     @
-
-  addEvent: ->
-    Backbone.history.navigate("companies/" + @model.id + "/events/new", trigger: true)
-
-  viewCompaniesEvents: ->
-    Backbone.history.navigate("companies/" + @model.id + "/events", trigger: true)

@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Config/Server
 gem 'thin'                        # Better server :)
 gem 'rails', '3.2.1'              # Running on rails, wooo
-# gem 'therubyracer'                # Javascript Engine
+gem 'therubyracer'                # Javascript Engine
 
 # Back End Gems
 gem 'validates_timeliness'        # Date/Time Validation

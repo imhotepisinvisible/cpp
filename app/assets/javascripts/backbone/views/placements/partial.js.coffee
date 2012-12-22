@@ -1,31 +1,26 @@
-class CPP.Views.PlacementsPartial extends CPP.Views.Base
+CPP.Views.Placements ||= {}
+
+class CPP.Views.Placements.Partial extends CPP.Views.Base
   template: JST['backbone/templates/placements/partial']
 
-  events: -> _.extend {}, CPP.Views.Base::events,
-    "click .btn-add"      : "addPlacement"
-    "click .btn-view-all" : "viewCompaniesPlacements"
-
-  initialize: (options) ->
-    @editable = options.editable || false
-    @collection.bind 'reset', @render, @
+  initialize: () ->
+    @editable = @editable? && @editable
+    @collection.bind('reset', @addAll)
     @render()
 
+  addTopThree: () ->
+    _.each(@collection.first(3), @addOne)
+
+  addOne: (placement) =>
+    view = new CPP.Views.Placements.PartialItem
+      model: placement
+      editable: @options.editable
+    @$("#placements").append(view.render().el)
+
   render: () ->
-    $(@el).html(@template(editable: @editable))
-
+    @$el.html(@template(company: @options.company, editable: @options.editable))
     if @collection.length > 0
-      @collection.each (placement) =>
-        view = new CPP.Views.PlacementsPartialItem
-                    model: placement
-                    editable: @editable
-        @$('#placements').append(view.render().el)
+      @addTopThree()
     else
-      @$('#placements').append "No events right now!"
+      @$('#placements').html("No placements right now!")
     @
-
-  addPlacement: ->
-    Backbone.history.navigate("companies/" + @model.id + "/placements/new", trigger: true)
-
-  viewCompaniesPlacements: ->
-    Backbone.history.navigate("companies/" + @model.id + "/placements", trigger: true)
-

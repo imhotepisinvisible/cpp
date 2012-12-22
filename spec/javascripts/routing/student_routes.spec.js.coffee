@@ -77,7 +77,7 @@ describe "Student Routing", ->
                               .returns(new Backbone.View())
 
       afterEach ->
-        window.CPP.Views.StudentsView.restore()
+        window.CPP.Views.Students.View.restore()
 
       it "should create a Student model", ->
         @router.view()
@@ -103,7 +103,7 @@ describe "Student Routing", ->
         @router.signup(1)
 
       afterEach ->
-        window.CPP.Views.StudentsSignup.restore()
+        window.CPP.Views.Students.Signup.restore()
 
       it "should create a new Student Model", ->
         expect(@studentModelStub).toHaveBeenCalledOnce()

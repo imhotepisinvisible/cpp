@@ -1,4 +1,6 @@
-class CPP.Views.EventsIndex extends CPP.Views.Base
+CPP.Views.Events ||= {}
+
+class CPP.Views.Events.Index extends CPP.Views.Base
   el: '#app'
   template: JST['backbone/templates/events/index']
 
@@ -46,7 +48,7 @@ class CPP.Views.EventsIndex extends CPP.Views.Base
   renderEvents: (col) ->
     @$('#events').html("")
     col.each (event) ->
-      view = new CPP.Views.EventsItem model: event
+      view = new CPP.Views.Events.Item model: event
       @$('#events').append(view.render().el)
   @
 

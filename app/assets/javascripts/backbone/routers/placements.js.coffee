@@ -8,7 +8,7 @@ class CPP.Routers.Placements extends Backbone.Router
 
   indexCompany: (company_id) ->
     placements = new CPP.Collections.Placements
-    # new CPP.Views.PlacementsIndex collection: placements
+    # new CPP.Views.Placements.Index collection: placements
     placements.fetch
       data:
         $.param({ company_id: company_id})
@@ -16,7 +16,7 @@ class CPP.Routers.Placements extends Backbone.Router
         placements.company = new CPP.Models.Company id: company_id
         placements.company.fetch
           success: ->
-            new CPP.Views.PlacementsIndex collection: placements
+            new CPP.Views.Placements.Index collection: placements
           error: ->
             notify "error", "Couldn't fetch company for placement"
       error: ->
@@ -26,7 +26,7 @@ class CPP.Routers.Placements extends Backbone.Router
     placements = new CPP.Collections.Placements
     placements.fetch
       success: ->
-        new CPP.Views.PlacementsIndex collection: placements
+        new CPP.Views.Placements.Index collection: placements
       error: ->
         notify "error", "Couldn't fetch placements"
 
@@ -41,7 +41,7 @@ class CPP.Routers.Placements extends Backbone.Router
           data:
             $.param({ company_id: placement.company.id})
           success: ->
-            new CPP.Views.PlacementsEdit model: placement
+            new CPP.Views.Placements.Edit model: placement
       error: ->
         notify "error", "Couldn't fetch company for event"
 
@@ -49,7 +49,7 @@ class CPP.Routers.Placements extends Backbone.Router
     placement = new CPP.Models.Placement id: id
     placement.fetch
       success: ->
-        new CPP.Views.PlacementsEdit model: placement
+        new CPP.Views.Placements.Edit model: placement
       error: ->
         notify "error", "Couldn't fetch placement"
 
@@ -60,7 +60,7 @@ class CPP.Routers.Placements extends Backbone.Router
         placement.company = new CPP.Models.Company id: placement.get 'company_id'
         placement.company.fetch
           success: ->
-            new CPP.Views.PlacementsView model: placement
+            new CPP.Views.Placements.View model: placement
           error: ->
             notify "error", "Couldn't fetch company for placement"
       error: ->

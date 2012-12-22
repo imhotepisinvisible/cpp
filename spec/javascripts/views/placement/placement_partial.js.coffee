@@ -14,13 +14,13 @@ describe "Placement Partial", ->
     @partialStub = sinon.stub(window.CPP.Views, "PlacementsPartialItem")
                       .returns(@partialView)
 
-    @placementsPartial = new CPP.Views.PlacementsPartial
+    @placementsPartial = new CPP.Views.Placements.Partial
                               el: "#placements"
                               model: @event
                               collection: @collection
 
   afterEach ->
-    window.CPP.Views.PlacementsPartialItem.restore()
+    window.CPP.Views.Placements.PartialItem.restore()
 
   describe "initialize", ->
     it "should have editable attribute default to false", ->

@@ -1,4 +1,6 @@
-class CPP.Views.TaggedEmailsEdit extends CPP.Views.Base
+CPP.Views.TaggedEmails ||= {}
+
+class CPP.Views.TaggedEmails.Edit extends CPP.Views.Base
   el: "#app"
 
   template: JST['backbone/templates/emails/editval']

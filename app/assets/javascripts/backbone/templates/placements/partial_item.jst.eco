@@ -1,24 +1,25 @@
-<div class="item placement-item row">
-  <div class="span1">
-      <div class="company-logo-header">
-        <% if @placement.company.get 'logo_file_name': %>
-          <% src="/companies/#{@placement.company.get 'id'}/documents/logo" %>
-        <% else: %>
-          <% src="/assets/default_profile.png" %>
-        <% end %>
-        <img src="<%= src %>">
-      </div>
-  </div>
+<div class="item event-item">
+  <div class="row-fluid">
 
-  <div class="span">
-    <div class="link-title">
-      <%= @placement.get 'position' %>
+    <div class="span2">
+      <div class="company-logo-header">
+        <img src="<%= "/companies/#{@model.get('company_id')}/documents/logo" %>">
+      </div>
     </div>
-    <div class="link-description">
-      <%= @placement.get 'description' %>
+
+    <div class="span<%= if @editable then 8 else 10 %>">
+      <div class="link-title">
+        <%= @model.get('position') %>
+      </div>
+      <div class="link-description"><%= @model.get('description') %></div>
     </div>
+
+    <% if @editable: %>
+    <div class="span2">
+      <div class="btn-group pull-right">
+        <a href="#/placements/<%= @model.get('id') %>/edit" class="btn btn-edit">Edit</a>
+      </div>
+    </div>
+    <% end %>
   </div>
-  <% if @editable: %>
-    <div class="btn btn-mini pull-right btn-edit">Edit</div>
-  <% end %>
 </div>

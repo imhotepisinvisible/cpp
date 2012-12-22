@@ -1,4 +1,6 @@
-class CPP.Views.StudentsEdit extends CPP.Views.Base
+CPP.Views.Students ||= {}
+
+class CPP.Views.Students.Edit extends CPP.Views.Base
   el: "#app"
   template: JST['backbone/templates/students/edit']
 
@@ -79,12 +81,12 @@ class CPP.Views.StudentsEdit extends CPP.Views.Base
     @year_group_list_tags_form.render()
     $('.year-group-tags-form').append(@year_group_list_tags_form.el)
 
-    events_partial = new CPP.Views.EventsPartial
+    events_partial = new CPP.Views.Events.Partial
       el: $(@el).find('#events-partial')
       model: @model
       collection: @model.events
 
-    placements_partial = new CPP.Views.PlacementsPartial
+    placements_partial = new CPP.Views.Placements.Partial
       el: $(@el).find('#placements-partial')
       model: @model
       collection: @model.placements

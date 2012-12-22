@@ -1,4 +1,6 @@
-class CPP.Views.PlacementsItem extends CPP.Views.Base
+CPP.Views.Placements ||= {}
+
+class CPP.Views.Placements.Item extends CPP.Views.Base
   tagName: "tr"
   className: "cpp-tbl-row"
 

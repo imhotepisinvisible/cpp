@@ -30,6 +30,12 @@ class CPP.Models.Company extends Backbone.Model
       return "red-ban icon-ban-circle"
     return "icon-ban-circle"
 
+  getLogoPath: ->
+    if @get('logo_file_name')
+      return "/companies/#{@get('id')}/documents/logo"
+    else
+      return "/assets/default_profile.png"
+
 class CPP.Collections.Companies extends CPP.Collections.Base
   url: '/companies'
   model: CPP.Models.Company

@@ -1,4 +1,6 @@
-class CPP.Views.TaggedEmailsItem extends CPP.Views.Base
+CPP.Views.TaggedEmails ||= {}
+
+class CPP.Views.TaggedEmails.Item extends CPP.Views.Base
   tagName: "tr"
   className: "cpp-tbl-row"
 

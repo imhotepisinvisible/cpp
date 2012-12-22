@@ -1,4 +1,6 @@
-class CPP.Views.StudentsSettings extends CPP.Views.Base
+CPP.Views.Students ||= {}
+
+class CPP.Views.Students.Settings extends CPP.Views.Base
   el: "#app"
   template: JST['backbone/templates/students/settings']
 

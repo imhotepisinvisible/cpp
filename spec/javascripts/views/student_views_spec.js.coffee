@@ -4,7 +4,7 @@ describe "Students Views", ->
       @form = new Backbone.Form schema: {}
       @backboneFormStub = sinon.stub(window.Backbone, "Form").returns(@form)
       @model = new Backbone.Model()
-      @view = new CPP.Views.StudentsSignup model: @model
+      @view = new CPP.Views.Students.Signup model: @model
 
     afterEach ->
       window.Backbone.Form.restore()

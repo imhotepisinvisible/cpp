@@ -1,4 +1,6 @@
-class CPP.Views.StudentsIndex extends CPP.Views.Base
+CPP.Views.Students ||= {}
+
+class CPP.Views.Students.Index extends CPP.Views.Base
   el: '#app'
   template: JST['backbone/templates/students/index']
 
@@ -16,7 +18,7 @@ class CPP.Views.StudentsIndex extends CPP.Views.Base
   renderStudents: (col) ->
     @$('#students').html("")
     col.each (student) ->
-      view = new CPP.Views.StudentsItem model: student
+      view = new CPP.Views.Students.Item model: student
       @$('#students').append(view.render().el)
   @
 

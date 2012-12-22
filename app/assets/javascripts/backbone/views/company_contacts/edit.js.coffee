@@ -1,4 +1,6 @@
-class CPP.Views.ContactsPartialEdit extends CPP.Views.Base
+CPP.Views.Contacts ||= {}
+
+class CPP.Views.Contacts.PartialEdit extends CPP.Views.Base
   template: JST['backbone/templates/company_contacts/contacts_edit']
 
   events: -> _.extend {}, CPP.Views.Base::events,
@@ -55,7 +57,7 @@ class CPP.Views.ContactsPartialEdit extends CPP.Views.Base
     console.log @collection
     if @company
       @undelegateEvents()
-      new CPP.Views.ContactsPartialEdit
+      new CPP.Views.Contacts.PartialEdit
         el: @el
         company: @company
         company_id: @company_id

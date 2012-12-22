@@ -7,7 +7,7 @@ describe "Placement Partial Item", ->
     placementStub.withArgs('position').returns('Intern')
     placementStub.withArgs('description').returns('Awesome backend job')
 
-    @placementsPartialItem = new CPP.Views.PlacementsPartialItem
+    @placementsPartialItem = new CPP.Views.Placements.PartialItem
                               el: "#placements"
                               model: @placement
                               editable: false

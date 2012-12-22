@@ -1,4 +1,6 @@
-class CPP.Views.TaggedEmailsIndex extends CPP.Views.Base
+CPP.Views.TaggedEmails ||= {}
+
+class CPP.Views.TaggedEmails.Index extends CPP.Views.Base
   el: '#app'
   template: JST['backbone/templates/emails/index']
 
@@ -21,7 +23,7 @@ class CPP.Views.TaggedEmailsIndex extends CPP.Views.Base
       email.company.fetch
         success: ->
           # Render the email if we can get its company
-          view = new CPP.Views.TaggedEmailsItem model: email
+          view = new CPP.Views.TaggedEmails.Item model: email
           @$('#emails').append(view.render().el)
         error: ->
           notify "error", "Couldn't fetch company for email"

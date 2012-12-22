@@ -54,28 +54,27 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
   render: ->
     $(@el).html(@template(company: @model))
 
-    new CPP.Views.EventsPartial
+    new CPP.Views.Events.Partial
       el: $(@el).find('#events-partial')
-      model: @model
+      company: @model
       collection: @model.events
       editable: true
 
-    new CPP.Views.PlacementsPartial
+    new CPP.Views.Placements.Partial
       el: $(@el).find('#placements-partial')
-      model: @model
+      company: @model
       collection: @model.placements
       editable: true
 
-    new CPP.Views.ContactsPartialEdit
+    new CPP.Views.Contacts.PartialEdit
       el: $(@el).find('#contacts-partial')
       company: @model
       company_id: @model.id
       limit: 3
 
-
-    new CPP.Views.TaggedEmailsPartial
+    new CPP.Views.TaggedEmails.Partial
       el: $(@el).find('#emails-partial')
-      model: @model
+      company: @model
       collection: @model.tagged_emails
       editable: true
 

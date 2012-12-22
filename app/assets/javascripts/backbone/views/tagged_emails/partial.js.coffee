@@ -1,4 +1,6 @@
-class CPP.Views.TaggedEmailsPartial extends CPP.Views.Base
+CPP.Views.TaggedEmails ||= {}
+
+class CPP.Views.TaggedEmails.Partial extends CPP.Views.Base
   template: JST['backbone/templates/emails/partial']
 
   editable: false
@@ -14,7 +16,7 @@ class CPP.Views.TaggedEmailsPartial extends CPP.Views.Base
   render: () ->
     $(@el).html(@template(editable: @editable))
     @collection.each (email) =>
-      view = new CPP.Views.TaggedEmailsPartialItem
+      view = new CPP.Views.TaggedEmails.PartialItem
                   model: email
                   editable: @editable
       @$('#emails').append(view.render().el)

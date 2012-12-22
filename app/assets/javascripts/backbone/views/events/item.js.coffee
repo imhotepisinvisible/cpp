@@ -1,4 +1,6 @@
-class CPP.Views.EventsItem extends CPP.Views.Base
+CPP.Views.Events ||= {}
+
+class CPP.Views.Events.Item extends CPP.Views.Base
   tagName: "tr"
   className: "cpp-tbl-row"
 

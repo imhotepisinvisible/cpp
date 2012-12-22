@@ -1,4 +1,6 @@
-class CPP.Views.PlacementsIndex extends CPP.Views.Base
+CPP.Views.Placements ||= {}
+
+class CPP.Views.Placements.Index extends CPP.Views.Base
   el: '#app'
   template: JST['backbone/templates/placements/index']
 
@@ -34,7 +36,7 @@ class CPP.Views.PlacementsIndex extends CPP.Views.Base
   renderPlacements: (col) ->
     @$('#placements').html("")
     col.each (placement) ->
-      view = new CPP.Views.PlacementsItem model: placement
+      view = new CPP.Views.Placements.Item model: placement
       @$('#placements').append(view.render().el)
   @
 

@@ -1,7 +1,6 @@
 <td>
   <% if @email.get('created'): %>
-    <% d = Date.parse(@email.get('created')) %>
-    <%= d.toString('dXXX MMMM yyyy - H:mm').replace('XXX', d.getOrdinal()) %>
+    <%= @email.getReadableDate('created') %>
   <% end %>
 </td>
 <td>
@@ -9,9 +8,8 @@
 </td>
 <td>
   <% if @email.get('sent'): %>
-    <% d = Date.parse(@email.get('sent')) %>
     <i class="icon-ok"></i>
-    <%= d.toString('dXXX MMMM yyyy - H:mm').replace('XXX', d.getOrdinal())%>
+    <%= @email.getReadableDate('sent') %>
   <% else: %>
     <i class="icon-remove"></i>
   <% end %>

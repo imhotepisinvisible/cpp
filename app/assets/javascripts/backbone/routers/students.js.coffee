@@ -11,7 +11,7 @@ class CPP.Routers.Students extends Backbone.Router
     students = new CPP.Collections.Students
     students.fetch
       success: ->
-        new CPP.Views.StudentsIndex collection: students
+        new CPP.Views.Students.Index collection: students
       error: ->
         notify "error", "Couldn't fetch students"
 
@@ -19,7 +19,7 @@ class CPP.Routers.Students extends Backbone.Router
     student = new CPP.Models.Student id: id
     student.fetch
       success: ->
-        new CPP.Views.StudentsView model: student
+        new CPP.Views.Students.View model: student
       error: ->
         notify "error", "Couldn't fetch student"
 
@@ -44,7 +44,7 @@ class CPP.Routers.Students extends Backbone.Router
       $.when.apply($, companydeferreds).done(->
         student.fetch
           success: ->
-            new CPP.Views.StudentsEdit model: student
+            new CPP.Views.Students.Edit model: student
           error: ->
             notify "error", "Couldn't fetch student"
       )
@@ -57,14 +57,14 @@ class CPP.Routers.Students extends Backbone.Router
     student.placements.fetch({ data: $.param({ limit: 3}) })
     student.fetch
       success: ->
-        new CPP.Views.StudentsSettings model: student
+        new CPP.Views.Students.Settings model: student
       error: ->
         notify "error", "Couldn't fetch student"
 
   signup: (department_id) ->
     student = new CPP.Models.Student departments: [department_id]
     student.collection = new CPP.Collections.Students
-    new CPP.Views.StudentsSignup model: student
+    new CPP.Views.Students.Signup model: student
 
   # The company index page that students will see
   companies: (id) ->

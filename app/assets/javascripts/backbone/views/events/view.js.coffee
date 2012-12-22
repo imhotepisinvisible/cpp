@@ -1,4 +1,6 @@
-class CPP.Views.EventsView extends CPP.Views.Base
+CPP.Views.Events ||= {}
+
+class CPP.Views.Events.View extends CPP.Views.Base
   el: "#app"
   template: JST['backbone/templates/events/view']
 

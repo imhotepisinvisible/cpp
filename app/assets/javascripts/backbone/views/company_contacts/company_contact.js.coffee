@@ -1,3 +1,5 @@
+CPP.Views.Contacts ||= {}
+
 class CPP.Views.CompanyContact extends CPP.Views.Base
   tagName: "li"
   className: "contact-display-container"
