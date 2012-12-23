@@ -2,7 +2,7 @@
   <i class="icon-calendar"></i>
   Events
   <div class="btn-group pull-right">
-    <% if @company: %>
+    <% if @company?: %>
       <a href="#/companies/<%= @company.get('id') %>/events" class="btn">All</a>
       <% if @editable: %>
         <a href="#/companies/<%= @company.get('id') %>/events/new" class="btn">

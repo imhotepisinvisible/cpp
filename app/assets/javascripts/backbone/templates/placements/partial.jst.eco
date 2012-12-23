@@ -2,7 +2,7 @@
   <i class="icon-briefcase"></i>
   Placements
   <div class="btn-group pull-right">
-    <% if @company: %>
+    <% if @company?: %>
       <a href="#/companies/<%= @company.get('id') %>/placements" class="btn">All</a>
       <% if @editable: %>
         <a href="#/companies/<%= @company.get('id') %>/placements/new" class="btn">
@@ -10,7 +10,7 @@
         </a>
       <% end %>
     <% else: %>
-      <a href="#/events" class="btn">All</a>
+      <a href="#/placements" class="btn">All</a>
     <% end %>
   </div>
 </h1>
