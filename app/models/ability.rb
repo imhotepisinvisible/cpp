@@ -10,7 +10,7 @@ class Ability
       can :create, Student
     when "Student"
       can :manage, Student, :id => user.id
-      can :read, Company do |company|
+      can [:read, :download_document], Company do |company|
         user.departments.map(&:organisation_id).include? company.organisation_id
       end
     when "CompanyAdministrator"

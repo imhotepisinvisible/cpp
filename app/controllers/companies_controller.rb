@@ -1,4 +1,5 @@
 class CompaniesController < ApplicationController
+  load_and_authorize_resource
   respond_to :json
 
   # If the current user is a student, injects their company preferences into
