@@ -33,4 +33,5 @@
 //= require jquery-fileupload/basic
 //= require tinymce-jquery
 //= require jcountdown
+//= require jquery.toggle.buttons
 //= require utils

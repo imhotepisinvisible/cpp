@@ -144,6 +144,7 @@ ActiveRecord::Schema.define(:version => 20121128183459) do
     t.string   "email"
     t.string   "password_digest"
     t.datetime "deleted_at"
+    t.boolean  "tooltip",                      :default => true
     t.integer  "year",                         :default => 0
     t.text     "bio",                          :default => ""
     t.text     "degree",                       :default => ""

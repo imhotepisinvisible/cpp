@@ -8,7 +8,7 @@ class CPP.Views.Base extends Backbone.View
 
     $("a[rel=popover]").popover()
     $(".tooltip").tooltip()
-    $("a[rel=tooltip]").tooltip()
+    $("[rel=tooltip]").tooltip()
     @
 
   back: ->

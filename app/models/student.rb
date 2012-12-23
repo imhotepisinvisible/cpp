@@ -57,7 +57,7 @@ class Student < User
   attr_accessible :year, :bio, :degree, :email,
                     :cv, :transcript, :covering_letter, :profile_picture,
                     :skill_list, :interest_list, :reject_skill_list, :reject_interest_list, :year_group_list, :active,
-                    :looking_for
+                    :looking_for, :tooltip
 
 
   def valid_email?

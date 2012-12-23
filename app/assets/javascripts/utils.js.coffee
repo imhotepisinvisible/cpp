@@ -78,3 +78,6 @@ window.displayJQXHRErrors = (data) ->
     window.displayErrorMessages(response.errors)
   else
     notify('error', "Error")
+
+window.addTooltip = (showTooltip, message, position) ->
+  if showTooltip then "rel='tooltip' title='#{message}' data-placement='#{position}'" else ''

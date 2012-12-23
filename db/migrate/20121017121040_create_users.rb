@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email
       t.string :password_digest
       t.datetime :deleted_at
+      t.boolean :tooltip, :default => true
 
       # Student Fields
       t.integer :year, :default => "?"

@@ -41,6 +41,21 @@ class CPP.Views.Students.Settings extends CPP.Views.Base
     @initPasswordForm()
     @render()
 
+    # Set up tooltip switch
+    $('#tooltip-switch').toggleButtons(
+      onChange: (el, status, e) =>
+        newState = if status then 'on' else 'off'
+        oldState = if status then 'off' else 'on'
+        $('#switch-on-off-text').html(oldState)
+        @model.set 'tooltip', status
+        @model.save {},
+          wait: true
+          success: (model, response) =>
+            notify 'success', "Switched #{newState} helpful tooltips"
+          error: (model, response) =>
+            notify 'error', "Unable to switch #{newState} helpful tooltips"
+    )
+
   initPasswordForm: ->
     @passwordForm = new Backbone.Form
       model: @model
@@ -72,6 +87,7 @@ class CPP.Views.Students.Settings extends CPP.Views.Base
     $('.reject_skill-tags-form').append(@reject_skill_list_tags_form.el)
     @reject_interest_list_tags_form.render()
     $('.reject_interest-tags-form').append(@reject_interest_list_tags_form.el)
+    super
 
   renderPasswordForm: ->
     $('#password-form').html(@passwordForm.el)

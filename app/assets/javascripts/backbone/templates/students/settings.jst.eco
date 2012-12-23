@@ -30,7 +30,21 @@
     </div>
 
     <div class="row">
-      <div class="span6"></div>
+      <div class="span6">
+        <h2 class="section-header"><i class="icon-cogs"></i> General Settings</h2>
+        <div>
+          <div class="switch-container">
+            <div class="switch" id="tooltip-switch">
+              <input id="tooltip-checkbox" type="checkbox" class="switch-checkbox" <%= if @student.get('tooltip') then 'checked="checked"' %>>
+            </div>
+            <span class="switch-text">
+              Switch 
+              <span id="switch-on-off-text"><%= if @student.get('tooltip') then 'off' else 'on' %></span>
+              helpful tooltips
+            </span>
+          </div>
+        </div>
+      </div>
       <div class="span6">
         <h2 class="section-header"><i class="icon-trash"></i> Delete Account</h2>
         Permanently delete your account, this cannot be undone.

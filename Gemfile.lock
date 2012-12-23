@@ -5,6 +5,12 @@ GIT
     jcountdown-rails (0.2.0)
       jquery-rails
 
+GIT
+  remote: http://github.com/wafcio/bootstrap-toggle-buttons-rails.git
+  revision: 74e65011eb08c4ffdb3d789f15c7238bb63a02f5
+  specs:
+    bootstrap-toggle-buttons-rails (2.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -322,6 +328,7 @@ DEPENDENCIES
   backbone-validation-rails
   bcrypt-ruby
   bootstrap-datepicker-rails
+  bootstrap-toggle-buttons-rails!
   bootstrap-will_paginate
   bourbon
   cantango

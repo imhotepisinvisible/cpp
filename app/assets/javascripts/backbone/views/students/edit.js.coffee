@@ -72,7 +72,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
 
 
   render: ->
-    super
     $(@el).html(@template(student: @model))
     @skill_list_tags_form.render()
     $('.skill-tags-form').append(@skill_list_tags_form.el)
@@ -110,6 +109,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     for option in $('#looking-for-select').children()
       if $(option).val() == @model.get('looking_for')
         $(option).attr('selected', 'selected')
+    super
     @
 
   profileUploadInitialize: ->
