@@ -4,8 +4,11 @@ class CPP.Routers.Students extends Backbone.Router
       'students/:id': 'view'
       'students/:id/edit': 'edit'
       'students/:id/settings': 'settings'
-      'students/:id/companies' : 'companies'
       'departments/:id/students/signup': 'signup'
+
+      'dashboard': 'edit'
+      'profile_preview': 'view'
+      'settings': 'settings'
 
   index: ->
     students = new CPP.Collections.Students
@@ -16,7 +19,9 @@ class CPP.Routers.Students extends Backbone.Router
         notify "error", "Couldn't fetch students"
 
   view: (id) ->
-    student = new CPP.Models.Student id: id
+    student = @getStudentFromID(id)
+    unless student
+      notify "error", "Invalid Student"
     student.fetch
       success: ->
         new CPP.Views.Students.View model: student
@@ -25,7 +30,9 @@ class CPP.Routers.Students extends Backbone.Router
 
 
   edit: (id) ->
-    student = new CPP.Models.Student id: id
+    student = @getStudentFromID(id)
+    unless student
+      notify "error", "Invalid Student"
     deferreds = []
     deferreds.push(student.events.fetch({ data: $.param({ limit: 3}) }))
     deferreds.push(student.placements.fetch({ data: $.param({ limit: 3}) }))
@@ -50,9 +57,10 @@ class CPP.Routers.Students extends Backbone.Router
       )
     )
 
-
   settings: (id) ->
-    student = new CPP.Models.Student id: id
+    student = @getStudentFromID(id)
+    unless student
+      notify "error", "Invalid Student"
     student.events.fetch({ data: $.param({ limit: 3}) })
     student.placements.fetch({ data: $.param({ limit: 3}) })
     student.fetch
@@ -65,3 +73,11 @@ class CPP.Routers.Students extends Backbone.Router
     student = new CPP.Models.Student departments: [department_id]
     student.collection = new CPP.Collections.Students
     new CPP.Views.Students.Signup model: student
+
+  getStudentFromID: (id) ->
+    if id?
+      return new CPP.Models.Student id: id
+    else if CPP.CurrentUser.get('type') == 'Student'
+      return CPP.CurrentUser
+    else
+      return false
