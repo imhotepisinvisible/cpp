@@ -4,7 +4,11 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.scoped
+    if current_user
+      @events = current_user.events
+    else
+      @events = Event.all # Change me
+    end
 
     if params.keys.include? "company_id"
       @events = @events.where(:company_id => params[:company_id])
