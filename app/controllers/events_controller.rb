@@ -5,9 +5,9 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     if current_user
-      @events = current_user.events
+      @events = current_user.events.scoped
     else
-      @events = Event.all # Change me
+      @events = Event.scoped # Change me
     end
 
     if params.keys.include? "company_id"
