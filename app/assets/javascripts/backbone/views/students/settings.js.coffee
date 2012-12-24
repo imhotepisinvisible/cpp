@@ -96,7 +96,7 @@ class CPP.Views.Students.Settings extends CPP.Views.Base
         url: "/students/#{@model.id}"
         type: 'DELETE'
         success: (data) ->
-          Backbone.history.navigate('/')
+          window.location = '/'
         error: (data) ->
           notify('error', "Couldn't delete your account!\nPlease contact administrator.")
 
