@@ -71,6 +71,10 @@ class CPP.Routers.Students extends Backbone.Router
         notify "error", "Couldn't fetch student"
 
   signup: ->
+
+    if CPP.CurrentUser? && CPP.CurrentUser isnt {}
+      window.history.back()
+      return false
     student = new CPP.Models.Student
     student.collection = new CPP.Collections.Students
     new CPP.Views.Students.Signup model: student
