@@ -38,9 +38,7 @@
               <input id="tooltip-checkbox" type="checkbox" class="switch-checkbox" <%= if @student.get('tooltip') then 'checked="checked"' %>>
             </div>
             <span class="switch-text">
-              Switch 
-              <span id="switch-on-off-text"><%= if @student.get('tooltip') then 'off' else 'on' %></span>
-              helpful tooltips
+              Helpful ToolTips
             </span>
           </div>
         </div>
