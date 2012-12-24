@@ -6,15 +6,26 @@
 <a class="brand" href="/"><%= image_tag "imperial.png" %></a>
 <div class="nav-collapse">
   <ul class="nav">
-    <li>
-      <a href="#companies">Companies</a>
-    </li>
-    <li>
-      <a href="#events">Events</a>
-    </li>
-    <li>
-      <a href="#placements">Placements</a>
-    </li>
+    <% if current_user %>
+      <% if current_user.type == "Student" %>
+      <li>
+        <a href="#dashboard">Dashboard</a>
+      </li>
+      <li>
+        <a href="#companies">Companies</a>
+      </li>
+      <li>
+        <a href="#events">Events</a>
+      </li>
+      <li>
+        <a href="#placements">Placements</a>
+      </li>
+      <% elsif current_user.type == "CompanyAdministrator" %>
+        <li>
+          <a href="#students">Students</a>
+        </li>
+      <% end %>
+    <% end %>
   </ul>
 
 <% if current_user %>
@@ -23,7 +34,7 @@
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.full_name %> <b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <li><a href="<%= profile_path %>">My Profile</a></li>
+        <li><a href="<%= profile_path %>">Preview My Profile </a></li>
         <li><a href="<%= settings_path %>">Account Settings</a></li>
         <li class="divider"></li>
         <li><a href="/logout">Log Out</a></li>
