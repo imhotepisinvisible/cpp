@@ -28,7 +28,12 @@ class StudentsController < ApplicationController
   def create
     @student = Student.new(params[:student])
 
-    departments = params[:departments].map{ |id| Department.find(id) }
+    if params.has_key? :departments
+      departments = params[:departments].map{ |id| Department.find(id) }
+    else
+      departments = []
+    end
+
     @student.departments = departments
 
     if @student.save

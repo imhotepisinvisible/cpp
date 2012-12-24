@@ -22,7 +22,7 @@ class Student < User
 
   acts_as_taggable_on :skills, :interests, :year_groups, :reject_skills, :reject_interests
 
-  validates :departments, :presence => true
+  validates :departments, :presence => { :message => "Must belong to at least one department" }
   validates :bio, :length => { :maximum => 500 }
   validate :valid_email?
 
@@ -61,6 +61,11 @@ class Student < User
 
 
   def valid_email?
+    if departments.blank? # Can't have org if no departments
+      errors.add(:email, "Cannot validate email without department")
+      return false
+    end
+
     organisation = departments.first.organisation
     if organisation.organisation_domains.any?
       match = false

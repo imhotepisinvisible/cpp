@@ -9,6 +9,7 @@ class CPP.Routers.Students extends Backbone.Router
       'dashboard': 'edit'
       'profile_preview': 'view'
       'settings': 'settings'
+      'register': 'signup'
 
   index: ->
     students = new CPP.Collections.Students
@@ -69,8 +70,8 @@ class CPP.Routers.Students extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch student"
 
-  signup: (department_id) ->
-    student = new CPP.Models.Student departments: [department_id]
+  signup: ->
+    student = new CPP.Models.Student
     student.collection = new CPP.Collections.Students
     new CPP.Views.Students.Signup model: student
 
