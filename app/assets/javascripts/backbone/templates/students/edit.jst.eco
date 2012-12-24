@@ -8,14 +8,14 @@
 
 <div id="student-profile-header" class="row">
     <div class="span3">
-      <div style="position:relative" id="student-profile-img-container"
-           class="upload-container img-polaroid <%= "missing-document" unless @student.get('profile_picture_file_name') %>">
+      <div id="student-profile-img-container"
+           class="upload-container img-polaroid <%= "missing-document" unless @student.get('profile_picture_file_name') %> image-buttons-container">
         <% if @student.get 'profile_picture_file_name': %>
           <img src="/students/<%= @student.get 'id' %>/documents/profile_picture" id="student-profile-img">
         <% else: %>
           <img src="/assets/default_profile.png" id="student-profile-img">
         <% end %>
-        <div style="position:absolute;right:10px;bottom:10px;">
+        <div class="image-buttons">
           <form class="form-inline hidden">
               <input class="file-input" id="file-profile-picture" type="file" name="student[profile_picture]" size="20">
           </form>
