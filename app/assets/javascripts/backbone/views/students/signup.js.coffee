@@ -26,8 +26,9 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
         wait: true
         success: (model, response) =>
           notify "success", "Registered"
-          Backbone.history.navigate('students/' + model.get('id') + '/edit', trigger: true)
-          @undelegateEvents()
+          $.post '/sessions', { session: { email: @model.get('email'), password: @model.get('password') } }, (data) ->
+            window.location = '/#/students/' + model.get('id') + '/edit'
+            window.location.reload(true)
         error: (model, response) =>
           errorlist = JSON.parse response.responseText
           for field, errors of errorlist.errors
