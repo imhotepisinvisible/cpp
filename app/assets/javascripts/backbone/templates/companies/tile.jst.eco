@@ -1,12 +1,7 @@
 <div class="span3">
   <div class="thumbnail company-tile">
     <div class="company-tile-logo">
-      <% if @company.get 'logo_file_name': %>
-        <% src="/companies/#{@company.get 'id'}/documents/logo" %>
-      <% else: %>
-        <% src="/assets/default_profile.png" %>
-      <% end %>
-      <img class="" src="<%= src%>">
+      <img src="<%= @company.getLogoPath() %>" />
     </div>
     <div class="company-tile-blurb">
       <%= @company.get('description').substring(0, 100) + '...' %>
