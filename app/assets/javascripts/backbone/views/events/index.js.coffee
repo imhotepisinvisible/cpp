@@ -50,7 +50,7 @@ class CPP.Views.Events.Index extends CPP.Views.Base
     col.each (event) ->
       view = new CPP.Views.Events.Item model: event
       @$('#events').append(view.render().el)
-  @
+    @
 
   renderFilters: ->
     new CPP.Filter
