@@ -23,8 +23,6 @@
 }
 
 .company-logo-img {
-  $size: 170px;
-
   width: 100%;
 
   max-width: 360px;
@@ -34,6 +32,15 @@
   @include border-bottom-radius($border_radius);
   @include border-left-radius($border_radius);
   @include border-right-radius($border_radius);
+}
+
+.company-logo-header{
+  .company-logo-img {
+    // max-height: 30px;
+    // margin-top: 5px;
+    // width: auto;
+    // height: auto;
+  }
 }
 
 .company-editable {
