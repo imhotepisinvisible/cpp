@@ -34,6 +34,11 @@
   @include border-right-radius($border_radius);
 }
 
+.small-company-logo {
+  max-width: 100px;
+  height: auto;
+}
+
 .company-logo-header{
   .company-logo-img {
     // max-height: 30px;

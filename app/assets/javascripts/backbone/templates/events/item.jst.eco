@@ -1,4 +1,4 @@
-<td><%= @event.company.get 'name' %></td>
+<td><img class="small-company-logo" src="<%= @event.company.getLogoPath() %>"/></td>
 <td><%= @event.get 'title' %></td>
 <td><%= @event.get 'deadline' %></td>
 <td><%= @event.get 'location' %></td>
