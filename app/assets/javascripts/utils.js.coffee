@@ -81,3 +81,9 @@ window.displayJQXHRErrors = (data) ->
 
 window.addTooltip = (showTooltip, message, position) ->
   if showTooltip then "rel='tooltip' title='#{message}' data-placement='#{position}'" else ''
+
+window.isStudent = ->
+  CPP.CurrentUser? && CPP.CurrentUser.type == "Student"
+
+window.isAdmin = ->
+  CPP.CurrentUser? && CPP.CurrentUser.type == "CompanyAdministrator"

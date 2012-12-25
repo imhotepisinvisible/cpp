@@ -4,9 +4,11 @@
 <td><%= @event.get 'location' %></td>
 <td><%= @event.get 'capacity' %></td>
 <td><a href="<%= @event.get 'google_map_url' %>"><i class="icon-map-marker"></a></td>
+<% if isAdmin(): %>
 <td>
   <div class="btn-group pull-right">
     <div class="btn btn-small btn-edit"><i class="icon-pencil" /></div>
     <div class="btn btn-small btn-danger btn-delete"><i class="icon-trash" /></div>
   </div>
 </td>
+<% end %>
