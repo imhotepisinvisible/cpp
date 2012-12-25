@@ -60,6 +60,20 @@ class CPP.Models.Event extends Backbone.Model
       options: @allDepartments
       editorClass: "departments-checkbox"
 
+  getFilled: ->
+    #TODO: Calculate on SERVER!!
+    Math.floor(Math.random() * @get("capacity")) + 1
+
+  getPercentageCapacity: ->
+    percentage = 100 * parseFloat(@getFilled()) / parseFloat(@get("capacity"))
+    return percentage
+
+  getCapacityClass: ->
+    p = @getPercentageCapacity()
+    return "danger" if p > 90
+    return "warning" if p > 60
+    return "info"
+
 class CPP.Collections.Events extends CPP.Collections.Base
   url: '/events'
   model: CPP.Models.Event

@@ -82,20 +82,15 @@
       </div>
 
       <!-- TODO: Move this into the model !-->
-      <% a = Math.floor(Math.random() * @event.get("capacity")) + 1 %>
-      <% percentage = 100 * parseFloat(a) / parseFloat(@event.get("capacity")) %>
-      <% pclass = "info" %>
-      <% pclass = "warning" if percentage > 60 %>
-      <% pclass = "danger" if percentage > 90 %>
 
       <div class="span4">
-        <div class="progress progress-<%= pclass %>">
-          <div class="bar" style="width: <%= percentage %>%"></div>
+        <div class="progress progress-<%= @event.getCapacityClass() %>">
+          <div class="bar" style="width: <%= @event.getPercentageCapacity() %>%"></div>
         </div>
       </div>
 
       <div class="span2">
-        <div class="well"><%= a %> / <%= @event.get "capacity" %></div>
+        <div class="well"><%= @event.getFilled() %> / <%= @event.get("capacity") %></div>
       </div>
     </div>
   </div>
