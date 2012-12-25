@@ -6,11 +6,7 @@
       <% if @placements.company: %>
         for <%= @placements.company.name %>
       <% end %>
-
-      <div class="btn pull-right btn-add">
-        Add Placement
-      </div>
-
+      <div class="btn pull-right btn-add">Add Placement</div>
     </h1>
     <table class="table table-bordered table-hover">
       <thead>

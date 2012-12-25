@@ -5,6 +5,8 @@
 <td><%= @placement.get 'location' %></td>
 <td><%= @placement.get 'deadline' %></td>
 <td>
-  <div class="btn btn-small btn-edit">Edit</div>
-  <div class="btn btn-small btn-danger btn-delete">Delete</div>
+  <div class="btn-group pull-right">
+    <div class="btn btn-small btn-edit">Edit</div>
+    <div class="btn btn-small btn-danger btn-delete">Delete</div>
+  </div>
 </td>
