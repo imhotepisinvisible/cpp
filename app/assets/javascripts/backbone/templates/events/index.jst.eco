@@ -22,7 +22,6 @@
           <th>Apply By</th>
           <th>Location</th>
           <th>Capacity</th>
-          <th>Map</th>
           <% if isAdmin(): %>
           <th class="btn-column"></th>
           <% end %>
