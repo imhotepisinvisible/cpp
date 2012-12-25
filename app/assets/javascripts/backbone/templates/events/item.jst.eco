@@ -5,6 +5,8 @@
 <td><%= @event.get 'capacity' %></td>
 <td><a href="<%= @event.get 'google_map_url' %>"><i class="icon-map-marker"></a></td>
 <td>
-  <div class="btn btn-small btn-edit">Edit</div>
-  <div class="btn btn-small btn-danger btn-delete">Delete</div>
+  <div class="btn-group pull-right">
+    <div class="btn btn-small btn-edit"><i class="icon-pencil" /></div>
+    <div class="btn btn-small btn-danger btn-delete"><i class="icon-trash" /></div>
+  </div>
 </td>

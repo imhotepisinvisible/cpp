@@ -13,13 +13,9 @@
           <img class="company-logo-img" src="<%= src%>">
         </div>
       <% end %>
+
+      <div class="btn pull-right btn-add">Add Event</div>
     </h1>
-    <div class="table-toolbar">
-      <div class="btn pull-right btn-add">
-        Add Event
-      </div>
-      <div class="clear"></div>
-    </div>
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
