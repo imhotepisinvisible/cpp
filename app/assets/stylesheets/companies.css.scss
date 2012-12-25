@@ -47,6 +47,16 @@
   background-color: #FFFABF;
 }
 
+.top-tile-row {
+  position: relative;
+
+  .rating-buttons{
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+  }
+}
+
 .contact-list{
   list-style: none;
   margin: 0px 0px 10px 0px;

@@ -1,7 +1,7 @@
 <div class="row">
   <div class="span9">
     <div class="thumbnail company-tile">
-      <div class="row-fluid">
+      <div class="row-fluid top-tile-row">
         <div class="span6">
           <% if @company.get 'logo_file_name': %>
             <% src="/companies/#{@company.get 'id'}/documents/logo" %>
@@ -12,13 +12,17 @@
         </div>
         <div class="span6">
           <div class="company-tile-blurb">
-            <%= @company.get('description').substring(0, 400) + '...' %>
+            <%= @company.get('description').substring(0, 300) + '...' %>
           </div>
         </div>
-        </div>
-          <span id="ban-rating" class="fav-icon pull-right <%= @company.getBanClass() %>"></span>
-          <span id="star-rating" class="fav-icon pull-right <%= @company.getStarClass() %>"></span>
-        <div class="clearfix"></div>
+
+          <div class="rating-buttons">
+            <span id="ban-rating" class="fav-icon pull-right <%= @company.getBanClass() %>"></span>
+            <span id="star-rating" class="fav-icon pull-right <%= @company.getStarClass() %>"></span>
+          </div>
+      </div>
+
+      <div class="clearfix"></div>
     </div>
       </div>
     </div>
