@@ -45,7 +45,7 @@ class Event < ActiveRecord::Base
   # Returns a relevance score from 0 to 100 for student with the given id
   # TODO: Implement!
   def relevance(student_id)
-    return company.name.length
+    return 1
   end
 
   def as_json(options={})
