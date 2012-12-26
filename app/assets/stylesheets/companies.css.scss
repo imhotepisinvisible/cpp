@@ -23,15 +23,7 @@
 }
 
 .company-logo-img {
-  width: 100%;
-
-  max-width: 360px;
-  max-height: 135px;
-
-  @include border-top-radius($border_radius);
-  @include border-bottom-radius($border_radius);
-  @include border-left-radius($border_radius);
-  @include border-right-radius($border_radius);
+  max-height: 55px;
 }
 
 .small-company-logo {

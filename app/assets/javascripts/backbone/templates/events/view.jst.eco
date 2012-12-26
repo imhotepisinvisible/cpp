@@ -3,12 +3,7 @@
      <h1><%= @event.get 'title' %></h1>
   </div>
   <div class="company-logo-header">
-    <% if @event.company.get 'logo_file_name': %>
-      <% src="/companies/#{@event.company.get 'id'}/documents/logo" %>
-    <% else: %>
-      <% src="/assets/default_profile.png" %>
-    <% end %>
-    <img class="company-logo-img pull-right" src="<%= src%>">
+    <img class="company-logo-img pull-right" src="<%= @event.company.getLogoPath() %>">
   </div>
 </div>
 

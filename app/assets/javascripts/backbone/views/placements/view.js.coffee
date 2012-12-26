@@ -12,6 +12,6 @@ class CPP.Views.Placements.View extends CPP.Views.Base
     $(@el).ready =>
       $("#jcountdown").setCountdown()
       #Date for the countdown
-      targetDate: @model.attributes.deadline
+      targetDate: @model.get('deadline')
       itemLabels: ["D", "H", "M", "S"]
     @

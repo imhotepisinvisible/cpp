@@ -37,6 +37,9 @@ class CPP.Models.Placement extends Backbone.Model
     other:
       type: "Text"
 
+  getReadableDate: (field) ->
+    Date.parse(@get(field)).toString('dS MMMM yyyy - H:mm')
+
 class CPP.Collections.Placements extends CPP.Collections.Base
   url: '/placements'
   model: CPP.Models.Placement

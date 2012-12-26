@@ -6,9 +6,6 @@ class CPP.Models.Event extends Backbone.Model
   url: ->
     '/events' + (if @isNew() then '' else '/' + @id)
 
-  getReadableDate: (field) ->
-    Date.parse(@get(field)).toString('dS MMMM yyyy - H:mm')
-
   validation:
     title:
       required: true
@@ -73,6 +70,9 @@ class CPP.Models.Event extends Backbone.Model
     return "danger" if p > 90
     return "warning" if p > 60
     return "info"
+
+  getReadableDate: (field) ->
+    Date.parse(@get(field)).toString('dS MMMM yyyy - H:mm')
 
 class CPP.Collections.Events extends CPP.Collections.Base
   url: '/events'
