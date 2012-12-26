@@ -20,7 +20,7 @@ class EventsController < ApplicationController
 
     if current_user && current_user.type == "Student"
       # Sort on relevance, then company id (groups by company if same relevance)
-      @events = @events.sort_by {|e| [e.relevance(current_user.id), e.company.id] }.reverse
+      @events.sort_by! {|e| [-e.relevance(current_user.id), e.company.name] }
       respond_with @events.as_json({:student_id => current_user.id})
     else
       respond_with @events

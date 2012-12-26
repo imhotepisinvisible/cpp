@@ -20,7 +20,7 @@ class PlacementsController < ApplicationController
 
     if current_user && current_user.type == "Student"
       # Sort on relevance, then company id (groups by company if same relevance)
-      @placements.sort_by {|p| [p.relevance(current_user.id), p.company.id] }.reverse
+      @placements = @placements.sort_by {|p| [-p.relevance(current_user.id), p.company.name] }
       respond_with @placements.as_json({:student_id => current_user.id})
     else
       respond_with @placements
