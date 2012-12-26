@@ -33,7 +33,15 @@ class Placement < ActiveRecord::Base
     :after => :now,
     :allow_nil => :true
 
+  # Returns a relevance score from 0 to 100 for student with the given id
+  # TODO: Implement!
+  def relevance(student_id)
+    return 1
+  end
+
   def as_json(options={})
-    super(:include => [:skills, :interests, :year_groups])
+    result = super(:methods => [:skill_list, :interest_list, :year_group_list])
+    result[:relevance] = relevance(options[:student_id]) if options.has_key? :student_id
+    return result
   end
 end

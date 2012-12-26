@@ -42,7 +42,15 @@ class Event < ActiveRecord::Base
     :after => :start_date,
     :after_message => "End time cannot be before start time"
 
+  # Returns a relevance score from 0 to 100 for student with the given id
+  # TODO: Implement!
+  def relevance(student_id)
+    return company.name.length
+  end
+
   def as_json(options={})
-    super(:methods => [:skill_list, :interest_list, :year_group_list])
+    result = super(:methods => [:skill_list, :interest_list, :year_group_list])
+    result[:relevance] = relevance(options[:student_id]) if options.has_key? :student_id
+    return result
   end
 end

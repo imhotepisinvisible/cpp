@@ -53,11 +53,11 @@ class Company < ActiveRecord::Base
 
   def as_json(options={})
     result = super(:methods => [:skill_list, :interest_list, :year_group_list])
-    
+
     if options.has_key? :student_id
       result[:rating] = rating(options[:student_id])
     end
-    
+
     return result
   end
 end
