@@ -1,14 +1,16 @@
 <div class="row">
-  <div class="span3" id="placement-filter"></div>
+  <div class="span3" id="placement-filter">
+    <h1 class="section-header">Filters</h1>
+    <div class="loading"></div>
+  </div>
   <div class="span9">
     <h1 class="section-header">
-      Placements
-      <% if @placements.company: %>
-        for <%= @placements.company.name %>
-      <% end %>
+      Placements <%= " with " + @placements.company.get('name') if @placements.company? %>
+      <% if isAdmin(): %>
       <div class="btn pull-right btn-add">Add Placement</div>
+      <% end %>
     </h1>
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover table-clickable">
       <thead>
         <tr>
           <th>Company</th>
@@ -17,10 +19,13 @@
           <th>Duration</th>
           <th>Location</th>
           <th>Deadline</th>
+          <% if isAdmin(): %>
           <th class="btn-column"></th>
+          <% end %>
         </tr>
       </thead>
       <tbody class="cpp-tbl" id="placements">
+        <tr><td colspan="<%= 6 + (isAdmin() ? 1 : 0) %>"><div class="loading"></div></td></tr>
       </tbody>
     </table>
   </div>

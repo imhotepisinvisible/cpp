@@ -12,7 +12,7 @@
   </div>
   <div class="span9">
     <h1 class="section-header">
-      Events <%= " by " + @events.company.get('name') if @events.company %>
+      Events <%= " by " + @events.company.get('name') if @events.company? %>
       <% if isAdmin(): %>
       <div class="btn pull-right btn-add">Add Event</div>
       <% end %>
