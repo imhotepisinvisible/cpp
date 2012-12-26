@@ -40,12 +40,15 @@ $(document).ready ->
   # 404 - Whatever you want, we don't have it
   $.ajaxSetup
     statusCode:
-        401: ->
+        401: (data) ->
           console.log "Got 401"
-          notify("error", data.responseText, 4000)
+          if loggedIn()
+            notify("error", data.responseText, 4000)
+          else
+            notify("error", "You need to log in to do that!", 4000)
         403: (data) ->
           console.log "Got 403"
-        404: ->
+        404: (data) ->
           console.log "Got 404"
 
   # Start the app <-- VERY important ;)
