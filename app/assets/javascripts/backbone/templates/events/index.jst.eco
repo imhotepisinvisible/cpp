@@ -5,7 +5,10 @@
         <img class="company-logo-img" src="<%= @events.company.getLogoPath()%>">
       </span>
     <% end %>
-    <div id="event-filter"></div>
+    <div id="event-filter">
+      <h1 class="section-header">Filters</h1>
+      <div class="loading"></div>
+    </div>
   </div>
   <div class="span9">
     <h1 class="section-header">
