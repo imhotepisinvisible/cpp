@@ -39,20 +39,28 @@ describe "Company Routing", ->
       @companiesCollectionStub = sinon.stub(window.CPP.Collections, "Companies")
                                   .returns(@collection)
 
-      @model = new Backbone.Model()
-      @model.url = "/companies"
-      @model.events = new Backbone.Model()
-      @model.events.url = "/events"
-      @model.placements = new Backbone.Model()
-      @model.placements.url = "/placements"
-      @model.emails = new Backbone.Model()
-      @model.emails.url = "/emails"
+      @company = new Backbone.Model()
+      @company.url = "/companies"
+      @company.events = new Backbone.Collection()
+      @company.events.url = "/events"
+      sinon.stub(@company.events, "fetch")
+      @company.placements = new Backbone.Collection()
+      @company.placements.url = "/placements"
+      sinon.stub(@company.placements, "fetch")
+      @company.tagged_emails = new Backbone.Collection()
+      @company.tagged_emails.url = "/tagged_emails"
+      sinon.stub(@company.tagged_emails, "fetch")
+      @company.company_contacts = new Backbone.Collection()
+      @company.company_contacts.url = "/company_contacts"
+      sinon.stub(@company.company_contacts, "fetch")
+      @company.departments = new Backbone.Collection()
+      @company.departments.url = "/departments"
+      sinon.stub(@company.departments, "fetch")
 
-      sinon.stub(@model, "fetch").yieldsTo "success"
+      sinon.stub(@company, "fetch").yieldsTo "success"
 
       @companyModelStub = sinon.stub(window.CPP.Models, "Company")
-                            .returns(@model)
-      # @modelFetchStub = sinon.stub(@model, "fetch").yieldsTo("success")
+                            .returns(@company)
 
 
     afterEach ->
@@ -97,20 +105,26 @@ describe "Company Routing", ->
 
       it "should create a Company model", ->
         @router.view(1)
-        expect(@companyModelStub).toHaveBeenCalledOnce
+        expect(@companyModelStub).toHaveBeenCalledOnce()
         expect(@companyModelStub).toHaveBeenCalledWith id: 1
 
-      it "should create an CompaniesView on fetch success", ->
+      it "should create a CompaniesView on fetch success", ->
         @router.view(1)
         expect(@companiesViewStub).toHaveBeenCalledOnce()
-        expect(@companiesViewStub).toHaveBeenCalledWith model: @model
+        expect(@companiesViewStub).toHaveBeenCalledWith model: @company
 
-
-      it "should not create an CompaniesView on fetch error", ->
-        @model.fetch.restore()
-        sinon.stub(@model, "fetch").yieldsTo "error"
-        @router.view()
+      it "should not create a CompaniesView on fetch error", ->
+        @company.fetch.restore()
+        sinon.stub(@company, "fetch").yieldsTo "error"
+        @router.view(1)
         expect(@companiesViewStub.callCount).toBe 0
+
+      # TOOD: Work out how to test deferreds
+      # it "should not create a CompaniesView on company events error", ->
+      #   @company.events.fetch.restore()
+      #   sinon.stub(@company.events, "fetch").yieldsTo("failure", @company.events)
+      #   @router.view(1)
+      #   expect(@companiesViewStub.callCount).toBe 0
 
     describe "Edit handler", ->
       beforeEach ->
@@ -127,12 +141,12 @@ describe "Company Routing", ->
       it "should create an EditView view on fetch success", ->
         @router.edit(1)
         expect(@companiesEditViewStub).toHaveBeenCalledOnce()
-        expect(@companiesEditViewStub).toHaveBeenCalledWith model: @model
+        expect(@companiesEditViewStub).toHaveBeenCalledWith model: @company
 
 
       it "should not create an EditView view on fetch error", ->
-        @model.fetch.restore()
-        sinon.stub(@model, "fetch").yieldsTo "error"
+        @company.fetch.restore()
+        sinon.stub(@company, "fetch").yieldsTo "error"
         @router.edit(1)
         expect(@companiesEditViewStub.callCount).toBe 0
 
