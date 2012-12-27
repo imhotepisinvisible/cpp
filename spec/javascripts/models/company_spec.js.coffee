@@ -58,9 +58,17 @@ describe "Company", ->
       it "should return the companies placements url", ->
         expect(@company.placements.url).toEqual '/companies/1/placements'
 
-    describe "when navigating to emails", ->
+    describe "when navigating to tagged emails", ->
       it "should return the companies email url", ->
-        expect(@company.emails.url).toEqual '/companies/1/emails'
+        expect(@company.tagged_emails.url).toEqual '/companies/1/tagged_emails'
+
+    describe "when navigating to contacts", ->
+      it "should return the companies contacts url", ->
+        expect(@company.company_contacts.url).toEqual '/companies/1/company_contacts'
+
+    describe "when navigating to departments", ->
+      it "should return the companies departments url", ->
+        expect(@company.departments.url).toEqual '/companies/1/departments'
 
 
   describe "when instantiated", ->
