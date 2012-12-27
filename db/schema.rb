@@ -121,6 +121,16 @@ ActiveRecord::Schema.define(:version => 20121128183459) do
     t.integer "rating",     :default => 1
   end
 
+  create_table "student_event_registrations", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "student_event_registrations", ["event_id"], :name => "index_student_event_registrations_on_event_id"
+  add_index "student_event_registrations", ["user_id"], :name => "index_student_event_registrations_on_user_id"
+
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -171,15 +181,5 @@ ActiveRecord::Schema.define(:version => 20121128183459) do
     t.integer  "covering_letter_file_size"
     t.datetime "covering_letter_updated_at"
   end
-
-  create_table "users_events", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "event_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "users_events", ["event_id"], :name => "index_users_events_on_event_id"
-  add_index "users_events", ["user_id"], :name => "index_users_events_on_user_id"
 
 end

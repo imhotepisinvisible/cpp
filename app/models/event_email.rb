@@ -2,7 +2,6 @@
 class EventEmail < Email
 
 	belongs_to :event
-	has_many :users_events
 
 	attr_accessible :event_id
 
@@ -11,5 +10,5 @@ class EventEmail < Email
 			queue_email(this, user)
 		end
 	end
-	
+
 end
