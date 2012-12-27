@@ -109,9 +109,13 @@ describe "Event Routing", ->
 
     describe "New handler", ->
       beforeEach ->
-        @company.departments = new Backbone.Collection()
-        sinon.stub(@company.departments, "fetch").yieldsTo "success"
+        departments = new Backbone.Collection()
+        sinon.stub(departments, "fetch").yieldsTo "success"
+        @departmentsStub = sinon.stub(window.CPP.Collections, "Departments").returns(departments)
         @router.new(1)
+
+      afterEach ->
+        window.CPP.Collections.Departments.restore()
 
       it "should create an Event collection", ->
         expect(@eventsCollectionStub).toHaveBeenCalledOnce()
