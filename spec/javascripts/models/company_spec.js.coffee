@@ -16,6 +16,14 @@ describe "Company", ->
     @emailsStub = sinon.stub(window.CPP.Collections, "TaggedEmails")
                     .returns(@emailsCollection)
 
+    @contactsCollection = new Backbone.Collection()
+    @contactsStub = sinon.stub(window.CPP.Collections, "CompanyContacts")
+                    .returns(@contactsCollection)
+
+    @departmentsCollection = new Backbone.Collection()
+    @departmentsStub = sinon.stub(window.CPP.Collections, "Departments")
+                    .returns(@departmentsCollection)
+
     @company = new CPP.Models.Company {
       name: @name
       logo: @logo
@@ -27,6 +35,8 @@ describe "Company", ->
     window.CPP.Collections.Events.restore()
     window.CPP.Collections.Placements.restore()
     window.CPP.Collections.TaggedEmails.restore()
+    window.CPP.Collections.CompanyContacts.restore()
+    window.CPP.Collections.Departments.restore()
 
   describe "url", ->
     describe "when no id is set", ->
@@ -82,7 +92,20 @@ describe "Company", ->
       it "should be exhibited", ->
         expect(@emailsStub).toHaveBeenCalledOnce()
 
-      it "should have a url of /companies/{id}/emails", ->
-        expect(@emailsCollection.url).toBe '/companies/1/emails'
+      it "should have a url of /companies/{id}/tagged_emails", ->
+        expect(@emailsCollection.url).toBe '/companies/1/tagged_emails'
 
+    describe "contacts collection", ->
+      it "should be exhibited", ->
+        expect(@contactsStub).toHaveBeenCalledOnce()
+
+      it "should have a url of /companies/{id}/company_contacts", ->
+        expect(@contactsCollection.url).toBe '/companies/1/company_contacts'
+
+    describe "departments collection", ->
+      it "should be exhibited", ->
+        expect(@departmentsStub).toHaveBeenCalledOnce()
+
+      it "should have a url of /companies/{id}/departments", ->
+        expect(@departmentsCollection.url).toBe '/companies/1/departments'
 
