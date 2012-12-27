@@ -39,6 +39,7 @@ describe "Student Routing", ->
 
   describe "Handler functionality", ->
     beforeEach ->
+      @student_id = 1
       @collection = new Backbone.Collection()
       @collection.url = "/students"
       @studentCollectionStub = sinon.stub(window.CPP.Collections, "Students")
@@ -73,41 +74,40 @@ describe "Student Routing", ->
 
     describe "View handler", ->
       beforeEach ->
-        @studentViewStub = sinon.stub(window.CPP.Views, "StudentsView")
+        @viewStub = sinon.stub(window.CPP.Views.Students, "View")
                               .returns(new Backbone.View())
 
       afterEach ->
         window.CPP.Views.Students.View.restore()
 
       it "should create a Student model", ->
-        @router.view()
+        @router.view @student_id
         expect(@studentModelStub).toHaveBeenCalledOnce()
         expect(@studentModelStub).toHaveBeenCalledWith()
 
 
       it "should create a StudentsView on student fetch success", ->
-        @router.view()
-        expect(@studentViewStub).toHaveBeenCalledOnce()
-        expect(@studentViewStub).toHaveBeenCalledWith model: @student
+        @router.view @student_id
+        expect(@viewStub).toHaveBeenCalledOnce()
+        expect(@viewStub).toHaveBeenCalledWith model: @student
 
       it "should not create a StudentsView on student fetch error", ->
         @student.fetch.restore()
         sinon.stub(@student, "fetch").yieldsTo "error"
-        @router.view()
-        expect(@studentViewStub.callCount).toBe 0
+        @router.view @student_id
+        expect(@viewStub.callCount).toBe 0
 
     describe "Signup Handler", ->
       beforeEach ->
-        @studentSignupViewStub = sinon.stub(window.CPP.Views, "StudentsSignup")
+        @studentSignupViewStub = sinon.stub(window.CPP.Views.Students, "Signup")
                                    .returns(new Backbone.View())
-        @router.signup(1)
+        @router.signup @student_id
 
       afterEach ->
         window.CPP.Views.Students.Signup.restore()
 
       it "should create a new Student Model", ->
         expect(@studentModelStub).toHaveBeenCalledOnce()
-        expect(@studentModelStub).toHaveBeenCalledWith department_id: 1
 
       it "shpould create a new student collection", ->
         expect(@studentCollectionStub).toHaveBeenCalledOnce()
