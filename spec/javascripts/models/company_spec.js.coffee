@@ -13,7 +13,7 @@ describe "Company", ->
                     .returns(@placementsCollection)
 
     @emailsCollection = new Backbone.Collection()
-    @emailsStub = sinon.stub(window.CPP.Collections, "Emails")
+    @emailsStub = sinon.stub(window.CPP.Collections, "TaggedEmails")
                     .returns(@emailsCollection)
 
     @company = new CPP.Models.Company {
@@ -26,7 +26,7 @@ describe "Company", ->
   afterEach ->
     window.CPP.Collections.Events.restore()
     window.CPP.Collections.Placements.restore()
-    window.CPP.Collections.Emails.restore()
+    window.CPP.Collections.TaggedEmails.restore()
 
   describe "url", ->
     describe "when no id is set", ->
