@@ -5,5 +5,8 @@
 # spec/javascripts/*_spec.js.erb
 # IT IS UNLIKELY THAT YOU WILL NEED TO CHANGE THIS FILE
 #
-#=require application
+#= require application
+#= require sinon
+#= require jasmine-sinon
+#= require jasmine-jquery
 #=require_tree .//

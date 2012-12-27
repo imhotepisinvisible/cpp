@@ -23,11 +23,6 @@
 //= require backbone-validation
 //= require backbone/cpp
 //
-// TESTING
-//= require sinon
-//= #require jasmine-sinon
-//= #require jasmine-jquery
-//
 // JQUERY UI/WIDGETS
 //= require jquery.ui.sortable
 //= require jquery-fileupload/basic
