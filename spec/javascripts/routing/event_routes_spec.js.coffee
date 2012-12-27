@@ -130,7 +130,6 @@ describe "Event Routing", ->
         expect(@companyModelStub).toHaveBeenCalledWith id: 1
 
       it "should create an Edit view on success", ->
-        console.log "Edit View", expect(@editViewStub)
         expect(@editViewStub).toHaveBeenCalledOnce()
         expect(@editViewStub).toHaveBeenCalledWith model: @model
 
