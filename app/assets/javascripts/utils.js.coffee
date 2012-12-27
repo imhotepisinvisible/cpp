@@ -86,7 +86,7 @@ window.loggedIn = ->
   CPP.CurrentUser? && CPP.CurrentUser isnt {}
 
 window.isStudent = ->
-  loggedIn() && CPP.CurrentUser.type == "Student"
+  loggedIn() && CPP.CurrentUser.get('type') == "Student"
 
 window.isAdmin = ->
-  loggedIn() && CPP.CurrentUser.type == "CompanyAdministrator"
+  loggedIn() && CPP.CurrentUser.get('type') == "CompanyAdministrator"
