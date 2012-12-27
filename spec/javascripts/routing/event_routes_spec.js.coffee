@@ -129,6 +129,9 @@ describe "Event Routing", ->
         expect(@companyModelStub).toHaveBeenCalledOnce()
         expect(@companyModelStub).toHaveBeenCalledWith id: 1
 
+      it "should create a Department Collection on company fetch success", ->
+        expect(@departmentsStub).toHaveBeenCalledOnce()
+
       it "should create an Edit view on success", ->
         expect(@editViewStub).toHaveBeenCalledOnce()
         expect(@editViewStub).toHaveBeenCalledWith model: @model
