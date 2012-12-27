@@ -40,10 +40,11 @@ describe "Student Routing", ->
   describe "Handler functionality", ->
     beforeEach ->
       @student_id = 1
-      @collection = new Backbone.Collection()
-      @collection.url = "/students"
+      @students = new Backbone.Collection()
+      @students.url = "/students"
+      sinon.stub(@students, "fetch").yieldsTo "success"
       @studentCollectionStub = sinon.stub(window.CPP.Collections, "Students")
-                                   .returns(@collection)
+                                   .returns @students
 
       @student = new (Backbone.Model.extend(
            schema:
@@ -61,9 +62,12 @@ describe "Student Routing", ->
       @studentModelStub = sinon.stub(window.CPP.Models, "Student")
                             .returns(@student)
 
+      @indexViewStub = sinon.stub(window.CPP.Views.Students, "Index").returns(new Backbone.View())
+
     afterEach ->
       window.CPP.Collections.Students.restore()
       window.CPP.Models.Student.restore()
+      window.CPP.Views.Students.Index.restore()
 
 
     describe "Index handler", ->
@@ -71,6 +75,17 @@ describe "Student Routing", ->
         @router.index()
         expect(@studentCollectionStub).toHaveBeenCalledOnce()
         expect(@studentCollectionStub).toHaveBeenCalledWith()
+
+      it "should create an Index view on collection fetch success", ->
+        @router.index()
+        expect(@indexViewStub).toHaveBeenCalledOnce()
+        expect(@indexViewStub).toHaveBeenCalledWith collection: @students
+
+      it "should not create an Index view on collection fetch error", ->
+        @students.fetch.restore()
+        sinon.stub(@students, 'fetch').yieldsTo 'error'
+        @router.index()
+        expect(@indexViewStub.callCount).toBe
 
     describe "View handler", ->
       beforeEach ->
@@ -116,3 +131,8 @@ describe "Student Routing", ->
       it "should create a new StudentSignup view", ->
         expect(@studentSignupViewStub).toHaveBeenCalledOnce()
         expect(@studentSignupViewStub).toHaveBeenCalledWith model: @student
+
+  ###################### TODO: #######################
+  # * Settings handler
+  # * Edit Handler
+  ####################################################
