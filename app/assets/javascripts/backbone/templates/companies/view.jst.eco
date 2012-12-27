@@ -22,6 +22,7 @@
   <div class="span6" id="placements-partial"></div>
 </div>
 
+<% if !isStudent(): %>
 <div class="row">
   <div class="span6" id="emails-partial"></div>
 
@@ -33,3 +34,4 @@
     Coming soon...
   </div>
 </div>
+<% end %>
