@@ -1,6 +1,6 @@
 describe "Email Routing", ->
   beforeEach ->
-      @router = new CPP.Routers.Emails
+      @router = new CPP.Routers.TaggedEmails
 
     describe "Calls correct routing method", ->
       beforeEach ->
@@ -12,54 +12,54 @@ describe "Email Routing", ->
 
         @router.navigate "elsewhere"
 
-      it "should call index route with an /emails route", ->
+      it "should call index route with an /tagged_emails route", ->
         @router.bind "route:index", @routeSpy
-        @router.navigate "emails", true
+        @router.navigate "tagged_emails", true
         expect(@routeSpy).toHaveBeenCalledOnce()
         expect(@routeSpy).toHaveBeenCalledWith()
 
-      it "should call view route with an /emails/{id} route", ->
+      it "should call view route with an /tagged_emails/{id} route", ->
         @router.bind "route:view", @routeSpy
-        @router.navigate "emails/1", true
+        @router.navigate "tagged_emails/1", true
         expect(@routeSpy).toHaveBeenCalledOnce()
         expect(@routeSpy).toHaveBeenCalledWith()
 
-      it "should call edit route with an /emails/{id}/edit route", ->
+      it "should call edit route with an /tagged_emails/{id}/edit route", ->
         @router.bind "route:edit", @routeSpy
-        @router.navigate "emails/1/edit", true
+        @router.navigate "tagged_emails/1/edit", true
         expect(@routeSpy).toHaveBeenCalledOnce()
         expect(@routeSpy).toHaveBeenCalledWith()
 
 
-      it "should call indexCompany route with a /companies/{comp_id}/emails route", ->
+      it "should call indexCompany route with a /companies/{comp_id}/tagged_emails route", ->
         @router.bind "route:indexCompany", @routeSpy
-        @router.navigate "companies/1/emails", true
+        @router.navigate "companies/1/tagged_emails", true
         expect(@routeSpy).toHaveBeenCalledOnce()
         expect(@routeSpy).toHaveBeenCalledWith()
 
-      it "should call new route with a /companies/{comp_id}/emails/new route", ->
+      it "should call new route with a /companies/{comp_id}/tagged_emails/new route", ->
         @router.bind "route:new", @routeSpy
-        @router.navigate "companies/1/emails/new", true
+        @router.navigate "companies/1/tagged_emails/new", true
         expect(@routeSpy).toHaveBeenCalledOnce()
         expect(@routeSpy).toHaveBeenCalledWith()
 
   describe "Handler functionality", ->
     beforeEach ->
       @collection = new Backbone.Collection()
-      @collection.url = "/emails"
+      @collection.url = "/tagged_emails"
       @collectionFetchStub = sinon.stub(@collection, "fetch").yieldsTo "success"
-      @emailsCollectionStub = sinon.stub(window.CPP.Collections, "Emails")
+      @emailsCollectionStub = sinon.stub(window.CPP.Collections, "TaggedEmails")
                                   .returns(@collection)
 
-      @emailsEditViewStub = sinon.stub(window.CPP.Views, "EmailsEdit")
+      @editViewStub = sinon.stub(window.CPP.Views.TaggedEmails, "Edit")
                                .returns(new Backbone.View())
 
-      @emailsIndexViewStub = sinon.stub(window.CPP.Views, "EmailsIndex")
+      @indexViewStub = sinon.stub(window.CPP.Views.TaggedEmails, "Index")
                                .returns(new Backbone.View())
 
       @emailModel = new Backbone.Model()
-      @emailModel.url = "/emails"
-      @emailModelStub = sinon.stub(window.CPP.Models, "Email")
+      @emailModel.url = "/tagged_emails"
+      @emailModelStub = sinon.stub(window.CPP.Models, "TaggedEmail")
                             .returns(@emailModel)
       sinon.stub(@emailModel, "fetch").yieldsTo "success"
 
@@ -70,11 +70,11 @@ describe "Email Routing", ->
       sinon.stub(@companyModel, "fetch").yieldsTo "success"
 
     afterEach ->
-        window.CPP.Collections.Emails.restore()
-        window.CPP.Models.Email.restore()
+        window.CPP.Collections.TaggedEmails.restore()
+        window.CPP.Models.TaggedEmail.restore()
         window.CPP.Models.Company.restore()
-        window.CPP.Views.EmailsEdit.restore()
-        window.CPP.Views.EmailsIndex.restore()
+        window.CPP.Views.TaggedEmails.Edit.restore()
+        window.CPP.Views.TaggedEmails.Index.restore()
 
     describe "Index handler", ->
       it "should create an Emails collection", ->
@@ -84,15 +84,15 @@ describe "Email Routing", ->
 
       it "should create an EmailsIndex view on fetch success", ->
         @router.index()
-        expect(@emailsIndexViewStub).toHaveBeenCalledOnce()
-        expect(@emailsIndexViewStub).toHaveBeenCalledWith collection: @collection
+        expect(@indexViewStub).toHaveBeenCalledOnce()
+        expect(@indexViewStub).toHaveBeenCalledWith collection: @collection
 
 
       it "should not create an EventIndex view on fetch error", ->
         @collection.fetch.restore()
         sinon.stub(@collection, "fetch").yieldsTo "error"
         @router.index()
-        expect(@emailsIndexViewStub.callCount).toBe 0
+        expect(@indexViewStub.callCount).toBe 0
 
       it "should fetch the event data from the server", ->
         @router.index()
@@ -101,11 +101,11 @@ describe "Email Routing", ->
 
     describe "View handler", ->
       beforeEach ->
-        @emailsViewStub = sinon.stub(window.CPP.Views, "EmailsView")
+        @viewStub = sinon.stub(window.CPP.Views.TaggedEmails, "View")
                                .returns(new Backbone.View())
 
       afterEach ->
-        window.CPP.Views.EmailsView.restore()
+        window.CPP.Views.TaggedEmails.View.restore()
 
       it "should create an Email model", ->
         @router.view 1
@@ -113,21 +113,21 @@ describe "Email Routing", ->
         expect(@emailModelStub).toHaveBeenCalledWith id: 1
 
       it "should create a Company Model on fetch success", ->
-        @emailModel.company_id = 2
+        sinon.stub(@emailModel, 'get').withArgs('company_id').returns 2
         @router.view 1
         expect(@companyModelStub).toHaveBeenCalledOnce()
         expect(@companyModelStub).toHaveBeenCalledWith id: 2
 
-      it "should create an EmailsView on company fetch success", ->
+      it "should create an View on company fetch success", ->
         @router.view 1
-        expect(@emailsViewStub).toHaveBeenCalledOnce()
-        expect(@emailsViewStub).toHaveBeenCalledWith model: @emailModel
+        expect(@viewStub).toHaveBeenCalledOnce()
+        expect(@viewStub).toHaveBeenCalledWith model: @emailModel
 
       it "should not create an EmailsView on company fetch error", ->
         @companyModel.fetch.restore()
         sinon.stub(@companyModel, "fetch").yieldsTo "error"
         @router.view 1
-        expect(@emailsViewStub.callCount).toBe 0
+        expect(@viewStub.callCount).toBe 0
 
       it "should not create a Company Model on fetch error", ->
         @emailModel.fetch.restore()
@@ -143,15 +143,15 @@ describe "Email Routing", ->
 
       it "should create an EmailsEdit view on fetch success", ->
         @router.edit 1
-        expect(@emailsEditViewStub).toHaveBeenCalledOnce()
-        expect(@emailsEditViewStub).toHaveBeenCalledWith model: @emailModel
+        expect(@editViewStub).toHaveBeenCalledOnce()
+        expect(@editViewStub).toHaveBeenCalledWith model: @emailModel
 
 
       it "should not create an EmailsEdit view on fetch error", ->
         @emailModel.fetch.restore()
         sinon.stub(@emailModel, "fetch").yieldsTo "error"
         @router.edit 1
-        expect(@emailsEditViewStub.callCount).toBe 0
+        expect(@editViewStub.callCount).toBe 0
 
     describe "New Handler", ->
       beforeEach ->
@@ -159,15 +159,15 @@ describe "Email Routing", ->
 
       it "should create an Email model", ->
         expect(@emailModelStub).toHaveBeenCalledWith
-        expect(@emailModelStub).toHaveBeenCalledWith company_id: 1
+        expect(@emailModelStub).toHaveBeenCalledWith company_id: 1, subject: "Subject", body: "Email body"
 
       it "should create an Email collection", ->
         expect(@emailsCollectionStub).toHaveBeenCalledOnce()
         expect(@emailsCollectionStub).toHaveBeenCalledWith()
 
-      it "should create an EmalsEdit view", ->
-        expect(@emailsEditViewStub).toHaveBeenCalledOnce()
-        expect(@emailsEditViewStub).toHaveBeenCalledWith model: @emailModel
+      it "should create an Edit view", ->
+        expect(@editViewStub).toHaveBeenCalledOnce()
+        expect(@editViewStub).toHaveBeenCalledWith model: @emailModel
 
     describe "IndexCompany Handler", ->
       it "should create an Email collection", ->
@@ -180,16 +180,16 @@ describe "Email Routing", ->
         expect(@companyModelStub).toHaveBeenCalledOnce()
         expect(@companyModelStub).toHaveBeenCalledWith id: 1
 
-      it "should create an EmailsIndex on company fetch success", ->
+      it "should create an Index on company fetch success", ->
         @router.indexCompany 1
-        expect(@emailsIndexViewStub).toHaveBeenCalledOnce()
-        expect(@emailsIndexViewStub).toHaveBeenCalledWith collection: @collection
+        expect(@indexViewStub).toHaveBeenCalledOnce()
+        expect(@indexViewStub).toHaveBeenCalledWith collection: @collection
 
-      it "should not create an EmailsView on company fetch error", ->
+      it "should not create an Index View on company fetch error", ->
         @companyModel.fetch.restore()
         sinon.stub(@companyModel, "fetch").yieldsTo "error"
         @router.indexCompany 1
-        expect(@emailsIndexViewStub.callCount).toBe 0
+        expect(@indexViewStub.callCount).toBe 0
 
       it "should not create a Company Model on fetch error", ->
         @collection.fetch.restore()
