@@ -69,6 +69,14 @@
 
       position: relative;
 
+      &.hoverable{
+        cursor: move;
+
+        &:hover{
+          background-color: #eee;
+        }
+      }
+
       .contact-name {
         font-weight: bold;
         font-size: 1.2em;
