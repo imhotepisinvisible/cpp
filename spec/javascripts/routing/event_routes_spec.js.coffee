@@ -59,11 +59,7 @@ describe "Event Routing", ->
       @indexViewStub = sinon.stub(window.CPP.Views.Events, "Index")
                               .returns(new Backbone.View())
 
-      @event = new (Backbone.Model.extend(
-                   schema:
-                      title:
-                        type: "Text"
-                  ))()
+      @event = new Backbone.Model()
       @event.url = "/events"
       @eventFetchStub =sinon.stub(@event, "fetch").yieldsTo "success"
 
