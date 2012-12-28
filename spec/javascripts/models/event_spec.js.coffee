@@ -24,7 +24,7 @@ describe "Event", ->
   describe "when instantiated", ->
     beforeEach ->
       @event = new CPP.Models.Event @attrs
-      
+
     it "should exhibit title attribute", ->
       expect(@event.get 'title').toEqual @attrs.title
 
@@ -50,25 +50,23 @@ describe "Event", ->
 
       @event = new CPP.Models.Event @attrs
 
+    afterEach ->
+      expect(@errorSpy).toHaveBeenCalledOnce()
+
     it "should not save when title is empty", ->
       @event.save 'title': ""
-      expect(@errorSpy).toHaveBeenCalledOnce()
 
     it "should not save when start_date is empty", ->
       @event.save 'start_date': ""
-      expect(@errorSpy).toHaveBeenCalledOnce()
 
     it "should not save when end_date is empty", ->
       @event.save 'end_date': ""
-      expect(@errorSpy).toHaveBeenCalledOnce()
 
     it "should not save when description is empty", ->
       @event.save 'description': ""
-      expect(@errorSpy).toHaveBeenCalledOnce()
 
     it "should not save when location is empty", ->
       @event.save 'location': ""
-      expect(@errorSpy).toHaveBeenCalledOnce()
 
 
   describe "when saving optional fields", ->
@@ -83,25 +81,25 @@ describe "Event", ->
 
       @event = new CPP.Models.Event @attrs
 
+    describe "for valid fields", ->
+      afterEach ->
+        expect(@successSpy).toHaveBeenCalledOnce()
 
-    it "should save when deadline is empty", ->
-      @event.save 'deadline': ""
-      expect(@successSpy).toHaveBeenCalledOnce()
+      it "should save when deadline is empty", ->
+        @event.save 'deadline': ""
 
-    it "should save when capacity is empty", ->
-      @event.save 'capacity': ""
-      expect(@successSpy).toHaveBeenCalledOnce()
+      it "should save when capacity is empty", ->
+        @event.save 'capacity': ""
 
-    it "should save when google_map_url is empty", ->
-      @event.save 'google_map_url': ""
-      expect(@successSpy).toHaveBeenCalledOnce()
+      it "should save when google_map_url is empty", ->
+        @event.save 'google_map_url': ""
 
-    it "should not allow an invalid url for google_map_url", ->
-      @event.save 'google_map_url' : "url"
-      @expect(@errorSpy).toHaveBeenCalledOnce()
+      # TODO investigate getting Faker.js as a gem?
+      it "should allow a valid url for google_map_url", ->
+        @event.save 'google_map_url' : 'https://www.google.co.uk'
 
-    # TODO investigate getting Faker.js as a gem?
-    it "should allow a valid url for google_map_url", ->
-      @event.save 'google_map_url' : 'https://www.google.co.uk'
-      expect(@successSpy).toHaveBeenCalledOnce()
+    describe "for invalid fields", ->
+      it "should not allow an invalid url for google_map_url", ->
+        @event.save 'google_map_url' : "url"
+        @expect(@errorSpy).toHaveBeenCalledOnce()
 

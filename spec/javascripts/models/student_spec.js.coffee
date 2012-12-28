@@ -60,35 +60,29 @@ describe "Student", ->
 
       @student = new CPP.Models.Student @attrs
 
+    afterEach ->
+      expect(@errorSpy).toHaveBeenCalledOnce()
+
     it "should not save when first_name is empty", ->
       @student.save 'first_name': ""
-      expect(@errorSpy).toHaveBeenCalledOnce()
 
     it "should not save when last_name is empty", ->
       @student.save 'last_name': null
-      expect(@errorSpy).toHaveBeenCalledOnce()
 
     it "should not save when email is empty", ->
       @student.save 'email': null
-      expect(@errorSpy).toHaveBeenCalledOnce()
 
     it "should not save when email does not match email form", ->
       @student.save 'email': "email"
-      @expect(@errorSpy).toHaveBeenCalledOnce()
 
     it "should not save when password is empty", ->
       @student.save 'password': null
-      expect(@errorSpy).toHaveBeenCalledOnce()
 
     it "should not save when password is less than 8 characters", ->
       @student.save 'password_confirmation' : 'aaaaaaa'
-      expect(@errorSpy).toHaveBeenCalledOnce()
 
     it "should not save when password_confirmation is empty", ->
       @student.save 'password_confirmation': ""
-      expect(@errorSpy).toHaveBeenCalledOnce()
 
     it "should not save when password_confirmation is less than 8 characters", ->
       @student.save 'password_confirmation' : 'aaaaaaa'
-      expect(@errorSpy).toHaveBeenCalledOnce()
-

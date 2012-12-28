@@ -46,17 +46,17 @@ describe "when saving required fields", ->
 
     @placement = new CPP.Models.Placement @attrs
 
+  afterEach ->
+    expect(@error_spy).toHaveBeenCalledOnce()
+
   it "should not save when position is empty", ->
     @placement.save 'position': ""
-    expect(@error_spy).toHaveBeenCalledOnce();
 
   it "should not save when description is empty", ->
     @placement.save 'description': ""
-    expect(@error_spy).toHaveBeenCalledOnce();
 
   it "should not save when description is empty", ->
     @placement.save 'location': ""
-    expect(@error_spy).toHaveBeenCalledOnce();
 
 describe "when saving optional fields", ->
   beforeEach ->
@@ -68,35 +68,30 @@ describe "when saving optional fields", ->
 
     @placement = new CPP.Models.Placement @attrs
 
+  afterEach ->
+    expect(@success_spy).toHaveBeenCalledOnce()
+
   it "should save when deadline is empty", ->
     @placement.save 'deadline': ""
-    expect(@success_spy).toHaveBeenCalledOnce();
 
   it "should save when duration is empty", ->
     @placement.save 'duration': ""
-    expect(@success_spy).toHaveBeenCalledOnce();
 
   it "should save when open_to is empty", ->
     @placement.save 'open_to': ""
-    expect(@success_spy).toHaveBeenCalledOnce();
 
   it "should save when salary is empty", ->
     @placement.save 'salary': ""
-    expect(@success_spy).toHaveBeenCalledOnce();
 
   it "should save when benefits is empty", ->
     @placement.save 'benefits': ""
-    expect(@success_spy).toHaveBeenCalledOnce();
 
   it "should save when application_procedure is empty", ->
     @placement.save 'application_procedure': ""
-    expect(@success_spy).toHaveBeenCalledOnce();
 
   it "should save when interview_date is empty", ->
     @placement.save 'interview_date': ""
-    expect(@success_spy).toHaveBeenCalledOnce();
 
   it "should save when other is empty", ->
     @placement.save 'other': ""
-    expect(@success_spy).toHaveBeenCalledOnce();
 
