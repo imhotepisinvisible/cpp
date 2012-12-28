@@ -17,8 +17,3 @@
 
 * Ignore uploaded files
 /documents/*
-
-#Ignore all tex generated files
-/report/*.aux
-/report/*.log
-/report/*.pdf
