@@ -4,7 +4,7 @@ class PlacementsController < ApplicationController
   # GET /placements
   # GET /placements.json
   def index
-    if current_user
+    if current_user && current_user.is_student?
       @placements = current_user.placements.scoped
     else
       @placements = Placement.scoped # Change me
@@ -18,7 +18,7 @@ class PlacementsController < ApplicationController
       @placements = @placements.limit(params[:limit])
     end
 
-    if current_user && current_user.type == "Student"
+    if current_user && current_user.is_student?
       # Sort on relevance, then company id (groups by company if same relevance)
       @placements = @placements.sort_by {|p| [-p.relevance(current_user.id), p.company.name] }
       respond_with @placements.as_json({:student_id => current_user.id})

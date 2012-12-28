@@ -28,6 +28,18 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :first_name, :last_name, :password, :password_confirmation
 
+  def is_student?
+    self.class.name == "Student"
+  end
+
+  def is_company_admin?
+    self.class.name == "CompanyAdministrator"
+  end
+
+  def is_admin?
+    self.class.name == "Administrator"
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end

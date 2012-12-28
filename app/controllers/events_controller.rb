@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    if current_user
+    if current_user && current_user.is_student?
       @events = current_user.events.scoped
     else
       @events = Event.scoped # Change me
@@ -18,7 +18,7 @@ class EventsController < ApplicationController
       @events = @events.limit(params[:limit])
     end
 
-    if current_user && current_user.type == "Student"
+    if current_user && current_user.is_student?
       # Sort on relevance, then company id (groups by company if same relevance)
       @events.sort_by! {|e| [-e.relevance(current_user.id), e.company.name] }
       respond_with @events.as_json({:student_id => current_user.id})
