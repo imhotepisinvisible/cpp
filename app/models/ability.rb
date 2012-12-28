@@ -11,9 +11,19 @@ class Ability
     when "Student"
       can :manage, Student, :id => user.id
       can [:read, :download_document], Company do |company|
-        user.departments.map(&:organisation_id).include? company.organisation_id
+        # Get departments for both and check they intersect
+        company_departments = user.company.departments.map(&:id)
+        student_departments = user.departments.map(&:id)
+        return intersect?(company_departments, student_departments)
       end
     when "CompanyAdministrator"
+      can :manage, Company, :id => user.company_id
+      can [:read, :download_document], Student do |student|
+        # Get departments for both and check they intersect
+        company_departments = user.company.departments.map(&:id)
+        student_departments = student.departments.map(&:id)
+        return intersect?(company_departments, student_departments)
+      end
     end
     #
     # The first argument to `can` is the action you are giving the user permission to do.
@@ -29,5 +39,9 @@ class Ability
     #   can :update, Article, :published => true
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
+  end
+
+  def intersect?(l1, l2)
+    !(l1 | l2).empty?
   end
 end

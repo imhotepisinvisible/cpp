@@ -14,6 +14,9 @@
       </li>
       <% elsif current_user.type == "CompanyAdministrator" %>
         <li>
+          <a href="#companies/<%= current_user.company_id %>">Manage Company Profile</a>
+        </li>
+        <li>
           <a href="#students">Students</a>
         </li>
       <% end %>
