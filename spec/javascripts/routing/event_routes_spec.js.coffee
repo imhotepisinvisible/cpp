@@ -45,12 +45,12 @@ describe "Event Routing", ->
 
   describe "Handler functionality", ->
     beforeEach ->
-      @collection = new Backbone.Collection()
-      @collection.url = "/events"
-      @collectionFetchStub = sinon.stub(@collection, "fetch").yieldsTo "success"
+      @events = new Backbone.Collection()
+      @events.url = "/events"
+      @eventsFetchStub = sinon.stub(@events, "fetch").yieldsTo "success"
 
       @eventsCollectionStub = sinon.stub(window.CPP.Collections, "Events")
-                                .returns(@collection)
+                                .returns(@events)
 
       @editViewStub = sinon.stub(window.CPP.Views.Events, "Edit")
                               .returns(new Backbone.View())
@@ -93,19 +93,19 @@ describe "Event Routing", ->
       it "should create an Index view on fetch success", ->
         @router.index()
         expect(@indexViewStub).toHaveBeenCalledOnce()
-        expect(@indexViewStub).toHaveBeenCalledWith collection: @collection
+        expect(@indexViewStub).toHaveBeenCalledWith collection: @events
 
 
       it "should not create an Index view on fetch success", ->
-        @collection.fetch.restore()
-        sinon.stub(@collection, "fetch").yieldsTo "error"
+        @events.fetch.restore()
+        sinon.stub(@events, "fetch").yieldsTo "error"
         @router.index()
         expect(@indexViewStub.callCount).toBe 0
 
       it "should fetch the event data from the server", ->
         @router.index()
-        expect(@collectionFetchStub).toHaveBeenCalledOnce()
-        expect(@collectionFetchStub).toHaveBeenCalledWith()
+        expect(@eventsFetchStub).toHaveBeenCalledOnce()
+        expect(@eventsFetchStub).toHaveBeenCalledWith()
 
     describe "New handler", ->
       beforeEach ->
@@ -210,15 +210,15 @@ describe "Event Routing", ->
         expect(@companyModelStub).toHaveBeenCalledWith id: 1
 
       it "should not create a Company Model on fetch error", ->
-        @collection.fetch.restore()
-        sinon.stub(@collection, "fetch").yieldsTo "error"
+        @events.fetch.restore()
+        sinon.stub(@events, "fetch").yieldsTo "error"
         @router.indexCompany(1)
         expect(@companyModelStub.callCount).toBe 0
 
       it "should create an EventsIndex on company fetch success", ->
         @router.indexCompany(1)
         expect(@indexViewStub).toHaveBeenCalledOnce()
-        expect(@indexViewStub).toHaveBeenCalledWith collection: @collection
+        expect(@indexViewStub).toHaveBeenCalledWith collection: @events
 
       it "should not create an EventsIndex on company fetch error", ->
         @company.fetch.restore()
