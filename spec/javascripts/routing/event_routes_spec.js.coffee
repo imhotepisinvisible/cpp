@@ -59,16 +59,16 @@ describe "Event Routing", ->
       @indexViewStub = sinon.stub(window.CPP.Views.Events, "Index")
                               .returns(new Backbone.View())
 
-      @model = new (Backbone.Model.extend(
+      @event = new (Backbone.Model.extend(
                    schema:
                       title:
                         type: "Text"
                   ))()
-      @model.url = "/events"
-      @modelFetchStub =sinon.stub(@model, "fetch").yieldsTo "success"
+      @event.url = "/events"
+      @eventFetchStub =sinon.stub(@event, "fetch").yieldsTo "success"
 
       @eventModelStub = sinon.stub(window.CPP.Models, "Event")
-                          .returns(@model)
+                          .returns(@event)
 
       @company = new Backbone.Model()
       @company.url = "/companies"
@@ -134,7 +134,7 @@ describe "Event Routing", ->
 
       it "should create an Edit view on success", ->
         expect(@editViewStub).toHaveBeenCalledOnce()
-        expect(@editViewStub).toHaveBeenCalledWith model: @model
+        expect(@editViewStub).toHaveBeenCalledWith model: @event
 
     describe "Edit handler", ->
       # TODO: Why does this test cause:
@@ -147,19 +147,19 @@ describe "Event Routing", ->
       it "should create an EventEdit view on fetch success", ->
         @router.edit(1)
         expect(@editViewStub).toHaveBeenCalledOnce()
-        expect(@editViewStub).toHaveBeenCalledWith model: @model
+        expect(@editViewStub).toHaveBeenCalledWith model: @event
 
 
       it "should not create an EventEdit view on fetch success", ->
-        @model.fetch.restore()
-        sinon.stub(@model, "fetch").yieldsTo "error"
+        @event.fetch.restore()
+        sinon.stub(@event, "fetch").yieldsTo "error"
         @router.edit(1)
         expect(@editViewStub.callCount).toBe 0
 
       it "should fetch the event data from the server", ->
         @router.edit(1)
-        expect(@modelFetchStub).toHaveBeenCalledOnce()
-        expect(@modelFetchStub).toHaveBeenCalledWith()
+        expect(@eventFetchStub).toHaveBeenCalledOnce()
+        expect(@eventFetchStub).toHaveBeenCalledWith()
 
     describe "View handler", ->
       beforeEach ->      
@@ -177,14 +177,14 @@ describe "Event Routing", ->
 
       it "should create a Company Model on fetch success", ->
         company_id = 2
-        sinon.stub(@model, 'get').withArgs('company_id').returns company_id
+        sinon.stub(@event, 'get').withArgs('company_id').returns company_id
         @router.view(1)
         expect(@companyModelStub).toHaveBeenCalledOnce()
         expect(@companyModelStub).toHaveBeenCalledWith id: company_id
 
       it "should not create a Company Model on fetch error", ->
-        @model.fetch.restore()
-        sinon.stub(@model, "fetch").yieldsTo "error"
+        @event.fetch.restore()
+        sinon.stub(@event, "fetch").yieldsTo "error"
         @router.view(1)
         expect(@companyModelStub.callCount).toBe 0
 
