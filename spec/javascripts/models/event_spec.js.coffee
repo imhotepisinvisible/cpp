@@ -1,47 +1,44 @@
 describe "Event", ->
   beforeEach ->
-    @title = "Google interview techniques"
-    @description = "Ace our interviews"
-    @location = "Victoria, London"
-    @start_date = new Date
-    @end_date = new Date
+    @attrs = 
+      title: "Google interview techniques"
+      description: "Ace our interviews"
+      location: "Victoria, London"
+      start_date: new Date
+      end_date: new Date
 
-  describe "Not sure", ->
-    # TODO, not sure if this is the best message...
+
+  describe "url", ->
     beforeEach ->
-      @event = new CPP.Models.Event {
-        title: @title
-        description: @description
-        location: @location
-        start_date: @start_date
-        end_date: @end_date
-      }
+      @event = new CPP.Models.Event @attrs
 
-    describe "url", ->
-      describe "when no id is set", ->
-        it "should return the collection URL", ->
-          expect(@event.url()).toEqual '/events'
+    describe "when no id is set", ->
+      it "should return the collection URL", ->
+        expect(@event.url()).toEqual '/events'
 
-      describe "when id is set", ->
-        it "should return the collection URL and id", ->
-          @event.id = 1
-          expect(@event.url()).toEqual '/events/1'
+    describe "when id is set", ->
+      it "should return the collection URL and id", ->
+        @event.id = 1
+        expect(@event.url()).toEqual '/events/1'
 
-    describe "when instantiated", ->
-      it "should exhibit title attribute", ->
-        expect(@event.get 'title').toEqual @title
+  describe "when instantiated", ->
+    beforeEach ->
+      @event = new CPP.Models.Event @attrs
+      
+    it "should exhibit title attribute", ->
+      expect(@event.get 'title').toEqual @attrs.title
 
-      it "should exhibit description attribute", ->
-        expect(@event.get 'description').toEqual @description
+    it "should exhibit description attribute", ->
+      expect(@event.get 'description').toEqual @attrs.description
 
-      it "should exhibit location attribute", ->
-        expect(@event.get 'location').toEqual @location
+    it "should exhibit location attribute", ->
+      expect(@event.get 'location').toEqual @attrs.location
 
-      it "should exhibit start_date attribute", ->
-        expect(@event.get 'start_date').toEqual @start_date
+    it "should exhibit start_date attribute", ->
+      expect(@event.get 'start_date').toEqual @attrs.start_date
 
-      it "should exhibit end_date attribute", ->
-        expect(@event.get 'end_date').toEqual @end_date
+    it "should exhibit end_date attribute", ->
+      expect(@event.get 'end_date').toEqual @attrs.end_date
 
   describe "when saving required fields", ->
     beforeEach ->
@@ -51,13 +48,7 @@ describe "Event", ->
         spy(@, "validated:invalid")
         init.call this
 
-      @event = new CPP.Models.Event {
-        title: @title
-        description: @description
-        location: @location
-        start_date: @start_date
-        end_date: @end_date
-      }
+      @event = new CPP.Models.Event @attrs
 
     it "should not save when title is empty", ->
       @event.save 'title': ""
@@ -90,13 +81,7 @@ describe "Event", ->
         errorSpy(@, "validated:invalid")
         init.call this
 
-      @event = new CPP.Models.Event {
-        title: @title
-        description: @description
-        location: @location
-        start_date: @start_date
-        end_date: @end_date
-      }
+      @event = new CPP.Models.Event @attrs
 
 
     it "should save when deadline is empty", ->

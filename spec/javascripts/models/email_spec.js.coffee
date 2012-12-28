@@ -1,14 +1,12 @@
 describe "Email", ->
   describe "Routing", ->
     beforeEach ->
-      @subject = 'subject'
-      @body = 'body'
-
-      @user = new CPP.Models.TaggedEmail {
-        subject: @subject
-        body: @body
+      @attrs =
+        subject: 'subject'
+        body: 'body'
         id: 1
-      }
+
+      @user = new CPP.Models.TaggedEmail @attrs
 
     describe "url", ->
       it "should return emails for new model", ->
@@ -20,10 +18,10 @@ describe "Email", ->
 
     describe "when instantiated", ->
       it "should exhibit subject attribute", ->
-        expect(@user.get 'subject').toEqual @subject
+        expect(@user.get 'subject').toEqual @attrs.subject
 
       it "should exhibit body attribute", ->
-        expect(@user.get 'body').toEqual @body
+        expect(@user.get 'body').toEqual @attrs.body
 
 
 

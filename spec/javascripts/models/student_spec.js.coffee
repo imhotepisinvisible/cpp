@@ -1,20 +1,16 @@
 describe "Student", ->
   beforeEach ->
-    @firstName = "Sarah"
-    @lastName = "Tattersall"
-    @email = "st@email.com"
-    @password = "aaaaaaaa"
+    @attrs = 
+      first_name: "Sarah"
+      last_name: "Tattersall"
+      email: "st@email.com"
+      password: "aaaaaaaa"
+      password_confirmation: "aaaaaaaa"
+      id: 1
 
   describe "Routing", ->
     beforeEach ->
-      @student = new CPP.Models.Student {
-        first_name: @firstName
-        last_name: @lastName
-        email: @email
-        password: @password
-        password_confirmation: @password
-        id: 1
-      }
+      @student = new CPP.Models.Student @attrs
 
     describe "url", ->
       describe "when no id is set", ->
@@ -24,6 +20,7 @@ describe "Student", ->
 
       describe "when id is set", ->
         it "should return the collection URL and id", ->
+          sinon.stub(@student, "isNew").returns(false)
           expect(@student.url()).toEqual '/students/1'
 
     describe "initialize", ->
@@ -38,20 +35,20 @@ describe "Student", ->
 
     describe "when instantiated", ->
       it "should exhibit first name attribute", ->
-        expect(@student.get 'first_name').toEqual @firstName
+        expect(@student.get 'first_name').toEqual @attrs.first_name
 
       it "should exhibit last_name attribute", ->
-        expect(@student.get 'last_name').toEqual @lastName
+        expect(@student.get 'last_name').toEqual @attrs.last_name
 
       it "should exhibit email attribute", ->
-        expect(@student.get 'email').toEqual @email
+        expect(@student.get 'email').toEqual @attrs.email
 
       # TODO: THIS ISN'T GOOD?
       it "should not exhibit password attribute", ->
-        expect(@student.get 'password').toEqual @password
+        expect(@student.get 'password').toEqual @attrs.password
 
       it "should exhibit password_confirmation attribute", ->
-        expect(@student.get 'password_confirmation').toEqual @password
+        expect(@student.get 'password_confirmation').toEqual @attrs.password
 
   describe "when saving required fields", ->
     beforeEach ->
@@ -61,13 +58,7 @@ describe "Student", ->
         spy(@, "validated:invalid")
         init.call this
 
-      @student = new CPP.Models.Student {
-        first_name: @firstName
-        last_name: @lastName
-        email: @email
-        password: @password
-        password_confirmation: @password
-      }
+      @student = new CPP.Models.Student @attrs
 
     it "should not save when first_name is empty", ->
       @student.save 'first_name': ""

@@ -1,8 +1,10 @@
 describe "Company", ->
   beforeEach ->
-    @name = "Google"
-    @logo = "Logo.jpg"
-    @description = "Super cool"
+    @attrs = 
+      name: "Google"
+      logo: "Logo.jpg"
+      description: "Super cool"
+      id: 1
 
     @eventsCollection = new Backbone.Collection()
     @eventsStub = sinon.stub(window.CPP.Collections, "Events")
@@ -24,12 +26,7 @@ describe "Company", ->
     @departmentsStub = sinon.stub(window.CPP.Collections, "Departments")
                     .returns(@departmentsCollection)
 
-    @company = new CPP.Models.Company {
-      name: @name
-      logo: @logo
-      description: @description
-      id: 1
-    }
+    @company = new CPP.Models.Company @attrs
 
   afterEach ->
     window.CPP.Collections.Events.restore()
@@ -74,13 +71,13 @@ describe "Company", ->
   describe "when instantiated", ->
 
     it "should exhibit name attribute", ->
-      expect(@company.get 'name').toEqual @name
+      expect(@company.get 'name').toEqual @attrs.name
 
     it "should exhibit logo attribute", ->
-      expect(@company.get 'logo').toEqual @logo
+      expect(@company.get 'logo').toEqual @attrs.logo
 
     it "should exhibit description attribute", ->
-     expect(@company.get 'description').toEqual @description
+     expect(@company.get 'description').toEqual @attrs.description
 
     describe "events collection", ->
       it "should be exhibited", ->
