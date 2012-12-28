@@ -31,6 +31,7 @@ describe "Placement Partial", ->
       expect(@placementsPartial.render()).toBe(@placementsPartial)
 
     it "should add top three", ->
+      @partialStub.reset()
       for id in [1..4]
         do (id) =>
           @collection.add new Backbone.Model id: id

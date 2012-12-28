@@ -20,6 +20,7 @@ describe "Events Partial", ->
                               model: @event
                               collection: @collection
 
+
   afterEach ->
     window.CPP.Views.Events.PartialItem.restore()
 
@@ -32,12 +33,13 @@ describe "Events Partial", ->
       expect(@eventsPartial.render()).toBe(@eventsPartial)
 
     it "should add top three", ->
+      @partialStub.reset()
       for id in [1..4]
         do (id) =>
           @collection.add new Backbone.Model id: id
 
       @eventsPartial.render()
-
+      console.log "After", expect(@partialStub)
       expect(@partialStub).toHaveBeenCalledThrice()
 
   describe "buttons", ->
