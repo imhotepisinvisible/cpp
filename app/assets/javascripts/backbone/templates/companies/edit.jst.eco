@@ -16,7 +16,7 @@
         <div id="company-logo-large company-logo-img-container"
              class="upload-container img-polaroid <%= "missing-document" unless @company.get('logo_file_name') %> image-buttons-container">
           <% if @company.get 'logo_file_name': %>
-            <img class='company-logo-img' src="/companies/<%= @company.get 'id' %>/documents/logo">
+            <img src="/companies/<%= @company.get 'id' %>/documents/logo">
           <% else: %>
             <img src="/assets/default_profile.png" id="company-logo-img">
           <% end %>
