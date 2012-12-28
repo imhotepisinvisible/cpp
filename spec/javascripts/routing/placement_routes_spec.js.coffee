@@ -127,7 +127,6 @@ describe "Placement Routing", ->
         expect(@companyModelStub).toHaveBeenCalledWith id: 1
 
       it "should create a Department Collection on company fetch success", ->
-        console.log expect(@departmentsStub)
         expect(@departmentsStub).toHaveBeenCalledOnce()
 
       it "should create a Edit view", ->

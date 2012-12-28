@@ -14,7 +14,6 @@ describe "Placement Partial Item", ->
 
   describe "Partial Item", ->
     it "Should link to event on events page", ->
-      console.log "oplacement item", $('.placement-item')
       spyEvent = spyOnEvent('.placement-item', 'click');
       navigationStub = sinon.spy(Backbone.history, 'navigate')
                           .withArgs('placements/1', trigger: true)

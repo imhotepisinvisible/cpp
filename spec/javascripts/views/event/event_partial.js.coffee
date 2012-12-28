@@ -39,7 +39,6 @@ describe "Events Partial", ->
           @collection.add new Backbone.Model id: id
 
       @eventsPartial.render()
-      console.log "After", expect(@partialStub)
       expect(@partialStub).toHaveBeenCalledThrice()
 
   describe "buttons", ->
@@ -50,7 +49,6 @@ describe "Events Partial", ->
 
       describe "add button", ->
         it "Should be displayed", ->
-          console.log "el", @eventsPartial.$el
           expect(@eventsPartial.$el.find 'div').toHaveClass('btn-add')
 
         it "should navigate to add screen when clicked", ->
