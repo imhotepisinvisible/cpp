@@ -6,24 +6,24 @@ describe "Events Partial Item", ->
     eventStub.withArgs('start_date').returns('2011-10-10T14:48:00')
     eventStub.withArgs('title').returns('Foo')
 
-    @eventsPartialItem = new CPP.Views.Events.PartialItem
+    @partialItem = new CPP.Views.Events.PartialItem
                               el: "#events"
                               model: @event
                               editable: false
 
   describe "Partial Item", ->
     it "Should link to event on events page", ->
-      @eventsPartialItem.render()
-      expect(@eventsPartialItem.$el.find('a')).toHaveAttr('href', '#events/1')
+      @partialItem.render()
+      expect(@partialItem.$el.find('a')).toHaveAttr('href', '#events/1')
 
   describe "edit button", ->
     describe "when editable", ->
       beforeEach ->
-        @eventsPartialItem.editable = true
-        @eventsPartialItem.render()
+        @partialItem.editable = true
+        @partialItem.render()
 
       it "Should display edit button", ->
-        expect(@eventsPartialItem.$el.find 'div').toHaveClass('btn-edit')
+        expect(@partialItem.$el.find 'div').toHaveClass('btn-edit')
 
       it "should navigate to edit screen", ->
         spyEvent = spyOnEvent('.btn-edit', 'click');
@@ -37,7 +37,7 @@ describe "Events Partial Item", ->
 
     describe "when not editable", ->
       it "Should not display edit button", ->
-        @eventsPartialItem.render()
-        expect(@eventsPartialItem.$el.find 'div').not.toHaveClass('btn-edit')
+        @partialItem.render()
+        expect(@partialItem.$el.find 'div').not.toHaveClass('btn-edit')
 
 

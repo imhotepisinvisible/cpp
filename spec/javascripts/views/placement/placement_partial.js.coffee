@@ -11,7 +11,7 @@ describe "Placement Partial", ->
 
     @renderStub = sinon.stub(@partialView, "render").returns(@partialView)
 
-    @partialStub = sinon.stub(window.CPP.Views, "PlacementsPartialItem")
+    @partialStub = sinon.stub(window.CPP.Views.Placements, "PartialItem")
                       .returns(@partialView)
 
     @placementsPartial = new CPP.Views.Placements.Partial
@@ -27,12 +27,16 @@ describe "Placement Partial", ->
       expect(@placementsPartial.editable).toBeFalsy()
 
   describe "render", ->
-    it "should add collection items", ->
-      expect(@partialStub).toHaveBeenCalledOnce()
-      expect(@partialStub).toHaveBeenCalledWith model: @model, editable: false
+    it "should return itself", ->
+      expect(@placementsPartial.render()).toBe(@placementsPartial)
 
-    it "should render partial items", ->
-      @expect(@renderStub).toHaveBeenCalledOnce()
+    it "should add top three", ->
+      for id in [1..4]
+        do (id) =>
+          @collection.add new Backbone.Model id: id
+
+      @placementsPartial.render()
+      expect(@partialStub).toHaveBeenCalledThrice()
 
   describe "buttons", ->
     describe "when editable", ->

@@ -3,16 +3,15 @@ describe "Events Partial", ->
     setFixtures(sandbox id: "events")
     @event = new Backbone.Model id: 1
 
-    @model = new Backbone.Model()
     @collection = new Backbone.Collection()
-    @collection.add @model
+    @collection.add(new Backbone.Model id: 1)
 
     @partialView = new Backbone.View()
     @partialView.el = '<div "id=item"></div>'
 
     @renderStub = sinon.stub(@partialView, "render").returns(@partialView)
 
-    @partialStub = sinon.stub(window.CPP.Views, "EventsPartialItem")
+    @partialStub = sinon.stub(window.CPP.Views.Events, "PartialItem")
                       .returns(@partialView)
 
 
@@ -29,12 +28,17 @@ describe "Events Partial", ->
       expect(@eventsPartial.editable).toBeFalsy()
 
   describe "render", ->
-    it "should add collection items", ->
-      expect(@partialStub).toHaveBeenCalledOnce()
-      expect(@partialStub).toHaveBeenCalledWith model: @model, editable: false
+    it "should return itself", ->
+      expect(@eventsPartial.render()).toBe(@eventsPartial)
 
-    it "should render partial items", ->
-      @expect(@renderStub).toHaveBeenCalledOnce()
+    it "should add top three", ->
+      for id in [1..4]
+        do (id) =>
+          @collection.add new Backbone.Model id: id
+
+      @eventsPartial.render()
+
+      expect(@partialStub).toHaveBeenCalledThrice()
 
   describe "buttons", ->
     describe "when editable", ->
@@ -44,6 +48,7 @@ describe "Events Partial", ->
 
       describe "add button", ->
         it "Should be displayed", ->
+          console.log "el", @eventsPartial.$el
           expect(@eventsPartial.$el.find 'div').toHaveClass('btn-add')
 
         it "should navigate to add screen when clicked", ->

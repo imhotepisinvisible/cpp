@@ -10,31 +10,25 @@ describe "Emails Partial", ->
     @partialView = new Backbone.View()
     @partialView.el = '<div "id=item"></div>'
 
-    @renderStub = sinon.stub(@partialView, "render").returns(@partialView)
-
-    @partialStub = sinon.stub(window.CPP.Views, "EmailsPartialItem")
+    @partialStub = sinon.stub(window.CPP.Views.TaggedEmails, "PartialItem")
                       .returns(@partialView)
 
 
-    @emailsPartial = new CPP.Views.EmailsPartial
+    @emailsPartial = new CPP.Views.TaggedEmails.PartialItem
                               el: "#events"
                               model: @event
                               collection: @collection
 
   afterEach ->
-    window.CPP.Views.EmailsPartialItem.restore()
+    window.CPP.Views.TaggedEmails.PartialItem.restore()
 
   describe "initialize", ->
     it "should have editable attribute default to false", ->
       expect(@emailsPartial.editable).toBeFalsy()
 
   describe "render", ->
-    it "should add collection items", ->
-      expect(@partialStub).toHaveBeenCalledOnce()
-      expect(@partialStub).toHaveBeenCalledWith model: @model, editable: false
-
-    it "should render partial items", ->
-      @expect(@renderStub).toHaveBeenCalledOnce()
+    it "should return itself", ->
+      expect(@emailsPartial.render()).toBe(@emailsPartial)
 
   describe "buttons", ->
     describe "when editable", ->

@@ -14,8 +14,15 @@ describe "Placement Partial Item", ->
 
   describe "Partial Item", ->
     it "Should link to event on events page", ->
-      @placementsPartialItem.render(@options)
-      expect(@placementsPartialItem.$el.find('a')).toHaveAttr('href', '#placements/1')
+      console.log "oplacement item", $('.placement-item')
+      spyEvent = spyOnEvent('.placement-item', 'click');
+      navigationStub = sinon.spy(Backbone.history, 'navigate')
+                          .withArgs('placements/1', trigger: true)
+      $('.placement-item').click()
+      expect('click').toHaveBeenTriggeredOn('.placement-item')
+      expect(spyEvent).toHaveBeenTriggered()
+      expect(navigationStub).toHaveBeenCalledOnce()
+      Backbone.history.navigate.restore()
 
 
   describe "edit button", ->
