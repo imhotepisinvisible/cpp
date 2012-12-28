@@ -69,6 +69,7 @@ describe "Placement Routing", ->
 
       @company = new Backbone.Model()
       @company.url = "/companies"
+      sinon.stub(@company, "fetch").yieldsTo "success"
 
       @companyModelStub = sinon.stub(window.CPP.Models, "Company")
                             .returns(@company)
@@ -153,7 +154,6 @@ describe "Placement Routing", ->
 
     describe "View Handler", ->
       beforeEach ->
-        sinon.stub(@company, "fetch").yieldsTo "success"
         @viewStub = sinon.stub(window.CPP.Views.Placements, "View")
                                 .returns(new Backbone.View())
 
@@ -188,9 +188,6 @@ describe "Placement Routing", ->
         expect(@viewStub.callCount).toBe 0
 
     describe "IndexCompany Handler", ->
-      beforeEach ->
-        sinon.stub(@company, "fetch").yieldsTo "success"
-
       it "should create a Placement collection", ->
         @router.indexCompany(1)
         expect(@placementsCollectionStub).toHaveBeenCalledOnce()
