@@ -6,6 +6,7 @@ describe "Student", ->
       email: "st@email.com"
       password: "aaaaaaaa"
       password_confirmation: "aaaaaaaa"
+      departments: ['doc']
       id: 1
 
   describe "Routing", ->
@@ -34,6 +35,9 @@ describe "Student", ->
           expect(@student.placements.url).toEqual '/students/1/placements'
 
     describe "when instantiated", ->
+      it "should be valid", ->
+        expect(@student.isValid()).toBeTruthy()
+
       it "should exhibit first name attribute", ->
         expect(@student.get 'first_name').toEqual @attrs.first_name
 
@@ -86,3 +90,6 @@ describe "Student", ->
 
     it "should not save when password_confirmation is less than 8 characters", ->
       @student.save 'password_confirmation' : 'aaaaaaa'
+
+    it "should not save when departments is empty", ->
+      @student.save 'departments' : null
