@@ -12,17 +12,17 @@ class Ability
       can :manage, Student, :id => user.id
       can [:read, :download_document], Company do |company|
         # Get departments for both and check they intersect
-        company_departments = user.company.departments.map(&:id)
-        student_departments = user.departments.map(&:id)
-        return intersect?(company_departments, student_departments)
+        company_deps = user.company.departments.map(&:id)
+        student_deps = user.departments.map(&:id)
+        !(company_deps | student_deps).empty?
       end
     when "CompanyAdministrator"
       can :manage, Company, :id => user.company_id
       can [:read, :download_document], Student do |student|
         # Get departments for both and check they intersect
-        company_departments = user.company.departments.map(&:id)
-        student_departments = student.departments.map(&:id)
-        return intersect?(company_departments, student_departments)
+        company_deps = user.company.departments.map(&:id)
+        student_deps = student.departments.map(&:id)
+        !(company_deps | student_deps).empty?
       end
     end
     #
@@ -39,9 +39,5 @@ class Ability
     #   can :update, Article, :published => true
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
-  end
-
-  def intersect?(l1, l2)
-    !(l1 | l2).empty?
   end
 end
