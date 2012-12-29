@@ -51,10 +51,13 @@ window.inPlaceStopEdit = (_model, prefix, attribute, defaultValue, displayFuncti
               $('#' + prefix + '-' + attribute).html defaultValue
               $('#' + prefix + '-' + attribute).addClass('missing')
           error: (model, response) =>
-            errorlist = JSON.parse response.responseText
-            msg = ''
-            for k,v of errorlist.errors
-            	msg += "#{k} - #{v}\n"
+            if response.responseText
+              errorlist = JSON.parse response.responseText
+              msg = ''
+              for k,v of errorlist.errors
+              	msg += "#{k} - #{v}\n"
+            else
+              msg = "Error"
             notify "error", msg
             $('#' + prefix + '-' + attribute).html displayFunction(originalValue)
 
