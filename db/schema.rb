@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20121128183459) do
     t.datetime "created"
     t.datetime "sent"
     t.integer  "company_id"
+    t.string   "state"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
