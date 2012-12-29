@@ -9,4 +9,12 @@
 #= require sinon
 #= require jasmine-sinon
 #= require jasmine-jquery
-#= require_tree .//
+
+#= require_tree ./collections
+#= require_tree ./models
+#= require_tree ./routing
+
+#= require_tree ./views/email
+#= require_tree ./views/event
+#= require_tree ./views/placement
+#= require_tree ./views/student
