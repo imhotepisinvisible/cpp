@@ -7,6 +7,7 @@ class CreateEmails < ActiveRecord::Migration
       t.datetime :sent # Presume sent will also imply approved.
 
       t.references :company
+      t.string :state
 
       t.timestamps
     end

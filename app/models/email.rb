@@ -22,9 +22,12 @@ class Email < ActiveRecord::Base
   validates :company_id, :presence => true
   validates :subject,    :presence => true
   validates :body,       :presence => true
+  validates :state,      :presence => true
 
   validates :body, obscenity: {message: "Profanity is not allowed!"}
   validates :subject, obscenity: {message: "Profanity is not allowed!"}
+
+  validates_inclusion_of :state, :in => %w( Rejected Pending Approved Postponed )
 
   attr_accessible :company_id, :subject, :body
 
