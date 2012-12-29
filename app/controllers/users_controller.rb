@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  require 'SecureRandom'
   respond_to :json
 
   # PUT /users/change_password
@@ -35,8 +36,10 @@ class UsersController < ApplicationController
       respond_with @user, status: :unprocessable_entity
     else
       # TODO GENERATE SECURE NEW PASSWORD AND EMAIL TO STUDENT
-      @user.password = 'aaaaaaaa'
+      password = SecureRandom.hex(8)
+      @user.password = password
       if @user.save
+        UserMailer.password_reset_email(@user,password).deliver
         head :no_content
       else
         @user.errors.add(:user, 'Unable to reset password')
@@ -44,5 +47,4 @@ class UsersController < ApplicationController
       end
     end
   end
-
 end

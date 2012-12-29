@@ -31,4 +31,10 @@ class UserMailer < ActionMailer::Base
   	end
   	body
   end
+
+  def password_reset_email(user, password)
+    subject = "CPP Password Reset Notification"
+    @password = password
+    mail(:to => user.email, :subject => subject)
+  end
 end
