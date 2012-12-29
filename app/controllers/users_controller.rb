@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  require 'SecureRandom'
   respond_to :json
 
   # PUT /users/change_password
