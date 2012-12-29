@@ -192,6 +192,7 @@ Company.all.each do |company|
 
   1.times do
     FactoryGirl.create :company_administrator, {
+      email: "#{company.name}@#{company.name}.com".downcase,
       password: "cppcppcpp",
       password_confirmation: "cppcppcpp",
       company: company
