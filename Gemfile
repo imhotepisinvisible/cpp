@@ -16,6 +16,9 @@ gem 'acts-as-taggable-on'         # Tagging framework
 gem 'rails3_acts_as_paranoid'     # Hides records instead of deleting them, being able to recover them.
 gem 'acts_as_list'                # Re-orderable lists
 gem 'newrelic_rpm'                # Newrelic Monitoring
+gem 'paperclip' # Nice model attachment
+gem 'obscenity' # Obscenity filter
+gem 'lorem'     # Simple Lorem
 
 # UI/Appearance Related Gems
 gem 'less-rails'                  # Less required for Bootstrap
@@ -40,9 +43,6 @@ gem 'jquery-fileupload-rails'     # File upload
 gem 'jcountdown-rails', :git => 'http://github.com/rezwyi/jcountdown-rails.git' #Countdown timer
 gem 'bootstrap-toggle-buttons-rails', :git => 'http://github.com/wafcio/bootstrap-toggle-buttons-rails.git' # On/Off switches
 
-gem 'paperclip' # Nice model attachment
-gem 'obscenity' # Obscenity filter
-
 group :assets do
   gem 'sass-rails',   '~> 3.2.3' # SASS for nicer CSS
   gem 'coffee-rails', '~> 3.2.1' # Coffeescript is the bomb
@@ -56,7 +56,6 @@ end
 group :development do
   gem 'rails3-generators' # for factory_girl_rails and simple_form
   gem 'sqlite3'           # Local development
-  gem 'lorem'             # Simple Lorem
   gem 'rails-erd'         # Generate ERD diagrams with Rake
   gem 'guard-rspec'       # Auto-Run rspec Tests
   gem 'guard-spork'       # Auto-Reload Spork
