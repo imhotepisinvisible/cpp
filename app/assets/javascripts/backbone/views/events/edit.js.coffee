@@ -17,10 +17,10 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
       @model.save {},
         wait: true
         success: (model, response) =>
-          # notify "success", "Updated Profile TAG"
-        error: (model, response) ->
+          notify "success", "Updated Profile TAG"
+        error: (model, response) =>
           # Notify tag-specific errors here (profanity etc)
-          errorlist = JSON.parse response.responseText
+          # errorlist = JSON.parse response.responseText
           notify "error", "Couldn't Update Tags"
 
     @skill_list_tags_form = new Backbone.Form.editors.TagEditor
