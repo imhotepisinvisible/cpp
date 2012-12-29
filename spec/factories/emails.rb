@@ -5,6 +5,8 @@ FactoryGirl.define do
     company
     subject "Subject"
     body "Body"
+    state "Rejected"
+    # state {['Rejected', 'Pending', 'Approved', 'Postponed'].sample}
     created {FactoryHelper.time_rand(Time.now)}
     sent {FactoryHelper.time_rand(Time.now)}
   end
