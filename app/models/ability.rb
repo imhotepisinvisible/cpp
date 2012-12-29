@@ -10,7 +10,7 @@ class Ability
       can :create, Student
     when "Student"
       can :manage, Student, :id => user.id
-      can [:read, :download_document], Company do |company|
+      can [:read, :download_document, :set_rating], Company do |company|
         # Get departments for both and check they intersect
         company_deps = company.departments.map(&:id)
         student_deps = user.departments.map(&:id)
