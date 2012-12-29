@@ -1,14 +1,14 @@
 <div class="row">
   <div class="span12">
     <h1 class="section-header"><i class="icon-cog"></i> Department Settings</h1>
+
     <div class="row">
       <div class="span6">
-        <h2 class="section-header"><i class="icon-info-sign"></i> Company Notifications</h2>
-        These notifications will be displayed to a company when they create a new placement or event.
-        <div id="notifications-form"></div>
+        <h2 class="section-header"><i class="icon-cogs"></i> Department Name</h2>
+        <div id="name-form"></div>
         <div class="centre-div">
-          <div id="btn-notifications-save" class="btn">Save</div>
-          <span id="btn-notifications-cancel" class="link form-cancel">cancel</span>
+          <div id="btn-name-save" class="btn">Save</div>
+          <span id="btn-name-cancel" class="link form-cancel">cancel</span>
         </div>
       </div>
 
@@ -17,6 +17,5 @@
         <div id="change-password"></div>
       </div>
     </div>
-
   </div>
 </div>

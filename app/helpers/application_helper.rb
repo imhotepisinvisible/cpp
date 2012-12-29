@@ -12,6 +12,8 @@ module ApplicationHelper
       return "#students/#{current_user.id}/settings"
     when 'CompanyAdministrator'
       return "#companies/#{current_user.company_id}/settings"
+    when 'DepartmentAdministrator'
+      return "#departments/#{current_user.department_id}/settings"
     else
       return ''
     end
@@ -25,6 +27,8 @@ module ApplicationHelper
       return "#students/#{current_user.id}"
     when 'CompanyAdministrator'
       return "#companies/#{current_user.company_id}"
+    when 'DepartmentAdministrator'
+      return ''
     else
       return ''
     end
@@ -38,6 +42,8 @@ module ApplicationHelper
       return '#dashboard'
     when 'CompanyAdministrator'
       return "#companies/#{current_user.company_id}/edit"
+    when 'DepartmentAdministrator'
+      return "#departments/#{current_user.department_id}/dashboard"
     else
       return ''
     end

@@ -5,46 +5,43 @@ class CPP.Views.Departments.Settings extends CPP.Views.Base
   template: JST['backbone/templates/departments/settings']
 
   events: -> _.extend {}, CPP.Views.Base::events,
-    'click #btn-notifications-save' : 'saveNotifications'
-    'click #btn-notifications-cancel' : 'cancelNotifications'
+    'click #btn-name-save' : 'saveName'
+    'click #btn-name-cancel' : 'cancelName'
 
   initialize: ->
-    @initNotificationsForm()
+    @initNameForm()
     @render()
 
   render: ->
     $(@el).html(@template(department: @model))
-    @renderNotificationsForm()
+    @renderNameForm()
 
     new CPP.Views.Users.ChangePassword
       el: $(@el).find('#change-password')
     .render()
 
-  initNotificationsForm: ->
-    @notificationsForm = new Backbone.Form
+  initNameForm: ->
+    @nameForm = new Backbone.Form
       model: @model
       schema:
-        settings_notifier_placement:
-          type: 'TextArea'
-          title: 'New Placement Notification'
-        settings_notifier_event:
-          type: 'TextArea'
-          title: 'New Event Notification'
+        name:
+          type: 'Text'
+          title: 'Name'
     .render()
 
-  renderNotificationsForm: ->
-    $('#notifications-form').html(@notificationsForm.el)
+  renderNameForm: ->
+    $('#name-form').html(@nameForm.el)
 
-  saveNotifications: (e) ->
-    if @notificationsForm.validate() == null
-      @notificationsForm.commit()
+  saveName: (e) ->
+    if @nameForm.validate() == null
+      @nameForm.commit()
       @model.save {},
         wait: true
         success: (model, response) ->
-          notify 'success', 'Company notifications updated'
+          notify 'success', 'Department name updated'
         error: (model, response) ->
           console.log response
 
-  cancelNotifications: (e) ->
-    @initNotificationsForm()
-    @renderNotificationsForm()
+  cancelName: (e) ->
+    @initNameForm()
+    @renderNameForm()
