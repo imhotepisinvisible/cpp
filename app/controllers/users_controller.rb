@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
   respond_to :json
 
+  # Assumes user is logged in and therefore accessible via current_user
   # PUT /users/change_password
   # PUT /users/change_password.json
   def change_password
-    @user = User.find_by_email(params[:email])
+    @user = current_user
     if params[:password] == params[:password_confirmation]
       if @user && @user.authenticate(params[:old_password])
         @user.password = params[:password]
