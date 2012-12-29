@@ -13,9 +13,9 @@ class CPP.Views.Events.Partial extends CPP.Views.Base
   addTopThree: () ->
     _.each(@collection.first(3), @addOne)
 
-  addOne: (placement) =>
+  addOne: (event) =>
     view = new CPP.Views.Events.PartialItem
-      model: placement
+      model: event
       editable: @editable
     @$("#events").append(view.render().el)
 

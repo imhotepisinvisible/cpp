@@ -5,8 +5,7 @@ class CPP.Views.Placements.Partial extends CPP.Views.Base
 
   initialize: () ->
     @editable = @options.editable
-    @company = @options.company
-
+    @company  = @options.company
     @editable = @editable? && @editable
     @collection.bind('reset', @addAll)
     @render()

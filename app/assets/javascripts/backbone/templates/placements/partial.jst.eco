@@ -15,6 +15,7 @@
         <a href="#/placements/new" class="btn">
           <i class="icon-plus"></i>
         </a>
+      <% end %>
     <% end %>
   </div>
 </h1>
