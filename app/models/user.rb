@@ -36,6 +36,10 @@ class User < ActiveRecord::Base
     self.class.name == "CompanyAdministrator"
   end
 
+  def is_department_admin?
+    self.class.name == "DepartmentAdministrator"
+  end
+
   def is_admin?
     self.class.name == "Administrator"
   end
