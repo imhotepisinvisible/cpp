@@ -43,7 +43,7 @@ module ApplicationHelper
     when 'CompanyAdministrator'
       return "#companies/#{current_user.company_id}/edit"
     when 'DepartmentAdministrator'
-      return "#departments/#{current_user.department_id}/dashboard"
+      return "#department_dashboard"
     else
       return ''
     end
