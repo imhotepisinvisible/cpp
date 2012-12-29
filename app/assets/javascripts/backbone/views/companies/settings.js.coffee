@@ -13,7 +13,6 @@ class CPP.Views.CompaniesSettings extends CPP.Views.Base
 
     new CPP.Views.Users.ChangePassword
       el: $(@el).find('#change-password')
-      model: @model
     .render()
 
   deleteCompany: (e) ->

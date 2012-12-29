@@ -10,7 +10,6 @@ class CPP.Views.Users.ChangePassword extends CPP.Views.Base
 
   initialize: ->
     @passwordForm = new Backbone.Form
-      model: @model
       schema:
         old_password:
           type: "Password"
@@ -43,7 +42,6 @@ class CPP.Views.Users.ChangePassword extends CPP.Views.Base
   savePassword: (e) ->
     if @passwordForm.validate() == null
       data = @passwordForm.getValue()
-      data.email = @model.get 'email'
 
       $.ajax
         url: "/users/change_password"

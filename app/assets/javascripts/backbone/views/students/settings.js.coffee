@@ -56,7 +56,6 @@ class CPP.Views.Students.Settings extends CPP.Views.Base
 
     new CPP.Views.Users.ChangePassword
       el: $(@el).find('#change-password')
-      model: @model
     .render()
 
     @reject_skill_list_tags_form.render()

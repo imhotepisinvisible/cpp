@@ -18,7 +18,6 @@ class CPP.Views.Departments.Settings extends CPP.Views.Base
 
     new CPP.Views.Users.ChangePassword
       el: $(@el).find('#change-password')
-      model: @model
     .render()
 
   initNotificationsForm: ->
