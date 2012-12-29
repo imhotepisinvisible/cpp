@@ -18,6 +18,9 @@ class CreateUsers < ActiveRecord::Migration
       # Company Admin Fields
       t.references :company
 
+      # Department Admin Fields
+      t.references :department
+
       t.string :type
 
       t.timestamps
