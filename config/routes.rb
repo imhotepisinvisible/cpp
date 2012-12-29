@@ -57,6 +57,7 @@ CPP::Application.routes.draw do
 
   resources :users do
     put 'change_password', :on => :collection, :action => :change_password
+    put 'forgot_password', :on => :collection, :action => :forgot_password
   end
 
   resources :sessions

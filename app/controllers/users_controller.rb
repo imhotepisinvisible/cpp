@@ -26,4 +26,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def forgot_password
+    @user = User.find_by_email(params[:email])
+    if @user == nil
+      # TODO: Does this get saved into the db? I don't want it to!
+      @user = User.new
+    end
+    @user.errors.add(:user, 'Unable to change password - new passwords do not match')
+    respond_with @user, status: :unprocessable_entity
+  end
+
 end
