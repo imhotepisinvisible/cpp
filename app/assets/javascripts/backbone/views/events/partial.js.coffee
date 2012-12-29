@@ -4,6 +4,8 @@ class CPP.Views.Events.Partial extends CPP.Views.Base
   template: JST['backbone/templates/events/partial']
 
   initialize: () ->
+    @editable = @options.editable
+    @company  = @options.company
     @editable = @editable? && @editable
     @collection.bind('reset', @addAll)
     @render()
@@ -14,11 +16,11 @@ class CPP.Views.Events.Partial extends CPP.Views.Base
   addOne: (placement) =>
     view = new CPP.Views.Events.PartialItem
       model: placement
-      editable: @options.editable
+      editable: @editable
     @$("#events").append(view.render().el)
 
   render: () ->
-    @$el.html(@template(company: @options.company, editable: @options.editable))
+    @$el.html(@template(company: @company, editable: @editable))
     if @collection.length > 0
       @addTopThree()
     else

@@ -1,7 +1,8 @@
-describe "Events Partial", ->
+describe "Events partial", ->
   beforeEach ->
     setFixtures(sandbox id: "events")
     @event = new Backbone.Model id: 1
+    @company = new Backbone.Model id: 1
 
     @collection = new Backbone.Collection()
     @collection.add(new Backbone.Model id: 1)
@@ -14,12 +15,10 @@ describe "Events Partial", ->
     @partialStub = sinon.stub(window.CPP.Views.Events, "PartialItem")
                       .returns(@partialView)
 
-
     @eventsPartial = new CPP.Views.Events.Partial
                               el: "#events"
                               model: @event
                               collection: @collection
-
 
   afterEach ->
     window.CPP.Views.Events.PartialItem.restore()
@@ -45,56 +44,81 @@ describe "Events Partial", ->
     describe "when editable", ->
       beforeEach ->
         @eventsPartial.editable = true
-        @eventsPartial.render()
 
-      describe "add button", ->
-        it "Should be displayed", ->
-          expect(@eventsPartial.$el.find 'div').toHaveClass('btn-add')
+      describe "for specific company", ->
+        beforeEach ->
+          @eventsPartial.company = @company
+          @eventsPartial.render()
 
-        it "should navigate to add screen when clicked", ->
-          spyEvent = spyOnEvent('.btn-add', 'click');
-          navigationStub = sinon.spy(Backbone.history, 'navigate')
-                              .withArgs('companies/1/events/new', trigger: true)
-          $('.btn-add').click()
-          expect('click').toHaveBeenTriggeredOn('.btn-add')
-          expect(spyEvent).toHaveBeenTriggered()
-          expect(navigationStub).toHaveBeenCalledOnce()
-          Backbone.history.navigate.restore()
+          describe "add button", ->
+            it "should be displayed", ->
+              expect(@eventsPartial.$el).toContain('.button-add-event')
 
-      describe "view all button", ->
-        it "Should be displayed", ->
-          expect(@eventsPartial.$el.find 'div').toHaveClass('btn-view-all')
+            it "should link to add an event for a specific company", ->
+              expect(@eventsPartial.$el.find('.button-add-event'))
+                .toHaveAttr('href', "#/companies/#{@company.get('id')}/events/new")
 
-        it "should navigate to view all screen", ->
-          spyEvent = spyOnEvent('.btn-view-all', 'click');
-          navigationStub = sinon.spy(Backbone.history, 'navigate')
-                              .withArgs('companies/1/events', trigger: true)
-          $('.btn-view-all').click()
-          expect('click').toHaveBeenTriggeredOn('.btn-view-all')
-          expect(spyEvent).toHaveBeenTriggered()
-          expect(navigationStub).toHaveBeenCalledOnce()
-          Backbone.history.navigate.restore()
+          describe "view all button", ->
+            it "should be displayed", ->
+              expect(@eventsPartial.$el).toContain('.button-all-events')
+
+            it "should link to events for a specific company", ->
+              expect(@eventsPartial.$el.find('.button-all-events'))
+                .toHaveAttr('href', "#/companies/#{@company.get('id')}/events")
+
+      describe "for a general event list", ->
+        beforeEach ->
+          @eventsPartial.render()
+
+        describe "add button", ->
+          it "should be displayed", ->
+            expect(@eventsPartial.$el).toContain('.button-add-event')
+
+          it "should link to add a general event", ->
+            expect(@eventsPartial.$el.find('.button-add-event'))
+              .toHaveAttr('href', '#/events/new')
+
+        describe "view all button", ->
+          it "should be displayed", ->
+            expect(@eventsPartial.$el).toContain('.button-all-events')
+
+          it "should link to general events", ->
+            expect(@eventsPartial.$el.find('.button-all-events'))
+              .toHaveAttr('href', '#/events')
 
     describe "when not editable", ->
       beforeEach ->
-        @eventsPartial.render(@options)
+        @eventsPartial.editable = false
 
-      describe "add button", ->
-        it "Should not be displayed", ->
-          expect(@eventsPartial.$el.find 'div').not.toHaveClass('btn-edit')
+      describe "for specific company", ->
+        beforeEach ->
+          @eventsPartial.company = @company
+          @eventsPartial.render()
 
-      describe "view all button", ->
-        it "Should be displayed", ->
-          expect(@eventsPartial.$el.find 'div').toHaveClass('btn-view-all')
+        describe "add button", ->
+          it "should not be displayed", ->
+            expect(@eventsPartial.$el).not.toContain('.button-add-event')
 
-        it "should navigate to view all screen", ->
-          spyEvent = spyOnEvent('.btn-view-all', 'click');
-          navigationStub = sinon.spy(Backbone.history, 'navigate')
-                              .withArgs('companies/1/events', trigger: true)
-          $('.btn-view-all').click()
-          expect('click').toHaveBeenTriggeredOn('.btn-view-all')
-          expect(spyEvent).toHaveBeenTriggered()
-          expect(navigationStub).toHaveBeenCalledOnce()
-          Backbone.history.navigate.restore()
+        describe "view all button", ->
+          it "should be displayed", ->
+            expect(@eventsPartial.$el).toContain('.button-all-events')
 
+          it "should link to events for a specific company", ->
+            expect(@eventsPartial.$el.find('.button-all-events'))
+              .toHaveAttr('href', "#/companies/#{@company.get('id')}/events")
 
+      describe "for a general event list", ->
+        beforeEach ->
+          @eventsPartial.render()
+
+        describe "add button", ->
+          it "should not be displayed", ->
+            expect(@eventsPartial.$el).not.toContain('.button-add-event')
+
+        describe "view all button", ->
+          it "should be displayed", ->
+            expect(@eventsPartial.$el).toContain('.button-all-events')
+
+          it "should link to general events", ->
+            expect(@eventsPartial.$el.find('.button-all-events'))
+              .toHaveAttr('href', '#/events')
