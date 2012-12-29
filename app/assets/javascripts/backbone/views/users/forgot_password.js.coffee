@@ -8,11 +8,14 @@ class CPP.Views.Users.ForgotPassword extends CPP.Views.Base
     'click .btn-submit': 'submitEvent'
 
   initialize: ->
-    @form = new Backbone.Form(model: @model).render()
+    @form = new Backbone.Form(
+      schema:
+        email: "Text"
+    ).render()
     @render()
 
   render: ->
-    $(@el).html(@template(student: @model))
+    $(@el).html(@template())
     super
     $('.form').append(@form.el)
     @form.on "change", =>
@@ -22,8 +25,6 @@ class CPP.Views.Users.ForgotPassword extends CPP.Views.Base
   submitEvent: ->
    if @form.validate() == null
     data = @form.getValue()
-    data.email = @model.get 'email'
-
     $.ajax
       url: "/users/forgot_password"
       data: data

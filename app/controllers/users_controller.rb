@@ -31,9 +31,18 @@ class UsersController < ApplicationController
     if @user == nil
       # TODO: Does this get saved into the db? I don't want it to!
       @user = User.new
+      @user.errors.add(:user, 'No such email address exists')
+      respond_with @user, status: :unprocessable_entity
+    else
+      # TODO GENERATE SECURE NEW PASSWORD AND EMAIL TO STUDENT
+      @user.password = 'aaaaaaaa'
+      if @user.save
+        head :no_content
+      else
+        @user.errors.add(:user, 'Unable to reset password')
+        respond_with @user, status: :unprocessable_entity
+      end
     end
-    @user.errors.add(:user, 'Unable to change password - new passwords do not match')
-    respond_with @user, status: :unprocessable_entity
   end
 
 end
