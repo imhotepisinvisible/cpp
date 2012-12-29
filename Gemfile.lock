@@ -186,6 +186,7 @@ GEM
     mocha (0.10.5)
       metaclass (~> 0.0.1)
     multi_json (1.5.0)
+    newrelic_rpm (3.5.4.34)
     obscenity (1.0.1)
     paperclip (3.4.0)
       activemodel (>= 3.0.0)
@@ -355,6 +356,7 @@ DEPENDENCIES
   less-rails
   lorem
   mocha
+  newrelic_rpm
   obscenity
   paperclip
   pg
