@@ -18,6 +18,7 @@ window.CPP =
     new CPP.Routers.TaggedEmails
     new CPP.Routers.CompanyContacts
     new CPP.Routers.ForgotPassword
+    new CPP.Routers.Departments
     # Backbone.history.start({pushState: true})
     Backbone.history.start()
 

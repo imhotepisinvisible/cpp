@@ -21,11 +21,7 @@
 
       <div class="span6">
         <h2 class="section-header"><i class="icon-asterisk"></i> Change Password</h2>
-        <div id="password-form"></div>
-        <div class="centre-div">
-          <div id="btn-password-save" class="btn">Save</div>
-          <span id="btn-password-cancel" class="link form-cancel">cancel</span>
-        </div>
+        <div id="change-password"></div>
       </div>
     </div>
 
