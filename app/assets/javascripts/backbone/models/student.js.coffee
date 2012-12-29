@@ -17,16 +17,12 @@ class CPP.Models.Student extends Backbone.Model
       required: true
     last_name:
       required: true
-    departments:
-      required: true
     email:
       required: true
       pattern: 'email'
     password:
-      required: true
       minLength: 8
     password_confirmation:
-      required: true
       minLength: 8
 
   schema: ->
@@ -40,11 +36,13 @@ class CPP.Models.Student extends Backbone.Model
       type: "Checkboxes"
       options: @allDepartments
       editorClass: "departments-checkbox"
+      validators: ['required']
     email:
       type: "Text"
       title: "Email"
     password:
       type: "Password"
+      validators: ['required']
     password_confirmation:
       type: "Password"
       title: "Password Confirmation"

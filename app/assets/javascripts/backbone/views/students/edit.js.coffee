@@ -29,7 +29,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     saveModel = ->
       @model.save {},
         wait: true
-        success: (model, response) =>
+        success: (model, response) ->
           notify "success", "Updated Profile"
         error: (model, response) ->
           # Notify tag-specific errors here (profanity etc)
@@ -264,9 +264,9 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     tag_id = close_div.find("input").val()
 
     # Remove tag from lists
-    @model.set 'skills', (tag for tag in @model.get('skills') when tag.name != tag_name)
-    @model.set 'interests', (tag for tag in @model.get('interests') when tag.name != tag_name)
-    @model.set 'year_groups', (tag for tag in @model.get('year_groups') when tag.name != tag_name)
+    @model.set 'skill_list', (tag for tag in @model.get('skill_list') when tag.name != tag_name)
+    @model.set 'interest_list', (tag for tag in @model.get('interest_list') when tag.name != tag_name)
+    @model.set 'year_group_list', (tag for tag in @model.get('year_group_list') when tag.name != tag_name)
 
     @model.save {},
         wait: true
