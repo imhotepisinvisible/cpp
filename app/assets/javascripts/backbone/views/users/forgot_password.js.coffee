@@ -30,7 +30,10 @@ class CPP.Views.Users.ForgotPassword extends CPP.Views.Base
       data: data
       type: 'PUT'
       success: (data) ->
-        notify "success", "Password reset"
+        notify "success", "Password reset", 2000
+        setTimeout(
+          -> window.location = '/'
+        , 2500)
       error: (data) ->
         response = JSON.parse data.responseText
         if response.errors
