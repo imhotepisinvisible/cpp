@@ -27,12 +27,13 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
   initialize: ->
 
     saveModel = ->
-      @model.save
+      @model.save null,
         wait: true
         success: (model, response) ->
           notify "success", "Updated Profile"
         error: (model, response) ->
           # Notify tag-specific errors here (profanity etc)
+          console.log response
           errorlist = JSON.parse response.responseText
           notify "error", "Couldn't Update Profile"
 

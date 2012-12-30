@@ -48,7 +48,9 @@ class StudentsController < ApplicationController
   def update
     @student = Student.find(params[:id])
     if @student.update_attributes(params[:student])
-      head :no_content
+      respond_with(@student) do |format|
+        format.json{render json: @student}
+      end
     else
       respond_with @student, status: :unprocessable_entity
     end

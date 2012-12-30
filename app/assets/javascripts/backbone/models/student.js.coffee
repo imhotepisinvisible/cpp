@@ -20,10 +20,10 @@ class CPP.Models.Student extends Backbone.Model
     email:
       required: true
       pattern: 'email'
-    password:
-      minLength: 8
-    password_confirmation:
-      minLength: 8
+    # password:
+    #   minLength: 8
+    # password_confirmation:
+    #   minLength: 8
 
   schema: ->
     first_name:
@@ -52,6 +52,7 @@ class CPP.Models.Student extends Backbone.Model
           field: 'password'
           message: 'Passwords do not match'
         ]
+
 
 class CPP.Collections.Students extends CPP.Collections.Base
   url: '/students'
