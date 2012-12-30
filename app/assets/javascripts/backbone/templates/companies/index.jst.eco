@@ -9,7 +9,7 @@
         </a>
       <% end %>
     </h1>
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover table-clickable">
       <thead>
         <tr>
           <th>Logo</th>
