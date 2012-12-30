@@ -38,8 +38,7 @@ window.inPlaceStopEdit = (_model, prefix, attribute, defaultValue, displayFuncti
     value = $('#' + prefix + '-' + attribute + '-editor').val()
     $('#' + prefix + '-' + attribute + '-input-container').hide()
     if value != _model.get attribute
-      _model.set attribute, value
-      _model.save {},
+      _model.save( attribute, value, {
           wait: true
           success: (model, response) =>
             notify "success", "Updated profile"
@@ -60,6 +59,7 @@ window.inPlaceStopEdit = (_model, prefix, attribute, defaultValue, displayFuncti
               msg = "Error"
             notify "error", msg
             $('#' + prefix + '-' + attribute).html displayFunction(originalValue)
+        })
 
     $('#' + prefix + '-' + attribute + '-container').show()
 
