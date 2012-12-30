@@ -28,10 +28,17 @@ class Ability
     when "DepartmentAdministrator"
       can :manage, DepartmentAdministrator, :id => user.id
       can :manage, Department, :id => user.department_id
-      can :manage, Company do |company|
+      can [:manage, :download_document], Company do |company|
+        puts company.departments.map(&:id).inspect, user.department_id
         company.departments.map(&:id).include? user.department_id
       end
-      can :manage, Student do |student|
+      can :manage, Event do |event|
+        event.company.departments.map(&:id).include? user.department_id
+      end
+      can :manage, Placement do |placement|
+        placement.company.departments.map(&:id).include? user.department_id
+      end
+      can [:manage, :download_document], Student do |student|
         student.departments.map(&:id).include? user.department_id
       end
     end
