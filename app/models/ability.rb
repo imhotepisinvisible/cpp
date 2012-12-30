@@ -19,41 +19,41 @@ class Ability
     when "CompanyAdministrator"
       can :manage, CompanyAdministrator, :id => user.id
       can :manage, Company, :id => user.company_id
-      can :create, Student
       can [:read, :download_document], Student do |student|
         # Get departments for both and check they intersect
         company_deps = user.company.departments.map(&:id)
         student_deps = student.departments.map(&:id)
         !(company_deps | student_deps).empty?
       end
-      can :create, Event
+      can :create, Student
       can :manage, Event, :company_id => user.company_id
-      can :create, Placement
+      can :create, Event
       can :manage, Placement, :company_id => user.company_id
+      can :create, Placement
     when "DepartmentAdministrator"
       can :manage, DepartmentAdministrator, :id => user.id
       can :manage, Department, :id => user.department_id
 
-      can :create, Company
       can [:manage, :download_document], Company do |company|
         puts company.departments.map(&:id).inspect, user.department_id
         company.departments.map(&:id).include? user.department_id
       end
+      can :create, Company
 
-      can :create, Event
       can :manage, Event do |event|
         event.company.departments.map(&:id).include? user.department_id
       end
+      can :create, Event
 
-      can :create, Placement
       can :manage, Placement do |placement|
         placement.company.departments.map(&:id).include? user.department_id
       end
+      can :create, Placement
 
-      can :create, Student
       can [:manage, :download_document], Student do |student|
         student.departments.map(&:id).include? user.department_id
       end
+      can :create, Student
     end
     #
     # The first argument to `can` is the action you are giving the user permission to do.
