@@ -1,5 +1,6 @@
 class CompaniesController < ApplicationController
   load_and_authorize_resource
+  before_filter :require_login
   respond_to :json
 
   # If the current user is a student, injects their company preferences into
@@ -10,11 +11,7 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    if current_user && current_user.type == "Student"
-      respond_with current_user.companies.as_json({:student_id => current_user.id})
-    else
-      respond_with [].as_json
-    end
+    respond_with current_user.companies.as_json({:student_id => current_user.id})
   end
 
   # GET /companies/1
