@@ -10,8 +10,12 @@ class Ability
       can :create, Student
     when "Student"
       can :manage, Student, :id => user.id
-      can :read, Event, :department_id => user.department_id
-      can :read, Placement, :department_id => user.department_id
+      can :read, Event, do |event|
+        user.departments.map(&:id).include? event.id
+      end
+      can :read, Placement, do |placement|
+        user.departments.map(&:id).include? placement.id
+      end
       can [:read, :download_document, :set_rating], Company do |company|
         # Get departments for both and check they intersect
         company_deps = company.departments.map(&:id)
