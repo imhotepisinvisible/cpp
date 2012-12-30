@@ -3,6 +3,7 @@ class CompanyAdministrator < User
 
   has_many :events, :through => :company, :uniq => true
   has_many :placements, :through => :company, :uniq => true
+  has_many :departments, :through => :company, :uniq => true
 
   attr_accessible :company_id
 
