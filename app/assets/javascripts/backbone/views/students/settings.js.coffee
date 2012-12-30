@@ -11,6 +11,7 @@ class CPP.Views.Students.Settings extends CPP.Views.Base
     saveTagModel = ->
       @model.save {},
         wait: true
+        forceUpdate: true
         success: (model, response) =>
           # notify "success", "Updated Profile TAG"
         error: (model, response) ->
