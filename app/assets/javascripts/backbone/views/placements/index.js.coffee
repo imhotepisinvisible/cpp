@@ -5,7 +5,6 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
   template: JST['backbone/templates/placements/index']
 
   events: -> _.extend {}, CPP.Views.Base::events,
-    "click .btn-add"              : "addPlacement"
     'click .company-logo-header'  : 'viewCompany'
 
   initialize: ->
@@ -65,9 +64,6 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
       ]
       data: @collection
   @
-
-  addPlacement: ->
-    Backbone.history.navigate("companies/" + @collection.company.id + "/placements/new", trigger: true)
 
   viewCompany: ->
     if @collection.company

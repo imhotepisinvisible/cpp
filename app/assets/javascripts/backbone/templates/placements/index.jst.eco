@@ -6,9 +6,19 @@
   <div class="span9">
     <h1 class="section-header">
       Placements <%= " with " + @placements.company.get('name') if @placements.company? %>
-      <% if isAdmin(): %>
-      <div class="btn pull-right btn-add">Add Placement</div>
+
+      <% if @editable: %>
+        <% if @placements.company?: %>
+          <a href="#/companies/<%= @placements.company.get('id') %>/placements/new" class="btn pull-right button-add-placement">
+            New Placement
+          </a>
+        <% else: %>
+          <a href="#/placements/new" class="btn pull-right button-add-placement">
+            New Placement
+          </a>
+        <% end %>
       <% end %>
+
     </h1>
     <table class="table table-bordered table-hover table-clickable">
       <thead>
