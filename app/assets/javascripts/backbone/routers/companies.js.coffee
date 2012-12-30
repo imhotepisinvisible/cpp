@@ -53,8 +53,9 @@ class CPP.Routers.Companies extends Backbone.Router
 
   edit: (id) ->
     if isDepartmentAdmin()
-      admin(id)
+      @admin(id)
       return
+
     company = new CPP.Models.Company id: id
 
     # Wait for all of these before fetching company
