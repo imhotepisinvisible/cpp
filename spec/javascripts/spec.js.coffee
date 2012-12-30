@@ -13,6 +13,7 @@
 #= require_tree ./collections
 #= require_tree ./models
 #= require_tree ./routing
+#= require_tree ./misc
 
 #= require_tree ./views/email
 #= require_tree ./views/event
