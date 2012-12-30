@@ -33,7 +33,6 @@ class StudentsController < ApplicationController
     else
       departments = []
     end
-
     @student.departments = departments
 
     if @student.save

@@ -32,6 +32,13 @@ class CompaniesController < ApplicationController
   # POST /companies.json
   def create
     @company = Company.new(params[:company])
+    @company.organisation_id = current_user.organisation.id
+    if params.has_key? :departments
+      departments = params[:departments].map{ |id| Department.find(id) }
+    else
+      departments = []
+    end
+    @company.departments = departments
 
     if @company.save
       respond_with @company, status: :created, location: @company

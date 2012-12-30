@@ -1,8 +1,9 @@
 class CPP.Routers.Companies extends Backbone.Router
   routes:
-      'companies': 'index'
-      'companies/:id': 'view'
-      'companies/:id/edit': 'edit'
+      'companies'             : 'index'
+      'companies/new'         : 'new'
+      'companies/:id'         : 'view'
+      'companies/:id/edit'    : 'edit'
       'companies/:id/settings': 'settings'
 
   # The company index page that admins will see
@@ -74,6 +75,14 @@ class CPP.Routers.Companies extends Backbone.Router
         error: ->
           notify "error", "Couldn't fetch company"
     )
+
+
+  new: ->
+    department_id = CPP.CurrentUser.get('department_id')
+    company = new CPP.Models.Company departments: [department_id]
+    company.collection = new CPP.Collections.Companies
+    new CPP.Views.Companies.Admin model: company
+
 
   settings: (id) ->
     company = new CPP.Models.Company id: id
