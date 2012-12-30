@@ -11,7 +11,11 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    respond_with current_user.companies.as_json({:student_id => current_user.id})
+    if current_user.is_student?
+      respond_with current_user.companies.as_json({:student_id => current_user.id})
+    else
+      respond_with current_user.companies
+    end
   end
 
   # GET /companies/1
