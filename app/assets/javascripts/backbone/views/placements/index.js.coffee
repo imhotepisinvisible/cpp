@@ -16,7 +16,7 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
   render: ->
     lcompanies = []
     ready = $.Deferred()
-    $(@el).html(@template(placements: @collection))
+    $(@el).html(@template(placements: @collection, editable: isAdmin()))
     @collection.each (event) =>
       event.company = new CPP.Models.Company id: event.get("company_id")
       event.company.fetch
