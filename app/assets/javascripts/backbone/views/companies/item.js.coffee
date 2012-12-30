@@ -4,15 +4,16 @@ class CPP.Views.CompaniesItem extends CPP.Views.Base
 
   initialize: ->
     # bind to model change so backbone view update on destroy
+    @editable = @options.editable
     @model.bind 'change', @render, @
 
   events: -> _.extend {}, CPP.Views.Base::events,
-    "click .btn-edit"   : "editCompany"
-    "click .btn-delete" : "deleteCompany"
-    "click"             : "viewCompany"
+    "click .button-company-edit"   : "editCompany"
+    "click .button-company-delete" : "deleteCompany"
+    "click"                        : "viewCompany"
 
   render: ->
-    $(@el).html(@template(company: @model))
+    $(@el).html(@template(company: @model, editable: @editable))
     @
 
   editCompany: (e) ->
@@ -20,11 +21,11 @@ class CPP.Views.CompaniesItem extends CPP.Views.Base
     Backbone.history.navigate("companies/" + @model.id + "/edit", trigger: true)
 
   deleteCompany: (e) ->
-    $(e.target).parent().parent().remove();
     e.stopPropagation()
     @model.destroy
       wait: true
       success: (model, response) ->
+        $(e.target).parent().parent().parent().remove();
         notify "success", "Company deleted"
       error: (model, response) ->
         notify "error", "Company could not be deleted"

@@ -6,17 +6,18 @@ class CPP.Views.CompaniesIndex extends CPP.Views.Base
     @collection.bind 'reset', @render, @
     @collection.bind 'change', @render, @
     @collection.bind 'filter', @renderCompanies, @
+    @editable = isDepartmentAdmin()
     @render()
 
   render: ->
-    $(@el).html(@template())
+    $(@el).html(@template(editable: @editable))
     @renderCompanies(@collection)
     @renderFilters()
 
   renderCompanies: (col) ->
     @$('#companies').html("")
     col.each (company) =>
-      view = new CPP.Views.CompaniesItem model: company
+      view = new CPP.Views.CompaniesItem(model: company, editable: @editable)
       @$('#companies').append(view.render().el)
     @
 

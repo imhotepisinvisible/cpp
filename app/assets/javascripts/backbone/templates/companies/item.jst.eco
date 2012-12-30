@@ -1,14 +1,12 @@
+<td><img class="img-logo company-logo-img" width="150px" src="<%= @company.getLogoPath() %>"></td>
+<td><%= @company.get('name') %></td>
+<td><%= @company.get('description').substring(0, 100) + '...' %></td>
+
+<% if @editable: %>
 <td>
-  <% if @company.get 'logo_file_name': %>
-    <% src="/companies/#{@company.get 'id'}/documents/logo" %>
-  <% else: %>
-    <% src="/assets/default_profile.png" %>
-  <% end %>
-  <img class="img-logo company-logo-img" width="150px" src="<%=src%>">
+  <div class="btn-group pull-right">
+    <div class="btn btn-small            button-company-edit">Edit</div>
+    <div class="btn btn-small btn-danger button-company-delete">Delete</div>
+  </div>
 </td>
-<td><%= @company.get 'name' %></td>
-<td><%= @company.get 'description' %></td>
-<td>
-  <div class="btn btn-small btn-edit">Edit</div>
-  <div class="btn btn-small btn-danger btn-delete">Delete</div>
-</td>
+<% end %>

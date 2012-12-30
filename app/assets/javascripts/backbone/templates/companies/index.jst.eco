@@ -1,24 +1,27 @@
 <div class="row">
   <div class="span3" id="company-filter"></div>
   <div class="span9">
-    <h1 class="section-header">Companies
-      <div class="btn pull-right">
-        Add Company
-      </div>
+    <h1 class="section-header">
+      Companies
+      <% if @editable: %>
+        <a href="#/companies/new" class="btn pull-right button-company-add">
+          New Company
+        </a>
+      <% end %>
     </h1>
-    <div class="table-toolbar">
-      <div class="clear"></div>
-    </div>
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
           <th>Logo</th>
           <th>Name</th>
           <th>Description</th>
+          <% if @editable: %>
           <th class="btn-column"></th>
+          <% end %>
         </tr>
       </thead>
       <tbody id="companies" class="cpp-tbl">
+        <tr><td colspan="<%= 3 + (@editable ? 1 : 0) %>"><div class="loading"></div></td></tr>
       </tbody>
     </table>
   </div>
