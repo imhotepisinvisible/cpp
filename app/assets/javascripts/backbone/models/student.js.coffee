@@ -53,12 +53,6 @@ class CPP.Models.Student extends Backbone.Model
           message: 'Passwords do not match'
         ]
 
-  set: (attributes, options) ->
-    console.log "******* SETTING *******"
-    console.log "attr", attributes
-    console.log "objects", options
-    Backbone.Model.prototype.set.call(this, attributes, options)
-
 class CPP.Collections.Students extends CPP.Collections.Base
   url: '/students'
   model: CPP.Models.Student
