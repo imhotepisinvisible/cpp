@@ -27,7 +27,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
   initialize: ->
 
     saveModel = ->
-      @model.save {},
+      @model.save
         wait: true
         success: (model, response) ->
           notify "success", "Updated Profile"
