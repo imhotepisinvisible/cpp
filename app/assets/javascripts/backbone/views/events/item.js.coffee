@@ -21,12 +21,12 @@ class CPP.Views.Events.Item extends CPP.Views.Base
 
   deleteEvent: (e) ->
     # Remove item from view
-    $(e.target).parent().parent().remove();
     e.stopPropagation()
     @model.destroy
       wait: true
       success: (model, response) ->
         notify "success", "Event deleted"
+        $(e.target).parent().parent().parent().remove();
       error: (model, response) ->
         notify "error", "Event could not be deleted"
 
