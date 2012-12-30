@@ -7,18 +7,19 @@ class CPP.Views.Students.Index extends CPP.Views.Base
   initialize: ->
     @collection.bind 'reset', @render, @
     @collection.bind 'filter', @renderStudents, @
+    @editable = isDepartmentAdmin()
     @render()
 
   render: ->
-    $(@el).html(@template(students: @collection))
+    $(@el).html(@template(students: @collection, editable: @editable))
     @renderStudents(@collection)
     @renderFilters()
   @
 
   renderStudents: (col) ->
     @$('#students').html("")
-    col.each (student) ->
-      view = new CPP.Views.Students.Item model: student
+    col.each (student) =>
+      view = new CPP.Views.Students.Item(model: student, editable: @editable)
       @$('#students').append(view.render().el)
   @
 

@@ -9,6 +9,9 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
     'click .btn-save': 'save'
 
   initialize: ->
+    if !(isDepartmentAdmin())
+      Backbone.history.navigate("/", trigger: true)
+      return
     @form = new Backbone.Form
       model: @model
       schema:
@@ -37,7 +40,7 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
     @render()
 
   render: ->
-    $(@el).html(@template(student: @model))
+    $(@el).html(@template(student: @model, editable: true))
     # Super called as extending we are extending CPP.Views.Base
     super
     $('.form').append(@form.el)

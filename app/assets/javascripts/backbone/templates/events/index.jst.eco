@@ -35,7 +35,7 @@
           <th>Apply By</th>
           <th>Location</th>
           <th>Capacity</th>
-          <% if isAdmin(): %>
+          <% if @editable: %>
           <th class="btn-column"></th>
           <% end %>
         </tr>

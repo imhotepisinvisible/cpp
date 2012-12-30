@@ -3,7 +3,6 @@ class CPP.Routers.Students extends Backbone.Router
       'students': 'index'
       'students/:id': 'view'
       'students/:id/edit': 'edit'
-      'students/:id/admin': 'admin'
       'students/:id/settings': 'settings'
       'departments/:id/students/signup': 'signup'
 
@@ -31,6 +30,10 @@ class CPP.Routers.Students extends Backbone.Router
         notify "error", "Couldn't fetch student"
 
   edit: (id) ->
+    if isDepartmentAdmin()
+      @admin(id)
+      return
+
     student = @getStudentFromID(id)
     unless student
       notify "error", "Invalid Student"

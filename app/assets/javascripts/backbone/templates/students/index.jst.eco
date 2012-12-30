@@ -3,6 +3,12 @@
   <div class="span9">
     <h1 class="section-header">
       Students
+
+      <% if @editable: %>
+        <a href="#/students/new" class="btn pull-right button-student-add">
+          New Student
+        </a>
+      <% end %>
     </h1>
     <table class="table table-bordered table-hover table-clickable">
       <thead>
@@ -11,9 +17,11 @@
           <th>Last Name</th>
           <th>Year</th>
           <th>Degree</th>
+          <th class="btn-column"></th>
         </tr>
       </thead>
       <tbody class="cpp-tbl" id="students">
+        <tr><td colspan="<%= 4 + (@editable ? 1 : 0) %>"><div class="loading"></div></td></tr>
       </tbody>
     </table>
   </div>
