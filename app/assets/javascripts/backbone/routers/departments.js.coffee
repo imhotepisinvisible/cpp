@@ -1,8 +1,9 @@
 class CPP.Routers.Departments extends Backbone.Router
   routes:
-    'departments/:id/settings': 'settings'
-    'departments/:id/dashboard': 'dashboard'
-    'department_dashboard' : 'dashboard'
+    'departments/:id/settings':   'settings'
+    'department_settings' :       'settings'
+    'departments/:id/dashboard':  'dashboard'
+    'department_dashboard' :      'dashboard'
 
   settings: (id) ->
     department = @getDepartmentFromID id

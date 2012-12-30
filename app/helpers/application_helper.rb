@@ -13,7 +13,7 @@ module ApplicationHelper
     when 'CompanyAdministrator'
       return "#companies/#{current_user.company_id}/settings"
     when 'DepartmentAdministrator'
-      return "#departments/#{current_user.department_id}/settings"
+      return "#department_settings"
     else
       return ''
     end
