@@ -13,9 +13,20 @@
   <div class="span9">
     <h1 class="section-header">
       Events <%= " by " + @events.company.get('name') if @events.company? %>
-      <% if isAdmin(): %>
-      <div class="btn pull-right btn-add">Add Event</div>
+
+      <% if @editable: %>
+        something
+        <% if @events.company?: %>
+          <a href="#/companies/<%= @events.company.get('id') %>/events/new" class="btn pull-right button-add-event">
+            <i class="icon-plus"></i>
+          </a>
+        <% else: %>
+          <a href="#/events/new" class="btn pull-right button-add-event">
+            <i class="icon-plus"></i>
+          </a>
+        <% end %>
       <% end %>
+
     </h1>
     <table class="table table-bordered table-hover table-clickable">
       <thead>
@@ -31,7 +42,7 @@
         </tr>
       </thead>
       <tbody class="cpp-tbl" id="events">
-        <tr><td colspan="<%= 5 + (isAdmin() ? 1 : 0) %>"><div class="loading"></div></td></tr>
+        <tr><td colspan="<%= 5 + (@editable ? 1 : 0) %>"><div class="loading"></div></td></tr>
       </tbody>
     </table>
   </div>

@@ -5,7 +5,6 @@ class CPP.Views.Events.Index extends CPP.Views.Base
   template: JST['backbone/templates/events/index']
 
   events: -> _.extend {}, CPP.Views.Base::events,
-    "click .btn-add"                  : "addEvent"
     "click .company-logo-header"      : "viewCompany"
 
 
@@ -29,7 +28,7 @@ class CPP.Views.Events.Index extends CPP.Views.Base
   render: ->
     lcompanies = []
     ready = $.Deferred()
-    $(@el).html(@template(events: @collection))
+    $(@el).html(@template(events: @collection, editable: isAdmin()))
     @collection.each (event) =>
       event.company = new CPP.Models.Company id: event.get("company_id")
       event.company.fetch
@@ -77,9 +76,6 @@ class CPP.Views.Events.Index extends CPP.Views.Base
       ]
       data: @collection
   @
-
-  addEvent: ->
-    Backbone.history.navigate("companies/" + @collection.company.id + "/events/new", trigger: true)
 
   viewCompany: ->
     if @collection.company
