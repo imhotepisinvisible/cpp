@@ -21,7 +21,6 @@ class Event < ActiveRecord::Base
   has_and_belongs_to_many :registered_students, :join_table => :student_event_registrations, :class_name => "Student", :table_name => :users
 
   acts_as_taggable_on :skills, :interests, :year_groups
-  attr_accessible :skill_list, :interest_list, :year_group_list
 
 	validates :company_id,   :presence => true
 	validates :title,        :presence => true
@@ -40,6 +39,11 @@ class Event < ActiveRecord::Base
   validates_datetime :end_date,
     :after => :start_date,
     :after_message => "End time cannot be before start time"
+
+  attr_accessible :skill_list, :interest_list, :year_group_list,
+                  :title, :start_date, :end_date, :deadline,
+                  :description, :location, :capacity, :google_map_url,
+                  :company_id
 
   # Returns a relevance score from 0 to 100 for student with the given id
   # TODO: Implement!
