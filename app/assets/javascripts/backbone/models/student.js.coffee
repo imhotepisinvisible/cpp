@@ -20,10 +20,12 @@ class CPP.Models.Student extends Backbone.Model
     email:
       required: true
       pattern: 'email'
-    # password:
-    #   minLength: 8
-    # password_confirmation:
-    #   minLength: 8
+    departments:
+      required: true
+    password:
+      minLength: 8
+    password_confirmation:
+      minLength: 8
 
   schema: ->
     first_name:
@@ -36,13 +38,11 @@ class CPP.Models.Student extends Backbone.Model
       type: "Checkboxes"
       options: @allDepartments
       editorClass: "departments-checkbox"
-      validators: ['required']
     email:
       type: "Text"
       title: "Email"
     password:
       type: "Password"
-      validators: ['required']
     password_confirmation:
       type: "Password"
       title: "Password Confirmation"
@@ -53,6 +53,11 @@ class CPP.Models.Student extends Backbone.Model
           message: 'Passwords do not match'
         ]
 
+  set: (attributes, options) ->
+    console.log "******* SETTING *******"
+    console.log "attr", attributes
+    console.log "objects", options
+    Backbone.Model.prototype.set.call(this, attributes, options)
 
 class CPP.Collections.Students extends CPP.Collections.Base
   url: '/students'

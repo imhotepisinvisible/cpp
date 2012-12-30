@@ -28,14 +28,14 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
 
     saveModel = ->
       @model.save null,
-        wait: true
         success: (model, response) ->
           notify "success", "Updated Profile"
         error: (model, response) ->
           # Notify tag-specific errors here (profanity etc)
-          console.log response
           errorlist = JSON.parse response.responseText
           notify "error", "Couldn't Update Profile"
+        wait: true
+        forceUpdate: true
 
     @skill_list_tags_form = new Backbone.Form.editors.TagEditor
       model: @model
