@@ -13,6 +13,14 @@ class CompaniesController < ApplicationController
   def index
     if current_user.is_student?
       respond_with current_user.companies.as_json({:student_id => current_user.id})
+    elsif current_user && current_user.type == "DepartmentAdministrator"
+      @companies = Company.scoped
+      if params.keys.include? "department_id"
+        @companies = @companies.all(:include => :departments, 
+                                    :conditions => ["companies_departments.department_id = ?",
+                                    params[:department_id]])
+      end
+      respond_with @companies
     else
       respond_with current_user.companies
     end

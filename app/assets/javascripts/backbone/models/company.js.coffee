@@ -17,6 +17,9 @@ class CPP.Models.Company extends Backbone.Model
     @departments = new CPP.Collections.Departments
     @departments.url = '/companies/' + this.id + '/departments'
 
+  toString: ->
+    return this.get 'name'
+
   url: ->
     '/companies' + (if @isNew() then '' else '/' + @id)
 

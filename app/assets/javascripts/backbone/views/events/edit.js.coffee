@@ -10,6 +10,24 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
 
   initialize: ->
     @model.set "requirementsEnabled", false
+
+    # If model doesn't have a company yet, i.e. admin
+    # Need to add to the schema a comapny select
+    # TODO: Is there a better way to do this?
+    if (this.options.department)
+      schema = @model.schema()
+      schema['company'] = {
+        type: "Select"
+        options: this.options.department.companies
+        editorClass: "company-select"
+      }
+      delete schema["departments"]
+
+      @model.set('departments', [this.options.department.id])
+      @model.save()
+      @model.schema = -> 
+        schema
+
     @form = new Backbone.Form(model: @model).render()
     Backbone.Validation.bind @form;
 

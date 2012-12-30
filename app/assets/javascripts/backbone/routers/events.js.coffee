@@ -1,10 +1,11 @@
 class CPP.Routers.Events extends Backbone.Router
   routes:
-      'events'                            : 'index'
-      'companies/:company_id/events'      : 'indexCompany'
-      'companies/:company_id/events/new'  : 'new'
-      'events/:id/edit'                   : 'edit'
-      'events/:id'                        : 'view'
+      'events'                               : 'index'
+      'companies/:company_id/events'         : 'indexCompany'
+      'companies/:company_id/events/new'     : 'new'
+      'events/:id/edit'                      : 'edit'
+      'events/new'                           : 'newAdmin'
+      'events/:id'                           : 'view'
 
   indexCompany: (company_id) ->
     events = new CPP.Collections.Events
@@ -44,6 +45,24 @@ class CPP.Routers.Events extends Backbone.Router
             new CPP.Views.Events.Edit model: event
       error: ->
         notify "error", "Couldn't fetch company for event"
+
+  newAdmin: (department_id) ->
+    event = new CPP.Models.Event
+    event.collection = new CPP.Collections.Events
+    department = new CPP.Models.Department id: window.getAdminDepartment()
+    department.fetch
+      success: ->
+        department.companies = new CPP.Collections.Companies
+        department.companies.fetch
+          data:
+            $.param({ department_id: window.getAdminDepartment() })
+          success: =>
+            console.log "Hooray", department.companies
+            new CPP.Views.Events.Edit model: event, department: department
+          error: ->
+            notify "error", "Couldn't fetch department companies"
+      error: ->
+        notify "error", "Couldn't fetch department"
 
   edit: (id) ->
     event = new CPP.Models.Event id: id

@@ -19,7 +19,7 @@ class CPP.Models.Event extends Backbone.Model
       required: true
     location:
       required: true
-    depatments:
+    departments:
       required: true
 
   schema: ->

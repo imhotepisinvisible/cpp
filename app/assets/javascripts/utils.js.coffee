@@ -99,3 +99,7 @@ window.isDepartmentAdmin = ->
 
 window.isAdmin = ->
   isCompanyAdmin() || isDepartmentAdmin()
+
+# Pre: assumes you already know you're an admin
+window.getAdminDepartment = ->
+  CPP.CurrentUser.attributes.department_id
