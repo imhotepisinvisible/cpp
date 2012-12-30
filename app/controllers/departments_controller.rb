@@ -1,12 +1,17 @@
 class DepartmentsController < ApplicationController
+  before_filter :require_login
   respond_to :json
 
   # GET /departments
   # GET /departments.json
   def index
-    @departments = Department.scoped
-    if params.keys.include? "company_id"
-      @departments = @departments.all(:include => :companies, :conditions => ["companies.id = ?", params[:company_id]])
+    if current_user.is_department_admin?
+      @departments = current_user.department
+    else
+      @departments = current_user.departments
+      if params.keys.include? "company_id"
+        @departments = @departments.all(:include => :companies, :conditions => ["companies.id = ?", params[:company_id]])
+      end
     end
     respond_with @departments
   end
