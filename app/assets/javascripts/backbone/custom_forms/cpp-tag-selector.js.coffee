@@ -68,7 +68,6 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
 
   # event handlers
   onRemoveTagClick: (event) =>
-    console.log "rt"
     $tag = $(event.target).siblings('.tag-text')
     @removeTag($tag.text())
 

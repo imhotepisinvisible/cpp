@@ -17,6 +17,8 @@ class CPP.Filter extends CPP.Views.Base
     @data = options.data
     @model = new CPP.Models.Event
     @model.set("skill_list",[])
+    @model.set("interest_list",[])
+    @model.set("year_group_list",[])
     @model.bind 'change', @setFilter, @
 
     @skill_list_tags_form = new Backbone.Form.editors.TagEditor
@@ -70,35 +72,45 @@ class CPP.Filter extends CPP.Views.Base
 
 
   setFilter: ->
-    console.log "sf"
     fCollection = @data
     if filters
       for filter in @filters
         tb =  $("#"+filter.attribute).val()
-        # Dont filter when nothing in text box
-        if (tb != "")
-          # Update collection
-          switch filter.type
-            when "text"
+        switch filter.type
+          when "text"
+            # Dont filter when nothing in text box
+            if (tb != "")
               fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
                 res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
                 (res.toString().toLowerCase().indexOf tb.toLowerCase()) != -1
               ))
-            when "number"
+          when "number"
+            if (tb != "")
               fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
                 res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
                 res.toString() is tb
               ))
-            when "tags"
-              # Need to get tags for model and match to tags in the filter model
-              if (@model.get "skill_list").length > 0
-                fCollection = new (fCollection.constructor)(fCollection.filter((model) =>
-                  res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
+          when "tags"
+            ftags = @model.get("skill_list").concat(@model.get("interest_list"))
+            if ftags.length > 0
+              fCollection = new (fCollection.constructor)(fCollection.filter((model) =>
+                res = model.get("skill_list").concat(model.get("interest_list"))
+                ret = false;
+                for tag in ftags
+                  ret |= tag in res
+                ret
+              ))
+            # Filter year groups after to only include specified year
+            yearTags = @model.get("year_group_list")
+            if yearTags.length > 0
+              fCollection = new (fCollection.constructor)(fCollection.filter((model) =>
+                  res = model.get("year_group_list")
                   ret = false;
-                  for skill in @model.get "skill_list"
-                    ret |= skill in res
+                  for tag in yearTags
+                    ret |= tag in res
                   ret
                 ))
+
       @data.trigger('filter', fCollection)
   @
 
