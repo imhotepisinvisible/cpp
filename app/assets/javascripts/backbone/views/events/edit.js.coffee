@@ -81,6 +81,7 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
       @form.commit()
       @model.save {},
         wait: true
+        forceUpdate: true
         success: (model, response) =>
           notify "success", "Event Saved"
           Backbone.history.navigate('companies/' + @model.get('company_id') + '/events', trigger: true)
