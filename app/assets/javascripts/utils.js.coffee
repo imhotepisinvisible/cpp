@@ -91,5 +91,11 @@ window.loggedIn = ->
 window.isStudent = ->
   loggedIn() && CPP.CurrentUser.get('type') == "Student"
 
-window.isAdmin = ->
+window.isCompanyAdmin = ->
   loggedIn() && CPP.CurrentUser.get('type') == "CompanyAdministrator"
+
+window.isDepartmentAdmin = ->
+  loggedIn() && CPP.CurrentUser.get('type') == "CompanyAdministrator"
+
+window.isAdmin = ->
+  isCompanyAdmin() || isDepartmentAdmin()
