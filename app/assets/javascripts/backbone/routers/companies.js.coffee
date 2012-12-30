@@ -3,7 +3,6 @@ class CPP.Routers.Companies extends Backbone.Router
       'companies': 'index'
       'companies/:id': 'view'
       'companies/:id/edit': 'edit'
-      'companies/:id/admin': 'admin'
       'companies/:id/settings': 'settings'
 
   # The company index page that admins will see
@@ -53,6 +52,9 @@ class CPP.Routers.Companies extends Backbone.Router
         model.company = company
 
   edit: (id) ->
+    if isDepartmentAdmin()
+      admin(id)
+      return
     company = new CPP.Models.Company id: id
 
     # Wait for all of these before fetching company
