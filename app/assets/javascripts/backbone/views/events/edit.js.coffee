@@ -16,7 +16,8 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
     # TODO: Is there a better way to do this?
     if (this.options.department)
       schema = @model.schema()
-      schema['company'] = {
+      schema['company_id'] = {
+        text: "Company"
         type: "Select"
         options: this.options.department.companies
         editorClass: "company-select"
