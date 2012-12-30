@@ -10,10 +10,10 @@ class Ability
       can :create, Student
     when "Student"
       can :manage, Student, :id => user.id
-      can :read, Event, do |event|
+      can :read, Event do |event|
         user.departments.map(&:id).include? event.id
       end
-      can :read, Placement, do |placement|
+      can :read, Placement do |placement|
         user.departments.map(&:id).include? placement.id
       end
       can [:read, :download_document, :set_rating], Company do |company|
