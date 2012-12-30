@@ -1,14 +1,11 @@
 class EventsController < ApplicationController
   respond_to :json
+  before_filter :require_login
 
   # GET /events
   # GET /events.json
   def index
-    if current_user && current_user.is_student?
-      @events = current_user.events.scoped
-    else
-      @events = Event.scoped # Change me
-    end
+    @events = current_user.events.scoped
 
     if params.keys.include? "company_id"
       @events = @events.where(:company_id => params[:company_id])

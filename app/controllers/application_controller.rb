@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
+  def require_login
+    raise CanCan::AccessDenied unless current_user
+  end
+
   # Lets us use current_user in our views and throughout our controllers
   helper_method :current_user
 end

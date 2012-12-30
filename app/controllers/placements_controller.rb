@@ -1,14 +1,11 @@
 class PlacementsController < ApplicationController
   respond_to :json
+  before_filter :require_login
 
   # GET /placements
   # GET /placements.json
   def index
-    if current_user && current_user.is_student?
-      @placements = current_user.placements.scoped
-    else
-      @placements = Placement.scoped # Change me
-    end
+    @placements = current_user.placements.scoped
 
     if params.keys.include? "company_id"
       @placements = @placements.where(:company_id => params[:company_id])
