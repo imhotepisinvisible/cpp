@@ -69,7 +69,7 @@ class CPP.Views.Events.Index extends CPP.Views.Base
         type: "number"
         attribute: "capacity"
         scope: ""},
-        {name: "SkillsList"
+        {name: "Tag Filters"
         type: "tags"
         attribute: "skill_list"
         scope: ""

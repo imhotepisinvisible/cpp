@@ -10,6 +10,44 @@ class CPP.Views.Placements.Edit extends CPP.Views.Base
 
   initialize: ->
     @form = new Backbone.Form(model: @model).render()
+
+    saveTagModel = =>
+      @model.save {},
+        wait: true
+        success: (model, response) =>
+          notify "success", "Updated Profile TAG"
+        error: (model, response) =>
+          # Notify tag-specific errors here (profanity etc)
+          # errorlist = JSON.parse response.responseText
+          notify "error", "Couldn't Update Tags"
+
+    @skill_list_tags_form = new Backbone.Form.editors.TagEditor
+      model: @model
+      key: 'skill_list'
+      title: 'Skills'
+      url: '/tags/skills'
+      tag_class: 'label-success'
+      tag_change_callback: saveTagModel
+      additions: true
+
+    @interest_list_tags_form = new Backbone.Form.editors.TagEditor
+      model: @model
+      key: 'interest_list'
+      title: 'Interests'
+      url: '/tags/interests'
+      tag_class: 'label-warning'
+      tag_change_callback: saveTagModel
+      additions: true
+
+    @year_group_list_tags_form = new Backbone.Form.editors.TagEditor
+      model: @model
+      key: 'year_group_list'
+      title: 'Year Groups'
+      url: '/tags/year_groups'
+      tag_class: 'label-info'
+      tag_change_callback: saveTagModel
+      additions: true
+
     @render()
 
   render: ->
@@ -19,6 +57,12 @@ class CPP.Views.Placements.Edit extends CPP.Views.Base
     $('.form').append(@form.el)
     @form.on "change", =>
       @form.validate()
+    @skill_list_tags_form.render()
+    $('.skill-tags-form').append(@skill_list_tags_form.el)
+    @interest_list_tags_form.render()
+    $('.interest-tags-form').append(@interest_list_tags_form.el)
+    @year_group_list_tags_form.render()
+    $('.year-group-tags-form').append(@year_group_list_tags_form.el)
   @
 
   submitPlacement: ->

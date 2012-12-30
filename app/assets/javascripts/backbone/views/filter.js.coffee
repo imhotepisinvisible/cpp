@@ -9,7 +9,6 @@ class CPP.Filter extends CPP.Views.Base
     "keyup .fltr-search"        : "setFilter"
     "blur .tag-input"           : "setFilter"
 
-
   sub_el: "#filters"
 
   initialize: (options) ->

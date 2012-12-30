@@ -44,6 +44,11 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
     new CPP.Filter
       el: $(@el).find('#placement-filter')
       filters: [
+        {name: "Company"
+        type: "text"
+        attribute: "name"
+        scope: ".company"
+        },
         {name: "Position Search"
         type: "text"
         attribute: "position"
@@ -52,11 +57,6 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
         type: "text"
         attribute: "location"
         scope: ""},
-        {name: "Company"
-        type: "text"
-        attribute: "name"
-        scope: ".company"
-        },
         {name: "tags"
         type: "tags"
         attrublute: null

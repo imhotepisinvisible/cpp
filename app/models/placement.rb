@@ -16,6 +16,7 @@ class Placement < ActiveRecord::Base
   belongs_to :company
 
   acts_as_taggable_on :skills, :interests, :year_groups
+  attr_accessible :skill_list, :interest_list, :year_group_list
 
   validates :company_id,  :presence => true
   validates :position,    :presence => true
