@@ -8,11 +8,12 @@ class CPP.Views.Events.Item extends CPP.Views.Base
 
   initialize: ->
     id = @model.get('id')
+    @editable = @options.editable
 
   events: -> _.extend {}, CPP.Views.Base::events,
-    "click .btn-edit"   : "editEvent"
-    "click .btn-delete" : "deleteEvent"
-    "click"             : "viewEvent"
+    "click .button-event-delete" : "deleteEvent"
+    "click .button-event-edit"   : "editEvent"
+    "click"                      : "viewEvent"
 
   editEvent: (e) ->
     e.stopPropagation()
@@ -30,7 +31,7 @@ class CPP.Views.Events.Item extends CPP.Views.Base
         notify "error", "Event could not be deleted"
 
   render: ->
-    $(@el).html(@template(event: @model))
+    $(@el).html(@template(event: @model, editable: @editable))
     @
 
   viewEvent: ->

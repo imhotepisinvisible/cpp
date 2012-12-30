@@ -3,11 +3,12 @@
 <td><%= @event.get 'deadline' %></td>
 <td><%= @event.get 'location' %></td>
 <td><%= @event.get 'capacity' %></td>
-<% if isAdmin(): %>
+
+<% if @editable: %>
 <td>
   <div class="btn-group pull-right">
-    <div class="btn btn-small btn-edit"><i class="icon-pencil" /></div>
-    <div class="btn btn-small btn-danger btn-delete"><i class="icon-trash" /></div>
+    <div class="btn btn-small button-event-edit"><i class="icon-pencil" /></div>
+    <div class="btn btn-small button-event-delete btn-danger"><i class="icon-trash" /></div>
   </div>
 </td>
 <% end %>

@@ -23,12 +23,13 @@ class CPP.Views.Events.Index extends CPP.Views.Base
     #console.log eventCounter
     #continue until (eventCounter == @collection.length)
     #console.log @collection.length
+    @editable = isAdmin()
     @render()
 
   render: ->
     lcompanies = []
     ready = $.Deferred()
-    $(@el).html(@template(events: @collection, editable: isAdmin()))
+    $(@el).html(@template(events: @collection, editable: @editable))
     @collection.each (event) =>
       event.company = new CPP.Models.Company id: event.get("company_id")
       event.company.fetch
@@ -46,8 +47,8 @@ class CPP.Views.Events.Index extends CPP.Views.Base
 
   renderEvents: (col) ->
     @$('#events').html("")
-    col.each (event) ->
-      view = new CPP.Views.Events.Item model: event
+    col.each (event) =>
+      view = new CPP.Views.Events.Item(model: event, editable: @editable)
       @$('#events').append(view.render().el)
     @
 
