@@ -3,6 +3,7 @@ class CPP.Routers.Students extends Backbone.Router
       'students': 'index'
       'students/:id': 'view'
       'students/:id/edit': 'edit'
+      'students/:id/admin': 'admin'
       'students/:id/settings': 'settings'
       'departments/:id/students/signup': 'signup'
 
@@ -28,7 +29,6 @@ class CPP.Routers.Students extends Backbone.Router
         new CPP.Views.Students.View model: student
       error: ->
         notify "error", "Couldn't fetch student"
-
 
   edit: (id) ->
     student = @getStudentFromID(id)
@@ -57,6 +57,14 @@ class CPP.Routers.Students extends Backbone.Router
             notify "error", "Couldn't fetch student"
       )
     )
+
+  admin: (id) ->
+    student = new CPP.Models.Student id: id
+    student.fetch
+      success: ->
+        new CPP.Views.Students.Admin model: student
+      error: ->
+        notify "error", "Couldn't fetch student"
 
   settings: (id) ->
     student = @getStudentFromID(id)
