@@ -141,7 +141,6 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
   removeTag: (tag) =>
     @tags = _.without(@tags, tag)
     @commit()
-    console.log "Just committed", @model
     @tag_change_callback()
     @render()
 
