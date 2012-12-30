@@ -7,7 +7,8 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-submit': 'submitEvent'
 
-  initialize: ->
+  initialize: (options) ->
+    @login = options.login
     @form = new Backbone.Form(model: @model).render()
     @render()
 
@@ -26,9 +27,10 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
         wait: true
         success: (model, response) =>
           notify "success", "Registered"
-          $.post '/sessions', { session: { email: @model.get('email'), password: @model.get('password') } }, (data) ->
-            window.location = '/#/students/' + model.get('id') + '/edit'
-            window.location.reload(true)
+          if @login
+            $.post '/sessions', { session: { email: @model.get('email'), password: @model.get('password') } }, (data) ->
+              window.location = '/#/students/' + model.get('id') + '/edit'
+              window.location.reload(true)
         error: (model, response) =>
           errorlist = JSON.parse response.responseText
           for field, errors of errorlist.errors

@@ -1,6 +1,7 @@
 class CPP.Routers.Students extends Backbone.Router
   routes:
       'students': 'index'
+      'students/new': 'signupNoLogin'
       'students/:id': 'view'
       'students/:id/edit': 'edit'
       'students/:id/settings': 'settings'
@@ -82,13 +83,20 @@ class CPP.Routers.Students extends Backbone.Router
         notify "error", "Couldn't fetch student"
 
   signup: ->
+    @register true
 
-    if CPP.CurrentUser? && CPP.CurrentUser isnt {}
+  signupNoLogin: ->
+    @register false
+
+  register: (login) ->
+    if login && CPP.CurrentUser? && CPP.CurrentUser isnt {}
       window.history.back()
       return false
     student = new CPP.Models.Student
     student.collection = new CPP.Collections.Students
-    new CPP.Views.Students.Signup model: student
+    new CPP.Views.Students.Signup
+      model: student
+      login: login
 
   getStudentFromID: (id) ->
     if id?
