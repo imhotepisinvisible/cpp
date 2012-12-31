@@ -7,6 +7,9 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
 
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-save': 'save'
+    'click .upload-document': 'uploadDocument'
+    'click .delete-document': 'deleteDocument'
+
 
   initialize: ->
     @form = new Backbone.Form
@@ -20,6 +23,38 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
           type: 'TextArea'
     .render()
     @render()
+    @logoUploadInitialize()
+
+  logoUploadInitialize: ->
+    $('#file-logo').fileupload
+      url: '/companies/' + @model.id
+      dataType: 'json'
+      type: "PUT"
+
+    .bind "fileuploaddone", (e, data) =>
+      notify 'success', 'Uploaded successfully'
+      $('.company-logo-image').attr('src', '/companies/' + @model.id + '/documents/logo')
+      $(e.target).closest('.upload-container').removeClass('missing-document')
+
+    .bind "fileuploadfail", (e, data) =>
+      displayJQZHRErrors data
+
+  deleteDocument: (e) ->
+    id = $(e.currentTarget).attr('id')
+    if confirm "Are you sure you wish to delete the logo?"
+      $.ajax
+        url: "/companies/#{@model.id}/documents/logo"
+        type: 'DELETE'
+        success: (data) ->
+          $(e.currentTarget).closest('.upload-container').addClass('missing-document')
+          $('.company-logo-image').attr('src', '/assets/default_profile.png')
+          notify('success', 'logo removed')
+
+        error: (data) ->
+          notify('error', "couldn't remove document")
+
+  uploadDocument: (e) ->
+    $(e.currentTarget).closest('.upload-container').find('.file-input').click()
 
   render: ->
     $(@el).html(@template(company: @model))

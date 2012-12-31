@@ -25,13 +25,11 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
       type: "PUT"
 
     .bind "fileuploaddone", (e, data) =>
-      console.log "Success"
       notify 'success', 'Uploaded successfully'
       $('.company-logo-image').attr('src', '/companies/' + @model.id + '/documents/logo')
       $(e.target).closest('.upload-container').removeClass('missing-document')
 
     .bind "fileuploadfail", (e, data) =>
-      console.log "Failure"
       displayJQZHRErrors data
 
   deleteDocument: (e) ->
