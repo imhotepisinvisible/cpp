@@ -11,7 +11,6 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
     'click .delete-document': 'delDocument'
     'change #file-logo': 'fileChange'
 
-
   initialize: ->
     @form = new Backbone.Form
       model: @model
@@ -41,7 +40,6 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
 
   delDocument: ->
     $('.company-logo-image').attr('src', '/assets/default_profile.png')
-
 
   deleteDocument: ->
     $.ajax
@@ -100,4 +98,3 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
               notify 'error', 'Unable to save company'
           catch err
             notify 'error', response.responseText
-          

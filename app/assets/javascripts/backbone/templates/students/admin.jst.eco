@@ -9,6 +9,27 @@
 </div>
 
 <div class="row">
+  <div class="offset1 span3">
+    <span>Profile picture</span>
+    <div id="student-profile-img-container"
+         class="upload-container img-polaroid <%= "missing-document" unless @student.get('profile_picture_file_name') %> image-buttons-container">
+      <% if @student.get 'profile_picture_file_name': %>
+        <img src="/students/<%= @student.get 'id' %>/documents/profile_picture" id="student-profile-img">
+      <% else: %>
+        <img src="/assets/default_profile.png" id="student-profile-img">
+      <% end %>
+      <div class="image-buttons">
+        <form class="form-inline hidden">
+            <input class="file-input" id="file-profile-picture" type="file" name="student[profile_picture]" size="20">
+        </form>
+        <div class="btn upload-document" id="upload-profile-picture"><i class="icon-upload-alt"/></div>
+        <div class="btn btn-danger delete-document" id="delete-profile-picture"><i class="icon-trash" /></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
   <div class="span12">
     <div class="control-group">
       <div class="controls">

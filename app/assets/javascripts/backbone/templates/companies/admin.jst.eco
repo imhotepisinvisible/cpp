@@ -9,7 +9,7 @@
 </div>
 
 <div class="row">
-  <div class="span4">
+  <div class="offset1 span3">
     <span>Logo</span>
     <div id="company-logo-large company-logo-img-container"
          class="upload-container img-polaroid <%= "missing-document" unless @company.get('logo_file_name') %> image-buttons-container">

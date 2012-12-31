@@ -7,6 +7,9 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
 
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-save': 'save'
+    'click .upload-document': 'uploadDocument'
+    'click .delete-document': 'delDocument'
+    'change #file-profile-picture': 'fileChange'
 
   initialize: ->
     if !(isDepartmentAdmin())
@@ -39,6 +42,46 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
     .render()
     @render()
 
+   profilePictureUploadInit: ->
+    $('#file-profile-picture').fileupload
+      singleFileUploads: true
+      url: '/students/' + @model.id
+      dataType: 'json'
+      type: "PUT"
+
+    .bind "fileuploaddone", (e, data) =>
+      window.history.back()
+      notify 'success', 'Student saved'
+
+    .bind "fileuploadfail", (e, data) =>
+      displayJQZHRErrors data
+
+  delDocument: ->
+    $('#student-profile-img').attr('src', '/assets/default_profile.png')
+
+  deleteDocument: (documentType) ->
+    $.ajax
+      url: "/students/#{@model.id}/documents/#{documentType}"
+      type: 'DELETE'
+      success: (data) ->
+        window.history.back()
+        notify 'success', 'Student saved'
+      error: (data) ->
+        notify('error', "Unable to remove #{documentType}")
+
+  uploadDocument: (e) ->
+    $(e.currentTarget).closest('.upload-container').find('.file-input').click()
+
+  fileChange: (e) ->
+    # When the logo changes, change the image src to the contents
+    # of the new logo locally (without uploading so that cancel will
+    # not upload)
+    logo = $('#file-profile-picture').get(0).files[0]
+    reader = new FileReader
+    reader.onload = (e) ->
+      $('#student-profile-img').attr('src', e.target.result)
+    reader.readAsDataURL(logo)
+
   render: ->
     $(@el).html(@template(student: @model, editable: true))
     # Super called as extending we are extending CPP.Views.Base
@@ -54,9 +97,16 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
       @model.save {},
         wait: true
         success: (model, response) =>
-          notify "success", "Student saved"
-          window.history.back()
-          @undelegateEvents()
+          if $('#file-profile-picture').get(0).files.length > 0
+            @profilePictureUploadInit()
+            $('#file-profile-picture').fileupload 'send',
+              files: $('#file-profile-picture').get(0).files
+          else if $('#student-profile-img').attr('src') == '/assets/default_profile.png'
+            @deleteDocument 'profile_picture'
+          else
+            window.history.back()
+            notify "success", "Student saved"
+            @undelegateEvents()
         error: (model, response) =>
           errorlist = JSON.parse response.responseText
           if response.errors
