@@ -9,6 +9,7 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
     'click .btn-save': 'save'
     'click .upload-document': 'uploadDocument'
     'click .delete-document': 'delDocument'
+    'change #file-logo': 'fileChange'
 
 
   initialize: ->
@@ -23,34 +24,32 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
           type: 'TextArea'
     .render()
     @render()
-    @logoUploadInitialize()
 
   logoUploadInitialize: ->
     $('#file-logo').fileupload
-      fileInput: null
       singleFileUploads: true
       url: '/companies/' + @model.id
       dataType: 'json'
       type: "PUT"
 
     .bind "fileuploaddone", (e, data) =>
-      console.log 'done', data
-      notify 'success', 'Uploaded successfully'
-      #window.history.back()
+      window.history.back()
+      notify 'success', 'Company saved'
 
     .bind "fileuploadfail", (e, data) =>
       displayJQZHRErrors data
 
   delDocument: ->
-    @deleteLogo = true
+    $('.company-logo-image').attr('src', '/assets/default_profile.png')
+
 
   deleteDocument: ->
     $.ajax
       url: "/companies/#{@model.id}/documents/logo"
       type: 'DELETE'
       success: (data) ->
-        notify('success', 'Logo removed')
         window.history.back()
+        notify 'success', 'Company saved'
       error: (data) ->
         notify('error', "Unable to remove logo")
 
@@ -66,20 +65,31 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
       @form.validate()
   @
 
+  fileChange: (e) ->
+    # When the logo changes, change the image src to the contents
+    # of the new logo locally (without uploading so that cancel will
+    # not upload)
+    logo = $('#file-logo').get(0).files[0]
+    reader = new FileReader
+    reader.onload = (e) ->
+      $('.company-logo-image').attr('src', e.target.result)
+    reader.readAsDataURL(logo)
+
   save: ->
     if @form.validate() == null
       @form.commit()
       @model.save {},
         wait: true
         success: (model, response) =>
-          notify "success", "Company saved"
           if $('#file-logo').get(0).files.length > 0
+            @logoUploadInitialize()
             $('#file-logo').fileupload 'send',
               files: $('#file-logo').get(0).files
-          else if @deleteLogo
+          else if $('.company-logo-image').attr('src') == '/assets/default_profile.png'
             @deleteDocument()
           else
             window.history.back()
+            notify "success", "Company saved"
             @undelegateEvents()
         error: (model, response) =>
           try
