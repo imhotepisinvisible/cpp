@@ -7,9 +7,13 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
 
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-save': 'save'
-    'click .upload-document': 'uploadDocument'
-    'click .delete-document': 'delDocument'
+    'click .upload-doc': 'uploadDocument'
+    'click #delete-profile-picture': 'delProfile'
+    'click .delete-doc': 'delDocument'
     'change #file-profile-picture': 'fileChange'
+    'change #file-cv': 'documentChange'
+    'change #file-transcript': 'documentChange'
+    'change #file-covering-letter': 'documentChange'
 
   initialize: ->
     if !(isDepartmentAdmin())
@@ -42,30 +46,42 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
     .render()
     @render()
 
-   profilePictureUploadInit: ->
-    $('#file-profile-picture').fileupload
-      singleFileUploads: true
+  uploadInitialize: (documentType) ->
+    $('#file-' + documentType).fileupload
       url: '/students/' + @model.id
       dataType: 'json'
       type: "PUT"
 
-    .bind "fileuploaddone", (e, data) =>
-      window.history.back()
-      notify 'success', 'Student saved'
-
     .bind "fileuploadfail", (e, data) =>
-      displayJQZHRErrors data
+      displayJQXHRErrors data
 
-  delDocument: ->
+  delProfile: ->
     $('#student-profile-img').attr('src', '/assets/default_profile.png')
 
+  documentChange: (e) ->
+    # This is called when the file for a document is changed
+    id = $(e.currentTarget).attr('id')
+    docType = id.substring(id.indexOf('-') + 1)
+
+    $("#delete-#{docType}").attr('data-delete', '')
+    $("#table-#{docType}").removeClass('missing-document')
+    files = $("#file-#{docType}").get(0).files
+    if files.length > 0
+      $("#filename-#{docType}").html(files[0].name)
+
+  delDocument: (e) ->
+    id = $(e.currentTarget).attr('id')
+    docType = id.substring(id.indexOf('-') + 1)
+
+    $("#delete-#{docType}").attr('data-delete', 'delete')
+    $("#table-#{docType}").addClass('missing-document')
+    $("#filename-#{docType}").html('')
+
   deleteDocument: (documentType) ->
+    documentType = documentType.replace("-","_")
     $.ajax
       url: "/students/#{@model.id}/documents/#{documentType}"
-      type: 'DELETE'
-      success: (data) ->
-        window.history.back()
-        notify 'success', 'Student saved'
+      type: 'DELETE'  
       error: (data) ->
         notify('error', "Unable to remove #{documentType}")
 
@@ -89,7 +105,7 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
     $('.form').append(@form.el)
     @form.on "change", =>
       @form.validate()
-  @
+    @
 
   save: ->
     if @form.validate() == null
@@ -97,19 +113,35 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
       @model.save {},
         wait: true
         success: (model, response) =>
-          if $('#file-profile-picture').get(0).files.length > 0
-            @profilePictureUploadInit()
-            $('#file-profile-picture').fileupload 'send',
-              files: $('#file-profile-picture').get(0).files
-          else if $('#student-profile-img').attr('src') == '/assets/default_profile.png'
-            @deleteDocument 'profile_picture'
-          else
+          # Upload the files that have changed
+          deferreds = []
+          for docType in ['profile-picture', 'cv', 'transcript', 'covering-letter']
+            if $("#delete-#{docType}").attr('data-delete') == 'delete'
+              deferreds.push(@deleteDocument docType)
+            else if $("#file-#{docType}").get(0).files.length > 0
+              @uploadInitialize docType
+              deferreds.push(
+                $("#file-#{docType}").fileupload 'send',
+                  files: $("#file-#{docType}").get(0).files)
+
+          # Delete profile picture if necessary
+          if $('#student-profile-img').attr('src') == '/assets/default_profile.png'
+            deferreds.push(@deleteDocument 'profile-picture')
+
+          # When everything has been uploaded/deleted as required,
+          # navigate away and notify success
+          $.when.apply($, deferreds).done(=>
             window.history.back()
-            notify "success", "Student saved"
+            notify 'success', 'Student saved'
             @undelegateEvents()
+          )
+          
         error: (model, response) =>
-          errorlist = JSON.parse response.responseText
-          if response.errors
-            window.displayErrorMessages response.errors
-          else
-            notify 'error', 'Unable to save student'
+          try
+            errorlist = JSON.parse response.responseText
+            if response.errors
+              window.displayErrorMessages response.errors
+            else
+              notify 'error', 'Unable to save student'
+          catch err
+            notify 'error', response.responseText
