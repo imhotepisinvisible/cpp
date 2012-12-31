@@ -12,10 +12,14 @@ class Ability
     when "Student"
       can :manage, Student, :id => user.id
       can :read, Event do |event|
-        user.departments.map(&:id).include? event.id
+        user_depts = user.departments.map(&:id)
+        event_depts = event.company.departments.map(&:id)
+        !(user_depts & event_depts).empty?
       end
       can :read, Placement do |placement|
-        user.departments.map(&:id).include? placement.id
+        user_depts = user.departments.map(&:id)
+        placement_depts = placement.company.departments.map(&:id)
+        !(user_depts & placement_depts).empty?
       end
       can [:read, :download_document, :set_rating], Company do |company|
         # Get departments for both and check they intersect
