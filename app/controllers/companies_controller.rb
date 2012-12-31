@@ -1,6 +1,7 @@
 class CompaniesController < ApplicationController
   load_and_authorize_resource
   before_filter :require_login
+  impressionist
   respond_to :json
 
   # If the current user is a student, injects their company preferences into
@@ -16,7 +17,7 @@ class CompaniesController < ApplicationController
     elsif current_user && current_user.type == "DepartmentAdministrator"
       @companies = Company.scoped
       if params.keys.include? "department_id"
-        @companies = @companies.all(:include => :departments, 
+        @companies = @companies.all(:include => :departments,
                                     :conditions => ["companies_departments.department_id = ?",
                                     params[:department_id]])
       end

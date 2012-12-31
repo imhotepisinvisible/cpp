@@ -11,6 +11,8 @@
 #   t.datetime "updated_at",      :null => false
 
 class Company < ActiveRecord::Base
+  is_impressionable
+
 	has_many :events
   has_many :placements
   has_many :emails

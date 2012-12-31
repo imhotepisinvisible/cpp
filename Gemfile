@@ -16,9 +16,10 @@ gem 'acts-as-taggable-on'         # Tagging framework
 gem 'rails3_acts_as_paranoid'     # Hides records instead of deleting them, being able to recover them.
 gem 'acts_as_list'                # Re-orderable lists
 gem 'newrelic_rpm'                # Newrelic Monitoring
-gem 'paperclip' # Nice model attachment
-gem 'obscenity' # Obscenity filter
-gem 'lorem'     # Simple Lorem
+gem 'paperclip'                   # Nice model attachment
+gem 'obscenity'                   # Obscenity filter
+gem 'lorem'                       # Simple Lorem
+gem 'impressionist'               # Stats & Logging
 
 # UI/Appearance Related Gems
 gem 'less-rails'                  # Less required for Bootstrap

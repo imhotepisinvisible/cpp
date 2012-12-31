@@ -1,3 +1,8 @@
+CanTango.configure.autoload do |load|
+  load.models :off
+  load.permits :on
+end
+
 CanTango.config do |config|
   config.debug.set :on
   config.permits.disable :account, :special, :role_group
