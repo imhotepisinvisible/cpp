@@ -26,14 +26,21 @@ class TagsController < ApplicationController
   end
 
   def validate
-    tag = ActsAsTaggableOn::Tag.new
-    tag.name = params[:tag]
-    tag.name.downcase!
-    if tag.valid?
-      head :no_content
-    else
-      respond_with tag.errors, status: :unprocessable_entity
+    name = params[:tag].downcase
+    # We find the tag with the given name, if it exists
+    # then we know the list only has one object, so index[0]
+    # since names are unique
+    tag = ActsAsTaggableOn::Tag.where("name= ?", name)[0]
+    if tag == nil
+        tag = ActsAsTaggableOn::Tag.new
+        tag.name = name
+      if tag.valid?
+        head :no_content
+      else
+        respond_with tag.errors, status: :unprocessable_entity
+      end
     end
+    head :no_content
   end
 
   private
