@@ -114,9 +114,10 @@ describe "Student Routing", ->
 
     describe "Signup Handler", ->
       beforeEach ->
-        @studentSignupViewStub = sinon.stub(window.CPP.Views.Students, "Signup")
+        window.CPP.CurrentUser = undefined
+        @signupViewStub = sinon.stub(window.CPP.Views.Students, "Signup")
                                    .returns(new Backbone.View())
-        @router.signup @student_id
+        @router.signup()
 
       afterEach ->
         window.CPP.Views.Students.Signup.restore()
@@ -128,11 +129,15 @@ describe "Student Routing", ->
         expect(@studentCollectionStub).toHaveBeenCalledOnce()
         expect(@studentCollectionStub).toHaveBeenCalledWith()
 
-      it "should create a new StudentSignup view", ->
-        expect(@studentSignupViewStub).toHaveBeenCalledOnce()
-        expect(@studentSignupViewStub).toHaveBeenCalledWith model: @student
+      it "should create a new Signup view", ->
+        expect(@signupViewStub).toHaveBeenCalledOnce()
+        expect(@signupViewStub).toHaveBeenCalledWith  
+          model: @student
+          login: true 
+
 
   ###################### TODO: #######################
   # * Settings handler
   # * Edit Handler
+  # * Admin signup
   ####################################################
