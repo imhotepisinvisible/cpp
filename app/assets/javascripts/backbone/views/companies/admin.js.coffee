@@ -8,7 +8,7 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-save': 'save'
     'click .upload-document': 'uploadDocument'
-    'click .delete-document': 'deleteDocument'
+    'click .delete-document': 'delDocument'
 
 
   initialize: ->
@@ -27,31 +27,32 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
 
   logoUploadInitialize: ->
     $('#file-logo').fileupload
+      fileInput: null
+      singleFileUploads: true
       url: '/companies/' + @model.id
       dataType: 'json'
       type: "PUT"
 
     .bind "fileuploaddone", (e, data) =>
+      console.log 'done', data
       notify 'success', 'Uploaded successfully'
-      $('.company-logo-image').attr('src', '/companies/' + @model.id + '/documents/logo')
-      $(e.target).closest('.upload-container').removeClass('missing-document')
+      #window.history.back()
 
     .bind "fileuploadfail", (e, data) =>
       displayJQZHRErrors data
 
-  deleteDocument: (e) ->
-    id = $(e.currentTarget).attr('id')
-    if confirm "Are you sure you wish to delete the logo?"
-      $.ajax
-        url: "/companies/#{@model.id}/documents/logo"
-        type: 'DELETE'
-        success: (data) ->
-          $(e.currentTarget).closest('.upload-container').addClass('missing-document')
-          $('.company-logo-image').attr('src', '/assets/default_profile.png')
-          notify('success', 'logo removed')
+  delDocument: ->
+    @deleteLogo = true
 
-        error: (data) ->
-          notify('error', "couldn't remove document")
+  deleteDocument: ->
+    $.ajax
+      url: "/companies/#{@model.id}/documents/logo"
+      type: 'DELETE'
+      success: (data) ->
+        notify('success', 'Logo removed')
+        window.history.back()
+      error: (data) ->
+        notify('error', "Unable to remove logo")
 
   uploadDocument: (e) ->
     $(e.currentTarget).closest('.upload-container').find('.file-input').click()
@@ -72,8 +73,14 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
         wait: true
         success: (model, response) =>
           notify "success", "Company saved"
-          window.history.back()
-          @undelegateEvents()
+          if $('#file-logo').get(0).files.length > 0
+            $('#file-logo').fileupload 'send',
+              files: $('#file-logo').get(0).files
+          else if @deleteLogo
+            @deleteDocument()
+          else
+            window.history.back()
+            @undelegateEvents()
         error: (model, response) =>
           try
             errorlist = JSON.parse response.responseText
