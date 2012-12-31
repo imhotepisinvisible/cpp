@@ -21,7 +21,7 @@ class Ability
         # Get departments for both and check they intersect
         company_deps = company.departments.map(&:id)
         student_deps = user.departments.map(&:id)
-        !(company_deps | student_deps).empty?
+        !(company_deps & student_deps).empty?
       end
     when "CompanyAdministrator"
       can :manage, CompanyAdministrator, :id => user.id
