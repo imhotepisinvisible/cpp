@@ -20,19 +20,20 @@ class CPP.Views.CompaniesView extends CPP.Views.Base
       company: @model
       collection: @model.placements
 
-    emails_partial = new CPP.Views.TaggedEmails.Partial
-      el: $(@el).find('#emails-partial')
-      company: @model
-      collection: @model.tagged_emails
-
     contacts_partial = new CPP.Views.Contacts.Partial
       el: $(@el).find('#contacts-partial')
       company: @model
       company_id: @model.id
       limit: 3
 
-    new CPP.Views.Companies.StatsPartial
-      company: @model
+    if isAdmin()
+      emails_partial = new CPP.Views.TaggedEmails.Partial
+        el: $(@el).find('#emails-partial')
+        company: @model
+        collection: @model.tagged_emails
+
+      new CPP.Views.Companies.StatsPartial
+        company: @model
 
     @
 
