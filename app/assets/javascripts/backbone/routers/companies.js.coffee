@@ -86,22 +86,34 @@ class CPP.Routers.Companies extends Backbone.Router
     new CPP.Views.Companies.Admin model: company
 
   signupCompany: (id) ->
-    company = new CPP.Models.Company id: id
-    company.fetch
-      success: ->
-        companyAdmin = new CPP.Models.CompanyAdministrator
-        new CPP.Views.CompanyAdministrator.Signup
-          model: companyAdmin
-          login: false
-          company: company
-      error: ->
-        notify 'error', "Couldn't fetch company"
+    if CPP.CurrentUser? and 
+      (CPP.CurrentUser.get('type') == 'DepartmentAdministrator' or 
+       CPP.CurrentUser.get('type') == 'CompanyAdministrator')
+      company = new CPP.Models.Company id: id
+      company.fetch
+        success: ->
+          companyAdmin = new CPP.Models.CompanyAdministrator
+          new CPP.Views.CompanyAdministrator.Signup
+            model: companyAdmin
+            login: false
+            company: company
+        error: ->
+          notify 'error', "Couldn't fetch company"
+    else
+      window.history.back()
+      return false
 
   signup: ->
-    @signupNewCompany true
-
-  signupNoLogin: ->
-    @signupNewCompany false
+    if CPP.CurrentUser? && CPP.CurrentUser.get('type') == 'DepartmentAdministrator'
+      # Dept administrator registering new admin and company
+      # so don't log in once registered
+      @signupNewCompany false
+    else if not CPP.CurrentUser?
+      # Nobody logged in, registering new company admin and new company
+      @signupNewCompany true
+    else
+      window.history.back()
+      return false
 
   signupNewCompany: (login) ->
     if login && CPP.CurrentUser? && CPP.CurrentUser isnt {}

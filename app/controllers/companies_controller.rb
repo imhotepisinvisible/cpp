@@ -3,7 +3,7 @@ require 'json'
 class CompaniesController < ApplicationController
   impressionist
   load_and_authorize_resource
-  before_filter :require_login
+  #before_filter :require_login
   respond_to :json
 
   # If the current user is a student, injects their company preferences into
@@ -39,7 +39,12 @@ class CompaniesController < ApplicationController
   # POST /companies.json
   def create
     @company = Company.new(params[:company])
-    @company.organisation_id = current_user.organisation.id
+    if current_user
+      @company.organisation_id = current_user.organisation.id
+    else
+      @company.organisation_id = 1
+    end
+
     if params.has_key? :departments
       departments = params[:departments].map{ |id| Department.find(id) }
     else
