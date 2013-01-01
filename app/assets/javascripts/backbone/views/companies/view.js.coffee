@@ -3,7 +3,8 @@ class CPP.Views.CompaniesView extends CPP.Views.Base
   template: JST['backbone/templates/companies/view']
 
   initialize: ->
-    @model.record_stat_view()
+    if isStudent()
+      @model.record_stat_view()
     @render()
 
   render: ->
