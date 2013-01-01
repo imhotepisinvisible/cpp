@@ -71,6 +71,9 @@ class StudentsController < ApplicationController
     document = (@student.send "#{document_type}".to_sym).path
     ext = File.extname document
     unless document.nil?
+      if RAILS_ENV == 'production'
+        document = (@student.send "#{document_type}".to_sym).s3_object
+      else
       if (params.has_key? :preview)
         send_file document, :filename => "#{@student.last_name}_#{@student.first_name}_#{document_type}#{ext}", :disposition => 'inline'
       else
