@@ -19,12 +19,12 @@ class CPP.Views.Placements.Item extends CPP.Views.Base
     Backbone.history.navigate("placements/" + @model.get('id') + "/edit", trigger: true)
 
   deletePlacement: (e) ->
-    $(e.target).parent().parent().remove();
     e.stopPropagation()
     @model.destroy
       wait: true
       success: (model, response) ->
         notify "success", "Placement deleted"
+        $(e.target).parent().parent().parent().remove()
       error: (model, response) ->
         notify "error", "Placement could not be deleted"
 
