@@ -92,6 +92,11 @@ class CompaniesController < ApplicationController
     document_path = (company.send "#{document_type}".to_sym).path
 
     unless document_path.nil?
+      if Rails.env.production?
+        redirect_to "https://s3-eu-west-1.amazonaws.com/imperial-cpp#{(company.send "#{document_type}".to_sym).path}"
+        return
+      end
+
       document_extension = File.extname document_path
       new_doc_name = "#{company.name}_#{document_type}#{document_extension}"
       send_file document_path, :filename => new_doc_name
