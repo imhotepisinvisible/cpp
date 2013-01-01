@@ -123,8 +123,22 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       notify 'success', 'Uploaded successfully'
       $('#student-profile-img').attr('src', '/students/' + @model.id + '/documents/profile_picture')
       $(e.target).closest('.upload-container').removeClass('missing-document')
+      upload = $(e.target).closest('.upload-container')
+      upload.find('.progress-upload').delay(250).slideUp 'slow', ->
+        upload.find('.bar').width('0%')
+        upload.removeClass('missing-document')
+
+    .bind "fileuploadstart", (e, data) ->
+      $(e.currentTarget).closest('.upload-container').find('.progress-upload').slideDown()
+
+    .bind "fileuploadprogress", (e, data) ->
+      progress = parseInt(data.loaded / data.total * 100, 10)
+      $('#progress-profile-picture').width(progress + '%')
 
     .bind "fileuploadfail", (e, data) =>
+      upload = $(e.target).closest('.upload-container')
+      upload.find('.progress-upload').delay(250).slideUp 'slow', ->
+        upload.find('.bar').width('0%')
       displayJQXHRErrors data
 
   uploadInitialize: (documentType) ->
