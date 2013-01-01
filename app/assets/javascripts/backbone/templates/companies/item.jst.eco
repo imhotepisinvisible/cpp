@@ -5,7 +5,8 @@
 <% if @editable: %>
 <td>
   <div class="btn-group pull-right">
-    <div class="btn btn-small            button-company-edit">Edit</div>
+    <div class="btn btn-small button-company-edit">Edit</div>
+    <div class="btn btn-small button-company-contacts-edit">Edit Contacts</div>
     <div class="btn btn-small btn-danger button-company-delete">Delete</div>
   </div>
 </td>

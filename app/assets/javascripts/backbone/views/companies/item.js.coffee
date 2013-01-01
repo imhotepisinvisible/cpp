@@ -10,6 +10,7 @@ class CPP.Views.CompaniesItem extends CPP.Views.Base
   events: -> _.extend {}, CPP.Views.Base::events,
     "click .button-company-edit"   : "editCompany"
     "click .button-company-delete" : "deleteCompany"
+    "click .button-company-contacts-edit" : 'editContacts'
     "click"                        : "viewCompany"
 
   render: ->
@@ -19,6 +20,10 @@ class CPP.Views.CompaniesItem extends CPP.Views.Base
   editCompany: (e) ->
     e.stopPropagation()
     Backbone.history.navigate("companies/" + @model.id + "/edit", trigger: true)
+
+  editContacts: (e) ->
+    e.stopPropagation()
+    Backbone.history.navigate("companies/#{@model.id}/company_contacts/edit", trigger: true)
 
   deleteCompany: (e) ->
     e.stopPropagation()
