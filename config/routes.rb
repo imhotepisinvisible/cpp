@@ -51,6 +51,8 @@ CPP::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => 'site#index'
 
+  get ":controller/:id/stat_show", :action => "stat_show"
+
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   get "tagged_emails/:id/preview" => "tagged_emails#preview"
@@ -95,6 +97,7 @@ CPP::Application.routes.draw do
     delete '/documents/:document_type', :on => :member, :action => :delete_document
     get '/documents/:document_type', :on => :member, :action => :download_document
     post '/set_rating', :on => :member, :action => :set_rating
+    get 'view_stats', :on => :member, :action => :view_stats
   end
 
   # Samples/Mockups
@@ -119,7 +122,6 @@ CPP::Application.routes.draw do
   match 'tags/reject_skills' => 'tags#reject_skills'
   match 'tags/reject_interests' => 'tags#reject_interests'
   match 'tags/validate' => 'tags#validate'
-
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

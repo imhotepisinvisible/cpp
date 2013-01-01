@@ -16,6 +16,7 @@
 //= require twitter/bootstrap
 //= require date
 //= require underscore
+//= require highcharts
 //
 // BACKBONE
 //= require backbone

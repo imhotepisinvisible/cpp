@@ -43,7 +43,7 @@ gem 'datejs-rails'                # Nicer date manipulation in Javascript
 gem 'jquery-fileupload-rails'     # File upload
 gem 'jcountdown-rails', :git => 'http://github.com/rezwyi/jcountdown-rails.git' #Countdown timer
 gem 'bootstrap-toggle-buttons-rails', :git => 'http://github.com/wafcio/bootstrap-toggle-buttons-rails.git' # On/Off switches
-
+gem 'highcharts-rails'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3' # SASS for nicer CSS
   gem 'coffee-rails', '~> 3.2.1' # Coffeescript is the bomb

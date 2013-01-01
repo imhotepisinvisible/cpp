@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
     render :text => exception.message, :status => 401
   end
 
+  def stat_show
+    head :no_content
+  end
+
   private
 
   # If @current_user is set, returns it else sets and returns

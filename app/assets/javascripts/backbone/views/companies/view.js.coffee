@@ -30,6 +30,9 @@ class CPP.Views.CompaniesView extends CPP.Views.Base
       company_id: @model.id
       limit: 3
 
+    new CPP.Views.Companies.StatsPartial
+      company: @model
+
     @
 
   activate: ->

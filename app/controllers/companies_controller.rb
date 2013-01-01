@@ -1,3 +1,5 @@
+require 'json'
+
 class CompaniesController < ApplicationController
   load_and_authorize_resource
   before_filter :require_login
@@ -123,6 +125,23 @@ class CompaniesController < ApplicationController
     student_company_rating.save!
 
     head :no_content
+  end
+
+  def view_stats
+    @company = Company.find(params[:id])
+    data = {
+      :name => "Company Views",
+      :pointInterval => 1.day * 1000,
+      :pointStart => 1.weeks.ago.at_midnight.to_i * 1000,
+      :data => (1.weeks.ago.to_date..Date.today).map{ |date|
+        @company.impressions.where(
+          "created_at > ? AND created_at < ?",
+          date.at_beginning_of_day,
+          date.tomorrow.at_beginning_of_day
+        ).select{ |impression| impression.action_name == "stat_show"}.count
+      }
+    }
+    respond_with data
   end
 
 end

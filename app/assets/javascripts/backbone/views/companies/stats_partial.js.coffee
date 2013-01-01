@@ -3,9 +3,9 @@ CPP.Views.Companies ||= {}
 class CPP.Views.Companies.StatsPartial extends CPP.Views.Base
   template: JST['backbone/templates/companies/stat_partial']
 
-  initialize: (options) ->
-    # Get Data
-    $.get "/companies/1/view_stats", (data) =>
+  initialize: ->
+    @company = @options.company
+    $.get "/companies/#{@company.get('id')}/view_stats", (data) =>
       @series_data = data
       @render()
 
