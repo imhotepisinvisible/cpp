@@ -1,4 +1,5 @@
 class TagsController < ApplicationController
+  impressionist
   respond_to :json
 
   def skills

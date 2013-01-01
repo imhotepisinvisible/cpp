@@ -1,9 +1,9 @@
 require 'json'
 
 class CompaniesController < ApplicationController
+  impressionist
   load_and_authorize_resource
   before_filter :require_login
-  impressionist
   respond_to :json
 
   # If the current user is a student, injects their company preferences into

@@ -1,4 +1,5 @@
 class SiteController < ApplicationController
+  impressionist
   def index
     # No Variables/Code Necessary Right now
   end

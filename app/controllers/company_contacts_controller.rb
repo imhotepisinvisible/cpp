@@ -1,4 +1,5 @@
 class CompanyContactsController < ApplicationController
+  impressionist
   respond_to :json
 
   # GET /company_contacts

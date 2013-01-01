@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  impressionist
   respond_to :json
 
   def new
