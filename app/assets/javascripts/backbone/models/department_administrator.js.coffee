@@ -1,5 +1,7 @@
 class CPP.Models.DepartmentAdministrator extends CPP.Models.Base
   initialize: ->
+    @allDepartments = new CPP.Collections.Departments
+    @allDepartments.url = '/departments'
 
   validation:
     first_name:

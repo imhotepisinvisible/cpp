@@ -1,5 +1,10 @@
 class CPP.Models.CompanyAdministrator extends CPP.Models.Base
   initialize: ->
+    @allDepartments = new CPP.Collections.Departments
+    @allDepartments.url = '/departments'
+
+  url: ->
+    '/company_administrators' + (if @isNew() then '' else '/' + @id)
 
   validation:
     first_name:

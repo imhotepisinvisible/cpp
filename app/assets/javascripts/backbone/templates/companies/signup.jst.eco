@@ -1,8 +1,15 @@
 <h1 class="section-header">
-  <% if @student.isNew(): %>
-    Student Sign Up
+  <% if @companyAdministrator.isNew(): %>
+    Company Administrator Sign Up
   <% end %>
 </h1>
+<span>
+  <% if @company.isNew(): %>
+    Create an administrator and a new company
+  <% else: %>
+    Create an administrator for <%= @company.get 'name' %>
+  <% end %>
+</span>
 
 <div class="row">
   <div class="span12">

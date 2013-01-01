@@ -2,6 +2,8 @@ class CPP.Routers.Companies extends Backbone.Router
   routes:
       'companies'             : 'index'
       'companies/new'         : 'new'
+      'companies/register'    : 'signup'
+      'companies/:id/register': 'signupCompany'
       'companies/:id'         : 'view'
       'companies/:id/edit'    : 'edit'
       'companies/:id/settings': 'settings'
@@ -83,6 +85,33 @@ class CPP.Routers.Companies extends Backbone.Router
     company.collection = new CPP.Collections.Companies
     new CPP.Views.Companies.Admin model: company
 
+  signupCompany: (id) ->
+    company = new CPP.Models.Company id: id
+    company.fetch
+      success: ->
+        companyAdmin = new CPP.Models.CompanyAdministrator
+        new CPP.Views.CompanyAdministrator.Signup
+          model: companyAdmin
+          login: false
+          company: company
+      error: ->
+        notify 'error', "Couldn't fetch company"
+
+  signup: ->
+    @signupNewCompany true
+
+  signupNoLogin: ->
+    @signupNewCompany false
+
+  signupNewCompany: (login) ->
+    if login && CPP.CurrentUser? && CPP.CurrentUser isnt {}
+      window.history.back()
+      return false
+    companyAdmin = new CPP.Models.CompanyAdministrator
+    new CPP.Views.CompanyAdministrator.Signup
+      model: companyAdmin
+      login: login
+      company: new CPP.Models.Company
 
   settings: (id) ->
     company = new CPP.Models.Company id: id

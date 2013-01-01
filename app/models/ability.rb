@@ -8,6 +8,7 @@ class Ability
     case user.type
     when nil
       can :create, Student
+      can :create, Company
       can :read, Department
     when "Student"
       can :manage, Student, :id => user.id
