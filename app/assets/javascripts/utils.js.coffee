@@ -5,6 +5,7 @@ window.getOrdinal = (n) ->
 
 
 window.notify = (alert_class, message, time = 2000) ->
+  return unless message
   n = $("#notifications")
   n.hide()
   n.removeClass()

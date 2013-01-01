@@ -52,7 +52,23 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
       dataType: 'json'
       type: "PUT"
 
+    .bind "fileuploaddone", (e, data) =>
+      upload = $(e.target).closest('.upload-container')
+      upload.find('.progress-upload').delay(250).slideUp 'slow', ->
+        upload.find('.bar').width('0%')
+        upload.removeClass('missing-document')
+
+    .bind "fileuploadstart", (e, data) ->
+      $(e.currentTarget).closest('.upload-container').find('.progress-upload').slideDown()
+
+    .bind "fileuploadprogress", (e, data) ->
+      progress = parseInt(data.loaded / data.total * 100, 10)
+      $("#progress-#{documentType}").width(progress + '%')
+
     .bind "fileuploadfail", (e, data) =>
+      upload = $(e.target).closest('.upload-container')
+      upload.find('.progress-upload').delay(250).slideUp 'slow', ->
+        upload.find('.bar').width('0%')
       displayJQXHRErrors data
 
   delProfile: ->
