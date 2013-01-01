@@ -50,4 +50,5 @@ class CPP.Models.CompanyAdministrator extends CPP.Models.Base
         ]
 
 class CPP.Collections.CompanyAdministrators extends CPP.Collections.Base
+  url: '/company_administrators'
   model: CPP.Models.CompanyAdministrator

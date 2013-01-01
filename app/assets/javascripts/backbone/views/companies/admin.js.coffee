@@ -71,7 +71,12 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
     $('.form').append(@form.el)
     @form.on "change", =>
       @form.validate()
-  @
+
+    new CPP.Views.Companies.EditAdministrators
+      el: $(@el).find('#edit-admins')
+      company: @model
+      header: false
+    @
 
   fileChange: (e) ->
     # When the logo changes, change the image src to the contents

@@ -111,3 +111,9 @@
     <div id="orders_chart"></div>
   </div>
 </div>
+
+<div class="row">
+  <div class="span6">
+    <div id="edit-admins"></div>
+  </div>
+</div>

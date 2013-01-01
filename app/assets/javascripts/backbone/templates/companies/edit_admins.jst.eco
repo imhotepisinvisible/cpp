@@ -1,0 +1,14 @@
+<% if @header: %>
+  <h1 class="section-header">
+    <i class="icon-wrench"></i> Administrators
+    <a class="btn pull-right" id="btn-new-admin" href="/#companies/<%= @company.id %>/register">
+      <i class="icon-plus"></i>
+    </a>
+  </h1>
+<% else: %>
+  <div>Company Administrators</div>
+  <a class="btn btn-mini" id="btn-new-admin" href="/#companies/<%= @company.id %>/register">
+    <i class="icon-plus"></i> Add New
+  </a>
+<% end %>
+<ul id="admins" class="admin-list"></ul>

@@ -32,7 +32,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row row-top-space">
   <div class="offset1 span4">
     <span>Documents</span>
     <table class="table table-striped">

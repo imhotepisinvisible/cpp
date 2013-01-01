@@ -45,7 +45,7 @@ class CPP.Views.CompanyContact extends CPP.Views.Base
         wait: true
         success: (_model) =>
           $(e.currentTarget).parent().find('.contact-role').html(@model.get 'role')
-          $(e.currentTarget).parent().find('.contact-name').html(@model.get 'first_name')
+          $(e.currentTarget).parent().find('.contact-name').html(@model.get('first_name') + ' ' + @model.get('last_name'))
           $(e.currentTarget).parent().find('.contact-email').html(@model.get 'email')
           notify 'success', 'Contact saved'
         error: ->

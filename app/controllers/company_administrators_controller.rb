@@ -6,6 +6,9 @@ class CompanyAdministratorsController < ApplicationController
   # GET /company_administrators.json
   def index
     @company_administrators = CompanyAdministrator.where(:active => true)
+    if params.keys.include? "company_id"
+      @company_administrators = @company_administrators.where(:company_id => params[:company_id])
+    end
     respond_with @company_administrators
   end
 

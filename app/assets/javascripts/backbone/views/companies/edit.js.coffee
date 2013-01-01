@@ -93,6 +93,11 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
     new CPP.Views.Companies.StatsPartial
       company: @model
       # el: $(@el).find('#contacts-partial')
+
+    new CPP.Views.Companies.EditAdministrators
+      el: $(@el).find('#edit-admins')
+      company: @model
+      header: true
     @
 
   companyNameEdit: ->
