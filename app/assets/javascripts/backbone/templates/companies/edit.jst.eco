@@ -100,11 +100,11 @@
       </tbody>
     </table>
   </div>
-  <div class="span6">
+  <div class="span6" id="stats-partial">
     <h1 class="section-header">
       <i class="icon-tasks"></i>
       Stats
     </h1>
-    Coming soon...
+    <div id="orders_chart"></div>
   </div>
 </div>

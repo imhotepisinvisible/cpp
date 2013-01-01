@@ -1,4 +1,4 @@
-class CPP.Models.Department extends Backbone.Model
+class CPP.Models.Department extends CPP.Models.Base
   url: ->
     '/departments' + (if @isNew() then '' else '/' + @id)
 

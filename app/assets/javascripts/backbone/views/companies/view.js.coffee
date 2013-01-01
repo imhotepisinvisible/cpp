@@ -3,6 +3,7 @@ class CPP.Views.CompaniesView extends CPP.Views.Base
   template: JST['backbone/templates/companies/view']
 
   initialize: ->
+    @model.record_stat_view()
     @render()
 
   render: ->
@@ -28,6 +29,7 @@ class CPP.Views.CompaniesView extends CPP.Views.Base
       company: @model
       company_id: @model.id
       limit: 3
+
     @
 
   activate: ->

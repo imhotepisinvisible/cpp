@@ -1,4 +1,4 @@
-class CPP.Models.Student extends Backbone.Model
+class CPP.Models.Student extends CPP.Models.Base
   initialize: ->
     @events = new CPP.Collections.Events
     @events.url = '/students/' + this.id + '/events'

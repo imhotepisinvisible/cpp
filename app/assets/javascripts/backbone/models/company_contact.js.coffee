@@ -1,4 +1,4 @@
-class CPP.Models.CompanyContact extends Backbone.Model
+class CPP.Models.CompanyContact extends CPP.Models.Base
   url: ->
     '/company_contacts' + (if @isNew() then '' else '/' + @id)
 

@@ -1,4 +1,4 @@
-class CPP.Models.Placement extends Backbone.Model
+class CPP.Models.Placement extends CPP.Models.Base
   url: ->
     '/placements' + (if @isNew() then '' else '/' + @id)
 

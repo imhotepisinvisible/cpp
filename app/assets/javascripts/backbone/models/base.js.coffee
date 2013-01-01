@@ -1,3 +1,13 @@
+class CPP.Models.Base extends Backbone.Model
+  record_stat_view: ->
+    console.log "STAT"
+    console.log @url
+    console.log @url()
+    return unless @url?
+    console.log @url() + "/stat_show"
+
+    $.get(@url() + "/stat_show")
+
 class CPP.Collections.Base extends Backbone.Collection
 
   # Search through the models in the collection

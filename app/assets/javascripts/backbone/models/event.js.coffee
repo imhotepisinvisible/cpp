@@ -1,4 +1,4 @@
-class CPP.Models.Event extends Backbone.Model
+class CPP.Models.Event extends CPP.Models.Base
   initialize: ->
     @allDepartments = new CPP.Collections.Departments
     @allDepartments.url = '/departments'

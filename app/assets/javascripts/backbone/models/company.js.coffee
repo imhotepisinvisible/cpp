@@ -1,4 +1,4 @@
-class CPP.Models.Company extends Backbone.Model
+class CPP.Models.Company extends CPP.Models.Base
   initialize: ->
     @hidden = false;
 

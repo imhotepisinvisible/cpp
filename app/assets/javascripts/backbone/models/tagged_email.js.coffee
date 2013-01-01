@@ -1,4 +1,4 @@
-class CPP.Models.TaggedEmail extends Backbone.Model
+class CPP.Models.TaggedEmail extends CPP.Models.Base
   url: ->
     '/tagged_emails' + (if @isNew() then '' else '/' + @id)
 

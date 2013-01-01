@@ -1,4 +1,4 @@
-class CPP.Models.CompanyAdministrator extends Backbone.Model
+class CPP.Models.CompanyAdministrator extends CPP.Models.Base
   initialize: ->
 
   validation:

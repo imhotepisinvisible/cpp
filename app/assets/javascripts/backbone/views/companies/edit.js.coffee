@@ -76,6 +76,9 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
       collection: @model.tagged_emails
       editable: true
 
+    new CPP.Views.Companies.StatsPartial
+      company: @model
+      # el: $(@el).find('#contacts-partial')
     @
 
   companyNameEdit: ->
