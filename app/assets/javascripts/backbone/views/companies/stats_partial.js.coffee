@@ -21,6 +21,7 @@ class CPP.Views.Companies.StatsPartial extends CPP.Views.Base
       yAxis:
         title:
           text: 'Views'
+        minTickInterval: 1
         min: 0
       series: [
         @series_data
