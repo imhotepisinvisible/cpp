@@ -4,7 +4,7 @@
     <h1 class="section-header">
       Companies
       <% if @editable: %>
-        <a href="#/companies/new" class="btn pull-right button-company-add">
+        <a href="#/companies/register" class="btn pull-right button-company-add">
           New Company
         </a>
       <% end %>

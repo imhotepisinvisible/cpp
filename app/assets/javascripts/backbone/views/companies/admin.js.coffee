@@ -32,7 +32,7 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
       type: "PUT"
 
     .bind "fileuploaddone", (e, data) =>
-      window.history.back()
+      Backbone.history.navigate('/companies/' + @model.id, trigger: true)
       notify 'success', 'Company saved'
 
     .bind "fileuploadstart", (e, data) ->
@@ -56,7 +56,7 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
       url: "/companies/#{@model.id}/documents/logo"
       type: 'DELETE'
       success: (data) ->
-        window.history.back()
+        Backbone.history.navigate('/companies/' + @model.id, trigger: true)
         notify 'success', 'Company saved'
       error: (data) ->
         notify('error', "Unable to remove logo")
@@ -96,7 +96,7 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
           else if $('.company-logo-image').attr('src') == '/assets/default_profile.png'
             @deleteDocument()
           else
-            window.history.back()
+            Backbone.history.navigate('/companies/' + @model.id, trigger: true)
             notify "success", "Company saved"
             @undelegateEvents()
         error: (model, response) =>

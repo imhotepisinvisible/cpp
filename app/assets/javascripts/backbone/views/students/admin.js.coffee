@@ -147,7 +147,7 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
           # When everything has been uploaded/deleted as required,
           # navigate away and notify success
           $.when.apply($, deferreds).done(=>
-            window.history.back()
+            Backbone.history.navigate("/students/#{@model.id}", trigger: true)
             notify 'success', 'Student saved'
             @undelegateEvents()
           )

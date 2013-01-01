@@ -31,10 +31,13 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
             $.post '/sessions', { session: { email: @model.get('email'), password: @model.get('password') } }, (data) ->
               window.location = '/#/students/' + model.get('id') + '/edit'
               window.location.reload(true)
+          else
+            Backbone.history.navigate("/students/#{model.id}/edit", trigger: true)
         error: (model, response) =>
-          errorlist = JSON.parse response.responseText
-          for field, errors of errorlist.errors
-            if field of @form.fields
-              @form.fields[field].setError(errors.join ', ')
+          if response.responseText
+            errorlist = JSON.parse response.responseText
+            for field, errors of errorlist.errors
+              if field of @form.fields
+                @form.fields[field].setError(errors.join ', ')
 
           notify "error", "Unable to register, please resolve issues below."
