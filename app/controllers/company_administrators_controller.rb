@@ -1,5 +1,4 @@
 class CompanyAdministratorsController < ApplicationController
-  impressionist
   # load_and_authorize_resource #TODO: Turn me on at some point
   respond_to :json
 

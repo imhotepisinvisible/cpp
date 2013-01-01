@@ -1,7 +1,6 @@
 require 'json'
 
 class CompaniesController < ApplicationController
-  impressionist
   load_and_authorize_resource
   #before_filter :require_login
   respond_to :json

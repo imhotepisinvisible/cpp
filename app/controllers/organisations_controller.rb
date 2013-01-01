@@ -1,5 +1,4 @@
 class OrganisationsController < ApplicationController
-  impressionist
   respond_to :json
 
   # GET /organisations

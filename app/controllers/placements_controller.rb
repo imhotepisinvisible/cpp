@@ -1,5 +1,4 @@
 class PlacementsController < ApplicationController
-  impressionist
   load_and_authorize_resource
   respond_to :json
   before_filter :require_login

@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  impressionist
   respond_to :json
 
   # Assumes user is logged in and therefore accessible via current_user
