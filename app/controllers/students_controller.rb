@@ -72,7 +72,7 @@ class StudentsController < ApplicationController
     ext = File.extname document
     unless document.nil?
       if Rails.env.production?
-        document = (@student.send "#{document_type}".to_sym).s3_object
+        redirect_to "https://s3-eu-west-1.amazonaws.com/imperial-cpp#{(@student.send "#{document_type}".to_sym).path}"
       end
 
       if (params.has_key? :preview)
