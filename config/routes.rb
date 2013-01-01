@@ -101,22 +101,6 @@ CPP::Application.routes.draw do
     get 'view_stats', :on => :member, :action => :view_stats
   end
 
-  # Samples/Mockups
-  match 'student_dash' => 'site#sample_student_dashboard'
-  match 'student_companies' => 'site#sample_student_companies'
-  match 'student_company' => 'site#sample_student_company'
-
-  match 'company_dash' => 'site#sample_company_dashboard'
-  match 'company_students' => 'site#sample_company_students'
-  match 'company_student' => 'site#sample_company_student'
-
-  match 'admin_students' => 'site#sample_admin_students'
-  match 'admin_companies' => 'site#sample_admin_companies'
-  match 'admin_placements' => 'site#sample_admin_placements'
-  match 'admin_emails' => 'site#sample_admin_emails'
-  match 'admin_stats' => 'site#sample_admin_stats'
-  match 'admin_events' => 'site#sample_admin_events'
-
   match 'tags/skills' => 'tags#skills'
   match 'tags/interests' => 'tags#interests'
   match 'tags/year_groups' => 'tags#year_groups'
