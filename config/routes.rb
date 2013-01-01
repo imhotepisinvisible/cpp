@@ -68,6 +68,7 @@ CPP::Application.routes.draw do
   resources :events
   resources :placements
   resources :departments
+  resources :company_administrators
   resources :company_contacts do
     post :sort, :on => :collection
   end
