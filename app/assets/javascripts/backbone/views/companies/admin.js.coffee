@@ -35,7 +35,17 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
       window.history.back()
       notify 'success', 'Company saved'
 
+    .bind "fileuploadstart", (e, data) ->
+      $(e.currentTarget).closest('.upload-container').find('.progress-upload').slideDown()
+
+    .bind "fileuploadprogress", (e, data) ->
+      progress = parseInt(data.loaded / data.total * 100, 10)
+      $('#progress-logo').width(progress + '%')
+
     .bind "fileuploadfail", (e, data) =>
+      upload = $(e.target).closest('.upload-container')
+      upload.find('.progress-upload').delay(250).slideUp 'slow', ->
+        upload.find('.bar').width('0%')
       displayJQZHRErrors data
 
   delDocument: ->

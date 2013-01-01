@@ -29,6 +29,9 @@
           <div class="btn btn-danger delete-document" id="delete-logo"><i class="icon-trash" /></div>
         </div>
       </div>
+      <div class="progress progress-info progress-upload" style="display:none">
+        <div id="progress-logo" class="bar"></div>
+      </div>
     </div>
   </div>
 </div>
