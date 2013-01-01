@@ -71,7 +71,7 @@ class StudentsController < ApplicationController
     document = (@student.send "#{document_type}".to_sym).path
     ext = File.extname document
     unless document.nil?
-      if RAILS_ENV == 'production'
+      if Rails.env.production?
         document = (@student.send "#{document_type}".to_sym).s3_object
       end
 
