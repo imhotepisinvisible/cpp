@@ -198,3 +198,11 @@ textarea {
   background: url('/assets/ajax-loader.gif') center center no-repeat;
   min-height: 30px;
 }
+
+.button-student-register{
+  width: 100%;
+  font-size: 20px;
+  text-align: center;
+  padding: 15px;
+  @include box-sizing(border-box);
+}
