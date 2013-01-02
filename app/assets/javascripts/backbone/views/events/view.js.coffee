@@ -26,6 +26,7 @@ class CPP.Views.Events.View extends CPP.Views.Base
           notify("success", "Successfully unregistered")
           @model.registered_students.remove(CPP.CurrentUser)
           $('.btn-signup-student').html('Attend')
+          $('.well').html("#{@model.getFilled()} / #{@model.get 'capacity'}")
         error: (data) ->
           notify("error", "Could not unregister")
     else
@@ -39,6 +40,7 @@ class CPP.Views.Events.View extends CPP.Views.Base
           notify("success", "Successfully registered as attending")
           @model.registered_students.add(CPP.CurrentUser)
           $('.btn-signup-student').html('Unattend')
+          $('.well').html("#{@model.getFilled()} / #{@model.get 'capacity'}")
         error: (data) ->
           notify("error", "Could not register")
     
