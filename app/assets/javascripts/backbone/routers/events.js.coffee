@@ -76,10 +76,14 @@ class CPP.Routers.Events extends Backbone.Router
     event.fetch
       success: ->
         event.company = new CPP.Models.Company id: event.get 'company_id'
-        event.company.fetch
-          success: ->
-            new CPP.Views.Events.View model: event
-          error: ->
-            notify "error", "Couldn't fetch company for event"
+        event.registeredStudents = new CPP.Collections.Students()
+
+
+        deferreds = []
+        deferreds.push(event.company.fetch())
+        deferreds.push(event.registeredStudents.fetch({ data: $.param({ event_id: id }) }))
+        $.when.apply($, deferreds).done(=>
+          new CPP.Views.Events.View model: event
+        )
       error: ->
         notify "error", "Couldn't fetch event"

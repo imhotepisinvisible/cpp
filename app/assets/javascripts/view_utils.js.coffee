@@ -29,3 +29,6 @@ window.validateField = (form, field) ->
       errors = form.model.preValidate(field, form.fields[field].getValue())
       if (errors)
         form.fields[field].setError(errors)
+
+window.studentAttendEvent = (event) ->
+  isStudent && event.registeredStudents.get(userId()) != undefined
