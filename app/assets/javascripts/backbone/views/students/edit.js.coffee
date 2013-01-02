@@ -185,7 +185,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
           $(e.currentTarget).closest('.upload-container').addClass('missing-document')
           if documentType == 'profile_picture'
             $('#student-profile-img').attr('src', '/assets/default_profile.png')
-
         error: (data) ->
           notify('error', "couldn't remove document")
 
@@ -254,9 +253,9 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
   meetsActiveMinReq: ->
     deg = (@model.get "degree")!=("")
     year = (@model.get "year")!=null
-    st = (@model.get "looking_for")!=("")
+    # st = (@model.get "looking_for")!=("")
     cv = (@model.get "cv_file_name")!=null
-    meetsMin = deg&&year&&st&&cv
+    meetsMin = deg&&year&&cv
     if !meetsMin
       notify('error', "Ensure Year, Degree, Status and CV are populated")
     return meetsMin
