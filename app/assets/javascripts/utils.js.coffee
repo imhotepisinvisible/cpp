@@ -112,7 +112,7 @@ window.swapDepartmentToCompanySchema = (model, department) ->
     # TODO: Is there a better way to do this?
     schema = model.schema()
     schema['company_id'] = {
-      text: "Company"
+      title: "Company"
       type: "Select"
       template: "field"
       options: department.companies
