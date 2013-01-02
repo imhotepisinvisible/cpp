@@ -17,6 +17,15 @@ class CPP.Views.Events.View extends CPP.Views.Base
   signup: (event) ->
     button = $('.btn-signup-student')
     if studentAttendEvent(@model)
-      console.log "Attending"
+      $.ajax
+          url: "/events/#{@model.id}/register",
+          dataType: 'json'
+          type: "POST"
+          data:
+            student_id: userId()
+          success: (data) =>
+            console.log "SUCCESS"
+          error: (data) =>
+            console.log "ERROR"
     else
       console.log "Unattending"

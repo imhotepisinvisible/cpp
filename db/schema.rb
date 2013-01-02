@@ -147,10 +147,8 @@ ActiveRecord::Schema.define(:version => 20121231161218) do
   end
 
   create_table "student_event_registrations", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "event_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer "user_id"
+    t.integer "event_id"
   end
 
   add_index "student_event_registrations", ["event_id"], :name => "index_student_event_registrations_on_event_id"
