@@ -66,7 +66,7 @@ class CPP.Models.Event extends CPP.Models.Base
       editorClass: "departments-checkbox"
 
   getFilled: ->
-    @.registeredStudents.length
+    @.registered_students.length
 
   getPercentageCapacity: ->
     percentage = 100 * parseFloat(@getFilled()) / parseFloat(@get("capacity"))
