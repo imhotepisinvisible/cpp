@@ -104,3 +104,23 @@ window.isAdmin = ->
 # Pre: assumes you already know you're an admin
 window.getAdminDepartment = ->
   CPP.CurrentUser.attributes.department_id
+
+# TODO: Possibly move to view utils?
+window.swapDepartmentToCompanySchema = (model, department) ->
+    # If model doesn't have a company yet, i.e. admin
+    # Need to add to the schema a comapny select
+    # TODO: Is there a better way to do this?
+    schema = model.schema()
+    schema['company_id'] = {
+      text: "Company"
+      type: "Select"
+      template: "field"
+      options: department.companies
+      editorClass: "company-select"
+    }
+    delete schema["departments"]
+
+    model.set('departments', [department.id])
+    model.save()
+    model.schema = -> 
+      schema

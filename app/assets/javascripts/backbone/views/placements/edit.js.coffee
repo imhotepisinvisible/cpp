@@ -9,6 +9,9 @@ class CPP.Views.Placements.Edit extends CPP.Views.Base
     'click .btn-submit': 'submitPlacement'
 
   initialize: ->
+    if (this.options.department) 
+      swapDepartmentToCompanySchema @model, this.options.department
+
     @form = new Backbone.Form(model: @model).render()
 
     saveTagModel = =>

@@ -57,7 +57,6 @@ class CPP.Routers.Events extends Backbone.Router
           data:
             $.param({ department_id: window.getAdminDepartment() })
           success: =>
-            console.log "Hooray", department.companies
             new CPP.Views.Events.Edit model: event, department: department
           error: ->
             notify "error", "Couldn't fetch department companies"

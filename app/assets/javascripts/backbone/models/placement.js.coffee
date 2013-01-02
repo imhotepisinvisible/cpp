@@ -10,7 +10,7 @@ class CPP.Models.Placement extends CPP.Models.Base
     location:
       required: true
 
-  schema:
+  schema: ->
     position:
       type: "Text"
     description:

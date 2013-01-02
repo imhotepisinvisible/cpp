@@ -5,13 +5,15 @@
     <%= @placement.get 'position' %> (Editing)
   <% end %>
 </h1>
-<% if @placement.isNew(): %>
-  <% for department in @placement.company.departments.models: %>
-    <% if department.get 'settings_notifier_placement': %>
-      <div class="alert alert-info">
-        <h3>Important notice from <%= department.get('name') %></h3>
-        <p><%= department.get('settings_notifier_placement') %></p>
-      </div>
+<% if @placement.company: %>
+  <% if @placement.isNew(): %>
+    <% for department in @placement.company.departments.models: %>
+      <% if department.get 'settings_notifier_placement': %>
+        <div class="alert alert-info">
+          <h3>Important notice from <%= department.get('name') %></h3>
+          <p><%= department.get('settings_notifier_placement') %></p>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
