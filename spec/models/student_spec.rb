@@ -22,7 +22,11 @@ describe Student do
         subject.should be_valid
         # subject.should allow_value(:email, "student@" + org_domain.domain)
     end
- end
+  end
 
+  it "should have default looking_for" do
+    s = Student.new
+    s.looking_for.should eq("Not looking for anything")
+  end
 
 end
