@@ -10,7 +10,7 @@ class CPP.Models.Placement extends CPP.Models.Base
     location:
       required: true
 
-  schema:
+  schema: ->
     position:
       type: "Text"
     description:
@@ -24,12 +24,14 @@ class CPP.Models.Placement extends CPP.Models.Base
       type: "Text"
     open_to:
       type: "Text"
+      title: "Open To (Year Groups?)"
     salary:
       type: "Text"
     benefits:
       type: "Text"
     application_procedure:
       type: "Text"
+      title: "Application Procedure"
     interview_date:
       type: "DateTime"
       title: "Interview Date (If Known)"

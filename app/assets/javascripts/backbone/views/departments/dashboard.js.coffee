@@ -28,16 +28,20 @@ class CPP.Views.Departments.Dashboard extends CPP.Views.Base
 
   renderNotificationsForm: ->
     $('#notifications-form').html(@notificationsForm.el)
+    Backbone.Validation.bind @notificationsForm
+    @notificationsForm.on "change", =>
+      @notificationsForm.validate()
 
   saveNotifications: (e) ->
     if @notificationsForm.validate() == null
       @notificationsForm.commit()
       @model.save {},
         wait: true
+        forceUpdate: true
         success: (model, response) ->
           notify 'success', 'Company notifications updated'
         error: (model, response) ->
-          console.log response
+          notify 'error', 'Cannot update company notifications'
 
   cancelNotifications: (e) ->
     @initNotificationsForm()

@@ -27,9 +27,11 @@ class CPP.Models.Event extends CPP.Models.Base
     	type: "Text"
    	start_date:
       type: "DateTime"
+      title: "Start Date"
       DateEditor: "DatePicker"
    	end_date:
       type: "DateTime"
+      title: "End Date"
       DateEditor: "DatePicker"
     deadline:
       type: "DateTime"
@@ -39,11 +41,13 @@ class CPP.Models.Event extends CPP.Models.Base
     location:
       type: "Text"
     capacity: "Text"
-    google_map_url: "Text"
+    google_map_url: 
+      type: "Text"
+      title: "Google Map Link"
     requirementsEnabled:
       type: "Checkboxes"
+      title: "Extra Requirements?"
       options: [""]
-      title: "Requirements"
       editorAttrs:
         style: "list-style: none"
       editorClass: "requirements-checkbox"

@@ -18,7 +18,7 @@
 
 class Event < ActiveRecord::Base
 	belongs_to :company
-  has_and_belongs_to_many :registered_students, :join_table => :student_event_registrations, :class_name => "Student", :table_name => :users
+  has_and_belongs_to_many :registered_students, :join_table => :student_event_registrations, :association_foreign_key => "user_id", :class_name => "Student"
 
   acts_as_taggable_on :skills, :interests, :year_groups
 

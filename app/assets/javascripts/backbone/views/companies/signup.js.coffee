@@ -19,6 +19,7 @@ class CPP.Views.CompanyAdministrator.Signup extends CPP.Views.Base
     $(@el).html(@template(companyAdministrator: @model, company: @company))
     super
     $('.form').append(@form.el)
+    Backbone.Validation.bind @form
     @form.on "change", =>
       @form.validate()
     @
@@ -36,6 +37,7 @@ class CPP.Views.CompanyAdministrator.Signup extends CPP.Views.Base
         deferreds.push(
           @company.save {},
             wait: true
+            forceUpdate: true
             success: (model, response) =>
               # Attach new admin to new company
               @model.set 'company_id', model.get 'id'
@@ -48,6 +50,7 @@ class CPP.Views.CompanyAdministrator.Signup extends CPP.Views.Base
       $.when.apply($, deferreds).done(=>
         @model.save {},
           wait: true
+          forceUpdate: true
           success: (model, response) =>
             notify "success", "Registered"
             @redirect(model)

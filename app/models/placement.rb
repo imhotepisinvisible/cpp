@@ -16,7 +16,10 @@ class Placement < ActiveRecord::Base
   belongs_to :company
 
   acts_as_taggable_on :skills, :interests, :year_groups
-  attr_accessible :skill_list, :interest_list, :year_group_list
+  attr_accessible :skill_list, :interest_list, :year_group_list,
+                  :company_id, :position, :location, :description,
+                  :duration, :deadline, :open_to, :salary, :benefits, 
+                  :application_procedure, :interview_date, :other
 
   validates :company_id,  :presence => true
   validates :position,    :presence => true
@@ -28,7 +31,8 @@ class Placement < ActiveRecord::Base
 
   validates_datetime :deadline,
     :after => :now,
-    :after_message => "Cannot be in the past"
+    :after_message => "Cannot be in the past",
+    :allow_nil => :true
 
   validates_datetime :interview_date,
     :after => :now,

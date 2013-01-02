@@ -69,8 +69,10 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
     # Super called as extending we are extending CPP.Views.Base
     super
     $('.form').append(@form.el)
+    Backbone.Validation.bind @form
     @form.on "change", =>
       @form.validate()
+    @
 
     new CPP.Views.Companies.EditAdministrators
       el: $(@el).find('#edit-admins')
@@ -93,6 +95,7 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
       @form.commit()
       @model.save {},
         wait: true
+        forceUpdate: true
         success: (model, response) =>
           if $('#file-logo').get(0).files.length > 0
             @logoUploadInitialize()

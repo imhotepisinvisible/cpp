@@ -31,16 +31,20 @@ class CPP.Views.Departments.Settings extends CPP.Views.Base
 
   renderNameForm: ->
     $('#name-form').html(@nameForm.el)
+    Backbone.Validation.bind @nameForm
+    @nameForm.on "change", =>
+      @nameForm.validate()
 
   saveName: (e) ->
     if @nameForm.validate() == null
       @nameForm.commit()
       @model.save {},
         wait: true
+        forceUpdate: true
         success: (model, response) ->
           notify 'success', 'Department name updated'
         error: (model, response) ->
-          console.log response
+          notify 'error', 'Unable to save department name'
 
   cancelName: (e) ->
     @initNameForm()

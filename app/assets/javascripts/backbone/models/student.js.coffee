@@ -22,10 +22,6 @@ class CPP.Models.Student extends CPP.Models.Base
       pattern: 'email'
     departments:
       required: true
-    password:
-      minLength: 8
-    password_confirmation:
-      minLength: 8
 
   schema: ->
     first_name:
@@ -43,6 +39,13 @@ class CPP.Models.Student extends CPP.Models.Base
       title: "Email"
     password:
       type: "Password"
+      validators: [passwordLength = (value, formValues) ->
+        err =
+          type: "password"
+          message: "Password must be at least 8 characters long"
+
+        err  if value.length < 8
+      ]
     password_confirmation:
       type: "Password"
       title: "Password Confirmation"

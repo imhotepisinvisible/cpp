@@ -3,6 +3,7 @@ class CPP.Routers.Placements extends Backbone.Router
       'placements'                            : 'index'
       'companies/:company_id/placements'      : 'indexCompany'
       'companies/:company_id/placements/new'  : 'new'
+      'placements/new'                        : 'newAdmin'
       'placements/:id/edit'                   : 'edit'
       'placements/:id'                        : 'view'
 
@@ -44,6 +45,23 @@ class CPP.Routers.Placements extends Backbone.Router
             new CPP.Views.Placements.Edit model: placement
       error: ->
         notify "error", "Couldn't fetch company for event"
+
+  newAdmin: ->
+    placement = new CPP.Models.Placement
+    placement.collection = new CPP.Collections.Placements
+    department = new CPP.Models.Department id: window.getAdminDepartment()
+    department.fetch
+      success: ->
+        department.companies = new CPP.Collections.Companies
+        department.companies.fetch
+          data:
+            $.param({ department_id: window.getAdminDepartment() })
+          success: =>
+            new CPP.Views.Placements.Edit model: placement, department: department
+          error: ->
+            notify "error", "Couldn't fetch department companies"
+      error: ->
+        notify "error", "Couldn't fetch department"
 
   edit: (id) ->
     placement = new CPP.Models.Placement id: id

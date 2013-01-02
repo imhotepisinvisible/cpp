@@ -9,6 +9,9 @@ class CPP.Views.Placements.Edit extends CPP.Views.Base
     'click .btn-submit': 'submitPlacement'
 
   initialize: ->
+    if (this.options.department) 
+      swapDepartmentToCompanySchema @model, this.options.department
+
     @form = new Backbone.Form(model: @model).render()
 
     saveTagModel = =>
@@ -70,6 +73,7 @@ class CPP.Views.Placements.Edit extends CPP.Views.Base
       @form.commit()
       @model.save {},
         wait: true
+        forceUpdate: true
         success: (model, response) =>
           notify "success", "Placement Saved"
           Backbone.history.navigate('companies/' + @model.get('company_id') + '/placements', trigger: true)

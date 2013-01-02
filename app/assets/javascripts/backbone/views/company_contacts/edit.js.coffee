@@ -80,12 +80,15 @@ class CPP.Views.Contacts.PartialEdit extends CPP.Views.Base
     @formNew = new Backbone.Form(model: contact, template: 'standardForm').render()
     Backbone.Validation.bind @formNew
     $(@el).find('#contact-list-container').html(@formNew.el)
+    @formNew.on "change", =>
+      @formNew.validate()
 
   saveNew: (e) ->
     if @formNew.validate() == null
       @formNew.commit()
       @formNew.model.save {},
         wait: true
+        forceUpdate: true
         success: (model) =>
           notify 'success', 'Contact added'
           @reRender(model: model)

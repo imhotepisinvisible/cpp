@@ -128,6 +128,7 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
       @form.commit()
       @model.save {},
         wait: true
+        forceUpdate: true
         success: (model, response) =>
           # Upload the files that have changed
           deferreds = []
