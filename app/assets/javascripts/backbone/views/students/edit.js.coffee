@@ -64,13 +64,15 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       tag_change_callback: saveModel
       additions: true
 
+    if !@meetsActiveMinReq()
+      @model.set "active", (false);
+
     @render()
     @updateActiveView()
     @uploadInitialize 'cv'
     @uploadInitialize 'transcript'
     @uploadInitialize 'covering-letter'
     @profileUploadInitialize()
-
 
   render: ->
     $(@el).html(@template(student: @model))
@@ -248,19 +250,30 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
 
     $('#student-name-container').show()
 
-  activate: (e)->
-    @model.set "active", (!@model.get "active");
-    @updateActiveView();
-    @model.save {},
-        wait: true
-        success: (model, response) =>
-          $("#profile-inactive-warning").slideToggle()
-          if @model.get "active"
-            notify "success", "Profile Active"
-          else
-            notify "success", "Profile Inactive"
-        error: (model, response) ->
-          notify "error", "Failed to change profile active status"
+  meetsActiveMinReq: ->
+    deg = (@model.get "degree")!=("")
+    year = (@model.get "year")!=null
+    st = (@model.get "looking_for")!=("")
+    cv = (@model.get "cv_file_name")!=null
+    meetsMin = deg&&year&&st&&cv
+    if !meetsMin
+      notify('error', "Ensure Year, Degree, Status and CV are populated")
+    return meetsMin
+
+  activate: (e) ->
+    if ((!@model.get "active") && @meetsActiveMinReq()) || @model.get "active"
+      @model.set "active", (!@model.get "active");
+      @updateActiveView();
+      @model.save {},
+          wait: true
+          success: (model, response) =>
+            $("#profile-inactive-warning").slideToggle()
+            if @model.get "active"
+              notify "success", "Profile Active"
+            else
+              notify "success", "Profile Inactive"
+          error: (model, response) ->
+            notify "error", "Failed to change profile active status"
 
   updateActiveView: ->
     if (!@model.get "active")
