@@ -67,6 +67,7 @@ CPP::Application.routes.draw do
   resources :companies
   resources :events do
     post '/register', :on => :member, :action => :register
+    post '/unregister', :on => :member, :action => :unregister
   end
   resources :placements
   resources :departments

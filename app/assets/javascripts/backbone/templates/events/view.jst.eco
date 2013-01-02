@@ -9,9 +9,9 @@
     <% if isStudent(): %>
       <div class="btn btn-primary btn-signup-student">
         <% if studentAttendEvent(@event): %>
-          Attend
-        <% else: %>
           Unattend
+        <% else: %>
+          Attend
         <% end %>
       </div>
     <% end %>

@@ -66,7 +66,7 @@ class EventsController < ApplicationController
   def register
     event = Event.find(params[:id])
     student = Student.find(params[:student_id])
-    if @event.registered_students << student
+    if event.registered_students << student
       head :no_content
     else
       respond_with @event, status: :unprocessable_entity
@@ -77,8 +77,13 @@ class EventsController < ApplicationController
   # PUT /events/unregister
   # PUT /events/unregister.json
   def unregister
-    puts "***************** UN-REGISTER ****************"
-    head :no_content
+    event = Event.find(params[:id])
+    student = Student.find(params[:student_id])
+    if event.registered_students.delete(student)
+      head :no_content
+    else
+      respond_with @event, status: :unprocessable_entity
+    end
   end
   # DELETE /events/1
   # DELETE /events/1.json
