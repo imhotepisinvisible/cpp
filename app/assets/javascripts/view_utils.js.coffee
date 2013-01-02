@@ -31,4 +31,4 @@ window.validateField = (form, field) ->
         form.fields[field].setError(errors)
 
 window.studentAttendEvent = (event) ->
-  isStudent && event.registered_students.get(userId()) != undefined
+  isStudent() && event.registered_students.get(userId()) != undefined
