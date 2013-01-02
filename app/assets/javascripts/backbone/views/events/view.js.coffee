@@ -15,20 +15,22 @@ class CPP.Views.Events.View extends CPP.Views.Base
     @
 
   signup: (event) ->
-    if studentAttendEvent(@model)
-      $.ajax
-        url: "/events/#{@model.id}/unregister",
-        dataType: 'json'
-        type: "POST"
-        data:
-          student_id: userId()
-        success: (data) =>
-          notify("success", "Successfully unregistered")
-          @model.registered_students.remove(CPP.CurrentUser)
-          $('.btn-signup-student').html('Attend')
-          $('.well').html("#{@model.getFilled()} / #{@model.get 'capacity'}")
-        error: (data) ->
-          notify("error", "Could not unregister")
+    if @model.getFilled() == @model.get('capacity')
+      notify("error", "Cannot sign up, event is full")
+    else if studentAttendEvent(@model)
+        $.ajax
+          url: "/events/#{@model.id}/unregister",
+          dataType: 'json'
+          type: "POST"
+          data:
+            student_id: userId()
+          success: (data) =>
+            notify("success", "Successfully unregistered")
+            @model.registered_students.remove(CPP.CurrentUser)
+            $('.btn-signup-student').html('Attend')
+            $('.well').html("#{@model.getFilled()} / #{@model.get 'capacity'}")
+          error: (data) ->
+            notify("error", "Could not unregister")
     else
       $.ajax
         url: "/events/#{@model.id}/register",
