@@ -23,8 +23,7 @@ class CPP.Views.CompanyContact extends CPP.Views.Base
     @form = new Backbone.Form(model: @model, template: 'standardForm').render()
     $(@el).find('.contact-form').html(@form.el)
     Backbone.Validation.bind @form
-    @form.on "change", =>
-      @form.validate()
+    validateField(@form, field) for field of @form.fields
     @
 
   drop: (event, index) ->

@@ -24,26 +24,29 @@ class CPP.Models.Event extends CPP.Models.Base
 
   schema: ->
     title:
-    	type: "Text"
+    	type: "Text",
    	start_date:
       type: "DateTime"
-      title: "Start Date"
+      title: "Start Date*"
       DateEditor: "DatePicker"
    	end_date:
       type: "DateTime"
-      title: "End Date"
+      title: "End Date*"
       DateEditor: "DatePicker"
     deadline:
       type: "DateTime"
       DateEditor: "DatePicker"
     description:
       type: "TextArea"
+      title: "Description*"
     location:
       type: "Text"
+      title: "Location*"
     capacity: "Text"
     google_map_url: 
       type: "Text"
-      title: "Google Map Link"
+      title: "Google Map URL*"
+      validators: ['required']
     requirementsEnabled:
       type: "Checkboxes"
       title: "Extra Requirements?"
@@ -57,6 +60,7 @@ class CPP.Models.Event extends CPP.Models.Base
       fieldAttrs:
         style: "display:none"
     departments:
+      title: "Department(s)*"
       type: "Checkboxes"
       options: @allDepartments
       editorClass: "departments-checkbox"

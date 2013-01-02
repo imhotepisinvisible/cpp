@@ -25,8 +25,7 @@ class CPP.Views.Users.ForgotPassword extends CPP.Views.Base
 
   renderForm: ->
     $('.form').html(@form.el)
-    @form.on "change", =>
-      @form.validate()
+    validateField(@form, field) for field of @form.fields
 
   submitEvent: ->
    if @form.validate() == null

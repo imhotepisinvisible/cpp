@@ -64,8 +64,7 @@ class CPP.Views.TaggedEmails.Edit extends CPP.Views.Base
     $('.year-group-tags-form').append(@year_group_list_tags_form.el)
 
     $('.form').append(@form.el)
-    @form.on "change", =>
-      @form.validate()
+    validateField(@form, field) for field of @form.fields
     tiny_mce_init()
     @updateStats()
   @

@@ -26,22 +26,24 @@ class CPP.Models.CompanyAdministrator extends CPP.Models.Base
   schema: ->
     first_name:
       type: "Text"
-      title: "First Name"
+      title: "First Name*"
     last_name:
       type: "Text"
-      title: "Last Name"
+      title: "Last Name*"
     departments:
+      title: "Departments*"
       type: "Checkboxes"
       options: @allDepartments
       editorClass: "departments-checkbox"
     email:
       type: "Text"
-      title: "Email"
+      title: "Email*"
     password:
       type: "Password"
+      title: "Password*"
     password_confirmation:
       type: "Password"
-      title: "Password Confirmation"
+      title: "Password Confirmation*"
       validators:
         [
           type: 'match'

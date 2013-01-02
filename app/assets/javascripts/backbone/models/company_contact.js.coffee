@@ -16,16 +16,16 @@ class CPP.Models.CompanyContact extends CPP.Models.Base
   schema:
     first_name:
       type: "Text"
-      title: "First Name"
+      title: "First Name*"
     last_name:
       type: "Text"
-      title: "Last Name"
+      title: "Last Name*"
     email:
       type: "Text"
-      title: "Email"
+      title: "Email*"
     role:
       type: "Text"
-      title: "Role"
+      title: "Role*"
 
 class CPP.Collections.CompanyContacts extends CPP.Collections.Base
   url: '/company_contacts'

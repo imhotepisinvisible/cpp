@@ -13,10 +13,13 @@ class CPP.Models.Placement extends CPP.Models.Base
   schema: ->
     position:
       type: "Text"
+      title: "Position*"
     description:
       type: "Text"
+      title: "Description*"
     location:
       type: "Text"
+      title: "Location*"
     deadline:
       type: "DateTime"
       DateEditor: "DatePicker"

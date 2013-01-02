@@ -23,22 +23,23 @@ class CPP.Models.DepartmentAdministrator extends CPP.Models.Base
   schema: ->
     first_name:
       type: "Text"
-      title: "First Name"
+      title: "First Name*"
     last_name:
       type: "Text"
-      title: "Last Name"
+      title: "Last Name*"
     departments:
       type: "Checkboxes"
+      title: "Departments*"
       options: @allDepartments
       editorClass: "departments-checkbox"
     email:
       type: "Text"
-      title: "Email"
+      title: "Email*"
     password:
       type: "Password"
     password_confirmation:
-      type: "Password"
-      title: "Password Confirmation"
+      type: "Password*"
+      title: "Password Confirmation*"
       validators:
         [
           type: 'match'

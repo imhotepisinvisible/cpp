@@ -20,8 +20,7 @@ class CPP.Views.CompanyAdministrator.Signup extends CPP.Views.Base
     super
     $('.form').append(@form.el)
     Backbone.Validation.bind @form
-    @form.on "change", =>
-      @form.validate()
+    validateField(@form, field) for field of @form.fields
     @
 
   submit: (e) ->

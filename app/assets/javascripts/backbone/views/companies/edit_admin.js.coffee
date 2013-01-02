@@ -29,9 +29,8 @@ class CPP.Views.Companies.EditAdministrator extends CPP.Views.Base
     .render()
     $(@el).find('.admin-form').html(@form.el)
     Backbone.Validation.bind @form
-    @form.on "change", =>
-      @form.validate()
-    @
+    
+    validateField(@form, field) for field of @form.fields
 
   edit: (e) ->
     console.log $(e.currentTarget)

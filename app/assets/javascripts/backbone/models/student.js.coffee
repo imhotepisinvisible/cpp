@@ -26,19 +26,20 @@ class CPP.Models.Student extends CPP.Models.Base
   schema: ->
     first_name:
       type: "Text"
-      title: "First Name"
+      title: "First Name*"
     last_name:
       type: "Text"
-      title: "Last Name"
+      title: "Last Name*"
     departments:
       type: "Checkboxes"
+      title: "Department(s)*"
       options: @allDepartments
       editorClass: "departments-checkbox"
     email:
       type: "Text"
-      title: "Email"
+      title: "Email*"
     password:
-      type: "Password"
+      type: "Password*"
       validators: [passwordLength = (value, formValues) ->
         err =
           type: "password"
@@ -48,7 +49,7 @@ class CPP.Models.Student extends CPP.Models.Base
       ]
     password_confirmation:
       type: "Password"
-      title: "Password Confirmation"
+      title: "Password Confirmation*"
       validators:
         [
           type: 'match'

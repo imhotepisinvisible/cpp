@@ -58,8 +58,7 @@ class CPP.Views.Placements.Edit extends CPP.Views.Base
     # Super called as extending we are extending CPP.Views.Base
     super
     $('.form').append(@form.el)
-    @form.on "change", =>
-      @form.validate()
+    validateField(@form, field) for field of @form.fields
     @skill_list_tags_form.render()
     $('.skill-tags-form').append(@skill_list_tags_form.el)
     @interest_list_tags_form.render()

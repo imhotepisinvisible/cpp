@@ -31,3 +31,6 @@
 //= require jcountdown
 //= require jquery.toggle.buttons
 //= require utils
+//
+// UTILS
+//= require view_utils 

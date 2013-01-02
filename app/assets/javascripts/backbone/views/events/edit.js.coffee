@@ -15,20 +15,20 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
     # Need to add to the schema a comapny select
     # TODO: Is there a better way to do this?
     if (this.options.department)
-      swapDepartmentToCompanySchema @model, this.options.department
-      # schema = @model.schema()
-      # schema['company_id'] = {
-      #   text: "Company"
-      #   type: "Select"
-      #   options: this.options.department.companies
-      #   editorClass: "company-select"
-      # }
-      # delete schema["departments"]
+      # swapDepartmentToCompanySchema @model, this.options.department
+      schema = @model.schema()
+      schema['company_id'] = {
+        text: "Company"
+        type: "Select"
+        options: this.options.department.companies
+        editorClass: "company-select"
+      }
+      delete schema["departments"]
 
-      # @model.set('departments', [this.options.department.id])
-      # @model.save()
-      # @model.schema = -> 
-      #   schema
+      @model.set('departments', [this.options.department.id])
+      @model.save()
+      @model.schema = -> 
+        schema
 
     @form = new Backbone.Form(model: @model).render()
     Backbone.Validation.bind @form;
@@ -84,8 +84,10 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
       # Tick Checkbox
       $(".requirements-checkbox").children()[0].children[0].checked = true;
       @form.fields["requirements"].$el.slideDown()
-    @form.on "change", =>
-      @form.validate()
+
+
+    validateField(@form, field) for field of @form.fields
+
     @form.on "requirementsEnabled:change", =>
       @form.fields["requirements"].$el.slideToggle()
     @skill_list_tags_form.render()

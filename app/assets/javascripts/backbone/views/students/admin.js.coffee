@@ -119,8 +119,7 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
     # Super called as extending we are extending CPP.Views.Base
     super
     $('.form').append(@form.el)
-    @form.on "change", =>
-      @form.validate()
+    validateField(@form, field) for field of @form.fields
     @
 
   save: ->
