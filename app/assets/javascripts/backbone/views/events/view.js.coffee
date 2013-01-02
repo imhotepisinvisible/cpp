@@ -11,7 +11,7 @@ class CPP.Views.Events.View extends CPP.Views.Base
     @render()
 
   render: ->
-    $(@el).html(@template(event: @model))
+    $(@el).html(@template(event: @model, attending: studentAttendEvent(@model)))
     @
 
   signup: (event) ->
