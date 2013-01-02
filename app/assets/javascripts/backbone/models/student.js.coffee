@@ -39,7 +39,8 @@ class CPP.Models.Student extends CPP.Models.Base
       type: "Text"
       title: "Email*"
     password:
-      type: "Password*"
+      type: "Password"
+      title: "Password*"
       validators: [passwordLength = (value, formValues) ->
         err =
           type: "password"
