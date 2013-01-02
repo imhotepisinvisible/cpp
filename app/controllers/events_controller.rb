@@ -65,11 +65,12 @@ class EventsController < ApplicationController
   # PUT /events/1/register.json
   def register
     event = Event.find(params[:id])
-    student = Student.find(params[:student_id])
-    if event.registered_students << student
+    if event.capacity == event.registered_students.length
+      respond_with event, status: :unprocessable_entity
+    elsif event.registered_students << Student.find(params[:student_id])
       head :no_content
     else
-      respond_with @event, status: :unprocessable_entity
+      respond_with event, status: :unprocessable_entity
     end
   end
 
