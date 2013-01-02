@@ -170,6 +170,11 @@ FactoryGirl.create :company, {
   description: "VMware, the global leader in virtualization and cloud infrastructure, delivers customer-proven solutions that accelerate IT by reducing complexity and enabling more flexible, agile service delivery. VMware enables enterprises to adopt a cloud model that addresses their unique business challenges. VMware's approach accelerates the transition to cloud computing while preserving existing investments and improving security and control. With more than 350,000 customers and 50,000 partners, VMware solutions help organizations of all sizes lower costs, increase business agility and ensure freedom of choice."
 }
 
+Student.all.each do |student|
+  student.cv = File.open(File.join(Rails.root, "app", "assets", "files", "cv.pdf" ))
+  student.save
+end
+
 Company.all.each do |company|
 
   # Upload Logo
