@@ -14,6 +14,7 @@ class CPP.Views.TaggedEmails.Edit extends CPP.Views.Base
     saveTagModel = =>
       @model.save {},
         wait: true
+        forceUpdate: true
         success: (model, response) =>
           # notify "success", "Updated Profile TAG"
           @updateStats()
@@ -75,6 +76,7 @@ class CPP.Views.TaggedEmails.Edit extends CPP.Views.Base
       @form.commit()
       @model.save {},
         wait: true
+        forceUpdate: true
         success: (model, response) =>
           notify "success", "Email Saved"
           Backbone.history.navigate('companies/' + @model.get('company_id') + '/tagged_emails', trigger: true)

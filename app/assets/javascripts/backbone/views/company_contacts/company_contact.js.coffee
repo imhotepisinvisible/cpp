@@ -21,8 +21,10 @@ class CPP.Views.CompanyContact extends CPP.Views.Base
   render: ->
     $(@el).html(@template({contact: @model}))
     @form = new Backbone.Form(model: @model, template: 'standardForm').render()
-    Backbone.Validation.bind @form
     $(@el).find('.contact-form').html(@form.el)
+    Backbone.Validation.bind @form
+    @form.on "change", =>
+      @form.validate()
     @
 
   drop: (event, index) ->
@@ -43,6 +45,7 @@ class CPP.Views.CompanyContact extends CPP.Views.Base
       @form.commit()
       @form.model.save {},
         wait: true
+        forceUpdate: true
         success: (_model) =>
           $(e.currentTarget).parent().find('.contact-role').html(@model.get 'role')
           $(e.currentTarget).parent().find('.contact-name').html(@model.get('first_name') + ' ' + @model.get('last_name'))

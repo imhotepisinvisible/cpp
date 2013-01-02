@@ -229,22 +229,23 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       @model.set 'first_name', firstName
       @model.set 'last_name', lastName
       @model.save {},
-          wait: true
-          success: (model, response) =>
-            notify "success", "Updated profile"
-            $('#student-profile-intro-name').html(model.get('first_name') + ' ' + model.get('last_name'))
-          error: (model, response) =>
-            errorlist = JSON.parse response.responseText
-            if errorlist.errors.first_name
-              msg = errorlist.errors.first_name
-            else
-              msg = []
-            if errorlist.errors.last_name
-              for error in errorlist.errors.last_name
-                if !(error in msg)
-                  msg.push error
-            notify "error", msg.join('\n')
-            $('#student-profile-intro-name').html originalName
+        wait: true
+        forceUpdate: true
+        success: (model, response) =>
+          notify "success", "Updated profile"
+          $('#student-profile-intro-name').html(model.get('first_name') + ' ' + model.get('last_name'))
+        error: (model, response) =>
+          errorlist = JSON.parse response.responseText
+          if errorlist.errors.first_name
+            msg = errorlist.errors.first_name
+          else
+            msg = []
+          if errorlist.errors.last_name
+            for error in errorlist.errors.last_name
+              if !(error in msg)
+                msg.push error
+          notify "error", msg.join('\n')
+          $('#student-profile-intro-name').html originalName
 
     $('#student-name-container').show()
 
@@ -252,15 +253,16 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     @model.set "active", (!@model.get "active");
     @updateActiveView();
     @model.save {},
-        wait: true
-        success: (model, response) =>
-          $("#profile-inactive-warning").slideToggle()
-          if @model.get "active"
-            notify "success", "Profile Active"
-          else
-            notify "success", "Profile Inactive"
-        error: (model, response) ->
-          notify "error", "Failed to change profile active status"
+      wait: true
+      forceUpdate: true
+      success: (model, response) =>
+        $("#profile-inactive-warning").slideToggle()
+        if @model.get "active"
+          notify "success", "Profile Active"
+        else
+          notify "success", "Profile Inactive"
+      error: (model, response) ->
+        notify "error", "Failed to change profile active status"
 
   updateActiveView: ->
     if (!@model.get "active")
@@ -284,12 +286,13 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     @model.set 'year_group_list', (tag for tag in @model.get('year_group_list') when tag.name != tag_name)
 
     @model.save {},
-        wait: true
-        success: (model, response) =>
-          notify "success", "Removed Tag"
-          tag_div.remove()
-        error: (model, response) ->
-          notify "error", "Failed to remove tag"
+      wait: true
+      forceUpdate: true
+      success: (model, response) =>
+        notify "success", "Removed Tag"
+        tag_div.remove()
+      error: (model, response) ->
+        notify "error", "Failed to remove tag"
 
   addSkill: (e) ->
     e.preventDefault()
@@ -302,6 +305,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
 
     @model.save {},
       wait: true
+      forceUpdate: true
       success: (model, response) =>
         notify "success", "Added Tag"
         tag_div.remove()
@@ -324,6 +328,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     @model.set 'looking_for', lookingFor
     @model.save {},
       wait: true
+      forceUpdate: true
       success: (model, response) =>
         notify "success", "Looking for updated"
       error: (model, response) =>

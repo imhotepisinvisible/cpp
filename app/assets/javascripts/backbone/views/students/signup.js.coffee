@@ -16,6 +16,7 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
     $(@el).html(@template(student: @model))
     super
     $('.form').append(@form.el)
+    Backbone.Validation.bind @form
     @form.on "change", =>
       @form.validate()
     @
@@ -25,6 +26,7 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
       @form.commit()
       @model.save {},
         wait: true
+        forceUpdate: true
         success: (model, response) =>
           notify "success", "Registered"
           if @login

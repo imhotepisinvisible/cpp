@@ -70,6 +70,7 @@ class CPP.Views.Placements.Edit extends CPP.Views.Base
       @form.commit()
       @model.save {},
         wait: true
+        forceUpdate: true
         success: (model, response) =>
           notify "success", "Placement Saved"
           Backbone.history.navigate('companies/' + @model.get('company_id') + '/placements', trigger: true)

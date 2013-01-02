@@ -27,8 +27,10 @@ class CPP.Views.Companies.EditAdministrator extends CPP.Views.Base
           title: "Last Name"
 
     .render()
-    #Backbone.Validation.bind @form
     $(@el).find('.admin-form').html(@form.el)
+    Backbone.Validation.bind @form
+    @form.on "change", =>
+      @form.validate()
     @
 
   edit: (e) ->
@@ -44,6 +46,7 @@ class CPP.Views.Companies.EditAdministrator extends CPP.Views.Base
       @form.commit()
       @model.save {},
         wait: true
+        forceUpdate: true
         success: (_model) =>
           $(e.currentTarget).parent().find('.admin-name').html(@model.get('first_name') + ' ' + @model.get('last_name'))
           $(e.currentTarget).parent().find('.admin-email').html(@model.get 'email')
