@@ -64,8 +64,9 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       tag_change_callback: saveModel
       additions: true
 
-    if !@meetsActiveMinReq()
-      @model.set "active", (false);
+    # Deactive profile if its active and does not meet min requirements
+    if (!@meetsActiveMinReq()) && @model.get "active"
+      @model.set "active", false;
 
     @render()
     @updateActiveView()
@@ -128,7 +129,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       upload = $(e.target).closest('.upload-container')
       upload.find('.progress-upload').delay(250).slideUp 'slow', ->
         upload.find('.bar').width('0%')
-        upload.removeClass('missing-document')
+        upload.removeClass('missing-document')      
 
     .bind "fileuploadstart", (e, data) ->
       $(e.currentTarget).closest('.upload-container').find('.progress-upload').slideDown()
@@ -143,7 +144,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
         upload.find('.bar').width('0%')
       displayJQXHRErrors data
 
-  uploadInitialize: (documentType) ->
+  uploadInitialize: (documentType) =>
     $('#file-' + documentType).fileupload
       url: '/students/' + @model.id
       dataType: 'json'
@@ -156,13 +157,14 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       progress = parseInt(data.loaded / data.total * 100, 10)
       $('#progress-' + documentType).width(progress + '%')
 
-    .bind "fileuploaddone", (e, data) ->
+    .bind "fileuploaddone", (e, data) =>
       upload = $(e.target).closest('.upload-container')
       upload.find('.progress-upload').delay(250).slideUp 'slow', ->
         upload.find('.bar').width('0%')
         upload.removeClass('missing-document')
 
       notify 'success', 'Uploaded successfully'
+      @model.set "cv_file_name", "cv"
 
     .bind "fileuploadfail", (e, data) =>
       upload = $(e.target).closest('.upload-container')
@@ -181,10 +183,12 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       $.ajax
         url: "/students/#{@model.id}/documents/#{documentType}"
         type: 'DELETE'
-        success: (data) ->
+        success: (data) =>
           $(e.currentTarget).closest('.upload-container').addClass('missing-document')
           if documentType == 'profile_picture'
             $('#student-profile-img').attr('src', '/assets/default_profile.png')
+          if documentType == 'cv'
+            @model.set("cv_file_name","")
         error: (data) ->
           notify('error', "couldn't remove document")
 
@@ -254,10 +258,10 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     deg = (@model.get "degree")!=("")
     year = (@model.get "year")!=null
     # st = (@model.get "looking_for")!=("")
-    cv = (@model.get "cv_file_name")!=null
+    cv = (@model.get "cv_file_name")!=null && (@model.get "cv_file_name")!="" 
     meetsMin = deg&&year&&cv
     if !meetsMin
-      notify('error', "Ensure Year, Degree, Status and CV are populated")
+      notify('error', "Ensure Year, Degree and CV are populated")
     return meetsMin
 
   activate: (e) ->
