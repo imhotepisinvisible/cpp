@@ -1,4 +1,5 @@
 class UserMailer < ActionMailer::Base
+  include Resque::Mailer
   default from: "impdoccpp@gmail.com"
 
   def bulk_email(email_id)
