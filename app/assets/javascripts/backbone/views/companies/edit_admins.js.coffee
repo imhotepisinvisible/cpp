@@ -13,6 +13,8 @@ class CPP.Views.Companies.EditAdministrators extends CPP.Views.Base
       success: =>
         @collection = admins
         @render()
+      error: =>
+        notify 'error', 'Could not fetch company administrators'
 
   render: ->
     $(@el).html(@template(company: @company, header: @header))
