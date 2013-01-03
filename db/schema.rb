@@ -182,12 +182,12 @@ ActiveRecord::Schema.define(:version => 20121231161218) do
     t.text     "bio",                          :default => ""
     t.text     "degree",                       :default => ""
     t.boolean  "active",                       :default => true
-    t.string   "looking_for",                  :default => ""
+    t.string   "looking_for",                  :default => "Not looking for anything"
     t.integer  "company_id"
     t.integer  "department_id"
     t.string   "type"
-    t.datetime "created_at",                                     :null => false
-    t.datetime "updated_at",                                     :null => false
+    t.datetime "created_at",                                                           :null => false
+    t.datetime "updated_at",                                                           :null => false
     t.string   "cv_file_name"
     t.string   "cv_content_type"
     t.integer  "cv_file_size"
