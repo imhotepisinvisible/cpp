@@ -6,7 +6,7 @@ class EventEmail < Email
 	attr_accessible :event_id
 
 	def send_email
-		this.event.users.each do |user|
+		this.event.registered_students.each do |user|
 			queue_email(this, user)
 		end
 	end
