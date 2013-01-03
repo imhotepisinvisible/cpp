@@ -82,9 +82,10 @@
         </span>
         <div id="student-looking-for-container">
           <select id="looking-for-select" class="input-xxlarge select-looking-for" <%= addTooltip(@student.get('tooltip'), 'Select the status that best matches you', 'right') %>>
-            <option>Looking for an Industrial Placement</option>
-            <option>Looking for a Summer Placement</option>
-            <option value="">Not looking for anything</option>
+            <option><%= looking_fors.industrial %></option>
+            <option><%= looking_fors.summer %></option>
+            <option><%= looking_fors.graduate %></option>
+            <option value=""><%= looking_fors.nothing %></option>
           </select>
         </div>
       </div>

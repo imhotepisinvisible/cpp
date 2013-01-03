@@ -32,3 +32,10 @@ window.validateField = (form, field) ->
 
 window.studentAttendEvent = (event) ->
   isStudent() && event.registered_students.get(userId()) != undefined
+
+window.looking_fors = {
+  summer: "Looking for a Summer Placement"
+  industrial: "Looking for an Industrial Placement"
+  graduate: "Looking for a Grauate Job"
+  nothing: "Not looking for anything"
+}

@@ -40,9 +40,10 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
         looking_for:
           title: 'Looking for'
           type: 'Select'
-          options: ['Looking for an Industrial Placement',
-                    'Looking for a Summer Placement',
-                    {val: '', label: 'Not looking for anything'}]
+          options: [ looking_fors.industrial,
+                     looking_fors.summer,
+                     looking_fors.graduate,
+                    {val: '', label: looking_fors.nothing}]
     .render()
     @render()
 
