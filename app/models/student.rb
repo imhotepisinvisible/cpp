@@ -12,6 +12,8 @@
 #   t.datetime "updated_at",      :null => false
 
 class Student < User
+  after_initialize :set_defaults
+  
   acts_as_paranoid
 
   has_and_belongs_to_many :departments, :foreign_key => :user_id
@@ -92,5 +94,8 @@ class Student < User
     super(:methods => [:skill_list, :interest_list, :year_group_list, :reject_skill_list, :reject_interest_list, :type])
   end
 
+  def set_defaults
+    self.looking_for = "Not looking for anything"
+  end
 
 end

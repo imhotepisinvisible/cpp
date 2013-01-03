@@ -61,6 +61,31 @@ class EventsController < ApplicationController
     end
   end
 
+  # PUT /events/1/register
+  # PUT /events/1/register.json
+  def register
+    event = Event.find(params[:id])
+    if event.capacity == event.registered_students.length
+      respond_with event, status: :unprocessable_entity
+    elsif event.registered_students << Student.find(params[:student_id])
+      head :no_content
+    else
+      respond_with event, status: :unprocessable_entity
+    end
+  end
+
+
+  # PUT /events/unregister
+  # PUT /events/unregister.json
+  def unregister
+    event = Event.find(params[:id])
+    student = Student.find(params[:student_id])
+    if event.registered_students.delete(student)
+      head :no_content
+    else
+      respond_with @event, status: :unprocessable_entity
+    end
+  end
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy

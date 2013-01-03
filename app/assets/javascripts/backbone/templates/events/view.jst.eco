@@ -5,6 +5,17 @@
   <div class="company-logo-header">
     <img class="company-logo-img pull-right" src="<%= @event.company.getLogoPath() %>">
   </div>
+
+    <% if @student: %>
+      <div class="btn btn-primary btn-signup-student">
+        <% if @attending: %>
+          Unattend
+        <% else: %>
+          Attend
+        <% end %>
+      </div>
+    <% end %>
+
 </div>
 
 <div class="row">

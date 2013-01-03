@@ -104,3 +104,6 @@ window.isAdmin = ->
 # Pre: assumes you already know you're an admin
 window.getAdminDepartment = ->
   CPP.CurrentUser.attributes.department_id
+
+window.userId = ->
+  CPP.CurrentUser.id

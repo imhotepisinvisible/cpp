@@ -66,8 +66,7 @@ class CPP.Models.Event extends CPP.Models.Base
       editorClass: "departments-checkbox"
 
   getFilled: ->
-    #TODO: Calculate on SERVER!!
-    Math.floor(Math.random() * @get("capacity")) + 1
+    @.registered_students.length
 
   getPercentageCapacity: ->
     percentage = 100 * parseFloat(@getFilled()) / parseFloat(@get("capacity"))

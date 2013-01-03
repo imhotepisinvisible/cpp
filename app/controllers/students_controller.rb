@@ -5,9 +5,14 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @students = Student.where(:active => true)
+    @students = Student.scoped
+    @students = @students.where(:active => true)
+    if params.keys.include? "event_id"
+      @students = @students.joins(:registered_events).where("event_id = ?", params[:event_id])
+    end
     respond_with @students
   end
+
 
   # GET /students/1
   # GET /students/1.json

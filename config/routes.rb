@@ -65,7 +65,10 @@ CPP::Application.routes.draw do
   resources :sessions
 
   resources :companies
-  resources :events
+  resources :events do
+    post '/register', :on => :member, :action => :register
+    post '/unregister', :on => :member, :action => :unregister
+  end
   resources :placements
   resources :departments
   resources :company_administrators
@@ -107,6 +110,7 @@ CPP::Application.routes.draw do
   match 'tags/reject_skills' => 'tags#reject_skills'
   match 'tags/reject_interests' => 'tags#reject_interests'
   match 'tags/validate' => 'tags#validate'
+
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

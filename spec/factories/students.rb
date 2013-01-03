@@ -6,6 +6,7 @@ FactoryGirl.define do
     standard_bio
     beng_student
     first_year
+    looking_for {["Not looking for anything", "Looking for a Summer Placement", "Looking for an Industrial Placement"].sample}
     email {["st809", "peh10", "tw810", "tw310", "js410"].sample + "@imperial.ac.uk"}
 
     trait :beng_student do

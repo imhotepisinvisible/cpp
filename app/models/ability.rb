@@ -12,7 +12,7 @@ class Ability
       can :read, Department
     when "Student"
       can :manage, Student, :id => user.id
-      can :read, Event do |event|
+      can [:read, :register, :unregister], Event do |event|
         user_depts = user.departments.map(&:id)
         event_depts = event.company.departments.map(&:id)
         !(user_depts & event_depts).empty?
