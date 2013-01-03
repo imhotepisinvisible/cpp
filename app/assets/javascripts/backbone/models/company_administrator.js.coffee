@@ -30,11 +30,6 @@ class CPP.Models.CompanyAdministrator extends CPP.Models.Base
     last_name:
       type: "Text"
       title: "Last Name*"
-    departments:
-      title: "Departments*"
-      type: "Checkboxes"
-      options: @allDepartments
-      editorClass: "departments-checkbox"
     email:
       type: "Text"
       title: "Email*"
