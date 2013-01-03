@@ -47,6 +47,14 @@
         </table>
       </div>
     </div>
+
+    <% if @company: %>
+      <div class="row">
+        <div class="span6" id="event-email">
+          <a class="btn btn-primary" href="/#events/<%= @event.id %>/email_attendees">Email Attendees</a>
+        </div>
+      </div>
+    <% end %>
   </div>
   <div class="span6" >
     <div class="row">
