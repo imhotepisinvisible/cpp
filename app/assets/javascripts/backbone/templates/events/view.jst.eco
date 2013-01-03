@@ -5,17 +5,6 @@
   <div class="company-logo-header">
     <img class="company-logo-img pull-right" src="<%= @event.company.getLogoPath() %>">
   </div>
-
-    <% if @student: %>
-      <div class="btn btn-primary btn-signup-student">
-        <% if @attending: %>
-          Unattend
-        <% else: %>
-          Attend
-        <% end %>
-      </div>
-    <% end %>
-
 </div>
 
 <div class="row">
@@ -23,7 +12,7 @@
     <div class="row">
       <div class="span6" id="description">
         <h1 class="section-header"><i class="icon-info-sign"></i>  Description</h1>
-        <%= @event.get 'description' %>
+        <div><%= @event.get 'description' %></div>
       </div>
     </div>
 
@@ -84,19 +73,48 @@
 
     <div class="row capacity_container">
       <div class="span6">
-        <h1 class="section-header"><i class="icon-list"></i> Capacity</h1>
-      </div>
-
-      <!-- TODO: Move this into the model !-->
-
-      <div class="span4">
-        <div class="progress progress-<%= @event.getCapacityClass() %>">
-          <div class="bar" style="width: <%= @event.getPercentageCapacity() %>%"></div>
+        <div class="row">
+          <div class="span6">
+            <h1 class="section-header"><i class="icon-list"></i> Sign Up</h1>
+          </div>
         </div>
-      </div>
 
-      <div class="span2">
-        <div class="well"><%= @event.getFilled() %> / <%= @event.get("capacity") %></div>
+        <div class="row">
+          <div class="span4">
+            <div id="capacity-progress" class="progress progress-<%= @event.getCapacityClass() %>">
+              <div id="capacity-bar" class="bar" style="width: <%= @event.getPercentageCapacity() %>%"></div>
+            </div>
+          </div>
+
+          <div class="span2">
+            <div id="capacity-text" class="well"><%= @event.getFilled() %> / <%= @event.get("capacity") %></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <% if @student: %>
+            <div class="span4">
+              <div id="attending-text">
+                <% if @attending: %>
+                    You are attending this event
+                <% else: %>
+                    You are not attending this event
+                <% end %>
+              </div>
+            </div>
+
+            <div class="span2">
+              <div class="btn btn-primary btn-signup-student">
+                <% if @attending: %>
+                  I don't want to go
+                <% else: %>
+                  Sign me up!
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
       </div>
     </div>
   </div>

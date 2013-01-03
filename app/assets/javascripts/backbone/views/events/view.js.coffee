@@ -18,19 +18,18 @@ class CPP.Views.Events.View extends CPP.Views.Base
     if @model.getFilled() == @model.get('capacity')
       notify("error", "Cannot sign up, event is full")
     else if studentAttendEvent(@model)
-        $.ajax
-          url: "/events/#{@model.id}/unregister",
-          dataType: 'json'
-          type: "POST"
-          data:
-            student_id: userId()
-          success: (data) =>
-            notify("success", "Successfully unregistered")
-            @model.registered_students.remove(CPP.CurrentUser)
-            $('.btn-signup-student').html('Attend')
-            $('.well').html("#{@model.getFilled()} / #{@model.get 'capacity'}")
-          error: (data) ->
-            notify("error", "Could not unregister")
+      $.ajax
+        url: "/events/#{@model.id}/unregister",
+        dataType: 'json'
+        type: "POST"
+        data:
+          student_id: userId()
+        success: (data) =>
+          notify("success", "Successfully unregistered")
+          @model.registered_students.remove(CPP.CurrentUser)
+          @updateViewCapacity false
+        error: (data) ->
+          notify("error", "Could not unregister")
     else
       $.ajax
         url: "/events/#{@model.id}/register",
@@ -41,8 +40,14 @@ class CPP.Views.Events.View extends CPP.Views.Base
         success: (data) =>
           notify("success", "Successfully registered as attending")
           @model.registered_students.add(CPP.CurrentUser)
-          $('.btn-signup-student').html('Unattend')
-          $('.well').html("#{@model.getFilled()} / #{@model.get 'capacity'}")
+          @updateViewCapacity true
         error: (data) ->
           notify("error", "Could not register")
-    
+  
+  updateViewCapacity: (attending) ->
+    $('#capacity-text').html("#{@model.getFilled()} / #{@model.get 'capacity'}")
+    $('#capacity-progress').removeClass 'progress-info progress-danger progress-warning'
+    $('#capacity-progress').addClass "progress-#{@model.getCapacityClass()}"
+    $('#capacity-bar').width("#{@model.getPercentageCapacity()}%")
+    $('.btn-signup-student').html(if attending then "I don't want to go" else "Sign me up!")
+    $('#attending-text').html('You are ' + (unless attending then 'not ' else '') + 'attending this event')
