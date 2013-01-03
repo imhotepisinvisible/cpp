@@ -8,7 +8,6 @@ class CPP.Views.CompanyAdministrator.Signup extends CPP.Views.Base
     'click .btn-submit': 'submit'
 
   initialize: (options) ->
-    @login = options.login
     @company = options.company
     @form = new Backbone.Form
       model: @model
@@ -26,49 +25,24 @@ class CPP.Views.CompanyAdministrator.Signup extends CPP.Views.Base
   submit: (e) ->
     if @form.validate() == null
       @form.commit()
-      deferreds = []
-      if @company.isNew()
-        # Save the new company with temporary name and desc
-        email = @model.get 'email'
-        @company.set 'name', email.substring(email.indexOf('@') + 1, email.lastIndexOf('.'))
-        @company.set 'description', 'Please enter a company description'
-        @company.set 'departments', @form.getValue().departments
-        deferreds.push(
-          @company.save {},
-            wait: true
-            forceUpdate: true
-            success: (model, response) =>
-              # Attach new admin to new company
-              @model.set 'company_id', model.get 'id'
-            error: (model, response) =>
-              notify 'error', 'Could not create company')
-      else
-        # Attach new admin to company
-        @model.set 'company_id', @company.get 'id'
+      @model.set 'company_id', @company.get 'id'
+      @model.save {},
+        wait: true
+        forceUpdate: true
+        success: (model, response) =>
+          notify "success", "Registered"
+          @redirect(model)
+          
+        error: (model, response) =>
+          if response.responseText
+            errorlist = JSON.parse response.responseText
+            for field, errors of errorlist.errors
+              if field of @form.fields
+                @form.fields[field].setError(errors.join ', ')
 
-      $.when.apply($, deferreds).done(=>
-        @model.save {},
-          wait: true
-          forceUpdate: true
-          success: (model, response) =>
-            notify "success", "Registered"
-            @redirect(model)
-            
-          error: (model, response) =>
-            if response.responseText
-              errorlist = JSON.parse response.responseText
-              for field, errors of errorlist.errors
-                if field of @form.fields
-                  @form.fields[field].setError(errors.join ', ')
-
-            notify "error", "Unable to register, please resolve issues below."
-      )
+          notify "error", "Unable to register, please resolve issues below."
+      
 
   redirect: (model) ->
-    if @login
-      $.post '/sessions', { session: { email: model.get('email'), password: model.get('password') } }, (data) ->
-        window.location = '/#/companies/' + model.get('company_id') + '/edit'
-        window.location.reload(true)
-    else
-      window.location = '/#/companies/' + model.get('company_id') + '/edit'
-      window.location.reload(true)
+    window.location = '/#/companies/' + model.get('company_id') + '/edit'
+    window.location.reload(true)

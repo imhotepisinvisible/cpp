@@ -95,7 +95,6 @@ class CPP.Routers.Companies extends Backbone.Router
           companyAdmin = new CPP.Models.CompanyAdministrator
           new CPP.Views.CompanyAdministrator.Signup
             model: companyAdmin
-            login: false
             company: company
         error: ->
           notify 'error', "Couldn't fetch company"
@@ -120,7 +119,7 @@ class CPP.Routers.Companies extends Backbone.Router
       window.history.back()
       return false
     companyAdmin = new CPP.Models.CompanyAdministrator
-    new CPP.Views.CompanyAdministrator.Signup
+    new CPP.Views.Company.Signup
       model: companyAdmin
       login: login
       company: new CPP.Models.Company
