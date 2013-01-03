@@ -31,9 +31,9 @@ class CPP.Views.Companies.EditAdministrator extends CPP.Views.Base
     Backbone.Validation.bind @form
     
     validateField(@form, field) for field of @form.fields
+    @
 
   edit: (e) ->
-    console.log $(e.currentTarget)
     $(e.currentTarget).parent().parent().find('.btn-container').hide()
     $(e.currentTarget).parent().parent().find('.btn-save-admin').show()
     $(e.currentTarget).parent().parent().find('.btn-cancel-admin').show()
@@ -66,7 +66,6 @@ class CPP.Views.Companies.EditAdministrator extends CPP.Views.Base
   cancel: (e) ->
     # Allow css to control style of btn-edit again
     $(e.currentTarget).parent().find('.btn-container').attr('style', '')
-
     $(e.currentTarget).parent().find('.btn-save-admin').hide()
     $(e.currentTarget).parent().find('.btn-cancel-admin').hide()
     $(e.currentTarget).parent().find('.admin-display-container').show()
