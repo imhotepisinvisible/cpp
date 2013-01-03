@@ -13,7 +13,7 @@ class CreateUsers < ActiveRecord::Migration
       t.text :bio, :default => ""
       t.text :degree, :default => ""
       t.boolean :active, :default => true
-      t.string :looking_for, :default => "Not looking for anything"
+      t.string :looking_for
 
       # Company Admin Fields
       t.references :company
