@@ -60,7 +60,10 @@ class Student < User
                     :cv, :transcript, :covering_letter, :profile_picture,
                     :skill_list, :interest_list, :reject_skill_list, :reject_interest_list, :year_group_list, :active,
                     :looking_for, :tooltip
-
+  def is_active?
+    #TODO: Add all conditions here!! e.g. missing fields
+    active
+  end
 
   def valid_email?
     if departments.blank? # Can't have org if no departments

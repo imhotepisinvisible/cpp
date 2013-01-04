@@ -5,11 +5,18 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @students = Student.scoped
-    @students = @students.where(:active => true)
+    if current_user.is_company_admin?
+      @students = current_user.company.accessible_students
+    else
+      @students = Student.all
+    end
+
     if params.keys.include? "event_id"
       @students = @students.joins(:registered_events).where("event_id = ?", params[:event_id])
     end
+
+    @students.select { |s| s.is_active? }
+
     respond_with @students
   end
 
