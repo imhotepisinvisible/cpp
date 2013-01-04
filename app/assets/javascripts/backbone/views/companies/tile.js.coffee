@@ -14,7 +14,7 @@ class CPP.Views.CompanyTile extends CPP.Views.Base
     @render()
 
   render: ->
-    $(@el).html(@template(company: @model))
+    $(@el).html(@template(company: @model, tooltip: (loggedIn() and CPP.CurrentUser.get('tooltip'))))
 
   viewCompany: (e) ->
     Backbone.history.navigate('companies/' + @model.id, trigger: true)

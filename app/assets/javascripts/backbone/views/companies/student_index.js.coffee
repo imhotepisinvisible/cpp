@@ -13,6 +13,8 @@ class CPP.Views.CompaniesStudentIndex extends CPP.Views.Base
     $(@el).html(@template())
     @renderCompanies(@collection)
     @renderFilters()
+    super
+    @
 
   renderCompanies: (collection) ->
     @collection.sort()
