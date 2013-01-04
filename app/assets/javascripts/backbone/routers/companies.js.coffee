@@ -28,6 +28,7 @@ class CPP.Routers.Companies extends Backbone.Router
     deferreds.push(company.events.fetch({ data: $.param({ limit: 3}) }))
     deferreds.push(company.placements.fetch({ data: $.param({ limit: 3}) }))
     deferreds.push(company.tagged_emails.fetch({ data: $.param({ limit: 3}) }))
+    deferreds.push(company.departments.fetch())
 
     $.when.apply($, deferreds).done(=>
 

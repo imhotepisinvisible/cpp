@@ -4,11 +4,10 @@ class CPP.Views.Companies.DepartmentRequests extends CPP.Views.Base
   template: JST['backbone/templates/companies/department_requests']
 
   initialize: (options) ->
-    console.log options.company
     @company = options.company
     depts = new CPP.Collections.Departments
     depts.fetch
-      success: ->
+      success: =>
         @collection = depts
         @render()
       error: ->

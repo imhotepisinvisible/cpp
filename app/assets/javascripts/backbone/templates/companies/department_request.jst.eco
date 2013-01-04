@@ -1,0 +1,13 @@
+<div class="item">
+  <div class="department-display-container">
+    <span class="department-name"><%= @dept.get 'name' %></span>
+  </div>
+
+  <div class="btn-container btn-group pull-right">
+    <div class="btn btn-mini btn-request">Request</div>
+  </div>
+
+  <div class="department-display-container">
+    <span class="request-status">Pending...</span>
+  </div>
+</div>
