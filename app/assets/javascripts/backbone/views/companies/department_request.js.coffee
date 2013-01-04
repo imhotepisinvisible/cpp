@@ -17,16 +17,11 @@ class CPP.Views.Companies.DepartmentRequest extends CPP.Views.Base
 
   statusMap: (code) ->
     switch code
-      when -1
-        'Rejected'
-      when 0
-        'Not requested'
-      when 1
-        'Pending approval'
-      when 2
-        'Approved'
-      else
-        code
+      when -1 then 'Rejected'
+      when 0  then 'Not requested'
+      when 1  then 'Pending approval'
+      when 2  then 'Approved'
+      else code
 
   request: ->
     # Rejected or not requested
