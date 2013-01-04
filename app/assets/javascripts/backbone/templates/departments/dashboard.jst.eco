@@ -14,9 +14,7 @@
 
       <div class="span6">
         <h2 class="section-header"><i class="icon-check"></i> Approvals</h2>
-        Approval stuff should go in here!!
-
-        What do we approve? Emails/companies/placements/events?
+        <div id="pending-approvals"></div>
       </div>
     </div>
 
