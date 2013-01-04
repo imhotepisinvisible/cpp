@@ -42,9 +42,10 @@ class Ability
       can :create, Event
       can :manage, Placement, :company_id => user.company_id
       can :create, Placement
+      can :apply, Department
     when "DepartmentAdministrator"
       can :manage, DepartmentAdministrator, :id => user.id
-      can :manage, Department, :id => user.department_id
+      can [:manage, :change_status], Department, :id => user.department_id
 
       can [:manage, :download_document, :pending, :approve, :reject], Company do |company|
         puts company.departments.map(&:id).inspect, user.department_id
