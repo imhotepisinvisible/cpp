@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130103171503) do
+ActiveRecord::Schema.define(:version => 20121231161218) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -25,11 +25,6 @@ ActiveRecord::Schema.define(:version => 20130103171503) do
     t.datetime "logo_updated_at"
   end
 
-  create_table "companies_departments", :id => false, :force => true do |t|
-    t.integer "company_id"
-    t.integer "department_id"
-  end
-
   create_table "company_contacts", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -39,6 +34,14 @@ ActiveRecord::Schema.define(:version => 20130103171503) do
     t.integer  "company_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "department_registrations", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "department_id"
+    t.boolean  "approved",      :default => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   create_table "departments", :force => true do |t|
@@ -147,10 +150,8 @@ ActiveRecord::Schema.define(:version => 20130103171503) do
   end
 
   create_table "student_event_registrations", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "event_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer "user_id"
+    t.integer "event_id"
   end
 
   add_index "student_event_registrations", ["event_id"], :name => "index_student_event_registrations_on_event_id"

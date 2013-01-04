@@ -13,6 +13,8 @@
 class Company < ActiveRecord::Base
   is_impressionable
 
+  belongs_to :organisation
+
 	has_many :events
   has_many :placements
   has_many :emails
@@ -20,8 +22,10 @@ class Company < ActiveRecord::Base
   has_many :company_contacts
   has_many :student_company_ratings
 
-  belongs_to :organisation
-  has_and_belongs_to_many :departments
+  has_many :department_registrations, :conditions => { :approved => true }
+  has_many :pending_department_registrations, :conditions => { :approved => false }, :class_name => "DepartmentRegistration"
+  has_many :departments        , :through => :department_registrations
+  has_many :pending_departments, :through => :pending_department_registrations, :class_name => "Department", :source => :department
 
   acts_as_taggable_on :skills, :interests, :year_groups
 
@@ -33,7 +37,7 @@ class Company < ActiveRecord::Base
     :content_type => { :content_type => ["image/jpeg", "image/jpg", "image/png"],
                         message: "Must be a jpeg or png file"}
 
-  validates :departments,     :presence => { :message => "Must belong to at least one department" }
+  # validates :departments,     :presence => { :message => "Must belong to at least one department" }
   validates :name,            :presence => true
   validates :description,     :presence => true
   validates :organisation_id, :presence => true

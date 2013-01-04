@@ -46,7 +46,7 @@ class Ability
       can :manage, DepartmentAdministrator, :id => user.id
       can :manage, Department, :id => user.department_id
 
-      can [:manage, :download_document], Company do |company|
+      can [:manage, :download_document, :pending, :approve, :reject], Company do |company|
         puts company.departments.map(&:id).inspect, user.department_id
         company.departments.map(&:id).include? user.department_id
       end
