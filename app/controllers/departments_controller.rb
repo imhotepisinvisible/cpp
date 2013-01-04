@@ -4,15 +4,10 @@ class DepartmentsController < ApplicationController
   # GET /departments
   # GET /departments.json
   def index
-    if !current_user
-      @departments = Department.all
-    elsif current_user.is_department_admin?
-      @departments = current_user.department
+    if params.keys.include? "company_id"
+      @departments = @departments.all(:include => :companies, :conditions => ["companies.id = ?", params[:company_id]])
     else
-      @departments = current_user.departments
-      if params.keys.include? "company_id"
-        @departments = @departments.all(:include => :companies, :conditions => ["companies.id = ?", params[:company_id]])
-      end
+      @departments = Department.all
     end
     respond_with @departments
   end
