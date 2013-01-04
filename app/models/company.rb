@@ -46,6 +46,8 @@ class Company < ActiveRecord::Base
   validates :name, obscenity: {message: "Profanity is not allowed!"}
   validates :description, obscenity: {message: "Profanity is not allowed!"}
 
+  validates :name, :uniqueness => true
+
   validates :description, :length => {
     :maximum => 1000,
   }

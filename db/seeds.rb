@@ -204,17 +204,6 @@ Company.all.each do |company|
     }
   end
 
-  1.times do
-    FactoryGirl.create :department_administrator, {
-      first_name: "Will",
-      last_name: "Knottenbelt",
-      email: "doc@doc.com",
-      password: "cppcppcpp",
-      password_confirmation: "cppcppcpp",
-      department: computing_department
-    }
-  end
-
   10.times do
     company.company_contacts << (FactoryGirl.create :company_contact, {
       :company => company
@@ -224,3 +213,12 @@ Company.all.each do |company|
   company.save
 
 end
+
+FactoryGirl.create :department_administrator, {
+  first_name: "Will",
+  last_name: "Knottenbelt",
+  email: "doc@doc.com",
+  password: "cppcppcpp",
+  password_confirmation: "cppcppcpp",
+  department: computing_department
+}
