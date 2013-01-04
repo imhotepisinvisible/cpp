@@ -191,9 +191,9 @@ Company.all.each do |company|
   end
 
   # Create emails
-  5.times do
-    FactoryGirl.create(:email, :company => company)
-  end
+  # 3.times do
+  #   FactoryGirl.create(:tagged_email, :company => company)
+  # end
 
   1.times do
     FactoryGirl.create :company_administrator, {

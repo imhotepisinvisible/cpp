@@ -1,24 +1,7 @@
-class CPP.Models.TaggedEmail extends CPP.Models.Base
+class CPP.Models.TaggedEmail extends CPP.Models.Email
   url: ->
     '/tagged_emails' + (if @isNew() then '' else '/' + @id)
 
-
-  getReadableDate: (field) ->
-    Date.parse(@get(field)).toString('dS MMMM yyyy - H:mm')
-
-  validation:
-    subject:
-      required: true
-    body:
-      required: true
-
-  schema:
-    subject:
-    	type: "Text"
-    body:
-      type: "TextArea"
-      editorClass: "tinymce"
-
-class CPP.Collections.TaggedEmails extends CPP.Collections.Base
+class CPP.Collections.TaggedEmails extends CPP.Collections.Emails
   url: '/tagged_emails'
   model: CPP.Models.TaggedEmail

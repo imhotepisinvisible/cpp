@@ -31,4 +31,23 @@ class Email < ActiveRecord::Base
 
   attr_accessible :company_id, :subject, :body
 
+  def get_matching_students_count
+    users = get_matching_students
+    year_groups = Hash.new(0)
+    users.each do |user|
+      year_groups[user.year] += 1
+    end
+    year_groups
+  end
+
+  def queue_email(email, user)
+
+  end
+
+  def send_email
+		get_matching_students.each do |user|
+			queue_email(this, user)
+		end
+	end
+
 end
