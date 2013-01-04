@@ -64,7 +64,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       additions: true
 
     @render()
-    @updateActiveView()
     @uploadInitialize 'cv'
     @uploadInitialize 'transcript'
     @uploadInitialize 'covering-letter'
