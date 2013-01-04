@@ -199,8 +199,14 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
   degreeEdit: ->
     window.inPlaceEdit @model, 'student', 'degree'
 
-  degreeStopEdit: ->
-    window.inPlaceStopEdit @model, 'student', 'degree', 'N/A degree', _.identity
+  degreeStopEdit: (e) ->
+    deferreds = []
+    if e and $('.dropdown-menu').is(':visible') and $('.dropdown-menu:hover').length > 0
+      deferreds.push($('.dropdown-menu').click())
+    
+    $.when.apply($, deferreds).done(
+      window.inPlaceStopEdit @model, 'student', 'degree', 'N/A degree', _.identity
+    )
 
   nameEdit: ->
     $('#student-name-container').hide()
