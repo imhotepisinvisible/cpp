@@ -1,8 +1,15 @@
-<div class="row" id="profile-inactive-warning" <%- if (@student.get "active") then 'style="display:none"'%>>
+<div class="row" id="profile-inactive-warning" <%- if (@student.reasonsProfileInactive().length == 0) then 'style="display:none"'%>>
   <div class="span12">
-    <div class="alert alert-error centre-text">
-      <p> Profile Inactive! You need to activate your profile to enable companies to view it!
-      </p>
+    <div class="alert alert-error">
+      <p><b>Your profile is not being shown to companies for the reasons below:</b></p>
+      <div>
+        <ul class="profile-inactive-list">
+          <% for reason in @student.reasonsProfileInactive(): %>
+          <li><%= reason %></li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="clearfix"></div>
     </div>
   </div>
 </div>
@@ -31,15 +38,6 @@
     </div>
 
     <div class="span9">
-      <div class="btn-group pull-right">
-        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-          <i class="icon-cog"></i>
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="#" id="activate-button">Deactivate</a></li>
-        </ul>
-      </div>
       <div id="student-profile-intro">
         <div id="student-name-input-container" style="display:none">
           <input type="text" id="student-name-editor" value="<%= @student.get 'first_name' %> <%= @student.get 'last_name' %>">

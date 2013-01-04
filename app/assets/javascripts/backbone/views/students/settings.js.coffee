@@ -52,6 +52,19 @@ class CPP.Views.Students.Settings extends CPP.Views.Base
             notify 'error', "Unable to switch #{stateText} helpful tooltips"
     )
 
+    # Set up tooltip switch
+    $('#active-switch').toggleButtons(
+      onChange: (el, status, e) =>
+        stateText = if status then 'on' else 'off'
+        @model.set 'active', status
+        @model.save {},
+          wait: true
+          success: (model, response) =>
+            notify 'success', "Switched #{stateText} showing profile to companies"
+          error: (model, response) =>
+            notify 'error', "Unable to switch #{stateText} showing profile to companies"
+    )
+
   render: ->
     $(@el).html(@template(student: @model))
 

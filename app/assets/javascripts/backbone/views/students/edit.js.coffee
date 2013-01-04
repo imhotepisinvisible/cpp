@@ -16,7 +16,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     'blur #student-year-input-container': 'yearStopEdit'
     'click #student-degree-container': 'degreeEdit'
     'blur #student-degree-input-container': 'degreeStopEdit'
-    'click #activate-button'  : 'activate'
     'submit #skill-tag-form': 'addSkill'
     'click #btn-toggle-profile' : 'toggleProfile'
     'change #looking-for-select' : 'changeLookingFor'
@@ -63,10 +62,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       tag_class: 'label-info'
       tag_change_callback: saveModel
       additions: true
-
-    # Deactive profile if its active and does not meet min requirements
-    if (!@meetsActiveMinReq()) && @model.get "active"
-      @model.set "active", false;
 
     @render()
     @updateActiveView()
@@ -125,7 +120,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       upload = $(e.target).closest('.upload-container')
       upload.find('.progress-upload').delay(250).slideUp 'slow', ->
         upload.find('.bar').width('0%')
-        upload.removeClass('missing-document')      
+        upload.removeClass('missing-document')
 
     .bind "fileuploadstart", (e, data) ->
       $(e.currentTarget).closest('.upload-container').find('.progress-upload').slideDown()
@@ -249,42 +244,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
           $('#student-profile-intro-name').html originalName
 
     $('#student-name-container').show()
-
-  meetsActiveMinReq: ->
-    deg = (@model.get "degree")!=("")
-    year = (@model.get "year")!=null
-    # st = (@model.get "looking_for")!=("")
-    cv = (@model.get "cv_file_name")!=null && (@model.get "cv_file_name")!="" 
-    meetsMin = deg&&year&&cv
-    if !meetsMin
-      notify('error', "Ensure Year, Degree and CV are populated")
-    return meetsMin
-
-  activate: (e) ->
-    if ((!@model.get "active") && @meetsActiveMinReq()) || @model.get "active"
-      @model.set "active", (!@model.get "active");
-      @updateActiveView();
-      @model.save {},
-          wait: true
-          forceUpdate: true
-          success: (model, response) =>
-            $("#profile-inactive-warning").slideToggle()
-            if @model.get "active"
-              notify "success", "Profile Active"
-            else
-              notify "success", "Profile Inactive"
-          error: (model, response) ->
-            notify "error", "Failed to change profile active status"
-
-  updateActiveView: ->
-    if (!@model.get "active")
-      $('#student-profile-img-container').addClass('profile-image-deactivated')
-      $('#student-profile-intro').addClass('profile-text-deactivated')
-      $('#activate-button').html("Activate")
-    else
-      $('#student-profile-img-container').removeClass('profile-image-deactivated')
-      $('#student-profile-intro').removeClass('profile-text-deactivated')
-      $('#activate-button').html("Deactivate")
 
   removeTag: (e) ->
     close_div = $(e.currentTarget)
