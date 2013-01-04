@@ -6,6 +6,7 @@ class CPP.Views.Companies.DepartmentRequests extends CPP.Views.Base
   initialize: (options) ->
     @company = options.company
     depts = new CPP.Collections.Departments
+    depts.url = "/companies/#{@company.id}/departments"
     depts.fetch
       success: =>
         @collection = depts

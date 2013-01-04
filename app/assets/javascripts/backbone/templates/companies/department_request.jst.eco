@@ -3,11 +3,15 @@
     <span class="department-name"><%= @dept.get 'name' %></span>
   </div>
 
-  <div class="btn-container btn-group pull-right">
-    <div class="btn btn-mini btn-request">Request</div>
-  </div>
+  <% if @dept.get('status') < 1: %>
+    <div class="btn-container btn-group pull-right">
+      <div class="btn btn-mini btn-request">Request</div>
+    </div>
+  <% end %>
 
   <div class="department-display-container">
-    <span class="request-status">Pending...</span>
+    <span class="request-status">
+      <%= @status %>
+    </span>
   </div>
 </div>
