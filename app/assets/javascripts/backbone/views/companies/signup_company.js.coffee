@@ -30,7 +30,8 @@ class CPP.Views.Company.Signup extends CPP.Views.Base
     @
 
   submit: (e) ->
-    if @adminForm.validate() == null and @companyForm.validate() == null
+    companyValid = @companyForm.validate()
+    if @adminForm.validate() == null and companyValid == null
       @adminForm.commit()
       @companyForm.commit()
       @company.save {},
@@ -51,7 +52,7 @@ class CPP.Views.Company.Signup extends CPP.Views.Base
               errorlist = JSON.parse response.responseText
               for field, errors of errorlist.errors
                 if field of @adminForm.fields
-                  @adminForm.fields[field].setError(errors.join ', ')
+                  @adminForm.fields[field].setError(_.uniq(errors).join ', ')
 
             notify "error", "Unable to register, please resolve issues below."
         error: (model, response) =>
@@ -59,7 +60,7 @@ class CPP.Views.Company.Signup extends CPP.Views.Base
               errorlist = JSON.parse response.responseText
               for field, errors of errorlist.errors
                 if field of @companyForm.fields
-                  @companyForm.fields[field].setError(errors.join ', ')
+                  @companyForm.fields[field].setError(_.uniq(errors).join ', ')
           notify 'error', 'Could not create company'
 
   redirect: (model) ->
