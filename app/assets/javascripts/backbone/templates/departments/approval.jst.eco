@@ -1,0 +1,14 @@
+<div class="item">
+  <div class="approval-display-container">
+    <span class="company-name"><%= @company.get 'name' %></span>
+  </div>
+
+  <div class="btn-container btn-group">
+    <div class="btn btn-mini btn-primary btn-approve">Approve</div>
+    <div class="btn btn-mini btn-danger btn-reject">Reject</div>
+  </div>
+
+  <div class="approval-display-container">
+    <span class="approval-status">Pending your approval</span>
+  </div>
+</div>

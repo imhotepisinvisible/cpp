@@ -113,20 +113,76 @@
 
       position: relative;
 
-      &.hoverable{
-        cursor: move;
-
-        &:hover{
-          background-color: #eee;
-        }
-      }
-
       .admin-name {
         font-weight: bold;
         font-size: 1.2em;
       }
 
       .admin-email{
+        color: #999;
+      }
+    }
+
+    .btn-container{
+      position: absolute;
+      right: 0px;
+    }
+  }
+}
+
+.department-list{
+  list-style: none;
+  margin: 0px 0px 10px 0px;
+  padding: 0px;
+
+  li {
+    .item {
+      padding: 10px 5px;
+      border-bottom: 1px solid #eee;
+      display: block;
+      text-decoration: none;
+      color: #444;
+
+      position: relative;
+
+      .department-name {
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+
+      .request-status{
+        color: #999;
+      }
+    }
+
+    .btn-container{
+      position: absolute;
+      right: 0px;
+    }
+  }
+}
+
+.approval-list{
+  list-style: none;
+  margin: 0px 0px 10px 0px;
+  padding: 0px;
+
+  li {
+    .item {
+      padding: 10px 5px;
+      border-bottom: 1px solid #eee;
+      display: block;
+      text-decoration: none;
+      color: #444;
+
+      position: relative;
+
+      .company-name {
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+
+      .approval-status{
         color: #999;
       }
     }

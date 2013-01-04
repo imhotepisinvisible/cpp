@@ -4,7 +4,9 @@ class CPP.Views.Departments.Dashboard extends CPP.Views.Base
   el: "#app"
   template: JST['backbone/templates/departments/dashboard']
 
-  events: -> _.extend {}, CPP.Views.Base::events
+  events: -> _.extend {}, CPP.Views.Base::events,
+    'click #btn-notifications-save': 'saveNotifications'
+    'click #btn-notifications-cancel': 'cancelNotifications'
 
   initialize: ->
     @initNotificationsForm()
@@ -13,6 +15,10 @@ class CPP.Views.Departments.Dashboard extends CPP.Views.Base
   render: ->
     $(@el).html(@template(department: @model))
     @renderNotificationsForm()
+
+    new CPP.Views.Departments.Approvals
+      el: $(@el).find('#pending-approvals')
+      model: @model
 
   initNotificationsForm: ->
     @notificationsForm = new Backbone.Form

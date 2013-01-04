@@ -3,24 +3,10 @@
     <h1 class="section-header"><i class="icon-dashboard"></i> <%= @department.get 'name' %> Dashboard</h1>
     <div class="row">
       <div class="span6">
-        <h2 class="section-header"><i class="icon-wrench"></i> Administration</h2>
-        <ul>
-          <li><a href="#students">Students</a></li>
-          <li><a href="#companies">Companies</a></li>
-          <li><a href="#events">Events</a></li>
-          <li><a href="#placements">Placements</a></li>
-        </ul>
-      </div>
-
-      <div class="span6">
         <h2 class="section-header"><i class="icon-check"></i> Approvals</h2>
-        Approval stuff should go in here!!
-
-        What do we approve? Emails/companies/placements/events?
+        <div id="pending-approvals"></div>
       </div>
-    </div>
 
-    <div class="row">
       <div class="span6">
         <h2 class="section-header"><i class="icon-info-sign"></i> Company Notifications</h2>
         These notifications will be displayed to a company when they create a new placement or event.
