@@ -98,6 +98,10 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
       el: $(@el).find('#edit-admins')
       company: @model
       header: true
+
+    new CPP.Views.Companies.DepartmentRequests
+      el: $(@el).find('#departments')
+      company: @model
     @
 
   companyNameEdit: ->
