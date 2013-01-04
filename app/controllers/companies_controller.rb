@@ -20,6 +20,26 @@ class CompaniesController < ApplicationController
     end
   end
 
+  # GET departments/1/companies/pending
+  def pending
+    department = Department.find(params[:department_id])
+    respond_with department.pending_companies
+  end
+
+  # PUT departments/1/companies/1/approve
+  def approve
+    department_registration = DepartmentRegistration.find_by_department_id_and_company_id(params[:department_id], params[:company_id])
+    department_registration.approved = true
+    department_registration.save!
+  end
+
+  # PUT departments/1/companies/1/reject
+  def reject
+    department_registration = DepartmentRegistration.find_by_department_id_and_company_id(params[:department_id], params[:company_id])
+    department_registration.approved = false
+    department_registration.save!
+  end
+
   # GET /companies/1
   # GET /companies/1.json
   def show
@@ -49,7 +69,7 @@ class CompaniesController < ApplicationController
     else
       departments = []
     end
-    @company.departments = departments
+    @company.pending_departments = departments
 
     if @company.save
       respond_with @company, status: :created, location: @company

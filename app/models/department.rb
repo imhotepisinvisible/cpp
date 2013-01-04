@@ -12,8 +12,10 @@
 class Department < ActiveRecord::Base
   belongs_to :organisation
   has_and_belongs_to_many :students
-  #has_many :admins
-  has_and_belongs_to_many :companies
+  has_many :department_registrations, :conditions => { :approved => true }
+  has_many :pending_department_registrations, :conditions => { :approved => false }, :class_name => "DepartmentRegistration"
+  has_many :companies        , :through => :department_registrations
+  has_many :pending_companies, :through => :pending_department_registrations, :class_name => "Company", :source => :company
 
   validates :name,            :presence => true
   validates :organisation_id, :presence => true
