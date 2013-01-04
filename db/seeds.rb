@@ -206,6 +206,8 @@ Company.all.each do |company|
 
   1.times do
     FactoryGirl.create :department_administrator, {
+      first_name: "Will",
+      last_name: "Knottenbelt",
       email: "doc@doc.com",
       password: "cppcppcpp",
       password_confirmation: "cppcppcpp",
