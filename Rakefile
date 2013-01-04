@@ -3,6 +3,7 @@
 # for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
 require File.expand_path('../config/application', __FILE__)
+require 'resque/tasks'
 
 CPP::Application.load_tasks
 
@@ -13,3 +14,4 @@ task :nuke do |t, args|
   Rake::Task["db:seed"].invoke
   Rake::Task["db:test:prepare"].invoke
 end
+

@@ -6,16 +6,11 @@
   <div class="span9">
     <h1 class="section-header">
       Emails
-      <% if @emails.company: %>
-        <div class="company-logo-header">
-          <img src="/assets/company_logos/<%= @emails.company.get 'logo' %>">
-        </div>
-      <% end %>
     </h1>
     <div class="table-toolbar">
-      <div class="btn pull-right btn-add">
-        Add Email
-      </div>
+      <a class="btn pull-right btn-add">
+        New Email
+      </a>
       <div class="clear"></div>
     </div>
     <table class="table table-bordered">

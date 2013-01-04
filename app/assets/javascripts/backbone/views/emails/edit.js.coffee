@@ -1,6 +1,6 @@
-CPP.Views.TaggedEmails ||= {}
+CPP.Views.Emails ||= {}
 
-class CPP.Views.TaggedEmails.Edit extends CPP.Views.Base
+class CPP.Views.Emails.Edit extends CPP.Views.Base
   el: "#app"
 
   template: JST['backbone/templates/emails/editval']
@@ -23,45 +23,48 @@ class CPP.Views.TaggedEmails.Edit extends CPP.Views.Base
           errorlist = JSON.parse response.responseText
           notify "error", "Couldn't Update Tags"
 
-    @skill_list_tags_form = new Backbone.Form.editors.TagEditor
-      model: @model
-      key: 'skill_list'
-      title: 'Skills'
-      url: '/tags/skills'
-      tag_class: 'label-success'
-      tag_change_callback: saveTagModel
-      additions: true
+    if @options.type == "tagged"
+      @skill_list_tags_form = new Backbone.Form.editors.TagEditor
+        model: @model
+        key: 'skill_list'
+        title: 'Skills'
+        url: '/tags/skills'
+        tag_class: 'label-success'
+        tag_change_callback: saveTagModel
+        additions: true
 
-    @interest_list_tags_form = new Backbone.Form.editors.TagEditor
-      model: @model
-      key: 'interest_list'
-      title: 'Interests'
-      url: '/tags/interests'
-      tag_class: 'label-warning'
-      tag_change_callback: saveTagModel
-      additions: true
+      @interest_list_tags_form = new Backbone.Form.editors.TagEditor
+        model: @model
+        key: 'interest_list'
+        title: 'Interests'
+        url: '/tags/interests'
+        tag_class: 'label-warning'
+        tag_change_callback: saveTagModel
+        additions: true
 
-    @year_group_list_tags_form = new Backbone.Form.editors.TagEditor
-      model: @model
-      key: 'year_group_list'
-      title: 'Year Groups'
-      url: '/tags/year_groups'
-      tag_class: 'label-info'
-      tag_change_callback: saveTagModel
-      additions: true
+      @year_group_list_tags_form = new Backbone.Form.editors.TagEditor
+        model: @model
+        key: 'year_group_list'
+        title: 'Year Groups'
+        url: '/tags/year_groups'
+        tag_class: 'label-info'
+        tag_change_callback: saveTagModel
+        additions: true
 
     @render()
 
 
-  render: ->
+  render: =>
     super
-    $(@el).html(@template(email: @model))
-    @skill_list_tags_form.render()
-    $('.skill-tags-form').append(@skill_list_tags_form.el)
-    @interest_list_tags_form.render()
-    $('.interest-tags-form').append(@interest_list_tags_form.el)
-    @year_group_list_tags_form.render()
-    $('.year-group-tags-form').append(@year_group_list_tags_form.el)
+    console.log @options.type
+    $(@el).html(@template(email: @model, type: @options.type))
+    if @options.type == "tagged"
+      @skill_list_tags_form.render()
+      $('.skill-tags-form').append(@skill_list_tags_form.el)
+      @interest_list_tags_form.render()
+      $('.interest-tags-form').append(@interest_list_tags_form.el)
+      @year_group_list_tags_form.render()
+      $('.year-group-tags-form').append(@year_group_list_tags_form.el)
 
     $('.form').append(@form.el)
     validateField(@form, field) for field of @form.fields
@@ -78,11 +81,14 @@ class CPP.Views.TaggedEmails.Edit extends CPP.Views.Base
         forceUpdate: true
         success: (model, response) =>
           notify "success", "Email Saved"
-          Backbone.history.navigate('companies/' + @model.get('company_id') + '/tagged_emails', trigger: true)
+          switch @options.type
+            when "tagged" then  Backbone.history.navigate('companies/' + @model.get('company_id') + '/tagged_emails', trigger: true)
+            when "event" then   Backbone.history.navigate('events/' + @model.get('event_id'), trigger: true)
           @undelegateEvents()
         error: (model, response) =>
           errorlist = JSON.parse response.responseText
           for field, errors of errorlist.errors
+            console.log field
             @form.fields[field].setError(errors.join ', ')
 
           notify "error", "Unable to save email, please resolve issues below."

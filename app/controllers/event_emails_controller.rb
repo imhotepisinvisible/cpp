@@ -1,10 +1,10 @@
-class TaggedEmailsController < ApplicationController
+class EventEmailsController < ApplicationController
   respond_to :json
   
   # GET /emails
   # GET /emails.json
   def index
-    @emails = TaggedEmail.scoped
+    @emails = EventEmail.scoped
 
     if params.keys.include? "company_id"
       @emails = @emails.where(:company_id => params[:company_id])
@@ -20,26 +20,26 @@ class TaggedEmailsController < ApplicationController
   # GET /emails/1
   # GET /emails/1.json
   def show
-    @email = TaggedEmail.find(params[:id])
+    @email = EventEmail.find(params[:id])
     respond_with @email
   end
 
   def preview
-    @email = TaggedEmail.find(params[:id])
+    @email = EventEmail.find(params[:id])
     render :text => @email.body
   end
 
   # GET /emails/new
   # GET /emails/new.json
   def new
-    @email = TaggedEmail.new
+    @email = EventEmail.new
     respond_with @email
   end
 
   # POST /emails
   # POST /emails.json
   def create
-    @email = TaggedEmail.new(params[:tagged_email])
+    @email = EventEmail.new(params[:event_email])
     @email.state = "Pending"
     if @email.save
       respond_with @email, status: :created, location: @email
@@ -51,8 +51,8 @@ class TaggedEmailsController < ApplicationController
   # PUT /emails/1
   # PUT /emails/1.json
   def update
-    @email = TaggedEmail.find(params[:id])
-    if @email.update_attributes(params[:tagged_email])
+    @email = EventEmail.find(params[:id])
+    if @email.update_attributes(params[:event_email])
       @email.send_email
       head :no_content
     else
@@ -61,14 +61,14 @@ class TaggedEmailsController < ApplicationController
   end
 
   def get_matching_students_count
-    @email = TaggedEmail.find(params[:id])
+    @email = EventEmail.find(params[:id])
     respond_with @email.get_matching_students_count
   end
 
   # DELETE /emails/1
   # DELETE /emails/1.json
   def destroy
-    @email = TaggedEmail.find(params[:id])
+    @email = EventEmail.find(params[:id])
     @email.destroy
     head :no_content
   end

@@ -3,12 +3,11 @@ class EventEmail < Email
 
 	belongs_to :event
 
-	attr_accessible :event_id
+	attr_accessible :event, :event_id
 
-	def send_email
-		this.event.users.each do |user|
-			queue_email(this, user)
-		end
+	def get_matching_students
+		this.event.registered_students
 	end
+
 
 end

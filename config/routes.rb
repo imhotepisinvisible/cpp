@@ -89,6 +89,7 @@ CPP::Application.routes.draw do
   end
 
   resources :tagged_emails
+  resources :event_emails
 
   get "tagged_emails/:id/get_matching_students_count" => "tagged_emails#get_matching_students_count"
 
@@ -101,6 +102,7 @@ CPP::Application.routes.draw do
     resources :events
     resources :placements
     resources :tagged_emails
+    resources :event_emails
     resources :departments
     resources :departments do
       put :change_status
