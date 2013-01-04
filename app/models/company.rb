@@ -37,10 +37,11 @@ class Company < ActiveRecord::Base
     :content_type => { :content_type => ["image/jpeg", "image/jpg", "image/png"],
                         message: "Must be a jpeg or png file"}
 
-  # validates :departments,     :presence => { :message => "Must belong to at least one department" }
-  validates :name,            :presence => true
-  validates :description,     :presence => true
-  validates :organisation_id, :presence => true
+  validates :pending_departments,     :presence => { :message => "Must belong to at least one department" }, :if => lambda { self.departments.empty? }
+  validates :departments,             :presence => { :message => "Must belong to at least one department" }, :if => lambda { self.pending_departments.empty? }
+  validates :name,                    :presence => true
+  validates :description,             :presence => true
+  validates :organisation_id,         :presence => true
 
   validates :name, obscenity: {message: "Profanity is not allowed!"}
   validates :description, obscenity: {message: "Profanity is not allowed!"}
