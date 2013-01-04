@@ -38,6 +38,17 @@
             </span>
           </div>
         </div>
+        <br/>
+        <div>
+          <div class="switch-container">
+            <div class="switch" id="active-switch">
+              <input id="tooltip-checkbox" type="checkbox" class="switch-checkbox" <%= if @student.get('active') then 'checked="checked"' %>>
+            </div>
+            <span class="switch-text">
+              Show profile to companies
+            </span>
+          </div>
+        </div>
       </div>
       <div class="span6">
         <h2 class="section-header"><i class="icon-trash"></i> Delete Account</h2>
