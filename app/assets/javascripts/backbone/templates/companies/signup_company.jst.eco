@@ -1,19 +1,20 @@
 <h1 class="section-header">
-  <% if @companyAdministrator.isNew(): %>
-    Company Administrator Sign Up
-  <% end %>
+  Create a New Company
 </h1>
-<span>
-  <% if @company.isNew(): %>
-    Create an administrator and a new company
-  <% else: %>
-    Create an administrator for <%= @company.get 'name' %>
-  <% end %>
-</span>
 
 <div class="row">
-  <div class="span12">
-    <div class="form"></div>
+  <div class="span6">
+    <h2 class="section-header">
+      Company Details
+    </h2>
+    <div id="company-form"></div>
+  </div>
+
+  <div class="span6">
+    <h2 class="section-header">
+      Administrator Details
+    </h2>
+    <div id="admin-form"></div>
   </div>
 </div>
 <div class="row">

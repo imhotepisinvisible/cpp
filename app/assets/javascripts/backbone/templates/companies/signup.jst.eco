@@ -1,5 +1,5 @@
 <h1 class="section-header">
-  Create a new administrator for <%= @company.get 'name' %>
+  Create a New Administrator for <%= @company.get 'name' %>
 </h1>
 
 <div class="row">

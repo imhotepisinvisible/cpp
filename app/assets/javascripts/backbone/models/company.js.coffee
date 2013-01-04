@@ -17,6 +17,9 @@ class CPP.Models.Company extends CPP.Models.Base
     @departments = new CPP.Collections.Departments
     @departments.url = '/companies/' + this.id + '/departments'
 
+    @allDepartments = new CPP.Collections.Departments
+    @allDepartments.url = '/departments'
+
   toString: ->
     return this.get 'name'
 
@@ -38,6 +41,28 @@ class CPP.Models.Company extends CPP.Models.Base
       return "/companies/#{@get('id')}/documents/logo"
     else
       return "/assets/default_profile.png"
+
+  validation:
+    name:
+      required: true
+    description:
+      required: true
+    departments:
+      required: true
+
+  schema: ->
+    name:
+      type: "Text"
+      title: "Name*"
+    description:
+      type: "TextArea"
+      title: "Description*"
+    departments:
+      type: "Checkboxes"
+      title: "Departments*"
+      options: @allDepartments
+      editorClass: "departments-checkbox"
+
 
 class CPP.Collections.Companies extends CPP.Collections.Base
   url: '/companies'

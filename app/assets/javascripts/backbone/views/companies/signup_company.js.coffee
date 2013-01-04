@@ -10,40 +10,36 @@ class CPP.Views.Company.Signup extends CPP.Views.Base
   initialize: (options) ->
     @login = options.login
     @company = options.company
-    @form = new Backbone.Form
+    @adminForm = new Backbone.Form
       model: @model
+    .render()
+    @companyForm = new Backbone.Form
+      model: @company
     .render()
     @render()
 
   render: ->
-    $(@el).html(@template(companyAdministrator: @model, company: @company))
+    $(@el).html(@template(admin: @model, company: @company))
     super
-    $('.form').append(@form.el)
-    Backbone.Validation.bind @form
-    validateField(@form, field) for field of @form.fields
+    $('#admin-form').append(@adminForm.el)
+    $('#company-form').append(@companyForm.el)
+    Backbone.Validation.bind @adminForm
+    validateField(@adminForm, field) for field of @adminForm.fields
+    Backbone.Validation.bind @companyForm
+    validateField(@companyForm, field) for field of @companyForm.fields
     @
 
   submit: (e) ->
-    if @form.validate() == null
-      @form.commit()
-      deferreds = []
-      # Save the new company with temporary name and desc
-      email = @model.get 'email'
-      @company.set 'name', email.substring(email.indexOf('@') + 1, email.lastIndexOf('.'))
-      @company.set 'description', 'Please enter a company description'
-      @company.set 'departments', @form.getValue().departments
-      deferreds.push(
-        @company.save {},
-          wait: true
-          forceUpdate: true
-          success: (model, response) =>
-            # Attach new admin to new company
-            @model.set 'company_id', model.get 'id'
-          error: (model, response) =>
-            notify 'error', 'Could not create company')
-
-      $.when.apply($, deferreds).done(=>
-        @model.save {},
+    if @adminForm.validate() == null and @companyForm.validate() == null
+      @adminForm.commit()
+      @companyForm.commit()
+      @company.save {},
+        wait: true
+        forceUpdate: true
+        success: (model, response) =>
+          # Attach new admin to new company
+          @model.set 'company_id', model.get 'id'
+          @model.save {},
           wait: true
           forceUpdate: true
           success: (model, response) =>
@@ -54,11 +50,17 @@ class CPP.Views.Company.Signup extends CPP.Views.Base
             if response.responseText
               errorlist = JSON.parse response.responseText
               for field, errors of errorlist.errors
-                if field of @form.fields
-                  @form.fields[field].setError(errors.join ', ')
+                if field of @adminForm.fields
+                  @adminForm.fields[field].setError(errors.join ', ')
 
             notify "error", "Unable to register, please resolve issues below."
-      )
+        error: (model, response) =>
+          if response.responseText
+              errorlist = JSON.parse response.responseText
+              for field, errors of errorlist.errors
+                if field of @companyForm.fields
+                  @companyForm.fields[field].setError(errors.join ', ')
+          notify 'error', 'Could not create company'
 
   redirect: (model) ->
     go = ->
