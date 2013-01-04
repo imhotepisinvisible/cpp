@@ -4,7 +4,9 @@ class CPP.Views.Departments.Dashboard extends CPP.Views.Base
   el: "#app"
   template: JST['backbone/templates/departments/dashboard']
 
-  events: -> _.extend {}, CPP.Views.Base::events
+  events: -> _.extend {}, CPP.Views.Base::events,
+    'click #btn-notifications-save': 'saveNotifications'
+    'click #btn-notifications-cancel': 'cancelNotifications'
 
   initialize: ->
     @initNotificationsForm()
