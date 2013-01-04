@@ -4,7 +4,7 @@ class DirectEmail < Email
 	has_and_belongs_to_many :students
 
 	def get_matching_students
-		this.students
+		students
 	end
 	
 end
