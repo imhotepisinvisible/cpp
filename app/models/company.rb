@@ -22,10 +22,14 @@ class Company < ActiveRecord::Base
   has_many :company_contacts
   has_many :student_company_ratings
 
-  has_many :department_registrations, :conditions => { :approved => true }
-  has_many :pending_department_registrations, :conditions => { :approved => false }, :class_name => "DepartmentRegistration"
+  has_many :department_registrations, :conditions => { :status => 2 }
   has_many :departments        , :through => :department_registrations
+
+  has_many :pending_department_registrations, :conditions => { :status => 1 }, :class_name => "DepartmentRegistration"
   has_many :pending_departments, :through => :pending_department_registrations, :class_name => "Department", :source => :department
+
+  has_many :all_department_registrations, :class_name => "DepartmentRegistration"
+  has_many :all_departments, :through => :all_department_registrations, :class_name => "Department", :source => :department
 
   acts_as_taggable_on :skills, :interests, :year_groups
 

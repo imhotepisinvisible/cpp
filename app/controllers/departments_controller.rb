@@ -3,13 +3,39 @@ class DepartmentsController < ApplicationController
 
   # GET /departments
   # GET /departments.json
+  # GET /companies/1/departments.json
   def index
     if params.keys.include? "company_id"
-      @departments = @departments.all(:include => :companies, :conditions => ["companies.id = ?", params[:company_id]])
+      company = Company.find(params[:company_id])
+      respond_with company.all_departments.as_json({:company_id => params[:company_id]})
     else
-      @departments = Department.all
+      respond_with Department.all
     end
-    respond_with @departments
+  end
+
+  # PUT /companies/1/departments/1/change_status
+  def change_status
+    raise unless params.has_key? :company_id
+    raise unless params.has_key? :status
+    dept_reg = DepartmentRegistration.find_or_create_by_company_id_and_department_id(params[:company_id], params[:department_id])
+    dept_reg.status = params[:status]
+    if dept_reg.save
+      head :no_content
+    else
+      respond_with dept_reg, status: :unprocessable_entity
+    end
+  end
+
+  # PUT /companies/1/departments/1/apply
+  def apply
+    raise unless params.has_key? :company_id
+    dept_reg = DepartmentRegistration.find_or_create_by_company_id_and_department_id(params[:company_id], params[:department_id])
+    dept_reg.status = 1
+    if dept_reg.save
+      head :no_content
+    else
+      respond_with dept_reg, status: :unprocessable_entity
+    end
   end
 
   # GET /departments/1

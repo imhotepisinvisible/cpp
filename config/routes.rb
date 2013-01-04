@@ -101,6 +101,11 @@ CPP::Application.routes.draw do
     resources :events
     resources :placements
     resources :tagged_emails
+    resources :departments
+    resources :departments do
+      put :change_status
+      put :apply
+    end
     resources :company_contacts do
       post :sort, :on => :collection
       get :position_clean, :on => :collection

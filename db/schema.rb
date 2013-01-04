@@ -39,9 +39,9 @@ ActiveRecord::Schema.define(:version => 20121231161218) do
   create_table "department_registrations", :force => true do |t|
     t.integer  "company_id"
     t.integer  "department_id"
-    t.boolean  "approved",      :default => false
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.integer  "status",        :default => 1
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "departments", :force => true do |t|

@@ -3,7 +3,7 @@ class CreateDepartmentRegistrations < ActiveRecord::Migration
     create_table :department_registrations do |t|
       t.references :company
       t.references :department
-      t.boolean    :approved, :default => false
+      t.integer    :status, :default => 1
       t.timestamps
     end
   end
