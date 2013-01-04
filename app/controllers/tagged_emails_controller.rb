@@ -40,6 +40,7 @@ class TaggedEmailsController < ApplicationController
   # POST /emails.json
   def create
     @email = TaggedEmail.new(params[:tagged_email])
+    @email.state = "Pending"
     if @email.save
       respond_with @email, status: :created, location: @email
     else

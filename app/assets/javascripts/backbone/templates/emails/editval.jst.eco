@@ -20,38 +20,32 @@
   </div>
 </div>
 <div class="row">
+  <% if @type != "event": %>
   <div class="span6">
     <h2 class="section-header">Select Recipients</h2>
-  </div>
-  <div class="span6">
-    <h2 class="section-header">Recipient Stats</h2>
-  </div>
-</div>
-<div class="row">
-  <div class="span6">
-    <div class="row">
-      <div class="span6">
-        <div class="tag-category">
-            <div class="skill-tags-form"></div>
-        </div>
+    <div>
+      <div class="tag-category">
+          <div class="skill-tags-form"></div>
       </div>
-
-      <div class="span6">
-        <div class="tag-category">
-            <div class="interest-tags-form"></div>
-        </div>
+    </div>
+    <div>
+      <div class="tag-category">
+          <div class="interest-tags-form"></div>
       </div>
-
-      <div class="span6">
-        <div class="tag-category">
-            <div class="year-group-tags-form"></div>
-        </div>
+    </div>
+    <div>
+      <div class="tag-category">
+          <div class="year-group-tags-form"></div>
       </div>
     </div>
   </div>
+  <% end %>
   <div class="span6">
+    <h2 class="section-header">Recipient Stats</h2>
     <div id="email-stats">
+      <% if @type != "event": %>
       <h4>Select some tags to see statistics</h4>
+      <% end %>
     </div>
   </div>
 </div>
