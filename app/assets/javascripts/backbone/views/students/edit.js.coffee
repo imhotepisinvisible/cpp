@@ -63,10 +63,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       tag_change_callback: saveModel
       additions: true
 
-    # Deactive profile if its active and does not meet min requirements
-    if (!@meetsActiveMinReq()) && @model.get "active"
-      @model.set "active", false;
-
     @render()
     @updateActiveView()
     @uploadInitialize 'cv'
@@ -248,26 +244,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
           $('#student-profile-intro-name').html originalName
 
     $('#student-name-container').show()
-
-  meetsActiveMinReq: ->
-    deg = (@model.get "degree")!=("")
-    year = (@model.get "year")!=null
-    # st = (@model.get "looking_for")!=("")
-    cv = (@model.get "cv_file_name")!=null && (@model.get "cv_file_name")!=""
-    meetsMin = deg&&year&&cv
-    if !meetsMin
-      notify('error', "Ensure Year, Degree and CV are populated")
-    return meetsMin
-
-  updateActiveView: ->
-    if (!@model.get "active")
-      $('#student-profile-img-container').addClass('profile-image-deactivated')
-      $('#student-profile-intro').addClass('profile-text-deactivated')
-      $('#activate-button').html("Activate")
-    else
-      $('#student-profile-img-container').removeClass('profile-image-deactivated')
-      $('#student-profile-intro').removeClass('profile-text-deactivated')
-      $('#activate-button').html("Deactivate")
 
   removeTag: (e) ->
     close_div = $(e.currentTarget)
