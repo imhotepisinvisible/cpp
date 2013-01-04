@@ -6,8 +6,13 @@ class CPP.Views.Companies.DepartmentRequests extends CPP.Views.Base
   initialize: (options) ->
     console.log options.company
     @company = options.company
-    @collection = @company.departments
-    @render()
+    depts = new CPP.Collections.Departments
+    depts.fetch
+      success: ->
+        @collection = depts
+        @render()
+      error: ->
+        notify 'error', 'Could not fetch departments'
 
   render: ->
     $(@el).html(@template(company: @company))
