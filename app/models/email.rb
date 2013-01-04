@@ -32,9 +32,8 @@ class Email < ActiveRecord::Base
   attr_accessible :company_id, :subject, :body
 
   def get_matching_students_count
-    users = get_matching_students
     year_groups = Hash.new(0)
-    users.each do |user|
+    get_matching_students.each do |user|
       year_groups[user.year] += 1
     end
     year_groups
