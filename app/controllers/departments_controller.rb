@@ -29,8 +29,8 @@ class DepartmentsController < ApplicationController
   # PUT /companies/1/departments/1/apply
   def apply
     raise unless params.has_key? :company_id
-    raise unless params.has_key? :status
-    dept_reg = DepartmentRegistration.new({department_id: params[:department_id], company_id: params[:company_id] })
+    dept_reg = DepartmentRegistration.find_or_create_by_company_id_and_department_id(params[:company_id], params[:department_id])
+    dept_reg.status = 1
     if dept_reg.save
       head :no_content
     else
