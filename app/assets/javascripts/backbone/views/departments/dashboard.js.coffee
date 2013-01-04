@@ -14,6 +14,10 @@ class CPP.Views.Departments.Dashboard extends CPP.Views.Base
     $(@el).html(@template(department: @model))
     @renderNotificationsForm()
 
+    new CPP.Views.Departments.Approvals
+      el: $(@el).find('#pending-approvals')
+      model: @model
+
   initNotificationsForm: ->
     @notificationsForm = new Backbone.Form
       model: @model
