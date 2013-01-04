@@ -8,7 +8,8 @@ class CPP.Views.Departments.Approval extends CPP.Views.Base
     'click .btn-approve' : 'approve'
     'click .btn-reject'  : 'reject'
 
-  initialize: ->
+  initialize: (options) ->
+    @dept = options.dept
     @render()
 
   render: ->
@@ -16,7 +17,22 @@ class CPP.Views.Departments.Approval extends CPP.Views.Base
     @
 
   approve: ->
-    console.log 'approve!'
+    @changeStatus 2
 
   reject: ->
-    console.log 'reject!'
+    @changeStatus -1
+
+  changeStatus: (status) ->
+    statusText = if status == 2 then 'approve' else 'reject'
+    suffix = if status == 2 then 'd' else 'ed'
+
+    $.ajax
+      url: "/companies/#{@model.id}/departments/#{@dept.id}/change_status"
+      type: 'PUT'
+      data:
+        status: status
+      success: =>
+        notify 'success', "Request #{statusText}#{suffix}"
+        $(@el).remove()
+      error: =>
+        notify 'error', "Could not #{statusText} request"

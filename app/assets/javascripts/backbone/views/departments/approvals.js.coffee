@@ -15,7 +15,7 @@ class CPP.Views.Departments.Approvals extends CPP.Views.Base
     $(@el).html(@template(dept: @model))
     if @collection.length > 0
       @collection.each (company) =>
-        view = new CPP.Views.Companies.DepartmentRequest
+        view = new CPP.Views.Departments.Approval
           model: company
           dept: @model
         @$('#approvals').append(view.render().el)
