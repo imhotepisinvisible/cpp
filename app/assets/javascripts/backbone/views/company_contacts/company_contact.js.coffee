@@ -19,7 +19,7 @@ class CPP.Views.CompanyContact extends CPP.Views.Base
     @render
 
   render: ->
-    $(@el).html(@template({contact: @model}))
+    $(@el).html(@template({contact: @model, tooltip: (loggedIn() and CPP.CurrentUser.get('tooltip'))}))
     @form = new Backbone.Form(model: @model, template: 'standardForm').render()
     $(@el).find('.contact-form').html(@form.el)
     Backbone.Validation.bind @form

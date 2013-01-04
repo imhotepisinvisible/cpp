@@ -1,4 +1,4 @@
-<div class="item hoverable">
+<div class="item hoverable" <%= addTooltip(@tooltip, 'Click and drag to re-order', 'left') %>>
   <div class="contact-form" style="display:none"></div>
 
   <div>

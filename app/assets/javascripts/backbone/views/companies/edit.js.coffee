@@ -64,7 +64,8 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
     $(e.currentTarget).closest('.upload-container').find('.file-input').click()
 
   render: ->
-    $(@el).html(@template(company: @model))
+    $(@el).html(@template(company: @model, tooltip: (loggedIn() and CPP.CurrentUser.get('tooltip'))))
+    super
 
     new CPP.Views.Events.Partial
       el: $(@el).find('#events-partial')

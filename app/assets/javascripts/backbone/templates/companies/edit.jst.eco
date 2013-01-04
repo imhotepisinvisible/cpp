@@ -8,7 +8,7 @@
     </div>
 
     <div id="company-name-container">
-      <h1 id="company-name" class="section-header company-editable"><%= @company.get 'name' %></h1>
+      <h1 id="company-name" class="section-header company-editable" <%= addTooltip(@tooltip, 'Click to edit company name', 'top') %>><%= @company.get 'name' %></h1>
     </div>
 
     <div class="row">
@@ -27,8 +27,8 @@
             </form>
 
             <div class="btn-group">
-              <div class="btn upload-document" id="upload-logo"><i class="icon-upload-alt"/></div>
-              <div class="btn btn-danger delete-document" id="delete-logo"><i class="icon-trash" /></div>
+              <div class="btn upload-document" id="upload-logo" <%= addTooltip(@tooltip, 'Upload a logo', 'top') %>><i class="icon-upload-alt"/></div>
+              <div class="btn btn-danger delete-document" id="delete-logo" <%= addTooltip(@tooltip, 'Delete logo', 'top') %>><i class="icon-trash" /></div>
             </div>
           </div>
           <div class="progress progress-info progress-upload" style="display:none">
@@ -43,7 +43,7 @@
           </textarea>
         </div>
 
-        <div id="company-description-container">
+        <div id="company-description-container" <%= addTooltip(@tooltip, 'Click to edit company description', 'top') %>>
           <p id="company-description" class="company-editable <%= if not @company.get('description') then 'missing' %>">
             <% if @company.get('description'): %>
               <%- @company.get('description').replace(/\n/g, "<br/>") %>

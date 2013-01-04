@@ -46,6 +46,7 @@ class CPP.Views.Students.Settings extends CPP.Views.Base
         @model.set 'tooltip', status
         @model.save {},
           wait: true
+          forceUpdate: true
           success: (model, response) =>
             notify 'success', "Switched #{stateText} helpful tooltips"
           error: (model, response) =>
@@ -59,6 +60,7 @@ class CPP.Views.Students.Settings extends CPP.Views.Base
         @model.set 'active', status
         @model.save {},
           wait: true
+          forceUpdate: true
           success: (model, response) =>
             notify 'success', "Switched #{stateText} showing profile to companies"
           error: (model, response) =>

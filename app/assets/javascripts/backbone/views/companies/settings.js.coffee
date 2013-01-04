@@ -9,11 +9,25 @@ class CPP.Views.CompaniesSettings extends CPP.Views.Base
     @render()
 
   render: ->
-    $(@el).html(@template(company: @model))
+    $(@el).html(@template(company: @model, tooltip: (loggedIn() and CPP.CurrentUser.get('tooltip'))))
 
     new CPP.Views.Users.ChangePassword
       el: $(@el).find('#change-password')
     .render()
+
+    # Set up tooltip switch
+    $('#tooltip-switch').toggleButtons(
+      onChange: (el, status, e) =>
+        stateText = if status then 'on' else 'off'
+        CPP.CurrentUser.set 'tooltip', status
+        CPP.CurrentUser.save {},
+          wait: true
+          forceUpdate: true
+          success: (model, response) =>
+            notify 'success', "Switched #{stateText} helpful tooltips"
+          error: (model, response) =>
+            notify 'error', "Unable to switch #{stateText} helpful tooltips"
+    )
 
   deleteCompany: (e) ->
     if confirm "Are you sure you wish to delete your profile?\nThis cannot be undone."

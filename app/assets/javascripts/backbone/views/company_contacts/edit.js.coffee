@@ -50,6 +50,7 @@ class CPP.Views.Contacts.PartialEdit extends CPP.Views.Base
         @$('#contacts').append(view.render().el)
     else
       @$('#contacts').append "No contacts right now!"
+    super
     @
 
 
