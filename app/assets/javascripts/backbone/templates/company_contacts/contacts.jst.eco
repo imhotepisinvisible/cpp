@@ -1,7 +1,9 @@
 <h1 class="section-header">
   <i class="icon-user"></i>
   Contacts
-  <div class="btn pull-right" id="btn-all">All</div>
+  <% if @partial: %>
+    <div class="btn pull-right" id="btn-all">All</div>
+  <% end %>
 </h1>
 <ul id="contacts" class="contact-list">
   <% if @contacts.length == 0: %>
@@ -20,3 +22,6 @@
     <% end %>
   <% end %>
 </ul>
+<% unless @partial: %>
+  <div class="link back">back</div>
+<% end %>

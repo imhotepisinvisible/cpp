@@ -1,8 +1,12 @@
 <h1 class="section-header"><i class="icon-user"></i> Contacts
-  <div class="btn-group pull-right">
-    <div id="btn-all" class="btn">All</div>
-    <div id="btn-new" class="btn"><i class="icon-plus"></i></div>
-  </div>
+  <% if @partial: %>
+    <div class="btn-group pull-right">
+      <div id="btn-all" class="btn">All</div>
+      <div id="btn-new" class="btn"><i class="icon-plus"></i></div>
+    </div>
+  <% else: %>
+    <div id="btn-new" class="btn pull-right"><i class="icon-plus"></i></div>
+  <% end %>
 </h1>
 <div id="contact-list-container">
   <ul id="contacts" class="contact-list">
@@ -10,3 +14,6 @@
 </div>
 <div id="btn-save-new" class="btn" style="display:none">Save</div>
 <span id="btn-cancel-new" class="link form-cancel" style="display:none">cancel</span>
+<% unless @partial: %>
+  <div class="link back">back</div>
+<% end %>

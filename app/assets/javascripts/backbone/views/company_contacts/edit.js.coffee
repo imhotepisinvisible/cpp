@@ -15,6 +15,7 @@ class CPP.Views.Contacts.PartialEdit extends CPP.Views.Base
     if options.company
       @limit = options.limit
       @company = options.company
+      @partial = true
       @company.company_contacts.fetch
         data: $.param({ limit: @limit })
         success: =>
@@ -22,6 +23,7 @@ class CPP.Views.Contacts.PartialEdit extends CPP.Views.Base
           @initializeNoFetch()
           @collection.bind 'destroy', @reRender, @
     else
+      @partial = false
       @initializeNoFetch()
       @collection.bind 'destroy', @reRender, @
 
@@ -41,7 +43,7 @@ class CPP.Views.Contacts.PartialEdit extends CPP.Views.Base
         ui.item.trigger('drop', ui.item.index());
 
   render: ->
-    $(@el).html(@template(contacts: @collection))
+    $(@el).html(@template(contacts: @collection, partial: @partial))
     if @collection.length > 0
       @collection.each (contact) =>
         view = new CPP.Views.CompanyContact
@@ -55,7 +57,6 @@ class CPP.Views.Contacts.PartialEdit extends CPP.Views.Base
 
 
   reRender: (options) ->
-    console.log @collection
     if @company
       @undelegateEvents()
       new CPP.Views.Contacts.PartialEdit

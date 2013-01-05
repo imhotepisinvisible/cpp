@@ -10,16 +10,18 @@ class CPP.Views.Contacts.Partial extends CPP.Views.Base
     @company_id = options.company_id
     if options.company
       @company = options.company
+      @partial = true
       @company.company_contacts.fetch
         data: $.param({ limit: options.limit })
         success: =>
           @collection = options.company.company_contacts
           @render()
     else
+      @partial = false
       @render()
 
   render: ->
-    $(@el).html(@template(contacts: @collection))
+    $(@el).html(@template(contacts: @collection, partial: @partial))
 
   viewAll: ->
     if @collection.at(0)
