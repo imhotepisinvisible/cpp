@@ -21,7 +21,7 @@ class Company < ActiveRecord::Base
   has_many :company_administrators
   has_many :company_contacts
   has_many :student_company_ratings
-  has_many :accessible_students, :through => :departments, :class_name => "Student"
+  has_many :accessible_students, :through => :departments, :class_name => "Student", :source => :students
 
   has_many :department_registrations, :conditions => { :status => 2 }
   has_many :departments        , :through => :department_registrations
