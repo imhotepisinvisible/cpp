@@ -144,6 +144,7 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
     @render()
 
   addTag: (tag) =>
+    tag = tag.toLowerCase()
     if tag && !@hasTag(tag)
       @tags.push tag
       @commit()
