@@ -38,6 +38,10 @@ class CPP.Views.Students.Index extends CPP.Views.Base
         {name: "Year"
         type: "number"
         attribute: 'year'
+        scope: ''},
+        {name: "Tags"
+        type: 'tags'
+        attribute: 'skill_list'
         scope: ''}
       ]
       data: @collection
