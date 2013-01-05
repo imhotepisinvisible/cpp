@@ -1,6 +1,6 @@
-CPP.Views.TaggedEmails ||= {}
+CPP.Views.Emails ||= {}
 
-class CPP.Views.TaggedEmails.PartialItem extends CPP.Views.Base
+class CPP.Views.Emails.PartialItem extends CPP.Views.Base
   tagName: "tr"
   className: "email-item"
 

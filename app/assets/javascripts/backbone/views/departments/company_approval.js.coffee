@@ -1,8 +1,8 @@
 CPP.Views.Departments ||= {}
 
-class CPP.Views.Departments.Approval extends CPP.Views.Base
+class CPP.Views.Departments.CompanyApproval extends CPP.Views.Base
   tagName: 'li'
-  template: JST['backbone/templates/departments/approval']
+  template: JST['backbone/templates/departments/company_approval']
 
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-approve' : 'approve'

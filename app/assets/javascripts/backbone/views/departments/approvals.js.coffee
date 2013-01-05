@@ -6,18 +6,32 @@ class CPP.Views.Departments.Approvals extends CPP.Views.Base
   initialize: (options) ->
     @model.pending_companies.fetch
       success: =>
-        @collection = @model.pending_companies
-        @render()
+        @companyCollection = @model.pending_companies
+        @model.pending_emails.fetch
+          success: =>
+            @emailCollection = @model.pending_emails
+            @render()
+          error: =>
+            notify 'error', 'Could not fetch email requests'
       error: ->
-        notify 'error', 'Could not fetch approval requests'
+        notify 'error', 'Could not fetch company approval requests'
 
   render: ->
     $(@el).html(@template(dept: @model))
-    if @collection.length > 0
-      @collection.each (company) =>
-        view = new CPP.Views.Departments.Approval
+    if @companyCollection.length > 0
+      @companyCollection.each (company) =>
+        view = new CPP.Views.Departments.CompanyApproval
           model: company
           dept: @model
-        @$('#approvals').append(view.render().el)
+        @$('#company-approvals').append(view.render().el)
     else
-      @$('#approvals').append "No pending requests!"
+      @$('#company-approvals').append "No pending company requests!"
+
+    if @emailCollection.length > 0
+      @emailCollection.each (email) =>
+        view = new CPP.Views.Departments.EmailApproval
+          model: email
+          dept: @model
+        @$('#email-approvals').append(view.render().el)
+    else
+      @$('#email-approvals').append "No pending email requests!"
