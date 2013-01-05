@@ -55,7 +55,6 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
         $.get @autocomplete_url, {exclude_tags: @tags}, (data) ->
           process(data)
       updater: (item) =>
-        @$input.val('')
         item = @addTag item
         return item
 
@@ -150,6 +149,8 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
       @commit()
       @tag_change_callback()
       @render()
+      @$input.val('')
+      @$input.focus()
       return ""
     else
       # ERROR HERE
