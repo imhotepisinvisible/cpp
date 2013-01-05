@@ -32,6 +32,9 @@ class CPP.Routers.Events extends Backbone.Router
         notify "error", "Couldn't fetch events"
 
   new: (company_id) ->
+    if isStudent()
+      window.history.back()
+      return false
     event = new CPP.Models.Event company_id: company_id
     event.collection = new CPP.Collections.Events
     event.company = new CPP.Models.Company id: company_id
@@ -47,6 +50,9 @@ class CPP.Routers.Events extends Backbone.Router
         notify "error", "Couldn't fetch company for event"
 
   newAdmin: (department_id) ->
+    if isStudent()
+      window.history.back()
+      return false
     event = new CPP.Models.Event
     event.collection = new CPP.Collections.Events
     department = new CPP.Models.Department id: window.getAdminDepartment()

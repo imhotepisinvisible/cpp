@@ -13,6 +13,9 @@ class CPP.Routers.Students extends Backbone.Router
       'register': 'signup'
 
   index: ->
+    if isStudent()
+      window.history.back()
+      return false
     students = new CPP.Collections.Students
     students.fetch
       success: ->
