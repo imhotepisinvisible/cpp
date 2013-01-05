@@ -42,7 +42,7 @@ class Event < ActiveRecord::Base
   attr_accessible :skill_list, :interest_list, :year_group_list,
                   :title, :start_date, :end_date, :deadline,
                   :description, :location, :capacity,
-                  :company_id
+                  :company_id, :requirements
 
   # Returns a relevance score from 0 to 100 for student with the given id
   # TODO: Implement!

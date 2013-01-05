@@ -7,6 +7,9 @@
 <% if @editable: %>
 <td>
   <div class="btn-group pull-right">
+    <% if @event.get('requirements'): %>
+      <span class="label label-warning">requirements</span>
+    <% end %>
     <div class="btn btn-small button-event-edit"><i class="icon-pencil" /></div>
     <div class="btn btn-small button-event-delete btn-danger"><i class="icon-trash" /></div>
   </div>
