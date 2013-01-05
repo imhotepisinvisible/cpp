@@ -1,0 +1,19 @@
+<h1 class="section-header">
+  Create a New Administrator for <%= @dept.get 'name' %>
+</h1>
+
+<div class="row">
+  <div class="span12">
+    <div class="form"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="span12">
+    <div class="control-group">
+      <div class="controls">
+        <div class="btn btn-submit">Save</div>
+        <span class='form-cancel link back'>cancel</span>
+      </div>
+    </div>
+  </div>
+</div>

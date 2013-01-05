@@ -71,7 +71,10 @@ CPP::Application.routes.draw do
   end
   resources :placements
   resources :departments
+  resources :department_administrators
   resources :departments do
+    resources :department_administrators
+
     resources :companies do
       get :pending, :on => :collection
       put :approve, :on => :member

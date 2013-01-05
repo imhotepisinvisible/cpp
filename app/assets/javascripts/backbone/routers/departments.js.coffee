@@ -4,6 +4,7 @@ class CPP.Routers.Departments extends Backbone.Router
     'department_settings' :       'settings'
     'departments/:id/dashboard':  'dashboard'
     'department_dashboard' :      'dashboard'
+    'departments/:id/register' :  'register'
 
   settings: (id) ->
     department = @getDepartmentFromID id
@@ -27,6 +28,19 @@ class CPP.Routers.Departments extends Backbone.Router
         error: ->
           notify 'error', "Couldn't fetch department"
 
+  register: (id) ->
+    department = @getDepartmentFromID id
+    unless department
+      notify 'error', 'Invalid department'
+    else
+      department.fetch
+        success: ->
+          new CPP.Views.DepartmentAdministrator.Register
+            dept: department
+            model: new CPP.Models.DepartmentAdministrator
+        error: ->
+          notify 'error', "Couldn't fetch department"
+
   getDepartmentFromID: (id) ->
     if id?
       return new CPP.Models.Department id: id
@@ -34,3 +48,4 @@ class CPP.Routers.Departments extends Backbone.Router
       return new CPP.Models.Department id: CPP.CurrentUser.get('department_id')
     else
       return false
+
