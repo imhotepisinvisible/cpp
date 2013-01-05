@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
   end
 
   def is_admin?
-    self.class.name == "Administrator"
+    is_company_admin? || is_department_admin?
   end
 
   def full_name
