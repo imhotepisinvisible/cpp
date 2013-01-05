@@ -135,7 +135,6 @@ ActiveRecord::Schema.define(:version => 20130105184041) do
     t.string   "duration"
     t.string   "location"
     t.datetime "deadline"
-    t.string   "open_to"
     t.string   "salary"
     t.text     "benefits"
     t.text     "application_procedure"
