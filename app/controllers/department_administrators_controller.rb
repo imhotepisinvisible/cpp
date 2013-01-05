@@ -16,44 +16,44 @@ class DepartmentAdministratorsController < ApplicationController
   # GET /department_administrators/1
   # GET /department_administrators/1.json
   def show
-    @department = DepartmentAdministrator.find(params[:id])
-    respond_with @department
+    @department_administrator = DepartmentAdministrator.find(params[:id])
+    respond_with @department_administrator
   end
 
   # GET /department_administrators/new
   # GET /department_administrators/new.json
   def new
-    @department = DepartmentAdministrator.new
-    respond_with @department
+    @department_administrator = DepartmentAdministrator.new
+    respond_with @department_administrator
   end
 
   # POST /department_administrators
   # POST /department_administrators.json
   def create
-    @department = DepartmentAdministrator.new(params[:department_administrator])
-    if @department.save
-      respond_with @department, status: :created, location: @department
+    @department_administrator = DepartmentAdministrator.new(params[:department_administrator])
+    if @department_administrator.save
+      respond_with @department_administrator, status: :created, location: @department_administrator
     else
-      respond_with @department, status: :unprocessable_entity
+      respond_with @department_administrator, status: :unprocessable_entity
     end
   end
 
   # PUT /department_administrators/1
   # PUT /department_administrators/1.json
   def update
-    @department = DepartmentAdministrator.find(params[:id])
-    if @department.update_attributes(params[:department_administrator])
+    @department_administrator = DepartmentAdministrator.find(params[:id])
+    if @department_administrator.update_attributes(params[:department_administrator])
       head :no_content
     else
-      respond_with @department, status: :unprocessable_entity
+      respond_with @department_administrator, status: :unprocessable_entity
     end
   end
 
   # DELETE /department_administrators/1
   # DELETE /department_administrators/1.json
   def destroy
-    @department = DepartmentAdministrator.find(params[:id])
-    @department.destroy
+    @department_administrator = DepartmentAdministrator.find(params[:id])
+    @department_administrator.destroy
     head :no_content
   end
 end
