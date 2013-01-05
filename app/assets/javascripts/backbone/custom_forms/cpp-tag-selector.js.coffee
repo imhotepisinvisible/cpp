@@ -77,6 +77,7 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
   #   #   @addTag @sanitizedIndputValue()
 
   onInputKeypress: (event) =>
+    return unless @additions
     if event.charCode == 44 || event.charCode == 13 # , or <CR>
       event.preventDefault()
 
