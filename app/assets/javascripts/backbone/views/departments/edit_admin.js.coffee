@@ -34,11 +34,9 @@ class CPP.Views.Departments.EditAdministrator extends CPP.Views.Base
     @
 
   edit: (e) ->
-    $(e.currentTarget).parent().parent().find('.btn-container').hide()
-    $(e.currentTarget).parent().parent().find('.btn-save-admin').show()
-    $(e.currentTarget).parent().parent().find('.btn-cancel-admin').show()
-    $(e.currentTarget).parent().parent().find('.admin-display-container').hide()
-    $(e.currentTarget).parent().parent().find('.admin-form').show()
+    container = $(e.currentTarget).parent().parent()
+    container.find('.btn-container').hide()
+    @toggleForm container, true
 
   save: (e) ->
     if @form.validate() == null
@@ -64,9 +62,13 @@ class CPP.Views.Departments.EditAdministrator extends CPP.Views.Base
         notify "error", "Administrator could not be deleted"
 
   cancel: (e) ->
+    container = $(e.currentTarget).parent()
     # Allow css to control style of btn-edit again
-    $(e.currentTarget).parent().find('.btn-container').attr('style', '')
-    $(e.currentTarget).parent().find('.btn-save-admin').hide()
-    $(e.currentTarget).parent().find('.btn-cancel-admin').hide()
-    $(e.currentTarget).parent().find('.admin-display-container').show()
-    $(e.currentTarget).parent().find('.admin-form').hide()
+    container.find('.btn-container').attr('style', '')
+    @toggleForm container, false
+
+  toggleForm: (container, show) ->
+    container.find('.btn-save-admin').toggle(show)
+    container.find('.btn-cancel-admin').toggle(show)
+    container.find('.admin-display-container').toggle(!show)
+    container.find('.admin-form').toggle(show)
