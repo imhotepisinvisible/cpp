@@ -3,7 +3,9 @@
      <h1><%= @event.get 'title' %></h1>
   </div>
   <div class="company-logo-header">
-    <img class="company-logo-img pull-right" src="<%= @event.company.getLogoPath() %>">
+    <a href="/#companies/<%= @event.company.id %>">
+      <img class="company-logo-img pull-right" src="<%= @event.company.getLogoPath() %>">
+    </a>
   </div>
 </div>
 
@@ -11,15 +13,94 @@
   <div class="span6">
     <div class="row">
       <div class="span6" id="description">
-        <h1 class="section-header"><i class="icon-info-sign"></i>  Description</h1>
+        <h1 class="section-header"><i class="icon-info-sign"></i> Description</h1>
         <div><%= @event.get 'description' %></div>
       </div>
     </div>
 
+    <div class="span6">
+      <div class="row">
+
+        <h1 class="section-header">
+          <i class="icon-tags"></i> Tags
+        </h1>
+
+        <div class="row">
+          <div class="span6">
+            <div class="tag-category">
+              <div class="tag-category-header">
+                Skills
+              </div>
+              <% if @event.get('skill_list').length > 0: %>
+                <% for i, tag of @event.get('skill_list'): %>
+                  <span class="label label-success tag year-group-tag">
+                    <%= tag %>
+                  </span>
+                <% end %>
+              <% else: %>
+                No Skills Tagged
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="span6">
+            <div class="tag-category">
+              <div class="tag-category-header">
+                Interests
+              </div>
+              <% if @event.get('interest_list').length > 0: %>
+                <% for i, tag of @event.get('interest_list'): %>
+                  <span class="label label-warning tag year-group-tag">
+                    <%= tag %>
+                  </span>
+                <% end %>
+              <% else: %>
+                No Interests Tagged
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="span6">
+            <div class="tag-category">
+              <div class="tag-category-header">
+                Year Groups
+              </div>
+              <% if @event.get('year_group_list').length > 0: %>
+                <% for i, tag of @event.get('year_group_list'): %>
+                  <span class="label label-info tag year-group-tag">
+                    <%= tag %>
+                  </span>
+                <% end %>
+              <% else: %>
+                No Year Groups Tagged
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+  <div class="span6" >
     <div class="row">
       <div class="span6" id="date">
-        <h1 class="section-header"><i class="icon-time"></i>  Event Times</h1>
+        <h1 class="section-header"><i class="icon-time"></i> Where and When</h1>
         <table class="table table-striped">
+          <tr>
+            <td>
+              Location:
+            </td>
+            <td>
+              <%= @event.get('location') %>
+            </td>
+          </tr>
           <tr>
             <td>
               Start Date:
@@ -48,43 +129,13 @@
       </div>
     </div>
 
-    <% if @company: %>
-      <div class="row">
-        <div class="span6" id="event-email">
-          <a class="btn btn-primary" href="/#events/<%= @event.id %>/email_attendees">Email Attendees</a>
-          <a class="btn btn-primary" href="/#events/<%= @event.id %>/emails">View emails sent</a>
-        </div>
-      </div>
-    <% end %>
-  </div>
-  <div class="span6" >
-    <div class="row">
-      <div class="span6">
-        <h1 class="section-header"><i class="icon-map-marker"></i> Location</h1>
-        <iframe width="100%"
-                height="350"
-                frameborder="0"
-                scrolling="no"
-                marginheight="0"
-                marginwidth="0"
-                src="https://maps.google.com/maps?q=SW6+7DT&amp;hl=en&amp;ll=51.4803,-0.200973&amp;spn=0.00598,0.012531&amp;sll=37.0625,-95.677068&amp;sspn=61.19447,102.65625&amp;t=m&amp;hnear=London+SW6+7DT,+United+Kingdom&amp;z=17&amp;output=embed&amp;iwloc=near">
-          </iframe>
-      </div>
-      <div class="span6">
-        <div class="event-location">
-          <dl>
-            <dt>Address</dt>
-            <dd><%= @event.get 'location' %></dd>
-          </dl>
-        </div>
-      </div>
-    </div>
-
     <div class="row capacity_container">
       <div class="span6">
         <div class="row">
           <div class="span6">
-            <h1 class="section-header"><i class="icon-list"></i> Sign Up</h1>
+            <h1 class="section-header">
+              <i class="icon-list"></i> <%= if window.isStudent() then 'Sign Up' else 'Capacity' %>
+            </h1>
           </div>
         </div>
 
@@ -120,6 +171,11 @@
                   Sign me up!
                 <% end %>
               </div>
+            </div>
+          <% else if @company: %>
+            <div class="span6" id="event-email">
+              <a class="btn btn-primary" href="/#events/<%= @event.id %>/email_attendees">Email Attendees</a>
+              <a class="btn btn-primary" href="/#events/<%= @event.id %>/emails">View emails sent</a>
             </div>
           <% end %>
         </div>

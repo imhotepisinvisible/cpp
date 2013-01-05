@@ -4,6 +4,9 @@ class CPP.Routers.CompanyContacts extends Backbone.Router
     'companies/:id/company_contacts'      : 'view'
 
   edit: (id) ->
+    if isStudent()
+      window.history.back()
+      return false
     contacts = new CPP.Collections.CompanyContacts
     contacts.fetch
       data:

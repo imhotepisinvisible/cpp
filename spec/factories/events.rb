@@ -10,7 +10,6 @@ FactoryGirl.define do
     description { 50.times.map{|i| Faker::Company.bs }.join ' ' }
     location { Faker::Address.street_address }
     capacity { Random.rand(100) }
-    google_map_url { Faker::Internet.url }
   end
 end
 

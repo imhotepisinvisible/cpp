@@ -7,6 +7,9 @@ class CPP.Routers.TaggedEmails extends Backbone.Router
       'tagged_emails/:id'                        : 'view'
 
   indexCompany: (company_id) ->
+    if isStudent()
+      window.history.back()
+      return false
     emails = new CPP.Collections.TaggedEmails
     # new CPP.Views.Emails.Index collection: emails
     emails.fetch
@@ -23,6 +26,9 @@ class CPP.Routers.TaggedEmails extends Backbone.Router
         notify "error", "Couldn't fetch emails"
 
   index: ->
+    if isStudent()
+      window.history.back()
+      return false
     emails = new CPP.Collections.TaggedEmails
     emails.fetch
       success: ->
@@ -31,11 +37,17 @@ class CPP.Routers.TaggedEmails extends Backbone.Router
         notify "error", "Couldn't fetch emails"
 
   new: (company_id) ->
+    if isStudent()
+      window.history.back()
+      return false
     email = new CPP.Models.TaggedEmail company_id: company_id, subject: "Subject", body: "Email body"
     email.collection = new CPP.Collections.TaggedEmails
     new CPP.Views.Emails.Edit model: email, type: "tagged"
 
   edit: (id) ->
+    if isStudent()
+      window.history.back()
+      return false
     email = new CPP.Models.TaggedEmail id: id
     email.fetch
       success: ->
@@ -44,6 +56,9 @@ class CPP.Routers.TaggedEmails extends Backbone.Router
         notify "error", "Couldn't fetch email"
 
   view: (id) ->
+    if isStudent()
+      window.history.back()
+      return false
     email = new CPP.Models.TaggedEmail id: id
     email.fetch
       success: ->

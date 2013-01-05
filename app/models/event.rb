@@ -12,7 +12,6 @@
 #   t.text     "description"
 #   t.string   "location"
 #   t.integer  "capacity"
-#   t.string   "google_map_url"
 #   t.datetime "created_at",     :null => false
 #   t.datetime "updated_at",     :null => false
 
@@ -42,7 +41,7 @@ class Event < ActiveRecord::Base
 
   attr_accessible :skill_list, :interest_list, :year_group_list,
                   :title, :start_date, :end_date, :deadline,
-                  :description, :location, :capacity, :google_map_url,
+                  :description, :location, :capacity,
                   :company_id
 
   # Returns a relevance score from 0 to 100 for student with the given id

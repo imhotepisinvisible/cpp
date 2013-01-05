@@ -25,9 +25,6 @@ class CPP.Models.Placement extends CPP.Models.Base
       DateEditor: "DatePicker"
     duration:
       type: "Text"
-    open_to:
-      type: "Text"
-      title: "Open To (Year Groups?)"
     salary:
       type: "Text"
     benefits:

@@ -33,23 +33,12 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
     @form = new Backbone.Form(model: @model).render()
     Backbone.Validation.bind @form;
 
-    saveTagModel = =>
-      @model.save {},
-        wait: true
-        success: (model, response) =>
-          notify "success", "Updated Profile TAG"
-        error: (model, response) =>
-          # Notify tag-specific errors here (profanity etc)
-          # errorlist = JSON.parse response.responseText
-          notify "error", "Couldn't Update Tags"
-
     @skill_list_tags_form = new Backbone.Form.editors.TagEditor
       model: @model
       key: 'skill_list'
       title: 'Skills'
       url: '/tags/skills'
       tag_class: 'label-success'
-      tag_change_callback: saveTagModel
       additions: true
 
     @interest_list_tags_form = new Backbone.Form.editors.TagEditor
@@ -58,7 +47,6 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
       title: 'Interests'
       url: '/tags/interests'
       tag_class: 'label-warning'
-      tag_change_callback: saveTagModel
       additions: true
 
     @year_group_list_tags_form = new Backbone.Form.editors.TagEditor
@@ -67,7 +55,6 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
       title: 'Year Groups'
       url: '/tags/year_groups'
       tag_class: 'label-info'
-      tag_change_callback: saveTagModel
       additions: true
 
     @render()

@@ -9,7 +9,6 @@ class CreateEvents < ActiveRecord::Migration
       t.text :description
       t.string :location
       t.integer :capacity
-      t.string :google_map_url
       t.string :requirements
 
       t.timestamps
