@@ -15,6 +15,76 @@
         <div><%= @event.get 'description' %></div>
       </div>
     </div>
+
+    <div class="span6">
+      <div class="row">
+
+        <h1 class="section-header">
+          <i class="icon-tags"></i> Tags
+        </h1>
+
+        <div class="row">
+          <div class="span6">
+            <div class="tag-category">
+              <div class="tag-category-header">
+                Skills
+              </div>
+              <% if @event.get('skill_list').length > 0: %>
+                <% for i, tag of @event.get('skill_list'): %>
+                  <span class="label label-success tag year-group-tag">
+                    <%= tag %>
+                  </span>
+                <% end %>
+              <% else: %>
+                No Skills Tagged
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="span6">
+            <div class="tag-category">
+              <div class="tag-category-header">
+                Interests
+              </div>
+              <% if @event.get('interest_list').length > 0: %>
+                <% for i, tag of @event.get('interest_list'): %>
+                  <span class="label label-warning tag year-group-tag">
+                    <%= tag %>
+                  </span>
+                <% end %>
+              <% else: %>
+                No Interests Tagged
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="span6">
+            <div class="tag-category">
+              <div class="tag-category-header">
+                Year Groups
+              </div>
+              <% if @event.get('year_group_list').length > 0: %>
+                <% for i, tag of @event.get('year_group_list'): %>
+                  <span class="label label-info tag year-group-tag">
+                    <%= tag %>
+                  </span>
+                <% end %>
+              <% else: %>
+                No Year Groups Tagged
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
   </div>
   <div class="span6" >
     <div class="row">
@@ -55,16 +125,6 @@
           </tr>
         </table>
       </div>
-    </div>
-
-    <% if @company: %>
-      <div class="row">
-        <div class="span6" id="event-email">
-          <a class="btn btn-primary" href="/#events/<%= @event.id %>/email_attendees">Email Attendees</a>
-          <a class="btn btn-primary" href="/#events/<%= @event.id %>/emails">View emails sent</a>
-        </div>
-      </div>
-    <% end %>
     </div>
 
     <div class="row capacity_container">
@@ -109,6 +169,11 @@
                   Sign me up!
                 <% end %>
               </div>
+            </div>
+          <% else if @company: %>
+            <div class="span6" id="event-email">
+              <a class="btn btn-primary" href="/#events/<%= @event.id %>/email_attendees">Email Attendees</a>
+              <a class="btn btn-primary" href="/#events/<%= @event.id %>/emails">View emails sent</a>
             </div>
           <% end %>
         </div>
