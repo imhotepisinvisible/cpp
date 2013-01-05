@@ -20,6 +20,10 @@ class CPP.Views.Departments.Dashboard extends CPP.Views.Base
       el: $(@el).find('#pending-approvals')
       model: @model
 
+    new CPP.Views.Departments.EditAdministrators
+      el: $(@el).find('#edit-admins')
+      model: @model
+
   initNotificationsForm: ->
     @notificationsForm = new Backbone.Form
       model: @model

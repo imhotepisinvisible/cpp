@@ -1,0 +1,22 @@
+<div class="item">
+  <div class="admin-form" style="display:none"></div>
+
+  <div class="admin-display-container">
+    <span class="admin-name"><%= @admin.get 'first_name' %> <%= @admin.get 'last_name' %></span>
+  </div>
+
+  <div class="btn-container btn-group pull-right">
+    <div class="btn btn-mini btn-edit-admin">Edit</div>
+    <% if CPP.CurrentUser.id != @admin.id: %>
+      <div class="btn btn-mini btn-delete-admin btn-danger"><i class="icon-trash"></i></div>
+    <% end %>
+  </div>
+
+  <div class="admin-display-container">
+    <span class="admin-email"><%= @admin.get 'email' %></span>
+  </div>
+
+  <div class="btn btn-save-admin" style="display:none">Save</div>
+  <span class="link btn-cancel-admin form-cancel" style="display:none">cancel</span>
+
+</div>

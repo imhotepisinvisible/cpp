@@ -3,12 +3,13 @@ class CPP.Models.DepartmentAdministrator extends CPP.Models.Base
     @allDepartments = new CPP.Collections.Departments
     @allDepartments.url = '/departments'
 
+  url: ->
+    '/department_administrators' + (if @isNew() then '' else '/' + @id)
+
   validation:
     first_name:
       required: true
     last_name:
-      required: true
-    departments:
       required: true
     email:
       required: true
@@ -27,18 +28,13 @@ class CPP.Models.DepartmentAdministrator extends CPP.Models.Base
     last_name:
       type: "Text"
       title: "Last Name*"
-    departments:
-      type: "Checkboxes"
-      title: "Departments*"
-      options: @allDepartments
-      editorClass: "departments-checkbox"
     email:
       type: "Text"
       title: "Email*"
     password:
       type: "Password"
     password_confirmation:
-      type: "Password*"
+      type: "Password"
       title: "Password Confirmation*"
       validators:
         [
@@ -49,3 +45,4 @@ class CPP.Models.DepartmentAdministrator extends CPP.Models.Base
 
 class CPP.Collections.DepartmentAdministrators extends CPP.Collections.Base
   model: CPP.Models.DepartmentAdministrator
+  url: '/department_administrators'

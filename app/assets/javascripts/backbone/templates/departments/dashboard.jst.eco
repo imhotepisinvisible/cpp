@@ -17,5 +17,17 @@
         </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="span6">
+        <h1 class="section-header">
+          <i class="icon-wrench"></i> Administrators
+          <a class="btn pull-right" id="btn-new-admin" href="/#departments/<%= @department.id %>/register">
+            <i class="icon-plus"></i>
+          </a>
+        </h1>
+        <div id="edit-admins"></div>
+      </div>
+    </div>
   </div>
 </div>
