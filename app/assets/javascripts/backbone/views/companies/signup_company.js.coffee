@@ -13,6 +13,14 @@ class CPP.Views.Company.Signup extends CPP.Views.Base
     @adminForm = new Backbone.Form
       model: @model
     .render()
+
+    if isDepartmentAdmin()
+      schema = @company.schema()
+      delete schema["departments"]
+
+      @company.set('departments', [CPP.CurrentUser.get 'department_id'])
+      @company.schema = -> schema
+
     @companyForm = new Backbone.Form
       model: @company
     .render()
