@@ -60,6 +60,10 @@ class CPP.Routers.Companies extends Backbone.Router
       @admin(id)
       return
 
+    if isStudent()
+      window.history.back()
+      return false
+
     company = new CPP.Models.Company id: id
 
     # Wait for all of these before fetching company
@@ -81,6 +85,10 @@ class CPP.Routers.Companies extends Backbone.Router
 
 
   new: ->
+    if isStudent()
+      window.history.back()
+      return false
+
     department_id = CPP.CurrentUser.get('department_id')
     company = new CPP.Models.Company departments: [department_id]
     company.collection = new CPP.Collections.Companies
@@ -126,6 +134,10 @@ class CPP.Routers.Companies extends Backbone.Router
       company: new CPP.Models.Company
 
   settings: (id) ->
+    if isStudent()
+      window.history.back()
+      return false
+
     company = new CPP.Models.Company id: id
 
     # Wait for all of these before fetching company

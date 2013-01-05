@@ -8,6 +8,10 @@ class CPP.Routers.EventEmails extends Backbone.Router
       'event_emails/:id'                       : 'view'
 
   indexCompany: (company_id) ->
+    if isStudent() or isCompanyAdmin()
+      window.history.back()
+      return false
+
     emails = new CPP.Collections.EventEmails
     # new CPP.Views.Emails.Index collection: emails
     emails.fetch
@@ -24,6 +28,10 @@ class CPP.Routers.EventEmails extends Backbone.Router
         notify "error", "Couldn't fetch emails"
 
   indexEvent: (event_id) ->
+    if isStudent() or isCompanyAdmin()
+      window.history.back()
+      return false
+
     emails = new CPP.Collections.EventEmails
     # new CPP.Views.Emails.Index collection: emails
     emails.fetch
@@ -40,6 +48,10 @@ class CPP.Routers.EventEmails extends Backbone.Router
         notify "error", "Couldn't fetch emails"
 
   index: ->
+    if isStudent() or isCompanyAdmin()
+      window.history.back()
+      return false
+
     emails = new CPP.Collections.EventEmails
     emails.fetch
       success: ->
@@ -48,6 +60,10 @@ class CPP.Routers.EventEmails extends Backbone.Router
         notify "error", "Couldn't fetch emails"
 
   new: (event_id) ->
+    if isStudent() or isCompanyAdmin()
+      window.history.back()
+      return false
+
     event = new CPP.Models.Event id: event_id
     event.fetch
       success: ->
@@ -59,6 +75,10 @@ class CPP.Routers.EventEmails extends Backbone.Router
         notify "error", "Couldn't fetch event"
 
   edit: (id) ->
+    if isStudent() or isCompanyAdmin()
+      window.history.back()
+      return false
+
     email = new CPP.Models.EventEmail id: id
     email.fetch
       success: ->
@@ -67,6 +87,10 @@ class CPP.Routers.EventEmails extends Backbone.Router
         notify "error", "Couldn't fetch email"
 
   view: (id) ->
+    if isStudent() or isCompanyAdmin()
+      window.history.back()
+      return false
+      
     email = new CPP.Models.EventEmail id: id
     email.fetch
       success: ->

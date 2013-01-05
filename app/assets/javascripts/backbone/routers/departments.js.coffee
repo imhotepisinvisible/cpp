@@ -7,6 +7,10 @@ class CPP.Routers.Departments extends Backbone.Router
     'departments/:id/register' :  'register'
 
   settings: (id) ->
+    if isStudent() or isCompanyAdmin()
+      window.history.back()
+      return false
+
     department = @getDepartmentFromID id
     unless department
       notify 'error', 'Invalid department'
@@ -18,6 +22,10 @@ class CPP.Routers.Departments extends Backbone.Router
           notify "error", "Couldn't fetch department"
 
   dashboard: (id) ->
+    if isStudent() or isCompanyAdmin()
+      window.history.back()
+      return false
+
     department = @getDepartmentFromID id
     unless department
       notify 'error', 'Invalid department'
@@ -29,6 +37,10 @@ class CPP.Routers.Departments extends Backbone.Router
           notify 'error', "Couldn't fetch department"
 
   register: (id) ->
+    if isStudent() or isCompanyAdmin()
+      window.history.back()
+      return false
+      
     department = @getDepartmentFromID id
     unless department
       notify 'error', 'Invalid department'

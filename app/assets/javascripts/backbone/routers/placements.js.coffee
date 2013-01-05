@@ -32,6 +32,9 @@ class CPP.Routers.Placements extends Backbone.Router
         notify "error", "Couldn't fetch placements"
 
   new: (company_id) ->
+    if isStudent()
+      window.history.back()
+      return false
     placement = new CPP.Models.Placement company_id: company_id
     placement.collection = new CPP.Collections.Placements
     placement.company = new CPP.Models.Company id: company_id
@@ -47,6 +50,9 @@ class CPP.Routers.Placements extends Backbone.Router
         notify "error", "Couldn't fetch company for event"
 
   newAdmin: ->
+    if isStudent()
+      window.history.back()
+      return false
     placement = new CPP.Models.Placement
     placement.collection = new CPP.Collections.Placements
     department = new CPP.Models.Department id: window.getAdminDepartment()
@@ -64,6 +70,9 @@ class CPP.Routers.Placements extends Backbone.Router
         notify "error", "Couldn't fetch department"
 
   edit: (id) ->
+    if isStudent()
+      window.history.back()
+      return false
     placement = new CPP.Models.Placement id: id
     placement.fetch
       success: ->
