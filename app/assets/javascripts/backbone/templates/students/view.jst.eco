@@ -146,7 +146,7 @@
                     </div>
                     <% if @student.get('interest_list').length > 0: %>
                       <% for i, tag of @student.get('interest_list'): %>
-                        <span class="label label-info tag year-group-tag">
+                        <span class="label label-warning tag year-group-tag">
                           <%= tag %>
                         </span>
                       <% end %>
