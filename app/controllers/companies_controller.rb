@@ -107,11 +107,12 @@ class CompaniesController < ApplicationController
 
   # TODO: This is repeated in the student controller
   # TODO: User variable to symbol is BAD. Filter allowed doctypes
+  # This is basically just for the logo, we should rename the method!
   # GET /students/1/:document_type
   def download_document
     company = Company.find(params[:id])
     document_type = params[:document_type]
-    document_path = (company.send "#{document_type}".to_sym).path
+    document_path = (company.send "#{document_type}".to_sym).path(:large)
 
     unless document_path.nil?
       if Rails.env.production?
