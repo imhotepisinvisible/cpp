@@ -88,6 +88,14 @@
 
                   </div>
                 </div>
+                <div class="row">
+                  <div class="span4">
+                    <h1 class="section-header">
+                      <i class="icon-envelope"></i> Contact Me
+                    </h1>
+                    <a class="btn btn-primary button-student-register" href="/#students/<%= @student.id %>/email">Contact me!</a>
+                  </div>
+                </div>
               <% else: %>
                 <div class="empty-student-profile-field-container">
                   <i class="icon-file empty-student-profile-field"/>
@@ -176,7 +184,6 @@
             </div>
           </div>
         </div>
-
     </div>
   </div>
 </div>
