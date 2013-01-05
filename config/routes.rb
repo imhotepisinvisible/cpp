@@ -55,7 +55,7 @@ CPP::Application.routes.draw do
 
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
-  get "tagged_emails/:id/preview" => "tagged_emails#preview"
+  get "emails/:id/preview" => "emails#preview"
 
   resources :users do
     put 'change_password', :on => :collection, :action => :change_password
@@ -77,6 +77,7 @@ CPP::Application.routes.draw do
       put :approve, :on => :member
       put :reject, :on => :member
     end
+
   end
   resources :company_administrators
   resources :company_contacts do
@@ -91,6 +92,12 @@ CPP::Application.routes.draw do
   resources :tagged_emails
   resources :event_emails
   resources :direct_emails
+
+  resources :emails do
+    get :pending, :on => :collection
+    put :approve, :on => :member
+    put :reject, :on => :member
+  end
 
   get "tagged_emails/:id/get_matching_students_count" => "tagged_emails#get_matching_students_count"
 

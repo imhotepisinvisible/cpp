@@ -22,15 +22,6 @@ class TaggedEmail < Email
     students
   end
 
-  def get_matching_students_count
-    users = get_matching_students
-    year_groups = Hash.new(0)
-    users.each do |user|
-      year_groups[user.year] += 1
-    end
-    year_groups
-  end
-
   def send_email
     #email sending shiz to go here...
   end
