@@ -29,7 +29,6 @@ class CPP.Filter extends CPP.Views.Base
       title: 'Skills'
       url: '/tags/skills'
       tag_class: 'label-success'
-      additions: true
 
     @interest_list_tags_form = new Backbone.Form.editors.TagEditor
       model: @model
@@ -37,7 +36,6 @@ class CPP.Filter extends CPP.Views.Base
       title: 'Interests'
       url: '/tags/interests'
       tag_class: 'label-warning'
-      additions: true
 
     @year_group_list_tags_form = new Backbone.Form.editors.TagEditor
       model: @model
@@ -45,7 +43,6 @@ class CPP.Filter extends CPP.Views.Base
       title: 'Year Groups'
       url: '/tags/year_groups'
       tag_class: 'label-info'
-      additions: true
 
     @render()
 

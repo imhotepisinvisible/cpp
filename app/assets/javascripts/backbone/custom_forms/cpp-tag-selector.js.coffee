@@ -55,7 +55,6 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
         $.get @autocomplete_url, {exclude_tags: @tags}, (data) ->
           process(data)
       updater: (item) =>
-        @$input.val('')
         item = @addTag item
         return item
 
@@ -78,6 +77,7 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
   #   #   @addTag @sanitizedIndputValue()
 
   onInputKeypress: (event) =>
+    return unless @additions
     if event.charCode == 44 || event.charCode == 13 # , or <CR>
       event.preventDefault()
 
@@ -145,11 +145,14 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
     @render()
 
   addTag: (tag) =>
+    tag = tag.toLowerCase()
     if tag && !@hasTag(tag)
       @tags.push tag
       @commit()
       @tag_change_callback()
       @render()
+      @$input.val('')
+      @$input.focus()
       return ""
     else
       # ERROR HERE
