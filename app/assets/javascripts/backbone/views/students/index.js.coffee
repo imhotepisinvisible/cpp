@@ -27,14 +27,18 @@ class CPP.Views.Students.Index extends CPP.Views.Base
     new CPP.Filter
       el: $(@el).find('#student-filter')
       filters: [
-        {name: "First Name Search"
+        {name: "First Name"
         type: "text"
         attribute: "first_name"
         scope: ""},
-        {name: "Last Name Search"
+        {name: "Last Name"
         type: "text"
         attribute: "last_name"
         scope: ""},
+        {name: "Year"
+        type: "number"
+        attribute: 'year'
+        scope: ''}
       ]
       data: @collection
   @
