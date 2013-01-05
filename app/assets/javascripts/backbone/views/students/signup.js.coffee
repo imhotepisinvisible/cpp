@@ -9,6 +9,14 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
 
   initialize: (options) ->
     @login = options.login
+
+    if isDepartmentAdmin()
+      schema = @model.schema()
+      delete schema["departments"]
+
+      @model.set('departments', [CPP.CurrentUser.get 'department_id'])
+      @model.schema = -> schema
+
     @form = new Backbone.Form(model: @model).render()
     @render()
 
