@@ -8,7 +8,7 @@ class StudentsController < ApplicationController
     if current_user.is_company_admin?
       @students = current_user.company.accessible_students
     else
-      @students = Student.all
+      @students = Student.scoped
     end
 
     if params.keys.include? "event_id"
