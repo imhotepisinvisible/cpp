@@ -23,7 +23,7 @@ class CPP.Views.TaggedEmails.Partial extends CPP.Views.Base
     @
 
   addEmail: ->
-    Backbone.history.navigate("companies/" + @model.id + "/tagged_emails/new", trigger: true)
+    Backbone.history.navigate("companies/" + getUserCompanyId() + "/tagged_emails/new", trigger: true)
 
   viewCompaniesEmails: ->
-    Backbone.history.navigate("companies/" + @model.id + "/tagged_emails", trigger: true)
+    Backbone.history.navigate("companies/" + getUserCompanyId() + "/tagged_emails", trigger: true)

@@ -3,9 +3,7 @@
   Mailings
   <div class="btn-group pull-right">
     <div class="btn btn-view-all">All</div>
-    <% if @editable: %>
-      <div class="btn btn-add"><i class="icon-plus"></i></div>
-    <% end %>
+    <div class="btn btn-add"><i class="icon-plus"></i></div>
   </div>
 </h1>
 <table class="table sortable">
@@ -13,7 +11,7 @@
     <tr>
       <th>Date</th>
       <th>Subject</th>
-      <th>Approved?</th>
+      <th>Status</th>
     </tr>
   </thead>
   <tbody id="emails">

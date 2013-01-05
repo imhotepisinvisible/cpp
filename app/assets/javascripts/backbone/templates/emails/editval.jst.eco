@@ -21,6 +21,16 @@
 
 <div class="row">
   <div class="span12">
+    <% if (@email.get('state') == "Rejected"): %>
+      <h2>Email Rejected!</h2>
+      <p>
+        <% if @email.get 'reject_reason': %>
+          <%= @email.get 'reject_reason' %>
+        <% else: %>
+          No reject reason given.
+        <% end %>
+        </p>
+    <% end %>
     <div class="form"></div>
   </div>
 </div>

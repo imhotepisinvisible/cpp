@@ -29,7 +29,7 @@ class Email < ActiveRecord::Base
 
   validates_inclusion_of :state, :in => %w( Rejected Pending Approved Postponed )
 
-  attr_accessible :company_id, :subject, :body
+  attr_accessible :company_id, :subject, :body, :state, :reject_reason
 
   def get_matching_students_count
     year_groups = Hash.new(0)
