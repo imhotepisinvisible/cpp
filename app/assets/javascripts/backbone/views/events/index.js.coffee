@@ -68,6 +68,11 @@ class CPP.Views.Events.Index extends CPP.Views.Base
         type: "text"
         attribute: "location"
         scope: ""},
+        {name: "Starting After",
+        type: 'date',
+        attribute: 'start_date'
+        default: Date.today().toString('yyyy-MM-dd')
+        scope: ''},
         {name: "Tags"
         type: "tags"
         attribute: null

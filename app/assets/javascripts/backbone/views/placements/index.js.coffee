@@ -56,6 +56,11 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
         type: "text"
         attribute: "location"
         scope: ""},
+        {name: "Deadline After",
+        type: 'date',
+        attribute: 'deadline'
+        default: Date.today().toString('yyyy-MM-dd')
+        scope: ''},
         {name: "Tags"
         type: "tags"
         attribute: null

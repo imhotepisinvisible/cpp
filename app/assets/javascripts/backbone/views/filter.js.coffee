@@ -2,12 +2,15 @@ class CPP.Filter extends CPP.Views.Base
   template: JST['backbone/templates/filters/filter']
   templateText: JST['backbone/templates/filters/filter_text']
   templateTags: JST['backbone/templates/filters/filter_tag']
+  templateDate: JST['backbone/templates/filters/filter_date']
   templateFilterHeaderText: JST['backbone/templates/filters/filter_header_text']
   templateFilterHeaderTag: JST['backbone/templates/filters/filter_header_tag']
+  templateFilterHeaderDate: JST['backbone/templates/filters/filter_header_date']
 
   events: -> _.extend {}, CPP.Views.Base::events,
     "keyup .fltr-search"        : "setFilter"
     "blur .tag-input"           : "setFilter"
+    'change .fltr-date'         : "setFilter"
 
   sub_el: "#filters"
 
@@ -59,7 +62,17 @@ class CPP.Filter extends CPP.Views.Base
         when "tags"
           $(@sub_el).append(@templateFilterHeaderTag(filter: filter))
           @renderTags()
-  @
+        when "date"
+          $(@sub_el).append(@templateFilterHeaderDate(filter: filter))
+          $(@sub_el).append(@templateDate(filter: filter))
+          $('.fltr-date').datepicker
+            weekStart: 1
+            format: 'yyyy-mm-dd'
+            autoclose: true
+      if filter.default
+        $('#'+filter.attribute).val(filter.default)
+        @setFilter()
+    @
 
   renderTags: ->
     @skill_list_tags_form.render()
@@ -109,6 +122,11 @@ class CPP.Filter extends CPP.Views.Base
                     ret |= tag in res
                   ret
                 ))
+          when 'date'
+            fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
+              res = eval('with (model, filter) {model' + filter.scope + '.get(filter.attribute)}')
+              res >= tb
+            ))
 
       @data.trigger('filter', fCollection)
   @
