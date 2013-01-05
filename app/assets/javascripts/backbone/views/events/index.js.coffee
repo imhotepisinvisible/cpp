@@ -56,11 +56,14 @@ class CPP.Views.Events.Index extends CPP.Views.Base
     new CPP.Filter
       el: $(@el).find('#event-filter')
       filters: [
+        {name: "Event Title",
+        type: "text",
+        attribute: 'title',
+        scope: ''},
         {name: "Company"
         type: "text"
         attribute: "name"
-        scope: ".company"
-        },
+        scope: ".company"},
         {name: "Location"
         type: "text"
         attribute: "location"
