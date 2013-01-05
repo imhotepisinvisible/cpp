@@ -84,10 +84,9 @@ ActiveRecord::Schema.define(:version => 20130103171932) do
     t.text     "description"
     t.string   "location"
     t.integer  "capacity"
-    t.string   "google_map_url"
     t.string   "requirements"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "impressions", :force => true do |t|
