@@ -8,7 +8,6 @@ class CreatePlacements < ActiveRecord::Migration
       t.string :location
       t.datetime :deadline
 
-      t.string :open_to
       t.string :salary
       t.text :benefits
       t.text :application_procedure
