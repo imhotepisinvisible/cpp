@@ -105,5 +105,8 @@ window.isAdmin = ->
 window.getAdminDepartment = ->
   CPP.CurrentUser.attributes.department_id
 
+window.getUserCompanyId = ->
+  CPP.CurrentUser.attributes.company_id
+
 window.userId = ->
   CPP.CurrentUser.id

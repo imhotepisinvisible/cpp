@@ -1,19 +1,14 @@
 <td>
-  <% if @email.get('created'): %>
-    <%= @email.getReadableDate('created') %>
+  <% if @email.get('created_at'): %>
+    <%= @email.getReadableDate('created_at') %>
   <% end %>
 </td>
 <td>
-  <%= @email.get('subject') %>
+  <a href="/#tagged_emails/<%= @email.get('id') %>/edit" ><%= @email.get('subject') %></a>
 </td>
 <td>
-  <% if @email.get('sent'): %>
-    <i class="icon-ok"></i>
-    <%= @email.getReadableDate('sent') %>
-  <% else: %>
-    <i class="icon-remove"></i>
-  <% end %>
+  <%= @email.get('state') %>
   <% if @editable: %>
-      <div class="btn btn-mini pull-right btn-edit">Edit</div>
+    <div class="btn btn-mini pull-right btn-edit">Edit</div>
   <% end %>
 </td>
