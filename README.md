@@ -37,7 +37,8 @@ Rails ERD
 Allows you to view project entities in graphical form. [More Info](http://rails-erd.rubyforge.org/install.html)
 
 * Install GraphViz with `brew install graphviz` or `sudo aptitude install graphviz`
-* Run `rake erd`
+* Run `rake erd` for a basic diagram
+* For a full diagram w/ all bells and whistles, run `rake erd title='CPP Model Relationships' inheritance=true polymorphism=true orientation=vertical`
 
 
 Getting Started
