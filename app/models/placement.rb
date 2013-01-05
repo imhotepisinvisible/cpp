@@ -18,7 +18,7 @@ class Placement < ActiveRecord::Base
   acts_as_taggable_on :skills, :interests, :year_groups
   attr_accessible :skill_list, :interest_list, :year_group_list,
                   :company_id, :position, :location, :description,
-                  :duration, :deadline, :open_to, :salary, :benefits, 
+                  :duration, :deadline, :salary, :benefits, 
                   :application_procedure, :interview_date, :other
 
   validates :company_id,  :presence => true

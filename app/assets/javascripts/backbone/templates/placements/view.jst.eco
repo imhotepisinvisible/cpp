@@ -16,61 +16,94 @@
       </div>
     </div>
 
+    
     <div class="row">
-      <div class="span6" id="date">
-        <h1 class="section-header"><i class="icon-calendar"></i>  Dates</h1>
-        <table class="table table-striped">
-          <tr>
-            <td>
-              Apply By:
-            </td>
-            <td>
-              <%= @placement.getReadableDate('deadline') %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Duration:
-            </td>
-            <td>
-              <%= @placement.getReadableDate('duration') %>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
+      <div class="span6">
+        <h1 class="section-header">
+          <i class="icon-tags"></i> Tags
+        </h1>
 
-    <div class="row">
-      <div class="span6" id="description">
-        <h1 class="section-header"><i class="icon-time"></i>  Countdown</h1>
-          <div class="btn pull-right">Apply Now</div>
-          <div id="jcountdown"></div>
+        <div class="row">
+          <div class="span6">
+            <div class="tag-category">
+              <div class="tag-category-header">
+                Skills
+              </div>
+              <% if @placement.get('skill_list').length > 0: %>
+                <% for i, tag of @placement.get('skill_list'): %>
+                  <span class="label label-success tag year-group-tag">
+                    <%= tag %>
+                  </span>
+                <% end %>
+              <% else: %>
+                No Skills Tagged
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="span6">
+            <div class="tag-category">
+              <div class="tag-category-header">
+                Interests
+              </div>
+              <% if @placement.get('interest_list').length > 0: %>
+                <% for i, tag of @placement.get('interest_list'): %>
+                  <span class="label label-warning tag year-group-tag">
+                    <%= tag %>
+                  </span>
+                <% end %>
+              <% else: %>
+                No Interests Tagged
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="span6">
+            <div class="tag-category">
+              <div class="tag-category-header">
+                Year Groups
+              </div>
+              <% if @placement.get('year_group_list').length > 0: %>
+                <% for i, tag of @placement.get('year_group_list'): %>
+                  <span class="label label-info tag year-group-tag">
+                    <%= tag %>
+                  </span>
+                <% end %>
+              <% else: %>
+                No Year Groups Tagged
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
   </div>
 
-  <div class="span6" >
-    <div class="row">
-      <div class="span6">
-        <h1 class="section-header"><i class="icon-map-marker"></i> Location</h1>
-        <iframe width="100%"
-                height="350"
-                frameborder="0"
-                scrolling="no"
-                marginheight="0"
-                marginwidth="0"
-                src="https://maps.google.com/maps?q=SW6+7DT&amp;hl=en&amp;ll=51.4803,-0.200973&amp;spn=0.00598,0.012531&amp;sll=37.0625,-95.677068&amp;sspn=61.19447,102.65625&amp;t=m&amp;hnear=London+SW6+7DT,+United+Kingdom&amp;z=17&amp;output=embed&amp;iwloc=near">
-          </iframe>
-      </div>
-      <div class="span6">
-        <div class="event-location">
-          <dl>
-            <dt>Address</dt>
-            <dd><%= @placement.get 'location' %></dd>
-          </dl>
-        </div>
-      </div>
-    </div>
+  <div class="span6" id="date">
+    <h1 class="section-header"><i class="icon-pushpin"></i>  Details</h1>
+    <table class="table table-striped">
+      <% if @placement.getReadableDate('deadline'): %>
+        <tr>
+          <td>
+            Apply By:
+          </td>
+          <td>
+            <%= @placement.getReadableDate('deadline') %>
+          </td>
+        </tr>
+      <% end %>
+      <%- addPlacementTableRow(@placement, 'duration', 'Duration') %>
+      <%- addPlacementTableRow(@placement, 'location', 'Location') %>
+      <%- addPlacementTableRow(@placement, 'salary', 'Salary') %>
+      <%- addPlacementTableRow(@placement, 'benefits', 'Benefits') %>
+      <%- addPlacementTableRow(@placement, 'application_procedure', 'Application Procedure') %>
+      <%- addPlacementTableRow(@placement, 'interview_date', 'Interview Date') %>
+      <%- addPlacementTableRow(@placement, 'other', 'Other Information') %>
+    </table>
   </div>
 </div>

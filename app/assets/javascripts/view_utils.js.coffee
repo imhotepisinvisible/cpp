@@ -39,3 +39,7 @@ window.looking_fors = {
   graduate: "Looking for a Grauate Job"
   nothing: "Not looking for anything"
 }
+
+window.addPlacementTableRow = (placement, attr, label) ->
+  val = placement.get attr
+  if val then "<tr><td>#{label}:</td><td>#{val}</td></tr>" else ''
