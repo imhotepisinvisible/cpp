@@ -25,7 +25,7 @@ class CPP.Views.CompaniesIndex extends CPP.Views.Base
     new CPP.Filter
       el: $(@el).find('#company-filter')
       filters: [
-        {name: "Company Search"
+        {name: "Name"
         type: "text"
         attribute: "name"
         scope: ""

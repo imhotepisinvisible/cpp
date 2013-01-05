@@ -41,8 +41,8 @@ class CPP.Views.Students.Index extends CPP.Views.Base
         scope: ''},
         {name: "Tags"
         type: 'tags'
-        attribute: 'skill_list'
-        scope: ''}
+        attribute: null
+        scope: null}
       ]
       data: @collection
   @

@@ -48,18 +48,18 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
         attribute: "name"
         scope: ".company"
         },
-        {name: "Position Search"
+        {name: "Position"
         type: "text"
         attribute: "position"
         scope: ""},
-        {name: "Location Search"
+        {name: "Location"
         type: "text"
         attribute: "location"
         scope: ""},
-        {name: "tags"
+        {name: "Tags"
         type: "tags"
-        attrublute: null
-        scopy: null
+        attribute: null
+        scope: null
         }
       ]
       data: @collection
