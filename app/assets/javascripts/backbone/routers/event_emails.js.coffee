@@ -48,7 +48,6 @@ class CPP.Routers.EventEmails extends Backbone.Router
         notify "error", "Couldn't fetch emails"
 
   new: (event_id) ->
-    console.log "hi"
     event = new CPP.Models.Event id: event_id
     event.fetch
       success: ->

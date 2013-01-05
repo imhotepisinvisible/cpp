@@ -80,10 +80,13 @@ class CPP.Views.Emails.Edit extends CPP.Views.Base
         wait: true
         forceUpdate: true
         success: (model, response) =>
-          notify "success", "Email Saved"
+          switch @options.type
+            when "direct" then notify "success", "Email sent"
+            else notify "success", "Email Saved"
           switch @options.type
             when "tagged" then  Backbone.history.navigate('companies/' + @model.get('company_id') + '/tagged_emails', trigger: true)
-            when "event" then   Backbone.history.navigate('events/' + @model.get('event_id'), trigger: true)
+            when "event"  then  Backbone.history.navigate('events/' + @model.get('event_id'), trigger: true)
+            when "direct" then  Backbone.history.navigate('students', trigger: true)
           @undelegateEvents()
         error: (model, response) =>
           errorlist = JSON.parse response.responseText

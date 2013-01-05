@@ -45,6 +45,7 @@ class Ability
       can :apply, Department
       can :manage, TaggedEmail, :company_id => user.company_id
       can :manage, EventEmail, :company_id => user.company_id
+      can :manage, DirectEmail, :company_id => user.company_id
     when "DepartmentAdministrator"
       can :manage, DepartmentAdministrator, :id => user.id
       can [:manage, :change_status], Department, :id => user.department_id
