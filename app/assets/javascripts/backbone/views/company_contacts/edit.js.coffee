@@ -66,7 +66,7 @@ class CPP.Views.Contacts.PartialEdit extends CPP.Views.Base
         limit: @limit
     else
       if options.model
-        @collection.unshift(options.model)
+        @collection.push(options.model)
       @initializeNoFetch()
 
   editAll: ->

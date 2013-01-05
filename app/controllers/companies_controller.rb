@@ -43,8 +43,13 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
-    @company = Company.find(params[:id])
-    respond_with @company
+    if current_user.is_student?
+      # Inject company rating if the current user is a student
+      respond_with current_user.companies.find(params[:id]).as_json({:student_id => current_user.id})
+    else
+      @company = Company.find(params[:id])
+      respond_with @company
+    end
   end
 
   # GET /companies/new

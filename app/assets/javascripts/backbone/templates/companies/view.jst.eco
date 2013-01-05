@@ -1,6 +1,14 @@
 <div class="row">
   <div class="span8">
-    <h1 class="section-header"><%= @company.get 'name' %></h1>
+    <h1 class="section-header">
+      <%= @company.get 'name' %>
+      <% if window.isStudent(): %>
+        </span>
+          <span id="ban-rating" class="fav-icon pull-right <%= @company.getBanClass() %>"></span>
+          <span id="star-rating" class="fav-icon pull-right <%= @company.getStarClass() %>"></span>
+        </span>
+      <% end %>
+    </h1>
     <div class="row">
       <div class="span4">
         <div class="company-logo-large">

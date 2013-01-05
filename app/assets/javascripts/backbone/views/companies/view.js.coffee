@@ -2,13 +2,19 @@ class CPP.Views.CompaniesView extends CPP.Views.Base
   el: "#app"
   template: JST['backbone/templates/companies/view']
 
+  events: -> _.extend {}, CPP.Views.Base::events,
+    'click #star-rating'  : 'companyHighlight'
+    'click #ban-rating'   : 'companyHighlight'
+
   initialize: ->
     if isStudent()
       @model.record_stat_view()
     @render()
 
   render: ->
-    $(@el).html(@template(company: @model))
+    $(@el).html(@template(company: @model, tooltip: (loggedIn() and CPP.CurrentUser.get('tooltip'))))
+
+    super
 
     events_partial = new CPP.Views.Events.Partial
       el: $(@el).find('#events-partial')
@@ -37,7 +43,23 @@ class CPP.Views.CompaniesView extends CPP.Views.Base
 
     @
 
-  activate: ->
-    console.log "activate"
+  companyHighlight: (e) ->
+    ct = $(e.currentTarget)
+    e.stopPropagation()
+    # Set rating
+    if (ct.hasClass('icon-star-empty'))
+      rating = 1
+    else if (ct.hasClass('icon-ban-circle') && !ct.hasClass('red-ban'))
+      rating = 3
+    else
+      rating = 2
+    @model.set("rating", rating)
+    $.post "companies/#{@model.id}/set_rating",
+      {rating: rating},
+      =>
+        $('#ban-rating').removeClass('red-ban icon-ban-circle')
+        $('#ban-rating').addClass(@model.getBanClass())
+        $('#star-rating').removeClass('golden-star icon-star icon-star-empty')
+        $('#star-rating').addClass(@model.getStarClass())
 
 
