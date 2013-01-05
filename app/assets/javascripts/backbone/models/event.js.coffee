@@ -13,8 +13,6 @@ class CPP.Models.Event extends CPP.Models.Base
       required: true
     end_date:
       required: true
-    google_map_url:
-      pattern: 'url'
     description:
       required: true
     location:
@@ -43,10 +41,6 @@ class CPP.Models.Event extends CPP.Models.Base
       type: "Text"
       title: "Location*"
     capacity: "Text"
-    google_map_url: 
-      type: "Text"
-      title: "Google Map URL*"
-      validators: ['required']
     requirementsEnabled:
       type: "Checkboxes"
       title: "Extra Requirements?"
