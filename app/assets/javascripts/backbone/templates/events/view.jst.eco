@@ -3,7 +3,9 @@
      <h1><%= @event.get 'title' %></h1>
   </div>
   <div class="company-logo-header">
-    <img class="company-logo-img pull-right" src="<%= @event.company.getLogoPath() %>">
+    <a href="/#companies/<%= @event.company.id %>">
+      <img class="company-logo-img pull-right" src="<%= @event.company.getLogoPath() %>">
+    </a>
   </div>
 </div>
 
