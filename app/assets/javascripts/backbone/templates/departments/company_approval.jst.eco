@@ -1,6 +1,8 @@
 <div class="item">
   <div class="approval-display-container">
-    <span class="company-name"><%= @company.get 'name' %></span>
+    <a class="company-name" href="/#companies/<%= @company.id %>">
+      <%= @company.get 'name' %>
+    </a>
   </div>
 
   <div class="btn-container btn-group">
