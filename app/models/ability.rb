@@ -50,7 +50,9 @@ class Ability
       can :manage, DepartmentAdministrator, :id => user.id
       can [:manage, :change_status], Department, :id => user.department_id
 
-      can [:pending, :approve, :reject], Email
+      can [:manage, :pending, :approve, :reject], Email do |email|
+        email.company.all_departments.map(&:id).include? user.department_id
+      end
 
       can [:manage, :download_document, :pending, :approve, :reject], Company do |company|
         company.all_departments.map(&:id).include? user.department_id

@@ -44,7 +44,7 @@ class DirectEmailsController < ApplicationController
     @email = DirectEmail.new(params[:direct_email])
     @email.state = "Pending"
     if params[:direct_email][:student_id]
-      @email.students << Student.find(params[:direct_email][:student_id])
+      @email.student = Student.find(params[:direct_email][:student_id])
     end
     if @email.save
       respond_with @email, status: :created, location: @email
