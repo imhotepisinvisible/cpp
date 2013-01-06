@@ -26,12 +26,14 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
 
     .bind "fileuploaddone", (e, data) =>
       notify 'success', 'Uploaded successfully'
-      $('.company-logo-image').attr('src', @model.get('logo_url'))
-      $(e.target).closest('.upload-container').removeClass('missing-document')
-      upload = $(e.target).closest('.upload-container')
-      upload.find('.progress-upload').delay(250).slideUp 'slow', ->
-        upload.find('.bar').width('0%')
-        upload.removeClass('missing-document')
+      @model.fetch
+        success: =>
+          $('.company-logo-image').attr('src', @model.get('logo_url'))
+          $(e.target).closest('.upload-container').removeClass('missing-document')
+          upload = $(e.target).closest('.upload-container')
+          upload.find('.progress-upload').delay(250).slideUp 'slow', ->
+            upload.find('.bar').width('0%')
+            upload.removeClass('missing-document')
 
     .bind "fileuploadstart", (e, data) ->
       $(e.currentTarget).closest('.upload-container').find('.progress-upload').slideDown()
