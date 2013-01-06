@@ -175,10 +175,8 @@
           <% else if @admin: %>
             <div class="span6" id="event-email">
               <a class="btn" href="/#events/<%= @event.id %>/students">View Attendees</a>
-              <% if @company: %>
-                <a class="btn btn-primary" href="/#events/<%= @event.id %>/email_attendees">Email Attendees</a>
-                <a class="btn btn-primary" href="/#events/<%= @event.id %>/emails">View Emails Sent</a>
-              <% end %>
+              <a class="btn btn-primary" href="/#events/<%= @event.id %>/email_attendees">Email Attendees</a>
+              <a class="btn btn-primary" href="/#events/<%= @event.id %>/emails">View Emails Sent</a>
             </div>
           <% end %>
         </div>
