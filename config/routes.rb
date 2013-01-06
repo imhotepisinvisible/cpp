@@ -102,7 +102,7 @@ CPP::Application.routes.draw do
     put :reject, :on => :member
   end
 
-  get "tagged_emails/:id/get_matching_students_count" => "tagged_emails#get_matching_students_count"
+  get "emails/:id/get_matching_students_count" => "emails#get_matching_students_count"
 
   resources :students do
     resources :events

@@ -1,7 +1,9 @@
-<td><%= @tagged_email.company.get 'name' %></td>
-<td><%= @tagged_email.get 'subject' %></td>
-<td>Pending</td>
+<td><%= @email.company.get 'name' %></td>
+<td><%= @email.get 'subject' %></td>
+<td><%= @email.get 'state' %></td>
 <td>
-  <div class="btn btn-small btn-edit">Edit</div>
-  <div class="btn btn-small btn-danger btn-delete">Delete</div>
+	<% if @email.get('state') != "Approved": %>
+  	<div class="btn btn-small btn-edit">Edit</div>
+  	<div class="btn btn-small btn-danger btn-delete">Delete</div>
+  <% end %>
 </td>

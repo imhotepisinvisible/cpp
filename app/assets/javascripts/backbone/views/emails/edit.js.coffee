@@ -97,7 +97,7 @@ class CPP.Views.Emails.Edit extends CPP.Views.Base
           notify "error", "Unable to save email, please resolve issues below."
 
   updateStats: ->
-    $.get "/tagged_emails/" + @model.id + "/get_matching_students_count", (data) ->
+    $.get "/emails/" + @model.id + "/get_matching_students_count", (data) ->
       console.log jQuery.isEmptyObject(data)
       if !jQuery.isEmptyObject(data)
         totalRecipients = 0

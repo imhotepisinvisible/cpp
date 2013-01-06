@@ -6,7 +6,7 @@ class EventEmail < Email
 	attr_accessible :event, :event_id
 
 	def get_matching_students
-		this.event.registered_students
+		event.registered_students
 	end
 
 

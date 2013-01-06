@@ -2,20 +2,12 @@ class UserMailer < ActionMailer::Base
   #include Resque::Mailer
   default from: "impdoccpp@gmail.com"
 
-  def bulk_email(email_id)
-  	@users = getUsersByInterest(email_id)
-  	@email = Email.find(email_id)
-  	puts "Size of array:"
-  	puts @users.size
-  	@users.each do |user|
-
-  		
-  		mail(:to => user.email,
-  				 :subject => @email.subject) do |format|
-  			format.html { render :inline => parseEmail(@email.body), :locals => {:user => user} }
-  		end
+  def send_email(address,subject,body)
+  	mail(:to => address, :subject => subject) do |format|
+  		format.html { render :inline => body }
   	end
   end
+
 
   def getUsersByInterest(email_id)
   	#TODO when Tags are done.

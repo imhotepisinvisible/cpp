@@ -40,12 +40,15 @@ class Email < ActiveRecord::Base
   end
 
   def queue_email(email, user)
-
+  	# Queueing logic would take place here if implemented.
+  	UserMailer.send_email(user.email, email.subject, email.body).deliver
   end
 
-  def send_email
+  def send_email!
 		get_matching_students.each do |user|
-			queue_email(this, user)
+			Thread.new do
+				queue_email(self, user)
+			end
 		end
 	end
 

@@ -16,7 +16,10 @@ class CPP.Views.Emails.Item extends CPP.Views.Base
 
   editEmail: (e) ->
     e.stopPropagation()
-    Backbone.history.navigate("tagged_emails/" + @model.get('id') + "/edit", trigger: true)
+    switch @options.type
+      when "tagged" then Backbone.history.navigate("tagged_emails/" + @model.get('id') + "/edit", trigger: true)
+      when "direct" then Backbone.history.navigate("direct_emails/" + @model.get('id') + "/edit", trigger: true)
+      when "event"  then Backbone.history.navigate("event_emails/" + @model.get('id') + "/edit", trigger: true)
 
   deleteEmail: (e) ->
     e.stopPropagation()
@@ -28,8 +31,11 @@ class CPP.Views.Emails.Item extends CPP.Views.Base
         notify "error", "Email could not be deleted"
 
   render: ->
-    $(@el).html(@template(tagged_email: @model))
+    $(@el).html(@template(email: @model))
     @
 
   viewEmail: ->
-    Backbone.history.navigate("tagged_emails/" + @model.get('id'), trigger: true)
+    switch @type
+      when "tagged" then Backbone.history.navigate("tagged_emails/" + @model.get('id'), trigger: true)
+      when "direct" then Backbone.history.navigate("direct_emails/" + @model.get('id'), trigger: true)
+      when "event"  then Backbone.history.navigate("event_emails/" + @model.get('id'), trigger: true)
