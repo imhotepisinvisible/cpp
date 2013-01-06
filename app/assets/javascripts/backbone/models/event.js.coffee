@@ -67,6 +67,9 @@ class CPP.Models.Event extends CPP.Models.Base
     return "warning" if p > 60
     return "info"
 
+  getSpaces: ->
+    @get('capacity') - @getFilled()
+
   getReadableDate: (field) ->
     Date.parse(@get(field)).toString('dS MMMM yyyy - H:mm')
 

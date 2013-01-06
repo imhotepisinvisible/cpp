@@ -2,7 +2,7 @@
 <td><%= @event.get 'title' %></td>
 <td><%= @event.get 'start_date' %></td>
 <td><%= @event.get 'location' %></td>
-<td><%= @event.get 'capacity' %></td>
+<td><%= @event.getSpaces() %></td>
 
 <% if @editable: %>
 <td>
