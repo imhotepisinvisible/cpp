@@ -24,10 +24,11 @@ class Department < ActiveRecord::Base
 
 
   # Includes the registration status
+  # -1 - Rejected
   # 0  - Not requested
   # 1  - Requested (pending)
-  # 2  - Approved
-  # -1 - Rejected
+  # 2  - Approved (visible to students)
+  # 3  - Partner (Can see students)
   def as_json(options={})
     result = super()
     if options.has_key? :company_id
