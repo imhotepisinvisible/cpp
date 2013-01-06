@@ -39,6 +39,10 @@ class CPP.Views.Students.Index extends CPP.Views.Base
         type: "number"
         attribute: 'year'
         scope: ''},
+        {name: "Degree",
+        type: 'text',
+        attribute: 'degree',
+        scope: ''},
         {name: "Tags"
         type: 'tags'
         attribute: null
