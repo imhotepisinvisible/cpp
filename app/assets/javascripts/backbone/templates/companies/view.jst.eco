@@ -4,8 +4,8 @@
       <%= @company.get 'name' %>
       <% if window.isStudent(): %>
         </span>
-          <span id="ban-rating" class="fav-icon pull-right <%= @company.getBanClass() %>"></span>
-          <span id="star-rating" class="fav-icon pull-right <%= @company.getStarClass() %>"></span>
+          <span id="ban-rating" class="fav-icon pull-right <%= @company.getBanClass() %>" <%= addTooltip(@tooltip, 'Click here to never receive emails from this company', 'top') %>></span>
+          <span id="star-rating" class="fav-icon pull-right <%= @company.getStarClass() %>" <%= addTooltip(@tooltip, 'Click here to always receive emails from this company', 'top') %>></span>
         </span>
       <% end %>
     </h1>

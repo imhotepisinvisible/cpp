@@ -10,16 +10,12 @@
             <%= @company.get('description').substring(0, 300) + '...' %>
           </div>
         </div>
-
-          <div class="rating-buttons">
-            <span id="ban-rating" class="fav-icon pull-right <%= @company.getBanClass() %>"></span>
-            <span id="star-rating" class="fav-icon pull-right <%= @company.getStarClass() %>"></span>
-          </div>
       </div>
-
+      <div>
+        <span id="ban-rating" class="fav-icon pull-right <%= @company.getBanClass() %>" <%= addTooltip(@tooltip, 'Click here to never receive emails from this company', 'top') %>></span>
+        <span id="star-rating" class="fav-icon pull-right <%= @company.getStarClass() %>" <%= addTooltip(@tooltip, 'Click here to always receive emails from this company', 'top') %>></span>
+      </div>
       <div class="clearfix"></div>
-    </div>
-      </div>
     </div>
   </div>
 </div>
