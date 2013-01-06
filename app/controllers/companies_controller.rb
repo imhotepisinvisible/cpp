@@ -107,7 +107,6 @@ class CompaniesController < ApplicationController
       UserMailer.account_terminated(admin).deliver
       admin.destroy
     end
-
     @company.destroy
 
     head :no_content
