@@ -1,4 +1,6 @@
 class OrganisationDomainsController < ApplicationController
+  impressionist
+
   respond_to :json
 
   # GET /organisation_domains

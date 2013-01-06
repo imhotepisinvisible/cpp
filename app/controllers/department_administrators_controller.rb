@@ -1,4 +1,6 @@
 class DepartmentAdministratorsController < ApplicationController
+  impressionist
+
   respond_to :json
 
   # GET /department_administrators

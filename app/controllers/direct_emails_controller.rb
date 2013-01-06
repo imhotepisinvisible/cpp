@@ -1,6 +1,8 @@
 class DirectEmailsController < ApplicationController
+  impressionist
+
   respond_to :json
-  
+
   # GET /emails
   # GET /emails.json
   def index
