@@ -32,9 +32,9 @@
         <tr>
           <th>Company</th>
           <th>Event</th>
-          <th>Apply By</th>
+          <th>Start Date</th>
           <th>Location</th>
-          <th>Capacity</th>
+          <th>Spaces</th>
           <% if @editable: %>
           <th class="btn-column"></th>
           <% end %>

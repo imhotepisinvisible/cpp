@@ -53,11 +53,6 @@ class CPP.Models.Event extends CPP.Models.Base
       title: ""
       fieldAttrs:
         style: "display:none"
-    departments:
-      title: "Department(s)*"
-      type: "Checkboxes"
-      options: @allDepartments
-      editorClass: "departments-checkbox"
 
   getFilled: ->
     @.registered_students.length
@@ -71,6 +66,9 @@ class CPP.Models.Event extends CPP.Models.Base
     return "danger" if p > 90
     return "warning" if p > 60
     return "info"
+
+  getSpaces: ->
+    @get('capacity') - @getFilled()
 
   getReadableDate: (field) ->
     Date.parse(@get(field)).toString('dS MMMM yyyy - H:mm')

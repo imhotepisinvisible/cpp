@@ -21,8 +21,10 @@ class Backbone.Form.editors.Datepicker extends Backbone.Form.editors.Base
 
     # Set up datepicker element
     @$el.datepicker
-      format: "dd/mm/yyyy"
+      format: "d/m/yyyy"
       weekStart: 1
+      if @value
+        @setValue(Date.parse(@value).toString('d/M/yyyy'))
     # Hide after change
     @$el.datepicker().on 'changeDate', =>
       @$el.datepicker("hide")
