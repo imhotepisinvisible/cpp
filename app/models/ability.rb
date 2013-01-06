@@ -53,8 +53,7 @@ class Ability
       can [:pending, :approve, :reject], Email
 
       can [:manage, :download_document, :pending, :approve, :reject], Company do |company|
-        puts company.departments.map(&:id).inspect, user.department_id
-        company.departments.map(&:id).include? user.department_id
+        company.all_departments.map(&:id).include? user.department_id
       end
       can :create, Company
 
