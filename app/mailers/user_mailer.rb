@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  include Resque::Mailer
+  #include Resque::Mailer
   default from: "impdoccpp@gmail.com"
 
   def bulk_email(email_id)
@@ -34,8 +34,15 @@ class UserMailer < ActionMailer::Base
   end
 
   def password_reset_email(user, password)
+    puts "PASSWORD RESET EMAIL"
     subject = "CPP Password Reset Notification"
     @password = password
+    mail(:to => user.email, :subject => subject)
+  end
+
+  def account_terminated(user)
+    puts "ACCOUNT TERMINATED EMAIL"
+    subject = "CPP Account Deleted"
     mail(:to => user.email, :subject => subject)
   end
 end
