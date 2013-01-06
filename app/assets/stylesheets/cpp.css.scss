@@ -15,6 +15,10 @@ h1 {
   font-family: 'Arvo', serif;
 }
 
+a.brand {
+  font-family: 'Arvo', serif;
+}
+
 textarea {
   resize: none;
 }
@@ -215,12 +219,7 @@ img.center {
 
 .row-top-space {
   margin-top: 20px;
-}
-
-.cpp-connect {
-  font-family: 'Arvo', serif;
-}
-.tooltip {
+}.tooltip {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 14px;
   font-weight: normal;
