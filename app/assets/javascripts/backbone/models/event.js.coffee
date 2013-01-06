@@ -55,7 +55,7 @@ class CPP.Models.Event extends CPP.Models.Base
         style: "display:none"
 
   getFilled: ->
-    @.registered_students.length
+    if @.registered_students then @.registered_students.length else 0
 
   getPercentageCapacity: ->
     percentage = 100 * parseFloat(@getFilled()) / parseFloat(@get("capacity"))
