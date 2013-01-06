@@ -104,7 +104,6 @@ class CompaniesController < ApplicationController
     # Delete all administrators attached to the account
     @company_administrators = CompanyAdministrator.where(:company_id => @company.id)
     @company_administrators.each do |admin|
-      puts "EWIUHWEFIHWEFIUHWEFIUWEHFIUWEHFIWEUHFI"
       UserMailer.account_terminated(admin).deliver
       admin.destroy
     end
