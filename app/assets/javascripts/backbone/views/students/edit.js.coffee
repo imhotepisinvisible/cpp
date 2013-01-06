@@ -78,6 +78,11 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     @year_group_list_tags_form.render()
     $('.year-group-tags-form').append(@year_group_list_tags_form.el)
 
+    profile_warnings = new CPP.Views.Students.ProfileWarnings
+      el: '#profile-warnings-container'
+      model: @model
+    profile_warnings.render()
+
     events_partial = new CPP.Views.Events.Partial
       el: $(@el).find('#events-partial')
       model: @model
@@ -203,7 +208,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     deferreds = []
     if e and $('.dropdown-menu').is(':visible') and $('.dropdown-menu:hover').length > 0
       deferreds.push($('.dropdown-menu').click())
-    
+
     $.when.apply($, deferreds).done(
       window.inPlaceStopEdit @model, 'student', 'degree', 'N/A degree', _.identity
     )
