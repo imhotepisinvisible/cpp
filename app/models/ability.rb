@@ -32,8 +32,9 @@ class Ability
       can :manage, CompanyAdministrator, :id => user.id
       can :manage, Company, :id => user.company_id
       can [:read, :download_document], Student do |student|
-        # Get departments for both and check they intersect
-        company_deps = user.company.departments.map(&:id)
+        # Only departments which are student approved can view students
+        company_deps = user.company.department_registrations.where(:status => 3)
+                        .collect{|d| d.department}.map(&:id)
         student_deps = student.departments.map(&:id)
         !(company_deps | student_deps).empty?
       end

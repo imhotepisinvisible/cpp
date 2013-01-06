@@ -2,7 +2,7 @@ class DepartmentAdministrator < User
   belongs_to :department
 
   has_one  :organisation, :through => :department
-  has_many :companies, :through => :department, :uniq => true
+  has_many :companies, :through => :department, :uniq => true, :source => :all_companies
   has_many :events, :through => :companies, :uniq => true
   has_many :placements, :through => :companies, :uniq => true
 
