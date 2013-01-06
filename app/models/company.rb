@@ -35,8 +35,12 @@ class Company < ActiveRecord::Base
   acts_as_taggable_on :skills, :interests, :year_groups
 
   has_attached_file :logo,
-    :path => ':rails_root/documents/logos/:id/:basename.:extension',
-    :url => '/:class/:id/logo'
+    :styles => {
+      :large => "1000x350",
+      :medium => "500x175",
+      :thumbnail => "100x35"
+    },
+    :default_url => '/assets/default_profile.png'
 
   validates_attachment :logo,
     :content_type => { :content_type => ["image/jpeg", "image/jpg", "image/png"],
@@ -68,7 +72,7 @@ class Company < ActiveRecord::Base
 
   def as_json(options={})
     result = super(:methods => [:skill_list, :interest_list, :year_group_list])
-
+    result[:logo_url] = logo.url(:large)
     if options.has_key? :student_id
       result[:rating] = rating(options[:student_id])
     end

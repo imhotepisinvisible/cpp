@@ -3,7 +3,7 @@
 
     <div class="span2">
       <div class="company-logo-header">
-        <img src="<%= "/companies/#{@model.get('company_id')}/documents/logo" %>">
+        <img src="<%= @model.company.getLogoPath() %>">
       </div>
     </div>
 

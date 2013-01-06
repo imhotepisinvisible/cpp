@@ -32,9 +32,14 @@ class Student < User
   validates :first_name, obscenity: {message: "Profanity is not allowed!"}
   validates :last_name, obscenity: {message: "Profanity is not allowed!"}
 
-  has_attached_file :cv,
-    :path => ':rails_root/documents/cvs/:id/:basename.:extension',
-    :url => '/:class/:id/cv'
+  has_attached_file :cv
+
+  has_attached_file :transcript
+
+  has_attached_file :covering_letter
+
+  has_attached_file :profile_picture,
+    :default_url => '/assets/default_profile.png'
 
   validates_attachment :cv, :transcript, :covering_letter,
       :content_type => { :content_type => ["application/pdf", "text/plain"],
@@ -43,18 +48,6 @@ class Student < User
   validates_attachment :profile_picture,
       :content_type => { :content_type => ["image/jpeg", "image/png"],
                           message: "Must be a jpeg or png file"}
-
-  has_attached_file :transcript,
-    :path => ':rails_root/documents/transcripts/:id/:basename.:extension',
-    :url => '/:class/:id/transcript'
-
-  has_attached_file :covering_letter,
-    :path => ':rails_root/documents/covering_letters/:id/:basename.:extension',
-    :url => '/:class/:id/covering_letter'
-
-  has_attached_file :profile_picture,
-    :path => ':rails_root/documents/profile_pictures/:id/:basename.:extension',
-    :url => '/:class/:id/profile_picture'
 
   attr_accessible :year, :bio, :degree, :email,
                     :cv, :transcript, :covering_letter, :profile_picture,

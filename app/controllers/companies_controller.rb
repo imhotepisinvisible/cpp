@@ -105,33 +105,10 @@ class CompaniesController < ApplicationController
     head :no_content
   end
 
-  # TODO: This is repeated in the student controller
-  # TODO: User variable to symbol is BAD. Filter allowed doctypes
-  # GET /students/1/:document_type
-  def download_document
-    company = Company.find(params[:id])
-    document_type = params[:document_type]
-    document_path = (company.send "#{document_type}".to_sym).path
-
-    unless document_path.nil?
-      if Rails.env.production?
-        redirect_to "https://s3-eu-west-1.amazonaws.com/imperial-cpp#{(company.send "#{document_type}".to_sym).path}"
-        return
-      end
-
-      document_extension = File.extname document_path
-      new_doc_name = "#{company.name}_#{document_type}#{document_extension}"
-      send_file document_path, :filename => new_doc_name
-    else
-      head :no_content
-    end
-  end
-
-  # DELETE /students/1/:document_type
-  def delete_document
+  # DELETE /companies/1/delete_logo
+  def delete_logo
     @company = Company.find(params[:id])
-    document_type = params[:document_type]
-    @company.send "#{document_type}=".to_sym, nil
+    @company.logo = nil
 
     if @company.save
       respond_with @company

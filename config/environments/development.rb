@@ -49,10 +49,14 @@ CPP::Application.configure do
     :port                 => 25
   }
 
+  config.paperclip_defaults = {
+    :path => ":rails_root/public/:class/:attachment/:id/:basename_:style.:extension",
+    :url  => "/:class/:attachment/:id/:basename_:style.:extension"
+  }
+
   if ENV['NORLOG'] && ENV['NORLOG'] == 1
     # Sends annoying query logs to /dev/null
     # In Bash: `export NORLOG = 1` to disable or `export NORLOG = 0` to enable.
     ActiveRecord::Base.logger = Logger.new('/dev/null')
   end
-  
 end
