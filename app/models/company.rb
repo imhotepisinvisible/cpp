@@ -23,7 +23,7 @@ class Company < ActiveRecord::Base
   has_many :student_company_ratings
   has_many :accessible_students, :through => :departments, :class_name => "Student", :source => :students
 
-  has_many :department_registrations, :conditions => { :status => 2 }
+  has_many :department_registrations, :conditions => { :status => [2, 3] }
   has_many :departments        , :through => :department_registrations
 
   has_many :pending_department_registrations, :conditions => { :status => 1 }, :class_name => "DepartmentRegistration"
