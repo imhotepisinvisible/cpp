@@ -50,8 +50,8 @@ CPP::Application.configure do
   }
 
   config.paperclip_defaults = {
-    :path => ":rails_root/public/:class/:id/:style/:basename.:extension",
-    :url  => "/:class/:id/:style/:basename.:extension"
+    :path => ":rails_root/public/:class/:attachment/:id/:basename_:style.:extension",
+    :url  => "/:class/:attachment/:id/:basename_:style.:extension"
   }
 
   if ENV['NORLOG'] && ENV['NORLOG'] == 1

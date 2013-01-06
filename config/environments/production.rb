@@ -71,7 +71,7 @@ CPP::Application.configure do
         :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
         :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
     },
-    :path => ":rails_root/public/:class/:id/:style/:basename.:extension",
-    :url  => "/:class/:id/:style/:basename.:extension"
+    :path => "/:class/:attachment/:id/:basename_:style.:extension",
+    :url  => "/:class/:attachment/:id/:basename_:style.:extension"
   }
 end
