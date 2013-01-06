@@ -59,7 +59,7 @@ class Student < User
     !last_name.blank? &&
     !degree.blank? &&
     !year.blank? &&
-    !cv
+    cv
   end
 
   def valid_email?
