@@ -39,8 +39,7 @@ class Company < ActiveRecord::Base
       :large => "1000x350",
       :medium => "500x175",
       :thumbnail => "100x35"
-    },
-    :path => ':rails_root/documents/company_logos/:id/:style/:basename.:extension'
+    }
 
   validates_attachment :logo,
     :content_type => { :content_type => ["image/jpeg", "image/jpg", "image/png"],

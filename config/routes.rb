@@ -124,8 +124,7 @@ CPP::Application.routes.draw do
       post :sort, :on => :collection
       get :position_clean, :on => :collection
     end
-    delete '/documents/:document_type', :on => :member, :action => :delete_document
-    get '/documents/:document_type', :on => :member, :action => :download_document
+    delete '/logo', :on => :member, :action => :delete_logo
     post '/set_rating', :on => :member, :action => :set_rating
     get 'view_stats', :on => :member, :action => :view_stats
   end

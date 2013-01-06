@@ -26,7 +26,7 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
 
     .bind "fileuploaddone", (e, data) =>
       notify 'success', 'Uploaded successfully'
-      $('.company-logo-image').attr('src', '/companies/' + @model.id + '/documents/logo')
+      $('.company-logo-image').attr('src', @model.get('large_logo_url'))
       $(e.target).closest('.upload-container').removeClass('missing-document')
       upload = $(e.target).closest('.upload-container')
       upload.find('.progress-upload').delay(250).slideUp 'slow', ->
@@ -50,7 +50,7 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
     id = $(e.currentTarget).attr('id')
     if confirm "Are you sure you wish to delete your logo?"
       $.ajax
-        url: "/companies/#{@model.id}/documents/logo"
+        url: "/companies/#{@model.id}/logo"
         type: 'DELETE'
         success: (data) ->
           $(e.currentTarget).closest('.upload-container').addClass('missing-document')
