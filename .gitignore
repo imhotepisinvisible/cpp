@@ -16,4 +16,4 @@
 .DS_Store
 
 * Ignore uploaded files
-/documents/*
+/public/system/*
