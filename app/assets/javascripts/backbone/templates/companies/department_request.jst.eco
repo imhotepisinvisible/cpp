@@ -1,4 +1,4 @@
-<div class="item">
+<div class="item <%= if @status == 'Rejected' then 'missing-document' else '' %>">
   <div class="department-display-container">
     <span class="department-name"><%= @dept.get 'name' %></span>
   </div>
