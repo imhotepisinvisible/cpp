@@ -30,7 +30,7 @@
 //= require tinymce-jquery
 //= require jcountdown
 //= require jquery.toggle.buttons
-//= require utils
 //
 // UTILS
-//= require view_utils 
+//= require utils
+//= require view_utils
