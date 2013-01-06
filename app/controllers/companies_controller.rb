@@ -100,6 +100,11 @@ class CompaniesController < ApplicationController
   # DELETE /companies/1.json
   def destroy
     @company = Company.find(params[:id])
+    # Notify deletion of administrators attached to the account
+    @company_administrators = CompanyAdministrator.where(:company_id => @company.id)
+    @company_administrators.each do |admin|
+      UserMailer.account_terminated(admin).deliver
+    end
     @company.destroy
 
     head :no_content

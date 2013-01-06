@@ -30,7 +30,7 @@ class CPP.Views.CompaniesItem extends CPP.Views.Base
     @model.destroy
       wait: true
       success: (model, response) ->
-        $(e.target).parent().parent().parent().remove();
+        $(e.target).parent().parent().parent().parent().remove();
         notify "success", "Company deleted"
       error: (model, response) ->
         notify "error", "Company could not be deleted"
