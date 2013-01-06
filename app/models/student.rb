@@ -62,7 +62,11 @@ class Student < User
                     :looking_for, :tooltip
   def is_active?
     #TODO: Add all conditions here!! e.g. missing fields
-    active
+    active &&
+    !first_name.blank? &&
+    !last_name.blank? &&
+    !degree.blank? &&
+    !year.blank?
   end
 
   def valid_email?

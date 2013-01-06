@@ -17,7 +17,7 @@ class StudentsController < ApplicationController
       @students = @students.joins(:registered_events).where("event_id = ?", params[:event_id])
     end
 
-    @students.select { |s| s.is_active? }
+    @students.select! { |s| s.is_active? }
 
     respond_with @students
   end
