@@ -26,7 +26,7 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
 
     .bind "fileuploaddone", (e, data) =>
       notify 'success', 'Uploaded successfully'
-      $('.company-logo-image').attr('src', @model.get('large_logo_url'))
+      $('.company-logo-image').attr('src', @model.get('logo_url'))
       $(e.target).closest('.upload-container').removeClass('missing-document')
       upload = $(e.target).closest('.upload-container')
       upload.find('.progress-upload').delay(250).slideUp 'slow', ->

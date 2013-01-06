@@ -38,7 +38,7 @@ class CPP.Models.Company extends CPP.Models.Base
 
   getLogoPath: ->
     if @get('logo_file_name')
-      return @get('large_logo_url')
+      return @get('logo_url')
     else
       return "/assets/default_profile.png"
 
