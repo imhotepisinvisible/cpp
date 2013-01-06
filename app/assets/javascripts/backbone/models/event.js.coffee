@@ -53,11 +53,6 @@ class CPP.Models.Event extends CPP.Models.Base
       title: ""
       fieldAttrs:
         style: "display:none"
-    departments:
-      title: "Department(s)*"
-      type: "Checkboxes"
-      options: @allDepartments
-      editorClass: "departments-checkbox"
 
   getFilled: ->
     @.registered_students.length
