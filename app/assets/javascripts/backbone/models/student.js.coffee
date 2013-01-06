@@ -64,7 +64,7 @@ class CPP.Models.Student extends CPP.Models.Base
     reasons.push("You need to add your first name")   if @get('first_name') == null || @get('first_name') == ''
     reasons.push("You need to add your last name")    if @get('last_name') == null || @get('last_name') == ''
     reasons.push("You need to add your degree")       if @get('degree') == null || @get('degree') == ''
-    reasons.push("You need to add your current year") if @get('year') == null || @get('year') == ''
+    reasons.push("You need to add your current year") if @get('year') == null || @get('year') == '' || @get('year') == 0
     reasons.push("You need to add your C.V")          if @get('cv_file_name') == null || @get('cv_file_name') == ''
     return reasons
 
