@@ -219,8 +219,16 @@ img.center {
 
 .row-top-space {
   margin-top: 20px;
-}.tooltip {
+}
+
+.tooltip {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 14px;
   font-weight: normal;
+}
+
+.company-bar {
+  padding: 10px 10px 10px 0px;
+  border-top: 1px double #ccc;
+  border-bottom: 1px double #ccc;
 }
