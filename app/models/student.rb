@@ -54,12 +54,12 @@ class Student < User
                     :skill_list, :interest_list, :reject_skill_list, :reject_interest_list, :year_group_list, :active,
                     :looking_for, :tooltip
   def is_active?
-    #TODO: Add all conditions here!! e.g. missing fields
     active &&
     !first_name.blank? &&
     !last_name.blank? &&
     !degree.blank? &&
-    !year.blank?
+    !year.blank? &&
+    !cv
   end
 
   def valid_email?
