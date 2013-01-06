@@ -33,7 +33,6 @@ class Department < ActiveRecord::Base
     result = super()
     if options.has_key? :company_id
       dept_reg = DepartmentRegistration.find_by_company_id_and_department_id(options[:company_id], id)
-      puts dept_reg.inspect
       if dept_reg
         result[:status] = dept_reg.status
       else
