@@ -7,6 +7,7 @@ class CPP.Routers.Companies extends Backbone.Router
       'companies/:id'         : 'view'
       'companies/:id/edit'    : 'edit'
       'companies/:id/settings': 'settings'
+      'company_dashboard'     : 'edit'
 
   # The company index page that admins will see
   index: ->
@@ -43,6 +44,8 @@ class CPP.Routers.Companies extends Backbone.Router
     )
 
   admin: (id) ->
+    if id?
+      company = new CPP.Models.Company id: id
     company = new CPP.Models.Company id: id
     company.fetch
       success: ->
@@ -63,6 +66,9 @@ class CPP.Routers.Companies extends Backbone.Router
     if isStudent()
       window.history.back()
       return false
+
+    if !id? && isCompanyAdmin()
+      id = CPP.CurrentUser.get('company_id')
 
     company = new CPP.Models.Company id: id
 
@@ -95,8 +101,8 @@ class CPP.Routers.Companies extends Backbone.Router
     new CPP.Views.Companies.Admin model: company
 
   signupCompany: (id) ->
-    if CPP.CurrentUser? and 
-      (CPP.CurrentUser.get('type') == 'DepartmentAdministrator' or 
+    if CPP.CurrentUser? and
+      (CPP.CurrentUser.get('type') == 'DepartmentAdministrator' or
        CPP.CurrentUser.get('type') == 'CompanyAdministrator')
       company = new CPP.Models.Company id: id
       company.fetch
