@@ -18,7 +18,7 @@ class Company < ActiveRecord::Base
 	has_many :events
   has_many :placements
   has_many :emails
-  has_many :company_administrators
+  has_many :company_administrators, :dependent => :destroy
   has_many :company_contacts
   has_many :student_company_ratings
   has_many :accessible_students, :through => :departments, :class_name => "Student", :source => :students
