@@ -17,6 +17,7 @@
 #   t.datetime "updated_at",     :null => false
 
 class Event < ActiveRecord::Base
+  default_scope order('start_date ASC')
 	belongs_to :company
   has_and_belongs_to_many :registered_students, :join_table => :student_event_registrations, :association_foreign_key => "user_id", :class_name => "Student"
 
