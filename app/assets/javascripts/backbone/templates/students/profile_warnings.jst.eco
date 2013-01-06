@@ -1,0 +1,15 @@
+<div class="row" id="profile-inactive-warning" <%- if (@model.reasonsProfileInactive().length == 0) then 'style="display:none"'%>>
+  <div class="span12">
+    <div class="alert alert-error">
+      <p><b>Your profile is not being shown to companies for the reasons below:</b></p>
+      <div>
+        <ul class="profile-inactive-list">
+          <% for reason in @model.reasonsProfileInactive(): %>
+          <li><%= reason %></li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>
