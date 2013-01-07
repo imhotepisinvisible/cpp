@@ -18,11 +18,11 @@ class SessionsController < ApplicationController
       when "DepartmentAdministrator"
         redirect_to "/#department_dashboard"
       else
-        redirect_to root_url
+        redirect_to root_url, :alert => "Invalid user type"
       end
 
     else
-      render "new"
+      redirect_to root_url, :alert => "Username/Password Incorrect"
     end
   end
 

@@ -22,6 +22,12 @@
     </div>
     <div class="span5 centre-span centre-text">
       <div id="notifications">
+        <% if alert %>
+          <div class="alert alert-error" id="alert"><%= alert %></div>
+        <% end %>
+        <% if notice %>
+          <div class="alert alert-success" id="notice"><%= notice %></div>
+        <% end %>
 
       </div>
     </div>
