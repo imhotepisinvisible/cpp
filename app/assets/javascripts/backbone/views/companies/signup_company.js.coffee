@@ -41,35 +41,40 @@ class CPP.Views.Company.Signup extends CPP.Views.Base
     companyValid = @companyForm.validate()
     if @adminForm.validate() == null and companyValid == null
       @adminForm.commit()
-      @companyForm.commit()
-      @company.save {},
-        wait: true
-        forceUpdate: true
-        success: (model, response) =>
-          # Attach new admin to new company
-          @model.set 'company_id', model.get 'id'
-          @model.save {},
+      if @company.isNew()
+        @companyForm.commit()
+        @company.save {},
           wait: true
           forceUpdate: true
           success: (model, response) =>
-            notify "success", "Registered"
-            @redirect(model)
-            
+            # Attach new admin to new company
+            @saveAdmin()
           error: (model, response) =>
             if response.responseText
-              errorlist = JSON.parse response.responseText
-              for field, errors of errorlist.errors
-                if field of @adminForm.fields
-                  @adminForm.fields[field].setError(_.uniq(errors).join ', ')
+                errorlist = JSON.parse response.responseText
+                for field, errors of errorlist.errors
+                  if field of @companyForm.fields
+                    @companyForm.fields[field].setError(_.uniq(errors).join ', ')
+            notify 'error', 'Could not create company'
+      else
+        @saveAdmin()
 
-            notify "error", "Unable to register, please resolve issues below."
-        error: (model, response) =>
-          if response.responseText
-              errorlist = JSON.parse response.responseText
-              for field, errors of errorlist.errors
-                if field of @companyForm.fields
-                  @companyForm.fields[field].setError(_.uniq(errors).join ', ')
-          notify 'error', 'Could not create company'
+  saveAdmin: (e) ->
+    @model.set 'company_id', @company.get 'id'
+    @model.save {},
+    wait: true
+    forceUpdate: true
+    success: (model, response) =>
+      notify "success", "Registered"
+      @redirect(model)
+      
+    error: (model, response) =>
+      if response.responseText
+        errorlist = JSON.parse response.responseText
+        for field, errors of errorlist.errors
+          if field of @adminForm.fields
+            @adminForm.fields[field].setError(_.uniq(errors).join ', ')
+      notify "error", "Unable to register, please resolve issues below."
 
   redirect: (model) ->
     go = ->
