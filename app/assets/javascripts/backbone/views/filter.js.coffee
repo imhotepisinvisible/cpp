@@ -9,7 +9,7 @@ class CPP.Filter extends CPP.Views.Base
 
   events: -> _.extend {}, CPP.Views.Base::events,
     "keyup .fltr-search"        : "setFilter"
-    "blur .tag-input"           : "setFilter"
+    "blur .tag-input"           : "blurTag"
     'change .fltr-date'         : "setFilter"
 
   sub_el: "#filters"
@@ -79,10 +79,18 @@ class CPP.Filter extends CPP.Views.Base
     @year_group_list_tags_form.render()
     $('.year-group-tags-form').append(@year_group_list_tags_form.el)
 
+  blurTag: (e) ->
+    deferreds = []
+    if e and $('.dropdown-menu').is(':visible') and $('.dropdown-menu:hover').length > 0
+      deferreds.push($('.dropdown-menu').click())
+
+    $.when.apply($, deferreds).done (=>
+      @setFilter()
+    )
 
   setFilter: ->
     fCollection = @data
-    if filters
+    if @filters
       for filter in @filters
         tb =  $("#"+filter.attribute).val()
         switch filter.type
@@ -119,7 +127,7 @@ class CPP.Filter extends CPP.Views.Base
                     ret |= tag in res
                   ret
                 ))
-          when 'date'
+          when "date"
             fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
               res = eval('with (model, filter) {model' + filter.scope + '.get(filter.attribute)}')
               res >= tb
