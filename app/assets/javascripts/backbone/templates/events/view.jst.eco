@@ -122,7 +122,11 @@
               Deadline:
             </td>
             <td>
-              <%= Date.parse(@event.get('deadline')).toString("dd/MM/yyyy HH:mm") %>
+              <% if @event.get 'deadline': %>
+                <%= Date.parse(@event.get('deadline')).toString("dd/MM/yyyy HH:mm") %>
+              <% else: %>
+                No deadline set.
+              <% end %>
             </td>
           </tr>
         </table>
