@@ -37,6 +37,7 @@ class EmailsController < ApplicationController
     email.state = "Approved"
     # Send email
     if email.save!
+      email.send_email!
       head :no_content
     else
       respond_with email, status: :unprocessable_entity

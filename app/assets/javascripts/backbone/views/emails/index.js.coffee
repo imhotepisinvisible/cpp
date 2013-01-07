@@ -16,14 +16,15 @@ class CPP.Views.Emails.Index extends CPP.Views.Base
     @render()
 
   render: ->
-    $(@el).html(@template(emails: @collection, type: @options.type))
+    type = @options.type
+    $(@el).html(@template(emails: @collection, type: type))
 
     @collection.each (email) =>
       email.company = new CPP.Models.Company id: email.get("company_id")
       email.company.fetch
         success: ->
           # Render the email if we can get its company
-          view = new CPP.Views.Emails.Item model: email
+          view = new CPP.Views.Emails.Item model: email, type: type
           @$('#emails').append(view.render().el)
         error: ->
           notify "error", "Couldn't fetch company for email"
@@ -31,7 +32,7 @@ class CPP.Views.Emails.Index extends CPP.Views.Base
 
   addEmail: ->
     switch @options.type
-      when "tagged" then  Backbone.history.navigate("companies/" + @collection.company.id + "/tagged_emails/new", trigger: true)
+      when "tagged" then  Backbone.history.navigate("companies/" + getUserCompanyId() + "/tagged_emails/new", trigger: true)
       when "event" then   Backbone.history.navigate("events/" + @collection.event.id + "/email_attendees", trigger: true)
 
   viewCompany: ->

@@ -58,7 +58,6 @@ class DirectEmailsController < ApplicationController
   def update
     @email = DirectEmail.find(params[:id])
     if @email.update_attributes(params[:direct_email])
-      @email.send_email
       head :no_content
     else
       respond_with @email, status: :unprocessable_entity
