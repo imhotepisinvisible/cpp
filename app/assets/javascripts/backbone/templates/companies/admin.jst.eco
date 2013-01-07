@@ -38,6 +38,7 @@
 
 <div class="row row-top-space">
   <div class="offset1 span3">
+    <label>Department Registration Status</label>
     <select id="select-approval-status">
       <option value="-1"><%= window.approvalStatusMap(-1) %></option>
       <option value="0"><%= window.approvalStatusMap(0) %></option>
