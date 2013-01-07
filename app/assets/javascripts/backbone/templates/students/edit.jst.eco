@@ -42,13 +42,7 @@
         </span>
 
         <span id="student-year-container">
-          <span id="student-year" class="student-editable student-profile-intro-status <%= if not @student.get('year') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to edit your year', 'bottom') %>>
-            <% if @student.get('year'): %>
-              <%= getOrdinal(@student.get 'year') %>
-            <% else: %>
-              N/A
-            <% end %>
-          </span>
+          <span id="student-year" class="student-editable student-profile-intro-status <%= if not @student.get('year') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to edit your year', 'bottom') %>><%= if @student.get('year') then getOrdinal(@student.get 'year') else "N/A" %></span>
         </span>
 
         <span> Year</span>
