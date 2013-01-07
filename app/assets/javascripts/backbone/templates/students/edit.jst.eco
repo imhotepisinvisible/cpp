@@ -82,13 +82,17 @@
           <div class="btn btn-primary" id="btn-toggle-profile">
             <i class="icon-pencil"></i>
             <span id="student-profile-toggle-text">
-              Edit My Profile
+              <% if (@student.reasonsProfileInactive().length == 0): %>
+                Advanced Profile Settings
+              <% else: %>
+                Hide Advanced Profile Settings
+              <% end %>
             </span>
           </div>
         </div>
 
 
-        <div class="span12" id="student-profile-body" style="display:none">
+        <div class="span12" id="student-profile-body" style="<%= if (@student.reasonsProfileInactive().length == 0) then 'display:none' else '' %>">
           <div class="row">
             <div class="span4">
               <h1 class="section-header">

@@ -298,10 +298,10 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     ttContainer = $('#student-profile-toggle-text-container')
     $('#student-profile-body').slideToggle 'fast', ->
       if $('#student-profile-body').is ":hidden"
-        tt.html("Edit My Profile")
+        tt.html("Advanced Profile Settings")
         ttContainer.find('i').show()
       else
-        tt.html("Close")
+        tt.html("Hide Advanced Profile Settings")
         ttContainer.find('i').hide()
 
   changeLookingFor: (e) ->

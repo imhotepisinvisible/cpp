@@ -25,6 +25,8 @@ gem 'obscenity'                   # Obscenity filter
 gem 'lorem'                       # Simple Lorem
 gem 'impressionist'               # Stats & Logging
 
+gem 'factory_girl_rails', :require => false # Easy fixtures
+
 # UI/Appearance Related Gems
 gem 'less-rails'                  # Less required for Bootstrap
 gem 'twitter-bootstrap-rails'     # Twitter Bootstrap <3 Rails
@@ -48,6 +50,7 @@ gem 'jquery-fileupload-rails'     # File upload
 gem 'jcountdown-rails', :git => 'http://github.com/rezwyi/jcountdown-rails.git' #Countdown timer
 gem 'bootstrap-toggle-buttons-rails', :git => 'http://github.com/wafcio/bootstrap-toggle-buttons-rails.git' # On/Off switches
 gem 'highcharts-rails'
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3' # SASS for nicer CSS
   gem 'coffee-rails', '~> 3.2.1' # Coffeescript is the bomb
@@ -86,8 +89,6 @@ group :test, :development do
   gem 'pry-rails'             # Awesome developer console http://pryrepl.org/
   gem 'faker'                 # For faking data
   gem 'database_cleaner'      # For tests, wipe database between tests
-
-  gem 'factory_girl_rails', :require => false # Easy fixtures
 end
 
 group :test do
