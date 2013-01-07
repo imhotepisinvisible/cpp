@@ -98,7 +98,7 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
     documentType = documentType.replace("-","_")
     $.ajax
       url: "/students/#{@model.id}/documents/#{documentType}"
-      type: 'DELETE'  
+      type: 'DELETE'
       error: (data) ->
         notify('error', "Unable to remove #{documentType}")
 
@@ -119,7 +119,7 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
     $(@el).html(@template(student: @model, editable: true))
     # Super called as extending we are extending CPP.Views.Base
     super
-    $('.form').append(@form.el)
+    $('#main-form').append(@form.el)
     validateField(@form, field) for field of @form.fields
     @
 
@@ -152,7 +152,7 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
             notify 'success', 'Student saved'
             @undelegateEvents()
           )
-          
+
         error: (model, response) =>
           try
             errorlist = JSON.parse response.responseText
