@@ -1,6 +1,6 @@
-CPP.Views.TaggedEmails ||= {}
+CPP.Views.Emails ||= {}
 
-class CPP.Views.TaggedEmails.Partial extends CPP.Views.Base
+class CPP.Views.Emails.Partial extends CPP.Views.Base
   template: JST['backbone/templates/emails/partial']
 
   editable: false
@@ -26,4 +26,4 @@ class CPP.Views.TaggedEmails.Partial extends CPP.Views.Base
     Backbone.history.navigate("companies/" + getUserCompanyId() + "/tagged_emails/new", trigger: true)
 
   viewCompaniesEmails: ->
-    Backbone.history.navigate("companies/" + getUserCompanyId() + "/tagged_emails", trigger: true)
+    Backbone.history.navigate("companies/" + getUserCompanyId() + "/emails", trigger: true)

@@ -20,6 +20,7 @@ class CPP.Views.Emails.Item extends CPP.Views.Base
       when "tagged" then Backbone.history.navigate("tagged_emails/" + @model.get('id') + "/edit", trigger: true)
       when "direct" then Backbone.history.navigate("direct_emails/" + @model.get('id') + "/edit", trigger: true)
       when "event"  then Backbone.history.navigate("event_emails/" + @model.get('id') + "/edit", trigger: true)
+      else Backbone.history.navigate("emails/" + @model.get('id') + "/edit", trigger: true)
 
   deleteEmail: (e) ->
     e.stopPropagation()
@@ -35,7 +36,8 @@ class CPP.Views.Emails.Item extends CPP.Views.Base
     @
 
   viewEmail: ->
-    switch @type
+    switch @options.type
       when "tagged" then Backbone.history.navigate("tagged_emails/" + @model.get('id'), trigger: true)
       when "direct" then Backbone.history.navigate("direct_emails/" + @model.get('id'), trigger: true)
       when "event"  then Backbone.history.navigate("event_emails/" + @model.get('id'), trigger: true)
+      else Backbone.history.navigate("emails/" + @model.get('id'), trigger: true)

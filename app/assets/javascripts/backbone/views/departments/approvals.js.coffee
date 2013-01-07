@@ -22,7 +22,6 @@ class CPP.Views.Departments.Approvals extends CPP.Views.Base
         notify 'error', 'Could not fetch company approval requests'
 
   render: ->
-    console.log 'render'
     $(@el).html(@template(dept: @model))
     if @companyCollection.length > 0
       @companyCollection.each (company) =>
