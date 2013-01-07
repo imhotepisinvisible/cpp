@@ -41,67 +41,71 @@
         <div class="control-group">
           <label class="control-label">Documents</label>
           <div class="controls">
-            <table class="table table-striped">
-              <tr>
-                <td id="table-cv" class="upload-container <%= "missing-document" unless @student.get('cv_file_name') %>">
-                  <div>
-                    Curriculum Vitae
-                    <div class="hidden">
-                      <input class="file-input" id="file-cv" type="file" name="student[cv]" size="20">
-                    </div>
-                    <div class="pull-right btn-group">
-                      <div class="btn upload-doc" id="upload-cv"><i class="icon-upload-alt"/></div>
-                      <div class="btn btn-danger delete-doc" id="delete-cv"><i class="icon-trash" /></div>
-                    </div>
-                    <div id="filename-cv" class="pull-right"></div>
-                  </div>
-                  <div class="clearfix"></div>
-                  <div class="progress progress-info progress-upload" style="display:none">
-                    <div id="progress-cv" class="bar">
-                  </div>
-                </td>
-              </tr>
+            <div class="row">
+              <div class="span4">
+                <table class="table table-striped">
+                  <tr>
+                    <td id="table-cv" class="upload-container <%= "missing-document" unless @student.get('cv_file_name') %>">
+                      <div>
+                        Curriculum Vitae
+                        <div class="hidden">
+                          <input class="file-input" id="file-cv" type="file" name="student[cv]" size="20">
+                        </div>
+                        <div class="pull-right btn-group">
+                          <div class="btn upload-doc" id="upload-cv"><i class="icon-upload-alt"/></div>
+                          <div class="btn btn-danger delete-doc" id="delete-cv"><i class="icon-trash" /></div>
+                        </div>
+                        <div id="filename-cv" class="pull-right"></div>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="progress progress-info progress-upload" style="display:none">
+                        <div id="progress-cv" class="bar">
+                      </div>
+                    </td>
+                  </tr>
 
-              <tr>
-                <td id="table-transcript" class="upload-container <%= "missing-document" unless @student.get('transcript_file_name') %>">
-                  <div>
-                    Transcript
-                    <div class="hidden">
-                      <input class="file-input" id="file-transcript" type="file" name="student[transcript]" size="20">
-                    </div>
-                    <div class="pull-right btn-group">
-                      <div class="btn upload-doc" id="upload-transcript"><i class="icon-upload-alt"/></div>
-                      <div class="btn btn-danger delete-doc" id="delete-transcript"><i class="icon-trash" /></div>
-                    </div>
-                    <div id="filename-transcript" class="pull-right"></div>
-                  </div>
-                  <div class="clearfix"></div>
-                  <div class="progress progress-info progress-upload" style="display:none">
-                    <div id="progress-transcript" class="bar">
-                  </div>
-                </td>
-              </tr>
+                  <tr>
+                    <td id="table-transcript" class="upload-container <%= "missing-document" unless @student.get('transcript_file_name') %>">
+                      <div>
+                        Transcript
+                        <div class="hidden">
+                          <input class="file-input" id="file-transcript" type="file" name="student[transcript]" size="20">
+                        </div>
+                        <div class="pull-right btn-group">
+                          <div class="btn upload-doc" id="upload-transcript"><i class="icon-upload-alt"/></div>
+                          <div class="btn btn-danger delete-doc" id="delete-transcript"><i class="icon-trash" /></div>
+                        </div>
+                        <div id="filename-transcript" class="pull-right"></div>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="progress progress-info progress-upload" style="display:none">
+                        <div id="progress-transcript" class="bar">
+                      </div>
+                    </td>
+                  </tr>
 
-              <tr>
-                <td id="table-covering-letter" class="upload-container <%= "missing-document" unless @student.get('covering_letter_file_name') %>">
-                  <div>
-                    Covering Letter
-                    <div class="hidden">
-                      <input class="file-input" id="file-covering-letter" type="file" name="student[covering_letter]" size="20">
-                    </div>
-                    <div class="pull-right btn-group">
-                      <div class="btn upload-doc" id="upload-covering-letter"><i class="icon-upload-alt"/></div>
-                      <div class="btn btn-danger delete-doc" id="delete-covering-letter"><i class="icon-trash" /></div>
-                    </div>
-                    <div id="filename-covering-letter" class="pull-right"></div>
-                  </div>
-                  <div class="clearfix"></div>
-                  <div class="progress progress-info progress-upload" style="display:none">
-                    <div id="progress-covering-letter" class="bar">
-                  </div>
-                </td>
-              </tr>
-            </table>
+                  <tr>
+                    <td id="table-covering-letter" class="upload-container <%= "missing-document" unless @student.get('covering_letter_file_name') %>">
+                      <div>
+                        Covering Letter
+                        <div class="hidden">
+                          <input class="file-input" id="file-covering-letter" type="file" name="student[covering_letter]" size="20">
+                        </div>
+                        <div class="pull-right btn-group">
+                          <div class="btn upload-doc" id="upload-covering-letter"><i class="icon-upload-alt"/></div>
+                          <div class="btn btn-danger delete-doc" id="delete-covering-letter"><i class="icon-trash" /></div>
+                        </div>
+                        <div id="filename-covering-letter" class="pull-right"></div>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="progress progress-info progress-upload" style="display:none">
+                        <div id="progress-covering-letter" class="bar">
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </fieldset>
