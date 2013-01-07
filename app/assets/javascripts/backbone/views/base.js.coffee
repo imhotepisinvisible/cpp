@@ -2,9 +2,10 @@ class CPP.Views.Base extends Backbone.View
   events:
     'click .back': 'back'
 
-  render: ->
+  render: (noUnbind) ->
     super
-    #$(@el).unbind()
+    unless noUnbind
+      $(@el).unbind()
 
     $("a[rel=popover]").popover()
     $(".tooltip").tooltip()
