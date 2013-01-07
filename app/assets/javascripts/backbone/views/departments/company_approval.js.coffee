@@ -20,7 +20,7 @@ class CPP.Views.Departments.CompanyApproval extends CPP.Views.Base
     @changeStatus 2, 'approved'
 
   reject: ->
-    @changeStatus -1, 'rejected'
+    @changeStatus -1, 'rejected, consider emailing this company to explain why.'
 
   changeStatus: (status, message) ->
     $.ajax
