@@ -28,7 +28,7 @@ class CPP.Routers.EventEmails extends Backbone.Router
         notify "error", "Couldn't fetch emails"
 
   indexEvent: (event_id) ->
-    if isStudent() or isCompanyAdmin()
+    if isStudent()
       window.history.back()
       return false
 
@@ -70,7 +70,7 @@ class CPP.Routers.EventEmails extends Backbone.Router
         company = event.get 'company_id'
         email = new CPP.Models.EventEmail company_id: company, event_id: event_id, subject: "Subject", body: "Email body"
         email.collection = new CPP.Collections.EventEmails
-        new CPP.Views.Emails.Edit model: email, type: "event"
+        new CPP.Views.Emails.Edit model: email, type: "event", event: event
       error: ->
         notify "error", "Couldn't fetch event"
 
@@ -87,7 +87,7 @@ class CPP.Routers.EventEmails extends Backbone.Router
         notify "error", "Couldn't fetch email"
 
   view: (id) ->
-    if isStudent() or isCompanyAdmin()
+    if isStudent()
       window.history.back()
       return false
 
