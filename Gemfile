@@ -25,8 +25,6 @@ gem 'obscenity'                   # Obscenity filter
 gem 'lorem'                       # Simple Lorem
 gem 'impressionist'               # Stats & Logging
 
-gem 'factory_girl_rails', :require => false # Easy fixtures
-
 # UI/Appearance Related Gems
 gem 'less-rails'                  # Less required for Bootstrap
 gem 'twitter-bootstrap-rails'     # Twitter Bootstrap <3 Rails
@@ -88,6 +86,7 @@ group :test, :development do
 
   gem 'pry-rails'             # Awesome developer console http://pryrepl.org/
   gem 'faker'                 # For faking data
+  gem 'factory_girl_rails', :require => false # Easy fixtures
   gem 'database_cleaner'      # For tests, wipe database between tests
 end
 
