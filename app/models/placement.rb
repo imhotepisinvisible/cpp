@@ -13,6 +13,7 @@
 #   t.datetime "updated_at",  :null => false
 
 class Placement < ActiveRecord::Base
+  default_scope order('created_at DESC')
   belongs_to :company
 
   acts_as_taggable_on :skills, :interests, :year_groups
