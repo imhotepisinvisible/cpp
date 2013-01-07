@@ -5,7 +5,7 @@
 
   <% if @dept.get('status') < 1: %>
     <div class="btn-container btn-group pull-right">
-      <div class="btn btn-mini btn-request">Request Access</div>
+      <div class="btn btn-mini btn-request"><%= if @dept.get('status') == -1 then 'Resubmit Request' else 'Request Access' %></div>
     </div>
   <% end %>
 

@@ -21,7 +21,7 @@ class CPP.Views.Departments.EmailApproval extends CPP.Views.Base
       type: 'PUT'
       success: =>
         notify 'success', "Request approved"
-        $(@el).remove()
+        @model.collection.remove(@model)
       error: =>
         notify 'error', "Could not approve request"
 
@@ -35,7 +35,7 @@ class CPP.Views.Departments.EmailApproval extends CPP.Views.Base
         reject_reason: reject_reason
       success: =>
         notify 'success', "Request rejected"
-        $(@el).remove()
+        @model.collection.remove(@model)
       error: =>
         notify 'error', "Could not reject request"
 

@@ -30,6 +30,6 @@ class CPP.Views.Departments.CompanyApproval extends CPP.Views.Base
         status: status
       success: =>
         notify 'success', "Company #{message}"
-        $(@el).remove()
+        @model.collection.remove(@model)
       error: ->
         notify 'error', "Company could not be #{message}"
