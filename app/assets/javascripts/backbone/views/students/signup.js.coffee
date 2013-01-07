@@ -23,7 +23,7 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
   render: ->
     $(@el).html(@template(student: @model))
     super
-    $('.form').append(@form.el)
+    $('#signup-form').append(@form.el)
     Backbone.Validation.bind @form
     validateField(@form, field) for field of @form.fields
     @
