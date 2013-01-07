@@ -12,6 +12,7 @@
 class Department < ActiveRecord::Base
   belongs_to :organisation
   has_and_belongs_to_many :students, :association_foreign_key => :user_id
+  has_and_belongs_to_many :events
   has_many :department_registrations, :conditions => { :status => [2,3] }
   has_many :pending_department_registrations, :conditions => { :status => 1 }, :class_name => "DepartmentRegistration"
   has_many :all_department_registrations, :class_name => "DepartmentRegistration"

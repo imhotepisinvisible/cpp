@@ -45,6 +45,14 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(params[:event])
+
+    if params.has_key? :departments
+      departments = params[:departments].map{ |id| Department.find(id) }
+    else
+      departments = []
+    end
+    @event.departments = departments
+
     if @event.save
       respond_with @event, status: :created, location: @event
     else
