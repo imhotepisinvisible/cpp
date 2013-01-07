@@ -2,6 +2,11 @@
   Create a New Company
 </h1>
 
+<div class="alert alert-info">
+  <p>Please enter information about your company below, followed by the administrator details which will be used to verify and access your account.</p>
+  <p>For the departments option, please select the departments to which you wish to advertise your company. These will then be approved by the appropriate departments. More departments can be added at any time.</p>
+</div>
+
 <div class="row">
   <div class="span6">
     <h2 class="section-header">

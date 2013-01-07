@@ -1,11 +1,11 @@
-<div class="item <%= if @status == 'Rejected' then 'missing-document' else '' %>">
+<div class="item <%= if @dept.get('status') == -1 then 'missing-document' else '' %>">
   <div class="department-display-container">
     <span class="department-name"><%= @dept.get 'name' %></span>
   </div>
 
   <% if @dept.get('status') < 1: %>
     <div class="btn-container btn-group pull-right">
-      <div class="btn btn-mini btn-request">Request</div>
+      <div class="btn btn-mini btn-request"><%= if @dept.get('status') == -1 then 'Resubmit Request' else 'Request Access' %></div>
     </div>
   <% end %>
 

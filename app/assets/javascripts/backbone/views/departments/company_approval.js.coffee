@@ -5,8 +5,8 @@ class CPP.Views.Departments.CompanyApproval extends CPP.Views.Base
   template: JST['backbone/templates/departments/company_approval']
 
   events: -> _.extend {}, CPP.Views.Base::events,
-    'click .btn-approve' : 'approve'
-    'click .btn-reject'  : 'reject'
+    'click #btn-approve' : 'approve'
+    'click #btn-reject'  : 'reject'
 
   initialize: (options) ->
     @dept = options.dept
@@ -17,22 +17,19 @@ class CPP.Views.Departments.CompanyApproval extends CPP.Views.Base
     @
 
   approve: ->
-    @changeStatus 2
+    @changeStatus 2, 'approved'
 
   reject: ->
-    @changeStatus -1
+    @changeStatus -1, 'rejected'
 
-  changeStatus: (status) ->
-    statusText = if status == 2 then 'approve' else 'reject'
-    suffix = if status == 2 then 'd' else 'ed'
-
+  changeStatus: (status, message) ->
     $.ajax
-      url: "/companies/#{@model.id}/departments/#{@dept.id}/change_status"
+      url: "/companies/#{@model.id}/departments/#{@dept.id}/status"
       type: 'PUT'
       data:
         status: status
       success: =>
-        notify 'success', "Request #{statusText}#{suffix}"
-        $(@el).remove()
-      error: =>
-        notify 'error', "Could not #{statusText} request"
+        notify 'success', "Company #{message}"
+        @model.collection.remove(@model)
+      error: ->
+        notify 'error', "Company could not be #{message}"

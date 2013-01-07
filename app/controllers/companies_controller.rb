@@ -77,6 +77,13 @@ class CompaniesController < ApplicationController
     end
     @company.pending_departments = departments
 
+    # Automatically 'request' approval for company's departments
+    departments.each do |dept|
+      dept_reg = DepartmentRegistration.find_or_create_by_company_id_and_department_id(@company.id, dept.id)
+      dept_reg.status = 1
+      dept_reg.save
+    end
+
     if @company.save
       respond_with @company, status: :created, location: @company
     else

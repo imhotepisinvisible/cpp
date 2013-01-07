@@ -23,6 +23,8 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
           type: 'TextArea'
     .render()
     @render()
+    $.get "/companies/#{@model.id}/departments/#{getAdminDepartment()}/status", (status) ->
+      $('#select-approval-status').val(status)
 
   logoUploadInitialize: ->
     $('#file-logo').fileupload
@@ -53,9 +55,9 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
 
   deleteDocument: ->
     $.ajax
-      url: "/companies/#{@model.id}/documents/logo"
+      url: "/companies/#{@model.id}/logo"
       type: 'DELETE'
-      success: (data) ->
+      success: (data) =>
         Backbone.history.navigate('/companies/' + @model.id, trigger: true)
         notify 'success', 'Company saved'
       error: (data) ->
@@ -96,16 +98,24 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
         wait: true
         forceUpdate: true
         success: (model, response) =>
-          if $('#file-logo').get(0).files.length > 0
-            @logoUploadInitialize()
-            $('#file-logo').fileupload 'send',
-              files: $('#file-logo').get(0).files
-          else if $('.company-logo-image').attr('src') == '/assets/default_profile.png'
-            @deleteDocument()
-          else
-            Backbone.history.navigate('/companies/' + @model.id, trigger: true)
-            notify "success", "Company saved"
-            @undelegateEvents()
+          $.ajax
+            url: "/companies/#{@model.id}/departments/#{getAdminDepartment()}/status"
+            type: 'PUT'
+            data:
+              status: $('#select-approval-status').val()
+            success: =>
+              if $('#file-logo').get(0).files.length > 0
+                @logoUploadInitialize()
+                $('#file-logo').fileupload 'send',
+                  files: $('#file-logo').get(0).files
+              else if $('.company-logo-image').attr('src') == '/assets/default_profile.png'
+                @deleteDocument()
+              else
+                Backbone.history.navigate('/companies/' + @model.id, trigger: true)
+                notify "success", "Company saved"
+                @undelegateEvents()
+            error: =>
+              notify 'error', "Could not change approval status"
         error: (model, response) =>
           try
             errorlist = JSON.parse response.responseText

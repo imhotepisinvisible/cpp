@@ -117,7 +117,8 @@ CPP::Application.routes.draw do
     resources :direct_emails
     resources :departments
     resources :departments do
-      put :change_status
+      put 'status', :action => :set_status
+      get 'status', :action => :get_status
       put :apply
     end
     resources :company_contacts do

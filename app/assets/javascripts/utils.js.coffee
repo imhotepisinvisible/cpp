@@ -86,6 +86,15 @@ window.displayJQXHRErrors = (data) ->
 window.addTooltip = (showTooltip, message, position) ->
   if showTooltip then "rel='tooltip' title='#{message}' data-placement='#{position}'" else ''
 
+window.approvalStatusMap = (code) ->
+  switch code
+    when -1 then 'Rejected, not visible to students from this department'
+    when  0 then 'Not requested, not visible to students from this department'
+    when  1 then 'Pending, not visible to students from this department'
+    when  2 then 'Approved, visible to students from this department'
+    when  3 then 'Partnered, can view students from this department'
+    else code
+
 window.loggedIn = ->
   CPP.CurrentUser? && CPP.CurrentUser isnt {}
 

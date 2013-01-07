@@ -12,18 +12,10 @@ class CPP.Views.Companies.DepartmentRequest extends CPP.Views.Base
     @render()
 
   render: ->
-    $(@el).html(@template(dept: @model, status: @statusMap(@model.get 'status')))
+    $(@el).html(@template(dept: @model, status: approvalStatusMap(@model.get 'status')))
     @
 
-  statusMap: (code) ->
-    switch code
-      when -1 then 'Rejected'
-      when 0  then 'Not requested'
-      when 1  then 'Pending approval'
-      when 2  then 'Approved'
-      else code
-
-  request: ->
+  request: (e) ->
     # Rejected or not requested
     if @model.get('status') < 1
       $.ajax
@@ -31,5 +23,6 @@ class CPP.Views.Companies.DepartmentRequest extends CPP.Views.Base
         type: 'PUT'
         success: ->
           notify 'success', 'Request sent'
-          $('.request-status').html('Pending approval')
-          $('.btn-container').hide()
+          $(e.currentTarget).closest('.item').find('.request-status').html(approvalStatusMap(1))
+          $(e.currentTarget).closest('.btn-container').hide()
+          $(e.currentTarget).closest('.item').removeClass('missing-document')
