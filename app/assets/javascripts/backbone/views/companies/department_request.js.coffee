@@ -23,6 +23,6 @@ class CPP.Views.Companies.DepartmentRequest extends CPP.Views.Base
         type: 'PUT'
         success: ->
           notify 'success', 'Request sent'
-          $('.request-status').html(approvalStatusMap(1))
-          $('.btn-container').hide()
+          $(e.currentTarget).closest('.item').find('.request-status').html(approvalStatusMap(1))
+          $(e.currentTarget).closest('.btn-container').hide()
           $(e.currentTarget).closest('.item').removeClass('missing-document')

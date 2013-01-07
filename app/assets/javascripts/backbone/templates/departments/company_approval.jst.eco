@@ -14,7 +14,8 @@
     </div>
     <div class="span2">
       <div class="btn-container btn-group">
-        <a class="btn btn-mini btn-primary" href="/#companies/<%= @company.id %>/edit">Edit Company</a>
+        <div id="btn-approve" class="btn btn-mini btn-primary">Approve</div>
+        <div id="btn-reject" class="btn btn-mini btn-danger">Reject</div>
       </div>
     </div>
   </div>
