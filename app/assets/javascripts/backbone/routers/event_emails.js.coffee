@@ -60,7 +60,7 @@ class CPP.Routers.EventEmails extends Backbone.Router
         notify "error", "Couldn't fetch emails"
 
   new: (event_id) ->
-    if isStudent() or isCompanyAdmin()
+    if isStudent()
       window.history.back()
       return false
 
@@ -90,7 +90,7 @@ class CPP.Routers.EventEmails extends Backbone.Router
     if isStudent() or isCompanyAdmin()
       window.history.back()
       return false
-      
+
     email = new CPP.Models.EventEmail id: id
     email.fetch
       success: ->
