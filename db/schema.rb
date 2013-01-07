@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20130105184041) do
   create_table "department_registrations", :force => true do |t|
     t.integer  "company_id"
     t.integer  "department_id"
-    t.integer  "status",        :default => 1
+    t.integer  "status",        :default => 0
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
   end

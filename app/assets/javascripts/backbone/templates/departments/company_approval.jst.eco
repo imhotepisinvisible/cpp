@@ -1,16 +1,21 @@
 <div class="item">
-  <div class="approval-display-container">
-    <a class="company-name" href="/#companies/<%= @company.id %>">
-      <%= @company.get 'name' %>
-    </a>
-  </div>
-
-  <div class="btn-container btn-group">
-    <div class="btn btn-mini btn-primary btn-approve">Approve</div>
-    <div class="btn btn-mini btn-danger btn-reject">Reject</div>
-  </div>
-
-  <div class="approval-display-container">
-    <span class="approval-status">Pending your approval</span>
+  <div class="row-fluid">
+    <div class="span2">
+      <div class="company-logo-header">
+        <a href="/#companies/<%= @company.id %>">
+          <img src="<%= @company.getLogoPath() %>">
+        </a>
+      </div>
+    </div>
+    <div class="span8">
+      <div class="approval-display-container">
+        <span class="approval-status">Pending your approval, edit this company to change their approval status</span>
+      </div>
+    </div>
+    <div class="span2">
+      <div class="btn-container btn-group">
+        <a class="btn btn-mini btn-primary" href="/#companies/<%= @company.id %>/edit">Edit Company</a>
+      </div>
+    </div>
   </div>
 </div>

@@ -14,7 +14,7 @@
     <div id="company-logo-large company-logo-img-container"
          class="upload-container img-polaroid <%= "missing-document" unless @company.get('logo_file_name') %> image-buttons-container">
       <% if @company.get 'logo_file_name': %>
-        <img src="/companies/<%= @company.get 'id' %>/documents/logo" class="company-logo-image">
+        <img src="<%= @company.getLogoPath() %>" class="company-logo-image">
       <% else: %>
         <img src="/assets/default_profile.png" id="company-logo-img" class="company-logo-image">
       <% end %>
@@ -33,6 +33,18 @@
         <div id="progress-logo" class="bar"></div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="row row-top-space">
+  <div class="offset1 span3">
+    <select id="select-approval-status">
+      <option value="-1"><%= window.approvalStatusMap(-1) %></option>
+      <option value="0"><%= window.approvalStatusMap(0) %></option>
+      <option value="1"><%= window.approvalStatusMap(1) %></option>
+      <option value="2"><%= window.approvalStatusMap(2) %></option>
+      <option value="3"><%= window.approvalStatusMap(3) %></option>
+    </select>
   </div>
 </div>
 

@@ -1,4 +1,4 @@
-<span>The entries below are requests from companies for access to your department's students.</span>
+<span>The entries below are requests from companies to be visible to students from your department.</span>
 <ul id="company-approvals" class="approval-list"></ul>
 <span>The entries below are requests from companies to email some/all of your department's students.</span>
 <ul id="email-approvals" class="approval-list"></ul>
