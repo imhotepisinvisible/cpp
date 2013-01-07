@@ -42,7 +42,7 @@ class DirectEmailsController < ApplicationController
   # POST /emails.json
   def create
     @email = DirectEmail.new(params[:direct_email])
-    @email.state = "Pending"
+    @email.state = "Approved"
     if params[:direct_email][:student_id]
       @email.student = Student.find(params[:direct_email][:student_id])
     end

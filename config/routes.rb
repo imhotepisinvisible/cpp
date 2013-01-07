@@ -112,6 +112,7 @@ CPP::Application.routes.draw do
   resources :companies do
     resources :events
     resources :placements
+    resources :emails
     resources :tagged_emails
     resources :event_emails
     resources :direct_emails

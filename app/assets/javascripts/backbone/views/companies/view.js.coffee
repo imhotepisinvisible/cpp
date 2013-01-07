@@ -33,10 +33,10 @@ class CPP.Views.CompaniesView extends CPP.Views.Base
       limit: 3
 
     if isAdmin()
-      emails_partial = new CPP.Views.TaggedEmails.Partial
+      emails_partial = new CPP.Views.Emails.Partial
         el: $(@el).find('#emails-partial')
         company: @model
-        collection: @model.tagged_emails
+        collection: @model.emails
 
       new CPP.Views.Companies.StatsPartial
         company: @model

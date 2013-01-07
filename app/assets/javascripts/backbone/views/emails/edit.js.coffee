@@ -56,7 +56,6 @@ class CPP.Views.Emails.Edit extends CPP.Views.Base
 
   render: =>
     super
-    console.log @options.type
     $(@el).html(@template(email: @model, type: @options.type))
     if @options.type == "tagged"
       @skill_list_tags_form.render()
@@ -98,7 +97,6 @@ class CPP.Views.Emails.Edit extends CPP.Views.Base
 
   updateStats: ->
     $.get "/emails/" + @model.id + "/get_matching_students_count", (data) ->
-      console.log jQuery.isEmptyObject(data)
       if !jQuery.isEmptyObject(data)
         totalRecipients = 0
         output = "<dl class=\"dl-horizontal\">\n"

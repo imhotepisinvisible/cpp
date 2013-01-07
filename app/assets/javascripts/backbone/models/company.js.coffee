@@ -8,8 +8,8 @@ class CPP.Models.Company extends CPP.Models.Base
     @placements = new CPP.Collections.Placements
     @placements.url = '/companies/' + this.id + '/placements'
 
-    @tagged_emails = new CPP.Collections.TaggedEmails
-    @tagged_emails.url = '/companies/' + this.id + '/tagged_emails'
+    @emails = new CPP.Collections.Emails
+    @emails.url = '/companies/' + this.id + '/emails'
 
     @company_contacts = new CPP.Collections.CompanyContacts
     @company_contacts.url = '/companies/' + this.id + '/company_contacts'

@@ -27,7 +27,6 @@ class CPP.Views.Departments.EmailApproval extends CPP.Views.Base
 
   reject: ->
     reject_reason = $('#reject_reason').val()
-    console.log reject_reason
     $.ajax
       url: "/emails/#{@model.id}/reject"
       type: 'PUT'
