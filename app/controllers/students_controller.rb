@@ -88,7 +88,7 @@ class StudentsController < ApplicationController
     ext = File.extname document
     unless document.nil?
       if Rails.env.production?
-        redirect_to "https://s3-eu-west-1.amazonaws.com/imperial-cpp#{(@student.send "#{document_type}".to_sym).path}"
+        redirect_to (@student.send "#{document_type}".to_sym).expiring_url
         return
       end
 
