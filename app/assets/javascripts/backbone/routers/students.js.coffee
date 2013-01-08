@@ -38,6 +38,10 @@ class CPP.Routers.Students extends Backbone.Router
       @admin(id)
       return
 
+    if isCompanyAdmin()
+      window.history.back()
+      return false
+
     student = @getStudentFromID(id)
     unless student
       notify "error", "Invalid Student"
