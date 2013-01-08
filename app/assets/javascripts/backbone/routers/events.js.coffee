@@ -4,7 +4,7 @@ class CPP.Routers.Events extends Backbone.Router
       'companies/:company_id/events'         : 'indexCompany'
       'companies/:company_id/events/new'     : 'new'
       'events/:id/edit'                      : 'edit'
-      'events/new'                           : 'newAdmin'
+      'events/new'                           : 'new'
       'events/:id'                           : 'view'
       'events/:id/students'                  : 'eventAttendees'
 
@@ -43,6 +43,11 @@ class CPP.Routers.Events extends Backbone.Router
     if isStudent()
       window.history.back()
       return false
+    if isDepartmentAdmin()
+      return @newAdmin()
+    unless company_id
+      company_id = getUserCompanyId()
+
     event = new CPP.Models.Event company_id: company_id
     event.collection = new CPP.Collections.Events
     event.company = new CPP.Models.Company id: company_id

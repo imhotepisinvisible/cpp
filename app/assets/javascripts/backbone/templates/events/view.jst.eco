@@ -138,7 +138,7 @@
         <div class="row">
           <div class="span6">
             <h1 class="section-header">
-              <i class="icon-list"></i> <%= if window.isStudent() then 'Sign Up' else 'Capacity' %>
+              <i class="icon-list"></i> <%= if window.isStudent() then 'Sign Up' else 'Attendees' %>
             </h1>
           </div>
         </div>
