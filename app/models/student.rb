@@ -59,7 +59,7 @@ class Student < User
     !last_name.blank? &&
     !degree.blank? &&
     !year.blank? &&
-    cv_file_size > 0
+    !cv_file_size.nil?
   end
 
   def valid_email?
