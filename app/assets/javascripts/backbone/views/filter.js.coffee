@@ -68,7 +68,7 @@ class CPP.Filter extends CPP.Views.Base
             autoclose: true
       if filter.default
         $('#'+filter.attribute).val(filter.default)
-        @setFilter()
+    @setFilter()
     @
 
   renderTags: ->

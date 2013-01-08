@@ -27,14 +27,10 @@ class CPP.Views.Students.Index extends CPP.Views.Base
     new CPP.Filter
       el: $(@el).find('#student-filter')
       filters: [
-        {name: "First Name"
-        type: "text"
-        attribute: "first_name"
-        scope: ""},
-        {name: "Last Name"
-        type: "text"
-        attribute: "last_name"
-        scope: ""},
+        {name: "Tags"
+        type: 'tags'
+        attribute: null
+        scope: null},
         {name: "Year"
         type: "number"
         attribute: 'year'
@@ -43,10 +39,14 @@ class CPP.Views.Students.Index extends CPP.Views.Base
         type: 'text',
         attribute: 'degree',
         scope: ''},
-        {name: "Tags"
-        type: 'tags'
-        attribute: null
-        scope: null}
+        {name: "First Name"
+        type: "text"
+        attribute: "first_name"
+        scope: ""},
+        {name: "Last Name"
+        type: "text"
+        attribute: "last_name"
+        scope: ""}
       ]
       data: @collection
   @

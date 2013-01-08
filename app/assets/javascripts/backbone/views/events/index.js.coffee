@@ -13,16 +13,6 @@ class CPP.Views.Events.Index extends CPP.Views.Base
       #model.set "visible", true
     @collection.bind 'reset', @render, @
     @collection.bind 'filter', @renderEvents, @
-    # Bind to model destroy so backbone view updates on destroy
-
-    # Get company for each event
-    #x=0
-    #eventCounter = 0
-    #@collection.each (event) =>
-      #if (event.get "visible")
-    #console.log eventCounter
-    #continue until (eventCounter == @collection.length)
-    #console.log @collection.length
     @editable = isAdmin()
     @render()
 
@@ -56,27 +46,27 @@ class CPP.Views.Events.Index extends CPP.Views.Base
     new CPP.Filter
       el: $(@el).find('#event-filter')
       filters: [
-        {name: "Event Title",
-        type: "text",
-        attribute: 'title',
-        scope: ''},
-        {name: "Company"
-        type: "text"
-        attribute: "name"
-        scope: ".company"},
-        {name: "Location"
-        type: "text"
-        attribute: "location"
-        scope: ""},
+        {name: "Tags"
+        type: "tags"
+        attribute: null
+        scope: null},
         {name: "Starting After",
         type: 'date',
         attribute: 'start_date'
         default: Date.today().toString('yyyy-MM-dd')
         scope: ''},
-        {name: "Tags"
-        type: "tags"
-        attribute: null
-        scope: null}
+        {name: "Company"
+        type: "text"
+        attribute: "name"
+        scope: ".company"},
+        {name: "Event Title",
+        type: "text",
+        attribute: 'title',
+        scope: ''},
+        {name: "Location"
+        type: "text"
+        attribute: "location"
+        scope: ""}
       ]
       data: @collection
   @

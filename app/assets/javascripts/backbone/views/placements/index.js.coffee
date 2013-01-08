@@ -43,11 +43,19 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
     new CPP.Filter
       el: $(@el).find('#placement-filter')
       filters: [
+        {name: "Tags"
+        type: "tags"
+        attribute: null
+        scope: null},
+        {name: "Deadline After",
+        type: 'date',
+        attribute: 'deadline'
+        default: Date.today().toString('yyyy-MM-dd')
+        scope: ''},
         {name: "Company"
         type: "text"
         attribute: "name"
-        scope: ".company"
-        },
+        scope: ".company"},
         {name: "Position"
         type: "text"
         attribute: "position"
@@ -55,17 +63,7 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
         {name: "Location"
         type: "text"
         attribute: "location"
-        scope: ""},
-        {name: "Deadline After",
-        type: 'date',
-        attribute: 'deadline'
-        default: Date.today().toString('yyyy-MM-dd')
-        scope: ''},
-        {name: "Tags"
-        type: "tags"
-        attribute: null
-        scope: null
-        }
+        scope: ""}
       ]
       data: @collection
   @
