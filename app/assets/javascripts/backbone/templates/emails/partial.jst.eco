@@ -15,5 +15,8 @@
     </tr>
   </thead>
   <tbody id="emails">
+    <tr>
+      <td colspan="3"><div class="loading"></div></td>
+    </tr>
   </tbody>
 </table>
