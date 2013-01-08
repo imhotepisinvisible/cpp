@@ -40,7 +40,7 @@ class Company < ActiveRecord::Base
       :medium => "500x175",
       :thumbnail => "100x35"
     },
-    :default_url => '/assets/default_profile.png'
+    :default_url => '/assets/default_logo.png'
 
   validates_attachment :logo,
     :content_type => { :content_type => ["image/jpeg", "image/jpg", "image/png"],
