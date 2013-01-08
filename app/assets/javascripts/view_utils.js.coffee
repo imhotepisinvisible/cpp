@@ -36,7 +36,7 @@ window.studentAttendEvent = (event) ->
 window.looking_fors = {
   summer: "Looking for a Summer Placement"
   industrial: "Looking for an Industrial Placement"
-  graduate: "Looking for a Grauate Job"
+  graduate: "Looking for a Graduate Job"
   nothing: "Not looking for anything"
 }
 
