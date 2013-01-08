@@ -144,7 +144,7 @@
         </div>
 
         <div class="row">
-          <% if @event.get "capacity": %>
+          <% if @event.get("capacity"): %>
             <div class="span4">
               <div id="capacity-progress" class="progress progress-<%= @event.getCapacityClass() %>">
                 <div id="capacity-bar" class="bar" style="width: <%= @event.getPercentageCapacity() %>%"></div>
@@ -153,6 +153,12 @@
 
             <div class="span2">
               <div id="capacity-text" class="well"><%= @event.getFilled() %> / <%= @event.get("capacity") %></div>
+            </div>
+          <% else: %>
+            <div class="span6">
+              <div class="well">
+                <span id="number-attending"><%= @event.getFilled() %></span> Attending
+              </div>
             </div>
           <% end %>
         </div>

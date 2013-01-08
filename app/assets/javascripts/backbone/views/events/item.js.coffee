@@ -31,7 +31,8 @@ class CPP.Views.Events.Item extends CPP.Views.Base
         notify "error", "Event could not be deleted"
 
   render: ->
-    $(@el).html(@template(event: @model, editable: @editable))
+    hasSpaces = (not @model.get('capacity')) or @model.getSpaces()
+    $(@el).html(@template(event: @model, editable: @editable, hasSpaces: hasSpaces))
     @
 
   viewEvent: ->

@@ -2,7 +2,7 @@
 <td><%= @event.get 'title' %></td>
 <td><%= @event.get 'start_date' %></td>
 <td><%= @event.get 'location' %></td>
-<td><%= @event.getSpaces() %></td>
+<td><i class="icon-spin icon-<%= if @hasSpaces then 'ok' else 'remove' %>"></i></td>
 
 <% if @editable: %>
 <td>

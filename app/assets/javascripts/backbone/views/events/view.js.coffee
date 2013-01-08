@@ -11,7 +11,12 @@ class CPP.Views.Events.View extends CPP.Views.Base
     @render()
 
   render: ->
-    $(@el).html(@template(event: @model, student: isStudent(), admin: isAdmin(), attending: studentAttendEvent(@model)))
+    $(@el).html(@template(
+      event: @model,
+      student: isStudent(),
+      admin: isAdmin(),
+      attending: studentAttendEvent(@model),
+    ))
     @
 
   signup: (event) ->
@@ -51,3 +56,4 @@ class CPP.Views.Events.View extends CPP.Views.Base
     $('#capacity-bar').width("#{@model.getPercentageCapacity()}%")
     $('.btn-signup-student').html(if attending then "I don't want to go" else "Sign me up!")
     $('#attending-text').html('You are ' + (unless attending then 'not ' else '') + 'attending this event')
+    $('#number-attending').html(@model.getFilled())
