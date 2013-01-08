@@ -30,7 +30,6 @@ class CPP.Views.CompanyContact extends CPP.Views.Base
     $(@el).trigger('update-sort', [@model, index]);
 
   edit: (e) ->
-    console.log $(e.currentTarget)
     $(e.currentTarget).parent().parent().find('.btn-container').hide()
     $(e.currentTarget).parent().parent().find('.btn-save').show()
     $(e.currentTarget).parent().parent().find('.btn-cancel').show()

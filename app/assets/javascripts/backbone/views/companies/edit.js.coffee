@@ -86,7 +86,6 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
       company: @model
       company_id: @model.id
       limit: 3
-    console.log $(@el).find('#emails-partial')
     new CPP.Views.Emails.Partial
       el: $(@el).find('#emails-partial')
       company: @model

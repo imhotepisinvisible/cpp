@@ -14,7 +14,8 @@ class CPP.Views.Emails.Partial extends CPP.Views.Base
     @render()
 
   render: () ->
-    $(@el).html(@template(editable: @editable))
+    $(@el).html(@template(editable: @editable, emails: @collection))
+    @$('#emails').html("")
     @collection.each (email) =>
       view = new CPP.Views.Emails.PartialItem
                   model: email

@@ -95,7 +95,6 @@ class CPP.Views.Emails.Edit extends CPP.Views.Base
         error: (model, response) =>
           errorlist = JSON.parse response.responseText
           for field, errors of errorlist.errors
-            console.log field
             @form.fields[field].setError(errors.join ', ')
 
           notify "error", "Unable to save email, please resolve issues below."
