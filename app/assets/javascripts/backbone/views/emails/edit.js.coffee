@@ -10,7 +10,6 @@ class CPP.Views.Emails.Edit extends CPP.Views.Base
 
   initialize: ->
     @form = new Backbone.Form(model: @model).render()
-
     saveTagModel = =>
       @model.save {},
         wait: true
@@ -56,7 +55,12 @@ class CPP.Views.Emails.Edit extends CPP.Views.Base
 
   render: =>
     super
-    $(@el).html(@template(email: @model, type: @options.type))
+    switch @options.type
+      when "tagged" then @title = "Create a New Mailing"
+      when "event"  then @title = "New Event Mailing - " + @options.event.attributes.title
+      when "direct" then @title = "New Direct Email to " + @options.student.attributes.first_name + ' ' + @options.student.attributes.last_name
+
+    $(@el).html(@template(email: @model, type: @options.type, title: @title))
     if @options.type == "tagged"
       @skill_list_tags_form.render()
       $('.skill-tags-form').append(@skill_list_tags_form.el)
@@ -68,7 +72,8 @@ class CPP.Views.Emails.Edit extends CPP.Views.Base
     $('.form').append(@form.el)
     validateField(@form, field) for field of @form.fields
     tiny_mce_init()
-    @updateStats()
+    if @options.type == "tagged"
+      @updateStats()
   @
 
   submitEmail: ->

@@ -54,7 +54,7 @@ class CPP.Routers.DirectEmails extends Backbone.Router
         company = getUserCompanyId()
         email = new CPP.Models.DirectEmail company_id: company, student_id: student_id, subject: "Subject", body: "Email body"
         email.collection = new CPP.Collections.DirectEmails
-        new CPP.Views.Emails.Edit model: email, type: "direct"
+        new CPP.Views.Emails.Edit model: email, type: "direct", student: student
       error: ->
         notify "error", "Couldn't fetch event"
 

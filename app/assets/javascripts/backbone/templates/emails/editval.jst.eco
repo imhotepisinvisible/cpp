@@ -5,7 +5,7 @@
 <% end %>
 <h1 class="section-header">
   <% if @email.isNew(): %>
-    Create a New Mailing
+    <%= @title %>
   <% else: %>
     <%= @email.get 'subject' %> (Editing)
   <% end %>
