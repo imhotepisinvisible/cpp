@@ -12,13 +12,12 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     'blur #student-bio-input-container': 'bioStopEdit'
     'click #student-name-container': 'nameEdit'
     'blur #student-name-input-container': 'nameStopEdit'
-    'click #student-year-container': 'yearEdit'
-    'blur #student-year-input-container': 'yearStopEdit'
     'click #student-degree-container': 'degreeEdit'
     'blur #student-degree-input-container': 'degreeStopEdit'
     'submit #skill-tag-form': 'addSkill'
     'click #btn-toggle-profile' : 'toggleProfile'
     'change #looking-for-select' : 'changeLookingFor'
+    'change #year-select' : 'changeYear'
     'keyup #student-name-input-container' : 'stopEditOnEnter'
     'keyup #student-year-input-container': 'stopEditOnEnter'
     'keyup #student-degree-input-container': 'stopEditOnEnter'
@@ -108,6 +107,14 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     for option in $('#looking-for-select').children()
       if $(option).val() == @model.get('looking_for')
         $(option).attr('selected', 'selected')
+
+    # Set the default selected year
+    if @model.get('year')
+      for option in $('#year-select').children()
+        if parseInt($(option).val()) == @model.get('year')
+          $(option).attr('selected', 'selected')
+    else
+      $('#year-select').addClass('missing')
     super
     @
 
@@ -193,13 +200,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
   bioStopEdit: ->
     window.inPlaceStopEdit @model, 'student', 'bio', 'Click here to add an About Me!', ((bio) ->
       bio.replace(/\n/g, "<br/>"))
-
-  yearEdit: ->
-    window.inPlaceEdit @model, 'student', 'year'
-
-  yearStopEdit: ->
-    window.inPlaceStopEdit @model, 'student', 'year', 'N/A', ((year) ->
-      if year then getOrdinal year else '')
 
   degreeEdit: ->
     window.inPlaceEdit @model, 'student', 'degree'
@@ -314,6 +314,24 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
         notify "success", "Looking for updated"
       error: (model, response) =>
         notify "error", "Could not update looking for"
+
+  changeYear: (e) ->
+    year = parseInt($(e.currentTarget.selectedOptions[0]).val())
+    if year
+      $(e.currentTarget).removeClass('missing')
+    else
+      year = null
+      $(e.currentTarget).addClass('missing')
+
+    @model.set 'year', year
+    @model.save {},
+      wait: true
+      forceUpdate: true
+      success: (model, response) =>
+        console.log 'new', model, 'old', @model
+        notify 'success', 'Year updated'
+      error: (model, response) =>
+        notify 'error', 'Could not update year'
 
   stopEditOnEnter: (e) ->
     if (e.keyCode == 13)

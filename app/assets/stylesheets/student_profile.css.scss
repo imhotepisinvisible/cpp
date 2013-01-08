@@ -111,26 +111,19 @@
   font-family: 'Arvo', serif;
   font-size: 70px;
   line-height: 75px;
-  width: 700px;
   height: 90px;
   @include box-sizing(border-box);
   position: relative;
 }
 
-#student-year-editor {
-  font-family: 'Arvo', serif;
-  font-size: 40px;
-  line-height: 45px;
-  width: 50px;
-  height: 55px;
-  @include box-sizing(border-box);
+#year-select {
+  width: 120px;
 }
 
 #student-degree-editor {
   font-family: 'Arvo', serif;
   font-size: 40px;
   line-height: 45px;
-  width: 300px;
   height: 55px;
   @include box-sizing(border-box);
 }
