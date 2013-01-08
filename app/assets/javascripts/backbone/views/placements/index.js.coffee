@@ -45,8 +45,8 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
       filters: [
         {name: "Tags"
         type: "tags"
-        attribute: null
-        scope: null},
+        attribute: ["skill_list", "interest_list", "year_group_list"]
+        scope: ''},
         {name: "Deadline After",
         type: 'date',
         attribute: 'deadline'

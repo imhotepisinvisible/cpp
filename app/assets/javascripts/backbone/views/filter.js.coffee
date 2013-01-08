@@ -108,23 +108,15 @@ class CPP.Filter extends CPP.Views.Base
                 res.toString() is tb
               ))
           when "tags"
-            ftags = @model.get("skill_list").concat(@model.get("interest_list"))
-            if ftags.length > 0
-              fCollection = new (fCollection.constructor)(fCollection.filter((model) =>
-                res = model.get("skill_list").concat(model.get("interest_list"))
-                ret = false;
-                for tag in ftags
-                  ret |= tag in res
-                ret
-              ))
-            # Filter year groups after to only include specified year
-            yearTags = @model.get("year_group_list")
-            if yearTags.length > 0
-              fCollection = new (fCollection.constructor)(fCollection.filter((model) =>
-                  res = model.get("year_group_list")
-                  ret = false;
-                  for tag in yearTags
-                    ret |= tag in res
+            for tagFilter in filter.attribute
+              filterTags = @model.get(tagFilter)
+              # Only filter when tags added to filter
+              if filterTags.length > 0
+                fCollection = new (fCollection.constructor)(fCollection.filter((model) =>
+                  modelTags = eval('with (model,filter,tagFilter) {model' + filter.scope + '.get(tagFilter)}')
+                  ret = true;
+                  for tag in filterTags
+                    ret &= tag in modelTags
                   ret
                 ))
           when "date"

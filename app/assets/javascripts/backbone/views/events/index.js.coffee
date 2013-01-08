@@ -48,8 +48,8 @@ class CPP.Views.Events.Index extends CPP.Views.Base
       filters: [
         {name: "Tags"
         type: "tags"
-        attribute: null
-        scope: null},
+        attribute: ["skill_list", "interest_list", "year_group_list"]
+        scope: ''},
         {name: "Starting After",
         type: 'date',
         attribute: 'start_date'
@@ -66,7 +66,12 @@ class CPP.Views.Events.Index extends CPP.Views.Base
         {name: "Location"
         type: "text"
         attribute: "location"
-        scope: ""}
+        scope: ""},
+        {name: "Starting After",
+        type: 'date',
+        attribute: 'start_date'
+        default: Date.today().toString('yyyy-MM-dd')
+        scope: ''},
       ]
       data: @collection
   @
