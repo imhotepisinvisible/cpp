@@ -3,7 +3,7 @@
     <div class="span2">
       <div class="company-logo-header">
         <a href="/#companies/<%= @company.id %>">
-          <img src="<%= @company.getLogoPath() %>">
+          <img src="<%= @company.get('log') %>">
         </a>
       </div>
     </div>

@@ -1,4 +1,4 @@
-<td><img class="img-logo company-logo-img" width="150px" src="<%= @company.getLogoPath() %>"></td>
+<td><img class="img-logo company-logo-img" width="150px" src="<%= @company.get('logo') %>"></td>
 <td><%= @company.get('name') %></td>
 <td><%= @company.get('description').substring(0, 100) + '...' %></td>
 

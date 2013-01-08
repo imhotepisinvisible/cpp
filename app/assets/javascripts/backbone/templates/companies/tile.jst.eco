@@ -1,7 +1,7 @@
 <div class="span3">
   <div class="thumbnail company-tile">
     <div class="company-tile-logo">
-      <img src="<%= @company.getLogoPath() %>" />
+      <img src="<%= @company.get('log') %>" />
     </div>
     <div class="company-tile-blurb">
       <%= @company.get('description').substring(0, 100) + '...' %>

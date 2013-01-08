@@ -4,7 +4,7 @@
   </div>
   <div class="company-logo-header">
     <a href="/#companies/<%= @event.company.id %>">
-      <img class="company-logo-img pull-right" src="<%= @event.company.getLogoPath() %>">
+      <img class="company-logo-img pull-right" src="<%= @event.company.get('logo_url') %>">
     </a>
   </div>
 </div>

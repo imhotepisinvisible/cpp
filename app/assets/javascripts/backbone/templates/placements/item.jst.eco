@@ -1,4 +1,4 @@
-<td><img class="small-company-logo" src="<%= @placement.company.getLogoPath() %>"/></td>
+<td><img class="small-company-logo" src="<%= @placement.company.get('logo_url') %>"/></td>
 <td><%= @placement.get 'position' %></td>
 <td><%= @placement.get 'description' %></td>
 <td><%= @placement.get 'duration' %></td>

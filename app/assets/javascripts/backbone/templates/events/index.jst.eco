@@ -2,7 +2,7 @@
   <div class="span3">
     <% if @events.company: %>
       <span class="company-logo-header">
-        <img class="company-logo-img" src="<%= @events.company.getLogoPath()%>">
+        <img class="company-logo-img" src="<%= @events.company.get('logo_url')%>">
       </span>
     <% end %>
     <div id="event-filter">

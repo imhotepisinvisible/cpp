@@ -36,12 +36,6 @@ class CPP.Models.Company extends CPP.Models.Base
       return "red-ban icon-ban-circle"
     return "icon-ban-circle"
 
-  getLogoPath: ->
-    if @get('logo_file_name')
-      return @get('logo_url')
-    else
-      return "/assets/default_profile.png"
-
   validation:
     name:
       required: true

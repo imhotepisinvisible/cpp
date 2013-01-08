@@ -15,7 +15,7 @@
       <div class="span4">
         <div id="company-logo-large company-logo-img-container"
              class="upload-container img-polaroid <%= "missing-document" unless @company.get('logo_file_name') %> image-buttons-container">
-          <img src="<%= @company.getLogoPath() %>" id="company-logo-img" class="company-logo-image">
+          <img src="<%= @company.get('logo_url') %>" id="company-logo-img" class="company-logo-image">
 
           <div class="image-buttons">
             <form class="form-inline hidden">

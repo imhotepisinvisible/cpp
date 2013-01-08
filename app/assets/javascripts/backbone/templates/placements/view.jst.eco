@@ -4,7 +4,7 @@
   </div>
   <div class="company-logo-header">
     <a href="/#companies/<%= @placement.company.id %>">
-      <img class="company-logo-img pull-right" src="<%= @placement.company.getLogoPath() %>">
+      <img class="company-logo-img pull-right" src="<%= @placement.company.get('logo_url') %>">
     </a>
   </div>
 </div>
@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    
+
     <div class="row">
       <div class="span6">
         <h1 class="section-header">
