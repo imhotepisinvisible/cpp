@@ -15,11 +15,21 @@ class DepartmentsController < ApplicationController
     end
   end
 
+  # GET /events/1/approved_departments
+  def approved
+    raise unless params.has_key? :event_id
+
+    event = Event.find(params[:event_id])
+    company = Company.find(event.company.id)
+
+    respond_with company.departments.as_json({:company_id => params[:company_id], :event_id => event.id})
+  end
+
   # GET /companies/1/departments/1/status
   def get_status
     raise unless params.has_key? :company_id
     dept_reg = DepartmentRegistration.find_or_create_by_company_id_and_department_id(params[:company_id], params[:department_id])
-    
+
     respond_with dept_reg.status
   end
 

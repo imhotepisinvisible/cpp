@@ -47,11 +47,10 @@ class EventsController < ApplicationController
     @event = Event.new(params[:event])
 
     if params.has_key? :departments
-      departments = params[:departments].map{ |id| Department.find(id) }
+      @event.departments = params[:departments].map{ |id| Department.find(id) }
     else
-      departments = []
+      @event.departments = []
     end
-    @event.departments = departments
 
     if @event.save
       respond_with @event, status: :created, location: @event
@@ -64,7 +63,17 @@ class EventsController < ApplicationController
   # PUT /events/1.json
   def update
     @event = Event.find(params[:id])
-    if @event.update_attributes(params[:event])
+
+    if params.has_key? :departments
+      puts params[:departments].map{ |id| Department.find(id) }.inspect
+      @event.departments = params[:departments].map{ |id| Department.find(id) }
+    else
+      @event.departments = []
+    end
+
+    @event.assign_attributes(params[:event])
+
+    if @event.save
       head :no_content
     else
       respond_with @event, status: :unprocessable_entity

@@ -41,8 +41,13 @@ class CPP.Models.Event extends CPP.Models.Base
       type: "Text"
       title: "Location*"
     capacity: "Text"
-    requirementsEnabled:
+    departments:
       type: "Checkboxes"
+      title: "Department(s)*"
+      options: new CPP.Collections.Departments
+      editorClass: "departments-checkbox"
+    requirementsEnabled:
+      type: "Checkbox"
       title: "Extra Requirements?"
       options: [""]
       editorAttrs:
