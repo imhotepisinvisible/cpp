@@ -222,3 +222,12 @@ FactoryGirl.create :department_administrator, {
   password_confirmation: "cppcppcpp",
   department: computing_department
 }
+
+FactoryGirl.create :department_administrator, {
+  first_name: "Darren",
+  last_name: "Dazzle",
+  email: "eee@doc.com",
+  password: "cppcppcpp",
+  password_confirmation: "cppcppcpp",
+  department: eee_department
+}
