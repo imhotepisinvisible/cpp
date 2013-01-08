@@ -29,7 +29,7 @@
       <% end %>
 
     </h1>
-    <% if @events.size > 0: %>
+    <% if @events.length > 0: %>
       <table class="table table-bordered table-hover table-clickable">
         <thead>
           <tr>
