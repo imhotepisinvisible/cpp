@@ -9,6 +9,8 @@ class StudentsController < ApplicationController
   def index
     if current_user.is_company_admin?
       @students = current_user.company.accessible_students
+    elsif current_user.is_department_admin?
+      @students = current_user.department.students
     else
       @students = Student.scoped
     end
