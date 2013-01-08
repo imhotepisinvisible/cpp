@@ -72,7 +72,7 @@ class Company < ActiveRecord::Base
 
   def as_json(options={})
     result = super(:methods => [:skill_list, :interest_list, :year_group_list])
-    result[:logo_url] = logo.expiring_url(:large)
+    result[:logo_url] = logo.expiring_url(20, :large)
     if options.has_key? :student_id
       result[:rating] = rating(options[:student_id])
     end

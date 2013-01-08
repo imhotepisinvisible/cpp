@@ -88,7 +88,7 @@ class StudentsController < ApplicationController
     ext = File.extname document
     unless document.nil?
       if Rails.env.production?
-        redirect_to (@student.send "#{document_type}".to_sym).expiring_url
+        redirect_to (@student.send "#{document_type}".to_sym).expiring_url(20)
         return
       end
 
