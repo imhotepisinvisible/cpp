@@ -22,7 +22,7 @@ class CPP.Views.Students.Settings extends CPP.Views.Base
     @reject_skill_list_tags_form = new Backbone.Form.editors.TagEditor
       model: @model
       key: 'reject_skill_list'
-      title: "Skills I don't want to hear about"
+      title: "Skills"
       url: '/tags/reject_skills'
       tag_class: 'label-success'
       tag_change_callback: saveTagModel
@@ -31,7 +31,7 @@ class CPP.Views.Students.Settings extends CPP.Views.Base
     @reject_interest_list_tags_form = new Backbone.Form.editors.TagEditor
       model: @model
       key: 'reject_interest_list'
-      title: "Interests I don't want to hear about"
+      title: "Interests"
       url: '/tags/reject_interests'
       tag_class: 'label-warning'
       tag_change_callback: saveTagModel
