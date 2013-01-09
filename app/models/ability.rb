@@ -55,7 +55,7 @@ class Ability
         email.company.all_departments.map(&:id).include? user.department_id
       end
 
-      can [:manage, :download_document, :pending, :approve, :reject], Company do |company|
+      can [:read, :update, :view_stats, :download_document, :pending, :approve, :reject], Company do |company|
         company.all_departments.map(&:id).include? user.department_id
       end
       can :create, Company

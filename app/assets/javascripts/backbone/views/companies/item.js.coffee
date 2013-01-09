@@ -9,7 +9,7 @@ class CPP.Views.CompaniesItem extends CPP.Views.Base
 
   events: -> _.extend {}, CPP.Views.Base::events,
     "click .button-company-edit"   : "editCompany"
-    "click .button-company-delete" : "deleteCompany"
+    "click .button-company-reject" : "reject"
     "click .button-company-contacts-edit" : 'editContacts'
     "click"                        : "viewCompany"
 
@@ -25,14 +25,21 @@ class CPP.Views.CompaniesItem extends CPP.Views.Base
     e.stopPropagation()
     Backbone.history.navigate("companies/#{@model.id}/company_contacts/edit", trigger: true)
 
-  deleteCompany: (e) ->
+  reject: (e) ->
     e.stopPropagation()
-    @model.destroy
-      wait: true
-      success: (model, response) ->
-        notify "success", "Company deleted"
-      error: (model, response) ->
-        notify "error", "Company could not be deleted"
+    @changeStatus CPP_APPROVAL_STATUS.REJECTED, 'rejected, consider emailing this company to explain why.'
+
+  changeStatus: (status, message) ->
+    $.ajax
+      url: "/companies/#{@model.id}/departments/#{getAdminDepartment()}/status"
+      type: 'PUT'
+      data:
+        status: status
+      success: =>
+        notify 'success', "Company #{message}"
+        @model.collection.remove(@model)
+      error: ->
+        notify 'error', "Company could not be #{message}"
 
   viewCompany: ->
     Backbone.history.navigate("companies/" + @model.id, trigger: true)

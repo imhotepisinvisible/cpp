@@ -7,7 +7,7 @@
   <div class="btn-group pull-right">
     <div class="btn btn-small button-company-edit"><i class="icon-pencil" /></div>
     <div class="btn btn-small button-company-contacts-edit"><i class="icon-user" /></div>
-    <div class="btn btn-small btn-danger button-company-delete"><i class="icon-trash"/></div>
+    <div class="btn btn-small btn-danger button-company-reject">Revoke Access</div>
   </div>
 </td>
 <% end %>
