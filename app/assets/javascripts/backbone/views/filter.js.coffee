@@ -122,7 +122,7 @@ class CPP.Filter extends CPP.Views.Base
           when "date"
             fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
               res = eval('with (model, filter) {model' + filter.scope + '.get(filter.attribute)}')
-              res >= tb
+              res >= tb || res == null
             ))
 
       @data.trigger('filter', fCollection)
