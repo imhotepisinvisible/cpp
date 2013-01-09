@@ -21,9 +21,8 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
       if @model.isNew()
         # On creation of an event, admin can choose company
         schema['company_id'] = {
-          text: "Company"
-          type: "Select"
           title: "Company"
+          type: "Select"
           options: companies
           editorClass: "company-select"
         }
