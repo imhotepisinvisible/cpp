@@ -45,18 +45,9 @@ class CPP.Models.Event extends CPP.Models.Base
       title: "Department(s)*"
       options: new CPP.Collections.Departments
       editorClass: "departments-checkbox"
-    requirementsEnabled:
-      type: "Checkbox"
-      title: "Extra Requirements?"
-      options: [""]
-      editorAttrs:
-        style: "list-style: none"
-      editorClass: "requirements-checkbox"
     requirements:
       type: "TextArea"
-      title: ""
-      fieldAttrs:
-        style: "display:none"
+      title: "Additional Requirements"
 
   getFilled: ->
     if @.registered_students then @.registered_students.length else 0
