@@ -3,7 +3,7 @@
     <div class="thumbnail company-tile">
       <div class="row-fluid top-tile-row">
         <div class="span6">
-          <img src="<%= @company.get('log') %>" />
+          <img src="<%= @company.get('logo_url') %>" />
         </div>
         <div class="span6">
           <div class="company-tile-blurb">
