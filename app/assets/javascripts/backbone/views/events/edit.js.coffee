@@ -23,6 +23,7 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
         schema['company_id'] = {
           text: "Company"
           type: "Select"
+          title: "Company"
           options: companies
           editorClass: "company-select"
         }
