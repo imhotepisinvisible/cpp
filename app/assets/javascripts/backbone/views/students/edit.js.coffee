@@ -19,7 +19,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     'change #looking-for-select' : 'changeLookingFor'
     'change #year-select' : 'changeYear'
     'keyup #student-name-input-container' : 'stopEditOnEnter'
-    'keyup #student-year-input-container': 'stopEditOnEnter'
     'keyup #student-degree-input-container': 'stopEditOnEnter'
 
   initialize: ->
@@ -102,6 +101,10 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       source: (query, process) =>
         $.get '/students/suggested_degrees', {}, (data) ->
           process(data)
+      updater: (item) =>
+        $('#student-degree-editor').val(item)
+        $('#student-degree-input-container').trigger('blur')
+        item
 
     # Set the default selected looking_for
     for option in $('#looking-for-select').children()
@@ -328,7 +331,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       wait: true
       forceUpdate: true
       success: (model, response) =>
-        console.log 'new', model, 'old', @model
         notify 'success', 'Year updated'
       error: (model, response) =>
         notify 'error', 'Could not update year'
@@ -336,5 +338,4 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
   stopEditOnEnter: (e) ->
     if (e.keyCode == 13)
       @nameStopEdit()
-      @yearStopEdit()
       @degreeStopEdit()
