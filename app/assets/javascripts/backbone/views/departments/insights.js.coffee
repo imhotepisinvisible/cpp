@@ -19,6 +19,7 @@ class CPP.Views.Departments.Insights extends CPP.Views.Base
       type: 'datetime'
       yAxis: 'Views'
       el: '#student-chart'
+      height: 200
 
     new CPP.Views.Stats.LineGraph
       url: '/companies/view_stats_all'
@@ -26,3 +27,4 @@ class CPP.Views.Departments.Insights extends CPP.Views.Base
       type: 'datetime'
       yAxis: 'Views'
       el: '#companies-chart'
+      height: 200

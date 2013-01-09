@@ -6,6 +6,7 @@ class CPP.Views.Stats.LineGraph extends CPP.Views.Base
     @title = @options.title
     @type = @options.type
     @yAxis = @options.yAxis
+    @height = if @options.height then @options.height else 300
     $.get @options.url, (data) =>
       @series_data = data
       @render()
