@@ -26,9 +26,11 @@
           <div class="alert alert-error" id="alert"><%= alert %></div>
         <% end %>
         <% if notice %>
-          <div class="alert alert-success" id="notice"><%= notice %></div>
+          <script>
+            msg = "<%= notice %>"
+            notify("success", msg)
+          </script>
         <% end %>
-
       </div>
     </div>
   </div>
