@@ -308,7 +308,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
         ttContainer.find('i').hide()
 
   changeLookingFor: (e) ->
-    lookingFor = $(e.currentTarget.selectedOptions[0]).val()
+    lookingFor = $(e.currentTarget).val()
     @model.set 'looking_for', lookingFor
     @model.save {},
       wait: true
@@ -319,7 +319,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
         notify "error", "Could not update looking for"
 
   changeYear: (e) ->
-    year = parseInt($(e.currentTarget.selectedOptions[0]).val())
+    year = parseInt($(e.currentTarget).val())
     if year
       $(e.currentTarget).removeClass('missing')
     else
