@@ -74,7 +74,7 @@ class CPP.Routers.Departments extends Backbone.Router
     else
       department.fetch
         success: ->
-          new CPP.Views.Department.Insights model: department
+          new CPP.Views.Departments.Insights model: department
         error: ->
           notify 'error', "Couldn't fetch department"
 
