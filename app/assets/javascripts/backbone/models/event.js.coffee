@@ -21,9 +21,7 @@ class CPP.Models.Event extends CPP.Models.Base
       required: true
 
   schema: ->
-    title:
-    	type: "Text"
-      # title: "Title*"
+    title: { type: 'TextArea', title: "Title*" }
    	start_date:
       type: "DateTime"
       title: "Start Date*"
