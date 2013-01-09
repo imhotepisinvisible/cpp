@@ -31,7 +31,6 @@ class CPP.Views.Students.Item extends CPP.Views.Base
       wait: true
       success: (model, response) ->
         notify "success", "Student deleted"
-        $(e.target).parent().parent().parent().remove();
       error: (model, response) ->
         notify "error", "Student could not be deleted"
 

@@ -10,7 +10,7 @@ class CPP.Filter extends CPP.Views.Base
   events: -> _.extend {}, CPP.Views.Base::events,
     "keyup .fltr-search"        : "setFilter"
     "blur .tag-input"           : "blurTag"
-    'change .fltr-date'         : "setFilter"
+    "change .fltr-date"         : "setFilter"
 
   sub_el: "#filters"
 
@@ -22,6 +22,8 @@ class CPP.Filter extends CPP.Views.Base
     @model.set("interest_list",[])
     @model.set("year_group_list",[])
     @model.bind 'change', @setFilter, @
+    # Re-set filter after deletion
+    @data.bind 'remove', @setFilter, @
 
     @skill_list_tags_form = new Backbone.Form.editors.TagEditor
       model: @model

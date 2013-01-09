@@ -20,11 +20,11 @@ class CPP.Views.Placements.Item extends CPP.Views.Base
 
   deletePlacement: (e) ->
     e.stopPropagation()
+    # @model.collection.remove(@model)
     @model.destroy
       wait: true
       success: (model, response) ->
         notify "success", "Placement deleted"
-        $(e.target).parent().parent().parent().remove()
       error: (model, response) ->
         notify "error", "Placement could not be deleted"
 
