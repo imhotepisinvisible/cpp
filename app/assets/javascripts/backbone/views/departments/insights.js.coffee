@@ -1,6 +1,6 @@
-CPP.Views.DepartmentAdministrator ||= {}
+CPP.Views.Departments ||= {}
 
-class CPP.Views.DepartmentAdministrator.Insights extends CPP.Views.Base
+class CPP.Views.Departments.Insights extends CPP.Views.Base
   el: "#app"
   template: JST['backbone/templates/departments/insights']
 

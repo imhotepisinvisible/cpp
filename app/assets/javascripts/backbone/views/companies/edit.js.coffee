@@ -92,8 +92,12 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
       collection: @model.emails
       editable: true
 
-    new CPP.Views.Companies.StatsPartial
-      company: @model
+    new CPP.Views.Stats.LineGraph
+      url: "/companies/#{@model.id}/view_stats"
+      yAxis: 'Views'
+      title: 'Student Views'
+      el: $(@el).find('#orders_chart')
+      type: 'datetime'
       # el: $(@el).find('#contacts-partial')
 
     new CPP.Views.Companies.EditAdministrators
