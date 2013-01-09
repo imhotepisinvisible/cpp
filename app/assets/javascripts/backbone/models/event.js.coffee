@@ -22,8 +22,8 @@ class CPP.Models.Event extends CPP.Models.Base
 
   schema: ->
     title:
-      title: "Title*"
-    	type: "Text",
+    	type: "Text"
+      # title: "Title*"
    	start_date:
       type: "DateTime"
       title: "Start Date*"
