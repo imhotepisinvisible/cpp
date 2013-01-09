@@ -21,12 +21,14 @@ class CPP.Models.Event extends CPP.Models.Base
       required: true
 
   schema: ->
-    title: { type: 'TextArea', title: "Title*" }
-   	start_date:
+    title:
+      type: 'Text'
+      title: "Title*"
+    start_date:
       type: "DateTime"
       title: "Start Date*"
       DateEditor: "DatePicker"
-   	end_date:
+    end_date:
       type: "DateTime"
       title: "End Date*"
       DateEditor: "DatePicker"
@@ -37,7 +39,7 @@ class CPP.Models.Event extends CPP.Models.Base
       type: "TextArea"
       title: "Description*"
     location:
-      type: "Text"
+      type: "TextArea"
       title: "Location*"
     capacity: "Text"
     departments:
