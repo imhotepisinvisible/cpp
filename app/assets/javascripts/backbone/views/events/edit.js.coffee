@@ -8,29 +8,36 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-submit': 'submitEvent'
 
+  # Department admins don't get to select departments
+  # Companies get to pick which departments their events will go to
   initialize: ->
     @model.set "requirementsEnabled", false
 
-    # If model doesn't have a company yet, i.e. admin
-    # Need to add to the schema a comapny select
-    # TODO: Is there a better way to do this?
-    if (this.options.department)
-      # swapDepartmentToCompanySchema @model, this.options.department
+    if isDepartmentAdmin()
+      companies = new CPP.Collections.Companies
+      companies.url = "/departments/#{CPP.CurrentUser.get('department_id')}/companies"
+
       schema = @model.schema()
-      schema['company_id'] = {
-        text: "Company"
-        type: "Select"
-        options: this.options.department.companies
-        editorClass: "company-select"
-      }
+      if @model.isNew()
+        # On creation of an event, admin can choose company
+        schema['company_id'] = {
+          text: "Company"
+          type: "Select"
+          options: companies
+          editorClass: "company-select"
+        }
+
+        # Only set departments if we are creating a new event
+        @model.set('departments', [CPP.CurrentUser.get('department_id')])
+
+      # Department doesn't get to see departments
       delete schema["departments"]
+      @model.schema = -> schema
 
-      @model.set('departments', [this.options.department.id])
-      @model.save()
-      @model.schema = -> 
-        schema
+    @completeInitialize()
 
-    @form = new Backbone.Form(model: @model).render()
+  completeInitialize: ->
+    @form = new Backbone.Form(model: @model)
     Backbone.Validation.bind @form;
 
     @skill_list_tags_form = new Backbone.Form.editors.TagEditor
@@ -59,31 +66,30 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
 
     @render()
 
+
   render: ->
     $(@el).html(@template(event: @model))
-    # Super called as extending we are extending CPP.Views.Base
     super
-    $('.form').append(@form.el)
-    # Initial check for rendering requirementes box
-    if (((@model.get "requirements") != null) and
-        ((@model.get "requirements") != ""))
+    $('.form').append(@form.render().el)
+
+    # Initial check for rendering requirements box
+    if @model.get("requirements")
       @model.set "requirementsEnabled", true
-      # Tick Checkbox
       $(".requirements-checkbox").children()[0].children[0].checked = true;
       @form.fields["requirements"].$el.slideDown()
-
 
     validateField(@form, field) for field of @form.fields
 
     @form.on "requirementsEnabled:change", =>
       @form.fields["requirements"].$el.slideToggle()
+
     @skill_list_tags_form.render()
-    $('.skill-tags-form').append(@skill_list_tags_form.el)
     @interest_list_tags_form.render()
-    $('.interest-tags-form').append(@interest_list_tags_form.el)
     @year_group_list_tags_form.render()
+    $('.skill-tags-form').append(@skill_list_tags_form.el)
+    $('.interest-tags-form').append(@interest_list_tags_form.el)
     $('.year-group-tags-form').append(@year_group_list_tags_form.el)
-  @
+    @
 
   submitEvent: ->
     if @form.validate() == null

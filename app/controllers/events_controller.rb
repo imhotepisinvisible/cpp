@@ -22,6 +22,9 @@ class EventsController < ApplicationController
       # Sort on relevance, then company id (groups by company if same relevance)
       @events.sort_by! {|e| [-e.relevance(current_user.id), e.company.name] }
       respond_with @events.as_json({:student_id => current_user.id})
+    elsif current_user && current_user.is_department_admin?
+      # TODO this must return events that have a department with current_user.id
+      respond_with @events.select{ |e| e.departments.map(&:id).include? current_user.department_id }
     else
       respond_with @events
     end
@@ -31,7 +34,7 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
-    respond_with @event
+    respond_with @event.as_json({:depts => @event.departments.map { |d| d.id }})
   end
 
   # GET /events/new
@@ -47,11 +50,10 @@ class EventsController < ApplicationController
     @event = Event.new(params[:event])
 
     if params.has_key? :departments
-      departments = params[:departments].map{ |id| Department.find(id) }
+      @event.departments = params[:departments].map{ |id| Department.find(id) }
     else
-      departments = []
+      @event.departments = []
     end
-    @event.departments = departments
 
     if @event.save
       respond_with @event, status: :created, location: @event
@@ -64,7 +66,16 @@ class EventsController < ApplicationController
   # PUT /events/1.json
   def update
     @event = Event.find(params[:id])
-    if @event.update_attributes(params[:event])
+
+    if params.has_key? :departments
+      @event.departments = params[:departments].map{ |id| Department.find(id) }
+    else
+      @event.departments = []
+    end
+
+    @event.assign_attributes(params[:event])
+
+    if @event.save
       head :no_content
     else
       respond_with @event, status: :unprocessable_entity

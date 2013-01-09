@@ -17,6 +17,7 @@
 
 class Event < ActiveRecord::Base
   default_scope order('start_date ASC')
+
 	belongs_to :company
   has_and_belongs_to_many :registered_students, :join_table => :student_event_registrations, :association_foreign_key => "user_id", :class_name => "Student"
   has_and_belongs_to_many :departments
@@ -41,6 +42,8 @@ class Event < ActiveRecord::Base
     :after => :start_date,
     :after_message => "End time cannot be before start time"
 
+  validates :departments, :presence => { :message => "Events must belong to at least one department" }
+
   attr_accessible :skill_list, :interest_list, :year_group_list,
                   :title, :start_date, :end_date, :deadline,
                   :description, :location, :capacity,
@@ -55,6 +58,7 @@ class Event < ActiveRecord::Base
   def as_json(options={})
     result = super(:methods => [:skill_list, :interest_list, :year_group_list])
     result[:relevance] = relevance(options[:student_id]) if options.has_key? :student_id
+    result[:departments] = options[:depts] if options.has_key? :depts
     return result
   end
 end

@@ -14,7 +14,7 @@ class Ability
       can :manage, Student, :id => user.id
       can [:read, :register, :unregister], Event do |event|
         user_depts = user.departments.map(&:id)
-        event_depts = event.company.departments.map(&:id)
+        event_depts = event.departments.map(&:id)
         !(user_depts & event_depts).empty?
       end
       can :read, Placement do |placement|
@@ -61,12 +61,12 @@ class Ability
       can :create, Company
 
       can :manage, Event do |event|
-        event.company.departments.map(&:id).include? user.department_id
+        event.departments.map(&:id).include? user.department_id
       end
       can :create, Event
 
       can :manage, Placement do |placement|
-        placement.company.departments.map(&:id).include? user.department_id
+        placement.company.all_departments.map(&:id).include? user.department_id
       end
       can :create, Placement
 

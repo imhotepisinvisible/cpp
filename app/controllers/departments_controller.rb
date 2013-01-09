@@ -19,7 +19,7 @@ class DepartmentsController < ApplicationController
   def get_status
     raise unless params.has_key? :company_id
     dept_reg = DepartmentRegistration.find_or_create_by_company_id_and_department_id(params[:company_id], params[:department_id])
-    
+
     respond_with dept_reg.status
   end
 
