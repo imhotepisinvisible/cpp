@@ -11,8 +11,6 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
   # Department admins don't get to select departments
   # Companies get to pick which departments their events will go to
   initialize: ->
-    @model.set "requirementsEnabled", false
-
     if isDepartmentAdmin()
       companies = new CPP.Collections.Companies
       companies.url = "/departments/#{CPP.CurrentUser.get('department_id')}/companies"
@@ -72,16 +70,7 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
     super
     $('.form').append(@form.render().el)
 
-    # Initial check for rendering requirements box
-    if @model.get("requirements")
-      @model.set "requirementsEnabled", true
-      $(".requirements-checkbox").children()[0].children[0].checked = true;
-      @form.fields["requirements"].$el.slideDown()
-
     validateField(@form, field) for field of @form.fields
-
-    @form.on "requirementsEnabled:change", =>
-      @form.fields["requirements"].$el.slideToggle()
 
     @skill_list_tags_form.render()
     @interest_list_tags_form.render()
