@@ -86,13 +86,21 @@ window.displayJQXHRErrors = (data) ->
 window.addTooltip = (showTooltip, message, position) ->
   if showTooltip then "rel='tooltip' title='#{message}' data-placement='#{position}'" else ''
 
+window.CPP_APPROVAL_STATUS = {
+  REJECTED: -1
+  NOT_REQ:   0
+  PENDING:   1
+  APPROVED:  2
+  PARTNERED: 3
+}
+
 window.approvalStatusMap = (code) ->
   switch code
-    when -1 then 'Rejected, not visible to students from this department'
-    when  0 then 'Not requested, not visible to students from this department'
-    when  1 then 'Pending, not visible to students from this department'
-    when  2 then 'Approved, visible to students from this department'
-    when  3 then 'Partnered, can view students from this department'
+    when CPP_APPROVAL_STATUS.REJECTED  then 'Rejected, not visible to students from this department'
+    when CPP_APPROVAL_STATUS.NOT_REQ   then 'Not requested, not visible to students from this department'
+    when CPP_APPROVAL_STATUS.PENDING   then 'Pending, not visible to students from this department'
+    when CPP_APPROVAL_STATUS.APPROVED  then 'Approved, visible to students from this department'
+    when CPP_APPROVAL_STATUS.PARTNERED then 'Partnered, can view students from this department'
     else code
 
 window.loggedIn = ->

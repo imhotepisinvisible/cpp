@@ -27,7 +27,7 @@ class CPP.Views.CompaniesItem extends CPP.Views.Base
 
   reject: (e) ->
     e.stopPropagation()
-    @changeStatus -1, 'rejected, consider emailing this company to explain why.'
+    @changeStatus CPP_APPROVAL_STATUS.REJECTED, 'rejected, consider emailing this company to explain why.'
 
   changeStatus: (status, message) ->
     $.ajax
