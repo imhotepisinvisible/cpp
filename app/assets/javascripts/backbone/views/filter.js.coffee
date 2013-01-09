@@ -81,8 +81,9 @@ class CPP.Filter extends CPP.Views.Base
 
   blurTag: (e) ->
     deferreds = []
-    if e and $('.dropdown-menu').is(':visible') and $('.dropdown-menu:hover').length > 0
-      deferreds.push($('.dropdown-menu').click())
+    if $(e.currentTarget).parent().find('.dropdown-menu').is(':visible') and
+       $(e.currentTarget).parent().find('.dropdown-menu:hover').length > 0
+      deferreds.push($(e.currentTarget).parent().find('.dropdown-menu').click())
 
     $.when.apply($, deferreds).done (=>
       @setFilter()
