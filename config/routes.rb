@@ -57,8 +57,6 @@ CPP::Application.routes.draw do
   get "login" => "sessions#new", :as => "login"
   get "emails/:id/preview" => "emails#preview"
 
-  get "events/:event_id/departments/approved" => "departments#approved"
-
   resources :users do
     put 'change_password', :on => :collection, :action => :change_password
     put 'forgot_password', :on => :collection, :action => :forgot_password

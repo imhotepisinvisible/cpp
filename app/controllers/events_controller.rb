@@ -22,6 +22,9 @@ class EventsController < ApplicationController
       # Sort on relevance, then company id (groups by company if same relevance)
       @events.sort_by! {|e| [-e.relevance(current_user.id), e.company.name] }
       respond_with @events.as_json({:student_id => current_user.id})
+    elsif current_user && current_user.is_department_admin?
+      # TODO this must return events that have a department with current_user.id
+      respond_with @events
     else
       respond_with @events
     end
@@ -31,7 +34,7 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
-    respond_with @event
+    respond_with @event.as_json({:depts => @event.departments.map { |d| d.id }})
   end
 
   # GET /events/new
@@ -65,7 +68,6 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     if params.has_key? :departments
-      puts params[:departments].map{ |id| Department.find(id) }.inspect
       @event.departments = params[:departments].map{ |id| Department.find(id) }
     else
       @event.departments = []

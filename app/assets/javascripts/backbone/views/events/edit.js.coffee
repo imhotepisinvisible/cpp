@@ -8,7 +8,6 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-submit': 'submitEvent'
 
-
   # Department admins don't get to select departments
   # Companies get to pick which departments their events will go to
   initialize: ->
@@ -19,30 +18,23 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
       companies.url = "/departments/#{CPP.CurrentUser.get('department_id')}/companies"
 
       schema = @model.schema()
-      schema['company_id'] = {
-        text: "Company"
-        type: "Select"
-        options: companies
-        editorClass: "company-select"
-      }
+      if @model.isNew()
+        # On creation of an event, admin can choose company
+        schema['company_id'] = {
+          text: "Company"
+          type: "Select"
+          options: companies
+          editorClass: "company-select"
+        }
+
+        # Only set departments if we are creating a new event
+        @model.set('departments', [CPP.CurrentUser.get('department_id')])
+
+      # Department doesn't get to see departments
       delete schema["departments"]
       @model.schema = -> schema
 
-      @model.set('departments', [CPP.CurrentUser.get('department_id')])
-      @completeInitialize()
-    else
-      if !@model.get('id')
-        # New, no departments, just intialize
-        @completeInitialize()
-      else
-        departments = new CPP.Collections.Departments
-        departments.url = "/events/#{@model.get('id')}/departments/approved"
-        departments.fetch
-          success: =>
-            dept_ids = departments.filter((d) -> d.get('value')).map((d) -> d.get('id'))
-            @model.set('departments', dept_ids)
-            @completeInitialize()
-
+    @completeInitialize()
 
   completeInitialize: ->
     @form = new Backbone.Form(model: @model)
@@ -81,11 +73,10 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
     $('.form').append(@form.render().el)
 
     # Initial check for rendering requirements box
-    if !!@model.get("requirements")
+    if @model.get("requirements")
       @model.set "requirementsEnabled", true
       $(".requirements-checkbox").children()[0].children[0].checked = true;
       @form.fields["requirements"].$el.slideDown()
-
 
     validateField(@form, field) for field of @form.fields
 
