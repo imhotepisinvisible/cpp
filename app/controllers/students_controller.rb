@@ -134,7 +134,7 @@ class StudentsController < ApplicationController
     respond_with degrees
   end
 
-  def view_stats
+  def view_stats_all
     data = {
       :name => "Student Views",
       :pointInterval => 1.day * 1000,
@@ -145,7 +145,7 @@ class StudentsController < ApplicationController
           date.at_beginning_of_day,
           date.tomorrow.at_beginning_of_day,
           'stat_show',
-          'students_controller'
+          'students'
         ).count
       }
     }

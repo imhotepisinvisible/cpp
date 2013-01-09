@@ -5,6 +5,8 @@ class CPP.Views.Students.View extends CPP.Views.Base
   template: JST['backbone/templates/students/view']
 
   initialize: ->
+    if isCompanyAdmin()
+      @model.record_stat_view()
     @render()
 
   render: ->
