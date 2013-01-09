@@ -89,7 +89,7 @@
   <div class="span6" id="date">
     <h1 class="section-header"><i class="icon-pushpin"></i>  Details</h1>
     <table class="table table-striped">
-      <% if @placement.getReadableDate('deadline'): %>
+      <% if @placement.get('deadline'): %>
         <tr>
           <td>
             Apply By:

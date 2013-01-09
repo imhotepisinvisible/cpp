@@ -26,7 +26,6 @@ class CPP.Views.Events.Item extends CPP.Views.Base
       wait: true
       success: (model, response) ->
         notify "success", "Event deleted"
-        $(e.currentTarget).parent().parent().parent().remove()
       error: (model, response) ->
         notify "error", "Event could not be deleted"
 

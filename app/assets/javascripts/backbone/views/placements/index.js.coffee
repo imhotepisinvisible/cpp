@@ -10,6 +10,7 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
   initialize: ->
     @collection.bind 'reset', @render, @
     @collection.bind 'filter', @renderPlacements, @
+    @collection.bind 'remove', @renderPlacementsAfterDeletion, @
 
     @render()
 
@@ -31,6 +32,9 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
       @renderPlacements(@collection)
       @renderFilters()
   @
+
+  renderPlacementsAfterDeletion: ->
+    @renderPlacements(@collection)
 
   renderPlacements: (col) ->
     @$('#placements').html("")
