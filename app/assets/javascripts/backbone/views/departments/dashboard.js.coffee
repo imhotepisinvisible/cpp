@@ -31,9 +31,13 @@ class CPP.Views.Departments.Dashboard extends CPP.Views.Base
         settings_notifier_placement:
           type: 'TextArea'
           title: 'New Placement Notification'
+          editorAttrs: { rows: 5 }
+          editorClass: "input-xlarge"
         settings_notifier_event:
           type: 'TextArea'
           title: 'New Event Notification'
+          editorAttrs: { rows: 5 }
+          editorClass: "input-xlarge"
     .render()
 
   renderNotificationsForm: ->
