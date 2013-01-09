@@ -40,14 +40,6 @@ class Department < ActiveRecord::Base
         result[:status] = 0
       end
     end
-
-    if options.has_key? :event_id
-      if events.map(&:id).include? options[:event_id]
-        result[:value] = true
-      else
-        result[:value] = false
-      end
-    end
     return result
   end
 end
