@@ -5,6 +5,8 @@ class CPP.Routers.Departments extends Backbone.Router
     'departments/:id/dashboard':  'dashboard'
     'department_dashboard' :      'dashboard'
     'departments/:id/register' :  'register'
+    'departments/:id/insights' :  'insights'
+    'insights'     :  'insights'
 
   settings: (id) ->
     if isStudent() or isCompanyAdmin()
@@ -60,4 +62,20 @@ class CPP.Routers.Departments extends Backbone.Router
       return new CPP.Models.Department id: CPP.CurrentUser.get('department_id')
     else
       return false
+
+  insights: (id) ->
+   if isStudent() or isCompanyAdmin()
+      window.history.back()
+      return false
+
+    department = @getDepartmentFromID id
+    unless department
+      notify 'error', 'Invalid department'
+    else
+      department.fetch
+        success: ->
+          new CPP.Views.Department.Insights model: department
+        error: ->
+          notify 'error', "Couldn't fetch department"
+
 
