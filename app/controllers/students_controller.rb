@@ -78,7 +78,9 @@ class StudentsController < ApplicationController
   def destroy
     @student = Student.find(params[:id])
     @student.destroy!
-    session[:user_id] = nil
+    if current_user.is_student?
+      session[:user_id] = nil
+    end
     head :no_content
   end
 
