@@ -1,4 +1,4 @@
-<h1 class="section-header"><i class="icon-user"></i> Contacts
+<h1 class="section-header"><i class="icon-user"></i> Contact
   <% if @partial: %>
     <div class="btn-group pull-right">
       <div id="btn-all" class="btn">All</div>
