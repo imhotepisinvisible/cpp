@@ -1,5 +1,6 @@
 <td><img class="small-company-logo" src="<%= @event.company.get('logo_url') %>"/></td>
-<td><%= @event.get 'title' %>
+<td>
+  <%= @event.get 'title' %>
   <br/>
   <% if @event.get('requirements'): %>
     <span class="label label-warning">requirements</span>
