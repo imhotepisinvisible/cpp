@@ -160,4 +160,22 @@ class CompaniesController < ApplicationController
     respond_with data
   end
 
+  def view_stats_all
+    data = {
+      :name => "Company Views",
+      :pointInterval => 1.day * 1000,
+      :pointStart => 1.weeks.ago.at_midnight.to_i * 1000,
+      :data => (1.weeks.ago.to_date..Date.today).map{ |date|
+        Impression.where(
+          "created_at > ? AND created_at < ? AND action_name = ? AND controller_name = ?",
+          date.at_beginning_of_day,
+          date.tomorrow.at_beginning_of_day,
+          'stat_show',
+          'companies'
+        ).select{ |impression| impression.action_name == "stat_show"}.count
+      }
+    }
+    respond_with data
+  end
+
 end

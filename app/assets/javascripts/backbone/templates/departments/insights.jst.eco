@@ -10,7 +10,7 @@
         <i class="icon-briefcase"></i>
           Company Views
         </h2>
-        <div id="companies_chart"></div>
+        <div id="companies-chart"></div>
       </div>
     </div>
     
@@ -20,7 +20,7 @@
         <i class="icon-user"></i>
           Student Views
         </h2>
-        <div id="student_chart"></div>
+        <div id="student-chart"></div>
       </div>
     </div>
 
