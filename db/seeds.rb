@@ -177,12 +177,16 @@ end
 
 Company.all.each do |company|
 
+  company.pending_department_registrations.each do |pdr|
+    pdr.status = 3
+    pdr.save!
+  end
   # Upload Logo
   company.logo = File.open(File.join(Rails.root, "app", "assets", "images", "company_logos", "#{company.name.downcase}_logo.jpg" ))
 
   # Create events
   5.times do
-    FactoryGirl.create(:event, :company => company, :departments => [computing_department])
+    e = FactoryGirl.create(:event, :company => company, :departments => [computing_department])
   end
 
   # Create placements
