@@ -10,7 +10,7 @@ class CPP.Views.CompaniesIndex extends CPP.Views.Base
     @render()
 
   render: ->
-    $(@el).html(@template(editable: @editable))
+    $(@el).html(@template(editable: @editable, companies: @collection))
     @renderCompanies(@collection)
     @renderFilters()
 
