@@ -28,7 +28,7 @@
     <div class="span9">
       <div id="student-profile-intro">
         <div id="student-name-input-container" style="display:none">
-          <input type="text" id="student-name-editor" value="<%= @student.get 'first_name' %> <%= @student.get 'last_name' %>">
+          <input type="text" class="span8" id="student-name-editor" value="<%= @student.get 'first_name' %> <%= @student.get 'last_name' %>">
         </div>
 
         <div id="student-name-container">
@@ -37,18 +37,21 @@
           </span>
         </div>
 
-        <span id="student-year-input-container" style="display:none">
-          <input type="text" id="student-year-editor" value="<%= @student.get 'year' %>">
-        </span>
-
-        <span id="student-year-container">
-          <span id="student-year" class="student-editable student-profile-intro-status <%= if not @student.get('year') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to edit your year', 'bottom') %>><%= if @student.get('year') then getOrdinal(@student.get 'year') else "N/A" %></span>
+        <span>
+          <select id="year-select" class="span2 select-looking-for missing" <%= addTooltip(@student.get('tooltip'), 'Select your current year', 'bottom') %>>
+            <option value="0">N/A</option>
+            <option value="1">1st</option>
+            <option value="2">2nd</option>
+            <option value="3">3rd</option>
+            <option value="4">4th</option>
+            <option value="5">5th</option>
+          </select>
         </span>
 
         <span> Year</span>
 
         <span id="student-degree-input-container" style="display:none">
-          <input type="text" id="student-degree-editor" value="<%= @student.get 'degree' %>" data-provide="typeahead">
+          <input type="text" class="span4" id="student-degree-editor" value="<%= @student.get 'degree' %>" data-provide="typeahead">
         </span>
 
         <span id="student-degree-container">
