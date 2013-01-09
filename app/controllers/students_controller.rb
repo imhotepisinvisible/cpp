@@ -87,6 +87,9 @@ class StudentsController < ApplicationController
   # GET /students/1/:document_type/:view_type
   def download_document
     @student = Student.find(params[:id])
+    if current_user && current_user.is_company_admin?
+      impressionist(@student, message: 'company_cv_download')
+    end
     document_type = params[:document_type]
     document = (@student.send "#{document_type}".to_sym).path
     ext = File.extname document
@@ -129,5 +132,23 @@ class StudentsController < ApplicationController
       end
     end
     respond_with degrees
+  end
+
+  def view_stats
+    data = {
+      :name => "Student Views",
+      :pointInterval => 1.day * 1000,
+      :pointStart => 1.weeks.ago.at_midnight.to_i * 1000,
+      :data => (1.weeks.ago.to_date..Date.today).map{ |date|
+        Impression.where(
+          "created_at > ? AND created_at < ? AND action_name = ? AND controller_name = ?",
+          date.at_beginning_of_day,
+          date.tomorrow.at_beginning_of_day,
+          'stat_show',
+          'students_controller'
+        ).count
+      }
+    }
+    respond_with data
   end
 end

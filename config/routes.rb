@@ -88,6 +88,7 @@ CPP::Application.routes.draw do
     post :sort, :on => :collection
   end
   resources :students do
+    get 'view_stats', :on => :collection, :action => :view_stats
     get 'suggested_degrees', :on => :collection, :action => :suggested_degrees
     delete '/documents/:document_type', :on => :member, :action => :delete_document
     get '/documents/:document_type', :on => :member, :action => :download_document

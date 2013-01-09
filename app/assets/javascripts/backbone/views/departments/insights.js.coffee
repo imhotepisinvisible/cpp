@@ -8,6 +8,8 @@ class CPP.Views.Departments.Insights extends CPP.Views.Base
   #   'click .btn-submit': 'submit'
 
   initialize: ->
+    $.get '/students/view_stats', (data) ->
+      console.log data
     @render()
 
   render: ->
