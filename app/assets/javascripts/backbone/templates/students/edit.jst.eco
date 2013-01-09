@@ -38,7 +38,7 @@
         </div>
 
         <span>
-          <select id="year-select" class="span2 select-looking-for missing" <%= addTooltip(@student.get('tooltip'), 'Select your current year', 'bottom') %>>
+          <select id="year-select" class="span2 select-looking-for" <%= addTooltip(@student.get('tooltip'), 'Select your current year', 'bottom') %>>
             <option value="0">N/A</option>
             <option value="1">1st</option>
             <option value="2">2nd</option>
