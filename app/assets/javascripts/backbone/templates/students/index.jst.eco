@@ -2,6 +2,7 @@
   <div class="span3" id="student-filter"></div>
   <div class="span9">
     <h1 class="section-header">
+      <i class="icon-user"></i>
       Students
 
       <% if @editable: %>

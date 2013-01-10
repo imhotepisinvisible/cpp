@@ -146,7 +146,7 @@ class CompaniesController < ApplicationController
   def view_stats
     @company = Company.find(params[:id])
     data = {
-      :name => "Company Views",
+      :name => "Student Views",
       :pointInterval => 1.day * 1000,
       :pointStart => 1.weeks.ago.at_midnight.to_i * 1000,
       :data => (1.weeks.ago.to_date..Date.today).map{ |date|
