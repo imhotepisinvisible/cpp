@@ -8,25 +8,26 @@
       </div>
 
       <div class="span6">
-        <h2 class="section-header"><i class="icon-info-sign"></i> Company Notifications</h2>
-        These notifications will be displayed to a company when they create a new placement or event.
-        <div id="notifications-form"></div>
-        <div class="centre-div">
-          <div id="btn-notifications-save" class="btn">Save</div>
-          <span id="btn-notifications-cancel" class="link form-cancel">cancel</span>
+        <div class="row">
+          <div class="span6">
+            <h2 class="section-header"><i class="icon-info-sign"></i> Company Notifications</h2>
+            These notifications will be displayed to a company when they create a new placement or event.
+            <div id="notifications-form"></div>
+            <div class="centre-div">
+              <div id="btn-notifications-save" class="btn">Save</div>
+              <span id="btn-notifications-cancel" class="link form-cancel">cancel</span>
+            </div>
+          </div>
+          <div class="span6">
+            <h1 class="section-header">
+              <i class="icon-wrench"></i> Administrators
+              <a class="btn pull-right" id="btn-new-admin" href="/#departments/<%= @department.id %>/register">
+                <i class="icon-plus"></i>
+              </a>
+            </h1>
+            <div id="edit-admins"></div>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="span6">
-        <h1 class="section-header">
-          <i class="icon-wrench"></i> Administrators
-          <a class="btn pull-right" id="btn-new-admin" href="/#departments/<%= @department.id %>/register">
-            <i class="icon-plus"></i>
-          </a>
-        </h1>
-        <div id="edit-admins"></div>
       </div>
     </div>
   </div>
