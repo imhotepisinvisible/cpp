@@ -208,7 +208,7 @@ class CompaniesController < ApplicationController
 
     ok_companies.each { |s| s.stat_count = company_id_counts[s.id] }
 
-    respond_with ok_companies
+    respond_with ok_companies[0..4]
   end
 
 end

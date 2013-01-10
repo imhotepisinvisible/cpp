@@ -182,6 +182,6 @@ class StudentsController < ApplicationController
 
     ok_students.each { |s| s.stat_count = student_id_counts[s.id] }
 
-    respond_with ok_students
+    respond_with ok_students[0..4]
   end
 end

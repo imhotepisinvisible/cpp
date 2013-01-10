@@ -103,6 +103,6 @@ class PlacementsController < ApplicationController
 
     ok_placements.each { |s| s.stat_count = placement_id_counts[s.id] }
 
-    respond_with ok_placements
+    respond_with ok_placements[0..4]
   end
 end

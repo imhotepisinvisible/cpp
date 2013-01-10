@@ -145,6 +145,6 @@ class EventsController < ApplicationController
 
     ok_events.each { |s| s.stat_count = event_id_counts[s.id] }
 
-    respond_with ok_events
+    respond_with ok_events[0..4]
   end
 end
