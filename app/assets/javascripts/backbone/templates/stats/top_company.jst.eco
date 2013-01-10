@@ -1,0 +1,10 @@
+<tr>
+  <td>
+    <a href="/#companies/<%= @model.id %>">
+      <%= @model.get('name') %>
+    </a>
+  </td>
+  <td>
+    <%= @model.get('stat_count') %> views
+  </td>
+</tr>

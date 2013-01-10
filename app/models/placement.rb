@@ -13,6 +13,7 @@
 #   t.datetime "updated_at",  :null => false
 
 class Placement < ActiveRecord::Base
+  is_impressionable
   default_scope order('created_at DESC')
   belongs_to :company
 
@@ -39,6 +40,14 @@ class Placement < ActiveRecord::Base
     :after => :now,
     :allow_nil => :true
 
+  attr_accessor :stat_count
+
+  after_initialize :init
+
+  def init
+    self.stat_count ||= 0
+  end
+
   # Returns a relevance score from 0 to 100 for student with the given id
   # TODO: Implement!
   def relevance(student_id)
@@ -48,6 +57,7 @@ class Placement < ActiveRecord::Base
   def as_json(options={})
     result = super(:methods => [:skill_list, :interest_list, :year_group_list])
     result[:relevance] = relevance(options[:student_id]) if options.has_key? :student_id
+    result[:stat_count] = @stat_count
     return result
   end
 end

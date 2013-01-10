@@ -58,6 +58,11 @@ CPP::Application.routes.draw do
   get "emails/:id/preview" => "emails#preview"
 
   get "events/:event_id/departments/approved" => "departments#approved"
+  get "companies/view_stats_all" => "companies#view_stats_all"
+  get "students/top_5" => "students#top_5"
+  get "companies/top_5" => "companies#top_5"
+  get "events/top_5" => "events#top_5"
+  get "placements/top_5" => "placements#top_5"
 
   resources :users do
     put 'change_password', :on => :collection, :action => :change_password
@@ -88,6 +93,7 @@ CPP::Application.routes.draw do
     post :sort, :on => :collection
   end
   resources :students do
+    get 'view_stats_all', :on => :collection, :action => :view_stats_all
     get 'suggested_degrees', :on => :collection, :action => :suggested_degrees
     delete '/documents/:document_type', :on => :member, :action => :delete_document
     get '/documents/:document_type', :on => :member, :action => :download_document

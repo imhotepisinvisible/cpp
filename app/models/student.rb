@@ -12,6 +12,7 @@
 #   t.datetime "updated_at",      :null => false
 
 class Student < User
+  is_impressionable
   acts_as_paranoid
 
   has_and_belongs_to_many :departments, :foreign_key => :user_id
@@ -53,6 +54,15 @@ class Student < User
                     :cv, :transcript, :covering_letter, :profile_picture,
                     :skill_list, :interest_list, :reject_skill_list, :reject_interest_list, :year_group_list, :active,
                     :looking_for, :tooltip
+  
+  attr_accessor :stat_count
+
+  after_initialize :init
+
+  def init
+    self.stat_count ||= 0
+  end
+
   def is_active?
     active &&
     !first_name.blank? &&
@@ -89,7 +99,9 @@ class Student < User
   end
 
   def as_json(options={})
-    super(:methods => [:skill_list, :interest_list, :year_group_list, :reject_skill_list, :reject_interest_list, :type])
+    result = super(:methods => [:skill_list, :interest_list, :year_group_list, :reject_skill_list, :reject_interest_list, :type])
+    result[:stat_count] = @stat_count
+    return result
   end
 
 end

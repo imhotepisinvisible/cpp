@@ -160,4 +160,55 @@ class CompaniesController < ApplicationController
     respond_with data
   end
 
+  def view_stats_all
+    data = {
+      :name => "Company Views",
+      :pointInterval => 1.day * 1000,
+      :pointStart => 1.weeks.ago.at_midnight.to_i * 1000,
+      :data => (1.weeks.ago.to_date..Date.today).map{ |date|
+        Impression.where(
+          "created_at > ? AND created_at < ? AND action_name = ? AND controller_name = ?",
+          date.at_beginning_of_day,
+          date.tomorrow.at_beginning_of_day,
+          'stat_show',
+          'companies'
+        ).select{ |impression| impression.action_name == "stat_show"}.count
+      }
+    }
+    respond_with data
+  end
+
+  def top_5
+    # TODO student profile views should be cached
+    company_impressions = Impression.where(
+      "created_at > ? AND created_at < ? AND action_name = ? AND controller_name = ?",
+      1.weeks.ago.to_date.at_beginning_of_day,
+      Date.today.tomorrow.at_beginning_of_day,
+      'stat_show',
+      'companies'
+    )
+
+    #raise student_impressions.first.inspect
+    company_ids = company_impressions.map{ |si| si.impressionable_id }
+    company_id_counts = Hash.new(0)
+    company_ids.each{|si| company_id_counts[si] += 1}
+    company_id_counts.sort_by {|key, value| value}
+    # ORDER student_id_counts by count
+    sortable = company_id_counts.map{|k, v| [v, k]}
+    sortable.sort!.reverse!
+
+    companies = sortable.map{ |count, id| Company.find(id) }
+
+    ok_companies = []
+    companies.each do |s|
+      if s.all_departments.map(&:id).include? current_user.department_id
+        ok_companies.push(s)
+      end
+    end
+
+    ok_companies.each { |s| s.stat_count = company_id_counts[s.id] }
+
+    respond_with ok_companies
+  end
+
 end

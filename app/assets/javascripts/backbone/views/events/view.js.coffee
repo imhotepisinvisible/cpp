@@ -8,6 +8,8 @@ class CPP.Views.Events.View extends CPP.Views.Base
     'click .btn-signup-student': 'signup'
 
   initialize: ->
+    if isStudent()
+      @model.record_stat_view()
     @render()
 
   render: ->

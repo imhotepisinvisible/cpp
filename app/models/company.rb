@@ -61,6 +61,14 @@ class Company < ActiveRecord::Base
     :maximum => 1000,
   }
 
+  attr_accessor :stat_count
+
+  after_initialize :init
+
+  def init
+    self.stat_count ||= 0
+  end
+
   def rating(student_id)
     student_company_rating = student_company_ratings.find_by_student_id(student_id)
     if student_company_rating
@@ -80,6 +88,8 @@ class Company < ActiveRecord::Base
     if options.has_key? :student_id
       result[:rating] = rating(options[:student_id])
     end
+
+    result[:stat_count] = @stat_count
 
     return result
   end

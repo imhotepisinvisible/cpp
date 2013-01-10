@@ -87,6 +87,9 @@ class StudentsController < ApplicationController
   # GET /students/1/:document_type/:view_type
   def download_document
     @student = Student.find(params[:id])
+    if current_user && current_user.is_company_admin?
+      impressionist(@student, message: 'company_cv_download')
+    end
     document_type = params[:document_type]
     document = (@student.send "#{document_type}".to_sym).path
     ext = File.extname document
@@ -129,5 +132,56 @@ class StudentsController < ApplicationController
       end
     end
     respond_with degrees
+  end
+
+  def view_stats_all
+    data = {
+      :name => "Student Views",
+      :pointInterval => 1.day * 1000,
+      :pointStart => 1.weeks.ago.at_midnight.to_i * 1000,
+      :data => (1.weeks.ago.to_date..Date.today).map{ |date|
+        Impression.where(
+          "created_at > ? AND created_at < ? AND action_name = ? AND controller_name = ?",
+          date.at_beginning_of_day,
+          date.tomorrow.at_beginning_of_day,
+          'stat_show',
+          'students'
+        ).count
+      }
+    }
+    respond_with data
+  end
+
+  def top_5
+    # TODO student profile views should be cached
+    student_impressions = Impression.where(
+      "created_at > ? AND created_at < ? AND action_name = ? AND controller_name = ?",
+      1.weeks.ago.to_date.at_beginning_of_day,
+      Date.today.tomorrow.at_beginning_of_day,
+      'stat_show',
+      'students'
+    )
+
+    #raise student_impressions.first.inspect
+    student_ids = student_impressions.map{ |si| si.impressionable_id }
+    student_id_counts = Hash.new(0)
+    student_ids.each{|si| student_id_counts[si] += 1}
+    student_id_counts.sort_by {|key, value| value}
+    # ORDER student_id_counts by count
+    sortable = student_id_counts.map{|k, v| [v, k]}
+    sortable.sort!.reverse!
+
+    students = sortable.map{ |count, id| Student.find(id) }
+
+    ok_students = []
+    students.each do |s|
+      if s.departments.map(&:id).include? current_user.department_id
+        ok_students.push(s)
+      end
+    end
+
+    ok_students.each { |s| s.stat_count = student_id_counts[s.id] }
+
+    respond_with ok_students
   end
 end

@@ -1,0 +1,90 @@
+<div class="row">
+  <div class="span8">
+    <h1 class="section-header">
+      Graphs
+    </h1>
+    
+    <div class="row">
+      <div class="span8">
+        <h2 class="section-header">
+        <i class="icon-briefcase"></i>
+          Company Views
+        </h2>
+        <div id="companies-chart"></div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="span8">
+        <h2 class="section-header">
+        <i class="icon-user"></i>
+          Student Views
+        </h2>
+        <div id="student-chart"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span8">
+        <h1 class="section-header">Top 5</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span4">
+        <h2 class="section-header">
+        <i class="icon-briefcase top-5-icon"></i>
+          Companies
+        </h2>
+        <div class="row">
+          <div class="span4">
+            <table class="table table-striped" id="top-companies"></table>
+          </div>
+        </div>
+      </div>
+      <div class="span4">
+        <h2 class="section-header">
+        <i class="icon-user top-5-icon"></i>
+          Students
+        </h2>
+        <div class="row">
+          <div class="span4">
+            <table class="table table-striped" id="top-students"></table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span4">
+        <h2 class="section-header">
+        <i class="icon-calendar top-5-icon"></i>
+          Events
+        </h2>
+        <div class="row">
+          <div class="span4">
+            <table class="table table-striped" id="top-events"></table>
+          </div>
+        </div>
+      </div>
+      <div class="span4">
+        <h2 class="section-header">
+        <i class="icon-folder-open top-5-icon"></i>
+          Placements
+        </h2>
+        <div class="row">
+          <div class="span4">
+            <table class="table table-striped" id="top-placements"></table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="span4">
+    <h1 class="section-header">
+      Audit
+    </h1>
+  </div>
+
+</div>
