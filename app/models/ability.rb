@@ -38,7 +38,6 @@ class Ability
         student_deps = student.departments.map(&:id)
         !(company_deps & student_deps).empty?
       end
-      can :create, Student
       can :manage, Event, :company_id => user.company_id
       can :create, Event
       can :manage, Placement, :company_id => user.company_id
