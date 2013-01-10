@@ -1,0 +1,10 @@
+<tr>
+  <td>
+    <a href="/#events/<%= @model.id %>">
+      <%= @model.get('title') %>
+    </a>
+  </td>
+  <td>
+    <%= @model.get('stat_count') %> views
+  </td>
+</tr>

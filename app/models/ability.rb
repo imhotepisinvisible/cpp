@@ -70,7 +70,7 @@ class Ability
       end
       can :create, Placement
 
-      can [:manage, :download_document], Student do |student|
+      can [:manage, :download_document, :top_5], Student do |student|
         student.departments.map(&:id).include? user.department_id
       end
       can :create, Student

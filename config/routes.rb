@@ -59,6 +59,10 @@ CPP::Application.routes.draw do
 
   get "events/:event_id/departments/approved" => "departments#approved"
   get "companies/view_stats_all" => "companies#view_stats_all"
+  get "students/top_5" => "students#top_5"
+  get "companies/top_5" => "companies#top_5"
+  get "events/top_5" => "events#top_5"
+  get "placements/top_5" => "placements#top_5"
 
   resources :users do
     put 'change_password', :on => :collection, :action => :change_password

@@ -151,4 +151,37 @@ class StudentsController < ApplicationController
     }
     respond_with data
   end
+
+  def top_5
+    # TODO student profile views should be cached
+    student_impressions = Impression.where(
+      "created_at > ? AND created_at < ? AND action_name = ? AND controller_name = ?",
+      1.weeks.ago.to_date.at_beginning_of_day,
+      Date.today.tomorrow.at_beginning_of_day,
+      'stat_show',
+      'students'
+    )
+
+    #raise student_impressions.first.inspect
+    student_ids = student_impressions.map{ |si| si.impressionable_id }
+    student_id_counts = Hash.new(0)
+    student_ids.each{|si| student_id_counts[si] += 1}
+    student_id_counts.sort_by {|key, value| value}
+    # ORDER student_id_counts by count
+    sortable = student_id_counts.map{|k, v| [v, k]}
+    sortable.sort!.reverse!
+
+    students = sortable.map{ |count, id| Student.find(id) }
+
+    ok_students = []
+    students.each do |s|
+      if s.departments.map(&:id).include? current_user.department_id
+        ok_students.push(s)
+      end
+    end
+
+    ok_students.each { |s| s.stat_count = student_id_counts[s.id] }
+
+    respond_with ok_students
+  end
 end

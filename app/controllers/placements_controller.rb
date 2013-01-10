@@ -72,4 +72,37 @@ class PlacementsController < ApplicationController
     @placement.destroy
     head :no_content
   end
+
+  def top_5
+    # TODO student profile views should be cached
+    placement_impressions = Impression.where(
+      "created_at > ? AND created_at < ? AND action_name = ? AND controller_name = ?",
+      1.weeks.ago.to_date.at_beginning_of_day,
+      Date.today.tomorrow.at_beginning_of_day,
+      'stat_show',
+      'placements'
+    )
+
+    #raise student_impressions.first.inspect
+    placement_ids = placement_impressions.map{ |si| si.impressionable_id }
+    placement_id_counts = Hash.new(0)
+    placement_ids.each{|si| placement_id_counts[si] += 1}
+    placement_id_counts.sort_by {|key, value| value}
+    # ORDER student_id_counts by count
+    sortable = placement_id_counts.map{|k, v| [v, k]}
+    sortable.sort!.reverse!
+
+    placements = sortable.map{ |count, id| Placement.find(id) }
+
+    ok_placements = []
+    placements.each do |s|
+      if s.company.all_departments.map(&:id).include? current_user.department_id
+        ok_placements.push(s)
+      end
+    end
+
+    ok_placements.each { |s| s.stat_count = placement_id_counts[s.id] }
+
+    respond_with ok_placements
+  end
 end

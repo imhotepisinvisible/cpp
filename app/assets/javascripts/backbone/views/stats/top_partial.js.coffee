@@ -7,6 +7,6 @@ class CPP.Views.Stats.TopPartial extends CPP.Views.Base
     @render()
 
   render: () ->
-    @collection.each (model) ->
+    @collection.each (model) =>
       @$el.append(@itemTemplate(model: model))
     @

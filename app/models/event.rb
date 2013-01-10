@@ -16,6 +16,7 @@
 #   t.datetime "updated_at",     :null => false
 
 class Event < ActiveRecord::Base
+  is_impressionable
   default_scope order('start_date ASC')
 
 	belongs_to :company
@@ -49,6 +50,14 @@ class Event < ActiveRecord::Base
                   :description, :location, :capacity,
                   :company_id, :requirements
 
+  attr_accessor :stat_count
+
+  after_initialize :init
+
+  def init
+    self.stat_count ||= 0
+  end
+
   # Returns a relevance score from 0 to 100 for student with the given id
   # TODO: Implement!
   def relevance(student_id)
@@ -59,6 +68,7 @@ class Event < ActiveRecord::Base
     result = super(:methods => [:skill_list, :interest_list, :year_group_list])
     result[:relevance] = relevance(options[:student_id]) if options.has_key? :student_id
     result[:departments] = options[:depts] if options.has_key? :depts
+    result[:stat_count] = @stat_count
     return result
   end
 end

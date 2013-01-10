@@ -5,6 +5,8 @@ class CPP.Views.Placements.View extends CPP.Views.Base
   template: JST['backbone/templates/placements/view']
 
   initialize: ->
+    if isStudent()
+      @model.record_stat_view()
     @render()
 
   render: ->

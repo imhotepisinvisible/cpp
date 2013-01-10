@@ -27,32 +27,50 @@
     <div class="row">
       <div class="span4">
         <h2 class="section-header">
-        <i class="icon-briefcase top-companies"></i>
+        <i class="icon-briefcase top-5-icon"></i>
           Top 5 Companies
         </h2>
-        <div class="span4" id="top-companies"></div>
+        <div class="row">
+          <div class="span4">
+            <table class="table table-striped" id="top-companies"></table>
+          </div>
+        </div>
       </div>
       <div class="span4">
         <h2 class="section-header">
-        <i class="icon-user top-students"></i>
+        <i class="icon-user top-5-icon"></i>
           Top 5 Students
         </h2>
-        <div class="span4" id="top-students"></div>
+        <div class="row">
+          <div class="span4">
+            <table class="table table-striped" id="top-students"></table>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="row">
       <div class="span4">
         <h2 class="section-header">
-        <i class="icon-calendar"></i>
-          Popular Events
+        <i class="icon-calendar top-5-icon"></i>
+          Top 5 Events
         </h2>
+        <div class="row">
+          <div class="span4">
+            <table class="table table-striped" id="top-events"></table>
+          </div>
+        </div>
       </div>
       <div class="span4">
         <h2 class="section-header">
-        <i class="icon-folder-open"></i>
-          Popular Placements
+        <i class="icon-folder-open top-5-icon"></i>
+          Top 5 Placements
         </h2>
+        <div class="row">
+          <div class="span4">
+            <table class="table table-striped" id="top-placements"></table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
