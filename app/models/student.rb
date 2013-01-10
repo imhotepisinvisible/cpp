@@ -16,7 +16,7 @@ class Student < User
 
   has_and_belongs_to_many :departments, :foreign_key => :user_id
   has_many :companies, :through => :departments, :uniq => true
-  has_many :events, :through => :companies, :uniq => true
+  has_many :events, :through => :departments, :uniq => true
   has_many :placements, :through => :companies, :uniq => true
   has_many :student_company_ratings
   has_and_belongs_to_many :registered_events, :join_table => :student_event_registrations, :class_name => "Event", :foreign_key => :user_id
