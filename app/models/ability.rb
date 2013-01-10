@@ -36,7 +36,7 @@ class Ability
         company_deps = user.company.department_registrations.where(:status => 3)
                         .collect{|d| d.department}.map(&:id)
         student_deps = student.departments.map(&:id)
-        !(company_deps | student_deps).empty?
+        !(company_deps & student_deps).empty?
       end
       can :create, Student
       can :manage, Event, :company_id => user.company_id
