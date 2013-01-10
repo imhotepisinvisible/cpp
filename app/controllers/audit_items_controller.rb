@@ -33,7 +33,7 @@ class AuditItemsController < ApplicationController
     audits += created_students.map{|i| i.to_audit_item}
 
     audits.sort! {|a, b| b.timestamp <=> a.timestamp}
-    audits = audits[0..15]
+    audits = audits[0..20]
     respond_with audits
   end
 end
