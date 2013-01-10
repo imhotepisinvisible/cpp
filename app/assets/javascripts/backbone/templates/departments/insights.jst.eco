@@ -85,6 +85,11 @@
     <h1 class="section-header">
       Audit
     </h1>
+    <div>
+      <ul id="audit-container">
+        <div class="loading"></div>
+      </ul>
+    </div>
   </div>
 
 </div>

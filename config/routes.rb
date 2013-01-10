@@ -71,6 +71,7 @@ CPP::Application.routes.draw do
 
   resources :sessions
 
+  resources :audit_items
   resources :companies
   resources :events do
     post '/register', :on => :member, :action => :register

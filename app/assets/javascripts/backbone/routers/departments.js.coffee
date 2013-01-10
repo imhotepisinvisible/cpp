@@ -42,7 +42,7 @@ class CPP.Routers.Departments extends Backbone.Router
     if isStudent() or isCompanyAdmin()
       window.history.back()
       return false
-      
+
     department = @getDepartmentFromID id
     unless department
       notify 'error', 'Invalid department'
