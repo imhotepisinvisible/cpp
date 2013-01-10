@@ -186,7 +186,7 @@ Company.all.each do |company|
 
   # Create events
   5.times do
-    e = FactoryGirl.create(:event, :company => company, :departments => [computing_department])
+    e = FactoryGirl.create(:event, :company => company, :departments => company.departments)
   end
 
   # Create placements
