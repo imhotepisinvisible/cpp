@@ -84,7 +84,8 @@
   </div>
   <div class="span6">
     <h1 class="section-header">
-      <i class="icon-group"></i> Departments
+      <i class="icon-group"></i> 
+      Departments
     </h1>
     <div id="departments"></div>
   </div>

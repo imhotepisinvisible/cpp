@@ -1,7 +1,10 @@
 <div class="row">
   <div class="span3" id="company-filter"></div>
   <div class="span9">
-    <h1 class="section-header">Companies</h1>
+    <h1 class="section-header">
+      <i class="icon-briefcase"></i>
+      Companies
+    </h1>
     <div id="company-tiles">
       No companies to display
     </div>
