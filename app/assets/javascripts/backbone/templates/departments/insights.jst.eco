@@ -25,10 +25,16 @@
     </div>
 
     <div class="row">
+      <div class="span8">
+        <h1 class="section-header">Top 5</h1>
+      </div>
+    </div>
+
+    <div class="row">
       <div class="span4">
         <h2 class="section-header">
         <i class="icon-briefcase top-5-icon"></i>
-          Top 5 Companies
+          Companies
         </h2>
         <div class="row">
           <div class="span4">
@@ -39,7 +45,7 @@
       <div class="span4">
         <h2 class="section-header">
         <i class="icon-user top-5-icon"></i>
-          Top 5 Students
+          Students
         </h2>
         <div class="row">
           <div class="span4">
@@ -53,7 +59,7 @@
       <div class="span4">
         <h2 class="section-header">
         <i class="icon-calendar top-5-icon"></i>
-          Top 5 Events
+          Events
         </h2>
         <div class="row">
           <div class="span4">
@@ -64,7 +70,7 @@
       <div class="span4">
         <h2 class="section-header">
         <i class="icon-folder-open top-5-icon"></i>
-          Top 5 Placements
+          Placements
         </h2>
         <div class="row">
           <div class="span4">
