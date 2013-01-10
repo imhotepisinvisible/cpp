@@ -64,6 +64,17 @@ class Event < ActiveRecord::Base
     return 1
   end
 
+  def to_audit_item(attribute = :created_at)
+    if attribute == :created_at
+      t = created_at
+      message = "#{company.name}'s event '#{title}' was created"
+    elsif attribute == :updated_at
+      t = updated_at
+      message = "#{company.name}'s event '#{title}' was updated"
+    end
+    AuditItem.new(self, t, 'event', message, "#events/#{id}")
+  end
+
   def as_json(options={})
     result = super(:methods => [:skill_list, :interest_list, :year_group_list])
     result[:relevance] = relevance(options[:student_id]) if options.has_key? :student_id

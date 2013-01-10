@@ -78,6 +78,17 @@ class Company < ActiveRecord::Base
     end
   end
 
+  def to_audit_item(attribute = :created_at)
+    if attribute == :created_at
+      t = created_at
+      message = "#{name} signed up!"
+    elsif attribute == :updated_at
+      t = updated_at
+      message = "#{name} updated their profile"
+    end
+    AuditItem.new(self, t, 'company', message, "#companies/#{id}")
+  end
+
   def as_json(options={})
     result = super(:methods => [:skill_list, :interest_list, :year_group_list])
     if Rails.env.production?

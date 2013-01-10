@@ -64,3 +64,6 @@ class CPP.Views.Departments.Insights extends CPP.Views.Base
       yAxis: 'Views'
       el: '#companies-chart'
       height: 200
+
+    @audit_partial = new CPP.Views.Stats.AuditItemPartial
+      el: $(@el).find('#audit-container')

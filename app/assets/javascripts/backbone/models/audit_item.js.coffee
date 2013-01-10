@@ -1,7 +1,5 @@
-class CPP.Models.AuditItem extends CPP.Models.Base
-  initialize: ->
-
-  typeToClass: ->
+class CPP.Models.AuditItem extends Backbone.Model
+  getIconClass: ->
     switch @get('type')
       when 'company'    then 'icon-briefcase'
       when 'student'    then 'icon-user'
@@ -10,8 +8,9 @@ class CPP.Models.AuditItem extends CPP.Models.Base
       when 'email'      then 'icon-envelope'
       else 'icon-circle'
 
-class CPP.Collections.AuditItems extends CPP.Collections.Base
+  getReadableTimestamp: ->
+    Date.parse(@get('timestamp')).toString('dS MMMM yyyy - H:mm')
+
+class CPP.Collections.AuditItems extends Backbone.Collection
   url: '/audit_items'
   model: CPP.Models.AuditItem
-  comparator: (audit_item) ->
-    audit_item.get("timestamp")

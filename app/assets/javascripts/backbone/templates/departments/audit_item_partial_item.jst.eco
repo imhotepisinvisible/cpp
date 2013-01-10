@@ -1,0 +1,23 @@
+<li class="audit-item">
+  <% if !!@model.get('url'): %>
+    <a href="<%= @model.get('url') %>">
+  <% else: %>
+    <div class="normal">
+  <% end %>
+
+  <div class="icon">
+    <i class="<%= @model.getIconClass() %>" />
+  </div>
+  <div class="message">
+    <%= @model.get('message') %>
+  </div>
+  <div class="timestamp">
+    <%= @model.get('timestamp') %>
+  </div>
+  <div class="clearfix"></div>
+  <% if !!@model.get('url'): %>
+    </a>
+  <% else: %>
+    </div>
+  <% end %>
+</li>

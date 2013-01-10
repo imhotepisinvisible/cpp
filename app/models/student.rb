@@ -98,6 +98,9 @@ class Student < User
     end
   end
 
+  def to_audit_item
+    AuditItem.new(self, created_at, 'student', "#{full_name} signed up!", "#students/#{id}")
+  end
   def as_json(options={})
     result = super(:methods => [:skill_list, :interest_list, :year_group_list, :reject_skill_list, :reject_interest_list, :type])
     result[:stat_count] = @stat_count

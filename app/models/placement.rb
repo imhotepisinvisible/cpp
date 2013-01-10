@@ -20,7 +20,7 @@ class Placement < ActiveRecord::Base
   acts_as_taggable_on :skills, :interests, :year_groups
   attr_accessible :skill_list, :interest_list, :year_group_list,
                   :company_id, :position, :location, :description,
-                  :duration, :deadline, :salary, :benefits, 
+                  :duration, :deadline, :salary, :benefits,
                   :application_procedure, :interview_date, :other
 
   validates :company_id,  :presence => true
@@ -52,6 +52,17 @@ class Placement < ActiveRecord::Base
   # TODO: Implement!
   def relevance(student_id)
     return 1
+  end
+
+  def to_audit_item(attribute = :created_at)
+    if attribute == :created_at
+      t = created_at
+      message = "'#{position}' created"
+    elsif attribute == :updated_at
+      t = updated_at
+      message = "'#{position}' updated"
+    end
+    AuditItem.new(self, t, 'placement', message, "#placements/#{id}")
   end
 
   def as_json(options={})
