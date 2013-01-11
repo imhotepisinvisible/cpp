@@ -5,6 +5,11 @@ class EventsController < ApplicationController
   respond_to :json
   before_filter :require_login
 
+  # Find all events the current user has access to
+  # If company_id is specified, only find those company events
+  # If limit is specified, limit results
+  # If student sort on relevance, then company id (groups by company if same relevance)
+  # If department, only return that department events
   # GET /events
   # GET /events.json
   def index
@@ -19,7 +24,6 @@ class EventsController < ApplicationController
     end
 
     if current_user && current_user.is_student?
-      # Sort on relevance, then company id (groups by company if same relevance)
       @events.sort_by! {|e| [-e.relevance(current_user.id), e.company.name] }
       respond_with @events.as_json({:student_id => current_user.id})
     elsif current_user && current_user.is_department_admin?
@@ -30,6 +34,9 @@ class EventsController < ApplicationController
     end
   end
 
+  # Get event for given id
+  # TODO: WHATS THIS DEPTS STUFF?
+  #
   # GET /events/1
   # GET /events/1.json
   def show

@@ -4,6 +4,10 @@ class StudentsController < ApplicationController
   load_and_authorize_resource
   respond_to :json
 
+  # Return the list of students available to user
+  # If company admin returns all students accessbale to them and who are active
+  # If department admin return department students
+  # If event_id is specified, only show students attending event
   # GET /students
   # GET /students.json
   def index
@@ -19,6 +23,7 @@ class StudentsController < ApplicationController
       @students = @students.joins(:registered_events).where("event_id = ?", params[:event_id])
     end
 
+    # TODO: Move this up to the other admin check?
     if current_user.is_company_admin?
       @students.select! { |s| s.is_active? }
     end
@@ -27,6 +32,8 @@ class StudentsController < ApplicationController
   end
 
 
+  # Find student for specified id
+  #
   # GET /students/1
   # GET /students/1.json
   def show
@@ -34,6 +41,8 @@ class StudentsController < ApplicationController
     respond_with @student
   end
 
+  # Create new student
+  #
   # GET /students/new
   # GET /students/new.json
   def new
@@ -41,6 +50,8 @@ class StudentsController < ApplicationController
     respond_with @student
   end
 
+  # Create new student with given parameters
+  #
   # POST /students
   # POST /students.json
   def create
@@ -60,6 +71,8 @@ class StudentsController < ApplicationController
     end
   end
 
+  # Update specified student with given params
+  #
   # PUT /students/1
   # PUT /students/1.json
   def update
@@ -73,6 +86,10 @@ class StudentsController < ApplicationController
     end
   end
 
+  # Delete specified student peremantnly. End the session (ie log out) if
+  # current user is student.
+  # Don't log out otherwise (department deleting student)
+  #
   # DELETE /students/1
   # DELETE /students/1.json
   def destroy
@@ -84,6 +101,8 @@ class StudentsController < ApplicationController
     head :no_content
   end
 
+  # Download student document, e.g. CV
+  #
   # GET /students/1/:document_type/:view_type
   def download_document
     @student = Student.find(params[:id])
@@ -109,6 +128,8 @@ class StudentsController < ApplicationController
     end
   end
 
+  # Delete student document, e.g. CV
+  #
   # DELETE /students/1/:document_type
   def delete_document
     @student = Student.find(params[:id])
@@ -122,6 +143,9 @@ class StudentsController < ApplicationController
     end
   end
 
+  # Suggest degrees that student can be
+  # This is done by crowdsourcing (i.e. look at every student and obtaining their degree)
+  #
   # GET /students/suggested_degrees
   def suggested_degrees
     @students = Student.all
@@ -134,6 +158,9 @@ class StudentsController < ApplicationController
     respond_with degrees
   end
 
+  # Returns company views of students over past week
+  #
+  # GET /students/view_stats_all
   def view_stats_all
     data = {
       :name => "Student Views",
@@ -152,6 +179,9 @@ class StudentsController < ApplicationController
     respond_with data
   end
 
+  # Returns five highest viewed students in past week
+  #
+  # GET /students/top_5
   def top_5
     # TODO student profile views should be cached
     student_impressions = Impression.where(

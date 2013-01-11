@@ -51,10 +51,10 @@ class Placement < ActiveRecord::Base
     :after => :now,
     :allow_nil => :true
 
-  ##############################################################
+  ##################################################################
   # Attributes not to store in database direectly and exist
   # for life of object
-  # ############################################################
+  # ################################################################
   attr_accessor :stat_count
 
   after_initialize :init

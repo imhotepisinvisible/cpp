@@ -3,6 +3,11 @@ class DirectEmailsController < ApplicationController
 
   respond_to :json
 
+
+  # Returns direct emails,
+  # If company_id is specified, finds just for that company
+  # If limit is specified, limits results
+  #
   # GET /emails
   # GET /emails.json
   def index
@@ -19,6 +24,8 @@ class DirectEmailsController < ApplicationController
     respond_with @emails
   end
 
+  # Get direct email for id 
+  #
   # GET /emails/1
   # GET /emails/1.json
   def show
@@ -26,11 +33,16 @@ class DirectEmailsController < ApplicationController
     respond_with @email
   end
 
+  # Previews email body
+  #
+  # GET /emails/1/preview
   def preview
     @email = DirectEmail.find(params[:id])
     render :text => @email.body
   end
 
+  # Create new direct email 
+  #
   # GET /emails/new
   # GET /emails/new.json
   def new
@@ -38,6 +50,8 @@ class DirectEmailsController < ApplicationController
     respond_with @email
   end
 
+  # Create new email with params 
+  #
   # POST /emails
   # POST /emails.json
   def create
@@ -53,6 +67,8 @@ class DirectEmailsController < ApplicationController
     end
   end
 
+  # Update direct email with params 
+  #
   # PUT /emails/1
   # PUT /emails/1.json
   def update
@@ -64,11 +80,15 @@ class DirectEmailsController < ApplicationController
     end
   end
 
+  # Return number of students who the direct email will be sent to 
+  #
   def get_matching_students_count
     @email = DirectEmail.find(params[:id])
     respond_with @email.get_matching_students_count
   end
 
+  # Delete direct email 
+  #
   # DELETE /emails/1
   # DELETE /emails/1.json
   def destroy

@@ -9,8 +9,6 @@ class CompaniesController < ApplicationController
   # If the current user is a student, injects their company preferences into
   # the company models as 'rating' else just returns all companies as JSON.
   #
-  # TODO: This should only return companies the current student has access to
-  #      via their department(s)
   # GET /companies
   # GET /companies.json
   def index
@@ -21,19 +19,25 @@ class CompaniesController < ApplicationController
     end
   end
 
+  # Get companies pending for given department
+  # 
   # GET departments/1/companies/pending
   def pending
     department = Department.find(params[:department_id])
     respond_with department.pending_companies
   end
-
+  
+  # Approve company for given department
+  # 
   # PUT departments/1/companies/1/approve
   def approve
     department_registration = DepartmentRegistration.find_by_department_id_and_company_id(params[:department_id], params[:company_id])
     department_registration.approved = true
     department_registration.save!
   end
-
+  
+  # Reject company for given department
+  # 
   # PUT departments/1/companies/1/reject
   def reject
     department_registration = DepartmentRegistration.find_by_department_id_and_company_id(params[:department_id], params[:company_id])
@@ -41,11 +45,13 @@ class CompaniesController < ApplicationController
     department_registration.save!
   end
 
+  # Show company
+  # 
+  # Injects company rating if the current user is a student
   # GET /companies/1
   # GET /companies/1.json
   def show
     if current_user.is_student?
-      # Inject company rating if the current user is a student
       respond_with current_user.companies.find(params[:id]).as_json({:student_id => current_user.id})
     else
       @company = Company.find(params[:id])
@@ -53,6 +59,8 @@ class CompaniesController < ApplicationController
     end
   end
 
+  # Create new company
+  # 
   # GET /companies/new
   # GET /companies/new.json
   def new
@@ -60,6 +68,8 @@ class CompaniesController < ApplicationController
     respond_with @company
   end
 
+  # Create new company with given params
+  # 
   # POST /companies
   # POST /companies.json
   def create
@@ -91,6 +101,8 @@ class CompaniesController < ApplicationController
     end
   end
 
+  # Update company based on params
+  # 
   # PUT /companies/1
   # PUT /companies/1.json
   def update
@@ -103,11 +115,12 @@ class CompaniesController < ApplicationController
     end
   end
 
+  # Deletes company and notifies deletion of administrator attached to account
+  # 
   # DELETE /companies/1
   # DELETE /companies/1.json
   def destroy
     @company = Company.find(params[:id])
-    # Notify deletion of administrators attached to the account
     @company_administrators = CompanyAdministrator.where(:company_id => @company.id)
     @company_administrators.each do |admin|
       UserMailer.account_terminated(admin).deliver
@@ -117,6 +130,8 @@ class CompaniesController < ApplicationController
     head :no_content
   end
 
+  # Delete company logo
+  # 
   # DELETE /companies/1/delete_logo
   def delete_logo
     @company = Company.find(params[:id])
@@ -129,6 +144,8 @@ class CompaniesController < ApplicationController
     end
   end
 
+  # Delete company logo
+  # 
   # POST /companies/1/set_rating
   def set_rating
     if !current_user
@@ -143,6 +160,9 @@ class CompaniesController < ApplicationController
     head :no_content
   end
 
+  # Return student views for company over past week
+  # 
+  # GET /companies/1/view_stats 
   def view_stats
     @company = Company.find(params[:id])
     data = {
@@ -160,6 +180,9 @@ class CompaniesController < ApplicationController
     respond_with data
   end
 
+  # Return student views for all companies over past week
+  # 
+  # GET /companies/view_stats_all
   def view_stats_all
     data = {
       :name => "Company Views",
@@ -178,6 +201,9 @@ class CompaniesController < ApplicationController
     respond_with data
   end
 
+  # Return top five companies
+  # 
+  # GET /companies/top_5 
   def top_5
     # TODO student profile views should be cached
     company_impressions = Impression.where(

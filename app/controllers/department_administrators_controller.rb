@@ -3,6 +3,9 @@ class DepartmentAdministratorsController < ApplicationController
 
   respond_to :json
 
+  # Return department admins
+  # If department_id is specified, return only those of department
+  # 
   # GET /department_administrators
   # GET /department_administrators.json
   # GET /departments/1/department_administrators.json
@@ -15,6 +18,8 @@ class DepartmentAdministratorsController < ApplicationController
     end
   end
 
+  # Find department admin for given id
+  #
   # GET /department_administrators/1
   # GET /department_administrators/1.json
   def show
@@ -22,6 +27,8 @@ class DepartmentAdministratorsController < ApplicationController
     respond_with @department_administrator
   end
 
+  # Create new department admin
+  #
   # GET /department_administrators/new
   # GET /department_administrators/new.json
   def new
@@ -29,6 +36,8 @@ class DepartmentAdministratorsController < ApplicationController
     respond_with @department_administrator
   end
 
+  # Create new department admin with given params
+  #
   # POST /department_administrators
   # POST /department_administrators.json
   def create
@@ -40,6 +49,8 @@ class DepartmentAdministratorsController < ApplicationController
     end
   end
 
+  # Update department admin with given params for given id
+  #
   # PUT /department_administrators/1
   # PUT /department_administrators/1.json
   def update
@@ -51,6 +62,8 @@ class DepartmentAdministratorsController < ApplicationController
     end
   end
 
+  # Delete department admin with given id
+  #
   # DELETE /department_administrators/1
   # DELETE /department_administrators/1.json
   def destroy

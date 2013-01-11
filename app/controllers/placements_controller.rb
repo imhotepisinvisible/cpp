@@ -4,7 +4,12 @@ class PlacementsController < ApplicationController
   load_and_authorize_resource
   respond_to :json
   before_filter :require_login
-
+  
+  # Find all placements current_user has access to
+  # If company_id is specified, only show that company's placements
+  # If limit is specified, limit results
+  # If student sort on relevance, then company id (groups by company if same relevance)
+  #
   # GET /placements
   # GET /placements.json
   def index
@@ -19,7 +24,6 @@ class PlacementsController < ApplicationController
     end
 
     if current_user && current_user.is_student?
-      # Sort on relevance, then company id (groups by company if same relevance)
       @placements = @placements.sort_by {|p| [-p.relevance(current_user.id), p.company.name] }
       respond_with @placements.as_json({:student_id => current_user.id})
     else
@@ -27,6 +31,8 @@ class PlacementsController < ApplicationController
     end
   end
 
+  # Find placement with specified id
+  #
   # GET /placements/1
   # GET /placements/1.json
   def show
@@ -34,6 +40,8 @@ class PlacementsController < ApplicationController
     respond_with @placement
   end
 
+  # Create new placement
+  #
   # GET /placements/new
   # GET /placements/new.json
   def new
@@ -41,6 +49,8 @@ class PlacementsController < ApplicationController
     respond_with @placement
   end
 
+  # Create new placement with given params
+  #
   # POST /placements
   # POST /placements.json
   def create
@@ -53,6 +63,8 @@ class PlacementsController < ApplicationController
     end
   end
 
+  # Update specified placement with params
+  #
   # PUT /placements/1
   # PUT /placements/1.json
   def update
@@ -65,6 +77,8 @@ class PlacementsController < ApplicationController
     end
   end
 
+  # Delete specified placement
+  #
   # DELETE /placements/1
   # DELETE /placements/1.json
   def destroy
@@ -73,6 +87,9 @@ class PlacementsController < ApplicationController
     head :no_content
   end
 
+  # Return top five placements with the highest views in the given week
+  #
+  # GET /placements/top_5
   def top_5
     # TODO student profile views should be cached
     placement_impressions = Impression.where(

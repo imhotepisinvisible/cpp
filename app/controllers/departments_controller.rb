@@ -15,6 +15,8 @@ class DepartmentsController < ApplicationController
     end
   end
 
+  # Returns approval status for company
+  #
   # GET /companies/1/departments/1/status
   def get_status
     raise unless params.has_key? :company_id
@@ -23,6 +25,8 @@ class DepartmentsController < ApplicationController
     respond_with dept_reg.status
   end
 
+  # Sets approval status for company
+  #
   # PUT /companies/1/departments/1/status
   def set_status
     raise unless params.has_key? :company_id
@@ -36,6 +40,7 @@ class DepartmentsController < ApplicationController
     end
   end
 
+  # TODO: COMMENT AND NOT HARDCODE STATUSES 
   # PUT /companies/1/departments/1/apply
   def apply
     raise unless params.has_key? :company_id
@@ -48,6 +53,8 @@ class DepartmentsController < ApplicationController
     end
   end
 
+  # Finds department with given id
+  #
   # GET /departments/1
   # GET /departments/1.json
   def show
@@ -55,6 +62,8 @@ class DepartmentsController < ApplicationController
     respond_with @department
   end
 
+  # Creates new department 
+  #
   # GET /departments/new
   # GET /departments/new.json
   def new
@@ -62,6 +71,8 @@ class DepartmentsController < ApplicationController
     respond_with @department
   end
 
+  # Creates new department with given params
+  #
   # POST /departments
   # POST /departments.json
   def create
@@ -73,6 +84,8 @@ class DepartmentsController < ApplicationController
     end
   end
 
+  # Updates department with given params
+  #
   # PUT /departments/1
   # PUT /departments/1.json
   def update
@@ -84,6 +97,8 @@ class DepartmentsController < ApplicationController
     end
   end
 
+  # Deletes department
+  #
   # DELETE /departments/1
   # DELETE /departments/1.json
   def destroy

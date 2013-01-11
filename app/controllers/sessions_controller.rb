@@ -1,10 +1,14 @@
 class SessionsController < ApplicationController
   respond_to :json
 
+  # Create new session
+  #
   def new
     @session = {email: nil, password:nil}
   end
 
+  # Create new session for a user
+  #
   def create
     user = User.find_by_email(params[:session][:email])
     if user && user.authenticate(params[:session][:password])
@@ -26,6 +30,8 @@ class SessionsController < ApplicationController
     end
   end
 
+  # End session, log out
+  #
   def destroy
     session[:user_id] = nil
     redirect_to root_url, :notice => "Logged out!"

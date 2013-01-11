@@ -3,7 +3,9 @@ class UsersController < ApplicationController
 
   respond_to :json
 
+  # Allows user to change their password
   # Assumes user is logged in and therefore accessible via current_user
+  # 
   # PUT /users/change_password
   # PUT /users/change_password.json
   def change_password
@@ -29,6 +31,10 @@ class UsersController < ApplicationController
     end
   end
 
+  # Resets users password to a new 8 character secure random string
+  # Emails user password
+  #
+  # /user/forgot_password
   def forgot_password
     @user = User.find_by_email(params[:email])
     if @user == nil
@@ -37,7 +43,6 @@ class UsersController < ApplicationController
       @user.errors.add(:user, 'No such email address exists')
       respond_with @user, status: :unprocessable_entity
     else
-      # TODO GENERATE SECURE NEW PASSWORD AND EMAIL TO STUDENT
       password = SecureRandom.hex(8)
       @user.password = password
       if @user.save

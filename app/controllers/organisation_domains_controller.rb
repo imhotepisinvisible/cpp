@@ -3,6 +3,8 @@ class OrganisationDomainsController < ApplicationController
 
   respond_to :json
 
+  # Return all organisation domains
+  #
   # GET /organisation_domains
   # GET /organisation_domains.json
   def index
@@ -10,6 +12,8 @@ class OrganisationDomainsController < ApplicationController
     respond_with @organisation_domains
   end
 
+  # Show organisation domain for given id
+  #
   # GET /organisation_domains/1
   # GET /organisation_domains/1.json
   def show
@@ -17,6 +21,8 @@ class OrganisationDomainsController < ApplicationController
     respond_with @organisation_domain
   end
 
+  # Create new organisation domain
+  #
   # GET /organisation_domains/new
   # GET /organisation_domains/new.json
   def new
@@ -24,6 +30,8 @@ class OrganisationDomainsController < ApplicationController
     respond_with @organisation_domain
   end
 
+  # Create new organisation domain with given parameters
+  #
   # POST /organisation_domains
   # POST /organisation_domains.json
   def create
@@ -35,6 +43,8 @@ class OrganisationDomainsController < ApplicationController
     end
   end
 
+  # Update given organisation domain with given params
+  #
   # PUT /organisation_domains/1
   # PUT /organisation_domains/1.json
   def update
@@ -46,6 +56,8 @@ class OrganisationDomainsController < ApplicationController
     end
   end
 
+  # Delete organisation domain
+  #
   # DELETE /organisation_domains/1
   # DELETE /organisation_domains/1.json
   def destroy
