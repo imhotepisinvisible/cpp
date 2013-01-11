@@ -13,24 +13,35 @@
 #   t.datetime "updated_at",  :null => false
 
 class Placement < ActiveRecord::Base
+  ##################### Log placement actions ########################
   is_impressionable
+
+  #################### Set default object scope#######################
   default_scope order('created_at DESC')
+
+  ###################### Declare associations ########################
   belongs_to :company
 
+  ######################### Declare tags #############################
   acts_as_taggable_on :skills, :interests, :year_groups
+
+  ############ Attributes can be set via mass assignment ############
   attr_accessible :skill_list, :interest_list, :year_group_list,
                   :company_id, :position, :location, :description,
                   :duration, :deadline, :salary, :benefits,
                   :application_procedure, :interview_date, :other
 
+  ######################## Ensure present #########################
   validates :company_id,  :presence => true
   validates :position,    :presence => true
   validates :location,    :presence => true
   validates :description, :presence => true
 
-  validates :description, obscenity: {message: "Profanity is not allowed!"}
-  validates :position, obscenity: {message: "Profanity is not allowed!"}
+  ###################### Disallow Profanity #######################
+  validates :description, obscenity: { message: "Profanity is not allowed!" }
+  validates :position, obscenity: { message: "Profanity is not allowed!" }
 
+  ####################### Validate date fields ######################
   validates_datetime :deadline,
     :after => :now,
     :after_message => "Cannot be in the past",
@@ -40,6 +51,10 @@ class Placement < ActiveRecord::Base
     :after => :now,
     :allow_nil => :true
 
+  ##############################################################
+  # Attributes not to store in database direectly and exist
+  # for life of object
+  # ############################################################
   attr_accessor :stat_count
 
   after_initialize :init
@@ -54,6 +69,7 @@ class Placement < ActiveRecord::Base
     return 1
   end
 
+  # TODO: COMMENT
   def to_audit_item(attribute = :created_at)
     if attribute == :created_at
       t = created_at
@@ -65,6 +81,7 @@ class Placement < ActiveRecord::Base
     AuditItem.new(self, t, 'placement', message, "#placements/#{id}")
   end
 
+  # Return JSON object
   def as_json(options={})
     result = super(:methods => [:skill_list, :interest_list, :year_group_list])
     result[:relevance] = relevance(options[:student_id]) if options.has_key? :student_id

@@ -12,35 +12,46 @@
 #   t.datetime "updated_at",      :null => false
 
 class Student < User
+  ##################### Log placement actions ########################
   is_impressionable
+
+  ##################### On delete hide record ########################
   acts_as_paranoid
 
+  ###################### Declare associations ########################
   has_and_belongs_to_many :departments, :foreign_key => :user_id
-  has_many :companies, :through => :departments, :uniq => true
-  has_many :events, :through => :departments, :uniq => true
+
+  has_many :companies,  :through => :departments, :uniq => true
+  has_many :events,     :through => :departments, :uniq => true
   has_many :placements, :through => :companies, :uniq => true
   has_many :student_company_ratings
-  has_and_belongs_to_many :registered_events, :join_table => :student_event_registrations, :class_name => "Event", :foreign_key => :user_id
+  
+  has_and_belongs_to_many :registered_events, 
+                          :join_table => :student_event_registrations,
+                          :class_name => "Event",
+                          :foreign_key => :user_id
 
-
+  ########################## Declare tags ###########################
   acts_as_taggable_on :skills, :interests, :year_groups, :reject_skills, :reject_interests
 
+
+  ######################### Validate fields #########################
   validates :departments, :presence => { :message => "Must belong to at least one department" }
   validates :bio, :length => { :maximum => 500 }
   validate :valid_email?
 
-  validates :bio, obscenity: {message: "Profanity is not allowed!"}
-  validates :first_name, obscenity: {message: "Profanity is not allowed!"}
-  validates :last_name, obscenity: {message: "Profanity is not allowed!"}
 
+  ######################### Disallow Profanity #########################
+  validates :bio, obscenity: { message: "Profanity is not allowed!" }
+  validates :first_name, obscenity: { message: "Profanity is not allowed!" }
+  validates :last_name, obscenity: { message: "Profanity is not allowed!" }
+
+  ####################### Validate attached files ######################
   has_attached_file :cv
-
   has_attached_file :transcript
-
   has_attached_file :covering_letter
-
   has_attached_file :profile_picture,
-    :default_url => '/assets/default_profile.png'
+                    :default_url => '/assets/default_profile.png'
 
   validates_attachment :cv, :transcript, :covering_letter,
       :content_type => { :content_type => ["application/pdf", "text/plain"],
@@ -50,11 +61,16 @@ class Student < User
       :content_type => { :content_type => ["image/jpeg", "image/png"],
                           message: "Must be a jpeg or png file"}
 
-  attr_accessible :year, :bio, :degree, :email,
-                    :cv, :transcript, :covering_letter, :profile_picture,
-                    :skill_list, :interest_list, :reject_skill_list, :reject_interest_list, :year_group_list, :active,
-                    :looking_for, :tooltip
+  ############## Attributes can be set via mass assignment ############
+  attr_accessible :year, :bio, :degree, :email, :cv, :transcript, 
+                  :covering_letter, :profile_picture, :skill_list, 
+                  :interest_list, :reject_skill_list, :reject_interest_list, 
+                  :year_group_list, :active, :looking_for, :tooltip
   
+  ####################################################################
+  # Attributes not to store in database direectly and exist
+  # for life of object
+  # ##################################################################
   attr_accessor :stat_count
 
   after_initialize :init
@@ -63,6 +79,7 @@ class Student < User
     self.stat_count ||= 0
   end
 
+  # Only active to companies if fields set 
   def is_active?
     active &&
     !first_name.blank? &&
@@ -72,6 +89,7 @@ class Student < User
     !cv_file_size.nil?
   end
 
+  # Ensures email domain matches one of organisation specified emails
   def valid_email?
     if departments.blank? # Can't have org if no departments
       errors.add(:email, "Cannot validate email without department")
@@ -98,9 +116,12 @@ class Student < User
     end
   end
 
+  # TODO: Comment 
   def to_audit_item
     AuditItem.new(self, created_at, 'student', "#{full_name} signed up!", "#students/#{id}")
   end
+
+  # Returns JSON object
   def as_json(options={})
     result = super(:methods => [:skill_list, :interest_list, :year_group_list, :reject_skill_list, :reject_interest_list, :type])
     result[:stat_count] = @stat_count

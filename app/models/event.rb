@@ -12,29 +12,43 @@
 #   t.text     "description"
 #   t.string   "location"
 #   t.integer  "capacity"
-#   t.datetime "created_at",     :null => false
-#   t.datetime "updated_at",     :null => false
+#   t.string   "requirements"
+#   t.datetime "created_at",   :null => false
+#   t.datetime "updated_at",   :null => false
 
 class Event < ActiveRecord::Base
+  ####################### Log event actions #########################
   is_impressionable
+
+
+  #################### Set default object scope#######################
   default_scope order('start_date ASC')
 
+  ###################### Declare associations ########################
 	belongs_to :company
-  has_and_belongs_to_many :registered_students, :join_table => :student_event_registrations, :association_foreign_key => "user_id", :class_name => "Student"
+  has_and_belongs_to_many :registered_students, 
+                          :join_table => :student_event_registrations, 
+                          :association_foreign_key => "user_id", 
+                          :class_name => "Student"
   has_and_belongs_to_many :departments
 
+  ########################## Declare tags ############################
   acts_as_taggable_on :skills, :interests, :year_groups
 
+  ########################## Ensure present ##########################
 	validates :company_id,   :presence => true
 	validates :title,        :presence => true
 	validates :description,  :presence => true
 	validates :location,     :presence => true
   validates :start_date,   :presence => true
   validates :end_date,     :presence => true
+  validates :departments,  :presence => { :message => "Events must belong to at least one department" }
 
+  ####################### Disallow Profanity ########################
   validates :description, obscenity: {message: "Profanity is not allowed!"}
   validates :title, obscenity: {message: "Profanity is not allowed!"}
 
+  ####################### Validate date fields ######################
   validates_datetime :start_date,
     :after => :now,
     :after_message => "Event cannot start in the past"
@@ -43,13 +57,16 @@ class Event < ActiveRecord::Base
     :after => :start_date,
     :after_message => "End time cannot be before start time"
 
-  validates :departments, :presence => { :message => "Events must belong to at least one department" }
-
+  ############ Attributes can be set via mass assignment ############
   attr_accessible :skill_list, :interest_list, :year_group_list,
                   :title, :start_date, :end_date, :deadline,
                   :description, :location, :capacity,
                   :company_id, :requirements
 
+  #################################################################
+  # Attributes not to store in database direectly and exist
+  # for life of object
+  # ###############################################################
   attr_accessor :stat_count
 
   after_initialize :init
@@ -64,6 +81,8 @@ class Event < ActiveRecord::Base
     return 1
   end
 
+
+  # TODO: Comment
   def to_audit_item(attribute = :created_at)
     if attribute == :created_at
       t = created_at
@@ -75,6 +94,7 @@ class Event < ActiveRecord::Base
     AuditItem.new(self, t, 'event', message, "#events/#{id}")
   end
 
+  # Returns JSON object
   def as_json(options={})
     result = super(:methods => [:skill_list, :interest_list, :year_group_list])
     result[:relevance] = relevance(options[:student_id]) if options.has_key? :student_id
