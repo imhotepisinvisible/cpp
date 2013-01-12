@@ -52,19 +52,23 @@ class CPP.Models.Event extends CPP.Models.Base
       title: "Additional Requirements"
 
   getFilled: ->
+    # Return the number of students attending the event
     if @.registered_students then @.registered_students.length else 0
 
   getPercentageCapacity: ->
+    # The percentage of spaces that have been taken
     percentage = 100 * parseFloat(@getFilled()) / parseFloat(@get("capacity"))
     return percentage
 
   getCapacityClass: ->
+    # The class to add to the event capacity bar
     p = @getPercentageCapacity()
     return "danger" if p > 90
     return "warning" if p > 60
     return "info"
 
   getSpaces: ->
+    # Remaining spaces in the event
     @get('capacity') - @getFilled()
 
   getReadableDate: (field) ->

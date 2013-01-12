@@ -6,11 +6,13 @@ class CPP.Views.CompaniesSettings extends CPP.Views.Base
     'click #delete-company' : 'deleteCompany'
 
   initialize: ->
+    # Company settings page
     @render()
 
   render: ->
     $(@el).html(@template(company: @model, tooltip: (loggedIn() and CPP.CurrentUser.get('tooltip'))))
 
+    # Change password partial
     new CPP.Views.Users.ChangePassword
       el: $(@el).find('#change-password')
     .render()

@@ -8,6 +8,7 @@ class CPP.Views.Companies.DepartmentRequest extends CPP.Views.Base
     'click .btn-request'   : 'request'
 
   initialize: (options) ->
+    # Individual department request
     @company = options.company
     @render()
 

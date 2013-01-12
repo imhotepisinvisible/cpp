@@ -8,6 +8,7 @@ class CPP.Views.CompanyAdministrator.Signup extends CPP.Views.Base
     'click .btn-submit': 'submit'
 
   initialize: (options) ->
+    # Company administrator signup page
     @company = options.company
     @form = new Backbone.Form
       model: @model
@@ -23,6 +24,7 @@ class CPP.Views.CompanyAdministrator.Signup extends CPP.Views.Base
     @
 
   submit: (e) ->
+    # Save the company adminsitrator
     if @form.validate() == null
       @form.commit()
       @model.set 'company_id', @company.get 'id'

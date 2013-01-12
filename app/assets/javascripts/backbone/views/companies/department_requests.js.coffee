@@ -4,6 +4,7 @@ class CPP.Views.Companies.DepartmentRequests extends CPP.Views.Base
   template: JST['backbone/templates/companies/department_requests']
 
   initialize: (options) ->
+    # Partial for department requests (for company dashboard)
     @company = options.company
     depts = new CPP.Collections.Departments
     depts.url = "/companies/#{@company.id}/departments"
@@ -17,6 +18,7 @@ class CPP.Views.Companies.DepartmentRequests extends CPP.Views.Base
   render: ->
     $(@el).html(@template(company: @company))
     if @collection.length > 0
+      # Create department request partial for each request
       @collection.each (dept) =>
         view = new CPP.Views.Companies.DepartmentRequest
           model: dept

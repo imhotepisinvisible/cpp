@@ -11,10 +11,12 @@ class CPP.Views.Companies.EditAdministrator extends CPP.Views.Base
     'click .btn-cancel-admin' : 'cancel'
 
   initialize: ->
+    # Company admin edit
     @render()
 
   render: ->
     $(@el).html(@template(admin: @model))
+    # Form to modify company administrator
     @form = new Backbone.Form
       model: @model
       template: 'standardForm'
@@ -25,7 +27,6 @@ class CPP.Views.Companies.EditAdministrator extends CPP.Views.Base
         last_name:
           type: "Text"
           title: "Last Name"
-
     .render()
     $(@el).find('.admin-form').html(@form.el)
     Backbone.Validation.bind @form
@@ -34,6 +35,7 @@ class CPP.Views.Companies.EditAdministrator extends CPP.Views.Base
     @
 
   edit: (e) ->
+    # Show the edit partial
     $(e.currentTarget).parent().parent().find('.btn-container').hide()
     $(e.currentTarget).parent().parent().find('.btn-save-admin').show()
     $(e.currentTarget).parent().parent().find('.btn-cancel-admin').show()
@@ -41,6 +43,7 @@ class CPP.Views.Companies.EditAdministrator extends CPP.Views.Base
     $(e.currentTarget).parent().parent().find('.admin-form').show()
 
   save: (e) ->
+    # Save the company admin
     if @form.validate() == null
       @form.commit()
       @model.save {},
@@ -55,6 +58,7 @@ class CPP.Views.Companies.EditAdministrator extends CPP.Views.Base
           notify 'error', 'Unable to save administrator'
 
   delete: (e) ->
+    # Delete the company admin
     @model.destroy
       wait: true
       success: (model, response) =>
@@ -64,6 +68,7 @@ class CPP.Views.Companies.EditAdministrator extends CPP.Views.Base
         notify "error", "Administrator could not be deleted"
 
   cancel: (e) ->
+    # Hide the edit partial
     # Allow css to control style of btn-edit again
     $(e.currentTarget).parent().find('.btn-container').attr('style', '')
     $(e.currentTarget).parent().find('.btn-save-admin').hide()

@@ -7,18 +7,17 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
     'blur #company-name-input-container': 'companyNameStopEdit'
     'click #company-description-container': 'descriptionEdit'
     'blur #company-description-input-container': 'descriptionStopEdit'
-
-
     'click .upload-document': 'uploadDocument'
     'click .delete-document': 'deleteDocument'
 
   initialize: ->
+    # Company dashboard
     @model.bind 'change', @render, @
     @render()
     @logoUploadInitialize()
 
-
   logoUploadInitialize: ->
+    # Company logo uploader
     $('#file-logo').fileupload
       url: '/companies/' + @model.id
       dataType: 'json'
@@ -49,6 +48,7 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
       displayJQZHRErrors data
 
   deleteDocument: (e) ->
+    # Delete company logo
     id = $(e.currentTarget).attr('id')
     if confirm "Are you sure you wish to delete your logo?"
       $.ajax
@@ -69,6 +69,7 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
     $(@el).html(@template(company: @model, tooltip: (loggedIn() and CPP.CurrentUser.get('tooltip'))))
     super
 
+    # Render partials
     new CPP.Views.Events.Partial
       el: $(@el).find('#events-partial')
       company: @model

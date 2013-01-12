@@ -4,7 +4,7 @@ class CPP.Views.CompaniesStudentIndex extends CPP.Views.Base
   rowDiv: '<div class="row" id="current-tile-row"></div>'
 
   initialize: (options) ->
-    #@collection.bind 'reset', @render, @
+    # Company index for students
     @collection.bind 'change', @render, @
     @collection.bind 'filter', @renderCompanies, @
     @render()
@@ -21,6 +21,7 @@ class CPP.Views.CompaniesStudentIndex extends CPP.Views.Base
     $('#company-tiles').html("")
     # Sort collection by rating (has to be done before bind to reset)
     if collection.length > 0
+      # First company in top position
       $('#company-tiles').append('<div id="company-tile-container-0"></div>')
       topCompanyTile = new CPP.Views.CompanyTile
         model: collection.first()
@@ -29,6 +30,7 @@ class CPP.Views.CompaniesStudentIndex extends CPP.Views.Base
       $('#company-tiles').append(@rowDiv)
 
       if collection.length > 1
+        # All other companies in rows of three
         for index in [1..(collection.length - 1)]
           # Every third company, add a new row
           if index % 3 == 1

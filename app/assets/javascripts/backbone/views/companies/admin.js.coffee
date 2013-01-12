@@ -12,6 +12,7 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
     'change #file-logo': 'fileChange'
 
   initialize: ->
+    # Initialise the company adminstrator form
     @form = new Backbone.Form
       model: @model
       schema:
@@ -23,10 +24,12 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
           type: 'TextArea'
     .render()
     @render()
+    # Obtain approval status for company
     $.get "/companies/#{@model.id}/departments/#{getAdminDepartment()}/status", (status) ->
       $('#select-approval-status').val(status)
 
   logoUploadInitialize: ->
+    # Logo uploader
     $('#file-logo').fileupload
       singleFileUploads: true
       url: '/companies/' + @model.id
@@ -51,9 +54,11 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
       displayJQZHRErrors data
 
   delDocument: ->
+    # Mark the logo for deletion
     $('.company-logo-image').attr('src', '/assets/default_profile.png')
 
   deleteDocument: ->
+    # Delete company logo
     $.ajax
       url: "/companies/#{@model.id}/logo"
       type: 'DELETE'
@@ -92,18 +97,21 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
     reader.readAsDataURL(logo)
 
   save: ->
+    # Save the form
     if @form.validate() == null
       @form.commit()
       @model.save {},
         wait: true
         forceUpdate: true
         success: (model, response) =>
+          # Save the approval status
           $.ajax
             url: "/companies/#{@model.id}/departments/#{getAdminDepartment()}/status"
             type: 'PUT'
             data:
               status: $('#select-approval-status').val()
             success: =>
+              # Upload the logo if it has changed
               if $('#file-logo').get(0).files.length > 0
                 @logoUploadInitialize()
                 $('#file-logo').fileupload 'send',
