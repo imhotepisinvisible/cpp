@@ -7,6 +7,7 @@ class CPP.Views.Contacts.Partial extends CPP.Views.Base
     'click #btn-all' : 'viewAll'
 
   initialize: (options) ->
+    # Company contacts view partial
     @company_id = options.company_id
     if options.company
       @company = options.company

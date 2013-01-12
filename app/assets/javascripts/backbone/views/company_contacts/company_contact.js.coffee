@@ -14,8 +14,8 @@ class CPP.Views.CompanyContact extends CPP.Views.Base
     'drop'              : 'drop'
 
   initialize: (options) ->
+    # Edit individual contact
     @model.bind 'change', @render, @
-
     @render
 
   render: ->
@@ -27,9 +27,11 @@ class CPP.Views.CompanyContact extends CPP.Views.Base
     @
 
   drop: (event, index) ->
+    # Event for placing draggable
     $(@el).trigger('update-sort', [@model, index]);
 
   edit: (e) ->
+    # Show the edit form
     $(e.currentTarget).parent().parent().find('.btn-container').hide()
     $(e.currentTarget).parent().parent().find('.btn-save').show()
     $(e.currentTarget).parent().parent().find('.btn-cancel').show()
@@ -38,6 +40,7 @@ class CPP.Views.CompanyContact extends CPP.Views.Base
     $(e.currentTarget).parent().parent().find('.contact-form').show()
 
   save: (e) ->
+    # Save the company contact
     index = $(e.currentTarget).parent().attr('id')
     if @form.validate() == null
       @form.commit()
@@ -55,6 +58,7 @@ class CPP.Views.CompanyContact extends CPP.Views.Base
       @cancel(e)
 
   delete: (e) ->
+    # Delete the company contact
     index = $(e.currentTarget).parent().parent().attr('id')
     @model.destroy
       wait: true

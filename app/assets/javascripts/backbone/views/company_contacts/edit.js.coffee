@@ -11,8 +11,10 @@ class CPP.Views.Contacts.PartialEdit extends CPP.Views.Base
     'update-sort' : 'updateSort'
 
   initialize: (options) ->
+    # Company contact edit page
     @company_id = options.company_id
     if options.company
+      # Fetch company contacts for specified company
       @limit = options.limit
       @company = options.company
       @partial = true
@@ -31,6 +33,7 @@ class CPP.Views.Contacts.PartialEdit extends CPP.Views.Base
   initializeNoFetch: ->
     @render()
 
+    # Allow drag and droppable contacts in edit partial
     $('#contacts').sortable
       axis: "y"
       dropOnEmpty: false
@@ -57,6 +60,7 @@ class CPP.Views.Contacts.PartialEdit extends CPP.Views.Base
 
 
   reRender: (options) ->
+    # Re-render company contact edit partial
     if @company
       @undelegateEvents()
       new CPP.Views.Contacts.PartialEdit
@@ -73,6 +77,7 @@ class CPP.Views.Contacts.PartialEdit extends CPP.Views.Base
     Backbone.history.navigate('/companies/' + @company_id + '/company_contacts/edit', trigger: true)
 
   new: (e) ->
+    # Show new contact form
     $(@el).find('#btn-cancel-new').show()
     $(@el).find('#btn-save-new').show()
 
@@ -86,6 +91,7 @@ class CPP.Views.Contacts.PartialEdit extends CPP.Views.Base
       @formNew.validate()
 
   saveNew: (e) ->
+    # Save the new contact
     if @formNew.validate() == null
       @formNew.commit()
       @formNew.model.save {},
