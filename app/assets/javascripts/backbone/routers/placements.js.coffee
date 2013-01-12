@@ -8,8 +8,8 @@ class CPP.Routers.Placements extends Backbone.Router
       'placements/:id'                        : 'view'
 
   indexCompany: (company_id) ->
+    # Placements index for specific company
     placements = new CPP.Collections.Placements
-    # new CPP.Views.Placements.Index collection: placements
     placements.fetch
       data:
         $.param({ company_id: company_id})
@@ -24,6 +24,7 @@ class CPP.Routers.Placements extends Backbone.Router
         notify "error", "Couldn't fetch placements"
 
   index: ->
+    # Placements index
     placements = new CPP.Collections.Placements
     placements.fetch
       success: ->
@@ -32,6 +33,7 @@ class CPP.Routers.Placements extends Backbone.Router
         notify "error", "Couldn't fetch placements"
 
   new: (company_id) ->
+    # New placement
     if isStudent()
       window.history.back()
       return false
@@ -50,6 +52,7 @@ class CPP.Routers.Placements extends Backbone.Router
         notify "error", "Couldn't fetch company for event"
 
   newAdmin: ->
+    # New placement created by an administrator
     if isStudent()
       window.history.back()
       return false
@@ -70,6 +73,7 @@ class CPP.Routers.Placements extends Backbone.Router
         notify "error", "Couldn't fetch department"
 
   edit: (id) ->
+    # Edit a placement
     if isStudent()
       window.history.back()
       return false
@@ -81,6 +85,7 @@ class CPP.Routers.Placements extends Backbone.Router
         notify "error", "Couldn't fetch placement"
 
   view: (id) ->
+    # Placement view
     placement = new CPP.Models.Placement id: id
     placement.fetch
       success: ->

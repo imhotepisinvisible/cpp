@@ -9,8 +9,8 @@ class CPP.Routers.Events extends Backbone.Router
       'events/:id/students'                  : 'eventAttendees'
 
   indexCompany: (company_id) ->
+    # Events index for a specific company
     events = new CPP.Collections.Events
-    # new CPP.Views.Events.Index collection: events
     events.fetch
       data:
         $.param({ company_id: company_id})
@@ -25,6 +25,7 @@ class CPP.Routers.Events extends Backbone.Router
         notify "error", "Couldn't fetch events"
 
   index: ->
+    # Events index
     events = new CPP.Collections.Events
     events.fetch
       success: ->
@@ -40,10 +41,12 @@ class CPP.Routers.Events extends Backbone.Router
         notify "error", "Couldn't fetch events"
 
   new: (company_id) ->
+    # Create a new event
     if isStudent()
       window.history.back()
       return false
     if isDepartmentAdmin()
+      # Redirect admin to admin event creation page
       return @newAdmin()
     unless company_id
       company_id = getUserCompanyId()
@@ -63,6 +66,7 @@ class CPP.Routers.Events extends Backbone.Router
         notify "error", "Couldn't fetch company for event"
 
   newAdmin: (department_id) ->
+    # Administrator new event page
     if isStudent()
       window.history.back()
       return false
@@ -83,6 +87,7 @@ class CPP.Routers.Events extends Backbone.Router
         notify "error", "Couldn't fetch department"
 
   edit: (id) ->
+    # Edit an event
     unless isAdmin()
       window.history.back()
       return false
@@ -95,12 +100,14 @@ class CPP.Routers.Events extends Backbone.Router
           notify "error", "Couldn't fetch event"
 
   view: (id) ->
+    # View an event
     event = new CPP.Models.Event id: id
     event.fetch
       success: ->
         event.company = new CPP.Models.Company id: event.get 'company_id'
         event.registered_students = new CPP.Collections.Students()
         deferreds = []
+        # Fetch company and registered students for event
         deferreds.push(event.company.fetch())
         deferreds.push(event.registered_students.fetch({ data: $.param({ event_id: id }) }))
         $.when.apply($, deferreds).done(=>
@@ -110,6 +117,7 @@ class CPP.Routers.Events extends Backbone.Router
         notify "error", "Couldn't fetch event"
 
   eventAttendees: (id) ->
+    # Student index for students attending the event
     event = new CPP.Models.Event id: id
     event.fetch
       success: ->

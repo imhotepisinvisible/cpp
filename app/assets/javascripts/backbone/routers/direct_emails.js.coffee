@@ -9,7 +9,6 @@ class CPP.Routers.DirectEmails extends Backbone.Router
 
   indexCompany: (company_id) ->
     emails = new CPP.Collections.DirectEmails
-    # new CPP.Views.Emails.Index collection: emails
     emails.fetch
       data:
         $.param({ company_id: company_id})
@@ -25,7 +24,6 @@ class CPP.Routers.DirectEmails extends Backbone.Router
 
   indexStudent: (student_id) ->
     emails = new CPP.Collections.DirectEmails
-    # new CPP.Views.Emails.Index collection: emails
     emails.fetch
       data:
         $.param({ student_id: student_id, company_id: userId()})

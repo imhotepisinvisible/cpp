@@ -9,6 +9,7 @@ class CPP.Routers.Departments extends Backbone.Router
     'insights'     :  'insights'
 
   settings: (id) ->
+    # Department setting spage
     if isStudent() or isCompanyAdmin()
       window.history.back()
       return false
@@ -24,6 +25,7 @@ class CPP.Routers.Departments extends Backbone.Router
           notify "error", "Couldn't fetch department"
 
   dashboard: (id) ->
+    # Department dashboard
     if isStudent() or isCompanyAdmin()
       window.history.back()
       return false
@@ -39,6 +41,8 @@ class CPP.Routers.Departments extends Backbone.Router
           notify 'error', "Couldn't fetch department"
 
   register: (id) ->
+    # Department administrator registration page - add new admin to
+    # existing department
     if isStudent() or isCompanyAdmin()
       window.history.back()
       return false
@@ -64,7 +68,8 @@ class CPP.Routers.Departments extends Backbone.Router
       return false
 
   insights: (id) ->
-   if isStudent() or isCompanyAdmin()
+    # Statistics page
+    if isStudent() or isCompanyAdmin()
       window.history.back()
       return false
 
