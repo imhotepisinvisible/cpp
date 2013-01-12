@@ -4,6 +4,7 @@ class CPP.Views.CompaniesIndex extends CPP.Views.Base
 
   # Company aggregate view for administrators
   initialize: (options) ->
+    # Bind to update collection
     @collection.bind 'reset', @render, @
     @collection.bind 'change', @render, @
     @collection.bind 'filter', @renderCompanies, @
@@ -12,19 +13,22 @@ class CPP.Views.CompaniesIndex extends CPP.Views.Base
 
   # Render the view
   render: ->
+    # Render template with editable and company collection
     $(@el).html(@template(editable: @editable, companies: @collection))
+    # Render companies and filters
     @renderCompanies(@collection)
     @renderFilters()
 
   # Render the companies in the collection
   renderCompanies: (col) ->
+    # Render companies dynamically
     @$('#companies').html("")
     col.each (company) =>
       view = new CPP.Views.CompaniesItem(model: company, editable: @editable)
       @$('#companies').append(view.render().el)
     @
 
-  # Render the company filters
+  # Set name and description text filters
   renderFilters: ->
     new CPP.Filter
       el: $(@el).find('#company-filter')

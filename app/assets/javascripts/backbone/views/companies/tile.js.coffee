@@ -7,8 +7,6 @@ class CPP.Views.CompanyTile extends CPP.Views.Base
     'click #ban-rating'   : 'companyHighlight'
 
   initialize: (options) ->
-    # Stop propagation of change of model to colleciton
-    #@model.off()
     if options.big
       @template = JST['backbone/templates/companies/top_tile']
     @render()
@@ -20,14 +18,17 @@ class CPP.Views.CompanyTile extends CPP.Views.Base
     Backbone.history.navigate('companies/' + @model.id, trigger: true)
 
   companyHighlight: (e) ->
-    ct = $(e.currentTarget)
+    ratingIcon = $(e.currentTarget)
+    # Stop click propagating to company
     e.stopPropagation()
-    # Set rating
-    if (ct.hasClass('icon-star-empty'))
+    # Set company rating 1 is favourite
+    if (ratingIcon.hasClass('icon-star-empty'))
       rating = 1
-    else if (ct.hasClass('icon-ban-circle') && !ct.hasClass('red-ban'))
+    else if (ratingIcon.hasClass('icon-ban-circle') && !ratingIcon.hasClass('red-ban'))
+      # Rating 3 is ban company
       rating = 3
     else
+      # Rating 2 is neutral
       rating = 2
     @model.set("rating", rating)
     $.post "companies/#{@model.id}/set_rating",

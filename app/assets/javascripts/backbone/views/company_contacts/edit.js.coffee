@@ -111,17 +111,18 @@ class CPP.Views.Contacts.PartialEdit extends CPP.Views.Base
 
   # Resort the collection of contacts
   updateSort: (event, model, pos) ->
+    # Take out the current model
     @collection.remove model
+    # For each model update index, if above the removed item then increase index
     @collection.each (model, index) ->
       position = index
       position += 1  if index >= pos
       model.set "position", position
-
+    # Update positions
     model.set "position", pos
-
+    # Re-insert the model
     @collection.add model,
       at: pos
-
     @collection.each (model) ->
       model.save()
 

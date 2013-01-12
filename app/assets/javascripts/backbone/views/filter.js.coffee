@@ -18,6 +18,7 @@ class CPP.Filter extends CPP.Views.Base
     @filters = options.filters
     @data = options.data
     @model = new CPP.Models.Event
+    # Set tag lists to be empty
     @model.set("skill_list",[])
     @model.set("interest_list",[])
     @model.set("year_group_list",[])
@@ -91,26 +92,31 @@ class CPP.Filter extends CPP.Views.Base
       @setFilter()
     )
 
+  # Applies filters, filtering from the collection accordingly  
   setFilter: ->
     fCollection = @data
     if @filters
       for filter in @filters
-        tb =  $("#"+filter.attribute).val()
+        textBox =  $("#"+filter.attribute).val()
         switch filter.type
+         # For different filter types filter the collection appropriately
           when "text"
             # Dont filter when nothing in text box
-            if (tb != "")
+            if (textBox != "")
+              # Filter from collection if filter text is not a substring 
               fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
                 res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
                 (res.toString().toLowerCase().indexOf tb.toLowerCase()) != -1
               ))
           when "number"
-            if (tb != "")
+            if (textBox != "")
+              # Filter from collection if filter number is not present
               fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
                 res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
-                res.toString() is tb
+                res.toString() is textBox
               ))
           when "tags"
+            # For each tag set, filter out data that does not correspond to all tags
             for tagFilter in filter.attribute
               filterTags = @model.get(tagFilter)
               # Only filter when tags added to filter
@@ -127,7 +133,7 @@ class CPP.Filter extends CPP.Views.Base
               res = eval('with (model, filter) {model' + filter.scope + '.get(filter.attribute)}')
               res >= tb || res == null
             ))
-
+      # Trigger filter with the updated collection to re-render individually from the page
       @data.trigger('filter', fCollection)
   @
 
