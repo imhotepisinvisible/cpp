@@ -5,10 +5,12 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
 
   template: JST['backbone/templates/events/editval']
 
+  # Bind event listers
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-submit': 'submitEvent'
 
-  # Department admins don't get to select departments
+  # On creating event:
+  # Department admins don't get to select departments, it is marked as their own
   # Companies get to pick which departments their events will go to
   initialize: ->
     if isDepartmentAdmin()
@@ -28,12 +30,14 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
         # Only set departments if we are creating a new event
         @model.set('departments', [CPP.CurrentUser.get('department_id')])
 
-      # Department doesn't get to see departments
+      # Department doesn't get to set departments
       delete schema["departments"]
       @model.schema = -> schema
 
     @completeInitialize()
 
+  # Create event form based upon model
+  # Set up skills, interests and year TagEditors for event
   completeInitialize: ->
     @form = new Backbone.Form(model: @model)
     Backbone.Validation.bind @form;
@@ -65,6 +69,8 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
     @render()
 
 
+  # Validate form fields seperatly
+  # Set up tags el
   render: ->
     $(@el).html(@template(event: @model))
     super
@@ -80,6 +86,8 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
     $('.year-group-tags-form').append(@year_group_list_tags_form.el)
     @
 
+  # If event is valid update and update on server
+  # On success navigate to events list
   submitEvent: ->
     if @form.validate() == null
       @form.commit()

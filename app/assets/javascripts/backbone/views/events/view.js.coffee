@@ -4,14 +4,18 @@ class CPP.Views.Events.View extends CPP.Views.Base
   el: "#app"
   template: JST['backbone/templates/events/view']
 
+  # Bind event listeners
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-signup-student': 'signup'
 
+  # If student record that the event has been viewed by a student
+  # for companies to use later
   initialize: ->
     if isStudent()
       @model.record_stat_view()
     @render()
 
+  # Display event view
   render: ->
     $(@el).html(@template(
       event: @model,
@@ -21,6 +25,7 @@ class CPP.Views.Events.View extends CPP.Views.Base
     ))
     @
 
+  # Sign student up by registering student on server
   signup: (event) ->
     if @model.getFilled() == @model.get('capacity')
       notify("error", "Cannot sign up, event is full")
@@ -50,7 +55,9 @@ class CPP.Views.Events.View extends CPP.Views.Base
           @updateViewCapacity true
         error: (data) ->
           notify("error", "Could not register")
-  
+
+  # Update capacity bar and student attending button based on 
+  # attending parameter.
   updateViewCapacity: (attending) ->
     $('#capacity-text').html("#{@model.getFilled()} / #{@model.get 'capacity'}")
     $('#capacity-progress').removeClass 'progress-info progress-danger progress-warning'
