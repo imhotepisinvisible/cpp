@@ -1,21 +1,27 @@
 CPP.Views.Emails ||= {}
 
+# Email editor
 class CPP.Views.Emails.Edit extends CPP.Views.Base
   el: "#app"
 
   template: JST['backbone/templates/emails/editval']
 
+  # Bind event listeners
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-submit': 'submitEmail'
 
+  # Set up skills, interest and year tag editors if options requires
+  # tagged emails
   initialize: ->
     @form = new Backbone.Form(model: @model).render()
+
+    # Auxillary function, saves model on tag input
+    # TODO: Could this be moved inside the if?
     saveTagModel = =>
       @model.save {},
         wait: true
         forceUpdate: true
         success: (model, response) =>
-          # notify "success", "Updated Profile TAG"
           @updateStats()
         error: (model, response) ->
           # Notify tag-specific errors here (profanity etc)

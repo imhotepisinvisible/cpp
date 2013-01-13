@@ -1,5 +1,6 @@
 CPP.Views.Emails ||= {}
 
+# Partial item view displayed on dashboards
 class CPP.Views.Emails.PartialItem extends CPP.Views.Base
   tagName: "tr"
   className: "email-item"
