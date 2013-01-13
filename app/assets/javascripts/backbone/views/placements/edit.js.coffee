@@ -1,13 +1,18 @@
 CPP.Views.Placements ||= {}
 
+# Placement editor form
 class CPP.Views.Placements.Edit extends CPP.Views.Base
   el: "#app"
 
   template: JST['backbone/templates/placements/editval']
 
+  # Bind events
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-submit': 'submitPlacement'
 
+  # If department in options then swap to associated schema for edit form 
+  # Render event edit form and tags
+  # Setup skill, interest and year tag editors
   initialize: ->
     if (this.options.department) 
       swapDepartmentToCompanySchema @model, this.options.department
@@ -40,9 +45,10 @@ class CPP.Views.Placements.Edit extends CPP.Views.Base
 
     @render()
 
+  # Render form and validate fields individually
+  # Super called as extending we are extending CPP.Views.Base
   render: ->
     $(@el).html(@template(placement: @model))
-    # Super called as extending we are extending CPP.Views.Base
     super
     $('.form').append(@form.el)
     validateField(@form, field) for field of @form.fields
@@ -54,6 +60,7 @@ class CPP.Views.Placements.Edit extends CPP.Views.Base
     $('.year-group-tags-form').append(@year_group_list_tags_form.el)
   @
 
+  # If form validates save placement to server
   submitPlacement: ->
     if @form.validate() == null
       @form.commit()
