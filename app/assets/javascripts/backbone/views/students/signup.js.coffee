@@ -1,12 +1,16 @@
 CPP.Views.Students ||= {}
 
+# Student signup page
 class CPP.Views.Students.Signup extends CPP.Views.Base
   el: "#app"
   template: JST['backbone/templates/students/signup']
 
+  # Bind events
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-submit': 'submitEvent'
 
+  # If department admin then remove department from schema
+  # Define signup form 
   initialize: (options) ->
     @login = options.login
 
@@ -20,6 +24,7 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
     @form = new Backbone.Form(model: @model).render()
     @render()
 
+  # Render signup form and validate individual fields
   render: ->
     $(@el).html(@template(student: @model))
     super
@@ -28,6 +33,7 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
     validateField(@form, field) for field of @form.fields
     @
 
+  # Submit form, validate and save fields
   submitEvent: ->
     if @form.validate() == null
       @form.commit()

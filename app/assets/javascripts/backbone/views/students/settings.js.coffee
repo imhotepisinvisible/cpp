@@ -1,13 +1,19 @@
 CPP.Views.Students ||= {}
 
+# Student settings page
 class CPP.Views.Students.Settings extends CPP.Views.Base
   el: "#app"
   template: JST['backbone/templates/students/settings']
 
+  # Bind events
   events: -> _.extend {}, CPP.Views.Base::events,
     'click #delete-student' : 'deleteStudent'
 
+  # Setup skill and interest rejection tags
+  # Define profile activation and tooltip activation buttons
+  # Call to render
   initialize: ->
+    #Auxhillary function, saves model on tag input
     saveTagModel = ->
       @model.save {},
         wait: true
@@ -67,6 +73,7 @@ class CPP.Views.Students.Settings extends CPP.Views.Base
             notify 'error', "Unable to switch #{stateText} showing profile to companies"
     )
 
+  # Render student settings and rejection tags
   render: ->
     $(@el).html(@template(student: @model))
 
@@ -80,6 +87,7 @@ class CPP.Views.Students.Settings extends CPP.Views.Base
     $('.reject_interest-tags-form').append(@reject_interest_list_tags_form.el)
     super
 
+  # Delete student on confirmation
   deleteStudent: (e) ->
     if confirm "Are you sure you wish to delete your profile?\nThis cannot be undone."
       $.ajax

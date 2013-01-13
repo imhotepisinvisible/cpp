@@ -1,9 +1,11 @@
 CPP.Views.Students ||= {}
 
+# Student edit view
 class CPP.Views.Students.Edit extends CPP.Views.Base
   el: "#app"
   template: JST['backbone/templates/students/edit']
 
+  # Bind events
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .upload-document': 'uploadDocument'
     'click .delete-document': 'deleteDocument'
@@ -21,8 +23,10 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     'keyup #student-name-input-container' : 'stopEditOnEnter'
     'keyup #student-degree-input-container': 'stopEditOnEnter'
 
+  # Setup skills, interests and year tag editors
+  # Initialise uploads and call render
   initialize: ->
-
+    # Auxhillary function, saved model on tag input
     saveModel = ->
       @model.save {},
         success: (model, response) ->
@@ -67,6 +71,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     @uploadInitialize 'covering-letter'
     @profileUploadInitialize()
 
+  # Render student edit template with tags, partials and inline editors
   render: ->
     $(@el).html(@template(student: @model))
     @skill_list_tags_form.render()
@@ -121,6 +126,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     super
     @
 
+    # Setup profile picture upload
   profileUploadInitialize: ->
     $('#file-profile-picture').fileupload
       url: '/students/' + @model.id
@@ -149,6 +155,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
         upload.find('.bar').width('0%')
       displayJQXHRErrors data
 
+  # Setup document uploads
   uploadInitialize: (documentType) =>
     $('#file-' + documentType).fileupload
       url: '/students/' + @model.id
@@ -177,9 +184,11 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
         upload.find('.bar').width('0%')
       displayJQXHRErrors data
 
+  # Upload a document
   uploadDocument: (e) ->
     $(e.currentTarget).closest('.upload-container').find('.file-input').click()
 
+  # Delete a document, confirm action from deleting document
   deleteDocument: (e) ->
     id = $(e.currentTarget).attr('id')
     documentType = id.substring(id.indexOf('-') + 1).replace("-","_")
@@ -197,16 +206,20 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
         error: (data) ->
           notify('error', "couldn't remove document")
 
+  # Show inline bio edit
   bioEdit: ->
     window.inPlaceEdit @model, 'student', 'bio'
 
+  # Stop inline bio edit and save changes
   bioStopEdit: ->
     window.inPlaceStopEdit @model, 'student', 'bio', 'Click here to add an About Me!', ((bio) ->
       bio.replace(/\n/g, "<br/>"))
 
+  # Show inline degree edit
   degreeEdit: ->
     window.inPlaceEdit @model, 'student', 'degree'
 
+  # Stop inline bio edit and save changes  
   degreeStopEdit: (e) ->
     deferreds = []
     if e and $('.dropdown-menu').is(':visible') and $('.dropdown-menu:hover').length > 0
@@ -216,12 +229,15 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       window.inPlaceStopEdit @model, 'student', 'degree', 'N/A degree', _.identity
     )
 
+  # Show inline name edit
   nameEdit: ->
     $('#student-name-container').hide()
     $('#student-name-editor').html(@model.get('first_name') + ' ' + @model.get('last_name'))
     $('#student-name-input-container').show()
     $('#student-name-editor').focus()
 
+  
+  # Stop inline name edit, find first and last names and if they are specified and at least one has changed then save changes  
   nameStopEdit: ->
     originalName = @model.get('first_name') + ' ' + @model.get('last_name')
     name = $('#student-name-editor').val()
@@ -258,13 +274,13 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
 
     $('#student-name-container').show()
 
+  # Remove tag from lists 
   removeTag: (e) ->
     close_div = $(e.currentTarget)
     tag_div = close_div.parent()
     tag_name = tag_div.find(".tag-text").html().trim()
     tag_id = close_div.find("input").val()
 
-    # Remove tag from lists
     @model.set 'skill_list', (tag for tag in @model.get('skill_list') when tag.name != tag_name)
     @model.set 'interest_list', (tag for tag in @model.get('interest_list') when tag.name != tag_name)
     @model.set 'year_group_list', (tag for tag in @model.get('year_group_list') when tag.name != tag_name)
@@ -278,6 +294,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       error: (model, response) ->
         notify "error", "Failed to remove tag"
 
+  # Add tag to skill list
   addSkill: (e) ->
     e.preventDefault()
     tagname = $("#add-skill-tag-input").val()
@@ -296,6 +313,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       error: (model, response) ->
         notify "error", "Failed to add tag"
 
+  # Profile preferences toggle
   toggleProfile: (e) ->
     tt = $('#student-profile-toggle-text')
     ttContainer = $('#student-profile-toggle-text-container')
@@ -307,6 +325,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
         tt.html("Hide Advanced Profile Settings")
         ttContainer.find('i').hide()
 
+  # Update looking_for field in model and save
   changeLookingFor: (e) ->
     lookingFor = $(e.currentTarget).val()
     @model.set 'looking_for', lookingFor
@@ -318,6 +337,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       error: (model, response) =>
         notify "error", "Could not update looking for"
 
+  # Update and save year field highlight 
   changeYear: (e) ->
     year = parseInt($(e.currentTarget).val())
     if year
@@ -335,6 +355,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       error: (model, response) =>
         notify 'error', 'Could not update year'
 
+  # Stop inline edit on enter key press 
   stopEditOnEnter: (e) ->
     if (e.keyCode == 13)
       @nameStopEdit()

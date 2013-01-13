@@ -1,21 +1,25 @@
 CPP.Views.Students ||= {}
-
+# Student view
 class CPP.Views.Students.Index extends CPP.Views.Base
   el: '#app'
   template: JST['backbone/templates/students/index']
 
+  # Bind to update placement collection
   initialize: ->
     @collection.bind 'reset', @render, @
     @collection.bind 'filter', @renderStudents, @
     @editable = isDepartmentAdmin()
     @render()
 
+  # Render index template, students and filters
   render: ->
     $(@el).html(@template(students: @collection, editable: @editable))
     @renderStudents(@collection)
     @renderFilters()
   @
 
+  # Remove all student then for each student
+  # in the collection passed in, render the student
   renderStudents: (col) ->
     @$('#students').html("")
     col.each (student) =>
@@ -23,6 +27,7 @@ class CPP.Views.Students.Index extends CPP.Views.Base
       @$('#students').append(view.render().el)
   @
 
+  # Define the filters to render
   renderFilters: ->
     new CPP.Filter
       el: $(@el).find('#student-filter')

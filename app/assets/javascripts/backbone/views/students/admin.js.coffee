@@ -1,10 +1,12 @@
 CPP.Views.Students ||= {}
 
+# Admin view of student
 class CPP.Views.Students.Admin extends CPP.Views.Base
   el: "#app"
 
   template: JST['backbone/templates/students/admin']
 
+  # Bind events
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-save': 'save'
     'click .upload-doc': 'uploadDocument'
@@ -15,6 +17,8 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
     'change #file-transcript': 'documentChange'
     'change #file-covering-letter': 'documentChange'
 
+  # If user is not a department admin then redirect
+  # Initialise the student administrator form
   initialize: ->
     if !(isDepartmentAdmin())
       Backbone.history.navigate("/", trigger: true)
@@ -47,6 +51,7 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
     .render()
     @render()
 
+  # Upload a document
   uploadInitialize: (documentType) ->
     $('#file-' + documentType).fileupload
       url: '/students/' + @model.id
@@ -72,11 +77,12 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
         upload.find('.bar').width('0%')
       displayJQXHRErrors data
 
+  # Deleate profile image
   delProfile: ->
     $('#student-profile-img').attr('src', '/assets/default_profile.png')
 
+  # Update document view when the file for a document is changed
   documentChange: (e) ->
-    # This is called when the file for a document is changed
     id = $(e.currentTarget).attr('id')
     docType = id.substring(id.indexOf('-') + 1)
 
@@ -86,6 +92,7 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
     if files.length > 0
       $("#filename-#{docType}").html(files[0].name)
 
+  # Update document view on deletion
   delDocument: (e) ->
     id = $(e.currentTarget).attr('id')
     docType = id.substring(id.indexOf('-') + 1)
@@ -94,6 +101,7 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
     $("#table-#{docType}").addClass('missing-document')
     $("#filename-#{docType}").html('')
 
+  # Delete a document
   deleteDocument: (documentType) ->
     documentType = documentType.replace("-","_")
     $.ajax
@@ -102,19 +110,21 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
       error: (data) ->
         notify('error', "Unable to remove #{documentType}")
 
+  # Update document view on upload
   uploadDocument: (e) ->
     $(e.currentTarget).closest('.upload-container').find('.file-input').click()
 
+  # When the logo changes, change the image src to the contents
+  # of the new logo locally (without uploading so that cancel will
+  # not upload)
   fileChange: (e) ->
-    # When the logo changes, change the image src to the contents
-    # of the new logo locally (without uploading so that cancel will
-    # not upload)
     logo = $('#file-profile-picture').get(0).files[0]
     reader = new FileReader
     reader.onload = (e) ->
       $('#student-profile-img').attr('src', e.target.result)
     reader.readAsDataURL(logo)
 
+  # Render admin student view and validate individual fields
   render: ->
     $(@el).html(@template(student: @model, editable: true))
     # Super called as extending we are extending CPP.Views.Base
@@ -123,6 +133,7 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
     validateField(@form, field) for field of @form.fields
     @
 
+  # Save the student profile 
   save: ->
     if @form.validate() == null
       @form.commit()
