@@ -1,9 +1,11 @@
 CPP.Views.Departments ||= {}
 
+# In place department edit for dashboard
 class CPP.Views.Departments.EditAdministrator extends CPP.Views.Base
   tagName: 'li'
   template: JST['backbone/templates/departments/edit_admin']
 
+  # Bind event listeners 
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-edit-admin'   : 'edit'
     'click .btn-save-admin'   : 'save'
@@ -13,6 +15,8 @@ class CPP.Views.Departments.EditAdministrator extends CPP.Views.Base
   initialize: ->
     @render()
 
+  # Creates an inplace edit form based on the schema that saves to model
+  # For each field performs individual validation
   render: ->
     $(@el).html(@template(admin: @model))
     @form = new Backbone.Form
@@ -33,11 +37,15 @@ class CPP.Views.Departments.EditAdministrator extends CPP.Views.Base
     validateField(@form, field) for field of @form.fields
     @
 
+  # Hide edit button and show edit form
   edit: (e) ->
     container = $(e.currentTarget).parent().parent()
     container.find('.btn-container').hide()
     @toggleForm container, true
 
+  # Save admin if form validates correctly.
+  # Force updates due to backbone clearing model and re-validating
+  # On success show edited admin
   save: (e) ->
     if @form.validate() == null
       @form.commit()
@@ -52,6 +60,7 @@ class CPP.Views.Departments.EditAdministrator extends CPP.Views.Base
         error: ->
           notify 'error', 'Unable to save administrator'
 
+  # Delete admin
   delete: (e) ->
     @model.destroy
       wait: true
@@ -61,12 +70,14 @@ class CPP.Views.Departments.EditAdministrator extends CPP.Views.Base
       error: (model, response) ->
         notify "error", "Administrator could not be deleted"
 
+  # Hide form
   cancel: (e) ->
     container = $(e.currentTarget).parent()
     # Allow css to control style of btn-edit again
     container.find('.btn-container').attr('style', '')
     @toggleForm container, false
 
+  # Toggle admin edit form on/off show
   toggleForm: (container, show) ->
     container.find('.btn-save-admin').toggle(show)
     container.find('.btn-cancel-admin').toggle(show)

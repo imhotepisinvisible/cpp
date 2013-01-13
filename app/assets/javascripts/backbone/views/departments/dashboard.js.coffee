@@ -1,9 +1,12 @@
 CPP.Views.Departments ||= {}
 
+# Department dashboard, viewed on signing in and displays useful
+# infortmation to department administrators.
 class CPP.Views.Departments.Dashboard extends CPP.Views.Base
   el: "#app"
   template: JST['backbone/templates/departments/dashboard']
 
+  # Bind event listeners
   events: -> _.extend {}, CPP.Views.Base::events,
     'click #btn-notifications-save': 'saveNotifications'
     'click #btn-notifications-cancel': 'cancelNotifications'
@@ -24,6 +27,8 @@ class CPP.Views.Departments.Dashboard extends CPP.Views.Base
       el: $(@el).find('#edit-admins')
       model: @model
 
+  # Create event/placement notification form, values inputted are to 
+  # be displayed to companies on creating new events/placements.
   initNotificationsForm: ->
     @notificationsForm = new Backbone.Form
       model: @model
@@ -40,12 +45,14 @@ class CPP.Views.Departments.Dashboard extends CPP.Views.Base
           editorClass: "input-xlarge"
     .render()
 
+  # Displays notificaiton form and sets up validation on change
   renderNotificationsForm: ->
     $('#notifications-form').html(@notificationsForm.el)
     Backbone.Validation.bind @notificationsForm
     @notificationsForm.on "change", =>
       @notificationsForm.validate()
 
+  # Saves notifications if validation passes
   saveNotifications: (e) ->
     if @notificationsForm.validate() == null
       @notificationsForm.commit()
@@ -57,6 +64,7 @@ class CPP.Views.Departments.Dashboard extends CPP.Views.Base
         error: (model, response) ->
           notify 'error', 'Cannot update company notifications'
 
+  # Render previous notifications
   cancelNotifications: (e) ->
     @initNotificationsForm()
     @renderNotificationsForm()

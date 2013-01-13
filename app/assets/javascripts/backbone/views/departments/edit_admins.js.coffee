@@ -4,6 +4,7 @@ class CPP.Views.Departments.EditAdministrators extends CPP.Views.Base
   
   template: JST['backbone/templates/departments/edit_admins']
 
+  # Fetch administrators for department
   initialize: (options) ->
     admins = new CPP.Collections.DepartmentAdministrators
     admins.fetch
@@ -14,6 +15,7 @@ class CPP.Views.Departments.EditAdministrators extends CPP.Views.Base
       error: =>
         notify 'error', 'Could not fetch department administrators'
 
+  # For each administrator show the edit administrator partial view
   render: ->
     $(@el).html(@template(admin: @model))
     if @collection.length > 0

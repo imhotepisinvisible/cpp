@@ -1,12 +1,16 @@
 CPP.Views.DepartmentAdministrator ||= {}
 
+# Create new administrator
 class CPP.Views.DepartmentAdministrator.Register extends CPP.Views.Base
   el: "#app"
   template: JST['backbone/templates/departments/register']
 
+  # Bind event listeners
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-submit': 'submit'
 
+  # Get department for administrator and create a new form based on the
+  # administrator model
   initialize: (options) ->
     @dept = options.dept
     @form = new Backbone.Form
@@ -14,6 +18,7 @@ class CPP.Views.DepartmentAdministrator.Register extends CPP.Views.Base
     .render()
     @render()
 
+  # Show form and validate fields individually
   render: ->
     $(@el).html(@template(admin: @model, dept: @dept))
     super
@@ -22,6 +27,7 @@ class CPP.Views.DepartmentAdministrator.Register extends CPP.Views.Base
     validateField(@form, field) for field of @form.fields
     @
 
+  # If form validates then create the new administrator on the server
   submit: (e) ->
     if @form.validate() == null
       @form.commit()

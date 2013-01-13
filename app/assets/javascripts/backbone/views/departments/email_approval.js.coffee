@@ -1,9 +1,11 @@
 CPP.Views.Departments ||= {}
 
+# Grants email approvals
 class CPP.Views.Departments.EmailApproval extends CPP.Views.Base
   tagName: 'li'
   template: JST['backbone/templates/departments/email_approval']
 
+  # Bind event listeners
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-approve' : 'approve'
     'click .btn-reject'  : 'reject'
@@ -15,6 +17,7 @@ class CPP.Views.Departments.EmailApproval extends CPP.Views.Base
     $(@el).html(@template(email: @model))
     @
 
+  # Approve an email on the server
   approve: ->
     $.ajax
       url: "/emails/#{@model.id}/approve"
@@ -25,6 +28,7 @@ class CPP.Views.Departments.EmailApproval extends CPP.Views.Base
       error: =>
         notify 'error', "Could not approve request"
 
+  # Reject email on the server sending the reason for reject
   reject: ->
     reject_reason = $('#reject_reason').val()
     $.ajax

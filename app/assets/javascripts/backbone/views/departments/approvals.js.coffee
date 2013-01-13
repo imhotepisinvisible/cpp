@@ -3,6 +3,8 @@ CPP.Views.Departments ||= {}
 class CPP.Views.Departments.Approvals extends CPP.Views.Base
   template: JST['backbone/templates/departments/approvals']
 
+  # Initializes department approval
+  # Fetches department pending companies and email requests
   initialize: (options) ->
     _.bindAll @, 'render'
     @model.pending_companies.fetch
@@ -21,6 +23,9 @@ class CPP.Views.Departments.Approvals extends CPP.Views.Base
       error: ->
         notify 'error', 'Could not fetch company approval requests'
 
+  # Renders template
+  # Display company approval partial and pending email partial for each
+  # item in the collections
   render: ->
     $(@el).html(@template(dept: @model))
     if @companyCollection.length > 0
