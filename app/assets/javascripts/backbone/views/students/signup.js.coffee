@@ -7,7 +7,7 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
 
   # Bind events
   events: -> _.extend {}, CPP.Views.Base::events,
-    'click .btn-submit': 'submitEvent'
+    'click .btn-submit': 'submitStudent'
 
   # If department admin then remove department from schema
   # Define signup form 
@@ -34,7 +34,7 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
     @
 
   # Submit form, validate and save fields
-  submitEvent: ->
+  submitStudent: ->
     if @form.validate() == null
       @form.commit()
       @model.save {},

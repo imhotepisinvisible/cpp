@@ -1,12 +1,15 @@
+# Tag form editor
 class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
   tags: []
 
   tagName: 'div'
 
+  # Bind events
   events:
     'click .tag .remove-tag' : 'onRemoveTagClick'
     'keypress input' : 'onInputKeypress'
 
+  # Set tag properties
   initialize: (options) =>
     super(options)
 
@@ -45,6 +48,7 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
     @name = @$el.attr('name')
     @$el.removeAttr('name').removeAttr('id')
 
+  # Render tags and set typeahead
   render: =>
     @$el.html("")
     @$tagsList.attr('id', @id).attr('name', @name).show()
@@ -65,17 +69,12 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
     @$el.append header
     @$el.append @$tagsList
 
-  # event handlers
+  # Event handlers
   onRemoveTagClick: (event) =>
     $tag = $(event.target).siblings('.tag-text')
     @removeTag($tag.text())
 
-  # onInputBlur: (event) =>
-  #   return
-  #   # return if @$suggestions.isSuggesting()
-  #   # unless @$input.val() == ''
-  #   #   @addTag @sanitizedIndputValue()
-
+  # Submit tag, add it to tags
   onInputKeypress: (event) =>
     return unless @additions
     if event.charCode == 44 || event.charCode == 13 # , or <CR>
@@ -108,42 +107,49 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
       else
         @addTag tag
 
-  # backbone form interface
+  # Backbone form interface
+  # Get tags
   getValue: =>
     @tags
 
+  # Set tags
   setValue: (tags) =>
     if tags == "" or tags == null
       tags = []
     @tags = tags
 
+  # Focus on tag input
   focus: ->
     if (this.hasFocus)
       return
     @$input.focus()
 
+  # Blur tag input
   blur: ->
     if (!this.hasFocus)
       return
     @$input.blur()
 
 
-  # instance methods
+  # Instance methods
   renderTags: =>
     _.map(@filteredTags(), @renderTag).join(' ')
 
   filteredTags: =>
     _.reject @tags, (tag) -> tag == ''
 
+  # Render individual tag
   renderTag: (tag) =>
     "<span class=\"label tag #{@tag_class}\"><span class=\"tag-text\">#{tag}</span><a class=\"close remove-tag\">×</a></span>"
 
+  # Remove tag and re-render
   removeTag: (tag) =>
     @tags = _.without(@tags, tag)
     @commit()
     @tag_change_callback()
     @render()
 
+  # Add and render tag
   addTag: (tag) =>
     tag = tag.toLowerCase()
     if tag && !@hasTag(tag)
@@ -158,5 +164,6 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
       # ERROR HERE
       return tag
 
+  # Check is the tag is present
   hasTag: (value) =>
     jQuery.inArray(value, @tags) >= 0
