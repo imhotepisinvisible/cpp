@@ -77,7 +77,7 @@ class CPP.Views.Students.Admin extends CPP.Views.Base
         upload.find('.bar').width('0%')
       displayJQXHRErrors data
 
-  # Deleate profile image
+  # Delete profile image
   delProfile: ->
     $('#student-profile-img').attr('src', '/assets/default_profile.png')
 
