@@ -10,8 +10,6 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
   initialize: ->
     @collection.bind 'reset', @render, @
     @collection.bind 'filter', @renderPlacements, @
-    # @collection.bind 'remove', @renderPlacementsAfterDeletion, @
-
     @render()
 
   render: ->
