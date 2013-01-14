@@ -1,7 +1,8 @@
 CPP.Views.Stats ||= {}
 
+# Stats graph
 class CPP.Views.Stats.LineGraph extends CPP.Views.Base
-
+  # Set graph properties and data then render
   initialize: ->
     @title = @options.title
     @type = @options.type
@@ -11,6 +12,7 @@ class CPP.Views.Stats.LineGraph extends CPP.Views.Base
       @series_data = data
       @render()
 
+  # Render chart using set properties and data
   render: () ->
     new Highcharts.Chart
       chart:

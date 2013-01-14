@@ -6,9 +6,6 @@ class CPP.Views.Placements.Item extends CPP.Views.Base
 
   template: JST['backbone/templates/placements/item']
 
-  initialize: ->
-    #@render()
-
   events: -> _.extend {}, CPP.Views.Base::events,
     "click .btn-edit"   : "editPlacement"
     "click .btn-delete" : "deletePlacement"
@@ -20,7 +17,6 @@ class CPP.Views.Placements.Item extends CPP.Views.Base
 
   deletePlacement: (e) ->
     e.stopPropagation()
-    # @model.collection.remove(@model)
     @model.destroy
       wait: true
       success: (model, response) ->
