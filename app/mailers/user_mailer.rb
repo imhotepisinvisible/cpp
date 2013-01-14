@@ -2,7 +2,7 @@ class UserMailer < ActionMailer::Base
   #include Resque::Mailer
   default from: "impdoccpp@gmail.com"
 
-  def send_email(address,subject,body,sender)
+  def send_email(address, subject, body, sender)
     mail(:to => address, :subject => subject, :from => sender) do |format|
       format.html { render :inline => body }
     end
