@@ -42,7 +42,8 @@ class Email < ActiveRecord::Base
   ############## Attributes can be set via mass assignment ############
   attr_accessible :company_id, :subject, :body, :state, :reject_reason
 
-  # TODO: Comment
+  # Sorts the students fetched from call to get_matching_students by year
+  # and returns a hash of year groups and their respective counts of students
   def get_matching_students_count
     year_groups = Hash.new(0)
     get_matching_students.each do |user|

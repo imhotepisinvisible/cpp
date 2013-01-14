@@ -1,4 +1,4 @@
-# TaggedEmail class. for emails to all students matching a given set of tags.
+# TaggedEmail class. For emails to all students matching a given set of tags.
 class TaggedEmail < Email
   ########################## Declare tags ###########################
   acts_as_taggable_on :skills, :interests, :year_groups
@@ -24,11 +24,6 @@ class TaggedEmail < Email
       students -= Student.tagged_with(self.send(c).map{|t| t.name}, :on => reject_c.to_sym, :any => true)
     end
     students
-  end
-
-  # TODO: Comment and complete 
-  def send_email
-    #email sending shiz to go here...
   end
 
 end
