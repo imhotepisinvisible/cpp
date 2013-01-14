@@ -31,14 +31,14 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
     ready.done =>
       @renderPlacements(@collection)
       @renderFilters()
-  @
+    @
 
   renderPlacements: (col) ->
     @$('#placements').html("")
     col.each (placement) ->
       view = new CPP.Views.Placements.Item model: placement
       @$('#placements').append(view.render().el)
-  @
+    @
 
   renderFilters: ->
     new CPP.Filter
@@ -67,7 +67,7 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
         scope: ""}
       ]
       data: @collection
-  @
+    @
 
   viewCompany: ->
     if @collection.company
