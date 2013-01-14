@@ -44,11 +44,11 @@ class Email < ActiveRecord::Base
     UserMailer.send_email(user.email, email.subject, email.body, sender).deliver
   end
 
+  # Sends the email for each recipient from the current user.
   def send_email!
-    sender = current_user.email
 		get_matching_students.each do |user|
 			Thread.new do
-				queue_email(self, user, sender)
+				queue_email(self, user, current_user.email)
 			end
 		end
 	end
