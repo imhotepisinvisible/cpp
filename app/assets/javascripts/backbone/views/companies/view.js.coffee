@@ -1,18 +1,21 @@
+# Company view
 class CPP.Views.CompaniesView extends CPP.Views.Base
   el: "#app"
   template: JST['backbone/templates/companies/view']
 
+  # Bind company rating events
   events: -> _.extend {}, CPP.Views.Base::events,
     # Bind events to clicking on company rating icons
     'click #star-rating'  : 'companyHighlight'
     'click #ban-rating'   : 'companyHighlight'
 
+  # Record company view from student
   initialize: ->
-    # Record company view from student
     if isStudent()
       @model.record_stat_view()
     @render()
 
+  # Render company template 
   render: ->
     $(@el).html(@template(company: @model, tooltip: (loggedIn() and CPP.CurrentUser.get('tooltip'))))
     super
@@ -45,6 +48,7 @@ class CPP.Views.CompaniesView extends CPP.Views.Base
 
     @
 
+  # Set company rating
   companyHighlight: (e) ->
     ratingIcon = $(e.currentTarget)
     e.stopPropagation()

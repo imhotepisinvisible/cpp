@@ -1,3 +1,4 @@
+# Input and Tag Filters
 class CPP.Filter extends CPP.Views.Base
   template: JST['backbone/templates/filters/filter']
   templateText: JST['backbone/templates/filters/filter_text']
@@ -7,6 +8,7 @@ class CPP.Filter extends CPP.Views.Base
   templateFilterHeaderTag: JST['backbone/templates/filters/filter_header_tag']
   templateFilterHeaderDate: JST['backbone/templates/filters/filter_header_date']
 
+  # Bind events
   events: -> _.extend {}, CPP.Views.Base::events,
     "keyup .fltr-search"        : "setFilter"
     "blur .tag-input"           : "blurTag"
@@ -14,6 +16,7 @@ class CPP.Filter extends CPP.Views.Base
 
   sub_el: "#filters"
 
+  # Setup filter lists, bind collection and set tag filter forms
   initialize: (options) ->
     @filters = options.filters
     @data = options.data
@@ -49,6 +52,7 @@ class CPP.Filter extends CPP.Views.Base
 
     @render()
 
+  # Render filters according to type 
   render: ->
     $(@el).html(@template())
     for filter in @filters
@@ -74,6 +78,7 @@ class CPP.Filter extends CPP.Views.Base
     @setFilter()
     @
 
+  # Render filter tags
   renderTags: ->
     @skill_list_tags_form.render()
     $('.skill-tags-form').append(@skill_list_tags_form.el)
@@ -82,6 +87,7 @@ class CPP.Filter extends CPP.Views.Base
     @year_group_list_tags_form.render()
     $('.year-group-tags-form').append(@year_group_list_tags_form.el)
 
+  # Register blur on tag
   blurTag: (e) ->
     deferreds = []
     if $(e.currentTarget).parent().find('.dropdown-menu').is(':visible') and
