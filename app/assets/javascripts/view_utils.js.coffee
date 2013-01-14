@@ -1,8 +1,8 @@
-# TODO: Possibly move to view utils?
+# Changes the model schema
+# Used for events and placements when a department is creating an event
+# Will give department option to select company rather than the schema of
+# the model which origionally exists with a department schema
 window.swapDepartmentToCompanySchema = (model, department) ->
-    # If model doesn't have a company yet, i.e. admin
-    # Need to add to the schema a comapny select
-    # TODO: Is there a better way to do this?
     schema = model.schema()
     schema['company_id'] = {
       title: "Company*"
@@ -30,9 +30,11 @@ window.validateField = (form, field) ->
       if (errors)
         form.fields[field].setError(errors)
 
+# Returns if a user (student) is planning to attend an event
 window.studentAttendEvent = (event) ->
   isStudent() && event.registered_students.get(userId()) != undefined
 
+# Looking for status options for students
 window.looking_fors = {
   summer: "Looking for a Summer Placement"
   industrial: "Looking for an Industrial Placement"
