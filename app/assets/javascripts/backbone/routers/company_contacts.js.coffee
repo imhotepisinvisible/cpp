@@ -3,8 +3,8 @@ class CPP.Routers.CompanyContacts extends Backbone.Router
     'companies/:id/company_contacts/edit' : 'edit'
     'companies/:id/company_contacts'      : 'view'
 
+  # Edit company contacts
   edit: (id) ->
-    # Edit company contacts
     if isStudent()
       window.history.back()
       return false
@@ -21,8 +21,8 @@ class CPP.Routers.CompanyContacts extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch contacts"
 
+  # View company contacts
   view: (id) ->
-    # View company contacts
     contacts = new CPP.Collections.CompanyContacts
     contacts.fetch
       data:

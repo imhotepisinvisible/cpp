@@ -3,12 +3,13 @@ class CPP.Views.CompaniesStudentIndex extends CPP.Views.Base
   template: JST['backbone/templates/companies/student_index']
   rowDiv: '<div class="row" id="current-tile-row"></div>'
 
+  # Company index for students
   initialize: (options) ->
-    # Company index for students
     @collection.bind 'change', @render, @
     @collection.bind 'filter', @renderCompanies, @
     @render()
 
+  # Render company index for students
   render: ->
     $(@el).html(@template())
     @renderCompanies(@collection)
@@ -16,6 +17,7 @@ class CPP.Views.CompaniesStudentIndex extends CPP.Views.Base
     super
     @
 
+  # Render the companies in tiles
   renderCompanies: (collection) ->
     @collection.sort()
     $('#company-tiles').html("")
@@ -43,6 +45,7 @@ class CPP.Views.CompaniesStudentIndex extends CPP.Views.Base
             big: false
     @
 
+  # Render the filters
   renderFilters: ->
     new CPP.Filter
       el: $(@el).find('#company-filter')

@@ -4,8 +4,8 @@ class CPP.Views.Companies.EditAdministrators extends CPP.Views.Base
   
   template: JST['backbone/templates/companies/edit_admins']
 
+  # Initialise a set of company administrator edit views
   initialize: (options) ->
-    # Initialise a set of company administrator edit views
     @company = options.company
     @header = options.header
     admins = new CPP.Collections.CompanyAdministrators
@@ -17,6 +17,7 @@ class CPP.Views.Companies.EditAdministrators extends CPP.Views.Base
       error: =>
         notify 'error', 'Could not fetch company administrators'
 
+  # Render the set of company administrator edit views
   render: ->
     $(@el).html(@template(company: @company, header: @header))
     if @collection.length > 0

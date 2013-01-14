@@ -10,10 +10,11 @@ class CPP.Views.Companies.EditAdministrator extends CPP.Views.Base
     'click .btn-delete-admin' : 'delete'
     'click .btn-cancel-admin' : 'cancel'
 
+  # Company admin edit partial
   initialize: ->
-    # Company admin edit
     @render()
 
+  # Render the company admin edit partial
   render: ->
     $(@el).html(@template(admin: @model))
     # Form to modify company administrator
@@ -34,16 +35,16 @@ class CPP.Views.Companies.EditAdministrator extends CPP.Views.Base
     validateField(@form, field) for field of @form.fields
     @
 
+  # Show the edit partial
   edit: (e) ->
-    # Show the edit partial
     $(e.currentTarget).parent().parent().find('.btn-container').hide()
     $(e.currentTarget).parent().parent().find('.btn-save-admin').show()
     $(e.currentTarget).parent().parent().find('.btn-cancel-admin').show()
     $(e.currentTarget).parent().parent().find('.admin-display-container').hide()
     $(e.currentTarget).parent().parent().find('.admin-form').show()
 
+  # Save the company admin
   save: (e) ->
-    # Save the company admin
     if @form.validate() == null
       @form.commit()
       @model.save {},
@@ -57,8 +58,8 @@ class CPP.Views.Companies.EditAdministrator extends CPP.Views.Base
         error: ->
           notify 'error', 'Unable to save administrator'
 
+  # Delete the company admin
   delete: (e) ->
-    # Delete the company admin
     @model.destroy
       wait: true
       success: (model, response) =>
@@ -67,8 +68,8 @@ class CPP.Views.Companies.EditAdministrator extends CPP.Views.Base
       error: (model, response) ->
         notify "error", "Administrator could not be deleted"
 
+  # Hide the edit partial
   cancel: (e) ->
-    # Hide the edit partial
     # Allow css to control style of btn-edit again
     $(e.currentTarget).parent().find('.btn-container').attr('style', '')
     $(e.currentTarget).parent().find('.btn-save-admin').hide()

@@ -12,8 +12,8 @@ class CPP.Routers.Students extends Backbone.Router
       'settings': 'settings'
       'register': 'signup'
 
+  # Student index
   index: ->
-    # Student index
     if isStudent()
       window.history.back()
       return false
@@ -24,8 +24,8 @@ class CPP.Routers.Students extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch students"
 
+  # Student profile
   view: (id) ->
-    # Student profile
     student = @getStudentFromID(id)
     unless student
       notify "error", "Invalid Student"
@@ -35,8 +35,8 @@ class CPP.Routers.Students extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch student"
 
+  # Student dashboard
   edit: (id) ->
-    # Student dashboard
     if isDepartmentAdmin()
       @admin(id)
       return
@@ -76,8 +76,8 @@ class CPP.Routers.Students extends Backbone.Router
       )
     )
 
+  # Student administration page
   admin: (id) ->
-    # Student administration page
     student = new CPP.Models.Student id: id
     student.fetch
       success: ->
@@ -85,8 +85,8 @@ class CPP.Routers.Students extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch student"
 
+  # Student settings page
   settings: (id) ->
-    # Student settings page
     student = @getStudentFromID(id)
     unless student
       notify "error", "Invalid Student"
@@ -104,8 +104,8 @@ class CPP.Routers.Students extends Backbone.Router
   signupNoLogin: ->
     @register false
 
+  # Register a new student
   register: (login) ->
-    # Register a new student
     if login && CPP.CurrentUser? && CPP.CurrentUser isnt {}
       window.history.back()
       return false

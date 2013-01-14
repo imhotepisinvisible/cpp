@@ -8,8 +8,8 @@ class CPP.Routers.Events extends Backbone.Router
       'events/:id'                           : 'view'
       'events/:id/students'                  : 'eventAttendees'
 
+  # Events index for a specific company
   indexCompany: (company_id) ->
-    # Events index for a specific company
     events = new CPP.Collections.Events
     events.fetch
       data:
@@ -24,8 +24,8 @@ class CPP.Routers.Events extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch events"
 
+  # Events index
   index: ->
-    # Events index
     events = new CPP.Collections.Events
     events.fetch
       success: ->
@@ -40,8 +40,8 @@ class CPP.Routers.Events extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch events"
 
+  # Create a new event
   new: (company_id) ->
-    # Create a new event
     if isStudent()
       window.history.back()
       return false
@@ -65,8 +65,8 @@ class CPP.Routers.Events extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch company for event"
 
+  # Administrator new event page
   newAdmin: (department_id) ->
-    # Administrator new event page
     if isStudent()
       window.history.back()
       return false
@@ -86,8 +86,8 @@ class CPP.Routers.Events extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch department"
 
+  # Edit an event
   edit: (id) ->
-    # Edit an event
     unless isAdmin()
       window.history.back()
       return false
@@ -99,8 +99,8 @@ class CPP.Routers.Events extends Backbone.Router
         error: ->
           notify "error", "Couldn't fetch event"
 
+  # View an event
   view: (id) ->
-    # View an event
     event = new CPP.Models.Event id: id
     event.fetch
       success: ->
@@ -116,8 +116,8 @@ class CPP.Routers.Events extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch event"
 
+  # Student index for students attending the event
   eventAttendees: (id) ->
-    # Student index for students attending the event
     event = new CPP.Models.Event id: id
     event.fetch
       success: ->

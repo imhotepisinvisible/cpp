@@ -7,8 +7,8 @@ class CPP.Views.Company.Signup extends CPP.Views.Base
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-submit': 'submit'
 
+  # Company and company administrator signup
   initialize: (options) ->
-    # Company and company administrator signup
     @login = options.login
     @company = options.company
     @adminForm = new Backbone.Form
@@ -28,6 +28,7 @@ class CPP.Views.Company.Signup extends CPP.Views.Base
     .render()
     @render()
 
+  # Render company signup page
   render: ->
     $(@el).html(@template(admin: @model, company: @company))
     super
@@ -40,8 +41,8 @@ class CPP.Views.Company.Signup extends CPP.Views.Base
     validateField(@companyForm, field) for field of @companyForm.fields
     @
 
+  # Validate both forms
   submit: (e) ->
-    # Validate both forms
     companyValid = @companyForm.validate()
     if @adminForm.validate() == null and companyValid == null
       # Save company first
@@ -64,8 +65,8 @@ class CPP.Views.Company.Signup extends CPP.Views.Base
       else
         @saveAdmin()
 
+  # Save company administrator
   saveAdmin: (e) ->
-    # Save company administrator
     @model.set 'company_id', @company.get 'id'
     @model.save {},
     wait: true
@@ -82,14 +83,15 @@ class CPP.Views.Company.Signup extends CPP.Views.Base
             @adminForm.fields[field].setError(_.uniq(errors).join ', ')
       notify "error", "Unable to register, please resolve issues below."
 
+  # Redirect to edit page on signup
   redirect: (model) ->
-    # Redirect to edit page on signup
     go = ->
       window.location = '/#/companies/' + model.get('company_id') + '/edit'
       window.location.reload(true)
 
     if @login
-      # Log in as new company admin
+      # Log in as new company admin, then navigate to company edit page
       $.post '/sessions', { session: { email: model.get('email'), password: model.get('password') } }, go
     else
+      # Do not log in, navigate to company edit page
       go()

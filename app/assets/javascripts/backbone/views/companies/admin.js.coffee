@@ -11,8 +11,8 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
     'click .delete-document': 'delDocument'
     'change #file-logo': 'fileChange'
 
+  # Initialise the company adminstrator form
   initialize: ->
-    # Initialise the company adminstrator form
     @form = new Backbone.Form
       model: @model
       schema:
@@ -28,8 +28,8 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
     $.get "/companies/#{@model.id}/departments/#{getAdminDepartment()}/status", (status) ->
       $('#select-approval-status').val(status)
 
+  # Logo uploader
   logoUploadInitialize: ->
-    # Logo uploader
     $('#file-logo').fileupload
       singleFileUploads: true
       url: '/companies/' + @model.id
@@ -53,12 +53,12 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
         upload.find('.bar').width('0%')
       displayJQZHRErrors data
 
+  # Mark the logo for deletion
   delDocument: ->
-    # Mark the logo for deletion
     $('.company-logo-image').attr('src', '/assets/default_profile.png')
 
+  # Delete company logo
   deleteDocument: ->
-    # Delete company logo
     $.ajax
       url: "/companies/#{@model.id}/logo"
       type: 'DELETE'
@@ -86,18 +86,18 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
       header: false
     @
 
+  # When the logo changes, change the image src to the contents
+  # of the new logo locally (without uploading so that cancel will
+  # not upload)
   fileChange: (e) ->
-    # When the logo changes, change the image src to the contents
-    # of the new logo locally (without uploading so that cancel will
-    # not upload)
     logo = $('#file-logo').get(0).files[0]
     reader = new FileReader
     reader.onload = (e) ->
       $('.company-logo-image').attr('src', e.target.result)
     reader.readAsDataURL(logo)
 
+  # Save the form
   save: ->
-    # Save the form
     if @form.validate() == null
       @form.commit()
       @model.save {},

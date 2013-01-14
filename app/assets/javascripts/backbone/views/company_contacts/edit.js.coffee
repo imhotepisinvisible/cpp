@@ -10,8 +10,8 @@ class CPP.Views.Contacts.PartialEdit extends CPP.Views.Base
     'click #btn-cancel-new' : 'cancelNew'
     'update-sort' : 'updateSort'
 
+  # Company contact edit page
   initialize: (options) ->
-    # Company contact edit page
     @company_id = options.company_id
     if options.company
       # Fetch company contacts for specified company
@@ -29,7 +29,7 @@ class CPP.Views.Contacts.PartialEdit extends CPP.Views.Base
       @initializeNoFetch()
       @collection.bind 'destroy', @reRender, @
 
-
+  # Initialise the edit view without fetching contacts
   initializeNoFetch: ->
     @render()
 
@@ -45,13 +45,14 @@ class CPP.Views.Contacts.PartialEdit extends CPP.Views.Base
       stop: (event, ui) ->
         ui.item.trigger('drop', ui.item.index());
 
+  # Render company contacts edit page
   render: ->
     $(@el).html(@template(contacts: @collection, partial: @partial))
     if @collection.length > 0
       @collection.each (contact) =>
         view = new CPP.Views.CompanyContact
-                      model: contact
-                      editable: @editable
+          model: contact
+          editable: @editable
         @$('#contacts').append(view.render().el)
     else
       @$('#contacts').append "No contacts right now!"
@@ -59,8 +60,8 @@ class CPP.Views.Contacts.PartialEdit extends CPP.Views.Base
     @
 
 
+  # Re-render company contact edit partial
   reRender: (options) ->
-    # Re-render company contact edit partial
     if @company
       @undelegateEvents()
       new CPP.Views.Contacts.PartialEdit
@@ -73,11 +74,12 @@ class CPP.Views.Contacts.PartialEdit extends CPP.Views.Base
         @collection.push(options.model)
       @initializeNoFetch()
 
+  # Navigate to page to view all companies
   editAll: ->
     Backbone.history.navigate('/companies/' + @company_id + '/company_contacts/edit', trigger: true)
 
+  # Show new contact form
   new: (e) ->
-    # Show new contact form
     $(@el).find('#btn-cancel-new').show()
     $(@el).find('#btn-save-new').show()
 
@@ -90,8 +92,8 @@ class CPP.Views.Contacts.PartialEdit extends CPP.Views.Base
     @formNew.on "change", =>
       @formNew.validate()
 
+  # Save the new contact
   saveNew: (e) ->
-    # Save the new contact
     if @formNew.validate() == null
       @formNew.commit()
       @formNew.model.save {},
@@ -103,9 +105,11 @@ class CPP.Views.Contacts.PartialEdit extends CPP.Views.Base
         error:
           notify 'error', 'Unable to add new contact'
 
+  # Cancel creation of new contact
   cancelNew: (e) ->
     @reRender({})
 
+  # Resort the collection of contacts
   updateSort: (event, model, pos) ->
     @collection.remove model
     @collection.each (model, index) ->

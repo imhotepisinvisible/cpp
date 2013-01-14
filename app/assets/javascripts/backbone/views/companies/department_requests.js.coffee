@@ -3,8 +3,8 @@ CPP.Views.Companies ||= {}
 class CPP.Views.Companies.DepartmentRequests extends CPP.Views.Base
   template: JST['backbone/templates/companies/department_requests']
 
+  # Partial for department requests (for company dashboard)
   initialize: (options) ->
-    # Partial for department requests (for company dashboard)
     @company = options.company
     depts = new CPP.Collections.Departments
     depts.url = "/companies/#{@company.id}/departments"
@@ -15,6 +15,7 @@ class CPP.Views.Companies.DepartmentRequests extends CPP.Views.Base
       error: ->
         notify 'error', 'Could not fetch departments'
 
+  # Render department requests
   render: ->
     $(@el).html(@template(company: @company))
     if @collection.length > 0

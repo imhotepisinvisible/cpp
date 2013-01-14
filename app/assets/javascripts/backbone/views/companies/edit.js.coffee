@@ -10,14 +10,14 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
     'click .upload-document': 'uploadDocument'
     'click .delete-document': 'deleteDocument'
 
+  # Company dashboard
   initialize: ->
-    # Company dashboard
     @model.bind 'change', @render, @
     @render()
     @logoUploadInitialize()
 
+  # Company logo uploader
   logoUploadInitialize: ->
-    # Company logo uploader
     $('#file-logo').fileupload
       url: '/companies/' + @model.id
       dataType: 'json'
@@ -47,8 +47,8 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
         upload.find('.bar').width('0%')
       displayJQZHRErrors data
 
+  # Delete company logo
   deleteDocument: (e) ->
-    # Delete company logo
     id = $(e.currentTarget).attr('id')
     if confirm "Are you sure you wish to delete your logo?"
       $.ajax
@@ -62,9 +62,11 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
         error: (data) ->
           notify('error', "couldn't remove document")
 
+  # Upload company logo
   uploadDocument: (e) ->
     $(e.currentTarget).closest('.upload-container').find('.file-input').click()
 
+  # Render company dashboard
   render: ->
     $(@el).html(@template(company: @model, tooltip: (loggedIn() and CPP.CurrentUser.get('tooltip'))))
     super
@@ -99,7 +101,6 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
       title: 'Student Views'
       el: $(@el).find('#orders_chart')
       type: 'datetime'
-      # el: $(@el).find('#contacts-partial')
 
     new CPP.Views.Companies.EditAdministrators
       el: $(@el).find('#edit-admins')
@@ -111,15 +112,19 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
       company: @model
     @
 
+  # Start editing the company name
   companyNameEdit: ->
     window.inPlaceEdit @model, 'company', 'name'
 
+  # Stop editing the company name
   companyNameStopEdit: ->
     window.inPlaceStopEdit @model, 'company', 'name', 'Click here to add a name!', _.identity
 
+  # Start editing the company description
   descriptionEdit: ->
     window.inPlaceEdit @model, 'company', 'description'
 
+  # Stop editing the company description
   descriptionStopEdit: ->
     window.inPlaceStopEdit @model, 'company', 'description', 'Click here to add a description!', ((desc) ->
       desc.replace(/\n/g, "<br/>"))

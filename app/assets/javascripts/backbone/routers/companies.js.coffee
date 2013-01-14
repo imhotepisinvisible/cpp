@@ -9,8 +9,8 @@ class CPP.Routers.Companies extends Backbone.Router
       'companies/:id/settings': 'settings'
       'company_dashboard'     : 'edit'
 
+  # The company index page that admins will see
   index: ->
-    # The company index page that admins will see
     companies = new CPP.Collections.Companies
     companies.fetch
       success: ->
@@ -21,8 +21,8 @@ class CPP.Routers.Companies extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch companies"
 
+  # The company profile page that students will see
   view: (id) ->
-    # The company profile page that students will see
     company = new CPP.Models.Company id: id
 
     # Wait for all of these before fetching company
@@ -43,8 +43,8 @@ class CPP.Routers.Companies extends Backbone.Router
           notify "error", "Couldn't fetch company"
     )
 
+  # Administrate a company
   admin: (id) ->
-    # Administrate a company
     company = new CPP.Models.Company id: id
     company.fetch
       success: ->
@@ -52,13 +52,14 @@ class CPP.Routers.Companies extends Backbone.Router
       error: ->
         notify 'error', "Couldn't fetch company"
 
+  # Set the company property of a collection of models
   setCompany: (models, company) ->
     for model in models
       do (model) ->
         model.company = company
 
+  # Company dashboard
   edit: (id) ->
-    # Company dashboard
     if isDepartmentAdmin()
       # Redirect administrator to admin page
       @admin(id)
@@ -92,8 +93,8 @@ class CPP.Routers.Companies extends Backbone.Router
     )
 
 
+  # Page to create a new company by an admin
   new: ->
-    # Page to create a new company by an admin
     if isStudent()
       window.history.back()
       return false
@@ -103,8 +104,8 @@ class CPP.Routers.Companies extends Backbone.Router
     company.collection = new CPP.Collections.Companies
     new CPP.Views.Companies.Admin model: company
 
+  # Sign up a company administrator for an existing company
   signupCompany: (id) ->
-    # Sign up a company administrator for an existing company
     if CPP.CurrentUser? and
       (CPP.CurrentUser.get('type') == 'DepartmentAdministrator' or
        CPP.CurrentUser.get('type') == 'CompanyAdministrator')
@@ -121,8 +122,8 @@ class CPP.Routers.Companies extends Backbone.Router
       window.history.back()
       return false
 
+  # Signup a new company
   signup: ->
-    # Signup a new company
     if CPP.CurrentUser? && CPP.CurrentUser.get('type') == 'DepartmentAdministrator'
       # Dept administrator registering new admin and company
       # so don't log in once registered
@@ -134,8 +135,8 @@ class CPP.Routers.Companies extends Backbone.Router
       window.history.back()
       return false
 
+  # Signup a new company
   signupNewCompany: (login) ->
-    # Signup a new company
     if login && CPP.CurrentUser? && CPP.CurrentUser isnt {}
       window.history.back()
       return false
@@ -145,8 +146,8 @@ class CPP.Routers.Companies extends Backbone.Router
       login: login
       company: new CPP.Models.Company
 
+  # Company settings page
   settings: (id) ->
-    # Company settings page
     if isStudent()
       window.history.back()
       return false
