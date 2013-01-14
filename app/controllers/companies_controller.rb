@@ -77,6 +77,8 @@ class CompaniesController < ApplicationController
     if current_user
       @company.organisation_id = current_user.organisation.id
     else
+      # Set organisation to 1 (imperial college)
+      # TODO make multi-organisational
       @company.organisation_id = 1
     end
 
