@@ -91,7 +91,6 @@ class PlacementsController < ApplicationController
   #
   # GET /placements/top_5
   def top_5
-    # TODO student profile views should be cached
     placement_impressions = Impression.where(
       "created_at > ? AND created_at < ? AND action_name = ? AND controller_name = ?",
       1.weeks.ago.to_date.at_beginning_of_day,
@@ -100,12 +99,12 @@ class PlacementsController < ApplicationController
       'placements'
     )
 
-    #raise student_impressions.first.inspect
     placement_ids = placement_impressions.map{ |si| si.impressionable_id }
     placement_id_counts = Hash.new(0)
     placement_ids.each{|si| placement_id_counts[si] += 1}
     placement_id_counts.sort_by {|key, value| value}
-    # ORDER student_id_counts by count
+
+    # Order placement_id_counts by count
     sortable = placement_id_counts.map{|k, v| [v, k]}
     sortable.sort!.reverse!
 

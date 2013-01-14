@@ -183,7 +183,6 @@ class StudentsController < ApplicationController
   #
   # GET /students/top_5
   def top_5
-    # TODO student profile views should be cached
     student_impressions = Impression.where(
       "created_at > ? AND created_at < ? AND action_name = ? AND controller_name = ?",
       1.weeks.ago.to_date.at_beginning_of_day,
@@ -192,12 +191,12 @@ class StudentsController < ApplicationController
       'students'
     )
 
-    #raise student_impressions.first.inspect
     student_ids = student_impressions.map{ |si| si.impressionable_id }
     student_id_counts = Hash.new(0)
     student_ids.each{|si| student_id_counts[si] += 1}
     student_id_counts.sort_by {|key, value| value}
-    # ORDER student_id_counts by count
+    
+    # Order student_id_counts by count
     sortable = student_id_counts.map{|k, v| [v, k]}
     sortable.sort!.reverse!
 

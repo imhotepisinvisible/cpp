@@ -207,7 +207,6 @@ class CompaniesController < ApplicationController
   # 
   # GET /companies/top_5 
   def top_5
-    # TODO student profile views should be cached
     company_impressions = Impression.where(
       "created_at > ? AND created_at < ? AND action_name = ? AND controller_name = ?",
       1.weeks.ago.to_date.at_beginning_of_day,
@@ -216,12 +215,12 @@ class CompaniesController < ApplicationController
       'companies'
     )
 
-    #raise student_impressions.first.inspect
     company_ids = company_impressions.map{ |si| si.impressionable_id }
     company_id_counts = Hash.new(0)
     company_ids.each{|si| company_id_counts[si] += 1}
     company_id_counts.sort_by {|key, value| value}
-    # ORDER student_id_counts by count
+
+    # Order company_id_counts by count
     sortable = company_id_counts.map{|k, v| [v, k]}
     sortable.sort!.reverse!
 
@@ -238,5 +237,4 @@ class CompaniesController < ApplicationController
 
     respond_with ok_companies[0..4]
   end
-
 end

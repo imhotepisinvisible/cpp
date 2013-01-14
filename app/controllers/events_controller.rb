@@ -123,7 +123,6 @@ class EventsController < ApplicationController
   end
 
   def top_5
-    # TODO student profile views should be cached
     event_impressions = Impression.where(
       "created_at > ? AND created_at < ? AND action_name = ? AND controller_name = ?",
       1.weeks.ago.to_date.at_beginning_of_day,
@@ -132,12 +131,12 @@ class EventsController < ApplicationController
       'events'
     )
 
-    #raise student_impressions.first.inspect
     event_ids = event_impressions.map{ |si| si.impressionable_id }
     event_id_counts = Hash.new(0)
     event_ids.each{|si| event_id_counts[si] += 1}
     event_id_counts.sort_by {|key, value| value}
-    # ORDER student_id_counts by count
+
+    # Order event_id_counts by count
     sortable = event_id_counts.map{|k, v| [v, k]}
     sortable.sort!.reverse!
 
