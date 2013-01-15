@@ -7,6 +7,7 @@ class CPP.Views.CompanyAdministrator.Signup extends CPP.Views.Base
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-submit': 'submit'
 
+  # Company administrator signup page
   initialize: (options) ->
     @company = options.company
     @form = new Backbone.Form
@@ -14,6 +15,7 @@ class CPP.Views.CompanyAdministrator.Signup extends CPP.Views.Base
     .render()
     @render()
 
+  # Render company administrator signup page
   render: ->
     $(@el).html(@template(companyAdministrator: @model, company: @company))
     super
@@ -22,6 +24,7 @@ class CPP.Views.CompanyAdministrator.Signup extends CPP.Views.Base
     validateField(@form, field) for field of @form.fields
     @
 
+  # Save the company adminsitrator
   submit: (e) ->
     if @form.validate() == null
       @form.commit()
@@ -42,7 +45,7 @@ class CPP.Views.CompanyAdministrator.Signup extends CPP.Views.Base
 
           notify "error", "Unable to register, please resolve issues below."
       
-
+  # Redirect to company edit page
   redirect: (model) ->
     window.location = '/#/companies/' + model.get('company_id') + '/edit'
     window.location.reload(true)

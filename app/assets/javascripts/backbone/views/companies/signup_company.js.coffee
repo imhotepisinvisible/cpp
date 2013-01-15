@@ -7,6 +7,7 @@ class CPP.Views.Company.Signup extends CPP.Views.Base
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-submit': 'submit'
 
+  # Company and company administrator signup
   initialize: (options) ->
     @login = options.login
     @company = options.company
@@ -14,6 +15,7 @@ class CPP.Views.Company.Signup extends CPP.Views.Base
       model: @model
     .render()
 
+    # Don't give department options if department admin is signing up a company
     if isDepartmentAdmin()
       schema = @company.schema()
       delete schema["departments"]
@@ -26,9 +28,11 @@ class CPP.Views.Company.Signup extends CPP.Views.Base
     .render()
     @render()
 
+  # Render company signup page
   render: ->
     $(@el).html(@template(admin: @model, company: @company))
     super
+    # Two forms, one for admin and other for company
     $('#admin-form').append(@adminForm.el)
     $('#company-form').append(@companyForm.el)
     Backbone.Validation.bind @adminForm
@@ -37,9 +41,11 @@ class CPP.Views.Company.Signup extends CPP.Views.Base
     validateField(@companyForm, field) for field of @companyForm.fields
     @
 
+  # Validate both forms
   submit: (e) ->
     companyValid = @companyForm.validate()
     if @adminForm.validate() == null and companyValid == null
+      # Save company first
       @adminForm.commit()
       if @company.isNew()
         @companyForm.commit()
@@ -59,6 +65,7 @@ class CPP.Views.Company.Signup extends CPP.Views.Base
       else
         @saveAdmin()
 
+  # Save company administrator
   saveAdmin: (e) ->
     @model.set 'company_id', @company.get 'id'
     @model.save {},
@@ -76,12 +83,15 @@ class CPP.Views.Company.Signup extends CPP.Views.Base
             @adminForm.fields[field].setError(_.uniq(errors).join ', ')
       notify "error", "Unable to register, please resolve issues below."
 
+  # Redirect to edit page on signup
   redirect: (model) ->
     go = ->
       window.location = '/#/companies/' + model.get('company_id') + '/edit'
       window.location.reload(true)
 
     if @login
+      # Log in as new company admin, then navigate to company edit page
       $.post '/sessions', { session: { email: model.get('email'), password: model.get('password') } }, go
     else
+      # Do not log in, navigate to company edit page
       go()

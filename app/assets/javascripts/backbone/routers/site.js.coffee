@@ -2,7 +2,7 @@ class CPP.Routers.Site extends Backbone.Router
   routes:
       '' : 'index'
 
-  # The company index page that admins will see
+  # Navigate to appropriate dashboard depending on current user
   index: ->
     if isStudent()
       Backbone.history.navigate("/dashboard", trigger: true)

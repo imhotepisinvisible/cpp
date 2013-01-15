@@ -20,6 +20,7 @@ class CPP.Models.Event extends CPP.Models.Base
     departments:
       required: true
 
+  # Schema to be used for backbone forms
   schema: ->
     title:
       type: 'Text'
@@ -51,19 +52,23 @@ class CPP.Models.Event extends CPP.Models.Base
       type: "TextArea"
       title: "Additional Requirements"
 
+  # Return the number of students attending the event
   getFilled: ->
     if @.registered_students then @.registered_students.length else 0
 
+  # The percentage of spaces that have been taken
   getPercentageCapacity: ->
     percentage = 100 * parseFloat(@getFilled()) / parseFloat(@get("capacity"))
     return percentage
 
+  # The class to add to the event capacity bar
   getCapacityClass: ->
     p = @getPercentageCapacity()
     return "danger" if p > 90
     return "warning" if p > 60
     return "info"
 
+  # Remaining spaces in the event
   getSpaces: ->
     @get('capacity') - @getFilled()
 

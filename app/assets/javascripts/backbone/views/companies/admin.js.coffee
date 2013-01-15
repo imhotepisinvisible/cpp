@@ -11,6 +11,7 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
     'click .delete-document': 'delDocument'
     'change #file-logo': 'fileChange'
 
+  # Initialise the company adminstrator form
   initialize: ->
     @form = new Backbone.Form
       model: @model
@@ -23,9 +24,11 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
           type: 'TextArea'
     .render()
     @render()
+    # Obtain approval status for company
     $.get "/companies/#{@model.id}/departments/#{getAdminDepartment()}/status", (status) ->
       $('#select-approval-status').val(status)
 
+  # Logo uploader
   logoUploadInitialize: ->
     $('#file-logo').fileupload
       singleFileUploads: true
@@ -50,9 +53,11 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
         upload.find('.bar').width('0%')
       displayJQZHRErrors data
 
+  # Mark the logo for deletion
   delDocument: ->
     $('.company-logo-image').attr('src', '/assets/default_profile.png')
 
+  # Delete company logo
   deleteDocument: ->
     $.ajax
       url: "/companies/#{@model.id}/logo"
@@ -81,16 +86,17 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
       header: false
     @
 
+  # When the logo changes, change the image src to the contents
+  # of the new logo locally (without uploading so that cancel will
+  # not upload)
   fileChange: (e) ->
-    # When the logo changes, change the image src to the contents
-    # of the new logo locally (without uploading so that cancel will
-    # not upload)
     logo = $('#file-logo').get(0).files[0]
     reader = new FileReader
     reader.onload = (e) ->
       $('.company-logo-image').attr('src', e.target.result)
     reader.readAsDataURL(logo)
 
+  # Save the form
   save: ->
     if @form.validate() == null
       @form.commit()
@@ -98,12 +104,14 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
         wait: true
         forceUpdate: true
         success: (model, response) =>
+          # Save the approval status
           $.ajax
             url: "/companies/#{@model.id}/departments/#{getAdminDepartment()}/status"
             type: 'PUT'
             data:
               status: $('#select-approval-status').val()
             success: =>
+              # Upload the logo if it has changed
               if $('#file-logo').get(0).files.length > 0
                 @logoUploadInitialize()
                 $('#file-logo').fileupload 'send',

@@ -7,9 +7,9 @@ class CPP.Routers.DirectEmails extends Backbone.Router
       'direct_emails/:id/edit'                  : 'edit'
       'direct_emails/:id'                       : 'view'
 
+  # Emails for a specific company
   indexCompany: (company_id) ->
     emails = new CPP.Collections.DirectEmails
-    # new CPP.Views.Emails.Index collection: emails
     emails.fetch
       data:
         $.param({ company_id: company_id})
@@ -23,9 +23,9 @@ class CPP.Routers.DirectEmails extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch emails"
 
+  # Index for a specific student
   indexStudent: (student_id) ->
     emails = new CPP.Collections.DirectEmails
-    # new CPP.Views.Emails.Index collection: emails
     emails.fetch
       data:
         $.param({ student_id: student_id, company_id: userId()})
@@ -39,6 +39,7 @@ class CPP.Routers.DirectEmails extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch emails"
 
+  # Direct email index
   index: ->
     emails = new CPP.Collections.DirectEmails
     emails.fetch
@@ -47,6 +48,7 @@ class CPP.Routers.DirectEmails extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch emails"
 
+  # Create a new direct email
   new: (student_id) ->
     student = new CPP.Models.Student id: student_id
     student.fetch
@@ -58,6 +60,7 @@ class CPP.Routers.DirectEmails extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch event"
 
+  # Edit a direct email
   edit: (id) ->
     email = new CPP.Models.DirectEmail id: id
     email.fetch
@@ -66,6 +69,7 @@ class CPP.Routers.DirectEmails extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch email"
 
+  # View a direct email
   view: (id) ->
     email = new CPP.Models.DirectEmail id: id
     email.fetch

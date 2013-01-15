@@ -8,6 +8,7 @@ class CPP.Routers.Departments extends Backbone.Router
     'departments/:id/insights' :  'insights'
     'insights'     :  'insights'
 
+  # Department setting spage
   settings: (id) ->
     if isStudent() or isCompanyAdmin()
       window.history.back()
@@ -23,6 +24,7 @@ class CPP.Routers.Departments extends Backbone.Router
         error: ->
           notify "error", "Couldn't fetch department"
 
+  # Department dashboard
   dashboard: (id) ->
     if isStudent() or isCompanyAdmin()
       window.history.back()
@@ -38,6 +40,8 @@ class CPP.Routers.Departments extends Backbone.Router
         error: ->
           notify 'error', "Couldn't fetch department"
 
+  # Department administrator registration page - add new admin to
+  # existing department
   register: (id) ->
     if isStudent() or isCompanyAdmin()
       window.history.back()
@@ -55,6 +59,7 @@ class CPP.Routers.Departments extends Backbone.Router
         error: ->
           notify 'error', "Couldn't fetch department"
 
+  # Return the department using id provided, or logged in user
   getDepartmentFromID: (id) ->
     if id?
       return new CPP.Models.Department id: id
@@ -63,8 +68,9 @@ class CPP.Routers.Departments extends Backbone.Router
     else
       return false
 
+  # Statistics page
   insights: (id) ->
-   if isStudent() or isCompanyAdmin()
+    if isStudent() or isCompanyAdmin()
       window.history.back()
       return false
 

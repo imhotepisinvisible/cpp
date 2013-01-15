@@ -12,6 +12,7 @@ class CPP.Routers.Students extends Backbone.Router
       'settings': 'settings'
       'register': 'signup'
 
+  # Student index
   index: ->
     if isStudent()
       window.history.back()
@@ -23,6 +24,7 @@ class CPP.Routers.Students extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch students"
 
+  # Student profile
   view: (id) ->
     student = @getStudentFromID(id)
     unless student
@@ -33,6 +35,7 @@ class CPP.Routers.Students extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch student"
 
+  # Student dashboard
   edit: (id) ->
     if isDepartmentAdmin()
       @admin(id)
@@ -45,12 +48,15 @@ class CPP.Routers.Students extends Backbone.Router
     student = @getStudentFromID(id)
     unless student
       notify "error", "Invalid Student"
+
+    # Fetch 3 events and placements for dashboard
     deferreds = []
     deferreds.push(student.events.fetch({ data: $.param({ limit: 3}) }))
     deferreds.push(student.placements.fetch({ data: $.param({ limit: 3}) }))
 
     $.when.apply($, deferreds).done(->
       companydeferreds = []
+      # Fetch company for each event and placement
       for e in student.events.models
         do (e) ->
           e.company = new CPP.Models.Company id: e.get 'company_id'
@@ -61,6 +67,7 @@ class CPP.Routers.Students extends Backbone.Router
           companydeferreds.push(p.company.fetch())
 
       $.when.apply($, companydeferreds).done(->
+        # Fetch the student when we're done
         student.fetch
           success: ->
             new CPP.Views.Students.Edit model: student
@@ -69,6 +76,7 @@ class CPP.Routers.Students extends Backbone.Router
       )
     )
 
+  # Student administration page
   admin: (id) ->
     student = new CPP.Models.Student id: id
     student.fetch
@@ -77,6 +85,7 @@ class CPP.Routers.Students extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch student"
 
+  # Student settings page
   settings: (id) ->
     student = @getStudentFromID(id)
     unless student
@@ -95,6 +104,7 @@ class CPP.Routers.Students extends Backbone.Router
   signupNoLogin: ->
     @register false
 
+  # Register a new student
   register: (login) ->
     if login && CPP.CurrentUser? && CPP.CurrentUser isnt {}
       window.history.back()

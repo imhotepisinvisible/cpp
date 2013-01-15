@@ -13,11 +13,12 @@ class CPP.Views.CompanyContact extends CPP.Views.Base
     'click .btn-cancel' : 'cancel'
     'drop'              : 'drop'
 
+  # Edit individual contact
   initialize: (options) ->
     @model.bind 'change', @render, @
-
     @render
 
+  # Render the individual contact
   render: ->
     $(@el).html(@template({contact: @model, tooltip: (loggedIn() and CPP.CurrentUser.get('tooltip'))}))
     @form = new Backbone.Form(model: @model, template: 'standardForm').render()
@@ -26,9 +27,11 @@ class CPP.Views.CompanyContact extends CPP.Views.Base
     validateField(@form, field) for field of @form.fields
     @
 
+  # Event for placing draggable
   drop: (event, index) ->
     $(@el).trigger('update-sort', [@model, index]);
 
+  # Show the edit form
   edit: (e) ->
     $(e.currentTarget).parent().parent().find('.btn-container').hide()
     $(e.currentTarget).parent().parent().find('.btn-save').show()
@@ -37,6 +40,7 @@ class CPP.Views.CompanyContact extends CPP.Views.Base
     $(e.currentTarget).parent().parent().find('.contact-display-container').hide()
     $(e.currentTarget).parent().parent().find('.contact-form').show()
 
+  # Save the company contact
   save: (e) ->
     index = $(e.currentTarget).parent().attr('id')
     if @form.validate() == null
@@ -54,6 +58,7 @@ class CPP.Views.CompanyContact extends CPP.Views.Base
 
       @cancel(e)
 
+  # Delete the company contact
   delete: (e) ->
     index = $(e.currentTarget).parent().parent().attr('id')
     @model.destroy
@@ -63,6 +68,7 @@ class CPP.Views.CompanyContact extends CPP.Views.Base
       error: (model, response) ->
         notify "error", "Contact could not be deleted"
 
+  # Cancel editing of company contact
   cancel: (e) ->
     # Allow css to control style of btn-edit again
     $(e.currentTarget).parent().find('.btn-container').attr('style', '')

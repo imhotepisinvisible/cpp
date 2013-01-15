@@ -6,6 +6,7 @@ class CPP.Routers.Emails extends Backbone.Router
       'emails/:id/edit'                   : 'edit'
       'emails/:id'                        : 'view'
 
+  # Emails for a specific company
   indexCompany: (company_id) ->
     emails = new CPP.Collections.Emails
     # new CPP.Views.Emails.Index collection: emails
@@ -22,6 +23,7 @@ class CPP.Routers.Emails extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch emails"
 
+  # All emails
   index: ->
     emails = new CPP.Collections.Emails
     emails.fetch
@@ -30,11 +32,13 @@ class CPP.Routers.Emails extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch emails"
 
+  # New email for specific company
   new: (company_id) ->
     email = new CPP.Models.Email company_id: company_id, subject: "Subject", body: "Email body"
     email.collection = new CPP.Collections.Emails
     new CPP.Views.Emails.Edit model: email
 
+  # Edit an email
   edit: (id) ->
     email = new CPP.Models.Email id: id
     email.fetch
@@ -43,6 +47,7 @@ class CPP.Routers.Emails extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch email"
 
+  # View an email
   view: (id) ->
     email = new CPP.Models.Email id: id
     email.fetch

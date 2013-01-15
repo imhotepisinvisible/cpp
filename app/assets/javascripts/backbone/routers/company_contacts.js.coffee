@@ -3,6 +3,7 @@ class CPP.Routers.CompanyContacts extends Backbone.Router
     'companies/:id/company_contacts/edit' : 'edit'
     'companies/:id/company_contacts'      : 'view'
 
+  # Edit company contacts
   edit: (id) ->
     if isStudent()
       window.history.back()
@@ -12,6 +13,7 @@ class CPP.Routers.CompanyContacts extends Backbone.Router
       data:
         $.param({ company_id: id})
       success: ->
+        # Reuse partial for full page
         new CPP.Views.Contacts.PartialEdit
           collection: contacts
           company_id: id
@@ -19,12 +21,14 @@ class CPP.Routers.CompanyContacts extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch contacts"
 
+  # View company contacts
   view: (id) ->
     contacts = new CPP.Collections.CompanyContacts
     contacts.fetch
       data:
         $.param({ company_id: id})
       success: ->
+        # Reuse partial
         new CPP.Views.Contacts.Partial
           collection: contacts
           company_id: id

@@ -7,6 +7,7 @@ class CPP.Views.Companies.DepartmentRequest extends CPP.Views.Base
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-request'   : 'request'
 
+  # Individual department request
   initialize: (options) ->
     @company = options.company
     @render()
@@ -15,8 +16,8 @@ class CPP.Views.Companies.DepartmentRequest extends CPP.Views.Base
     $(@el).html(@template(dept: @model, status: approvalStatusMap(@model.get 'status')))
     @
 
+  # Rejected or not requested
   request: (e) ->
-    # Rejected or not requested
     if @model.get('status') < 1
       $.ajax
         url: "/companies/#{@company.id}/departments/#{@model.id}/apply"

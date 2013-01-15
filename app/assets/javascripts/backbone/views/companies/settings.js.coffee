@@ -5,12 +5,15 @@ class CPP.Views.CompaniesSettings extends CPP.Views.Base
   events: -> _.extend {}, CPP.Views.Base::events,
     'click #delete-company' : 'deleteCompany'
 
+  # Company settings page
   initialize: ->
     @render()
 
+  # Render company settings page
   render: ->
     $(@el).html(@template(company: @model, tooltip: (loggedIn() and CPP.CurrentUser.get('tooltip'))))
 
+    # Change password partial
     new CPP.Views.Users.ChangePassword
       el: $(@el).find('#change-password')
     .render()
@@ -29,6 +32,7 @@ class CPP.Views.CompaniesSettings extends CPP.Views.Base
             notify 'error', "Unable to switch #{stateText} helpful tooltips"
     )
 
+  # Delete the company
   deleteCompany: (e) ->
     if confirm "Are you sure you wish to delete your profile?\nThis cannot be undone."
       $.ajax
