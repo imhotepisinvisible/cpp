@@ -1,17 +1,22 @@
 CPP.Views.Placements ||= {}
 
+# Placement view
 class CPP.Views.Placements.Index extends CPP.Views.Base
   el: '#app'
   template: JST['backbone/templates/placements/index']
 
+  # Bind events
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .company-logo-header'  : 'viewCompany'
 
+  # Bind to update placement collection
   initialize: ->
     @collection.bind 'reset', @render, @
     @collection.bind 'filter', @renderPlacements, @
     @render()
 
+  # For each placement fetch the corresponding company
+  # Render placements and filters
   render: ->
     lcompanies = []
     ready = $.Deferred()
@@ -31,6 +36,8 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
       @renderFilters()
     @
 
+  # Remove all placements then for each placement in the collection
+  # passed in render the placement
   renderPlacements: (col) ->
     @$('#placements').html("")
     col.each (placement) ->
@@ -38,6 +45,7 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
       @$('#placements').append(view.render().el)
     @
 
+  # Define the filters to render
   renderFilters: ->
     new CPP.Filter
       el: $(@el).find('#placement-filter')
@@ -67,6 +75,7 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
       data: @collection
     @
 
+  # Navigate to the placements associated company
   viewCompany: ->
     if @collection.company
       Backbone.history.navigate("companies/" + @collection.company.id, trigger: true)
