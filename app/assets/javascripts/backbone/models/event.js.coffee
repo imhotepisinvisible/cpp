@@ -1,7 +1,7 @@
 class CPP.Models.Event extends CPP.Models.Base
   initialize: ->
     @allDepartments = new CPP.Collections.Departments
-    @allDepartments.url = '/departments'
+    @allDepartments.url = "companies/#{@get('company_id')}/departments"
 
   url: ->
     '/events' + (if @isNew() then '' else '/' + @id)
@@ -46,7 +46,7 @@ class CPP.Models.Event extends CPP.Models.Base
     departments:
       type: "Checkboxes"
       title: "Department(s)*"
-      options: new CPP.Collections.Departments
+      options: @allDepartments
       editorClass: "departments-checkbox"
     requirements:
       type: "TextArea"

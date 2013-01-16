@@ -49,6 +49,13 @@ eee_department = FactoryGirl.create :department, {
   settings_notifier_event: "Please note that at current an event must be scheduled at least two weeks in advance to be approved."
 }
 
+biochem_department = FactoryGirl.create :department, {
+  name:"BioChem Department",
+  organisation: organisation,
+  settings_notifier_placement: "If this is your first placement you're offering, make sure you send back a placement performa and a health and saftey form which can be found on https://www.doc.ic.ac.uk/internal/industrialplacements/employers/IPproforma12-studentorganised.doc and https://www.doc.ic.ac.uk/internal/industrialplacements/employers/Placement_Provider_Information_Form_2012.doc",
+  settings_notifier_event: "Please note that at current an event must be scheduled at least two weeks in advance to be approved."
+}
+
 pete = FactoryGirl.create :student,  {
   first_name: "Peter",
   last_name: "Hamilton",
@@ -225,6 +232,15 @@ FactoryGirl.create :department_administrator, {
   password: "cppcppcpp",
   password_confirmation: "cppcppcpp",
   department: computing_department
+}
+
+FactoryGirl.create :department_administrator, {
+  first_name: "Will",
+  last_name: "Smith",
+  email: "bio@doc.com",
+  password: "cppcppcpp",
+  password_confirmation: "cppcppcpp",
+  department: biochem_department
 }
 
 FactoryGirl.create :department_administrator, {

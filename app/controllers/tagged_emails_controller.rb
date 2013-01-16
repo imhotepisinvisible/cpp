@@ -1,6 +1,8 @@
 class TaggedEmailsController < ApplicationController
   impressionist
-
+  
+  before_filter :require_login
+  load_and_authorize_resource
   respond_to :json
   
   # Get all tagged emails

@@ -16,25 +16,12 @@ class CPP.Views.Events.Index extends CPP.Views.Base
     @editable = isAdmin()
     @render()
 
-  # TODO: COMMENT 
+  # Render events
   render: ->
-    lcompanies = []
-    ready = $.Deferred()
     $(@el).html(@template(events: @collection, editable: @editable))
-    @collection.each (event) =>
-      event.company = new CPP.Models.Company id: event.get("company_id")
-      event.company.fetch
-        success: =>
-          lcompanies.push(event.company)
-          if (lcompanies.length == @collection.length)
-            ready.resolve()
-        error: ->
-          notify "error", "Couldn't fetch company for event"
-          ready.resolver()
-    ready.done =>
-      @renderEvents(@collection)
-      @renderFilters()
-    @
+    @renderEvents(@collection)
+    @renderFilters()
+  @
 
   # Render each event item
   renderEvents: (col) ->

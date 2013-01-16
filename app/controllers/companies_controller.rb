@@ -3,7 +3,6 @@ require 'json'
 class CompaniesController < ApplicationController
   impressionist
   load_and_authorize_resource
-  #before_filter :require_login
   respond_to :json
 
   # If the current user is a student, injects their company preferences into
@@ -77,13 +76,11 @@ class CompaniesController < ApplicationController
     if current_user
       @company.organisation_id = current_user.organisation.id
     else
-      # Set organisation to 1 (imperial college)
+      # Set organisation to Imperial College
       # This is because we don't have full multi-org support yet, it means all
       # companies are created belonging to Imperial. It's not nice, but it's not
       # something which could really be put in a variable either for the time being.
-      #
-      # TODO make multi-organisational
-      @company.organisation_id = 1
+      @company.organisation_id = Organisation.where(name: "Imperial College London")[0].id
     end
 
     if params.has_key? :departments

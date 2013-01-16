@@ -1,6 +1,7 @@
 class OrganisationDomainsController < ApplicationController
   impressionist
 
+  before_filter :require_login
   respond_to :json
 
   # Return all organisation domains

@@ -1,6 +1,7 @@
 class CompanyContactsController < ApplicationController
   impressionist
 
+  before_filter :require_login
   respond_to :json
   
   # Return company contacts

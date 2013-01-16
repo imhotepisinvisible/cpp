@@ -42,6 +42,7 @@ class Ability
       can :manage, TaggedEmail, :company_id => user.company_id
       can :manage, EventEmail, :company_id => user.company_id
       can :manage, DirectEmail, :company_id => user.company_id
+      can :manage, Email, :company_id => user.company_id
       can :manage, Company, :id => user.company_id
       can :manage, CompanyAdministrator, :id => user.id
       can :apply, Department
@@ -80,7 +81,7 @@ class Ability
   # a - list of departments
   # b - list of departments
   def share_departments?(a, b)
-    intersect(a.departments.map(&:id), b.departments.map(&:id))
+    intersect?(a.departments.map(&:id), b.departments.map(&:id))
   end
 
   # Returns true if lists a and b intersect, false otherwise

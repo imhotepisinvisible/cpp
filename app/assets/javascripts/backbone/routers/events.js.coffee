@@ -18,6 +18,8 @@ class CPP.Routers.Events extends Backbone.Router
         events.company = new CPP.Models.Company id: company_id
         events.company.fetch
           success: ->
+            events.each (event) =>
+              event.company = events.company
             new CPP.Views.Events.Index collection: events
           error: ->
             notify "error", "Couldn't fetch company for event"
@@ -33,7 +35,8 @@ class CPP.Routers.Events extends Backbone.Router
         events.each (event) =>
           event.registered_students = new CPP.Collections.Students()
           deferreds.push(event.registered_students.fetch({ data: $.param({ event_id: event.id }) }))
-        
+          event.company = new CPP.Models.Company id: event.get "company_id"
+          deferreds.push event.company.fetch()
         $.when.apply($, deferreds).done(=>
           new CPP.Views.Events.Index collection: events
         )

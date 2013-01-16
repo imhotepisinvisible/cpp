@@ -15,20 +15,19 @@ class CPP.Views.Emails.Edit extends CPP.Views.Base
   initialize: ->
     @form = new Backbone.Form(model: @model).render()
 
-    # Auxillary function, saves model on tag input
-    # TODO: Could this be moved inside the if?
-    saveTagModel = =>
-      @model.save {},
-        wait: true
-        forceUpdate: true
-        success: (model, response) =>
-          @updateStats()
-        error: (model, response) ->
-          # Notify tag-specific errors here (profanity etc)
-          errorlist = JSON.parse response.responseText
-          notify "error", "Couldn't Update Tags"
-
     if @options.type == "tagged"
+      # Auxillary function, saves model on tag input
+      saveTagModel = =>
+        @model.save {},
+          wait: true
+          forceUpdate: true
+          success: (model, response) =>
+            @updateStats()
+          error: (model, response) ->
+            # Notify tag-specific errors here (profanity etc)
+            errorlist = JSON.parse response.responseText
+            notify "error", "Couldn't Update Tags"
+
       @skill_list_tags_form = new Backbone.Form.editors.TagEditor
         model: @model
         key: 'skill_list'

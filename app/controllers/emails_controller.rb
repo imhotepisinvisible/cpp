@@ -1,6 +1,8 @@
 class EmailsController < ApplicationController
   impressionist
 
+  before_filter :require_login
+  load_and_authorize_resource
   respond_to :json
   
   # Finds all emails

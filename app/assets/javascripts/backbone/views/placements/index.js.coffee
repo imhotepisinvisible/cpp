@@ -15,26 +15,12 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
     @collection.bind 'filter', @renderPlacements, @
     @render()
 
-  # For each placement fetch the corresponding company
-  # Render placements and filters
+  # Render placement template, placements and filters
   render: ->
-    lcompanies = []
-    ready = $.Deferred()
     $(@el).html(@template(placements: @collection, editable: isAdmin()))
-    @collection.each (placement) =>
-      placement.company = new CPP.Models.Company id: placement.get("company_id")
-      placement.company.fetch
-        success: =>
-          lcompanies.push(placement.company)
-          if (lcompanies.length == @collection.length)
-            ready.resolve()
-        error: ->
-          notify "error", "Couldn't fetch company for placement"
-          ready.resolver()
-    ready.done =>
-      @renderPlacements(@collection)
-      @renderFilters()
-    @
+    @renderPlacements(@collection)
+    @renderFilters()
+  @
 
   # Remove all placements then for each placement in the collection
   # passed in render the placement

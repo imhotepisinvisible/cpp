@@ -99,6 +99,7 @@ window.addTooltip = (showTooltip, message, position) ->
   if showTooltip then "rel='tooltip' title='#{message}' data-placement='#{position}'" else ''
 
 # Company approval statuses for departments
+# If change also change lib/cpp_approval_status.rb
 window.CPP_APPROVAL_STATUS = {
   REJECTED: -1
   NOT_REQ:   0

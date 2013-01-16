@@ -18,7 +18,7 @@ class CPP.Views.Students.Index extends CPP.Views.Base
     @renderFilters()
   @
 
-  # Remove all student then for each student
+  # Remove all students, then for each student
   # in the collection passed in, render the student
   renderStudents: (col) ->
     @$('#students').html("")

@@ -1,5 +1,5 @@
 class TagsController < ApplicationController
-  respond_to :json
+  respond_to :json  
 
   # Find all tags that have been declared as a skill or rejected skill
   # Excludes any excluded tags in params

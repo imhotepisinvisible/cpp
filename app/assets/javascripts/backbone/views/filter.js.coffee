@@ -112,7 +112,7 @@ class CPP.Filter extends CPP.Views.Base
               # Filter from collection if filter text is not a substring
               fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
                 res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
-                (res.toString().toLowerCase().indexOf tb.toLowerCase()) != -1
+                (res.toString().toLowerCase().indexOf textBox.toLowerCase()) != -1
               ))
           when "number"
             if (textBox != "")
@@ -137,7 +137,7 @@ class CPP.Filter extends CPP.Views.Base
           when "date"
             fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
               res = eval('with (model, filter) {model' + filter.scope + '.get(filter.attribute)}')
-              res >= tb || res == null
+              res >= textBox || res == null
             ))
       # Trigger filter with the updated collection to re-render individually from the page
       @data.trigger('filter', fCollection)

@@ -1,6 +1,7 @@
 class OrganisationsController < ApplicationController
   impressionist
 
+  before_filter :require_login
   respond_to :json
 
   # Find all organisations
