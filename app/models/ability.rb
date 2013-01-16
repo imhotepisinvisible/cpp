@@ -42,6 +42,7 @@ class Ability
       can :manage, TaggedEmail, :company_id => user.company_id
       can :manage, EventEmail, :company_id => user.company_id
       can :manage, DirectEmail, :company_id => user.company_id
+      can :manage, Email, :company_id => user.company_id
       can :manage, Company, :id => user.company_id
       can :manage, CompanyAdministrator, :id => user.id
       can :apply, Department
