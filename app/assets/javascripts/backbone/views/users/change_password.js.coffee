@@ -1,13 +1,14 @@
 CPP.Views.Users ||= {}
-
+# Change User Password
 class CPP.Views.Users.ChangePassword extends CPP.Views.Base
 
   template: JST['backbone/templates/users/change_password']
-
+  # Bind events
   events: -> _.extend {}, CPP.Views.Base::events,
     'click #btn-password-save' : 'savePassword'
     'click #btn-password-cancel' : 'cancelPassword'
-
+  # Set schema for password form
+  # Render form and validate on change
   initialize: ->
     @passwordForm = new Backbone.Form
       schema:
@@ -31,14 +32,17 @@ class CPP.Views.Users.ChangePassword extends CPP.Views.Base
       @passwordForm.validate()
     @
 
+  # Render password form 
   render: ->
     $(@el).html(@template())
     $('#password-form').html(@passwordForm.el)
 
+  # Re initialise and render to cancel action 
   cancelPassword: (e) ->
     @initialize()
     @render()
 
+  # Save changed password
   savePassword: (e) ->
     if @passwordForm.validate() == null
       data = @passwordForm.getValue()

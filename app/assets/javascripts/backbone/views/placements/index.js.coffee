@@ -16,11 +16,11 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
     lcompanies = []
     ready = $.Deferred()
     $(@el).html(@template(placements: @collection, editable: isAdmin()))
-    @collection.each (event) =>
-      event.company = new CPP.Models.Company id: event.get("company_id")
-      event.company.fetch
+    @collection.each (placement) =>
+      placement.company = new CPP.Models.Company id: placement.get("company_id")
+      placement.company.fetch
         success: =>
-          lcompanies.push(event.company)
+          lcompanies.push(placement.company)
           if (lcompanies.length == @collection.length)
             ready.resolve()
         error: ->
