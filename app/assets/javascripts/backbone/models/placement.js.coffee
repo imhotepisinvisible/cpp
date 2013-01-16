@@ -1,4 +1,8 @@
 class CPP.Models.Placement extends CPP.Models.Base
+  initialize: ->
+    @allDepartments = new CPP.Collections.Departments
+    @allDepartments.url = "/companies/#{@get 'company_id'}/departments"
+
   url: ->
     '/placements' + (if @isNew() then '' else '/' + @id)
 
