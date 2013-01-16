@@ -20,24 +20,24 @@ class CompaniesController < ApplicationController
   end
 
   # Get companies pending for given department
-  # 
+  #
   # GET departments/1/companies/pending
   def pending
     department = Department.find(params[:department_id])
     respond_with department.pending_companies
   end
-  
+
   # Approve company for given department
-  # 
+  #
   # PUT departments/1/companies/1/approve
   def approve
     department_registration = DepartmentRegistration.find_by_department_id_and_company_id(params[:department_id], params[:company_id])
     department_registration.approved = true
     department_registration.save!
   end
-  
+
   # Reject company for given department
-  # 
+  #
   # PUT departments/1/companies/1/reject
   def reject
     department_registration = DepartmentRegistration.find_by_department_id_and_company_id(params[:department_id], params[:company_id])
@@ -46,7 +46,7 @@ class CompaniesController < ApplicationController
   end
 
   # Show company
-  # 
+  #
   # Injects company rating if the current user is a student
   # GET /companies/1
   # GET /companies/1.json
@@ -60,7 +60,7 @@ class CompaniesController < ApplicationController
   end
 
   # Create new company
-  # 
+  #
   # GET /companies/new
   # GET /companies/new.json
   def new
@@ -69,7 +69,7 @@ class CompaniesController < ApplicationController
   end
 
   # Create new company with given params
-  # 
+  #
   # POST /companies
   # POST /companies.json
   def create
@@ -78,6 +78,10 @@ class CompaniesController < ApplicationController
       @company.organisation_id = current_user.organisation.id
     else
       # Set organisation to 1 (imperial college)
+      # This is because we don't have full multi-org support yet, it means all
+      # companies are created belonging to Imperial. It's not nice, but it's not
+      # something which could really be put in a variable either for the time being.
+      #
       # TODO make multi-organisational
       @company.organisation_id = 1
     end
@@ -104,7 +108,7 @@ class CompaniesController < ApplicationController
   end
 
   # Update company based on params
-  # 
+  #
   # PUT /companies/1
   # PUT /companies/1.json
   def update
@@ -118,7 +122,7 @@ class CompaniesController < ApplicationController
   end
 
   # Deletes company and notifies deletion of administrator attached to account
-  # 
+  #
   # DELETE /companies/1
   # DELETE /companies/1.json
   def destroy
@@ -133,7 +137,7 @@ class CompaniesController < ApplicationController
   end
 
   # Delete company logo
-  # 
+  #
   # DELETE /companies/1/delete_logo
   def delete_logo
     @company = Company.find(params[:id])
@@ -147,7 +151,7 @@ class CompaniesController < ApplicationController
   end
 
   # Delete company logo
-  # 
+  #
   # POST /companies/1/set_rating
   def set_rating
     if !current_user
@@ -163,8 +167,8 @@ class CompaniesController < ApplicationController
   end
 
   # Return student views for company over past week
-  # 
-  # GET /companies/1/view_stats 
+  #
+  # GET /companies/1/view_stats
   def view_stats
     @company = Company.find(params[:id])
     data = {
@@ -183,7 +187,7 @@ class CompaniesController < ApplicationController
   end
 
   # Return student views for all companies over past week
-  # 
+  #
   # GET /companies/view_stats_all
   def view_stats_all
     data = {
@@ -204,8 +208,8 @@ class CompaniesController < ApplicationController
   end
 
   # Return top five companies
-  # 
-  # GET /companies/top_5 
+  #
+  # GET /companies/top_5
   def top_5
     company_impressions = Impression.where(
       "created_at > ? AND created_at < ? AND action_name = ? AND controller_name = ?",

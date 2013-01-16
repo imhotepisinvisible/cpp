@@ -34,8 +34,9 @@ class EventsController < ApplicationController
     end
   end
 
-  # Get event for given id
-  # TODO: WHATS THIS DEPTS STUFF?
+  # Get event for given id and respond with it in JSON form
+  # Inserts a list 'depts' into the JSON with the IDs of departments which this
+  # event is targetted at.
   #
   # GET /events/1
   # GET /events/1.json
