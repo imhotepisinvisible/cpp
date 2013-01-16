@@ -5,10 +5,8 @@ class CPP.Views.Events.Partial extends CPP.Views.Base
 
   # Bind collections reset event to addAll so when reset view updates
   initialize: () ->
-    @editable = @options.editable
+    @editable = @options.editable? && @options.editable
     @company  = @options.company
-    # TODO: What is this line?
-    @editable = @editable? && @editable
     @collection.bind('reset', @addAll)
     @render()
 
