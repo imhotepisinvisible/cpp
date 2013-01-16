@@ -1,5 +1,5 @@
-CPP : Connect
-=======
+CPP : Connect - [Visit Live Site!](http://cppconnect.com)
+==========================================================
 
 Revolutionising the Corporate Partnership Programme
 
