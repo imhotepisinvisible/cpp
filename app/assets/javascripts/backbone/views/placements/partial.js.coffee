@@ -5,11 +5,10 @@ class CPP.Views.Placements.Partial extends CPP.Views.Base
   template: JST['backbone/templates/placements/partial']
 
   # Set editable and the company associated with the placement
-  # Render the placement 
+  # Render the placement
   initialize: () ->
-    @editable = @options.editable
+    @editable = @options.editable? && @options.editable
     @company  = @options.company
-    @editable = @editable? && @editable
     @collection.bind('reset', @addAll)
     @render()
 
