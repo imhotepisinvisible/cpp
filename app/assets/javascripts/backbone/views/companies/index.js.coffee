@@ -1,8 +1,10 @@
+# All companies view
 class CPP.Views.CompaniesIndex extends CPP.Views.Base
   el: "#app"
   template: JST['backbone/templates/companies/index']
 
   # Company aggregate view for administrators
+  # Bind to update collection
   initialize: (options) ->
     @collection.bind 'reset', @render, @
     @collection.bind 'change', @render, @
@@ -10,13 +12,14 @@ class CPP.Views.CompaniesIndex extends CPP.Views.Base
     @editable = isDepartmentAdmin()
     @render()
 
-  # Render the view
+  # Render template with editable and company collection
+  # Render companies and filters
   render: ->
     $(@el).html(@template(editable: @editable, companies: @collection))
     @renderCompanies(@collection)
     @renderFilters()
 
-  # Render the companies in the collection
+  # Render the companies in the collection dynamically
   renderCompanies: (col) ->
     @$('#companies').html("")
     col.each (company) =>
@@ -24,7 +27,7 @@ class CPP.Views.CompaniesIndex extends CPP.Views.Base
       @$('#companies').append(view.render().el)
     @
 
-  # Render the company filters
+  # Set name and description text filters
   renderFilters: ->
     new CPP.Filter
       el: $(@el).find('#company-filter')
