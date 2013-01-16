@@ -1,4 +1,7 @@
+require 'cpp_approval_status'
+
 class DepartmentsController < ApplicationController
+  include CPPApprovalStatus
   impressionist
 
   respond_to :json
@@ -40,12 +43,11 @@ class DepartmentsController < ApplicationController
     end
   end
 
-  # TODO: COMMENT AND NOT HARDCODE STATUSES
   # PUT /companies/1/departments/1/apply
   def apply
     raise unless params.has_key? :company_id
     dept_reg = DepartmentRegistration.find_or_create_by_company_id_and_department_id(params[:company_id], params[:department_id])
-    dept_reg.status = 1
+    dept_reg.status = CPPApprovalStatus.PENDING
     if dept_reg.save
       head :no_content
     else

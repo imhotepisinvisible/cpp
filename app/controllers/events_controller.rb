@@ -27,7 +27,6 @@ class EventsController < ApplicationController
       @events.sort_by! {|e| [-e.relevance(current_user.id), e.company.name] }
       respond_with @events.as_json({:student_id => current_user.id})
     elsif current_user && current_user.is_department_admin?
-      # TODO this must return events that have a department with current_user.id
       respond_with @events.select{ |e| e.departments.map(&:id).include? current_user.department_id }
     else
       respond_with @events
