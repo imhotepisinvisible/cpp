@@ -2,12 +2,11 @@ class UserMailer < ActionMailer::Base
   #include Resque::Mailer
   default from: "impdoccpp@gmail.com"
 
-  def send_email(address,subject,body)
-  	mail(:to => address, :subject => subject) do |format|
-  		format.html { render :inline => body }
-  	end
+  def send_email(address, subject, body, sender)
+    mail(:to => address, :subject => subject, :from => sender) do |format|
+      format.html { render :inline => body }
+    end
   end
-
 
   def getUsersByInterest(email_id)
   	#TODO when Tags are done.
