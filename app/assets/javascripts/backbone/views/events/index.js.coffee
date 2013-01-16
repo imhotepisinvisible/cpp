@@ -16,7 +16,9 @@ class CPP.Views.Events.Index extends CPP.Views.Base
     @editable = isAdmin()
     @render()
 
-  # TODO: COMMENT 
+  # Render events
+  # Will not display an event if couldn't fetch a company
+  # TODO: WE SHOULD MOVE FETCHING OUT TO ROUTER
   render: ->
     lcompanies = []
     ready = $.Deferred()
