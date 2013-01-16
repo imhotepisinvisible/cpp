@@ -43,7 +43,6 @@ class DepartmentsController < ApplicationController
     end
   end
 
-  # TODO: COMMENT AND NOT HARDCODE STATUSES
   # PUT /companies/1/departments/1/apply
   def apply
     raise unless params.has_key? :company_id
