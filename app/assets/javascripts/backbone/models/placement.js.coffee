@@ -43,7 +43,7 @@ class CPP.Models.Placement extends CPP.Models.Base
     departments:
       type: "Checkboxes"
       title: "Department(s)*"
-      options: new CPP.Collections.Departments
+      options: @allDepartments
       editorClass: "departments-checkbox"
     other:
       type: "Text"
