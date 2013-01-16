@@ -10,24 +10,37 @@
 #   t.datetime "updated_at",      :null => false
 
 class User < ActiveRecord::Base
+  ##################### On delete hide record ########################
   acts_as_paranoid
-  # :column => 'deleted_at'
 
+  ###################### Password encryption #########################
   has_secure_password
 
+
+  ######################### Ensure present ###########################
   validates :email,           :presence => true
   validates :password_digest, :presence => true, :on => :create
   validates :first_name,      :presence => true
   validates :last_name,       :presence => true
 
+
+  ########################## Ensure unique ##########################
   validates :email, :uniqueness => true
 
+
+  ######################### Ensure length ###########################
   validates :password, :length => {
     :minimum => 8,
     :too_short => "password is too short, must be at least %{count} characters"
   }, :on => :create
 
-  attr_accessible :email, :first_name, :last_name, :password, :password_confirmation
+
+  ###################################################################
+  # Attributes not to store in database direectly and exist
+  # for life of object
+  # #################################################################
+  attr_accessible :email, :first_name, :last_name, :password, 
+                  :password_confirmation
 
   def is_student?
     self.class.name == "Student"

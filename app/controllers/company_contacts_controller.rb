@@ -2,7 +2,11 @@ class CompanyContactsController < ApplicationController
   impressionist
 
   respond_to :json
-
+  
+  # Return company contacts
+  # If company_id specified return only those for company
+  # If limit specified, limit the results
+  # 
   # GET /company_contacts
   # GET /company_contacts.json
   def index
@@ -19,6 +23,8 @@ class CompanyContactsController < ApplicationController
     respond_with @contacts
   end
 
+  # Find company contact with given id
+  # 
   # GET /company_contacts/1
   # GET /company_contacts/1.json
   def show
@@ -26,6 +32,8 @@ class CompanyContactsController < ApplicationController
     respond_with @contact
   end
 
+  # Create new company contact
+  # 
   # GET /company_contacts/new
   # GET /company_contacts/new.json
   def new
@@ -33,6 +41,8 @@ class CompanyContactsController < ApplicationController
     respond_with @contact
   end
 
+  # Create new company contact with given params
+  # 
   # POST /company_contacts
   # POST /company_contacts.json
   def create
@@ -44,6 +54,8 @@ class CompanyContactsController < ApplicationController
     end
   end
 
+  # Update company contact with given params
+  # 
   # PUT /company_contacts/1
   # PUT /company_contacts/1.json
   def update
@@ -55,6 +67,8 @@ class CompanyContactsController < ApplicationController
     end
   end
 
+  # Destroy company contact with given id
+  # 
   # DELETE /company_contacts/1
   # DELETE /company_contacts/1.json
   def destroy

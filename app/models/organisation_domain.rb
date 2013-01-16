@@ -10,9 +10,10 @@
 #   t.datetime "updated_at",      :null => false
 
 class OrganisationDomain < ActiveRecord::Base
+  ###################### Declare associations ########################
   belongs_to :organisation
 
-  # validates :organisation_id, :presence => true, :on => :create
-  validates :domain,          :presence => true
+  ######################### Ensure present ##########################
+  validates :domain, :presence => true
 
 end

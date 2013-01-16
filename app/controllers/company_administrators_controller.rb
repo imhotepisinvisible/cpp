@@ -4,6 +4,9 @@ class CompanyAdministratorsController < ApplicationController
   # load_and_authorize_resource #TODO: Turn me on at some point
   respond_to :json
 
+  # Returns company administrators, if there's a company_id it returns those 
+  # only for the given company
+  # 
   # GET /company_administrators
   # GET /company_administrators.json
   def index
@@ -14,6 +17,8 @@ class CompanyAdministratorsController < ApplicationController
     respond_with @company_administrators
   end
 
+  # Find company administrator with given id
+  # 
   # GET /company_administrators/1
   # GET /company_administrators/1.json
   def show
@@ -21,6 +26,8 @@ class CompanyAdministratorsController < ApplicationController
     respond_with @company_administrator
   end
 
+  # Create new company administrator
+  # 
   # GET /company_administrators/new
   # GET /company_administrators/new.json
   def new
@@ -28,6 +35,8 @@ class CompanyAdministratorsController < ApplicationController
     respond_with @company_administrator
   end
 
+  # Create new company administrator with given params
+  # 
   # POST /company_administrators
   # POST /company_administrators.json
   def create
@@ -40,6 +49,8 @@ class CompanyAdministratorsController < ApplicationController
     end
   end
 
+  # Update company administrator with given id with given params
+  # 
   # PUT /company_administrators/1
   # PUT /company_administrators/1.json
   def update
@@ -51,6 +62,8 @@ class CompanyAdministratorsController < ApplicationController
     end
   end
 
+  # Delete company administrator with given id
+  # 
   # DELETE /company_administrators/1
   # DELETE /company_administrators/1.json
   def destroy

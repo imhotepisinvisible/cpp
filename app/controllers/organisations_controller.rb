@@ -3,6 +3,8 @@ class OrganisationsController < ApplicationController
 
   respond_to :json
 
+  # Find all organisations
+  #
   # GET /organisations
   # GET /organisations.json
   def index
@@ -10,6 +12,8 @@ class OrganisationsController < ApplicationController
     respond_with @organisations
   end
 
+  # Get organisation for given id
+  #
   # GET /organisations/1
   # GET /organisations/1.json
   def show
@@ -17,6 +21,8 @@ class OrganisationsController < ApplicationController
     respond_with @organisation
   end
 
+  # Create new organisation
+  #
   # GET /organisations/new
   # GET /organisations/new.json
   def new
@@ -24,6 +30,8 @@ class OrganisationsController < ApplicationController
     respond_with @organisation
   end
 
+  # Create new organisation with given params
+  #
   # POST /organisations
   # POST /organisations.json
   def create
@@ -35,6 +43,8 @@ class OrganisationsController < ApplicationController
     end
   end
 
+  # Update specified organisation with given params
+  #
   # PUT /organisations/1
   # PUT /organisations/1.json
   def update
@@ -46,6 +56,8 @@ class OrganisationsController < ApplicationController
     end
   end
 
+  # Delete specified organisation
+  #
   # DELETE /organisations/1
   # DELETE /organisations/1.json
   def destroy

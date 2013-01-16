@@ -2,7 +2,11 @@ class EmailsController < ApplicationController
   impressionist
 
   respond_to :json
-
+  
+  # Finds all emails
+  # If company_id is specified, only returns those of the company 
+  # If limit is specified, limits results 
+  #
   # GET /emails
   # GET /emails.json
   def index
@@ -19,6 +23,8 @@ class EmailsController < ApplicationController
     respond_with @emails
   end
 
+  # Finds email for given id
+  #
   # GET /emails/1
   # GET /emails/1.json
   def show
@@ -26,11 +32,16 @@ class EmailsController < ApplicationController
     respond_with @email
   end
 
+  # Returns all pending emails 
+  #
+  # GET /emails/1/pending
   def pending
     @emails = Email.where(:state => "Pending")
     respond_with @emails
   end
 
+  # Approve given email and send 
+  #
   # PUT /emails/1/approve
   def approve
     email = Email.find(params[:id])
@@ -44,6 +55,8 @@ class EmailsController < ApplicationController
     end
   end
 
+  # Reject given email, with a reason if specified 
+  #
   # PUT emails/1/reject
   def reject
     email = Email.find(params[:id])
@@ -56,11 +69,16 @@ class EmailsController < ApplicationController
     end
   end
 
+  # Preview given email
+  #
+  # GET emails/1/preview
   def preview
     @email = Email.find(params[:id])
     render :text => @email.body
   end
 
+  # Create new email
+  #
   # GET /emails/new
   # GET /emails/new.json
   def new
@@ -68,6 +86,9 @@ class EmailsController < ApplicationController
     respond_with @email
   end
 
+  # Create new email with given params
+  # Set to pending
+  #
   # POST /emails
   # POST /emails.json
   def create
@@ -80,6 +101,8 @@ class EmailsController < ApplicationController
     end
   end
 
+  # Update email with given params 
+  #
   # PUT /emails/1
   # PUT /emails/1.json
   def update
@@ -92,11 +115,16 @@ class EmailsController < ApplicationController
     end
   end
 
+  # Return number of students that match email tags 
+  #
+  # GET emails/1/get_matching_students_count
   def get_matching_students_count
     @email = Email.find(params[:id])
     respond_with @email.get_matching_students_count
   end
 
+  # Delete email 
+  #
   # DELETE /emails/1
   # DELETE /emails/1.json
   def destroy

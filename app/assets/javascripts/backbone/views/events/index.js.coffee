@@ -8,14 +8,15 @@ class CPP.Views.Events.Index extends CPP.Views.Base
     "click .company-logo-header"      : "viewCompany"
 
 
+  # Bind reset and filter events to render and renderEvents so that on change
+  # the views change.
   initialize: ->
-    #@collection.each (model) ->
-      #model.set "visible", true
     @collection.bind 'reset', @render, @
     @collection.bind 'filter', @renderEvents, @
     @editable = isAdmin()
     @render()
 
+  # TODO: COMMENT 
   render: ->
     lcompanies = []
     ready = $.Deferred()
@@ -33,8 +34,9 @@ class CPP.Views.Events.Index extends CPP.Views.Base
     ready.done =>
       @renderEvents(@collection)
       @renderFilters()
-  @
+    @
 
+  # Render each event item
   renderEvents: (col) ->
     @$('#events').html("")
     col.each (event) =>
@@ -42,6 +44,7 @@ class CPP.Views.Events.Index extends CPP.Views.Base
       @$('#events').append(view.render().el)
     @
 
+  # Create event filters
   renderFilters: ->
     new CPP.Filter
       el: $(@el).find('#event-filter')
@@ -71,6 +74,7 @@ class CPP.Views.Events.Index extends CPP.Views.Base
       data: @collection
   @
 
+  # Navigate to company page
   viewCompany: ->
     if @collection.company
       Backbone.history.navigate("companies/" + @collection.company.id, trigger: true)

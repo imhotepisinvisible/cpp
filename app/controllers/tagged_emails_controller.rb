@@ -2,7 +2,11 @@ class TaggedEmailsController < ApplicationController
   impressionist
 
   respond_to :json
-
+  
+  # Get all tagged emails
+  # If company_id specified, only find for that company
+  # If limit specified, limit results
+  #
   # GET /emails
   # GET /emails.json
   def index
@@ -19,6 +23,8 @@ class TaggedEmailsController < ApplicationController
     respond_with @emails
   end
 
+  # Return specified TaggedEmail
+  #
   # GET /emails/1
   # GET /emails/1.json
   def show
@@ -26,11 +32,15 @@ class TaggedEmailsController < ApplicationController
     respond_with @email
   end
 
+  # Preview specified email
+  #
   def preview
     @email = TaggedEmail.find(params[:id])
     render :text => @email.body
   end
 
+  # Create new TaggedEmail
+  #
   # GET /emails/new
   # GET /emails/new.json
   def new
@@ -38,6 +48,8 @@ class TaggedEmailsController < ApplicationController
     respond_with @email
   end
 
+  # Create new TaggedEmail with given params and set its approval to pending
+  #
   # POST /emails
   # POST /emails.json
   def create
@@ -50,6 +62,8 @@ class TaggedEmailsController < ApplicationController
     end
   end
 
+  # Update specified tagged email with given params
+  #
   # PUT /emails/1
   # PUT /emails/1.json
   def update
@@ -61,11 +75,16 @@ class TaggedEmailsController < ApplicationController
     end
   end
 
+  # Return number of students who will receive this email
+  #
+  # GET /emails/1/get_matching_students_count 
   def get_matching_students_count
     @email = TaggedEmail.find(params[:id])
     respond_with @email.get_matching_students_count
   end
 
+  # Delete specified TaggedEmail
+  #
   # DELETE /emails/1
   # DELETE /emails/1.json
   def destroy

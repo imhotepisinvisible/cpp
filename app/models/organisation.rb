@@ -8,9 +8,11 @@
 #   t.datetime "created_at", :null => false
 #   t.datetime "updated_at", :null => false
 class Organisation < ActiveRecord::Base
+  ###################### Declare associations ########################
   has_many :companies
   has_many :organisation_domains
   has_many :departments
 
+  ######################### Ensure present ##########################
   validates :name, :presence => true
 end
