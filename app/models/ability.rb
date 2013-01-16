@@ -80,7 +80,7 @@ class Ability
   # a - list of departments
   # b - list of departments
   def share_departments?(a, b)
-    intersect(a.departments.map(&:id), b.departments.map(&:id))
+    intersect?(a.departments.map(&:id), b.departments.map(&:id))
   end
 
   # Returns true if lists a and b intersect, false otherwise
