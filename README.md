@@ -3,15 +3,25 @@ CPP 2.0
 
 Revolutionising the Corporate Partnership Programme
 
-Requirements
-============
+Quick-Start
+===========
+
+1. Install Rails, ImageMagick and Redis
+2. Clone the repository & cd into it
+3. Run `bundle install` to install the necessary gems
+4. Run `rake nuke` to set up a seeded development database
+5. Fire up a dev app with `rails s`
+6. Visit `localhost:3000` in your browser
+7. Use app! See `db/seeds.rb` to find logins for students/companies/dept admins
+
+Further Requirements/Team Setup
+==========================
 
 * Assuming all teammembers are running OSX or Ubuntu...
 * (OSX only) Install [Homebrew](http://mxcl.github.com/homebrew/)
 * Install Git ``$ sudo apt-get install git``` or ``$ brew install git```
 * On Ubuntu you may need to run ``sudo apt-get install build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion pkg-config``
 * Install RVM: run ``\curl -L https://get.rvm.io | bash -s stable --rails`` - more info: [RVM with Ruby](https://rvm.io/rvm/install/)
-
 
 Useful tools
 ============
