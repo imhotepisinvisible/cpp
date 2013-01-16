@@ -28,15 +28,15 @@ class Company < ActiveRecord::Base
   has_many :department_registrations, :conditions => { :status => [2, 3] }
 
   has_many :departments, :through => :department_registrations
-  has_many :accessible_students, :through => :departments, 
+  has_many :accessible_students, :through => :departments,
            :class_name => "Student", :source => :students
-  has_many :pending_department_registrations, :conditions => { :status => 1 }, 
+  has_many :pending_department_registrations, :conditions => { :status => 1 },
            :class_name => "DepartmentRegistration"
-  has_many :pending_departments, :through => :pending_department_registrations, 
+  has_many :pending_departments, :through => :pending_department_registrations,
            :class_name => "Department", :source => :department
 
   has_many :all_department_registrations, :class_name => "DepartmentRegistration"
-  has_many :all_departments, :through => :all_department_registrations, 
+  has_many :all_departments, :through => :all_department_registrations,
            :class_name => "Department", :source => :department
 
   ######################### Declare tags ###########################
@@ -55,20 +55,20 @@ class Company < ActiveRecord::Base
   validates_attachment :logo,
     :content_type => { :content_type => ["image/jpeg", "image/jpg", "image/png"],
                         message: "Must be a jpeg or png file"}
-  
+
 
   ######################### Ensure present #########################
   validates :name,            :presence => true
   validates :description,     :presence => true
   validates :organisation_id, :presence => true
 
-  validates :pending_departments,     
-            :presence => { :message => "Must belong to at least one department" }, 
+  validates :pending_departments,
+            :presence => { :message => "Must belong to at least one department" },
             :if => lambda { self.departments.empty? }
   validates :departments,
             :presence => { :message => "Must belong to at least one department" },
             :if => lambda { self.pending_departments.empty? }
-  
+
   ######################### Ensure unique #########################
   validates :name, :uniqueness => true
 
@@ -94,7 +94,11 @@ class Company < ActiveRecord::Base
     self.stat_count ||= 0
   end
 
-  # TODO: ADD COMMENT, WHAT"S THIS 2?  
+  # Returns the rating for this company for the student for the given student_id
+  # Ratings are on a scale from 1 to 3
+  #   1 - Dislike/block
+  #   2 - Neutral (default)
+  #   3 - Like
   def rating(student_id)
     student_company_rating = student_company_ratings.find_by_student_id(student_id)
     if student_company_rating
@@ -104,7 +108,7 @@ class Company < ActiveRecord::Base
     end
   end
 
-  # TODO: COMMENT 
+  # TODO: COMMENT
   def to_audit_item(attribute = :created_at)
     if attribute == :created_at
       t = created_at
