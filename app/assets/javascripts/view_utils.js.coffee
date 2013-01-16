@@ -4,19 +4,20 @@
 # the model which origionally exists with a department schema
 window.swapDepartmentToCompanySchema = (model, department) ->
     schema = model.schema()
-    schema['company_id'] = {
-      title: "Company*"
-      type: "Select"
-      template: "field"
-      options: department.companies
-      editorClass: "company-select"
-    }
-    delete schema["departments"]
 
-    model.set('departments', [department.id])
-    model.save()
-    model.schema = -> 
-      schema
+    if model.isNew()
+      schema['company_id'] = {
+        title: "Company*"
+        type: "Select"
+        template: "field"
+        options: department.companies
+        editorClass: "company-select"
+      }
+      
+      model.set 'departments', [department.id]
+
+    delete schema["departments"]
+    model.schema = -> schema
 
 # To be used with backbone forms as so:
 # validateField(@form, field) for field of @form.fields

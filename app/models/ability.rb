@@ -65,7 +65,7 @@ class Ability
         event.departments.map(&:id).include? user.department_id
       end
       can :manage, Placement do |placement|
-        placement.company.all_departments.map(&:id).include? user.department_id
+        placement.departments.map(&:id).include? user.department_id
       end
       can :manage, Student do |student|
         student.departments.map(&:id).include? user.department_id

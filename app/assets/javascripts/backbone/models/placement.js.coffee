@@ -1,4 +1,8 @@
 class CPP.Models.Placement extends CPP.Models.Base
+  initialize: ->
+    @allDepartments = new CPP.Collections.Departments
+    @allDepartments.url = "/companies/#{@get 'company_id'}/departments"
+
   url: ->
     '/placements' + (if @isNew() then '' else '/' + @id)
 
@@ -36,6 +40,11 @@ class CPP.Models.Placement extends CPP.Models.Base
       type: "DateTime"
       title: "Interview Date (If Known)"
       DateEditor: "DatePicker"
+    departments:
+      type: "Checkboxes"
+      title: "Department(s)*"
+      options: @allDepartments
+      editorClass: "departments-checkbox"
     other:
       type: "Text"
 

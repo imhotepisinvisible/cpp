@@ -198,7 +198,7 @@ Company.all.each do |company|
 
   # Create placements
   5.times do
-    FactoryGirl.create(:placement, :company => company)
+    FactoryGirl.create(:placement, :company => company, :departments => company.departments)
   end
 
   # Create emails

@@ -13,32 +13,12 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
   # Department admins don't get to select departments, it is marked as their own
   # Companies get to pick which departments their events will go to
   initialize: ->
-    if isDepartmentAdmin()
-      companies = new CPP.Collections.Companies
-      companies.url = "/departments/#{CPP.CurrentUser.get('department_id')}/companies"
+    if (this.options.department)
+      swapDepartmentToCompanySchema @model, this.options.department
 
-      schema = @model.schema()
-      if @model.isNew()
-        # On creation of an event, admin can choose company
-        schema['company_id'] = {
-          title: "Company"
-          type: "Select"
-          options: companies
-          editorClass: "company-select"
-        }
+    # Create event form based upon model
+    # Set up skills, interests and year TagEditors for event
 
-        # Only set departments if we are creating a new event
-        @model.set('departments', [CPP.CurrentUser.get('department_id')])
-
-      # Department doesn't get to set departments
-      delete schema["departments"]
-      @model.schema = -> schema
-
-    @completeInitialize()
-
-  # Create event form based upon model
-  # Set up skills, interests and year TagEditors for event
-  completeInitialize: ->
     @form = new Backbone.Form(model: @model)
     Backbone.Validation.bind @form;
 

@@ -21,6 +21,7 @@ class Placement < ActiveRecord::Base
 
   ###################### Declare associations ########################
   belongs_to :company
+  has_and_belongs_to_many :departments
 
   ######################### Declare tags #############################
   acts_as_taggable_on :skills, :interests, :year_groups
@@ -85,6 +86,7 @@ class Placement < ActiveRecord::Base
   def as_json(options={})
     result = super(:methods => [:skill_list, :interest_list, :year_group_list])
     result[:relevance] = relevance(options[:student_id]) if options.has_key? :student_id
+    result[:departments] = options[:depts] if options.has_key? :depts
     result[:stat_count] = @stat_count
     return result
   end
