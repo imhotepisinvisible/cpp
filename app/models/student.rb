@@ -25,8 +25,8 @@ class Student < User
   has_many :events,     :through => :departments, :uniq => true
   has_many :placements, :through => :companies, :uniq => true
   has_many :student_company_ratings
-  
-  has_and_belongs_to_many :registered_events, 
+
+  has_and_belongs_to_many :registered_events,
                           :join_table => :student_event_registrations,
                           :class_name => "Event",
                           :foreign_key => :user_id
@@ -62,11 +62,11 @@ class Student < User
                           message: "Must be a jpeg or png file"}
 
   ############## Attributes can be set via mass assignment ############
-  attr_accessible :year, :bio, :degree, :email, :cv, :transcript, 
-                  :covering_letter, :profile_picture, :skill_list, 
-                  :interest_list, :reject_skill_list, :reject_interest_list, 
+  attr_accessible :year, :bio, :degree, :email, :cv, :transcript,
+                  :covering_letter, :profile_picture, :skill_list,
+                  :interest_list, :reject_skill_list, :reject_interest_list,
                   :year_group_list, :active, :looking_for, :tooltip
-  
+
   ####################################################################
   # Attributes not to store in database direectly and exist
   # for life of object
@@ -79,7 +79,7 @@ class Student < User
     self.stat_count ||= 0
   end
 
-  # Only active to companies if fields set 
+  # Only active to companies if fields set
   def is_active?
     active &&
     !first_name.blank? &&
@@ -116,7 +116,7 @@ class Student < User
     end
   end
 
-  # TODO: Comment 
+  # Creates a new audit item for when the model was last created/updated
   def to_audit_item
     AuditItem.new(self, created_at, 'student', "#{full_name} signed up!", "#students/#{id}")
   end

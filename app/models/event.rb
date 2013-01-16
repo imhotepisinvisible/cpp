@@ -26,9 +26,9 @@ class Event < ActiveRecord::Base
 
   ###################### Declare associations ########################
 	belongs_to :company
-  has_and_belongs_to_many :registered_students, 
-                          :join_table => :student_event_registrations, 
-                          :association_foreign_key => "user_id", 
+  has_and_belongs_to_many :registered_students,
+                          :join_table => :student_event_registrations,
+                          :association_foreign_key => "user_id",
                           :class_name => "Student"
   has_and_belongs_to_many :departments
 
@@ -82,7 +82,7 @@ class Event < ActiveRecord::Base
   end
 
 
-  # TODO: Comment
+  # Creates a new audit item for when the model was last created/updated
   def to_audit_item(attribute = :created_at)
     if attribute == :created_at
       t = created_at

@@ -69,7 +69,7 @@ class Placement < ActiveRecord::Base
     return 1
   end
 
-  # TODO: COMMENT
+  # Creates a new audit item for when the model was last created/updated
   def to_audit_item(attribute = :created_at)
     if attribute == :created_at
       t = created_at
