@@ -1,7 +1,7 @@
 class CompanyAdministratorsController < ApplicationController
   impressionist
 
-  # load_and_authorize_resource #TODO: Turn me on at some point
+  load_and_authorize_resource
   respond_to :json
 
   # Returns company administrators, if there's a company_id it returns those 

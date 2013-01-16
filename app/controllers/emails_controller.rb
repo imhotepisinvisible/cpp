@@ -1,6 +1,7 @@
 class EmailsController < ApplicationController
   impressionist
 
+  load_and_authorize_resource
   respond_to :json
   
   # Finds all emails

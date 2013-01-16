@@ -1,6 +1,7 @@
 class EventEmailsController < ApplicationController
   impressionist
 
+  load_and_authorize_resource
   respond_to :json
 
   # Find all emails related to events
