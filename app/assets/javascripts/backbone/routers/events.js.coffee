@@ -33,7 +33,8 @@ class CPP.Routers.Events extends Backbone.Router
         events.each (event) =>
           event.registered_students = new CPP.Collections.Students()
           deferreds.push(event.registered_students.fetch({ data: $.param({ event_id: event.id }) }))
-        
+          event.company = new CPP.Models.Company id: event.get "company_id"
+          deferreds.push event.company.fetch()
         $.when.apply($, deferreds).done(=>
           new CPP.Views.Events.Index collection: events
         )

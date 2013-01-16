@@ -17,26 +17,11 @@ class CPP.Views.Events.Index extends CPP.Views.Base
     @render()
 
   # Render events
-  # Will not display an event if couldn't fetch a company
-  # TODO: WE SHOULD MOVE FETCHING OUT TO ROUTER
   render: ->
-    lcompanies = []
-    ready = $.Deferred()
     $(@el).html(@template(events: @collection, editable: @editable))
-    @collection.each (event) =>
-      event.company = new CPP.Models.Company id: event.get("company_id")
-      event.company.fetch
-        success: =>
-          lcompanies.push(event.company)
-          if (lcompanies.length == @collection.length)
-            ready.resolve()
-        error: ->
-          notify "error", "Couldn't fetch company for event"
-          ready.resolver()
-    ready.done =>
-      @renderEvents(@collection)
-      @renderFilters()
-    @
+    @renderEvents(@collection)
+    @renderFilters()
+  @
 
   # Render each event item
   renderEvents: (col) ->
