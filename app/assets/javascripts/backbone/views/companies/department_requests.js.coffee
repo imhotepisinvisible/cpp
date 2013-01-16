@@ -9,6 +9,7 @@ class CPP.Views.Companies.DepartmentRequests extends CPP.Views.Base
     depts = new CPP.Collections.Departments
     depts.url = "/companies/#{@company.id}/departments"
     depts.fetch
+      data: {show_all: 1}
       success: =>
         @collection = depts
         @render()

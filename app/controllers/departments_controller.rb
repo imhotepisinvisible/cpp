@@ -12,8 +12,13 @@ class DepartmentsController < ApplicationController
   # GET /companies/1/departments.json
   def index
     if params.keys.include? "company_id"
-      company = Company.find(params[:company_id])
-      respond_with Department.all.as_json({:company_id => params[:company_id]})
+      if params.keys.include? "show_all"
+        departments = Department.all
+      else
+        company = Company.find(params[:company_id])
+        departments = company.departments
+      end
+      respond_with departments.as_json({:company_id => params[:company_id]})
     else
       respond_with Department.all
     end
