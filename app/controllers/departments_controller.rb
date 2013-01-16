@@ -4,6 +4,7 @@ class DepartmentsController < ApplicationController
   include CPPApprovalStatus
   impressionist
 
+  before_filter :require_login
   respond_to :json
 
   # GET /departments
