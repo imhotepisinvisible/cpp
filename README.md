@@ -3,6 +3,9 @@ CPP : Connect
 
 Revolutionising the Corporate Partnership Programme
 
+
+![Screen Shot 2013-01-07 at 14 24 30](https://f.cloud.github.com/assets/510845/71779/019715da-5ff7-11e2-9bf4-53a4a9b20fe0.png)
+
 Quick-Start
 ===========
 
