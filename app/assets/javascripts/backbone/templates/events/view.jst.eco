@@ -1,11 +1,14 @@
 <div class="row section-header">
-  <div class="span6">
+  <div class="span9">
      <h1><%= @event.get 'title' %></h1>
   </div>
-  <div class="company-logo-header">
-    <a href="/#companies/<%= @event.company.id %>">
-      <img class="company-logo-img pull-right" src="<%= @event.company.get('logo_url') %>">
+  <div class="company-logo-header span3">
+    <a href="/#companies/<%= @event.company.id %>" class="pull-right">
+      <img class="company-logo-img" src="<%= @event.company.get('logo_url') %>">
     </a>
+    <% if @admin: %>
+      <a class="btn pull-right" href="/#events/<%= @event.id %>/edit">Edit</a>
+    <% end %>
   </div>
 </div>
 

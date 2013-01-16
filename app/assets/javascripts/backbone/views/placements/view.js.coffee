@@ -13,5 +13,5 @@ class CPP.Views.Placements.View extends CPP.Views.Base
 
   # Render placement template with placement model
   render: ->
-    $(@el).html(@template(placement: @model))
+    $(@el).html(@template(placement: @model, admin: isAdmin()))
     @

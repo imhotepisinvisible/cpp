@@ -52,7 +52,7 @@ class CPP.Filter extends CPP.Views.Base
 
     @render()
 
-  # Render filters according to type 
+  # Render filters according to type
   render: ->
     $(@el).html(@template())
     for filter in @filters
@@ -98,7 +98,7 @@ class CPP.Filter extends CPP.Views.Base
       @setFilter()
     )
 
-  # Applies filters, filtering from the collection accordingly  
+  # Applies filters, filtering from the collection accordingly
   setFilter: ->
     fCollection = @data
     if @filters
@@ -109,7 +109,7 @@ class CPP.Filter extends CPP.Views.Base
           when "text"
             # Dont filter when nothing in text box
             if (textBox != "")
-              # Filter from collection if filter text is not a substring 
+              # Filter from collection if filter text is not a substring
               fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
                 res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
                 (res.toString().toLowerCase().indexOf tb.toLowerCase()) != -1
