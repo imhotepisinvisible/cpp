@@ -36,6 +36,11 @@ class CPP.Models.Placement extends CPP.Models.Base
       type: "DateTime"
       title: "Interview Date (If Known)"
       DateEditor: "DatePicker"
+    departments:
+      type: "Checkboxes"
+      title: "Department(s)*"
+      options: new CPP.Collections.Departments
+      editorClass: "departments-checkbox"
     other:
       type: "Text"
 

@@ -17,6 +17,7 @@ class Department < ActiveRecord::Base
 
   has_and_belongs_to_many :students, :association_foreign_key => :user_id
   has_and_belongs_to_many :events
+  has_and_belongs_to_many :placements
 
   has_many :department_registrations, 
            :conditions => { :status => [2,3] }

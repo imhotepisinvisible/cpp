@@ -26,6 +26,8 @@ class PlacementsController < ApplicationController
     if current_user && current_user.is_student?
       @placements = @placements.sort_by {|p| [-p.relevance(current_user.id), p.company.name] }
       respond_with @placements.as_json({:student_id => current_user.id})
+    elsif current_user && current_user.is_department_admin?
+      respond_with @placements.select{ |p| p.departments.map(&:id).include? current_user.department_id }
     else
       respond_with @placements
     end
@@ -37,7 +39,7 @@ class PlacementsController < ApplicationController
   # GET /placements/1.json
   def show
     @placement = Placement.find(params[:id])
-    respond_with @placement
+    respond_with @placement.as_json({:depts => @placement.departments.map { |d| d.id }})
   end
 
   # Create new placement
@@ -56,6 +58,12 @@ class PlacementsController < ApplicationController
   def create
     @placement = Placement.new(params[:placement])
 
+    if params.has_key? :departments
+      @placement.departments = params[:departments].map{ |id| Department.find(id) }
+    else
+      @placement.departments = []
+    end
+
     if @placement.save
       respond_with @placement, status: :created, location: @placement
     else
@@ -69,6 +77,12 @@ class PlacementsController < ApplicationController
   # PUT /placements/1.json
   def update
     @placement = Placement.find(params[:id])
+
+    if params.has_key? :departments
+      @placement.departments = params[:departments].map{ |id| Department.find(id) }
+    else
+      @placement.departments = []
+    end
 
     if @placement.update_attributes(params[:placement])
       head :no_content
@@ -112,7 +126,7 @@ class PlacementsController < ApplicationController
 
     ok_placements = []
     placements.each do |s|
-      if s.company.all_departments.map(&:id).include? current_user.department_id
+      if s.departments.map(&:id).include? current_user.department_id
         ok_placements.push(s)
       end
     end
