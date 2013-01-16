@@ -1,4 +1,4 @@
-CPP 2.0
+CPP : Connect
 =======
 
 Revolutionising the Corporate Partnership Programme
