@@ -51,6 +51,9 @@ class CPP.Models.Company extends CPP.Models.Base
     description:
       type: "TextArea"
       title: "Description*"
+    career_link:
+      type: "Text"
+      title: "Career Page URL"
     departments:
       type: "Checkboxes"
       title: "Departments*"
