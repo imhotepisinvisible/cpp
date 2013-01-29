@@ -4,7 +4,6 @@ class DepartmentsController < ApplicationController
   include CPPApprovalStatus
   impressionist
 
-  before_filter :require_login
   respond_to :json
 
   # GET /departments
@@ -28,6 +27,7 @@ class DepartmentsController < ApplicationController
   #
   # GET /companies/1/departments/1/status
   def get_status
+    require_login
     raise unless params.has_key? :company_id
     dept_reg = DepartmentRegistration.find_or_create_by_company_id_and_department_id(params[:company_id], params[:department_id])
 
@@ -38,6 +38,7 @@ class DepartmentsController < ApplicationController
   #
   # PUT /companies/1/departments/1/status
   def set_status
+    require_login
     raise unless params.has_key? :company_id
     raise unless params.has_key? :status
     dept_reg = DepartmentRegistration.find_or_create_by_company_id_and_department_id(params[:company_id], params[:department_id])
@@ -51,6 +52,7 @@ class DepartmentsController < ApplicationController
 
   # PUT /companies/1/departments/1/apply
   def apply
+    require_login
     raise unless params.has_key? :company_id
     dept_reg = DepartmentRegistration.find_or_create_by_company_id_and_department_id(params[:company_id], params[:department_id])
     dept_reg.status = CPPApprovalStatus.PENDING
@@ -66,6 +68,7 @@ class DepartmentsController < ApplicationController
   # GET /departments/1
   # GET /departments/1.json
   def show
+    require_login
     @department = Department.find(params[:id])
     respond_with @department
   end
@@ -75,6 +78,7 @@ class DepartmentsController < ApplicationController
   # GET /departments/new
   # GET /departments/new.json
   def new
+    require_login
     @department = Department.new
     respond_with @department
   end
@@ -84,6 +88,7 @@ class DepartmentsController < ApplicationController
   # POST /departments
   # POST /departments.json
   def create
+    require_login
     @department = Department.new(params[:department])
     if @department.save
       respond_with @department, status: :created, location: @department
@@ -97,6 +102,7 @@ class DepartmentsController < ApplicationController
   # PUT /departments/1
   # PUT /departments/1.json
   def update
+    require_login
     @department = Department.find(params[:id])
     if @department.update_attributes(params[:department])
       head :no_content
@@ -110,6 +116,7 @@ class DepartmentsController < ApplicationController
   # DELETE /departments/1
   # DELETE /departments/1.json
   def destroy
+    require_login
     @department = Department.find(params[:id])
     @department.destroy
     head :no_content
