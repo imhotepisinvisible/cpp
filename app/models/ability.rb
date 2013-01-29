@@ -24,6 +24,7 @@ class Ability
     when nil
       can :create, Student
       can :create, Company
+      can :create, CompanyAdministrator
       can :read, Department
     when "Student"
       can :manage, Student, :id => user.id
