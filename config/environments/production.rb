@@ -68,4 +68,15 @@ CPP::Application.configure do
     :path => "/app/cpp-resources/:class/:attachment/:id/:basename_:style.:extension",
     :url  => "/resources/:class/:attachment/:id/:basename_:style.:extension"
   }
+
+  # Mailer Config
+  config.action_mailer.delivery_method = :sendmail
+  # Defaults to:
+  # config.action_mailer.sendmail_settings = {
+  #   location: '/usr/sbin/sendmail',
+  #   arguments: '-i -t'
+  # }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_options = { from: 'no-reply@cpp.doc.ic.ac.uk' }
 end
