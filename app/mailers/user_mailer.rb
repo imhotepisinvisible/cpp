@@ -1,6 +1,6 @@
 class UserMailer < ActionMailer::Base
   #include Resque::Mailer
-  default from: "impdoccpp@gmail.com"
+  default from: "no-reply@cpp.doc.ic.ac.uk"
 
   def send_email(address, subject, body, sender)
     mail(:to => address, :subject => subject, :from => sender) do |format|
@@ -17,7 +17,7 @@ class UserMailer < ActionMailer::Base
   	templates = Hash.new()
   	templates[/\{\{FIRSTNAME\}\}/] = "<%= user.first_name %>"
   	templates[/\{\{LASTNAME\}\}/] = "<%= user.last_name %>"
-  	
+
   	templates.each do |key,value|
   		body.gsub!(key,value);
   	end
