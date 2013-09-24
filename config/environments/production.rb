@@ -65,13 +65,7 @@ CPP::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   config.paperclip_defaults = {
-    :storage => :s3,
-    :s3_credentials => {
-        :bucket => ENV['S3_BUCKET_NAME'],
-        :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-        :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
-    },
-    :path => "/uploads/:class/:attachment/:id/:basename_:style.:extension",
-    :url  => ":s3_eu_url"
+    :path => "/app/cpp-resources/:class/:attachment/:id/:basename_:style.:extension",
+    :url  => "/resources/:class/:attachment/:id/:basename_:style.:extension"
   }
 end
