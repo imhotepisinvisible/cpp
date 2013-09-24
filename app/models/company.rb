@@ -124,11 +124,7 @@ class Company < ActiveRecord::Base
   # TODO: Bit more comment
   def as_json(options={})
     result = super(:methods => [:skill_list, :interest_list, :year_group_list])
-    if Rails.env.production?
-      result[:logo_url] = logo.expiring_url(20, :large)
-    else
-      result[:logo_url] = logo.url(:large)
-    end
+    result[:logo_url] = logo.url(:large)
     if options.has_key? :student_id
       result[:rating] = rating(options[:student_id])
     end

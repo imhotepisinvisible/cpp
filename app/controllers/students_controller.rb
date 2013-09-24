@@ -112,11 +112,6 @@ class StudentsController < ApplicationController
     document = (@student.send "#{document_type}".to_sym).path
     ext = File.extname document
     unless document.nil?
-      if Rails.env.production?
-        redirect_to (@student.send "#{document_type}".to_sym).expiring_url(20)
-        return
-      end
-
       if (params.has_key? :preview)
         send_file document, :filename => "#{@student.last_name}_#{@student.first_name}_#{document_type}#{ext}", :disposition => 'inline'
       else
@@ -194,7 +189,7 @@ class StudentsController < ApplicationController
     student_id_counts = Hash.new(0)
     student_ids.each{|si| student_id_counts[si] += 1}
     student_id_counts.sort_by {|key, value| value}
-    
+
     # Order student_id_counts by count
     sortable = student_id_counts.map{|k, v| [v, k]}
     sortable.sort!.reverse!
