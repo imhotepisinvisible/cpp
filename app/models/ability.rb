@@ -59,9 +59,10 @@ class Ability
         company_admin.company.all_departments.map(&:id).include? user.department_id
       end
       can :manage, Department, :id => user.department_id
-      can :manage, Email do |email|
-        email.company.all_departments.map(&:id).include? user.department_id
-      end
+      #can :manage, Email do |email|
+      #  email.company.all_departments.map(&:id).include? user.department_id
+      #end
+      can :manage, Email
       can :manage, Company do |company|
         company.all_departments.map(&:id).include? user.department_id
       end

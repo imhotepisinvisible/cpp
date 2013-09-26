@@ -63,6 +63,7 @@ class DirectEmailsController < ApplicationController
       @email.student = Student.find(params[:direct_email][:student_id])
     end
     if @email.save
+      @email.send_email!
       respond_with @email, status: :created, location: @email
     else
       respond_with @email, status: :unprocessable_entity
