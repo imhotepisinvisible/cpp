@@ -47,11 +47,15 @@ class Ability
       can :manage, Company, :id => user.company_id
       can :manage, CompanyAdministrator, :id => user.id
       can :apply, Department
-      can [:read, :download_document], Student do |student|
+      can [:show, :download_document], Student do |student|
         member_dept_regs = user.company.department_registrations.where(:status => 3)
         member_depts = member_dept_regs.map{ |r| r.department.id }
         student_depts = student.departments.map(&:id)
         intersect?(member_depts, student_depts)
+      end
+      # Only allow companies that have been approved to see students.
+      if user.company.department_registrations.where(:status => 3).size > 0
+        can :index, Student
       end
     when "DepartmentAdministrator"
       can :manage, DepartmentAdministrator, :id => user.id
