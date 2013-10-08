@@ -59,6 +59,7 @@ class Ability
       end
     when "DepartmentAdministrator"
       can :manage, DepartmentAdministrator, :id => user.id
+      can :create, CompanyAdministrator
       can :manage, CompanyAdministrator do |company_admin|
         company_admin.company.all_departments.map(&:id).include? user.department_id
       end
@@ -67,6 +68,7 @@ class Ability
       #  email.company.all_departments.map(&:id).include? user.department_id
       #end
       can :manage, Email
+      can :create, Company
       can :manage, Company do |company|
         company.all_departments.map(&:id).include? user.department_id
       end
