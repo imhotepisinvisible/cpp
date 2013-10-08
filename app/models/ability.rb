@@ -72,9 +72,11 @@ class Ability
       can :manage, Company do |company|
         company.all_departments.map(&:id).include? user.department_id
       end
+      can :create, Event
       can :manage, Event do |event|
         event.departments.map(&:id).include? user.department_id
       end
+      can :create, Placement
       can :manage, Placement do |placement|
         placement.departments.map(&:id).include? user.department_id
       end
