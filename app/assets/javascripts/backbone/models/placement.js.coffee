@@ -19,7 +19,9 @@ class CPP.Models.Placement extends CPP.Models.Base
       type: "Text"
       title: "Position*"
     description:
-      type: "Text"
+      type: "TextArea"
+      rows: 60
+      cols: 10
       title: "Description*"
     location:
       type: "Text"
