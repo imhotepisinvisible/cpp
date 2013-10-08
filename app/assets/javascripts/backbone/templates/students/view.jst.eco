@@ -94,7 +94,7 @@
                       <i class="icon-envelope"></i> Contact Me
                     </h1>
                     <% if isAdmin(): %>
-                      <a class="btn btn-primary button-student-register" href="/#students/<%= @student.id %>/email">Contact me!</a>
+                      <a class="btn btn-primary button-student-register" href="mailto:<%= @student.get('email') %>">Contact me!</a>
                     <% else: %>
                       <div class="btn btn-primary button-student-register">Contact me!</div>
                     <% end %>
