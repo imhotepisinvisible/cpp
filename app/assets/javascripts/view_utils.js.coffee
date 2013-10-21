@@ -41,6 +41,9 @@ window.looking_fors = {
   industrial: "Looking for an Industrial Placement"
   graduate: "Looking for a Graduate Job"
   nothing: "Not looking for anything"
+  graduateSecured: "Secured graduate position"
+  summerSecured: "Secured summer internship"
+  industrialSecured: "Secured industrial placement"
 }
 
 window.addPlacementTableRow = (placement, attr, label) ->

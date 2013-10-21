@@ -69,6 +69,9 @@
             <option><%= looking_fors.summer %></option>
             <option><%= looking_fors.graduate %></option>
             <option value=""><%= looking_fors.nothing %></option>
+            <option><%= looking_fors.graduateSecured %></option>
+            <option><%= looking_fors.summerSecured %></option>
+            <option><%= looking_fors.industrialSecured %></option>
           </select>
         </div>
       </div>
