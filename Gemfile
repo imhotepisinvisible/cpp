@@ -3,12 +3,12 @@ source 'https://rubygems.org'
 # Config/Server
 gem 'thin'                        # Better server :)
 gem 'rails', '3.2.1'              # Running on rails, wooo
-gem 'therubyracer'                # Javascript Engine
+gem 'therubyracer', '0.12.1'      # Javascript Engine
 
 # Back End Gems
 gem 'validates_timeliness'        # Date/Time Validation
 gem 'cantango'                    # Nice RBAC
-gem 'bcrypt-ruby'                 # For password encryption
+gem 'bcrypt-ruby', '~>3.0.0'      # For password encryption
 gem 'haml-rails'                  # Support HAML Templates in Rails
 gem 'simple_form'                 # Nicer forms in rails
 gem 'rufus-scheduler'             # Task Scheduling
@@ -29,7 +29,7 @@ gem 'impressionist'               # Stats & Logging
 gem 'less-rails'                  # Less required for Bootstrap
 gem 'twitter-bootstrap-rails'     # Twitter Bootstrap <3 Rails
 gem 'bourbon'                     # Nice SCSS mixins
-gem 'font-awesome-rails'          # Font Awesome = Icons
+gem 'font-awesome-rails' # Font Awesome = Icons
 gem "google_visualr", ">= 2.1"    # Google Charts
 gem 'tinymce-rails'               # WYSIWYG editor for emails
 gem 'will_paginate'               # Basic Pagination
@@ -38,14 +38,13 @@ gem 'jquery-ui-rails'             # JQuery user interface plugin
 
 # JS Frameworks/Plugins
 gem 'jquery-rails'                # Add jQuery goodness
-gem 'backbone-on-rails'           # Nice client side JS framework
+gem 'backbone-on-rails', '0.9.9.0'# Nice client side JS framework
 gem 'backbone-validation-rails'   # Adds model validation in Backbone
 gem 'underscore-rails'            # Templating for backboneJS
-gem 'rails-backbone-forms'        # Client side form validation
+gem 'rails-backbone-forms', '0.10.1' # Client side form validation
 gem 'bootstrap-datepicker-rails'  # Date picker
 gem 'datejs-rails'                # Nicer date manipulation in Javascript
 gem 'jquery-fileupload-rails'     # File upload
-gem 'jcountdown-rails', :git => 'http://github.com/rezwyi/jcountdown-rails.git' #Countdown timer
 gem 'bootstrap-toggle-buttons-rails', :git => 'http://github.com/wafcio/bootstrap-toggle-buttons-rails.git' # On/Off switches
 gem 'highcharts-rails'
 
@@ -67,6 +66,7 @@ group :development do
   gem 'guard-spork'       # Auto-Reload Spork
   gem 'guard-livereload'  # Auto-Browser-Reload when files change
   gem 'rb-fsevent'        # Watch file system events (for Guard)
+  gem 'rb-readline'
 
   gem 'terminal-notifier-guard' # Notification center for test runs :)
 end

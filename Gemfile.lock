@@ -1,11 +1,4 @@
 GIT
-  remote: http://github.com/rezwyi/jcountdown-rails.git
-  revision: 388eeda94dd491814b6871007396867a6032bed9
-  specs:
-    jcountdown-rails (0.2.0)
-      jquery-rails
-
-GIT
   remote: http://github.com/wafcio/bootstrap-toggle-buttons-rails.git
   revision: 74e65011eb08c4ffdb3d789f15c7238bb63a02f5
   specs:
@@ -183,7 +176,7 @@ GEM
     less-rails (2.2.6)
       actionpack (>= 3.1)
       less (~> 2.2.0)
-    libv8 (3.3.10.4)
+    libv8 (3.16.14.3)
     libwebsocket (0.1.7.1)
       addressable
       websocket
@@ -254,11 +247,13 @@ GEM
       thor (~> 0.14.6)
     rake (10.0.3)
     rb-fsevent (0.9.2)
+    rb-readline (0.5.1)
     rdoc (3.12)
       json (~> 1.4)
     redis (3.0.2)
     redis-namespace (1.2.1)
       redis (~> 3.0.0)
+    ref (1.0.5)
     resque (1.23.0)
       multi_json (~> 1.0)
       redis-namespace (~> 1.0)
@@ -323,8 +318,9 @@ GEM
       activesupport (>= 3.0.1)
       i18n
     terminal-notifier-guard (1.5.3)
-    therubyracer (0.10.2)
-      libv8 (~> 3.3.10)
+    therubyracer (0.12.1)
+      libv8 (~> 3.16.14.0)
+      ref
     thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -361,9 +357,9 @@ DEPENDENCIES
   acts-as-taggable-on
   acts_as_list
   aws-sdk
-  backbone-on-rails
+  backbone-on-rails (= 0.9.9.0)
   backbone-validation-rails
-  bcrypt-ruby
+  bcrypt-ruby (~> 3.0.0)
   bootstrap-datepicker-rails
   bootstrap-toggle-buttons-rails!
   bootstrap-will_paginate
@@ -387,7 +383,6 @@ DEPENDENCIES
   jasmine-jquery-rails
   jasmine-sinon-rails
   jasminerice
-  jcountdown-rails!
   jquery-fileupload-rails
   jquery-rails
   jquery-ui-rails
@@ -400,11 +395,12 @@ DEPENDENCIES
   pg
   pry-rails
   rails (= 3.2.1)
-  rails-backbone-forms
+  rails-backbone-forms (= 0.10.1)
   rails-erd
   rails3-generators
   rails3_acts_as_paranoid
   rb-fsevent
+  rb-readline
   redis
   resque
   resque_mailer
@@ -418,7 +414,7 @@ DEPENDENCIES
   spork-rails
   sqlite3
   terminal-notifier-guard
-  therubyracer
+  therubyracer (= 0.12.1)
   thin
   tinymce-rails
   twitter-bootstrap-rails
