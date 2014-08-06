@@ -128,4 +128,8 @@ class Student < User
     return result
   end
 
+  def as_csv()
+    attributes.except("password_digest")
+  end
+
 end

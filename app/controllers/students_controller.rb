@@ -2,7 +2,7 @@ class StudentsController < ApplicationController
   impressionist
 
   load_and_authorize_resource
-  respond_to :json
+  respond_to :json, :csv
 
   # Return the list of students available to user
   # If company admin returns all students accessbale to them and who are active
