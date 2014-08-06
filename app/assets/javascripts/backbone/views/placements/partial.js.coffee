@@ -30,5 +30,5 @@ class CPP.Views.Placements.Partial extends CPP.Views.Base
     if @collection.length > 0
       @addTopThree()
     else
-      @$('#placements').html("No placements right now!")
+      @$('#placements').html("No opportunities right now!")
     @

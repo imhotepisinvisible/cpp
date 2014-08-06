@@ -44,7 +44,7 @@
         </tbody>
       </table>
     <% else: %>
-      <p>No placements created yet!</p>
+      <p>No opportunities created yet!</p>
     <% end %>
   </div>
 </div>
