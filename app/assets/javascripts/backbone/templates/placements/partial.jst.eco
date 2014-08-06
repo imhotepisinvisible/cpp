@@ -1,6 +1,6 @@
 <h1 class="section-header">
   <i class="icon-folder-open"></i>
-  Placements
+  Opportunities
   <div class="btn-group pull-right">
     <% if @company?: %>
       <a href="#/companies/<%= @company.get('id') %>/placements" class="btn">All</a>

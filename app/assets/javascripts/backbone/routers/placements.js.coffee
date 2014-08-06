@@ -1,11 +1,11 @@
 class CPP.Routers.Placements extends Backbone.Router
   routes:
-      'placements'                            : 'index'
-      'companies/:company_id/placements'      : 'indexCompany'
-      'companies/:company_id/placements/new'  : 'new'
-      'placements/new'                        : 'newAdmin'
-      'placements/:id/edit'                   : 'edit'
-      'placements/:id'                        : 'view'
+      'opportunities'                            : 'index'
+      'companies/:company_id/opportunities'      : 'indexCompany'
+      'companies/:company_id/opportunities/new'  : 'new'
+      'opportunities/new'                        : 'newAdmin'
+      'opportunities/:id/edit'                   : 'edit'
+      'opportunities/:id'                        : 'view'
 
   # Placements index for specific company
   indexCompany: (company_id) ->
