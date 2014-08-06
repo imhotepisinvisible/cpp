@@ -17,7 +17,7 @@ class CPP.Views.Placements.Item extends CPP.Views.Base
   # Navigate to placement edit page
   editPlacement: (e) ->
     e.stopPropagation()
-    Backbone.history.navigate("placements/" + @model.get('id') + "/edit", trigger: true)
+    Backbone.history.navigate("opportunities/" + @model.get('id') + "/edit", trigger: true)
 
   # Stop propagation to only register event on clicked item
   # Remove placement on server, remove event propagated to collection which is updated
@@ -37,4 +37,4 @@ class CPP.Views.Placements.Item extends CPP.Views.Base
 
   # Navigate to placement view page
   viewPlacement: ->
-    Backbone.history.navigate("placements/" + @model.get('id'), trigger: true)
+    Backbone.history.navigate("opportunities/" + @model.get('id'), trigger: true)

@@ -69,7 +69,7 @@ class CPP.Views.Placements.Edit extends CPP.Views.Base
         forceUpdate: true
         success: (model, response) =>
           notify "success", "Placement Saved"
-          Backbone.history.navigate('companies/' + @model.get('company_id') + '/placements', trigger: true)
+          Backbone.history.navigate('companies/' + @model.get('company_id') + '/opportunities', trigger: true)
           @undelegateEvents()
         error: (model, response) =>
           errorlist = JSON.parse response.responseText
