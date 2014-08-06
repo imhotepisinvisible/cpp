@@ -17,7 +17,7 @@
     <div class="row">
       <div class="span6" id="description">
         <h1 class="section-header"><i class="icon-info-sign"></i>  Description</h1>
-        <%= @placement.get 'description' %>
+        <%- @placement.get('description').replace(/\n/g, '<br>') %>
       </div>
     </div>
 
