@@ -62,13 +62,14 @@ class CPP.Views.Departments.EditAdministrator extends CPP.Views.Base
 
   # Delete admin
   delete: (e) ->
-    @model.destroy
-      wait: true
-      success: (model, response) =>
-        notify "success", "Administrator deleted"
-        $(@el).remove()
-      error: (model, response) ->
-        notify "error", "Administrator could not be deleted"
+    if confirm("Are you sure you want to delete this admin?")
+      @model.destroy
+        wait: true
+        success: (model, response) =>
+          notify "success", "Administrator deleted"
+          $(@el).remove()
+        error: (model, response) ->
+          notify "error", "Administrator could not be deleted"
 
   # Hide form
   cancel: (e) ->
