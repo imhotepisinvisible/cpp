@@ -74,7 +74,7 @@ class Company < ActiveRecord::Base
 
   ######################## Ensure length #########################
   validates :description, :length => {
-    :maximum => 1000,
+    :maximum => 2000,
   }
 
   ###################### Disallow Profanity ######################
