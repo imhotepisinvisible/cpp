@@ -7,7 +7,7 @@
       <img class="company-logo-img" src="<%= @placement.company.get('logo_url') %>">
     </a>
     <% if @admin: %>
-      <a class="btn pull-right" href="/#placements/<%= @placement.id %>/edit">Edit</a>
+      <a class="btn pull-right" href="/#opportunities/<%= @placement.id %>/edit">Edit</a>
     <% end %>
   </div>
 </div>

@@ -30,4 +30,4 @@ class CPP.Views.Placements.PartialItem extends CPP.Views.Base
   # View placement via clicking on partial item  
   viewPlacement: (e) ->
     e.stopPropagation()
-    Backbone.history.navigate('placements/' + @model.id, trigger: true)
+    Backbone.history.navigate('opportunities/' + @model.id, trigger: true)
