@@ -23,5 +23,6 @@ production:
   encoding: unicode
   database: cpp
   pool: 5
+  host: 127.0.0.1
   username: postgres
   timeout: 5000
