@@ -26,6 +26,8 @@ textarea {
 
 textarea[name=description] {
   resize: both;
+  height: 150px;
+  width: 50%;
 }
 
 #filters {
