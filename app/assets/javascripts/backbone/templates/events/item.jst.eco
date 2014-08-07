@@ -11,6 +11,7 @@
 <td><i class="icon-<%= if @hasSpaces then 'ok' else 'remove' %>"></i></td>
 
 <% if @editable: %>
+<td><%= @event.get('workflow_state') %></td>
 <td>
   <div class="btn-group pull-right">
     <div class="btn btn-small button-event-edit"><i class="icon-pencil" /></div>

@@ -40,12 +40,13 @@
             <th>Location</th>
             <th>Spaces</th>
             <% if @editable: %>
+            <th>Status</th>
             <th class="btn-column"></th>
             <% end %>
           </tr>
         </thead>
         <tbody class="cpp-tbl" id="events">
-          <tr><td colspan="<%= 5 + (@editable ? 1 : 0) %>"><div class="loading"></div></td></tr>
+          <tr><td colspan="<%= 5 + (@editable ? 2 : 0) %>"><div class="loading"></div></td></tr>
         </tbody>
       </table>
     <% else: %>

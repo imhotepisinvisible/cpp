@@ -17,12 +17,16 @@ class CPP.Views.Departments.Approvals extends CPP.Views.Base
             @emailCollection = @model.pending_emails
             @emailCollection.bind 'remove', @render, @
             @emailCollection.bind 'change', @render, @
-            @render()
+            @model.pending_events.fetch
+              success: =>
+                @eventCollection = @model.pending_events
+                @eventCollection.bind 'remove', @render, @
+                @eventCollection.bind 'change', @render, @
+                @render()
           error: =>
             notify 'error', 'Could not fetch email requests'
       error: ->
         notify 'error', 'Could not fetch company approval requests'
-
   # Renders template
   # Display company approval partial and pending email partial for each
   # item in the collections
@@ -45,3 +49,12 @@ class CPP.Views.Departments.Approvals extends CPP.Views.Base
         @$('#email-approvals').append(view.render().el)
     else
       @$('#email-approvals').append "No pending email requests!"
+
+    if @eventCollection.length > 0
+      @eventCollection.each (event) =>
+        view = new CPP.Views.Departments.EventApproval
+          model: event
+          dept: @model
+        @$('#event-approvals').append(view.render().el)
+    else
+      @$('#event-approvals').append "No pending event requests!"

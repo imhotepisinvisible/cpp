@@ -102,4 +102,16 @@ class Event < ActiveRecord::Base
     result[:stat_count] = @stat_count
     return result
   end
+
+  include Workflow
+  workflow do
+    state :new do
+      event :approve, :transitions_to => :approved
+      event :reject, :transitions_to => :rejected
+    end
+    state :rejected do
+      event :edit, :transitions_to => :new
+    end
+    state :approved
+  end
 end

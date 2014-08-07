@@ -349,6 +349,7 @@ GEM
       rack (>= 1.0.0)
     websocket (1.0.6)
     will_paginate (3.0.3)
+    workflow (1.1.0)
 
 PLATFORMS
   ruby
@@ -422,3 +423,4 @@ DEPENDENCIES
   underscore-rails
   validates_timeliness
   will_paginate
+  workflow

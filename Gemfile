@@ -24,6 +24,7 @@ gem 'resque_mailer'               # Email queueing gem
 gem 'obscenity'                   # Obscenity filter
 gem 'lorem'                       # Simple Lorem
 gem 'impressionist'               # Stats & Logging
+gem 'workflow'                    # Handling approval states
 
 # UI/Appearance Related Gems
 gem 'less-rails'                  # Less required for Bootstrap

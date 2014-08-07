@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130129180028) do
+ActiveRecord::Schema.define(:version => 20140806160107) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -98,8 +98,9 @@ ActiveRecord::Schema.define(:version => 20130129180028) do
     t.string   "location"
     t.integer  "capacity"
     t.string   "requirements"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.string   "workflow_state"
   end
 
   create_table "impressions", :force => true do |t|

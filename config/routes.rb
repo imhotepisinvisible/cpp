@@ -76,6 +76,9 @@ CPP::Application.routes.draw do
   resources :events do
     post '/register', :on => :member, :action => :register
     post '/unregister', :on => :member, :action => :unregister
+    get :pending, :on => :collection
+    put :approve, :on => :member
+    put :reject, :on => :member
   end
   resources :placements
   resources :departments

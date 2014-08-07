@@ -24,12 +24,36 @@ class EventsController < ApplicationController
     end
 
     if current_user && current_user.is_student?
+      @events = @events.with_approved_state.select {|e| can? :show, e.company}
       @events.sort_by! {|e| [-e.relevance(current_user.id), e.company.name] }
       respond_with @events.as_json({:student_id => current_user.id})
     elsif current_user && current_user.is_department_admin?
       respond_with @events.select{ |e| e.departments.map(&:id).include? current_user.department_id }
     else
       respond_with @events
+    end
+  end
+
+  def pending
+    @events = current_user.events.scoped.with_new_state
+    respond_with @events
+  end
+
+  def approve
+    @event = Event.find(params[:id])
+    if @event.approve!
+      respond_with @event
+    else
+      respond_with @event, status: :unprocessable_entity
+    end
+  end
+
+  def reject
+    @event = Event.find(params[:id])
+    if @event.reject!
+      respond_with @event
+    else
+      respond_with @event, status: :unprocessable_entity
     end
   end
 
