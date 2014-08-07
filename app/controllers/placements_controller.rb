@@ -24,12 +24,36 @@ class PlacementsController < ApplicationController
     end
 
     if current_user && current_user.is_student?
+      @placements = @placements.with_approved_state.select {|p| can? :show, p.company }
       @placements = @placements.sort_by {|p| [-p.relevance(current_user.id), p.company.name] }
       respond_with @placements.as_json({:student_id => current_user.id})
     elsif current_user && current_user.is_department_admin?
       respond_with @placements.select{ |p| p.departments.map(&:id).include? current_user.department_id }
     else
       respond_with @placements
+    end
+  end
+
+  def pending
+    @placements = current_user.placements.scoped.with_new_state
+    respond_with @placements
+  end
+
+  def approve
+    @placement = Placement.find(params[:id])
+    if @placement.approve!
+      respond_with @placement
+    else
+      respond_with @placement, status: :unprocessable_entity
+    end
+  end
+
+  def reject
+    @placement = Placement.find(params[:id])
+    if @placement.reject!
+      respond_with @placement
+    else
+      respond_with @placement, status: :unprocessable_entity
     end
   end
 

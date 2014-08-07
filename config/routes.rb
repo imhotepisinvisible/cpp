@@ -80,7 +80,11 @@ CPP::Application.routes.draw do
     put :approve, :on => :member
     put :reject, :on => :member
   end
-  resources :placements
+  resources :placements do
+    get :pending, :on => :collection
+    put :approve, :on => :member
+    put :reject, :on => :member
+  end
   resources :departments
   resources :department_administrators
   resources :departments do

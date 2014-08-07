@@ -13,11 +13,12 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
   initialize: ->
     @collection.bind 'reset', @render, @
     @collection.bind 'filter', @renderPlacements, @
+    @editable = isAdmin()
     @render()
 
   # Render placement template, placements and filters
   render: ->
-    $(@el).html(@template(placements: @collection, editable: isAdmin()))
+    $(@el).html(@template(placements: @collection, editable: @editable))
     @renderPlacements(@collection)
     @renderFilters()
   @
@@ -26,8 +27,8 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
   # passed in render the placement
   renderPlacements: (col) ->
     @$('#placements').html("")
-    col.each (placement) ->
-      view = new CPP.Views.Placements.Item model: placement
+    col.each (placement) =>
+      view = new CPP.Views.Placements.Item(model: placement, editable: @editable)
       @$('#placements').append(view.render().el)
     @
 

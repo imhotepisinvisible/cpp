@@ -7,6 +7,10 @@ class CPP.Views.Placements.Item extends CPP.Views.Base
 
   template: JST['backbone/templates/placements/item']
 
+  initialize: ->
+    id = @model.get('id')
+    @editable = @options.editable
+
   # Bind events to edit, delete and view
   events: -> _.extend {}, CPP.Views.Base::events,
     "click .btn-edit"   : "editPlacement"
@@ -32,7 +36,7 @@ class CPP.Views.Placements.Item extends CPP.Views.Base
 
   # Render placement item template
   render: ->
-    $(@el).html(@template(placement: @model))
+    $(@el).html(@template(placement: @model, editable: @editable ))
     @
 
   # Navigate to placement view page
