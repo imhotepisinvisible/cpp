@@ -22,7 +22,16 @@ class CPP.Views.Departments.Approvals extends CPP.Views.Base
                 @eventCollection = @model.pending_events
                 @eventCollection.bind 'remove', @render, @
                 @eventCollection.bind 'change', @render, @
-                @render()
+                @model.pending_placements.fetch
+                  success: =>
+                    @placementCollection = @model.pending_placements
+                    @placementCollection.bind 'remove', @render, @
+                    @placementCollection.bind 'change', @render, @
+                    @render()
+                  error: =>
+                    notify 'error', 'Could not fetch opportunity requests'
+              error: =>
+                notify 'error', 'Could not fetch event requests'
           error: =>
             notify 'error', 'Could not fetch email requests'
       error: ->
@@ -58,3 +67,12 @@ class CPP.Views.Departments.Approvals extends CPP.Views.Base
         @$('#event-approvals').append(view.render().el)
     else
       @$('#event-approvals').append "No pending event requests!"
+
+    if @placementCollection.length > 0
+      @placementCollection.each (placement) =>
+        view = new CPP.Views.Departments.PlacementApproval
+          model: placement
+          dept: @model
+        @$('#placement-approvals').append(view.render().el)
+    else
+      @$('#placement-approvals').append "No pending placement requests!"

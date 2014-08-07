@@ -6,6 +6,8 @@ class CPP.Models.Department extends CPP.Models.Base
     @pending_emails.url = '/emails/pending'
     @pending_events = new CPP.Collections.Events
     @pending_events.url = '/events/pending'
+    @pending_placements = new CPP.Collections.Placements
+    @pending_placements.url = '/placements/pending'
 
   url: ->
     '/departments' + (if @isNew() then '' else '/' + @id)

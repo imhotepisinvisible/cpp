@@ -1,7 +1,7 @@
 <h1 class="section-header">
   <i class="icon-folder-open"></i>
   <% if @placement.isNew(): %>
-    Create a New Placement
+    Create a New Opportunity
   <% else: %>
     <%= @placement.get 'position' %> (Editing)
   <% end %>

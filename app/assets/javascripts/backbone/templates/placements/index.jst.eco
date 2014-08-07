@@ -14,11 +14,11 @@
       <% if @editable: %>
         <% if @placements.company?: %>
           <a href="#/companies/<%= @placements.company.get('id') %>/opportunities/new" class="btn pull-right button-add-placement">
-            New Placement
+            New Opportunity
           </a>
         <% else: %>
           <a href="#/opportunities/new" class="btn pull-right button-add-placement">
-            New Placement
+            New Opportunity
           </a>
         <% end %>
       <% end %>
@@ -34,13 +34,14 @@
             <th>Duration</th>
             <th>Location</th>
             <th>Deadline</th>
-            <% if isAdmin(): %>
+            <% if @editable: %>
+            <th>Status</th>
             <th class="btn-column"></th>
             <% end %>
           </tr>
         </thead>
         <tbody class="cpp-tbl" id="placements">
-          <tr><td colspan="<%= 6 + (isAdmin() ? 1 : 0) %>"><div class="loading"></div></td></tr>
+          <tr><td colspan="<%= 6 + (isAdmin() ? 2 : 0) %>"><div class="loading"></div></td></tr>
         </tbody>
       </table>
     <% else: %>

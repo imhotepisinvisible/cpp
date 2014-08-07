@@ -55,7 +55,10 @@ class Email < ActiveRecord::Base
   # Queues the sending of given 'email' for given 'user'
   # TODO: Implement queuing logic
   def queue_email(email, user)
-  	UserMailer.send_email(user.email, email.subject, email.body).deliver
+  	if UserMailer.send_email(user.email, email.subject, email.body).deliver
+      email.sent = true
+      email.save
+    end
   end
 
   # Sends email to students that match the catagory

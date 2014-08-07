@@ -4,7 +4,8 @@
 <td><%= @placement.get 'duration' %></td>
 <td><%= @placement.get 'location' %></td>
 <td><%= @placement.get 'deadline' %></td>
-<% if isAdmin(): %>
+<% if @editable: %>
+<td><%= @placement.get 'workflow_state' %></td>
 <td>
   <div class="btn-group pull-right">
     <div class="btn btn-small btn-edit"><i class="icon-pencil" /></div>

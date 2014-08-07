@@ -4,3 +4,5 @@
 <ul id="email-approvals" class="approval-list"></ul>
 <div class="alert alert-info"><p>The entries below are requests from companies to create events on the system.</p></div>
 <ul id="event-approvals" class="approval-list"></ul>
+<div class="alert alert-info"><p>The entries below are requests from companies to create opportunities on the system.</p></div>
+<ul id="placement-approvals" class="approval-list"></ul>
