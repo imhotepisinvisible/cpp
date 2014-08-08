@@ -126,6 +126,7 @@
   line-height: 45px;
   height: 55px;
   width: auto;
+  max-width: 600px;
   @include box-sizing(border-box);
 }
 
