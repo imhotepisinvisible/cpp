@@ -78,4 +78,7 @@ CPP::Application.configure do
   }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
+
+  # precompile site.js as it's not included by default in application.js
+  config.assets.precompile += %w( site.js )
 end
