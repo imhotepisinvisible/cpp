@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(:version => 20140807144035) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
-    t.string   "career_link"
   end
 
   create_table "company_contacts", :force => true do |t|
