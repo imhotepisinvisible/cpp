@@ -9,6 +9,8 @@ class CPP.Models.Student extends CPP.Models.Base
     @allDepartments = new CPP.Collections.Departments
     @allDepartments.url = '/departments'
 
+    @courses = new CPP.Collections.Courses
+
   url: ->
     '/students' + (if @isNew() then '' else '/' + @id)
 
@@ -22,6 +24,8 @@ class CPP.Models.Student extends CPP.Models.Base
       pattern: 'email'
     departments:
       required: true
+    year:
+      pattern: 'number'
 
   schema: ->
     first_name:

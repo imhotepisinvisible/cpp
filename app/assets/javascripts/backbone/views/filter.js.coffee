@@ -4,6 +4,8 @@ class CPP.Filter extends CPP.Views.Base
   templateText: JST['backbone/templates/filters/filter_text']
   templateTags: JST['backbone/templates/filters/filter_tag']
   templateDate: JST['backbone/templates/filters/filter_date']
+  templateCourse: JST['backbone/templates/filters/filter_course']
+  templateGraduating: JST['backbone/templates/filters/filter_graduating']
   templateFilterHeaderText: JST['backbone/templates/filters/filter_header_text']
   templateFilterHeaderTag: JST['backbone/templates/filters/filter_header_tag']
   templateFilterHeaderDate: JST['backbone/templates/filters/filter_header_date']
@@ -13,6 +15,7 @@ class CPP.Filter extends CPP.Views.Base
     "keyup .fltr-search"        : "setFilter"
     "blur .tag-input"           : "blurTag"
     "change .fltr-date"         : "setFilter"
+    "change .fltr-course"       : "setFilter"
 
   sub_el: "#filters"
 
@@ -43,12 +46,8 @@ class CPP.Filter extends CPP.Views.Base
       url: '/tags/interests'
       tag_class: 'label-warning'
 
-    @year_group_list_tags_form = new Backbone.Form.editors.TagEditor
-      model: @model
-      key: 'year_group_list'
-      title: 'Year Groups'
-      url: '/tags/year_groups'
-      tag_class: 'label-info'
+    @courses = new CPP.Collections.Courses
+    @courses.fetch({async:false})
 
     @render()
 
@@ -63,6 +62,12 @@ class CPP.Filter extends CPP.Views.Base
         when "number"
           $(@sub_el).append(@templateFilterHeaderText(filter: filter))
           $(@sub_el).append(@templateText(filter: filter))
+        when "course"
+          $(@sub_el).append(@templateFilterHeaderText(filter: filter))
+          $(@sub_el).append(@templateCourse(filter: filter, courses: @courses))
+        when "graduating-after"
+          $(@sub_el).append(@templateFilterHeaderText(filter: filter))
+          $(@sub_el).append(@templateGraduating(filter: filter))
         when "tags"
           $(@sub_el).append(@templateFilterHeaderTag(filter: filter))
           @renderTags()
@@ -84,8 +89,6 @@ class CPP.Filter extends CPP.Views.Base
     $('.skill-tags-form').append(@skill_list_tags_form.el)
     @interest_list_tags_form.render()
     $('.interest-tags-form').append(@interest_list_tags_form.el)
-    @year_group_list_tags_form.render()
-    $('.year-group-tags-form').append(@year_group_list_tags_form.el)
 
   # Register blur on tag
   blurTag: (e) ->
@@ -120,6 +123,24 @@ class CPP.Filter extends CPP.Views.Base
               fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
                 res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
                 res.toString() is textBox
+              ))
+          when "course"
+            if (textBox != "")
+              # Filter from collection if filter number is not present
+              fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
+                res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
+                return res.toString() is textBox if res
+                return false
+
+              ))
+          when "graduating-after"
+            textBox = $("#graduating-"+filter.attribute).val()
+            console.log textBox
+            if (textBox != "")
+              # Filter from collection if filter number is not present
+              fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
+                res = eval('with (model,filter) {model' + filter.scope + '.get(filter.attribute)}')
+                res >= textBox
               ))
           when "tags"
             # For each tag set, filter out data that does not correspond to all tags

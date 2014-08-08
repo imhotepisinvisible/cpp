@@ -38,14 +38,6 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
       tag_class: 'label-warning'
       additions: true
 
-    @year_group_list_tags_form = new Backbone.Form.editors.TagEditor
-      model: @model
-      key: 'year_group_list'
-      title: 'Year Groups'
-      url: '/tags/year_groups'
-      tag_class: 'label-info'
-      additions: true
-
     @render()
 
 
@@ -60,10 +52,8 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
 
     @skill_list_tags_form.render()
     @interest_list_tags_form.render()
-    @year_group_list_tags_form.render()
     $('.skill-tags-form').append(@skill_list_tags_form.el)
     $('.interest-tags-form').append(@interest_list_tags_form.el)
-    $('.year-group-tags-form').append(@year_group_list_tags_form.el)
     @
 
   # If event is valid update and update on server

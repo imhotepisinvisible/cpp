@@ -28,6 +28,7 @@ class Ability
       can :read, Department
     when "Student"
       can :manage, Student, :id => user.id
+      cannot :index, Student
       can [:read, :register, :unregister], Event do |event|
         share_departments?(user, event)
       end
@@ -37,6 +38,7 @@ class Ability
       can [:read, :download_document, :set_rating], Company do |company|
         share_departments?(user, company)
       end
+      can :read, Course
     when "CompanyAdministrator"
       can :manage, Event, :company_id => user.company_id
       can :manage, Placement, :company_id => user.company_id
@@ -53,11 +55,13 @@ class Ability
         student_depts = student.departments.map(&:id)
         intersect?(member_depts, student_depts)
       end
+      can :read, Course
       # Only allow companies that have been approved to see students.
       if user.company.department_registrations.where(:status => 3).size > 0
         can :index, Student
       end
     when "DepartmentAdministrator"
+      can :manage, Course
       can :manage, DepartmentAdministrator, :id => user.id
       can :create, CompanyAdministrator
       can :manage, CompanyAdministrator do |company_admin|

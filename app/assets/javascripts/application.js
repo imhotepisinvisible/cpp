@@ -18,12 +18,6 @@
 //= require underscore
 //= require highcharts
 //
-// BACKBONE
-//= require backbone
-//= require backbone-forms-bootstrap
-//= require backbone-validation
-//= require backbone/cpp
-//
 // JQUERY UI/WIDGETS
 //= require jquery.ui.sortable
 //= require jquery-fileupload/basic

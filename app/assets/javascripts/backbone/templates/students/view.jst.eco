@@ -26,8 +26,14 @@
             <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
           </p>
           <p id="student-profile-intro-status">
-            <%= getOrdinal(@student.get 'year') %> Year <%= @student.get 'degree' %>
-            <br>
+            <% if @student.get('course_id') != null: %>
+              Studying <%= @student.courses.models[@student.get 'course_id'].attributes.name %>
+              <br>
+            <% end %>
+            <% if @student.get('year') >= 2000: %>
+              Graduating in <%= @student.get 'year' %>
+              <br>
+            <% end %>
             <%= @student.get 'looking_for' %>
           </p>
         </div>

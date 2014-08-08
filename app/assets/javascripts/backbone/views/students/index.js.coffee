@@ -9,6 +9,8 @@ class CPP.Views.Students.Index extends CPP.Views.Base
     @collection.bind 'reset', @render, @
     @collection.bind 'filter', @renderStudents, @
     @editable = isDepartmentAdmin()
+    @courses = new CPP.Collections.Courses
+    @courses.fetch({async:false })
     @render()
 
   # Render index template, students and filters
@@ -23,7 +25,7 @@ class CPP.Views.Students.Index extends CPP.Views.Base
   renderStudents: (col) ->
     @$('#students').html("")
     col.each (student) =>
-      view = new CPP.Views.Students.Item(model: student, editable: @editable)
+      view = new CPP.Views.Students.Item(model: student, editable: @editable, courses: @courses)
       @$('#students').append(view.render().el)
   @
 
@@ -36,13 +38,17 @@ class CPP.Views.Students.Index extends CPP.Views.Base
         type: 'tags'
         attribute: ["skill_list", "interest_list", "year_group_list"]
         scope: ''},
-        {name: "Year"
-        type: "number"
+        {name: "Graduating in"
+        type: "text"
         attribute: 'year'
         scope: ''},
-        {name: "Degree",
-        type: 'text',
-        attribute: 'degree',
+        {name: "Graduating after"
+        type: "graduating-after"
+        attribute: 'year'
+        scope: ''},
+        {name: "Course",
+        type: 'course',
+        attribute: 'course_id',
         scope: ''},
         {name: "First Name"
         type: "text"

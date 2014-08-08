@@ -9,6 +9,7 @@ class CPP.Views.Students.Item extends CPP.Views.Base
   # Set editable on initialisation
   initialize: ->
     @editable = @options.editable
+    @courses = @options.courses
 
   # Bind eventsto edit, delete and view
   events: -> _.extend {}, CPP.Views.Base::events,
@@ -43,7 +44,7 @@ class CPP.Views.Students.Item extends CPP.Views.Base
 
   # Render student item template
   render: ->
-    $(@el).html(@template(student: @model, editable: @editable))
+    $(@el).html(@template(student: @model, editable: @editable, courses: @courses))
     @
 
   # Navigate to student view page

@@ -13,6 +13,7 @@ class CPP.Views.Students.View extends CPP.Views.Base
 
   # render student template with student model
   render: ->
+    @model.courses.fetch({async:false })
     $(@el).html(@template(student: @model))
     super
     @

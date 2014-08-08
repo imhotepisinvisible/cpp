@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140807112736) do
+ActiveRecord::Schema.define(:version => 20140807144035) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -33,6 +33,12 @@ ActiveRecord::Schema.define(:version => 20140807112736) do
     t.string   "role"
     t.integer  "position"
     t.integer  "company_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "courses", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -221,6 +227,9 @@ ActiveRecord::Schema.define(:version => 20140807112736) do
     t.string   "covering_letter_content_type"
     t.integer  "covering_letter_file_size"
     t.datetime "covering_letter_updated_at"
+    t.integer  "course_id"
   end
+
+  add_index "users", ["course_id"], :name => "index_users_on_course_id"
 
 end

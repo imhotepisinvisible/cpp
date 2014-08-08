@@ -120,20 +120,29 @@
   width: 120px;
 }
 
-#student-degree-editor {
+.student-profile-select {
   font-family: 'Arvo', serif;
   font-size: 40px;
   line-height: 45px;
   height: 55px;
+  width: auto;
   @include box-sizing(border-box);
 }
 
-.select-looking-for {
-  font-size: 40px;
+.student-profile-input {
   font-family: 'Arvo', serif;
-  line-height: 45px;
-  height: 55px;
+  font-size: 40px !important;
+  line-height: 45px !important;
+  height: 45px !important;
+  width: auto;
 }
+
+// .select-looking-for {
+//   font-size: 40px;
+//   font-family: 'Arvo', serif;
+//   line-height: 45px;
+//   height: 55px;
+// }
 
 .student-editable {
   background-color: #FFFABF;

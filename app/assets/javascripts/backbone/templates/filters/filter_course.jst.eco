@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="span3">
+  	<select id="<%= @filter.attribute %>" class="fltr-course">
+  		<option value="">All Courses</option>
+  		<% for id, course of @courses.models: %>
+  			<option value="<%= id %>"><%= course.attributes['name'] %></option>
+  		<% end %>
+  	</select>
+  </div>
+</div>

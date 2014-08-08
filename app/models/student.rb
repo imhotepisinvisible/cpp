@@ -25,6 +25,7 @@ class Student < User
   has_many :events,     :through => :departments, :uniq => true
   has_many :placements, :through => :companies, :uniq => true
   has_many :student_company_ratings
+  belongs_to :course
 
   has_and_belongs_to_many :registered_events,
                           :join_table => :student_event_registrations,
@@ -65,7 +66,7 @@ class Student < User
   attr_accessible :year, :bio, :degree, :email, :cv, :transcript,
                   :covering_letter, :profile_picture, :skill_list,
                   :interest_list, :reject_skill_list, :reject_interest_list,
-                  :year_group_list, :active, :looking_for, :tooltip
+                  :year_group_list, :active, :looking_for, :tooltip, :course_id
 
   ####################################################################
   # Attributes not to store in database direectly and exist

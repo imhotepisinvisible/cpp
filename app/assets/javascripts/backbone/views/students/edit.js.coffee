@@ -14,12 +14,13 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     'blur #student-bio-input-container': 'bioStopEdit'
     'click #student-name-container': 'nameEdit'
     'blur #student-name-input-container': 'nameStopEdit'
-    'click #student-degree-container': 'degreeEdit'
-    'blur #student-degree-input-container': 'degreeStopEdit'
+    # 'click #student-degree-container': 'degreeEdit'
+    # 'blur #student-degree-input-container': 'degreeStopEdit'
     'submit #skill-tag-form': 'addSkill'
     'click #btn-toggle-profile' : 'toggleProfile'
     'change #looking-for-select' : 'changeLookingFor'
-    'change #year-select' : 'changeYear'
+    'blur #year-input' : 'changeYear'
+    'change #student-course-input' : 'changeCourse'
     'keyup #student-name-input-container' : 'stopEditOnEnter'
     'keyup #student-degree-input-container': 'stopEditOnEnter'
 
@@ -56,15 +57,8 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       tag_change_callback: saveModel
       additions: true
 
-    @year_group_list_tags_form = new Backbone.Form.editors.TagEditor
-      model: @model
-      key: 'year_group_list'
-      title: 'Year Groups'
-      url: '/tags/year_groups'
-      tag_class: 'label-info'
-      tag_change_callback: saveModel
-      additions: true
-
+    @courses = new CPP.Collections.Courses
+    @courses.fetch({async:false})
     @render()
     @uploadInitialize 'cv'
     @uploadInitialize 'transcript'
@@ -73,13 +67,11 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
 
   # Render student edit template with tags, partials and inline editors
   render: ->
-    $(@el).html(@template(student: @model))
+    $(@el).html(@template(student: @model, courses: @courses))
     @skill_list_tags_form.render()
     $('.skill-tags-form').append(@skill_list_tags_form.el)
     @interest_list_tags_form.render()
     $('.interest-tags-form').append(@interest_list_tags_form.el)
-    @year_group_list_tags_form.render()
-    $('.year-group-tags-form').append(@year_group_list_tags_form.el)
 
     profile_warnings = new CPP.Views.Students.ProfileWarnings
       el: '#profile-warnings-container'
@@ -102,27 +94,21 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
           tagnames = (tag.name for tag in data)
           process(tagnames)
 
-    $('#student-degree-editor').typeahead
-      source: (query, process) =>
-        $.get '/students/suggested_degrees', {}, (data) ->
-          process(data)
-      updater: (item) =>
-        $('#student-degree-editor').val(item)
-        $('#student-degree-input-container').trigger('blur')
-        item
-
     # Set the default selected looking_for
     for option in $('#looking-for-select').children()
       if $(option).val() == @model.get('looking_for')
         $(option).attr('selected', 'selected')
 
-    # Set the default selected year
-    if @model.get('year')
-      for option in $('#year-select').children()
+    # Set the default selected course
+    if @model.get('course_id') != null
+      for option in $('#student-course-input').children()
+        if parseInt($(option).val()) == @model.get('course_id')
+          $(option).attr('selected', 'selected')
+
+    if @model.get('year') != null
+      for option in $('#year-input').children()
         if parseInt($(option).val()) == @model.get('year')
           $(option).attr('selected', 'selected')
-    else
-      $('#year-select').addClass('missing')
     super
     @
 
@@ -215,19 +201,19 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     window.inPlaceStopEdit @model, 'student', 'bio', 'Click here to add an About Me!', ((bio) ->
       bio.replace(/\n/g, "<br/>"))
 
-  # Show inline degree edit
-  degreeEdit: ->
-    window.inPlaceEdit @model, 'student', 'degree'
+  # # Show inline degree edit
+  # degreeEdit: ->
+  #   window.inPlaceEdit @model, 'student', 'degree'
 
-  # Stop inline bio edit and save changes  
-  degreeStopEdit: (e) ->
-    deferreds = []
-    if e and $('.dropdown-menu').is(':visible') and $('.dropdown-menu:hover').length > 0
-      deferreds.push($('.dropdown-menu').click())
+  # # Stop inline bio edit and save changes  
+  # degreeStopEdit: (e) ->
+  #   deferreds = []
+  #   if e and $('.dropdown-menu').is(':visible') and $('.dropdown-menu:hover').length > 0
+  #     deferreds.push($('.dropdown-menu').click())
 
-    $.when.apply($, deferreds).done(
-      window.inPlaceStopEdit @model, 'student', 'degree', 'N/A degree', _.identity
-    )
+  #   $.when.apply($, deferreds).done(
+  #     window.inPlaceStopEdit @model, 'student', 'degree', 'N/A degree', _.identity
+  #   )
 
   # Show inline name edit
   nameEdit: ->
@@ -339,12 +325,14 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
 
   # Update and save year field highlight 
   changeYear: (e) ->
+    console.log "changing year"
     year = parseInt($(e.currentTarget).val())
     if year
       $(e.currentTarget).removeClass('missing')
     else
       year = null
       $(e.currentTarget).addClass('missing')
+      return
 
     @model.set 'year', year
     @model.save {},
@@ -354,6 +342,17 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
         notify 'success', 'Year updated'
       error: (model, response) =>
         notify 'error', 'Could not update year'
+
+  changeCourse: (e) ->
+    courseId = parseInt($(e.currentTarget).val())
+    @model.set 'course_id', courseId
+    @model.save {},
+      wait: true
+      forceUpdate: true
+      success: (model, response) =>
+        notify 'success', 'Course updated'
+      error: (model, response) =>
+        notify 'error', 'Could not update course'
 
   # Stop inline edit on enter key press 
   stopEditOnEnter: (e) ->

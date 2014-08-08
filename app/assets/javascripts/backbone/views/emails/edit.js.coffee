@@ -46,15 +46,6 @@ class CPP.Views.Emails.Edit extends CPP.Views.Base
         tag_change_callback: saveTagModel
         additions: true
 
-      @year_group_list_tags_form = new Backbone.Form.editors.TagEditor
-        model: @model
-        key: 'year_group_list'
-        title: 'Year Groups'
-        url: '/tags/year_groups'
-        tag_class: 'label-info'
-        tag_change_callback: saveTagModel
-        additions: true
-
     @render()
 
 
@@ -71,8 +62,6 @@ class CPP.Views.Emails.Edit extends CPP.Views.Base
       $('.skill-tags-form').append(@skill_list_tags_form.el)
       @interest_list_tags_form.render()
       $('.interest-tags-form').append(@interest_list_tags_form.el)
-      @year_group_list_tags_form.render()
-      $('.year-group-tags-form').append(@year_group_list_tags_form.el)
 
     $('.form').append(@form.el)
     validateField(@form, field) for field of @form.fields
