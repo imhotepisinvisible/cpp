@@ -48,9 +48,16 @@
           <div class="interest-tags-form"></div>
       </div>
     </div>
-    <div>
-      <div class="tag-category">
-          <div class="year-group-tags-form"></div>
+    <div class="tag-category">
+      <div class="tag-category-header">
+        Graduating in
+          <select name="graduating-year" id="graduating-year" class="input-medium pull-right">
+            <option value="">Select a year</option>
+            <% for year in [2000..2050]: %>
+              <option value="<%= year %>"><%= year %></option>
+            <% end %>
+          </select>
+          <div class="clearfix"></div>
       </div>
     </div>
   </div>

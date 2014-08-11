@@ -9,6 +9,7 @@ class CPP.Views.Emails.Edit extends CPP.Views.Base
   # Bind event listeners
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-submit': 'submitEmail'
+    'change #graduating-year': 'updateYear'
 
   # Set up skills, interest and year tag editors if options requires
   # tagged emails
@@ -93,17 +94,28 @@ class CPP.Views.Emails.Edit extends CPP.Views.Base
 
           notify "error", "Unable to save email, please resolve issues below."
 
+  updateYear: ->
+    @model.set 'graduating_year', parseInt($('#graduating-year').val())
+    @model.save {},
+      wait: true
+      forceUpdate: true
+      success: (model, response) =>
+        @updateStats()
+      error: (model, response) =>
+        notify "error", "Unable to update graduating year"
+
   updateStats: ->
     $.get "/emails/" + @model.id + "/get_matching_students_count", (data) ->
       if !jQuery.isEmptyObject(data)
         totalRecipients = 0
         output = "<dl class=\"dl-horizontal\">\n"
         for year in Object.keys(data)
-          totalRecipients += data[year]
-          output += "<dt>Year "+year+"</dt><dd>"+data[year]+" student"
-          if data[year] > 1
-            output += "s"
-          output += "</dd>\n"
+          if year > 10
+            totalRecipients += data[year]
+            output += "<dt>Graduating in "+year+"</dt><dd>"+data[year]+" student"
+            if data[year] > 1
+              output += "s"
+            output += "</dd>\n"
         output += "<dt>Total</dt><dd>" + totalRecipients + " student"
         if totalRecipients > 1
           output += "s"

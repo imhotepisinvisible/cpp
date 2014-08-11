@@ -7,7 +7,7 @@ class TaggedEmail < Email
   # Attributes not to store in database direectly and exist
   # for life of object
   # ##################################################################
-  attr_accessible :skill_list, :interest_list, :year_group_list
+  attr_accessible :skill_list, :interest_list, :year_group_list, :graduating_year
 
   # Return JSON object 
   def as_json(options={})
@@ -17,7 +17,11 @@ class TaggedEmail < Email
   # Return students that should receive email based on tags
   def get_matching_students
     contexts = ["skills","interests"]
-    students = Student.all
+    if self.graduating_year
+      students = Student.where(:year => self.graduating_year)
+    else
+      students = Student.all
+    end
     puts students.map{|s| s.first_name}.to_s
     contexts.each do |c|
       puts "Context: " + c

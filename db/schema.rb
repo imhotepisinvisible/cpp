@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140807144035) do
+ActiveRecord::Schema.define(:version => 20140811152450) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20140807144035) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.string   "career_link"
   end
 
   create_table "company_contacts", :force => true do |t|
@@ -81,11 +82,13 @@ ActiveRecord::Schema.define(:version => 20140807144035) do
     t.datetime "sent"
     t.integer  "company_id"
     t.string   "state"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "event_id"
     t.string   "type"
     t.string   "reject_reason"
+    t.integer  "graduatingYear"
+    t.integer  "graduating_year"
   end
 
   create_table "emails_students", :force => true do |t|
