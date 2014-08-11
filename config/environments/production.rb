@@ -81,4 +81,8 @@ CPP::Application.configure do
 
   # precompile site.js as it's not included by default in application.js
   config.assets.precompile += %w( site.js )
+
+  # load production database config file
+  config.paths['config/database'] = '/app/.cpp_db'
+
 end
