@@ -57,6 +57,11 @@ class EventsController < ApplicationController
     end
   end
 
+  def attending_students
+    @event = Event.find(params[:id])
+    respond_with @event.registered_students
+  end
+
   # Get event for given id and respond with it in JSON form
   # Inserts a list 'depts' into the JSON with the IDs of departments which this
   # event is targetted at.

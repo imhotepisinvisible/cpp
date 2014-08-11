@@ -81,6 +81,7 @@ CPP::Application.routes.draw do
     get :pending, :on => :collection
     put :approve, :on => :member
     put :reject, :on => :member
+    get :attending_students, :on => :member
   end
   resources :placements do
     get :pending, :on => :collection

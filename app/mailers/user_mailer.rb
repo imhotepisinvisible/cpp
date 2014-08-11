@@ -2,8 +2,9 @@ class UserMailer < ActionMailer::Base
   #include Resque::Mailer
   default from: "no-reply@cpp.doc.ic.ac.uk"
 
-  def send_email(address, subject, body, sender)
-    mail(:to => address, :subject => subject, :from => sender) do |format|
+  def send_email(address, subject, body)
+    puts "Sending email to " + address
+    mail(:to => address, :subject => subject) do |format|
       format.html { render :inline => body }
     end
   end

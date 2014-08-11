@@ -17,11 +17,18 @@ class TaggedEmail < Email
   # Return students that should receive email based on tags
   def get_matching_students
     contexts = ["skills","interests"]
-    students = Student.where(:active => true)
-    puts students.inspect
+    students = Student.all
+    puts students.map{|s| s.first_name}.to_s
     contexts.each do |c|
-      reject_c = "reject_" + c
-      students -= Student.tagged_with(self.send(c).map{|t| t.name}, :on => reject_c.to_sym, :any => true)
+      puts "Context: " + c
+      puts c.to_sym
+      if self.send(c).size > 0
+        puts "Context " + c + " has tags " + self.send(c).map{|t| t.name}.to_s
+        contextStudents = Student.tagged_with(self.send(c).map{|t| t.name}, :on => c.to_sym)
+        puts "Students matching context " + c + ": " + contextStudents.map{|s| s.first_name}.to_s
+        students = students & contextStudents
+        puts students.map{|s| s.first_name}
+      end
     end
     students
   end

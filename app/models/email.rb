@@ -57,16 +57,17 @@ class Email < ActiveRecord::Base
   def queue_email(email, user)
   	if UserMailer.send_email(user.email, email.subject, email.body).deliver
       email.sent = true
-      email.save
+      email.save!
     end
   end
 
   # Sends email to students that match the catagory
   def send_email!
+    puts get_matching_students.inspect
 		get_matching_students.each do |user|
-			Thread.new do
-				queue_email(self, user, current_user.email)
-			end
+      puts "creating thread to email: " + user.email
+        # puts "thread created for email:" + user.email
+			queue_email(self, user)
 		end
 	end
 

@@ -29,7 +29,7 @@ class Ability
     when "Student"
       can :manage, Student, :id => user.id
       cannot :index, Student
-      can [:read, :register, :unregister], Event do |event|
+      can [:read, :register, :unregister, :attending_students], Event do |event|
         share_departments?(user, event)
       end
       can :read, Placement do |placement|

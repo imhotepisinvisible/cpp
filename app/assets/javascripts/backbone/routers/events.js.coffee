@@ -34,7 +34,8 @@ class CPP.Routers.Events extends Backbone.Router
         deferreds = []
         events.each (event) =>
           event.registered_students = new CPP.Collections.Students()
-          deferreds.push(event.registered_students.fetch({ data: $.param({ event_id: event.id }) }))
+          event.registered_students.url = "/events/" + event.id + "/attending_students"
+          deferreds.push(event.registered_students.fetch())
           event.company = new CPP.Models.Company id: event.get "company_id"
           deferreds.push event.company.fetch()
         $.when.apply($, deferreds).done(=>
@@ -109,10 +110,11 @@ class CPP.Routers.Events extends Backbone.Router
       success: ->
         event.company = new CPP.Models.Company id: event.get 'company_id'
         event.registered_students = new CPP.Collections.Students()
+        event.registered_students.url = "/events/" + id + "/attending_students"
         deferreds = []
         # Fetch company and registered students for event
         deferreds.push(event.company.fetch())
-        deferreds.push(event.registered_students.fetch({ data: $.param({ event_id: id }) }))
+        deferreds.push(event.registered_students.fetch())
         $.when.apply($, deferreds).done(=>
           new CPP.Views.Events.View model: event
         )
