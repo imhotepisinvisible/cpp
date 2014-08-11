@@ -72,7 +72,7 @@ class CompanyAdministratorsController < ApplicationController
   def destroy
     require_login
     @company_administrator = CompanyAdministrator.find(params[:id])
-    @company_administrator.destroy!
+    @company_administrator.destroy
     head :no_content
   end
 end

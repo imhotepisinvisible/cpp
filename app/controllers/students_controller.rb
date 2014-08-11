@@ -93,7 +93,7 @@ class StudentsController < ApplicationController
   # DELETE /students/1.json
   def destroy
     @student = Student.find(params[:id])
-    @student.destroy!
+    @student.destroy
     if current_user.is_student?
       session[:user_id] = nil
     end

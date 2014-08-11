@@ -11,7 +11,7 @@
 
 class User < ActiveRecord::Base
   ##################### On delete hide record ########################
-  acts_as_paranoid
+  # acts_as_paranoid
 
   ###################### Password encryption #########################
   has_secure_password
