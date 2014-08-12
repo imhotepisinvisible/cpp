@@ -16,7 +16,7 @@ class CPP.Views.Emails.Edit extends CPP.Views.Base
   initialize: ->
     @form = new Backbone.Form(model: @model).render()
 
-    if @options.type == "tagged"
+    if @options.type == "tagged" || @model.get('skill_list') != null
       # Auxillary function, saves model on tag input
       saveTagModel = =>
         @model.save {},
@@ -58,7 +58,7 @@ class CPP.Views.Emails.Edit extends CPP.Views.Base
       when "direct" then @title = "New Direct Email to " + @options.student.attributes.first_name + ' ' + @options.student.attributes.last_name
 
     $(@el).html(@template(email: @model, type: @options.type, title: @title))
-    if @options.type == "tagged"
+    if @options.type == "tagged" || @model.get('skill_list') != null
       @skill_list_tags_form.render()
       $('.skill-tags-form').append(@skill_list_tags_form.el)
       @interest_list_tags_form.render()
@@ -67,7 +67,10 @@ class CPP.Views.Emails.Edit extends CPP.Views.Base
     $('.form').append(@form.el)
     validateField(@form, field) for field of @form.fields
     tiny_mce_init()
-    if @options.type == "tagged"
+    if @options.type == "tagged" || @model.get('skill_list') != null
+      for option in $('#graduating-year').children()
+        if parseInt($(option).val()) == @model.get('graduating_year')
+          $(option).attr('selected', 'selected')
       @updateStats()
   @
 

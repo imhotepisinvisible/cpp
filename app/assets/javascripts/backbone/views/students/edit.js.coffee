@@ -325,7 +325,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
 
   # Update and save year field highlight 
   changeYear: (e) ->
-    console.log "changing year"
     year = parseInt($(e.currentTarget).val())
     if year
       $(e.currentTarget).removeClass('missing')

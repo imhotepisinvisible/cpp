@@ -135,7 +135,6 @@ class CPP.Filter extends CPP.Views.Base
               ))
           when "graduating-after"
             textBox = $("#graduating-"+filter.attribute).val()
-            console.log textBox
             if (textBox != "")
               # Filter from collection if filter number is not present
               fCollection = new (fCollection.constructor)(fCollection.filter((model) ->

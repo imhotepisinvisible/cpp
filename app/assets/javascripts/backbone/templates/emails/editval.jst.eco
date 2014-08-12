@@ -35,7 +35,7 @@
   </div>
 </div>
 <div class="row">
-  <% if @type == "tagged": %>
+  <% if (@type == "tagged") || (@email.get('skill_list') != null): %>
   <div class="span6">
     <h2 class="section-header">Select Recipients</h2>
     <div>

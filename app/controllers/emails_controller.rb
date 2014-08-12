@@ -110,8 +110,7 @@ class EmailsController < ApplicationController
   def update
     @email = Email.find(params[:id])
     if @email.update_attributes(params[:event_email])
-      @email.send_email
-      head :no_content
+      respond_with @email
     else
       respond_with @email, status: :unprocessable_entity
     end
