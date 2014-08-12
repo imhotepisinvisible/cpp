@@ -75,4 +75,4 @@ class CPP.Views.Departments.Approvals extends CPP.Views.Base
           dept: @model
         @$('#placement-approvals').append(view.render().el)
     else
-      @$('#placement-approvals').append "No pending placement requests!"
+      @$('#placement-approvals').append "No pending opportunity requests!"
