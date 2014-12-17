@@ -44,7 +44,7 @@ GEM
       json (~> 1.4)
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
-    backbone-on-rails (0.9.9.0)
+    backbone-on-rails (0.9.10.0)
       eco
       ejs
       jquery-rails
@@ -364,7 +364,7 @@ DEPENDENCIES
   acts-as-taggable-on
   acts_as_list
   aws-sdk
-  backbone-on-rails (= 0.9.9.0)
+  backbone-on-rails (= 0.9.10.0)
   backbone-validation-rails
   bcrypt-ruby (~> 3.0.0)
   bootstrap-datepicker-rails
