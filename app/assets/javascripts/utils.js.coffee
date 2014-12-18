@@ -88,10 +88,13 @@ window.displayErrorMessages = (errors) ->
 
 # Parses JQXHR errors and displays to user
 window.displayJQXHRErrors = (data) ->
-  response = JSON.parse data.jqXHR.responseText
-  if response.errors
-    window.displayErrorMessages(response.errors)
-  else
+  try
+    response = JSON.parse data.jqXHR.responseText
+    if response.errors
+      window.displayErrorMessages(response.errors)
+    else
+      notify('error', "Error")
+  catch e
     notify('error', "Error")
 
 # Shows tooltip with specified message and position to user
