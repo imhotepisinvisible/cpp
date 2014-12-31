@@ -9,6 +9,7 @@ then
         echo "restore-db - Restore db from db/current.sql.zip"
         echo "restart - Restart rails app after bundling gems" 
         echo "rebuild - Rebuild the docker container with latest Gemfile and restart"
+	echo "seed-db - Seed db with initial values"
         echo 'cmd "bundle exec something" - Run the command in quotes in /app' 
         exit
 fi
@@ -29,6 +30,9 @@ restart) echo  "Restarting Docker Rails Container"
    ;;
 rebuild) echo  "Rebuilding Docker Rails Container"
     vagrant ssh -c "sh /app/docker/scripts/rebuild.sh"
+    ;;
+seed-db) echo  "Seeding db with initial values"
+    vagrant ssh -c "sh /app/docker/scripts/seed-db.sh"
    ;;
 cmd) echo "running '$2' in docker container in /app"
   vagrant ssh -c "/app/docker/scripts/cmd.sh '$2'"
