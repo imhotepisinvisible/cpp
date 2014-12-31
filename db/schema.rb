@@ -87,7 +87,6 @@ ActiveRecord::Schema.define(:version => 20140811152450) do
     t.integer  "event_id"
     t.string   "type"
     t.string   "reject_reason"
-    t.integer  "graduatingYear"
     t.integer  "graduating_year"
   end
 

@@ -17,3 +17,6 @@
 
 * Ignore uploaded files
 /public/*
+
+# Ignore vagrant config
+.vagrant/*
