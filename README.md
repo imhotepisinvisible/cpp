@@ -1,49 +1,25 @@
-CPP : Connect - [Visit Live Site!](http://cppconnect.com)
+CPP : Connect
 ==========================================================
 
-Revolutionising the Corporate Partnership Programme
-
-
-![Screen Shot 2013-01-07 at 14 24 30](https://f.cloud.github.com/assets/510845/71779/019715da-5ff7-11e2-9bf4-53a4a9b20fe0.png)
-
-Quick-Start
+Quick Start
 ===========
 
-1. Install Rails, ImageMagick and Redis
-2. Clone the repository & cd into it
-3. Run `bundle install` to install the necessary gems
-4. Run `rake nuke` to set up a seeded development database
-5. Fire up a dev app with `rails s`
-6. Visit `localhost:3000` in your browser
-7. Use app! See `db/seeds.rb` to find logins for students/companies/dept admins
+Running CPP in a Vagrant VM is probably the quickest way to get up and running.
 
-Further Requirements/Team Setup
-==========================
+This sets up Ruby 1.9.3 on an Ubuntu 12.04 VM, based on [this guide](http://www.talkingquickly.co.uk/2014/06/rails-development-environment-with-vagrant-and-docker/)
 
-* Assuming all teammembers are running OSX or Ubuntu...
-* (OSX only) Install [Homebrew](http://mxcl.github.com/homebrew/)
-* Install Git ``$ sudo apt-get install git``` or ``$ brew install git```
-* On Ubuntu you may need to run ``sudo apt-get install build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion pkg-config``
-* Install RVM: run ``\curl -L https://get.rvm.io | bash -s stable --rails`` - more info: [RVM with Ruby](https://rvm.io/rvm/install/)
+1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+2. Install [Vagrant](https://www.vagrantup.com/downloads.html)
+3. If you're on Linux, install nfsd
+4. If you're on Windows, install git, and make sure the line endings are set to Unix (NOT CRLF)
+5. Clone the git repo
+6. In terminal, cd into the cpp directory and type 'vagrant up'
+7. Wait forever while everything is downloaded and set up (if your internet cuts out during this step, something may go wrong and you may have to run this step again)
+8. If this is your first time running the project, seed the db with the initial logins by typing './d seed-db' into the terminal (this command will not work on Windows)
+9. You should be up and running! Visit http://localhost:3000 in your browser to see the site.
+10. The vm is set up to mirror the files in the cpp directory, so you can change any files in there and watch the results update instantly on the site - no need to even restart.
 
-Useful tools
-============
-
-Sublime
--------
-* Download [sublime] (http://www.sublimetext.com/2)
-* Add Package manager
-  * Visit [package manager](http://wbond.net/sublime_packages/package_control/installation) and copy the huge chunk of text
-  * Press ctrl+(the plus/minus key thignn top left of keyboard), copy in the chunk and press enter
-* Now install coffeescript package
-  * cmd+shift+p
-  * type install, enter
-  * start typing coffeescript, enter
-* Install git package
-  * Same as Coffeescript but typing git
-* Install scss package (for Super CSS)
-  * Same as Coffeescript but typing scss
-* Set default settings for 2 space indentation, no line wrap, 80+120 line guides (rulers)
+Magic!
 
 Rails ERD
 ---------
@@ -52,12 +28,3 @@ Allows you to view project entities in graphical form. [More Info](http://rails-
 * Install GraphViz with `brew install graphviz` or `sudo aptitude install graphviz`
 * Run `rake erd` for a basic diagram
 * For a full diagram w/ all bells and whistles, run `rake erd title='CPP Model Relationships' inheritance=true polymorphism=true orientation=vertical`
-
-
-Getting Started
-===============
-
-* Clone template locally ```$ git clone git@github.com:PeterHamilton/cpp.git```
-* Run ```$ bundle install``` in the root to get all the gems
-* Run rails server ```$ rails s```
-* Check rails is running by visiting [http://localhost:3000/](http://localhost:3000/)
