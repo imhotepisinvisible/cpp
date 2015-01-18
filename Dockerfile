@@ -1,18 +1,17 @@
-FROM ubuntu:12.04
+FROM ubuntu:14.04
 MAINTAINER talkingquickly.co.uk <ben@talkingquickly.co.uk>
 
 ENV DEBIAN_FRONTEND noninteractive
 
 # REPOS
 RUN apt-get -y update
-RUN apt-get install -y -q python-software-properties
+RUN apt-get install -y -q software-properties-common lsb-release
 RUN add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
 RUN add-apt-repository -y ppa:chris-lea/node.js
 RUN apt-get -y update
 
 # INSTALL
-RUN apt-get install -y -q build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion pkg-config libmysqlclient-dev libpq-dev make wget unzip git vim nano nodejs mysql-client mysql-server gawk libgdbm-dev libffi-dev
-
+RUN apt-get install -y -q build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion pkg-config libmysqlclient-dev libpq-dev make wget unzip git vim nano nodejs mysql-client mysql-server gawk libgdbm-dev libffi-dev imagemagick
 RUN git clone https://github.com/sstephenson/ruby-build.git /tmp/ruby-build && \
     cd /tmp/ruby-build && \
     ./install.sh && \

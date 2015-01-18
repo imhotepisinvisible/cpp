@@ -1,4 +1,4 @@
-FROM ubuntu:12.04
+FROM ubuntu:14.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -11,4 +11,4 @@ RUN apt-get update
 RUN apt-get install -y -q redis-server
 
 EXPOSE      6379
-ENTRYPOINT  ["/usr/bin/redis-server"]
+ENTRYPOINT  "/usr/bin/redis-server"
