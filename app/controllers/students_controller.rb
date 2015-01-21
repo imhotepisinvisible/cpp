@@ -76,12 +76,20 @@ class StudentsController < ApplicationController
   # PUT /students/1.json
   def update
     @student = Student.find(params[:id])
-    if @student.update_attributes(params[:student])
-      respond_with(@student) do |format|
-        format.json{render json: @student}
+    begin
+      if @student.update_attributes(params[:student])
+        respond_with(@student) do |format|
+          format.json{render json: @student}
+        end
+      else
+        respond_with @student, status: :unprocessable_entity
       end
-    else
-      respond_with @student, status: :unprocessable_entity
+    rescue Errno::EACCES
+      render status: :internal_server_error, json: {
+        errors: {
+          dummy_attr: ['The user running the Rails process can\'t write to the uploads directory.']
+        }
+      }
     end
   end
 
