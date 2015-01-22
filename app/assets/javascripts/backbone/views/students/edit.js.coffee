@@ -17,7 +17,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     # 'click #student-degree-container': 'degreeEdit'
     # 'blur #student-degree-input-container': 'degreeStopEdit'
     'submit #skill-tag-form': 'addSkill'
-    'click #btn-toggle-profile' : 'toggleProfile'
+    # 'click #btn-toggle-profile' : 'toggleProfile'
     'change #looking-for-select' : 'changeLookingFor'
     'blur #year-input' : 'changeYear'
     'change #student-course-input' : 'changeCourse'
@@ -300,16 +300,16 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
         notify "error", "Failed to add tag"
 
   # Profile preferences toggle
-  toggleProfile: (e) ->
-    tt = $('#student-profile-toggle-text')
-    ttContainer = $('#student-profile-toggle-text-container')
-    $('#student-profile-body').slideToggle 'fast', ->
-      if $('#student-profile-body').is ":hidden"
-        tt.html("Advanced Profile Settings")
-        ttContainer.find('i').show()
-      else
-        tt.html("Hide Advanced Profile Settings")
-        ttContainer.find('i').hide()
+  #toggleProfile: (e) ->
+  #  tt = $('#student-profile-toggle-text')
+  #  ttContainer = $('#student-profile-toggle-text-container')
+  #  $('#student-profile-body').slideToggle 'fast', ->
+  #    if $('#student-profile-body').is ":hidden"
+  #      tt.html("Advanced Profile Settings")
+  #      ttContainer.find('i').show()
+  #    else
+  #      tt.html("Hide Advanced Profile Settings")
+  #      ttContainer.find('i').hide()
 
   # Update looking_for field in model and save
   changeLookingFor: (e) ->
@@ -357,4 +357,4 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
   stopEditOnEnter: (e) ->
     if (e.keyCode == 13)
       @nameStopEdit()
-      @degreeStopEdit()
+      #@degreeStopEdit()

@@ -50,7 +50,7 @@
         <span>
           <select id="year-input" class="student-profile-select">
             <option value="">Pick a Year</option>
-            <% for year in [2000..2050]: %>
+            <% for year in [2000..2020]: %>
               <option value="<%= year %>"><%= year %></option>
             <% end %>
           </select>
@@ -59,7 +59,8 @@
       </div>
       <div class="row">
         <span>
-        <select id="looking-for-select" class="span8 student-profile-select" <%= addTooltip(@student.get('tooltip'), 'Select the status that best matches you', 'right') %>>
+    <select id="looking-for-select" class="span8 student-profile-select" <%= addTooltip(@student.get('tooltip'), 'Select the status that best matches you', 'right') %>>
+          <option value="">Select your employment status</option>
           <option><%= looking_fors.industrial %></option>
           <option><%= looking_fors.summer %></option>
           <option><%= looking_fors.graduate %></option>
@@ -77,19 +78,7 @@
 <div class="row">
 <div class="span12" id="student-profile-body-container">
   <div class="row">
-    <div class="span12" id="student-profile-toggle">
-      <div class="btn btn-primary" id="btn-toggle-profile">
-        <i class="icon-pencil"></i>
-        <span id="student-profile-toggle-text">
-        <% if (@student.reasonsProfileInactive().length == 0): %>
-        Advanced Profile Settings
-        <% else: %>
-        Hide Advanced Profile Settings
-        <% end %>
-        </span>
-      </div>
-    </div>
-    <div class="span12" id="student-profile-body" style="<%= if (@student.reasonsProfileInactive().length == 0) then 'display:none' else '' %>">
+    <div class="span12" id="student-profile-body">
       <div class="row">
         <div class="span4">
           <h1 class="section-header">

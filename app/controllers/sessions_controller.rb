@@ -16,9 +16,9 @@ class SessionsController < ApplicationController
 
       case user.type
       when "Student"
-        redirect_to "/#students/#{user.id}/edit"
+        redirect_to "/#edit"
       when "CompanyAdministrator"
-        redirect_to "/#company_dashboard"
+        redirect_to "/#edit"
       when "DepartmentAdministrator"
         redirect_to "/#department_dashboard"
       else

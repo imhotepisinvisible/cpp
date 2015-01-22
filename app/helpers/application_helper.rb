@@ -34,12 +34,12 @@ module ApplicationHelper
     end
   end
 
-  def dashboard_path
+  def edit_path
     return '' unless current_user
 
     case current_user.type
     when 'Student'
-      return '#dashboard'
+      return '#edit'
     when 'CompanyAdministrator'
       return "#companies/#{current_user.company_id}/edit"
     when 'DepartmentAdministrator'
