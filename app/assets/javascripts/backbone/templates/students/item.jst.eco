@@ -24,3 +24,8 @@
     <% end %>
   </div>
 </td>
+
+<% date = Date.parse(@student.get('updated_at'))%>
+<td>
+  <%= date.toString("dd/MM/yyyy") %>
+</td>

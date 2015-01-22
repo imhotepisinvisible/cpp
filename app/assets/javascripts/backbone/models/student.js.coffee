@@ -75,3 +75,9 @@ class CPP.Models.Student extends CPP.Models.Base
 class CPP.Collections.Students extends CPP.Collections.Base
   url: '/students'
   model: CPP.Models.Student
+  sortKey: 'updated_at'
+  comparator: (studentA, studentB) ->
+          if studentA.get(this.sortKey) > studentB.get(this.sortKey) then -1
+          else if studentB.get(this.sortKey) > studentA.get(this.sortKey) then 1
+          else 0
+                

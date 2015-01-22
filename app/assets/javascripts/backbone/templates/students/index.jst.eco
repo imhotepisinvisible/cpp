@@ -20,6 +20,7 @@
             <th>Graduating in</th>
             <th>Course</th>
             <th class="btn-column"></th>
+            <th>Updated On</th>
           </tr>
         </thead>
         <tbody class="cpp-tbl" id="students">
