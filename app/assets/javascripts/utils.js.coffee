@@ -145,3 +145,6 @@ window.getUserCompanyId = ->
 
 window.userId = ->
   CPP.CurrentUser.id
+
+window.getDateFormat = ->
+        'dd/MM/yyyy'
