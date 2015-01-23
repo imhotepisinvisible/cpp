@@ -6,8 +6,8 @@
     <span class="label label-warning">requirements</span>
   <% end %>
 </td>
-<% date = @event.get('start_date') %>
-<td><%= date.toString(getDateFormat()) %></td>
+
+<td><% Date.parse(@event.get('start_date')).toString(getDateFormat()) %></td>
 <td><%= @event.get 'location' %></td>
 <td><i class="icon-<%= if @hasSpaces then 'ok' else 'remove' %>"></i></td>
 
