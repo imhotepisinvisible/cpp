@@ -31,16 +31,16 @@ class CPP.Routers.Events extends Backbone.Router
     events = new CPP.Collections.Events
     events.fetch
       success: ->
-        deferreds = []
-        events.each (event) =>
-          event.registered_students = new CPP.Collections.Students()
-          event.registered_students.url = "/events/" + event.id + "/attending_students"
-          deferreds.push(event.registered_students.fetch())
-          event.company = new CPP.Models.Company id: event.get "company_id"
-          deferreds.push event.company.fetch()
-        $.when.apply($, deferreds).done(=>
-          new CPP.Views.Events.Index collection: events
-        )
+        #deferreds = []
+        #events.each (event) =>
+          #event.registered_students = new CPP.Collections.Students()
+          #event.registered_students.url = "/events/" + event.id + "/attending_students"
+          #deferreds.push(event.registered_students.fetch())
+          #event.company = new CPP.Models.Company id: event.get "company_id"
+          #deferreds.push event.company.fetch()
+        #$.when.apply($, deferreds).done(=>
+        new CPP.Views.Events.Index collection: events
+        #)
       error: ->
         notify "error", "Couldn't fetch events"
 

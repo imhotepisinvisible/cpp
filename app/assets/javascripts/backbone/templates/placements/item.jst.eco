@@ -1,4 +1,4 @@
-<td><img class="small-company-logo" src="<%= @placement.company.get('logo_url') %>"/></td>
+<td><img class="small-company-logo" src="<%= @placement.get 'company_logo_url' %>"</td>
 <td><%= @placement.get 'position' %></td>
 <td><%= @placement.get('description').substring(0, 100) + '...' %></td>
 <td><%= @placement.get 'duration' %></td>
