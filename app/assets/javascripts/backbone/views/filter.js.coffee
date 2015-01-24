@@ -155,7 +155,8 @@ class CPP.Filter extends CPP.Views.Base
                   ret
                 ))
           when "date"
-          # Compare the dates in the correct format (res will be a string in timestamp format
+          # Compare the dates in the correct format
+          # res is in the default US format (mm/dd/yyyy)
           # textBox is in the format specified in utils.js.coffee
             fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
               res = eval('with (model, filter) {model' + filter.scope + '.get(filter.attribute)}')
