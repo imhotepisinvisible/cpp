@@ -11,6 +11,7 @@ window.CPP =
   Views: {}
   Routers: {}
   init: ->
+    window.CPPRouter = new CPP.Router
     new CPP.Routers.Companies
     new CPP.Routers.Students
     new CPP.Routers.Events
@@ -22,7 +23,7 @@ window.CPP =
     new CPP.Routers.CompanyContacts
     new CPP.Routers.ForgotPassword
     new CPP.Routers.Departments
-    new CPP.Routers.Site
+    #new CPP.Routers.Site
     Backbone.history.start({pushState: true})
     #Backbone.history.start()
 
@@ -77,7 +78,6 @@ $(document).on "click", "a[href^='/']", (event) ->
     url = href.replace(/^\//,'').replace('\#\!\/','')
 
     # Instruct Backbone to trigger routing events
-    testR = new CPP.Routers.Site
-    testR.navigate url, { trigger: true }
+    CPPRouter.navigate url, { trigger: true }
 
     return false
