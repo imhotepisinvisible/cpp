@@ -1,7 +1,7 @@
 # Changes the model schema
 # Used for events and placements when a department is creating an event
 # Will give department option to select company rather than the schema of
-# the model which origionally exists with a department schema
+# the model which originally exists with a department schema
 window.swapDepartmentToCompanySchema = (model, department) ->
     schema = model.schema()
 

@@ -73,7 +73,7 @@ $(document).on "click", "a[href^='/']", (event) ->
   if !passThrough && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey
     event.preventDefault()
 
-    # Remove leading slashes and hash bangs (backward compatablility)
+    # Remove leading slashes and hash bangs (backward compatibility)
     url = href.replace(/^\//,'').replace('\#\!\/','')
 
     # Instruct Backbone to trigger routing events
