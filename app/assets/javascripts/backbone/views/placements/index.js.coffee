@@ -48,8 +48,8 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
         scope: ''},
         {name: "Company"
         type: "text"
-        attribute: "name"
-        scope: ".company"},
+        attribute: "company_name"
+        scope: ''},
         {name: "Position"
         type: "text"
         attribute: "position"
@@ -57,7 +57,7 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
         {name: "Location"
         type: "text"
         attribute: "location"
-        scope: ""}
+        scope: ''}
       ]
       data: @collection
     @

@@ -47,8 +47,8 @@ class CPP.Views.Events.Index extends CPP.Views.Base
         scope: ''},
         {name: "Company"
         type: "text"
-        attribute: "name"
-        scope: ".company"},
+        attribute: "company_name"
+        scope: ''},
         {name: "Event Title",
         type: "text",
         attribute: 'title',
@@ -56,7 +56,7 @@ class CPP.Views.Events.Index extends CPP.Views.Base
         {name: "Location"
         type: "text"
         attribute: "location"
-        scope: ""},
+        scope: ''},
       ]
       data: @collection
   @
