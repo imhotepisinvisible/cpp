@@ -3,11 +3,11 @@
      <h1><%= @placement.company.get('name') %> - <%= @placement.get 'position' %></h1>
   </div>
   <div class="company-logo-header span3">
-    <a href="/#companies/<%= @placement.company.id %>" class="pull-right">
+    <a href="/companies/<%= @placement.company.id %>" class="pull-right">
       <img class="company-logo-img" src="<%= @placement.company.get('logo_url') %>">
     </a>
     <% if @admin: %>
-      <a class="btn pull-right" href="/#opportunities/<%= @placement.id %>/edit">Edit</a>
+      <a class="btn pull-right" href="/opportunities/<%= @placement.id %>/edit">Edit</a>
     <% end %>
   </div>
 </div>

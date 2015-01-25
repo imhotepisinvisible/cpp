@@ -23,8 +23,8 @@ window.CPP =
     new CPP.Routers.ForgotPassword
     new CPP.Routers.Departments
     new CPP.Routers.Site
-    # Backbone.history.start({pushState: true})
-    Backbone.history.start()
+    Backbone.history.start({pushState: true})
+    #Backbone.history.start()
 
 
 $(document).ready ->
@@ -60,4 +60,24 @@ $(document).ready ->
   # Start the app <-- VERY important ;)
   CPP.init()
 
+# Globally capture clicks. If they are internal and not in the pass
+# through list, route them through Backbone's navigate method.
+$(document).on "click", "a[href^='/']", (event) ->
 
+  href = $(event.currentTarget).attr('href')
+
+  # chain 'or's for other black list routes
+  passThrough = href.indexOf('logout') >= 0 || href.indexOf('courses') >= 0 || href.indexOf('documents') >= 0 || href.indexOf('.csv') >= 0
+
+  # Allow shift+click for new tabs, etc.
+  if !passThrough && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey
+    event.preventDefault()
+
+    # Remove leading slashes and hash bangs (backward compatablility)
+    url = href.replace(/^\//,'').replace('\#\!\/','')
+
+    # Instruct Backbone to trigger routing events
+    testR = new CPP.Routers.Site
+    testR.navigate url, { trigger: true }
+
+    return false

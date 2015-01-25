@@ -14,7 +14,7 @@
         <div class="item">
           <div>
             <span class="contact-role pull-right"><%= contact.get 'role' %></span>
-            <span class="contact-name"><%= "#{contact.get 'first_name'} #{contact.get 'last_name'}" %></span>
+            <span class="contact-name"><%= "{contact.get 'first_name'} {contact.get 'last_name'}" %></span>
           </div>
           <a class="contact-email" href="mailto:<%= contact.email %>"> <%= contact.get 'email' %></a>
         </div>

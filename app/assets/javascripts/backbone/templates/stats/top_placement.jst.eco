@@ -1,6 +1,6 @@
 <tr>
   <td>
-    <a href="/#opportunities/<%= @model.id %>">
+    <a href="/opportunities/<%= @model.id %>">
       <%= @model.get('position') %>
     </a>
   </td>

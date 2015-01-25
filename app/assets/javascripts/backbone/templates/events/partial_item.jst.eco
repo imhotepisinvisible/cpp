@@ -17,7 +17,7 @@
     <% if @editable: %>
     <div class="span2">
       <div class="btn-group pull-right">
-        <a href="#/events/<%= @model.get('id') %>/edit" class="btn btn-edit">Edit</a>
+        <a href="/events/<%= @model.get('id') %>/edit" class="btn btn-edit">Edit</a>
       </div>
     </div>
     <% end %>

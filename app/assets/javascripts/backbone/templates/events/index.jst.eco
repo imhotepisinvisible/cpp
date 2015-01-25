@@ -19,11 +19,11 @@
 
       <% if @editable: %>
         <% if @events.company?: %>
-          <a href="#/companies/<%= @events.company.get('id') %>/events/new" class="btn pull-right button-add-event">
+          <a href="/companies/<%= @events.company.get('id') %>/events/new" class="btn pull-right button-add-event">
             New Event
           </a>
         <% else: %>
-          <a href="#/events/new" class="btn pull-right button-add-event">
+          <a href="/events/new" class="btn pull-right button-add-event">
             New Event
           </a>
         <% end %>

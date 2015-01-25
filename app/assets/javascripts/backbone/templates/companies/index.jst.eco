@@ -5,7 +5,7 @@
       <i class="icon-briefcase"></i>
       Companies
       <% if @editable: %>
-        <a href="#/companies/register" class="btn pull-right button-company-add">
+        <a href="/companies/register" class="btn pull-right button-company-add">
           New Company
         </a>
       <% end %>

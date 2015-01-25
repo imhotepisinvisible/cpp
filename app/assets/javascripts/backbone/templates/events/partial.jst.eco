@@ -3,16 +3,16 @@
   Events
   <div class="btn-group pull-right">
     <% if @company?: %>
-      <a href="#/companies/<%= @company.get('id') %>/events" class="btn button-all-events">All</a>
+      <a href="/companies/<%= @company.get('id') %>/events" class="btn button-all-events">All</a>
       <% if @editable: %>
-        <a href="#/companies/<%= @company.get('id') %>/events/new" class="btn button-add-event">
+        <a href="/companies/<%= @company.get('id') %>/events/new" class="btn button-add-event">
           <i class="icon-plus"></i>
         </a>
       <% end %>
     <% else: %>
-      <a href="#/events" class="btn button-all-events">All</a>
+      <a href="/events" class="btn button-all-events">All</a>
       <% if @editable: %>
-        <a href="#/events/new" class="btn button-add-event">
+        <a href="/events/new" class="btn button-add-event">
           <i class="icon-plus"></i>
         </a>
       <% end %>

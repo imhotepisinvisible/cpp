@@ -9,11 +9,11 @@ module ApplicationHelper
 
     case current_user.type
     when 'Student'
-      return "#students/#{current_user.id}/settings"
+      return "students/{current_user.id}/settings"
     when 'CompanyAdministrator'
-      return "#companies/#{current_user.company_id}/settings"
+      return "companies/{current_user.company_id}/settings"
     when 'DepartmentAdministrator'
-      return "#department_settings"
+      return "department_settings"
     else
       return ''
     end
@@ -24,9 +24,9 @@ module ApplicationHelper
 
     case current_user.type
     when 'Student'
-      return "#students/#{current_user.id}"
+      return "students/{current_user.id}"
     when 'CompanyAdministrator'
-      return "#companies/#{current_user.company_id}"
+      return "companies/{current_user.company_id}"
     when 'DepartmentAdministrator'
       return ''
     else
@@ -39,11 +39,11 @@ module ApplicationHelper
 
     case current_user.type
     when 'Student'
-      return '#edit'
+      return 'edit'
     when 'CompanyAdministrator'
-      return "#companies/#{current_user.company_id}/edit"
+      return "companies/{current_user.company_id}/edit"
     when 'DepartmentAdministrator'
-      return "#department_dashboard"
+      return "department_dashboard"
     else
       return ''
     end
