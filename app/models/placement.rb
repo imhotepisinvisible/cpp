@@ -79,7 +79,7 @@ class Placement < ActiveRecord::Base
       t = updated_at
       message = "'#{position}' updated"
     end
-    AuditItem.new(self, t, 'placement', message, "#placements/#{id}")
+    AuditItem.new(self, t, 'placement', message, "placements/#{id}")
   end
 
   # Return JSON object

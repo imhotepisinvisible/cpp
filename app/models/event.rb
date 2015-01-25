@@ -91,7 +91,7 @@ class Event < ActiveRecord::Base
       t = updated_at
       message = "#{company.name}'s event '#{title}' was updated"
     end
-    AuditItem.new(self, t, 'event', message, "#events/#{id}")
+    AuditItem.new(self, t, 'event', message, "events/#{id}")
   end
 
   # Returns JSON object

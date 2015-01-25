@@ -50,5 +50,5 @@ class CPP.Views.DepartmentAdministrator.Register extends CPP.Views.Base
       
 
   redirect: (model) ->
-    window.location = '/#department_dashboard'
+    window.location = '/department_dashboard'
     window.location.reload(true)

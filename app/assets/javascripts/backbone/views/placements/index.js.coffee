@@ -53,7 +53,7 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
         {name: "Position"
         type: "text"
         attribute: "position"
-        scope: ""},
+        scope: ''},
         {name: "Location"
         type: "text"
         attribute: "location"

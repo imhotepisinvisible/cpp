@@ -16,11 +16,11 @@ class SessionsController < ApplicationController
 
       case user.type
       when "Student"
-        redirect_to "/#edit"
+        redirect_to "/"
       when "CompanyAdministrator"
-        redirect_to "/#edit"
+        redirect_to "/"
       when "DepartmentAdministrator"
-        redirect_to "/#department_dashboard"
+        redirect_to "/"
       else
         redirect_to root_url, :alert => "Invalid user type"
       end

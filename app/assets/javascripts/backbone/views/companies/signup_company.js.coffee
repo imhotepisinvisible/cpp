@@ -86,7 +86,7 @@ class CPP.Views.Company.Signup extends CPP.Views.Base
   # Redirect to edit page on signup
   redirect: (model) ->
     go = ->
-      window.location = '/#/companies/' + model.get('company_id') + '/edit'
+      window.location = '/companies/' + model.get('company_id') + '/edit'
       window.location.reload(true)
 
     if @login

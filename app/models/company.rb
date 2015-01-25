@@ -117,7 +117,7 @@ class Company < ActiveRecord::Base
       t = updated_at
       message = "#{name} updated their profile"
     end
-    AuditItem.new(self, t, 'company', message, "#companies/#{id}")
+    AuditItem.new(self, t, 'company', message, "companies/#{id}")
   end
 
   # Converts company to JSON object
