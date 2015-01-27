@@ -3,6 +3,7 @@
 <td><%= @placement.get('description').substring(0, 100) + '...' %></td>
 <td><%= @placement.get 'duration' %></td>
 <td><%= @placement.get 'location' %></td>
+<td><%= @placement.get 'created_at' %></td>
 <td><%= @placement.get 'deadline' %></td>
 <% if @editable: %>
 <td><%= @placement.get 'workflow_state' %></td>
