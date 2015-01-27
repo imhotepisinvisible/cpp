@@ -129,6 +129,9 @@ class Company < ActiveRecord::Base
       result[:rating] = rating(options[:student_id])
     end
 
+    dept_reg = DepartmentRegistration.find_by_company_id(id)
+    result[:status] = dept_reg.status
+
     result[:stat_count] = @stat_count
 
     return result

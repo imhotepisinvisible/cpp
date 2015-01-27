@@ -17,13 +17,14 @@
             <th>Logo</th>
             <th>Name</th>
             <th>Description</th>
+	    <th>Status</th>
             <% if @editable: %>
             <th class="btn-column"></th>
             <% end %>
           </tr>
         </thead>
         <tbody id="companies" class="cpp-tbl">
-          <tr><td colspan="<%= 3 + (@editable ? 1 : 0) %>"><div class="loading"></div></td></tr>
+          <tr><td colspan="<%= 4 + (@editable ? 1 : 0) %>"><div class="loading"></div></td></tr>
         </tbody>
       </table>
     <% else: %>
