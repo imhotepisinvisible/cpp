@@ -1,5 +1,5 @@
 # Company view
-class CPP.Views.CompaniesView extends CPP.Views.Base
+class CPP.Views.CompaniesView extends CPP.Views.CompaniesItem
   el: "#app"
   template: JST['backbone/templates/companies/view']
 
@@ -8,6 +8,7 @@ class CPP.Views.CompaniesView extends CPP.Views.Base
     # Bind events to clicking on company rating icons
     'click #star-rating'  : 'companyHighlight'
     'click #ban-rating'   : 'companyHighlight'
+    'click .button-company-edit'   : 'editCompany'
 
   # Record company view from student
   initialize: ->

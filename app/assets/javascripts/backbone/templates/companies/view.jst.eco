@@ -3,6 +3,11 @@
     <h1 class="section-header">
       <i class="icon-briefcase"></i>
       <%= @company.get 'name' %>
+      <% if isDepartmentAdmin(): %>
+        <div class="btn-group pull-right">
+	  <div class="btn btn-small button-company-edit"><i class="icon-pencil" /></div>
+        </div>
+      <% end %>
       <% if window.isStudent(): %>
         </span>
           <span id="ban-rating" class="fav-icon pull-right <%= @company.getBanClass() %>" <%= addTooltip(@tooltip, 'Click here to never receive emails from this company', 'top') %>></span>
