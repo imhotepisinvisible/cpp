@@ -3,11 +3,11 @@
      <h1><%= @event.get 'title' %></h1>
   </div>
   <div class="company-logo-header span3">
-    <a href="/#companies/<%= @event.company.id %>" class="pull-right">
+    <a href="/companies/<%= @event.company.id %>" class="pull-right">
       <img class="company-logo-img" src="<%= @event.company.get('logo_url') %>">
     </a>
     <% if @admin: %>
-      <a class="btn pull-right" href="/#events/<%= @event.id %>/edit">Edit</a>
+      <a class="btn pull-right" href="/events/<%= @event.id %>/edit">Edit</a>
     <% end %>
   </div>
 </div>
@@ -189,9 +189,9 @@
             </div>
           <% else if @admin: %>
             <div class="span6" id="event-email">
-              <a class="btn" href="/#events/<%= @event.id %>/students">View Attendees</a>
-              <a class="btn btn-primary" href="/#events/<%= @event.id %>/email_attendees">Email Attendees</a>
-              <a class="btn" href="/#events/<%= @event.id %>/emails">View Emails Sent</a>
+              <a class="btn" href="/events/<%= @event.id %>/students">View Attendees</a>
+              <a class="btn btn-primary" href="/events/<%= @event.id %>/email_attendees">Email Attendees</a>
+              <a class="btn" href="/events/<%= @event.id %>/emails">View Emails Sent</a>
             </div>
           <% end %>
         </div>

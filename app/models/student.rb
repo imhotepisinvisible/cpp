@@ -119,7 +119,7 @@ class Student < User
 
   # Creates a new audit item for when the model was last created/updated
   def to_audit_item
-    AuditItem.new(self, created_at, 'student', "#{full_name} signed up!", "#students/#{id}")
+    AuditItem.new(self, created_at, 'student', "#{full_name} signed up!", "students/#{id}")
   end
 
   # Returns JSON object

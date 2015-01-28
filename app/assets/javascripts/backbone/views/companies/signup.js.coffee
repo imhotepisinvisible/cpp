@@ -47,5 +47,5 @@ class CPP.Views.CompanyAdministrator.Signup extends CPP.Views.Base
       
   # Redirect to company edit page
   redirect: (model) ->
-    window.location = '/#/companies/' + model.get('company_id') + '/edit'
+    window.location = '/companies/' + model.get('company_id') + '/edit'
     window.location.reload(true)

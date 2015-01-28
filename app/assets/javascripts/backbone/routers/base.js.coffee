@@ -1,6 +1,7 @@
-class CPP.Routers.Site extends Backbone.Router
+class CPP.Router extends Backbone.Router
   routes:
       '' : 'index'
+      '*default': 'index'
 
   # Navigate to appropriate dashboard depending on current user
   index: ->

@@ -1,4 +1,4 @@
-<td><img class="img-logo company-logo-img" width="150px" src="<%= @company.get('logo_url') %>"></td>
+<td><img class="img-logo company-logo-img" width="150px" src="<%= @company.get('logo_url_medium') %>"></td>
 <td><%= @company.get('name') %></td>
 <td><%= @company.get('description').substring(0, 100) + '...' %></td>
 <td><%= @company.getStatus(@company.get('status'))%></td>

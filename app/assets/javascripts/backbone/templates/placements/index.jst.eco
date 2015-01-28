@@ -13,11 +13,11 @@
 
       <% if @editable: %>
         <% if @placements.company?: %>
-          <a href="#/companies/<%= @placements.company.get('id') %>/opportunities/new" class="btn pull-right button-add-placement">
+          <a href="/companies/<%= @placements.company.get('id') %>/opportunities/new" class="btn pull-right button-add-placement">
             New Opportunity
           </a>
         <% else: %>
-          <a href="#/opportunities/new" class="btn pull-right button-add-placement">
+          <a href="/opportunities/new" class="btn pull-right button-add-placement">
             New Opportunity
           </a>
         <% end %>

@@ -84,6 +84,7 @@ class Ability
       can :manage, Placement do |placement|
         placement.departments.map(&:id).include? user.department_id
       end
+      can :create, Student
       can :manage, Student do |student|
         student.departments.map(&:id).include? user.department_id
       end

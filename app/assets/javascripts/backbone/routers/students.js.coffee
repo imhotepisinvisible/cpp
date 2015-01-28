@@ -7,7 +7,7 @@ class CPP.Routers.Students extends Backbone.Router
       'students/:id/settings': 'settings'
       'departments/:id/students/signup': 'signup'
 
-      'dashboard': 'edit'
+      'edit': 'edit'
       'profile_preview': 'view'
       'settings': 'settings'
       'register': 'signup'

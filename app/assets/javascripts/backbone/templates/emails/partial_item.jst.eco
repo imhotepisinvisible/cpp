@@ -4,7 +4,7 @@
   <% end %>
 </td>
 <td>
-  <a href="/#tagged_emails/<%= @email.get('id') %>/edit" ><%= @email.get('subject') %></a>
+  <a href="/tagged_emails/<%= @email.get('id') %>/edit" ><%= @email.get('subject') %></a>
 </td>
 <td>
   <%= @email.get('state') %>

@@ -77,7 +77,7 @@
     <div class="control-group">
       <div class="controls">
         <div class="btn btn-submit"><%= send_button_text %></div>
-        <a href="/#students">Cancel</a>
+        <a href="/students">Cancel</a>
       </div>
     </div>
   </div>

@@ -91,7 +91,7 @@ class Event < ActiveRecord::Base
       t = updated_at
       message = "#{company.name}'s event '#{title}' was updated"
     end
-    AuditItem.new(self, t, 'event', message, "#events/#{id}")
+    AuditItem.new(self, t, 'event', message, "events/#{id}")
   end
 
   # Returns JSON object
@@ -100,6 +100,8 @@ class Event < ActiveRecord::Base
     result[:relevance] = relevance(options[:student_id]) if options.has_key? :student_id
     result[:departments] = options[:depts] if options.has_key? :depts
     result[:stat_count] = @stat_count
+    result[:company_name] = company.name
+    result[:company_logo_url] = company.logo.url(:thumbnail)
     return result
   end
 

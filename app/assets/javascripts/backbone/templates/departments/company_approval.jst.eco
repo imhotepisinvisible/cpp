@@ -2,14 +2,14 @@
   <div class="row-fluid">
     <div class="span2">
       <div class="company-logo-header">
-        <a href="/#companies/<%= @company.id %>">
+        <a href="/companies/<%= @company.id %>">
           <img src="<%= @company.get('logo_url') %>">
         </a>
       </div>
     </div>
     <div class="span8">
       <div class="approval-display-container">
-        <span class="approval-status"><a href="/#companies/<%= @company.id %>"><%= @company.get 'name' %></a>: Pending your approval</span>
+        <span class="approval-status"><a href="/companies/<%= @company.id %>"><%= @company.get 'name' %></a>: Pending your approval</span>
       </div>
     </div>
     <div class="span2">

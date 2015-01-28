@@ -1,7 +1,5 @@
 CPP::Application.routes.draw do
 
-  resources :courses
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -52,7 +50,8 @@ CPP::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'site#index'
-
+  
+  # Non-Backbone Routes
   get ":controller/:id/stat_show", :action => "stat_show"
 
   get "logout" => "sessions#destroy", :as => "logout"
@@ -65,13 +64,25 @@ CPP::Application.routes.draw do
   get "companies/top_5" => "companies#top_5"
   get "events/top_5" => "events#top_5"
   get "placements/top_5" => "placements#top_5"
+  
+  get ':controller/:id/documents/:document_type', :action => :download_document
+
+  resources :sessions
+
+  resources :courses
+
+  # Pass all other routes through to Backbone
+  class XHRConstraint
+    def matches?(request)
+      !request.xhr? && !(request.url =~ /\.csv$/) && !(request.url =~ /\.json$/ && ::Rails.env == 'development')
+    end
+  end
+  match '(*url)' => 'site#index', :constraints => XHRConstraint.new
 
   resources :users do
     put 'change_password', :on => :collection, :action => :change_password
     put 'forgot_password', :on => :collection, :action => :forgot_password
   end
-
-  resources :sessions
 
   resources :audit_items
   resources :companies
@@ -155,6 +166,8 @@ CPP::Application.routes.draw do
   match 'tags/reject_skills' => 'tags#reject_skills'
   match 'tags/reject_interests' => 'tags#reject_interests'
   match 'tags/validate' => 'tags#validate'
+
+
 
   # See how all your routes lay out with "rake routes"
 

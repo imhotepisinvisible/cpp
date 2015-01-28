@@ -1,6 +1,6 @@
 <div class="item">
   <div class="approval-display-container">
-    <span class="email-name">Email: <a href="/#emails/<%= @email.get 'id' %>"><%= @email.get 'subject' %></a></span>
+    <span class="email-name">Email: <a href="/emails/<%= @email.get 'id' %>"><%= @email.get 'subject' %></a></span>
   </div>
 
   <div class="btn-container btn-group">

@@ -44,7 +44,7 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
           notify "success", "Registered"
           if @login
             $.post '/sessions', { session: { email: @model.get('email'), password: @model.get('password') } }, (data) ->
-              window.location = '/#/students/' + model.get('id') + '/edit'
+              window.location = '/students/' + model.get('id') + '/edit'
               window.location.reload(true)
           else
             Backbone.history.navigate("/students/#{model.id}/edit", trigger: true)

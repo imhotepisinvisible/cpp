@@ -117,7 +117,7 @@ class Company < ActiveRecord::Base
       t = updated_at
       message = "#{name} updated their profile"
     end
-    AuditItem.new(self, t, 'company', message, "#companies/#{id}")
+    AuditItem.new(self, t, 'company', message, "companies/#{id}")
   end
 
   # Converts company to JSON object
@@ -125,6 +125,7 @@ class Company < ActiveRecord::Base
   def as_json(options={})
     result = super(:methods => [:skill_list, :interest_list, :year_group_list])
     result[:logo_url] = logo.url(:large)
+    result[:logo_url_medium] = logo.url(:medium)
     if options.has_key? :student_id
       result[:rating] = rating(options[:student_id])
     end

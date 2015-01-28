@@ -6,7 +6,7 @@
       Students
 
       <% if @editable: %>
-        <a href="#/students/new" class="btn pull-right button-student-add">
+        <a href="/students/new" class="btn pull-right button-student-add">
           New Student
         </a>
       <% end %>
