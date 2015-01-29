@@ -1,6 +1,7 @@
 <div class="item">
   <div class="approval-display-container">
-    <span class="event-name">Event: <a href="/#events/<%= @event.get 'id' %>"><%= @event.get 'title' %></a></span>
+    <span> <a href="/#companies/<%= @event.get 'company_id'%>"><%= @event.get 'company_name' %></a></span>		
+    <span class="event-name"> - <a href="/#events/<%= @event.get 'id' %>"><%= @event.get 'title' %></a></span>
     <div class="btn-container btn-group">
       <div class="btn btn-primary btn-approve">Approve</div>
       <div class="btn btn-danger btn-reject">Reject</div>
