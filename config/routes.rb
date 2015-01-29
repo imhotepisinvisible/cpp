@@ -69,7 +69,7 @@ CPP::Application.routes.draw do
 
   resources :sessions
 
-  resources :courses
+  
 
   # Pass all other routes through to Backbone
   class XHRConstraint
@@ -83,7 +83,7 @@ CPP::Application.routes.draw do
     put 'change_password', :on => :collection, :action => :change_password
     put 'forgot_password', :on => :collection, :action => :forgot_password
   end
-
+  resources :courses
   resources :audit_items
   resources :companies
   resources :events do

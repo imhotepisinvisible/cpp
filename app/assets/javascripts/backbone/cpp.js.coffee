@@ -23,6 +23,7 @@ window.CPP =
     new CPP.Routers.CompanyContacts
     new CPP.Routers.ForgotPassword
     new CPP.Routers.Departments
+    new CPP.Routers.Courses
     #new CPP.Routers.Site
     Backbone.history.start({pushState: true})
     #Backbone.history.start()
