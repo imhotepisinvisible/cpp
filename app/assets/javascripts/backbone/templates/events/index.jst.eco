@@ -30,6 +30,7 @@
       <% end %>
 
     </h1>
+    <div id="events-table">
     <% if @events.length > 0: %>
       <table class="table table-bordered table-hover table-clickable">
         <thead>
@@ -52,5 +53,6 @@
     <% else: %>
       <p>No events created yet!</p>
     <% end %>
+    </div>
   </div>
 </div>

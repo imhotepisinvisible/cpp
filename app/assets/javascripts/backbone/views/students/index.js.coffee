@@ -6,11 +6,14 @@ class CPP.Views.Students.Index extends CPP.Views.Base
 
   # Bind to update placement collection
   initialize: ->
+    @collection.on "fetch", (->
+        @$('#students-table').html "<div class=\"loading\"></div>"
+        return), @
     @collection.bind 'reset', @render, @
     @collection.bind 'filter', @renderStudents, @
     @editable = isDepartmentAdmin()
     @courses = new CPP.Collections.Courses
-    @courses.fetch({async:false })
+    @courses.fetch({async:false})
     @render()
 
   # Render index template, students and filters
@@ -60,4 +63,5 @@ class CPP.Views.Students.Index extends CPP.Views.Base
         scope: ""}
       ]
       data: @collection
+      courses: @courses
   @

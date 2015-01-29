@@ -18,9 +18,8 @@ class CPP.Routers.Students extends Backbone.Router
       window.history.back()
       return false
     students = new CPP.Collections.Students
+    new CPP.Views.Students.Index collection: students
     students.fetch
-      success: ->
-        new CPP.Views.Students.Index collection: students
       error: ->
         notify "error", "Couldn't fetch students"
 

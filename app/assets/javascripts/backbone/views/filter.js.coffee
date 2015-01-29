@@ -32,22 +32,23 @@ class CPP.Filter extends CPP.Views.Base
     # Re-set filter after deletion
     @data.bind 'remove', @setFilter, @
 
-    @skill_list_tags_form = new Backbone.Form.editors.TagEditor
-      model: @model
-      key: 'skill_list'
-      title: 'Skills'
-      url: '/tags/skills'
-      tag_class: 'label-success'
+    for filter in @filters
+        if filter.type == "tags"
+    	    @skill_list_tags_form = new Backbone.Form.editors.TagEditor
+      		  model: @model
+      		  key: 'skill_list'
+      		  title: 'Skills'
+      		  url: '/tags/skills'
+      		  tag_class: 'label-success'
 
-    @interest_list_tags_form = new Backbone.Form.editors.TagEditor
-      model: @model
-      key: 'interest_list'
-      title: 'Interests'
-      url: '/tags/interests'
-      tag_class: 'label-warning'
-
-    @courses = new CPP.Collections.Courses
-    @courses.fetch({async:false})
+    	    @interest_list_tags_form = new Backbone.Form.editors.TagEditor
+      		  model: @model
+      		  key: 'interest_list'
+      		  title: 'Interests'
+      		  url: '/tags/interests'
+      		  tag_class: 'label-warning'
+        else if filter.type == "course"
+            @courses = options.courses
 
     @render()
 

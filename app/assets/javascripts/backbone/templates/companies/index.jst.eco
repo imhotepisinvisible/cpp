@@ -10,6 +10,7 @@
         </a>
       <% end %>
     </h1>
+    <div id="companies-table">
     <% if @companies.length > 0: %>
       <table class="table table-bordered table-hover table-clickable">
         <thead>
@@ -29,5 +30,6 @@
     <% else: %>
       <p>No companies signed up yet!</p>
     <% end %>
+    </div>
   </div>
 </div>

@@ -11,6 +11,9 @@ class CPP.Views.Events.Index extends CPP.Views.Base
   # Bind reset and filter events to render and renderEvents so that on change
   # the views change.
   initialize: ->
+    @collection.on "fetch", (->
+    	@$('#events-table').html "<div class=\"loading\"></div>"
+    	return), @
     @collection.bind 'reset', @render, @
     @collection.bind 'filter', @renderEvents, @
     @editable = isAdmin()

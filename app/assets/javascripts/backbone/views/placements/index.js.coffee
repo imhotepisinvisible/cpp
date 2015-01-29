@@ -11,6 +11,9 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
 
   # Bind to update placement collection
   initialize: ->
+    @collection.on "fetch", (->
+        @$('#placements-table').html "<div class=\"loading\"></div>"
+        return), @
     @collection.bind 'reset', @render, @
     @collection.bind 'filter', @renderPlacements, @
     @editable = isAdmin()

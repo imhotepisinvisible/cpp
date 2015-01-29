@@ -11,6 +11,7 @@
         </a>
       <% end %>
     </h1>
+    <div id="students-table">
     <% if @students.length > 0: %>
       <table class="table table-bordered table-hover table-clickable">
         <thead>
@@ -29,5 +30,6 @@
     <% else: %>
       <p>No students signed up yet!</p>
     <% end %>
+    </div>
   </div>
 </div>
