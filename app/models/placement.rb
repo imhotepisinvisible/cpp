@@ -88,6 +88,7 @@ class Placement < ActiveRecord::Base
     result[:relevance] = relevance(options[:student_id]) if options.has_key? :student_id
     result[:departments] = options[:depts] if options.has_key? :depts
     result[:stat_count] = @stat_count
+    result[:company_name] = company.name
     return result
   end
 
