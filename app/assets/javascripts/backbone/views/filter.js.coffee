@@ -76,7 +76,7 @@ class CPP.Filter extends CPP.Views.Base
           $(@sub_el).append(@templateDate(filter: filter))
           $('.fltr-date').datepicker
             weekStart: 1
-            format: 'dd/mm/yyyy'
+            format: getDatePickerFormat() #'dd/mm/yyyy'
             autoclose: true
       if filter.default
         $('#'+filter.attribute).val(filter.default)
