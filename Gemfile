@@ -43,7 +43,7 @@ gem 'jquery-rails'                # Add jQuery goodness
 gem 'backbone-on-rails', '0.9.10.0'# Nice client side JS framework
 gem 'backbone-validation-rails'   # Adds model validation in Backbone
 gem 'underscore-rails'            # Templating for backboneJS
-gem 'rails-backbone-forms', '0.10.1' # Client side form validation
+gem 'rails-backbone-forms', '0.11.1' # Client side form validation
 gem 'bootstrap-datepicker-rails'  # Date picker
 gem 'datejs-rails'                # Nicer date manipulation in Javascript
 gem 'jquery-fileupload-rails'     # File upload
