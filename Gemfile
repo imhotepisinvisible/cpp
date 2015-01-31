@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Config/Server
 gem 'thin'                        # Better server :)
 gem 'unicorn'                     # Unicorn webserver: better for running on a VM
-gem 'rails', '3.2.1'              # Running on rails, wooo
+gem 'rails', '3.2.1'             # Running on rails, wooo
 gem 'therubyracer', '0.12.1'      # Javascript Engine
 
 # Back End Gems
@@ -47,7 +47,7 @@ gem 'rails-backbone-forms', '0.10.1' # Client side form validation
 gem 'bootstrap-datepicker-rails'  # Date picker
 gem 'datejs-rails'                # Nicer date manipulation in Javascript
 gem 'jquery-fileupload-rails'     # File upload
-gem 'bootstrap-toggle-buttons-rails', :git => 'http://github.com/wafcio/bootstrap-toggle-buttons-rails.git' # On/Off switches
+gem 'rails-bootstrap-toggle-buttons' # On/Off switches
 gem 'highcharts-rails'
 
 group :assets do
