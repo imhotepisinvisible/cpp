@@ -7,23 +7,7 @@ FactoryGirl.define do
     beng_student
     first_year
     looking_for {["Not looking for anything", "Looking for a Summer Placement", "Looking for an Industrial Placement"].sample}
-    email {["st809", "peh10", "tw810", "tw310", "js410"].sample + "@imperial.ac.uk"}
-
-    trait :beng_student do
-      degree "BEng"
-    end
-
-    trait :meng_student do
-      degree "MEng"
-    end
-
-    trait :msc_student do
-      degree "Msc"
-    end
-
-    trait :phd_student do
-      degree "PhD"
-    end
+    email {["og514", "isb14", "hwl214", "sg5414", "al4209"].sample + "@imperial.ac.uk"}
 
     trait :first_year do
       year 1

@@ -36,9 +36,9 @@ FactoryGirl.create :organisation_domain, {
 }
 
 computing_department = FactoryGirl.create :department, {
-  name:"Department of Computing",
+  name: "Department of Computing",
   organisation: organisation,
-  settings_notifier_placement: "If this is your first placement you're offering, make sure you send back a placement performa and a health and saftey form which can be found on https://www.doc.ic.ac.uk/internal/industrialplacements/employers/IPproforma12-studentorganised.doc and https://www.doc.ic.ac.uk/internal/industrialplacements/employers/Placement_Provider_Information_Form_2012.doc",
+  settings_notifier_placement: "If this is your first placement you're offering, make sure you send back a placement performa and a health and safety form which can be found on https://www.doc.ic.ac.uk/internal/industrialplacements/employers/IPproforma12-studentorganised.doc and https://www.doc.ic.ac.uk/internal/industrialplacements/employers/Placement_Provider_Information_Form_2012.doc",
   settings_notifier_event: "Please note that at current an event must be scheduled at least two weeks in advance to be approved."
 }
 
@@ -50,13 +50,13 @@ oliver = FactoryGirl.create :student,  {
   password_confirmation: "cppcppcpp",
   year: 3,
   bio: "Placeholder Text",
-  degree: 'MSc in Computing Science',
-  departments: [computing_department]
+  course_id: 13
 }
 
 oliver.skill_list = ["Ruby on Rails", "Backbone.js", "Java", "Coffeescript", "Javascript", "HTML", "CSS"]
 oliver.interest_list = ["Web Dev", "Startups", "iOS Dev", "Open Source"]
 oliver.year_group_list = ["3rd Year", "MEng"]
+oliver.departments = [computing_department]
 oliver.save!
 
 isb14 = FactoryGirl.create :student,  {
@@ -67,7 +67,7 @@ isb14 = FactoryGirl.create :student,  {
   password_confirmation: "cppcppcpp",
   year: 3,
   bio: "Placeholder Text.",
-  degree: 'MSc in Computing Science',
+  course_id: 13,
   departments: [computing_department]
 }
 
@@ -84,7 +84,7 @@ hwl214 = FactoryGirl.create :student,  {
   password_confirmation: "cppcppcpp",
   year: 3,
   bio: "Placeholder Text.",
-  degree: 'MSc in Computing Science',
+  course_id: 13,
   departments: [computing_department]
 }
 
@@ -96,7 +96,7 @@ sg5414 = FactoryGirl.create :student,  {
   password_confirmation: "cppcppcpp",
   year: 3,
   bio: "Placeholder Text.",
-  degree: 'MSc in Computing Science',
+  course_id: 13,
   departments: [computing_department]
 }
 
@@ -108,7 +108,7 @@ al4209 = FactoryGirl.create :student,  {
   password_confirmation: "cppcppcpp",
   year: 3,
   bio: "Placeholder Text.",
-  degree: 'MSc in Computing Science',
+  course_id: 13,
   departments: [computing_department]
 }
 
