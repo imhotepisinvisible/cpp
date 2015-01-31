@@ -36,6 +36,9 @@ class CPP.Models.Company extends CPP.Models.Base
       return "red-ban icon-ban-circle"
     return "icon-ban-circle"
 
+  getStatus: (code)->
+    return window.approvalStatusMap(code).split(',')[0]
+    
   validation:
     name:
       required: true
