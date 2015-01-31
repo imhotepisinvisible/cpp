@@ -34,9 +34,8 @@ class CPP.Routers.Departments extends Backbone.Router
     unless department
       notify 'error', 'Invalid department'
     else
+      new CPP.Views.Departments.Dashboard model: department
       department.fetch
-        success: ->
-          new CPP.Views.Departments.Dashboard model: department
         error: ->
           notify 'error', "Couldn't fetch department"
 
