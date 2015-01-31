@@ -50,13 +50,13 @@ oliver = FactoryGirl.create :student,  {
   password_confirmation: "cppcppcpp",
   year: 3,
   bio: "Placeholder Text",
-  course_id: 13
+  course_id: 13,
+  departments: [computing_department]
 }
 
 oliver.skill_list = ["Ruby on Rails", "Backbone.js", "Java", "Coffeescript", "Javascript", "HTML", "CSS"]
 oliver.interest_list = ["Web Dev", "Startups", "iOS Dev", "Open Source"]
 oliver.year_group_list = ["3rd Year", "MEng"]
-oliver.departments = [computing_department]
 oliver.save!
 
 isb14 = FactoryGirl.create :student,  {
