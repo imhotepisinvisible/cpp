@@ -77,7 +77,7 @@ class CPP.Filter extends CPP.Views.Base
           $(@sub_el).append(@templateDate(filter: filter))
           $('.fltr-date').datepicker
             weekStart: 1
-            format: 'yyyy-mm-dd'
+            format: getDatePickerFormat() #'dd/mm/yyyy'
             autoclose: true
       if filter.default
         $('#'+filter.attribute).val(filter.default)
@@ -156,10 +156,13 @@ class CPP.Filter extends CPP.Views.Base
                   ret
                 ))
           when "date"
+          # Compare the dates in the correct format
+          # res is in the default US format (mm/dd/yyyy)
+          # textBox is in the format specified in utils.js.coffee
             fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
               res = eval('with (model, filter) {model' + filter.scope + '.get(filter.attribute)}')
-              res >= textBox || res == null
-            ))
+              Date.parse(res) >= Date.parseExact(textBox, getDateFormat()) || res == null 
+            )) #res >= textBox || res == null
       # Trigger filter with the updated collection to re-render individually from the page
       @data.trigger('filter', fCollection)
   @

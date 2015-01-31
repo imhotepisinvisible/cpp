@@ -47,7 +47,7 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
         {name: "Deadline After",
         type: 'date',
         attribute: 'deadline'
-        default: Date.today().toString('yyyy-MM-dd')
+        default: Date.today().toString(getDateFormat()) #'dd/MM/yyyy')
         scope: ''},
         {name: "Company"
         type: "text"

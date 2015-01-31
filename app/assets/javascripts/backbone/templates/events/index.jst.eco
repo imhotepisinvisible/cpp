@@ -37,7 +37,7 @@
           <tr>
             <th>Company</th>
             <th>Event</th>
-            <th>Start Date</th>
+            <th>Date</th>
             <th>Location</th>
             <th>Spaces</th>
             <% if @editable: %>
