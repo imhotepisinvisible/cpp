@@ -23,7 +23,6 @@ class Ability
     case user.type
     when nil
       can :create, Student
-      can :create, Company
       can :create, CompanyAdministrator
       can :read, Department
     when "Student"

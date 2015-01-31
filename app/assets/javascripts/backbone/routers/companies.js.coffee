@@ -129,9 +129,6 @@ class CPP.Routers.Companies extends Backbone.Router
       # Dept administrator registering new admin and company
       # so don't log in once registered
       @signupNewCompany false
-    else if not CPP.CurrentUser?
-      # Nobody logged in, registering new company admin and new company
-      @signupNewCompany true
     else
       window.history.back()
       return false
