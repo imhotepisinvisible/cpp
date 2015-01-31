@@ -85,7 +85,7 @@ class Student < User
     active &&
     !first_name.blank? &&
     !last_name.blank? &&
-    (!degree.blank? || !course_id.blank?) &&
+    !course_id.blank? &&
     !year.blank? &&
     !cv_file_size.nil?
   end

@@ -7,8 +7,6 @@
 <td>
 	<% if @student.get('course_id') != null: %>
 		<%= @courses.models[@student.get 'course_id'].attributes.name %>
-	<% else: %>
-		<%= @student.get 'degree' %>
 	<% end %>
 </td>
 
