@@ -27,7 +27,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
   # Setup skills, interests and year tag editors
   # Initialise uploads and call render
   initialize: ->
-    # Auxhillary function, saved model on tag input
+    # Auxiliary function, saved model on tag input
     saveModel = ->
       @model.save {},
         success: (model, response) ->
@@ -59,6 +59,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
 
     @courses = new CPP.Collections.Courses
     @courses.fetch({async:false})
+    
     @render()
     @uploadInitialize 'cv'
     @uploadInitialize 'transcript'

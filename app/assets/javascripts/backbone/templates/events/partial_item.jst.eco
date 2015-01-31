@@ -3,7 +3,7 @@
 
     <div class="span2">
       <div class="company-logo-header">
-        <img src="<%= @model.company.get('logo_url') %>">
+        <img src="<%= @model.get('company_logo_url') %>">
       </div>
     </div>
 

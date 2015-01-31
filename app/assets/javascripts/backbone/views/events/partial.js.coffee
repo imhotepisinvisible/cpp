@@ -7,7 +7,10 @@ class CPP.Views.Events.Partial extends CPP.Views.Base
   initialize: () ->
     @editable = @options.editable? && @options.editable
     @company  = @options.company
-    @collection.bind('reset', @addAll)
+    @collection.on "fetch", (->
+    	@$('#events').html "<div class=\"loading\"></div>"
+    	return), @
+    @collection.bind('reset', @render, @)
     @render()
 
   addTopThree: () ->
@@ -23,7 +26,7 @@ class CPP.Views.Events.Partial extends CPP.Views.Base
   # Render template view and display top three events if the collection
   # has more than one item
   render: () ->
-    @$el.html(@template(company: @company, editable: @editable))
+    $(@el).html(@template(company: @company, editable: @editable))
     if @collection.length > 0
       @addTopThree()
     else

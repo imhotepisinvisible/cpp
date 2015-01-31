@@ -9,7 +9,10 @@ class CPP.Views.Placements.Partial extends CPP.Views.Base
   initialize: () ->
     @editable = @options.editable? && @options.editable
     @company  = @options.company
-    @collection.bind('reset', @addAll)
+    @collection.on "fetch", (->
+    	@$('#placements').html "<div class=\"loading\"></div>"
+    	return), @
+    @collection.bind('reset', @render, @)
     @render()
 
   # For the first three placements, call addOne
@@ -26,7 +29,7 @@ class CPP.Views.Placements.Partial extends CPP.Views.Base
   # Render placement partial tamplate and populate three placements
   # If there are no placements then display no placement message
   render: () ->
-    @$el.html(@template(company: @company, editable: @editable))
+    $(@el).html(@template(company: @company, editable: @editable))
     if @collection.length > 0
       @addTopThree()
     else
