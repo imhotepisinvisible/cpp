@@ -8,7 +8,8 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
   # Bind events
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-submit': 'submitStudent'
-
+    'keydown' : 'enterPress'
+           
   # If department admin then remove department from schema
   # Define signup form 
   initialize: (options) ->
@@ -32,6 +33,10 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
     Backbone.Validation.bind @form
     validateField(@form, field) for field of @form.fields
     @
+
+  enterPress: (k) ->
+    if k.keyCode == 13
+        @submitStudent()
 
   # Submit form, validate and save fields
   submitStudent: ->
