@@ -25,6 +25,7 @@ class CPP.Views.Placements.PartialItem extends CPP.Views.Base
   # Edit placement via placement edit button 
   editPlacement: (e) ->
     e.stopPropagation()
+    Backbone.history.navigate("opportunities/" + @model.id + "/edit", trigger: true)
 
   # Stop propagation to only register event on clicked item
   # View placement via clicking on partial item  

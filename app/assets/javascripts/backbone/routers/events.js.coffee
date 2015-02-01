@@ -11,18 +11,8 @@ class CPP.Routers.Events extends Backbone.Router
   # Events index for a specific company
   indexCompany: (company_id) ->
     events = new CPP.Collections.Events
+    new CPP.Views.Events.Index collection: events
     events.fetch
-      data:
-        $.param({ company_id: company_id})
-      success: ->
-        events.company = new CPP.Models.Company id: company_id
-        events.company.fetch
-          success: ->
-            events.each (event) =>
-              event.company = events.company
-            new CPP.Views.Events.Index collection: events
-          error: ->
-            notify "error", "Couldn't fetch company for event"
       error: ->
         notify "error", "Couldn't fetch events"
 

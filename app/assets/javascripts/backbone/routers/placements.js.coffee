@@ -10,18 +10,8 @@ class CPP.Routers.Placements extends Backbone.Router
   # Placements index for specific company
   indexCompany: (company_id) ->
     placements = new CPP.Collections.Placements
+    new CPP.Views.Placements.Index collection: placements
     placements.fetch
-      data:
-        $.param({ company_id: company_id})
-      success: ->
-        placements.company = new CPP.Models.Company id: company_id
-        placements.company.fetch
-          success: ->
-            placements.each (placement) =>
-              placement.company = placements.company
-            new CPP.Views.Placements.Index collection: placements
-          error: ->
-            notify "error", "Couldn't fetch company for placement"
       error: ->
         notify "error", "Couldn't fetch placements"
 
