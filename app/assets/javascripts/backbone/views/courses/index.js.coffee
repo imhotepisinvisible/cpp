@@ -1,8 +1,8 @@
-CPP.Views.Course ||= {}
+CPP.Views.Courses ||= {}
 
-class CPP.Views.Course extends CPP.Views.Base
+class CPP.Views.Courses.Index extends CPP.Views.Base
   el: "#app"
-  template: JST['backbone/template/courses/course']
+  template: JST['backbone/templates/courses/index']
 
   # events: -> _.extend {}, CPP.Views.Base::events,
   #   'click .btn-edit'       : 'edit'
@@ -11,7 +11,10 @@ class CPP.Views.Course extends CPP.Views.Base
   #   'click .btn-new_course' : 'edit' #check double barrel
 
   initialize: (options) ->
-    @render
+    @collection.bind 'reset', @render, @
+    @collection.bind 'change', @render, @
+    @collection.bind 'filter', @renderCourses, @
+    @render()
 
   render: ->
     $(@el).html(@template(courses: @collection))

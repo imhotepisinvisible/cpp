@@ -25,7 +25,8 @@ class Student < User
   has_many :events,     :through => :departments, :uniq => true
   has_many :placements, :through => :companies, :uniq => true
   has_many :student_company_ratings
-  belongs_to :course
+
+  has_one :course
 
   has_and_belongs_to_many :registered_events,
                           :join_table => :student_event_registrations,
