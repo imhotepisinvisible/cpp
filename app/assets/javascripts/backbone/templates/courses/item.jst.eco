@@ -1,4 +1,9 @@
-<td><%= @course.get('name') %></td>
+<td><%= @course.get 'name' %></td>
+
+
+
+
+<!-- <td><%= @course.get('name') %></td> -->
 <!-- <td> -->
 <!--   <div class="btn-group pull-right"> -->
 <!--     <div class="btn btn-small button-course-view"><i class="icon-pencil" /></div> -->
@@ -6,4 +11,3 @@
 <!--     <div class="btn btn-small button-course-delete"><i class="icon-trash" /></div>     -->
 <!--   </div> -->
 <!-- </td> -->
-<!-- <% end %> -->

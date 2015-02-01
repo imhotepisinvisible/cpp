@@ -53,4 +53,5 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     @course.destroy
     head :no_content
+  end
 end

@@ -3,7 +3,7 @@ class CPP.Routers.Courses extends Backbone.Router
     'courses'          : 'index'
    # 'courses/:id'      : 'view' #check if show is correct
    # 'courses/:id/edit' : 'edit'
-   # 'courses/new'      : 'new'
+    'courses/new'      : 'new'
 
   index: ->
     if !isDepartmentAdmin()
@@ -15,8 +15,18 @@ class CPP.Routers.Courses extends Backbone.Router
         view = new CPP.Views.Courses.Index collection: courses
       error: ->
         notify "error", "Couldn't fetch courses"
+        
     
   #view: (id) ->
   #  courses = new CPP.Models.course
   #  courses.fetch
   #  new CPP.Vies.Courses.
+
+
+  new: ->
+    if !isDepartmentAdmin()
+      window.history.back()
+      return false
+    course = new CPP.Models.Course    
+    course.collection = new CPP.Collections.Courses
+    new CPP.Views.Courses.New model: course 

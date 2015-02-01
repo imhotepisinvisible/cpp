@@ -82,10 +82,10 @@ CPP::Application.routes.draw do
   resources :users do
     put 'change_password', :on => :collection, :action => :change_password
     put 'forgot_password', :on => :collection, :action => :forgot_password
-  end
-  resources :courses
+  end  
   resources :audit_items
   resources :companies
+  resources :courses
   resources :events do
     post '/register', :on => :member, :action => :register
     post '/unregister', :on => :member, :action => :unregister

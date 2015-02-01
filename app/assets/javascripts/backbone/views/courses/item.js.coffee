@@ -1,4 +1,4 @@
-CPP.Vies.Courses ||= {}
+#CPP.Vies.Courses ||= {}
 
 class CPP.Views.Courses.Item extends CPP.Views.Base
   tagName: "tr"
@@ -7,9 +7,9 @@ class CPP.Views.Courses.Item extends CPP.Views.Base
   template: JST['backbone/templates/courses/item']
 
   # Individual company item in index
-  initialize: ->
+  #initialize: ->
     # Bind to model change so backbone view update on destroy  
-    @model.bind 'change', @render, @
+   # @model.bind 'change', @render, @
 
   render: ->
     $(@el).html(@template(course: @model))
