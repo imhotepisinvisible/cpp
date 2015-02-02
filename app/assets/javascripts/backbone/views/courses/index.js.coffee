@@ -5,20 +5,18 @@ class CPP.Views.Courses.Index extends CPP.Views.Base
   template: JST['backbone/templates/courses/index']
 
   events: -> _.extend {}, CPP.Views.Base::events,
-  #   'click .btn-edit'       : 'edit'
-  #   'click .btn-view'       : 'view'
-  #   'click .btn-delete'     : 'delete'
-      'click .btn-new_course' : 'new' #check double barrel
+      'click .btn-new_course' : 'new' 
 
   initialize: (options) ->
     @collection.bind 'reset', @render, @
-    @collection.bind 'change', @render, @
-    @collection.bind 'filter', @renderCourses, @
+    @collection.bind 'change', @render, @    
+    @collection.bind 'destroy', @render, @
     @render()
 
   render: ->
     $(@el).html(@template(courses: @collection))
     @renderCourses(@collection)
+  @
 
   renderCourses: (col) ->
     @$('#courses').html("")

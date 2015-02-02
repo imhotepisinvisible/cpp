@@ -1,4 +1,3 @@
-#CPP.Vies.Courses ||= {}
 
 class CPP.Views.Courses.Item extends CPP.Views.Base
   tagName: "tr"
@@ -6,12 +5,21 @@ class CPP.Views.Courses.Item extends CPP.Views.Base
 
   template: JST['backbone/templates/courses/item']
 
-  # Individual company item in index
-  #initialize: ->
-    # Bind to model change so backbone view update on destroy  
-   # @model.bind 'change', @render, @
+  events: -> _.extend {}, CPP.Views.Base::events,
+    'click .button-course-delete'       : 'delete'
 
   render: ->
     $(@el).html(@template(course: @model))
     @
-        
+
+  # Delete the course
+  delete: (e) ->
+    e.stopPropagation()
+    @model.destroy
+      wait: true
+      success: (model, response) ->
+        notify "success", "Course deleted"
+      error: (model, response) ->
+        notify "error", "Course could not be deleted"
+    
+  

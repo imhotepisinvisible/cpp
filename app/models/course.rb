@@ -16,8 +16,7 @@ class Course < ActiveRecord::Base
   def as_json(options={})
     #result[:student_id] = student.profile_id
     #result super(:methods => [:type])
-    result = super()
-    result[:student_id] = 1 #just testing 
+    result = super()     
     return result
   end
 

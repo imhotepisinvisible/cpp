@@ -8,21 +8,21 @@
       </a>
     </h1>
     <% if @courses.length > 0: %>
-      <table class="table table-bordered table-hover table-clickable">
+      <table class="table table-bordered">
         <thead>
           <tr>
             <th>Name</th>
-            <!-- <th class="btn-column"></th>     -->
+            <th class="btn-column"></th>
           </tr>
         </thead>
         <tbody id="courses" class="cpp-tbl">
-          <tr><td colspan="<%= 1  %>"><div class="loading"></div></td></tr>
+          <tr><td colspan="<%= 2  %>"><div class="loading"></div></td></tr>
         </tbody>
       </table>
     <% else: %>
       <p>No Courses!</p>
     <% end %>
-<!--   </div> -->
-<!-- </div> -->
+  </div>
+</div>
 <div class="row">
 </div>
