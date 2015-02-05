@@ -3,8 +3,17 @@
 <td><%= @placement.get('description').substring(0, 100) + '...' %></td>
 <td><%= @placement.get 'duration' %></td>
 <td><%= @placement.get 'location' %></td>
-<td><%= @placement.get 'created_at' %></td>
-<td><%= @placement.get 'deadline' %></td>
+
+<% date = Date.parse(@placement.get('created_at'))%>
+<td>
+  <%= date.toString(getDateFormat()) %>
+</td>
+
+<% date2 = Date.parse(@placement.get('deadline'))%>
+<td>
+  <%= date2.toString(getDateFormat()) %>
+</td>
+
 <% if @editable: %>
 <td><%= @placement.get 'workflow_state' %></td>
 <td>
