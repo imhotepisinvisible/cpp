@@ -145,6 +145,25 @@ class StudentsController < ApplicationController
     end
   end
 
+  # Bulk download CVs
+  #
+  # GET /students/export_cvs
+  def export_cvs
+    t = Tempfile.new("my-temp-filename-#{Time.now}")
+    Zip::File.open(t.path, Zip::File::CREATE) do |zipfile|
+      @students = Student.all
+      @students.each do |student|
+        title = "#{student.id}-#{student.last_name}#{student.first_name}-cv.pdf"
+        cv_url = (student.send :cv).path
+        zipfile.add(title, cv_url) if cv_url.present?
+      end
+    end
+    send_file t.path, :type => 'application/zip',
+                                 :disposition => 'attachment',
+                                 :filename => "CVs.zip"
+    t.close
+  end
+
   # Suggest degrees that student can be
   # This is done by crowdsourcing (i.e. look at every student and obtaining their degree)
   #

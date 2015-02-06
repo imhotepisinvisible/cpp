@@ -66,6 +66,7 @@ CPP::Application.routes.draw do
   get "placements/top_5" => "placements#top_5"
   
   get ':controller/:id/documents/:document_type', :action => :download_document
+  get ':controller/export_cvs', :action => :export_cvs
 
   resources :sessions
 
