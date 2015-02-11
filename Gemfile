@@ -29,7 +29,7 @@ gem 'workflow'                    # Handling approval states
 
 # UI/Appearance Related Gems
 gem 'less-rails'                  # Less required for Bootstrap
-gem 'twitter-bootstrap-rails'     # Twitter Bootstrap <3 Rails
+gem 'twitter-bootstrap-rails', '~>2.2.7'     # Twitter Bootstrap <3 Rails
 gem 'bourbon'                     # Nice SCSS mixins
 gem 'font-awesome-rails' # Font Awesome = Icons
 gem "google_visualr", ">= 2.1"    # Google Charts

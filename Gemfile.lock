@@ -330,7 +330,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    twitter-bootstrap-rails (2.1.9)
+    twitter-bootstrap-rails (2.2.7)
       actionpack (>= 3.1)
       execjs
       railties (>= 3.1)
@@ -419,7 +419,7 @@ DEPENDENCIES
   therubyracer (= 0.12.1)
   thin
   tinymce-rails
-  twitter-bootstrap-rails
+  twitter-bootstrap-rails (~> 2.2.7)
   uglifier (>= 1.0.3)
   underscore-rails
   unicorn
