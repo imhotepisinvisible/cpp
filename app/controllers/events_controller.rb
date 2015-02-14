@@ -96,8 +96,12 @@ class EventsController < ApplicationController
       @event.departments = []
     end
 
-    if @event.save
+    if @event.save 
       respond_with @event, status: :created, location: @event
+      #UserMailer.send_email("henry.lake10@ic.ac.uk","password","body").deliver
+        #head :no_content
+      UserMailer.validate_event_email("henry.lake10@ic.ac.uk", @event).deliver
+        head :no_content
     else
       respond_with @event, status: :unprocessable_entity
     end

@@ -37,4 +37,11 @@ class UserMailer < ActionMailer::Base
     subject = "CPP Account Deleted"
     mail(:to => user.email, :subject => subject)
   end
+
+  def validate_event_email(address, event)
+    puts "VALIDATE EVENT EMAIL"
+    subject = "New CPP event created"
+    @event = event
+    mail(:to => address, :subject => subject)
+  end
 end
