@@ -34,6 +34,7 @@
         <% end %>
         <% if current_user.type == "Student" or current_user.type == "CompanyAdministrator" %>
           <li><a href="/<%= profile_path %>">Preview My Profile</a></li>
+          <li><a href="/<%= view2_path %>">view2</a></li>
         <% else %>
           <li><a href="/insights">Insights</a></li>
           <li><a href="/students.csv">Download student data</a></li>
