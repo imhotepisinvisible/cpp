@@ -1,12 +1,20 @@
+// fonts have been overridden to basic font family.
+
 // cannot include top link in .less for some reason
 // @import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,300,300italic,400italic,600,700);
+@import url(http://fonts.googleapis.com/css?family=Fira+Sans);
 @import url(https://fonts.googleapis.com/css?family=Give+You+Glory);
 @import url(https://fonts.googleapis.com/css?family=Arvo);
 
-
 // /* Site Settings */
-// not for .less atm
-// @border_radius: 6px;
+// // --- overriding Bootstrap variables ---- //
+@sansFontFamily:        'Fira Sans', Helvetica, Arial, sans-serif;
+@serifFontFamily:       Georgia, 'Times New Roman', Times, serif;
+
+@baseFontSize:          12px;
+@baseFontFamily:        @sansFontFamily;
+@baseLineHeight:        18px;
+@altFontFamily:         @serifFontFamily;
 
 /* Main Site Styles (tags etc) */
 body {
@@ -14,13 +22,13 @@ body {
   background-image: url('/assets/navy_blue.png');
 }
 
-h1 {
-  font-family: 'Arvo', serif;
-  line-height: 46px;
+h1,h2,h3,h4,h5,h6,p {
+  font-family: @sansFontFamily;
+  font-size: @baseFontSize
 }
 
 a.brand {
-  font-family: 'Arvo', serif;
+  //font-family: 'Arvo', serif;
 }
 
 textarea {
@@ -59,12 +67,6 @@ textarea[name=description] {
   background-color: #ffffff;
   border: 1px solid #DDD;
   overflow: hidden;
-//   //  ---- this bit is .scss and doesn't work with .less -----
-//   // .border-top-radius(@border_radius);
-//   // .border-bottom-radius(@border_radius);
-//   // .border-left-radius(@border_radius);
-//   // .border-right-radius(@border_radius);
-//   // .box-shadow(0 1px 2px rgba(0, 0, 0, .075));
 }
 
 .footer{
@@ -129,13 +131,9 @@ img.center {
       text-decoration: none;
       color: #444;
 
-      // .btn {
-      //   display: none;
-      // }
-
       .link-title {
-        font-weight: bold;
-        font-size: 1.2em;
+        // font-weight: bold;
+        // font-size: 1.2em;
       }
 
       .link-description{
@@ -147,9 +145,6 @@ img.center {
         background: #efefef;
         text-decoration: none;
 
-        // .btn{
-        //   display: block;
-        // }
       }
     }
   }
@@ -169,13 +164,13 @@ img.center {
 
 .ban-icon {
   padding-top: 8px;
-  font-size: 20px;
+  // font-size: 20px;
   color: #6D6968;
 }
 
 .fav-icon {
   padding-top: 8px;
-  font-size: 25px;
+  // font-size: 25px;
   color: #6D6968;
   padding-right: 5px;
 }
@@ -224,11 +219,9 @@ img.center {
 
 .button-student-register{
   width: 100%;
-  font-size: 20px;
+  // font-size: 20px;
   text-align: center;
   padding: 15px;
-  //  ---- this bit is .scss and doesn't work with .less -----
-  //.box-sizing(border-box);
 }
 
 .row-top-space {
@@ -236,9 +229,8 @@ img.center {
 }
 
 .tooltip {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 14px;
-  font-weight: normal;
+  // line-height: 14px;
+  // font-weight: normal;
 }
 
 .company-bar {
