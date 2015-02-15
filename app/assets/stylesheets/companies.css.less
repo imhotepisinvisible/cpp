@@ -1,0 +1,192 @@
+.company-tile {
+	margin-bottom: 26px;
+
+  &:hover{
+    border-color: #08C;
+    cursor: pointer;
+  }
+}
+
+#company-name-editor {
+  font-family: 'Arvo', serif;
+  font-size: 38.5px;
+  line-height: 40px;
+  width: 700px;
+  height: 60px;
+  // .box-sizing(border-box);
+}
+
+#company-description-editor {
+  width: 100%;
+  min-height: 120px;
+  // .box-sizing(border-box);
+}
+
+.company-logo-img {
+  max-height: 55px;
+}
+
+.small-company-logo {
+  max-width: 100px;
+  height: auto;
+}
+
+.company-logo-header{
+  .btn {
+    margin-top: 10px;
+  }
+}
+
+.company-editable {
+  background-color: #FFFABF;
+}
+
+.top-tile-row {
+  position: relative;
+
+  .rating-buttons{
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+  }
+}
+
+.contact-list{
+  list-style: none;
+  margin: 0px 0px 10px 0px;
+  padding: 0px;
+
+  li {
+    .item {
+      padding: 10px 5px;
+      border-bottom: 1px solid #eee;
+      display: block;
+      text-decoration: none;
+      color: #444;
+
+      position: relative;
+
+      &.hoverable{
+        cursor: move;
+
+        &:hover{
+          background-color: #eee;
+        }
+      }
+
+      .contact-name {
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+
+      .contact-role {
+        color: #999;
+      }
+
+      .contact-email{
+        margin-top: 5px;
+      }
+    }
+
+    .btn-container{
+      position: absolute;
+      right: 0px;
+    }
+  }
+}
+
+.admin-list{
+  list-style: none;
+  margin: 0px 0px 10px 0px;
+  padding: 0px;
+
+  li {
+    .item {
+      padding: 10px 5px;
+      border-bottom: 1px solid #eee;
+      display: block;
+      text-decoration: none;
+      color: #444;
+
+      position: relative;
+
+      .admin-name {
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+
+      .admin-email{
+        color: #999;
+      }
+    }
+
+    .btn-container{
+      position: absolute;
+      right: 0px;
+    }
+  }
+}
+
+.department-list{
+  list-style: none;
+  margin: 0px 0px 10px 0px;
+  padding: 0px;
+
+  li {
+    .item {
+      padding: 10px 5px;
+      border-bottom: 1px solid #eee;
+      display: block;
+      text-decoration: none;
+      color: #444;
+
+      position: relative;
+
+      .department-name {
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+
+      .request-status{
+        color: #999;
+      }
+    }
+
+    .btn-container{
+      position: absolute;
+      right: 0px;
+    }
+  }
+}
+
+.approval-list{
+  list-style: none;
+  margin: 0px 0px 10px 0px;
+  padding: 0px;
+
+  li {
+    .item {
+      padding: 10px 5px;
+      border-bottom: 1px solid #eee;
+      display: block;
+      text-decoration: none;
+      color: #444;
+
+      position: relative;
+
+      .company-name {
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+
+      .approval-status{
+        color: #999;
+      }
+    }
+
+    .btn-container{
+      position: absolute;
+      right: 0px;
+    }
+  }
+}

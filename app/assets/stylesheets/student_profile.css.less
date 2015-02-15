@@ -1,0 +1,192 @@
+// replaced $ with @
+// replaced @include with .
+// replace #{ $var } with @{ var }
+
+
+#student-profile-header {
+  margin-bottom: 15px;
+  font-family: 'Arvo', serif;
+
+  #student-profile-intro {
+    font-size: 40px;
+    line-height: 45px;
+
+
+    #student-profile-intro-name {
+      font-size: 70px;
+      line-height: 75px;
+    }
+  }
+}
+
+#student-profile-img-container {
+  float: left;
+  border: 1px solid #DDD;
+
+  //  ---- this bit is .scss and doesn't work with .less -----
+  // .border-top-radius(@border_radius);
+  // .border-bottom-radius(@border_radius);
+  // .border-left-radius(@border_radius);
+  // .border-right-radius(@border_radius);
+  //.box-shadow(~"0 1px 2px rgba(0, 0, 0, .075)");
+}
+
+#student-profile-img {
+
+  width: 170px;
+  height: 170px;
+
+  max-width: 170px;
+
+  border: 1px solid #DDD;
+
+  //  ---- this bit is .scss and doesn't work with .less -----
+  // .border-top-radius(@border_radius);
+  // .border-bottom-radius(@border_radius);
+  // .border-left-radius(@border_radius);
+  // .border-right-radius(@border_radius);
+  // .box-shadow(0 1px 2px rgba(0, 0, 0, .075));
+}
+
+.profile-image-deactivated {
+  opacity: 0.5;
+}
+
+.profile-text-deactivated {
+  color: #efefef;
+}
+
+#student-profile-body-container {
+  background: #efefef;
+  padding: 15px 15px 15px 30px;
+  margin-left: 0px;
+
+  //  ---- this bit is .scss and doesn't work with .less -----
+  // .box-shadow(inset 0  10px 10px -10px rgba(104, 104, 104, 0.5),
+  //                     inset 0 -10px 10px -10px rgba(104, 104, 104, 0.5));
+
+  #student-profile-toggle {
+    text-align: center;
+  }
+}
+
+#opportunities-container {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.empty-student-profile-field-container {
+  text-align: center;
+
+  .empty-student-profile-field {
+    line-height: 200px;
+    font-size: 200px;
+    color: #ddd;
+    text-shadow: 0 1px 0 #fff;
+  }
+}
+
+.progress-upload {
+  margin: 5px 0 0;
+}
+
+#student-bio-editor {
+  width: 100%;
+  min-height: 150px;
+  //  ---- this bit is .scss and doesn't work with .less -----
+  // .box-sizing(border-box);
+}
+
+.missing {
+  background-color: #f2dede!important;
+}
+
+.missing-document {
+  background-color: #f2dede!important;
+  color: #b94a48;
+
+  .download-document {
+    display: none;
+  }
+
+  .delete-document {
+    display: none;
+  }
+}
+
+.document-table {
+  border-top: 2px solid #efefef!important;
+}
+
+#student-name-editor {
+  font-family: 'Arvo', serif;
+  font-size: 70px;
+  line-height: 75px;
+  height: 90px;
+  //  ---- this bit is .scss and doesn't work with .less -----
+  // .box-sizing(border-box);
+  position: relative;
+}
+
+#year-select {
+  width: 120px;
+}
+
+.student-profile-select {
+  font-family: 'Arvo', serif;
+  font-size: 40px;
+  line-height: 45px;
+  height: 55px;
+  width: auto;
+  max-width: 600px;
+
+  //  ---- this bit is .scss and doesn't work with .less -----
+  //.box-sizing(border-box);
+}
+
+.student-profile-input {
+  font-family: 'Arvo', serif;
+  font-size: 40px !important;
+  line-height: 45px !important;
+  height: 45px !important;
+  width: auto;
+}
+
+// .select-looking-for {
+//   font-size: 40px;
+//   font-family: 'Arvo', serif;
+//   line-height: 45px;
+//   height: 55px;
+// }
+
+.student-editable {
+  background-color: #FFFABF;
+}
+
+#student-name-container {
+  margin-bottom: 15px;
+}
+
+#student-looking-for-container {
+  margin-top: 10px;
+}
+
+.switch-container {
+  display: inline-block;
+
+  .switch {
+    vertical-align: middle;
+  }
+
+  .switch-text {
+    vertical-align: middle;
+  }
+}
+
+#signup-form {
+  padding-top: 10px;
+}
+
+// #student-degree-input-container .dropdown-menu li > a {
+//   line-height: 40px;
+// }
