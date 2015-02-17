@@ -56,7 +56,7 @@ class CPP.Views.Departments.Approvals extends CPP.Views.Base
           dept: @model
         @$('#company-approvals').append(view.render().el)
     else
-      @$('#company-approvals').append "<li>No pending company requests!</li>"
+      @$('#company-approvals').append "<li>No pending company requests</li>"
 
   # Display pending email partial for each item in the collection
   renderPendingEmails: ->
@@ -68,7 +68,7 @@ class CPP.Views.Departments.Approvals extends CPP.Views.Base
           dept: @model
         @$('#email-approvals').append(view.render().el)
     else
-      @$('#email-approvals').append "<li>No pending email requests!</li>"
+      @$('#email-approvals').append "<li>No pending email requests</li>"
 
   # Display pending event partial for each item in the collection
   renderPendingEvents: ->
@@ -80,7 +80,7 @@ class CPP.Views.Departments.Approvals extends CPP.Views.Base
           dept: @model
         @$('#event-approvals').append(view.render().el)
     else
-      @$('#event-approvals').append "<li>No pending event requests!</li>"
+      @$('#event-approvals').append "<li>No pending event requests</li>"
 
   # Display pending placement partial for each item in the collection
   renderPendingPlacements: ->
@@ -92,4 +92,4 @@ class CPP.Views.Departments.Approvals extends CPP.Views.Base
           dept: @model
         @$('#placement-approvals').append(view.render().el)
     else
-      @$('#placement-approvals').append "<li>No pending opportunity requests!</li>"
+      @$('#placement-approvals').append "<li>No pending opportunity requests</li>"

@@ -1,16 +1,30 @@
-<div class="alert alert-info"><p>The entries below are requests from companies to be visible to students from your department.</p></div>
-<ul id="company-approvals" class="approval-list">
-	<div class="loading"></div>
-</ul>
-<div class="alert alert-info"><p>The entries below are requests from companies to email some/all of your department's students.</p></div>
-<ul id="email-approvals" class="approval-list">
-	<div class="loading"></div>
-</ul>
-<div class="alert alert-info"><p>The entries below are requests from companies to create events on the system.</p></div>
-<ul id="event-approvals" class="approval-list">
-	<div class="loading"></div>
-</ul>
-<div class="alert alert-info"><p>The entries below are requests from companies to create opportunities on the system.</p></div>
-<ul id="placement-approvals" class="approval-list">
-	<div class="loading"></div>
-</ul>
+<div class="tabbable">
+	<ul class="nav nav-pills">
+		<li class="active"><a href="#tabs-1" data-toggle="tab">Events</a></li>
+		<li><a href="#tabs-2" data-toggle="tab">Opportunities</a></li>
+		<li><a href="#tabs-3" data-toggle="tab">Companies</a></li>
+		<li><a href="#tabs-4" data-toggle="tab">Emails</a></li>
+	</ul>
+</div>
+<div class="tab-content">
+	<div class="tab-pane active" id="tabs-1">
+		<ul id="event-approvals" class="approval-list">
+			<div class="loading"></div>
+		</ul>
+	</div>
+	<div class="tab-pane" id="tabs-2">
+		<ul id="placement-approvals" class="approval-list">
+			<div class="loading"></div>
+		</ul>
+	</div>
+	<div class="tab-pane" id="tabs-3">
+		<ul id="company-approvals" class="approval-list">
+			<div class="loading"></div>
+		</ul>
+	</div>
+	<div class="tab-pane" id="tabs-4">
+		<ul id="email-approvals" class="approval-list">
+			<div class="loading"></div>
+		</ul>
+	</div>
+</div>
