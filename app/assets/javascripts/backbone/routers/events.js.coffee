@@ -7,10 +7,10 @@ class CPP.Routers.Events extends Backbone.Router
       'events/new'                           : 'new'
       'events/:id'                           : 'view'
       'events/:id/students'                  : 'eventAttendees'
-
+    
   # Events index for a specific company
   indexCompany: (company_id) ->
-    events = new CPP.Collections.Events
+    events = new CPP.Collection.Events
     new CPP.Views.Events.Index collection: events
     events.fetch
       error: ->
@@ -18,10 +18,11 @@ class CPP.Routers.Events extends Backbone.Router
 
   # Events index
   index: ->
-    events = new CPP.Collections.Events
+    events = new CPP.Collections.EventsPager
     new CPP.Views.Events.Index collection: events
     events.fetch
       error: ->
+        console.log(events)
         notify "error", "Couldn't fetch events"
 
   # Create a new event

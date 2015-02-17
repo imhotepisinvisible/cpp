@@ -13,8 +13,8 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = current_user.events.scoped
-
+    @events = current_user.events.scoped.paginate(:page => params[:page], :per_page => params[:per_page])
+    
     if params.keys.include? "company_id"
       @events = @events.where(:company_id => params[:company_id])
     end
