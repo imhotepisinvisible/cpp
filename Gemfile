@@ -26,6 +26,7 @@ gem 'obscenity'                   # Obscenity filter
 gem 'lorem'                       # Simple Lorem
 gem 'impressionist'               # Stats & Logging
 gem 'workflow'                    # Handling approval states
+gem 'kaminari'                    # Pagination of backend models
 
 # UI/Appearance Related Gems
 gem 'less-rails'                  # Less required for Bootstrap
@@ -49,6 +50,7 @@ gem 'datejs-rails'                # Nicer date manipulation in Javascript
 gem 'jquery-fileupload-rails'     # File upload
 gem 'rails-bootstrap-toggle-buttons' # On/Off switches
 gem 'highcharts-rails'
+gem 'backbone-paginator-rails'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3' # SASS for nicer CSS
@@ -69,7 +71,6 @@ group :development do
   gem 'guard-livereload'  # Auto-Browser-Reload when files change
   gem 'rb-fsevent'        # Watch file system events (for Guard)
   gem 'rb-readline'
-
   gem 'terminal-notifier-guard' # Notification center for test runs :)
 end
 
