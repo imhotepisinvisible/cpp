@@ -1,8 +1,17 @@
+<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+</a>
+
 <a class="brand" href="/">
   <%= image_tag "imperial.png" %>
   CPP:Connect
 </a>
-<div class="navbar">
+
+<div class="nav-collapse collapse">
+
   <ul class="nav">
     <% if current_user %>
       <% if current_user.type == "Student" %>
@@ -34,7 +43,6 @@
         <% end %>
         <% if current_user.type == "Student" or current_user.type == "CompanyAdministrator" %>
           <li><a href="/<%= profile_path %>">Preview My Profile</a></li>
-          <li><a href="/<%= view2_path %>">view2</a></li>
         <% else %>
           <li><a href="/insights">Insights</a></li>
           <li><a href="/students.csv">Download student data</a></li>

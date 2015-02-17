@@ -1,5 +1,5 @@
 <!-- Warning to signify you need to improve your profile -->
-<div class="row" id="profile-inactive-warning" <%- if (@student.get "active") then 'style="display:none"'%>>
+<div class="row-fluid" id="profile-inactive-warning" <%- if (@student.get "active") then 'style="display:none"'%>>
   <div class="span12">
     <div class="alert alert-error centre-text">
       <p> Profile Inactive! You need to active your profile to enable companies to view it!</p>
@@ -8,13 +8,13 @@
 </div>
 
 <!-- Student Profile Photo and Key Info -->
-<div class="row">
+<div class="row-fluid">
   <div class="span12" id="student-profile-header">
-    <div class="row">
+    <div class="row-fluid">
 
     <!-- Profile Photo -->
       <div class="span3">
-        <div id="student-profile-img-container" class="img-polaroid">
+        <div id="student-profile-img-container">  <!-- NOTE: removed polardoid to make full bleed -->
           <% if @student.get 'profile_picture_file_name': %>
             <img src="/students/<%= @student.get 'id' %>/documents/profile_picture" id="student-profile-img">
           <% else: %>
@@ -25,7 +25,7 @@
       </div>
 
     <!-- Key Info -->
-      <div class="span9">
+      <div class="span9" id="student-profile-key-info">
         <div id="student-profile-intro">
           <p id="student-profile-intro-name">
             <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
@@ -49,16 +49,16 @@
 </div>
 
 <!-- Main Body of the student profile -->
-<div class="row">
+<div class="row-fluid">
     <div class="span12" id="student-profile-body-container">
-      <div class="row">
+      <div class="row-fluid">
         <div class="span12" id="student-profile-body">
 
 
 
 
           <!-- Navigation Tabs -->
-          <div class="row">
+          <div class="row-fluid">
             <div class="span12">
 
 <!-- need to put in here that the tabs are 100%, 50% and 33% respectively -->
@@ -72,7 +72,7 @@
           </div>
 
           <!-- Content of the navigation tabs -->
-          <div class="row">
+          <div class="row-fluid">
             <div class="span12">
 
                 <div class="tab-content">
@@ -92,7 +92,7 @@
 
 
           
-          <div class="row">
+          <div class="row-fluid">
             
             <!-- Documents & Contact Me (Column 1 of 3) -->
             <div class="span4">
@@ -105,8 +105,8 @@
               <% if ((@student.get 'cv_file_name') or (@student.get 'transcript_file_name') or (@student.get 'covering_letter_file_name')): %>
                 
                 <!-- Documents Body (Table format) -->
-                <div class="row">
-                  <div class="span4">
+                <div class="row-fluid">
+                  <div class="span12">
                     <table class="table table-striped">
 
                       <% if @student.get 'cv_file_name': %>
@@ -150,8 +150,8 @@
                 </div>
 
                 <!-- Contact Me Section-->
-                <div class="row">
-                  <div class="span4">
+                <div class="row-fluid">
+                  <div class="span12">
 
                     <!-- Contact Me header -->
                     <h1 class="section-header">
@@ -187,8 +187,8 @@
               </h1>
  
               <!-- Body (about me) -->
-              <div class="row">
-                <div class="span4">
+              <div class="row-fluid">
+                <div class="span12">
 
                   <% if @student.get('bio'): %>
                     <p>
@@ -206,6 +206,8 @@
 
 
             <!-- Column3: Passions - skills, interests and year groups? -->
+            <!--  this bit is implemented badly - should be like a list rather 
+            that being separated using spanning divs -->
             <div class="span4">
 
               <!-- Passions Header -->
@@ -213,10 +215,10 @@
                 <i class="icon-heart"></i> Passions
               </h1>
 
-              <div class="row">
+              <div class="row-fluid">
 
                 <!-- Skills -->
-                <div class="span4">
+                <div class="span12">
                   <div class="tag-category">
 
                     <div class="tag-category-header">
@@ -237,7 +239,7 @@
                 </div>
 
                 <!-- Interests -->
-                <div class="span4">
+                <div class="span12">
                   <div class="tag-category">
 
                     <div class="tag-category-header">
@@ -258,7 +260,7 @@
                 </div>
 
                 <!-- Year Groups -->
-                <div class="span4">
+                <div class="span12">
                   <div class="tag-category">
 
                     <div class="tag-category-header">
@@ -278,7 +280,7 @@
                   </div>
                 </div>
 
-              </div> <!-- end of passions row -->
+              </div> <!-- end of passions row-fluid -->
             </div> <!-- end of passions column -->
 
           

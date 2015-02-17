@@ -34,21 +34,6 @@ module ApplicationHelper
     end
   end
 
-  def view2_path
-    return '' unless current_user
-
-    case current_user.type
-    when 'Student'
-      return "students/#{current_user.id}/view2"
-    when 'CompanyAdministrator'
-      return "companies/#{current_user.company_id}/view2"
-    when 'DepartmentAdministrator'
-      return "department_dashboard"
-    else
-      return ''
-    end
-  end
-
   def edit_path
     return '' unless current_user
 
