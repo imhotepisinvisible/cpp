@@ -148,11 +148,13 @@ class StudentsController < ApplicationController
   # Bulk download CVs
   #
   # GET /students/export_cvs
+  # TODO: Queue this with resque...
   def export_cvs
     if params.has_key? :students
         t = Tempfile.new("my-temp-filename-#{Time.now}")
         Zip::File.open(t.path, Zip::File::CREATE) do |zipfile|
             @students = params[:students].split(',')
+            @students = @students.uniq
             @students.each do |id|
                 begin
                     student = Student.find(id)
