@@ -9,6 +9,9 @@
         <a href="/students/new" class="btn pull-right button-student-add">
           New Student
         </a>
+	      <a href = "students" class="btn pull-right button-student-suspend">
+	        Suspend Students
+	      </a>
       <% end %>
     </h1>
     <div id="students-table">

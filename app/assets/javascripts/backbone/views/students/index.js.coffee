@@ -4,6 +4,9 @@ class CPP.Views.Students.Index extends CPP.Views.Base
   el: '#app'
   template: JST['backbone/templates/students/index']
 
+  events:
+    "click .button-student-suspend": "suspend"
+
   # Bind to update placement collection
   initialize: ->
     @collection.on "fetch", (->
@@ -65,3 +68,33 @@ class CPP.Views.Students.Index extends CPP.Views.Base
       data: @collection
       courses: @courses
   @
+
+  work: -> 
+    students = new CPP.Collections.Students
+    students.fetch
+      success: (students) ->
+        students.each (student) ->
+          student.set("active", false)
+          student.save {},
+            wait: true
+            forceUpdate: true
+            success: (student, response) ->
+              console.log(first_name + "updated")
+            error: (student, response) ->
+              console.log(first_name + "not updated")
+
+  suspend: -> 
+    if confirm("Suspend all Student accounts?")
+      students = new CPP.Collections.Students
+      students.fetch
+        success: (students) ->
+          students.each (student) ->
+            student.set("active", false)
+            student.save {},
+              wait: true
+              forceUpdate: true
+              success: (student, response) ->
+                console.log(first_name + "updated")
+              error: (student, response) ->
+                console.log(first_name + "not updated")
+                
