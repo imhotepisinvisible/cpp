@@ -48,8 +48,10 @@ class CPP.Views.Departments.Approvals extends CPP.Views.Base
   
   # Display pending company partial for each item in the collection
   renderPendingCompanies: ->
+    @$('#company-count').html("")
     @$('#company-approvals').html ""
     if @companyCollection.length > 0
+      @$('#company-count').html(@companyCollection.length)
       @companyCollection.each (company) =>
         view = new CPP.Views.Departments.CompanyApproval
           model: company
@@ -60,8 +62,10 @@ class CPP.Views.Departments.Approvals extends CPP.Views.Base
 
   # Display pending email partial for each item in the collection
   renderPendingEmails: ->
+    @$('#email-count').html("")
     @$('#email-approvals').html ""
     if @emailCollection.length > 0
+      @$('#email-count').html(@emailCollection.length)
       @emailCollection.each (email) =>
         view = new CPP.Views.Departments.EmailApproval
           model: email
@@ -72,8 +76,10 @@ class CPP.Views.Departments.Approvals extends CPP.Views.Base
 
   # Display pending event partial for each item in the collection
   renderPendingEvents: ->
+    @$('#event-count').html("")
     @$('#event-approvals').html ""
     if @eventCollection.length > 0
+      @$('#event-count').html(@eventCollection.length)
       @eventCollection.each (event) =>
         view = new CPP.Views.Departments.EventApproval
           model: event
@@ -84,8 +90,10 @@ class CPP.Views.Departments.Approvals extends CPP.Views.Base
 
   # Display pending placement partial for each item in the collection
   renderPendingPlacements: ->
+    @$('#placement-count').html("")
     @$('#placement-approvals').html ""
     if @placementCollection.length > 0
+      @$('#placement-count').html(@placementCollection.length)
       @placementCollection.each (placement) =>
         view = new CPP.Views.Departments.PlacementApproval
           model: placement

@@ -1,28 +1,28 @@
 <div class="tabbable">
 	<ul class="nav nav-pills">
-		<li class="active"><a href="#tabs-1" data-toggle="tab">Events</a></li>
-		<li><a href="#tabs-2" data-toggle="tab">Opportunities</a></li>
-		<li><a href="#tabs-3" data-toggle="tab">Companies</a></li>
-		<li><a href="#tabs-4" data-toggle="tab">Emails</a></li>
+		<li class="active"><a href="#event-tab" data-toggle="tab">Events <span id="event-count" class="badge"></span></a></li>
+		<li><a href="#placement-tab" data-toggle="tab">Opportunities <span id="placement-count" class="badge"></span></a></li>
+		<li><a href="#company-tab" data-toggle="tab">Companies <span id="company-count" class="badge"></span></a></li>
+		<li><a href="#email-tab" data-toggle="tab">Emails <span id="email-count" class="badge"></span></a></li>
 	</ul>
 </div>
 <div class="tab-content">
-	<div class="tab-pane active" id="tabs-1">
+	<div class="tab-pane active" id="event-tab">
 		<ul id="event-approvals" class="approval-list">
 			<div class="loading"></div>
 		</ul>
 	</div>
-	<div class="tab-pane" id="tabs-2">
+	<div class="tab-pane" id="placement-tab">
 		<ul id="placement-approvals" class="approval-list">
 			<div class="loading"></div>
 		</ul>
 	</div>
-	<div class="tab-pane" id="tabs-3">
+	<div class="tab-pane" id="company-tab">
 		<ul id="company-approvals" class="approval-list">
 			<div class="loading"></div>
 		</ul>
 	</div>
-	<div class="tab-pane" id="tabs-4">
+	<div class="tab-pane" id="email-tab">
 		<ul id="email-approvals" class="approval-list">
 			<div class="loading"></div>
 		</ul>
