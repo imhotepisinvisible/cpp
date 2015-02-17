@@ -26,6 +26,8 @@ gem 'obscenity'                   # Obscenity filter
 gem 'lorem'                       # Simple Lorem
 gem 'impressionist'               # Stats & Logging
 gem 'workflow'                    # Handling approval states
+gem 'rubyzip', '>= 1.0.0'         # will load new rubyzip version
+gem 'zip-zip'                     # will load compatibility for old rubyzip API.
 
 # UI/Appearance Related Gems
 gem 'less-rails'                  # Less required for Bootstrap

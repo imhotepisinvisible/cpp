@@ -4,6 +4,10 @@ class CPP.Views.Students.Index extends CPP.Views.Base
   el: '#app'
   template: JST['backbone/templates/students/index']
 
+  # Bind event listeners
+  events: -> _.extend {}, CPP.Views.Base::events,
+    'click .button-export-cvs' : 'exportCVs'
+
   # Bind to update placement collection
   initialize: ->
     @collection.on "fetch", (->
@@ -26,10 +30,15 @@ class CPP.Views.Students.Index extends CPP.Views.Base
   # Remove all students, then for each student
   # in the collection passed in, render the student
   renderStudents: (col) ->
+    @collection = col
     @$('#students').html("")
     col.each (student) =>
       view = new CPP.Views.Students.Item(model: student, editable: @editable, courses: @courses)
       @$('#students').append(view.render().el)
+  @
+
+  exportCVs: ->
+    window.location = "export_cvs?students=" + @collection.pluck("id")
   @
 
   # Define the filters to render

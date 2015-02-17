@@ -65,7 +65,8 @@ CPP::Application.routes.draw do
   get "events/top_5" => "events#top_5"
   get "placements/top_5" => "placements#top_5"
   
-  get ':controller/:id/documents/:document_type', :action => :download_document
+  get 'students/:id/documents/:document_type' => 'students#download_document'
+  get 'export_cvs' => 'students#export_cvs'
 
   resources :sessions
 
