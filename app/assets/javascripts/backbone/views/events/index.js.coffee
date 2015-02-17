@@ -22,7 +22,9 @@ class CPP.Views.Events.Index extends CPP.Views.Base
   # Render events
   render: ->
     $(@el).html(@template(events: @collection, editable: @editable))
+    console.log("1")
     @renderEvents(@collection)
+    console.log("2")
     @renderFilters()
   @
 
