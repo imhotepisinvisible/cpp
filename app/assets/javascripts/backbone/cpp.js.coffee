@@ -80,7 +80,7 @@ $(document).on "click", "a[href^='/']", (event) ->
     # Instruct Backbone to trigger routing events
     CPPRouter.navigate url, { trigger: true }
 
-    return false
+    #return false
 
 # Patch Model and Collection so they emit a 'fetch' event when starting to fetch data
 # http://tbranyen.com/post/how-to-indicate-backbone-fetch-progress
