@@ -83,7 +83,9 @@ class CPP.Views.Students.Index extends CPP.Views.Base
             error: (student, response) ->
               console.log(first_name + "not updated")
 
-  suspend: -> 
+  suspend: (e) -> 
+    #e.stopPropagation()
+    e.preventDefault()
     if confirm("Suspend all Student accounts?")
       $.ajax
         url: "students/suspend"
