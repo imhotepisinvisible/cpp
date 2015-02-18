@@ -215,4 +215,23 @@ class StudentsController < ApplicationController
 
     respond_with ok_students[0..4]
   end
+
+  # Suspends all students then emails them
+  #
+  # PUT /students/suspend
+  def suspend # PASS in collection from AJAX query
+    if params.has_key? :students
+      @students = params[:students].split(',')[0]
+      @students.each do |id|
+        student = Student.find(id)
+        #if student.departments.id == current_user.department_id
+        student.update_attributes(active: 'f')
+        # Send an email/add to email list
+      end
+      student = Student.find(@students[0])
+      respond_with(student) do |format|
+        format.json{render json: student}
+      end  
+    end
+  end
 end

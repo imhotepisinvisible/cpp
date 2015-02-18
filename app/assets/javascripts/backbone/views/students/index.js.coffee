@@ -85,16 +85,14 @@ class CPP.Views.Students.Index extends CPP.Views.Base
 
   suspend: -> 
     if confirm("Suspend all Student accounts?")
-      students = new CPP.Collections.Students
-      students.fetch
-        success: (students) ->
-          students.each (student) ->
-            student.set("active", false)
-            student.save {},
-              wait: true
-              forceUpdate: true
-              success: (student, response) ->
-                console.log(first_name + "updated")
-              error: (student, response) ->
-                console.log(first_name + "not updated")
+      $.ajax
+        url: "students/suspend"
+        type: 'PUT'
+        data: 
+          students: @collection.pluck('id')
+        success: =>
+          notify 'success', "All student accounts suspended" 
+  @
+
+
                 
