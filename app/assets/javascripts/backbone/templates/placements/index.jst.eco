@@ -24,6 +24,7 @@
       <% end %>
 
     </h1>
+    <div id="placements-table">
     <% if @placements.length > 0: %>
       <table class="table table-bordered table-hover table-clickable">
         <thead>
@@ -48,5 +49,6 @@
     <% else: %>
       <p>No opportunities created yet!</p>
     <% end %>
+    </div>
   </div>
 </div>

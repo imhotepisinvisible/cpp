@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   # force_ssl
+  after_filter :customheaders
 
   # If any controllers raise authentication exceptions, catch them here and
   # respond to the client with a 403 (auth fail) + exception message in the body
@@ -21,6 +22,10 @@ class ApplicationController < ActionController::Base
 
   def require_login
     raise CanCan::AccessDenied unless current_user
+  end
+  
+  def customheaders
+    response.headers['Vary'] = 'Accept'
   end
 
   # Lets us use current_user in our views and throughout our controllers

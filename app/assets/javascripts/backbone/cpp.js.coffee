@@ -82,3 +82,23 @@ $(document).on "click", "a[href^='/']", (event) ->
     CPPRouter.navigate url, { trigger: true }
 
     return false
+
+# Patch Model and Collection so they emit a 'fetch' event when starting to fetch data
+# http://tbranyen.com/post/how-to-indicate-backbone-fetch-progress
+# Patch Model and Collection. 
+_.each [
+  Backbone.Model
+  Backbone.Collection
+], (constructor)  ->
+  # Cache original fetch.
+  fetch = constructor::fetch
+
+  #Override the fetch method to emit a fetch event.
+  constructor::fetch = () ->
+    #Trigger the fetch event on the instance.
+
+    @trigger "fetch", @
+
+    #Pass through to original fetch.
+    fetch.apply @, arguments
+

@@ -7,8 +7,6 @@
 <td>
 	<% if @student.get('course_id') != null: %>
 		<%= @courses.models[@student.get 'course_id'].attributes.name %>
-	<% else: %>
-		<%= @student.get 'degree' %>
 	<% end %>
 </td>
 
@@ -23,4 +21,9 @@
     <div class="btn btn-small button-student-delete btn-danger"><i class="icon-trash" /></div>
     <% end %>
   </div>
+</td>
+
+<% date = Date.parse(@student.get('updated_at'))%>
+<td>
+  <%= date.toString("dd/MM/yyyy") %>
 </td>

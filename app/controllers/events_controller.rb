@@ -23,6 +23,11 @@ class EventsController < ApplicationController
       @events = @events.limit(params[:limit])
     end
 
+    # if a start date has been included, then only get items after this date
+    if params.keys.include? "start_date"
+      @events = @events.where("start_date > ?", params[:start_date])
+    end
+
     if current_user && current_user.is_student?
       @events = @events.with_approved_state.select {|e| can? :show, e.company}
       @events.sort_by! {|e| [-e.relevance(current_user.id), e.company.name] }
@@ -91,8 +96,12 @@ class EventsController < ApplicationController
       @event.departments = []
     end
 
-    if @event.save
+    if @event.save 
       respond_with @event, status: :created, location: @event
+      #UserMailer.send_email("henry.lake10@ic.ac.uk","password","body").deliver
+        #head :no_content
+      UserMailer.validate_event_email("henry.lake10@ic.ac.uk", @event).deliver
+        head :no_content
     else
       respond_with @event, status: :unprocessable_entity
     end

@@ -5,6 +5,10 @@ class CPP.Views.CompaniesStudentIndex extends CPP.Views.Base
 
   # Company index for students
   initialize: (options) ->
+    @collection.on "fetch", (->
+        @$('#company-tiles').html "<div class=\"loading\"></div>"
+        return), @
+    @collection.bind 'reset', @render, @
     @collection.bind 'change', @render, @
     @collection.bind 'filter', @renderCompanies, @
     @render()

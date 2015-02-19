@@ -10,7 +10,13 @@
           New Student
         </a>
       <% end %>
+      <% if isCompanyAdmin(): %>
+        <div class="btn pull-right button-export-cvs">
+          Download CVs
+        </div>
+      <% end %>
     </h1>
+    <div id="students-table">
     <% if @students.length > 0: %>
       <table class="table table-bordered table-hover table-clickable">
         <thead>
@@ -20,14 +26,16 @@
             <th>Graduating in</th>
             <th>Course</th>
             <th class="btn-column"></th>
+            <th>Updated On</th>
           </tr>
         </thead>
         <tbody class="cpp-tbl" id="students">
-          <tr><td colspan="<%= 4 + (@editable ? 1 : 0) %>"><div class="loading"></div></td></tr>
+          <tr><td colspan="<%= 5 + (@editable ? 1 : 0) %>"><div class="loading"></div></td></tr>
         </tbody>
       </table>
     <% else: %>
       <p>No students signed up yet!</p>
     <% end %>
+    </div>
   </div>
 </div>

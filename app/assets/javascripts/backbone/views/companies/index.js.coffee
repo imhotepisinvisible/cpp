@@ -6,6 +6,9 @@ class CPP.Views.CompaniesIndex extends CPP.Views.Base
   # Company aggregate view for administrators
   # Bind to update collection
   initialize: (options) ->
+    @collection.on "fetch", (->
+        @$('#companies-table').html "<div class=\"loading\"></div>"
+        return), @
     @collection.bind 'reset', @render, @
     @collection.bind 'change', @render, @
     @collection.bind 'filter', @renderCompanies, @

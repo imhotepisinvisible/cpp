@@ -22,7 +22,7 @@
 //= require jquery.ui.sortable
 //= require jquery-fileupload/basic
 //= require tinymce-jquery
-//= require jquery.toggle.buttons
+//= require bootstrap-toggle-buttons
 //
 // UTILS
 //= require utils

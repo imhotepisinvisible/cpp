@@ -10,7 +10,7 @@ class CPP.Routers.Students extends Backbone.Router
       'edit': 'edit'
       'profile_preview': 'view'
       'settings': 'settings'
-      'register': 'signup'
+      'register': 'signup' 
 
   # Student index
   index: ->
@@ -18,9 +18,8 @@ class CPP.Routers.Students extends Backbone.Router
       window.history.back()
       return false
     students = new CPP.Collections.Students
+    new CPP.Views.Students.Index collection: students
     students.fetch
-      success: ->
-        new CPP.Views.Students.Index collection: students
       error: ->
         notify "error", "Couldn't fetch students"
 
@@ -43,35 +42,19 @@ class CPP.Routers.Students extends Backbone.Router
 
     student = @getStudentFromID(id)
     unless student
-      notify "error", "Invalid Student"
-
+      notify "error", "Invalid Student"         
+    
+    new CPP.Views.Students.Edit model: student
+    student.fetch
+      error: ->
+        notify "error", "Couldn't fetch student"
+    
     # Fetch 3 events and placements for dashboard
-    deferreds = []
-    deferreds.push(student.events.fetch({ data: $.param({ limit: 3}) }))
-    deferreds.push(student.placements.fetch({ data: $.param({ limit: 3}) }))
-
-    $.when.apply($, deferreds).done(->
-      companydeferreds = []
-      # Fetch company for each event and placement
-      for e in student.events.models
-        do (e) ->
-          e.company = new CPP.Models.Company id: e.get 'company_id'
-          companydeferreds.push(e.company.fetch())
-      for p in student.placements.models
-        do (p) ->
-          p.company = new CPP.Models.Company id: p.get 'company_id'
-          companydeferreds.push(p.company.fetch())
-
-      $.when.apply($, companydeferreds).done(->
-        # Fetch the student when we're done
-        student.fetch
-          success: ->
-            new CPP.Views.Students.Edit model: student
-          error: ->
-            notify "error", "Couldn't fetch student"
-      )
-    )
-
+    #deferreds = []     
+    now = new Date() 
+    student.events.fetch({ data: $.param({ limit: 3 , start_date: now.toISOString()}) })
+    student.placements.fetch({ data: $.param({ limit: 3, deadline: now.toISOString()}) })
+       
   # Student administration page
   admin: (id) ->
     student = new CPP.Models.Student id: id
@@ -86,8 +69,9 @@ class CPP.Routers.Students extends Backbone.Router
     student = @getStudentFromID(id)
     unless student
       notify "error", "Invalid Student"
-    student.events.fetch({ data: $.param({ limit: 3}) })
-    student.placements.fetch({ data: $.param({ limit: 3}) })
+    #These aren't even on the settings page, so why are they being fetched?
+    #student.events.fetch({ data: $.param({ limit: 3}) })
+    #student.placements.fetch({ data: $.param({ limit: 3}) })
     student.fetch
       success: ->
         new CPP.Views.Students.Settings model: student
@@ -118,3 +102,5 @@ class CPP.Routers.Students extends Backbone.Router
       return CPP.CurrentUser
     else
       return false
+
+                  

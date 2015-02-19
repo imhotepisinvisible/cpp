@@ -145,6 +145,34 @@ class StudentsController < ApplicationController
     end
   end
 
+  # Bulk download CVs
+  #
+  # GET /students/export_cvs
+  def export_cvs
+    if params.has_key? :students
+        t = Tempfile.new("my-temp-filename-#{Time.now}")
+        Zip::File.open(t.path, Zip::File::CREATE) do |zipfile|
+            @students = params[:students].split(',')
+            @students.each do |id|
+                begin
+                    student = Student.find(id)
+                    title = "#{student.id}-#{student.last_name}#{student.first_name}-cv.pdf"
+                    cv_url = (student.send :cv).path
+                    zipfile.add(title, cv_url) if cv_url.present?
+                rescue ActiveRecord::RecordNotFound
+                end
+            end
+            zipfile.add("CVs.txt", File.join(Rails.root, "app", "assets", "files", "CVs.txt" ))
+        end
+        send_file t.path, :type => 'application/zip',
+                                     :disposition => 'attachment',
+                                     :filename => "CVs.zip"
+        t.close
+    else
+        redirect_to root_path
+    end
+  end
+
   # Suggest degrees that student can be
   # This is done by crowdsourcing (i.e. look at every student and obtaining their degree)
   #

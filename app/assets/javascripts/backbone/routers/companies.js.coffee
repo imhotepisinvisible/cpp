@@ -12,6 +12,10 @@ class CPP.Routers.Companies extends Backbone.Router
   # The company index page that admins will see
   index: ->
     companies = new CPP.Collections.Companies
+    if isStudent()
+        view = new CPP.Views.CompaniesStudentIndex collection: companies
+    else
+        view = new CPP.Views.CompaniesIndex collection: companies
     companies.fetch
       success: ->
         if isStudent() # why ComapaniesIndex not Companies.index
@@ -130,9 +134,6 @@ class CPP.Routers.Companies extends Backbone.Router
       # Dept administrator registering new admin and company
       # so don't log in once registered
       @signupNewCompany false
-    else if not CPP.CurrentUser?
-      # Nobody logged in, registering new company admin and new company
-      @signupNewCompany true
     else
       window.history.back()
       return false

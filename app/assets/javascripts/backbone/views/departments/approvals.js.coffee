@@ -7,40 +7,48 @@ class CPP.Views.Departments.Approvals extends CPP.Views.Base
   # Fetches department pending companies and email requests
   initialize: (options) ->
     _.bindAll @, 'render'
-    @model.pending_companies.fetch
-      success: =>
-        @companyCollection = @model.pending_companies
-        @companyCollection.bind 'remove', @render, @
-        @companyCollection.bind 'change', @render, @
-        @model.pending_emails.fetch
-          success: =>
-            @emailCollection = @model.pending_emails
-            @emailCollection.bind 'remove', @render, @
-            @emailCollection.bind 'change', @render, @
-            @model.pending_events.fetch
-              success: =>
-                @eventCollection = @model.pending_events
-                @eventCollection.bind 'remove', @render, @
-                @eventCollection.bind 'change', @render, @
-                @model.pending_placements.fetch
-                  success: =>
-                    @placementCollection = @model.pending_placements
-                    @placementCollection.bind 'remove', @render, @
-                    @placementCollection.bind 'change', @render, @
-                    @render()
-                  error: =>
-                    notify 'error', 'Could not fetch opportunity requests'
-              error: =>
-                notify 'error', 'Could not fetch event requests'
-          error: =>
-            notify 'error', 'Could not fetch email requests'
+    @companyCollection = @model.pending_companies
+    @companyCollection.bind 'reset', @renderPendingCompanies, @
+    @companyCollection.bind 'remove', @renderPendingCompanies, @
+    @companyCollection.bind 'change', @renderPendingCompanies, @
+    @companyCollection.fetch
       error: ->
         notify 'error', 'Could not fetch company approval requests'
+    @emailCollection = @model.pending_emails
+    @emailCollection.bind 'reset', @renderPendingEmails, @
+    @emailCollection.bind 'remove', @renderPendingEmails, @
+    @emailCollection.bind 'change', @renderPendingEmails, @
+    @emailCollection.fetch
+      error: =>
+        notify 'error', 'Could not fetch email requests'
+    @eventCollection = @model.pending_events
+    @eventCollection.bind 'reset', @renderPendingEvents, @
+    @eventCollection.bind 'remove', @renderPendingEvents, @
+    @eventCollection.bind 'change', @renderPendingEvents, @
+    @eventCollection.fetch
+        error: =>
+          notify 'error', 'Could not fetch event requests'
+    @placementCollection = @model.pending_placements
+    @placementCollection.bind 'reset', @renderPendingPlacements, @
+    @placementCollection.bind 'remove', @renderPendingPlacements, @
+    @placementCollection.bind 'change', @renderPendingPlacements, @
+    @placementCollection.fetch
+        error: =>
+          notify 'error', 'Could not fetch opportunity requests'
+    @render()
+
+
   # Renders template
-  # Display company approval partial and pending email partial for each
-  # item in the collections
   render: ->
     $(@el).html(@template(dept: @model))
+    @renderPendingCompanies
+    @renderPendingEmails
+    @renderPendingEvents
+    @renderPendingPlacements
+  
+  # Display pending company partial for each item in the collection
+  renderPendingCompanies: ->
+    @$('#company-approvals').html ""
     if @companyCollection.length > 0
       @companyCollection.each (company) =>
         view = new CPP.Views.Departments.CompanyApproval
@@ -48,8 +56,11 @@ class CPP.Views.Departments.Approvals extends CPP.Views.Base
           dept: @model
         @$('#company-approvals').append(view.render().el)
     else
-      @$('#company-approvals').append "No pending company requests!"
+      @$('#company-approvals').append "<li>No pending company requests!</li>"
 
+  # Display pending email partial for each item in the collection
+  renderPendingEmails: ->
+    @$('#email-approvals').html ""
     if @emailCollection.length > 0
       @emailCollection.each (email) =>
         view = new CPP.Views.Departments.EmailApproval
@@ -57,8 +68,11 @@ class CPP.Views.Departments.Approvals extends CPP.Views.Base
           dept: @model
         @$('#email-approvals').append(view.render().el)
     else
-      @$('#email-approvals').append "No pending email requests!"
+      @$('#email-approvals').append "<li>No pending email requests!</li>"
 
+  # Display pending event partial for each item in the collection
+  renderPendingEvents: ->
+    @$('#event-approvals').html ""
     if @eventCollection.length > 0
       @eventCollection.each (event) =>
         view = new CPP.Views.Departments.EventApproval
@@ -66,8 +80,11 @@ class CPP.Views.Departments.Approvals extends CPP.Views.Base
           dept: @model
         @$('#event-approvals').append(view.render().el)
     else
-      @$('#event-approvals').append "No pending event requests!"
+      @$('#event-approvals').append "<li>No pending event requests!</li>"
 
+  # Display pending placement partial for each item in the collection
+  renderPendingPlacements: ->
+    @$('#placement-approvals').html ""
     if @placementCollection.length > 0
       @placementCollection.each (placement) =>
         view = new CPP.Views.Departments.PlacementApproval
@@ -75,4 +92,4 @@ class CPP.Views.Departments.Approvals extends CPP.Views.Base
           dept: @model
         @$('#placement-approvals').append(view.render().el)
     else
-      @$('#placement-approvals').append "No pending opportunity requests!"
+      @$('#placement-approvals').append "<li>No pending opportunity requests!</li>"

@@ -43,10 +43,9 @@
       Register your events, contact students and become more connected with Imperial students
     </p>
     <p>
-      Want more from the service? find out about becoming a benefactor by emailing
-      <a href="mailto:cpp@doc.ic.ac.uk">cpp@doc.ic.ac.uk</a>
+      Interested?  Click below to contact the department and learn more about the benefits
+       of becoming a CPP Partner Company.
     </p>
-    <p>Otherwise, apply below.</p>
   </div>
 </div>
 <div class="row">
@@ -56,8 +55,8 @@
     </a>
   </div>
   <div class="span6">
-    <a class="btn button-student-register" href="/companies/register">
-      Apply
+    <a class="btn button-student-register" href="mailto:cpp@doc.ic.ac.uk">
+      Contact the Department of Computing
     </a>
   </div>
 </div>

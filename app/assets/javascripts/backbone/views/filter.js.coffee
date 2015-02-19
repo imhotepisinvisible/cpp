@@ -32,22 +32,23 @@ class CPP.Filter extends CPP.Views.Base
     # Re-set filter after deletion
     @data.bind 'remove', @setFilter, @
 
-    @skill_list_tags_form = new Backbone.Form.editors.TagEditor
-      model: @model
-      key: 'skill_list'
-      title: 'Skills'
-      url: '/tags/skills'
-      tag_class: 'label-success'
+    for filter in @filters
+        if filter.type == "tags"
+    	    @skill_list_tags_form = new Backbone.Form.editors.TagEditor
+      		  model: @model
+      		  key: 'skill_list'
+      		  title: 'Skills'
+      		  url: '/tags/skills'
+      		  tag_class: 'label-success'
 
-    @interest_list_tags_form = new Backbone.Form.editors.TagEditor
-      model: @model
-      key: 'interest_list'
-      title: 'Interests'
-      url: '/tags/interests'
-      tag_class: 'label-warning'
-
-    @courses = new CPP.Collections.Courses
-    @courses.fetch({async:false})
+    	    @interest_list_tags_form = new Backbone.Form.editors.TagEditor
+      		  model: @model
+      		  key: 'interest_list'
+      		  title: 'Interests'
+      		  url: '/tags/interests'
+      		  tag_class: 'label-warning'
+        else if filter.type == "course"
+            @courses = options.courses
 
     @render()
 
@@ -76,7 +77,7 @@ class CPP.Filter extends CPP.Views.Base
           $(@sub_el).append(@templateDate(filter: filter))
           $('.fltr-date').datepicker
             weekStart: 1
-            format: 'yyyy-mm-dd'
+            format: getDatePickerFormat() #'dd/mm/yyyy'
             autoclose: true
       if filter.default
         $('#'+filter.attribute).val(filter.default)
@@ -155,10 +156,13 @@ class CPP.Filter extends CPP.Views.Base
                   ret
                 ))
           when "date"
+          # Compare the dates in the correct format
+          # res is in the default US format (mm/dd/yyyy)
+          # textBox is in the format specified in utils.js.coffee
             fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
               res = eval('with (model, filter) {model' + filter.scope + '.get(filter.attribute)}')
-              res >= textBox || res == null
-            ))
+              Date.parse(res) >= Date.parseExact(textBox, getDateFormat()) || res == null 
+            )) #res >= textBox || res == null
       # Trigger filter with the updated collection to re-render individually from the page
       @data.trigger('filter', fCollection)
   @

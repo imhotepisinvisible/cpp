@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Config/Server
 gem 'thin'                        # Better server :)
 gem 'unicorn'                     # Unicorn webserver: better for running on a VM
-gem 'rails', '3.2.1'              # Running on rails, wooo
+gem 'rails', '3.2.1'             # Running on rails, wooo
 gem 'therubyracer', '0.12.1'      # Javascript Engine
 
 # Back End Gems
@@ -26,6 +26,8 @@ gem 'obscenity'                   # Obscenity filter
 gem 'lorem'                       # Simple Lorem
 gem 'impressionist'               # Stats & Logging
 gem 'workflow'                    # Handling approval states
+gem 'rubyzip', '>= 1.0.0'         # will load new rubyzip version
+gem 'zip-zip'                     # will load compatibility for old rubyzip API.
 
 # UI/Appearance Related Gems
 gem 'less-rails'                  # Less required for Bootstrap
@@ -43,11 +45,11 @@ gem 'jquery-rails'                # Add jQuery goodness
 gem 'backbone-on-rails', '0.9.10.0'# Nice client side JS framework
 gem 'backbone-validation-rails'   # Adds model validation in Backbone
 gem 'underscore-rails'            # Templating for backboneJS
-gem 'rails-backbone-forms', '0.10.1' # Client side form validation
+gem 'rails-backbone-forms', '0.11.1' # Client side form validation
 gem 'bootstrap-datepicker-rails'  # Date picker
 gem 'datejs-rails'                # Nicer date manipulation in Javascript
 gem 'jquery-fileupload-rails'     # File upload
-gem 'bootstrap-toggle-buttons-rails', :git => 'http://github.com/wafcio/bootstrap-toggle-buttons-rails.git' # On/Off switches
+gem 'rails-bootstrap-toggle-buttons' # On/Off switches
 gem 'highcharts-rails'
 
 group :assets do

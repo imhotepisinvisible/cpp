@@ -145,3 +145,10 @@ window.getUserCompanyId = ->
 
 window.userId = ->
   CPP.CurrentUser.id
+
+# Create global function for dates to return in 15/12/2015 format
+window.getDateFormat = ->
+        'dd/MM/yyyy'
+# Datepicker uses different meaning for 'MM', so needs separate function
+window.getDatePickerFormat = ->
+        'dd/mm/yyyy'
