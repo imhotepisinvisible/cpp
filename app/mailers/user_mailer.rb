@@ -42,6 +42,14 @@ class UserMailer < ActionMailer::Base
     puts "VALIDATE EVENT EMAIL"
     subject = "New CPP event created"
     @event = event
+    #@user = user 
+    #@url = "http://localhost:3000/events/"+ event.id + "/approve"
     mail(:to => address, :subject => subject)
   end
+
+  
+    
+
+ 
+
 end

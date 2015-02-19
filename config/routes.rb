@@ -90,6 +90,7 @@ CPP::Application.routes.draw do
     post '/register', :on => :member, :action => :register
     post '/unregister', :on => :member, :action => :unregister
     get :pending, :on => :collection
+    get :approve, :on => :member
     put :approve, :on => :member
     put :reject, :on => :member
     get :attending_students, :on => :member
