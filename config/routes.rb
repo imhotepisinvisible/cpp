@@ -53,6 +53,8 @@ CPP::Application.routes.draw do
   
   # Non-Backbone Routes
   get ":controller/:id/stat_show", :action => "stat_show"
+  get "events/:id/approve" => "events#approve"
+  get "events/:id/reject" => "events#reject"
 
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"

@@ -16,10 +16,4 @@
     %p If you are not Will or Victoria... woops.
     %p event id
     %p= @event.id
-    <!-- %p= button_to "Approve", "http://localhost:3000/events/57/approve", :class => "button", method => :put -->
-    <!-- %p= button_to "Approve", "http://localhost:3000/events", :class => "button", :method => :get -->
-    <!-- %code.language-ruby -->
     %p= link_to "Approve", "http://localhost:3000/events/#{@event.id}/approve", :class => "button", :method => :get
-
-    <!-- link_to "Approve", "http://localhost:3000/events/", :id => @event.id, :class => "button" -->
-    
