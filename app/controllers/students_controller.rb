@@ -224,13 +224,12 @@ class StudentsController < ApplicationController
       @students = params[:students].split(',')[0]
       @students.each do |id|
         student = Student.find(id)
-        #if student.departments.id == current_user.department_id
         student.update_attributes(active: 'f')
         # Send an email/add to email list
+        Resque.enqueue(Deactivate, id)
       end
-      student = Student.find(@students[0])
-      respond_with(student) do |format|
-        format.json{render json: student}
+      respond_to do |format|
+        format.json {head :ok}
       end  
     end
   end

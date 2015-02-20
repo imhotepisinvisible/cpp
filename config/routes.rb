@@ -71,6 +71,8 @@ CPP::Application.routes.draw do
 
   resources :courses
 
+  mount Resque::Server, :at => "/resque"
+
   # Pass all other routes through to Backbone
   class XHRConstraint
     def matches?(request)
@@ -168,9 +170,7 @@ CPP::Application.routes.draw do
   match 'tags/reject_interests' => 'tags#reject_interests'
   match 'tags/validate' => 'tags#validate'
 
-
-
-  # See how all your routes lay out with "rake routes"
+   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.

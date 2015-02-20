@@ -20,7 +20,7 @@ gem 'newrelic_rpm'                # Newrelic Monitoring
 gem 'paperclip'                   # Nice model attachment
 gem 'aws-sdk'                     # AWS SDK for paperclip uploads
 gem 'redis'                       # Allows connection to redis server
-gem 'resque'                      # Job Queueing system
+gem 'resque', :require => 'resque/server'                      # Job Queueing system
 gem 'resque_mailer'               # Email queueing gem
 gem 'obscenity'                   # Obscenity filter
 gem 'lorem'                       # Simple Lorem

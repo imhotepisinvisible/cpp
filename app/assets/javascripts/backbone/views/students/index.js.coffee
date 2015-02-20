@@ -84,12 +84,12 @@ class CPP.Views.Students.Index extends CPP.Views.Base
               console.log(first_name + "not updated")
 
   suspend: (e) -> 
-    #e.stopPropagation()
     e.preventDefault()
     if confirm("Suspend all Student accounts?")
       $.ajax
         url: "students/suspend"
         type: 'PUT'
+        dataType : 'html'
         data: 
           students: @collection.pluck('id')
         success: =>
