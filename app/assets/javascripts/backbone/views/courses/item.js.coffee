@@ -6,7 +6,8 @@ class CPP.Views.Courses.Item extends CPP.Views.Base
   template: JST['backbone/templates/courses/item']
 
   events: -> _.extend {}, CPP.Views.Base::events,
-    'click .button-course-delete'       : 'delete'
+    'click .button-course-delete'     : 'delete'
+    'click .button-course-edit'       : 'edit'
 
   render: ->
     $(@el).html(@template(course: @model))
@@ -21,5 +22,10 @@ class CPP.Views.Courses.Item extends CPP.Views.Base
         notify "success", "Course deleted"
       error: (model, response) ->
         notify "error", "Course could not be deleted"
+
+
+  edit: (e) ->
+    e.stopPropagation()
+    Backbone.history.navigate("courses/" +@model.id + "/edit", trigger: true)
     
   

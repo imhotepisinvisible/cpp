@@ -6,6 +6,7 @@ class CPP.Models.Course extends CPP.Models.Base
   validation:
     name:
       required: true
+      maxLength: 100
 
   schema: ->
     name:
