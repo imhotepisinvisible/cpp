@@ -21,12 +21,17 @@
 
 
 <body>
+
   <div class="navbar navbar-fixed-top">
+
+    <!-- Primary Nav -->
     <div class="navbar-inner">
       <div class="container">
         <%= render 'layouts/navigation' %>
       </div>
     </div>
+
+    <!-- This is an alert -->
     <div class="span5 centre-span centre-text">
       <div id="notifications">
         <% if alert %>
@@ -40,6 +45,7 @@
         <% end %>
       </div>
     </div>
+
   </div>
 
   <div class="container" id="main-container">

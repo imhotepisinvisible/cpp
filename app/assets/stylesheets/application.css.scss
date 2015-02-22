@@ -12,19 +12,8 @@
 
 // External Libraries
 @import "bourbon"; // Must Go first
-@import "bootstrap_and_overrides.css.less";
 @import "backbone-forms-bootstrap";
 @import "bootstrap-datepicker";
 @import "simple_form";
 @import "bootstrap-toggle-buttons";
-
-// Site-Wide styles
-@import "cpp";
-
-// Styles for specific site features
-@import "emails";
-@import "events";
-@import "tags";
-@import "student_profile";
-@import "companies";
-@import "stats";
+@import "applicationLessCollection.less";

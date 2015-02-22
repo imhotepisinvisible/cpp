@@ -1,0 +1,35 @@
+// This file is exclusively for CSS changes to the Navigation Bar
+@import: variablesOverride;
+
+.navbar-fixed-top {
+  margin-bottom: 0px;
+}
+.navbar-inner {
+  padding: 0px;
+ // margin: 0px -40px;
+}
+
+// the brand
+.navbar .brand {
+  float: left;
+  display: block;
+  // vertically center the text given @navbarHeight
+  padding: ((@navbarHeight - @baseLineHeight) / 2) 20px ((@navbarHeight - @baseLineHeight) / 2);
+  margin-left: -20px; // negative indent to left-align the text down the page
+  font-size: 20px;
+  font-weight: 200;
+  //color: @navbarBrandColor;
+  //text-shadow: 0 1px 0 @navbarBackgroundHighlight;
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+// #nav {
+//   width: 100%;
+//   float: left;
+//   margin: 0 0 1em 0;
+//   padding: 0;
+//   background-color: #f2f2f2;
+//   border-bottom: 1px solid #ccc;  }
