@@ -5,6 +5,7 @@
 <td><%= @placement.get 'location' %></td>
 <td><%= moment(@placement.get 'created_at').fromNow() %></td>
 <td><%= moment(@placement.get 'deadline').format(getDateFormat()) %></td>
+
 <% if @editable: %>
 <td><%= @placement.get 'workflow_state' %></td>
 <td>
