@@ -120,10 +120,17 @@ class StudentsController < ApplicationController
     document = (@student.send "#{document_type}".to_sym).path
     ext = File.extname document
     unless document.nil?
-      if (params.has_key? :preview)
-        send_file document, :filename => "#{@student.last_name}_#{@student.first_name}_#{document_type}#{ext}", :disposition => 'inline'
+      if File.exist?(document)
+        if (params.has_key? :preview)
+          send_file document, :filename => "#{@student.last_name}_#{@student.first_name}_#{document_type}#{ext}", :disposition => 'inline'
+        else
+          send_file document, :filename => "#{@student.last_name}_#{@student.first_name}_#{document_type}#{ext}"
+        end
       else
-        send_file document, :filename => "#{@student.last_name}_#{@student.first_name}_#{document_type}#{ext}"
+        @student.send "#{document_type}=".to_sym, nil
+        @student.save
+        redirect_to root_path
+        return
       end
     else
       head :no_content
@@ -160,7 +167,7 @@ class StudentsController < ApplicationController
                     student = Student.find(id)
                     title = "#{student.id}-#{student.last_name}#{student.first_name}-cv.pdf"
                     cv_url = (student.send :cv).path
-                    zipfile.add(title, cv_url) if cv_url.present?
+                    zipfile.add(title, cv_url) if cv_url.present? && File.exist?(cv_url)
                 rescue ActiveRecord::RecordNotFound
                 end
             end
