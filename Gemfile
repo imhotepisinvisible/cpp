@@ -47,7 +47,7 @@ gem 'backbone-validation-rails'   # Adds model validation in Backbone
 gem 'underscore-rails'            # Templating for backboneJS
 gem 'rails-backbone-forms', '0.11.1' # Client side form validation
 gem 'bootstrap-datepicker-rails'  # Date picker
-gem 'datejs-rails'                # Nicer date manipulation in Javascript
+gem 'momentjs-rails'              # Nicer date manipulation in Javascript
 gem 'jquery-fileupload-rails'     # File upload
 gem 'rails-bootstrap-toggle-buttons' # On/Off switches
 gem 'highcharts-rails'

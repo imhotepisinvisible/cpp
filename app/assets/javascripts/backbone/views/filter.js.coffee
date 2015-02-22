@@ -161,7 +161,7 @@ class CPP.Filter extends CPP.Views.Base
           # textBox is in the format specified in utils.js.coffee
             fCollection = new (fCollection.constructor)(fCollection.filter((model) ->
               res = eval('with (model, filter) {model' + filter.scope + '.get(filter.attribute)}')
-              Date.parse(res) >= Date.parseExact(textBox, getDateFormat()) || res == null 
+              moment(res) >= moment(textBox, getDateFormat()) || res == null 
             )) #res >= textBox || res == null
       # Trigger filter with the updated collection to re-render individually from the page
       @data.trigger('filter', fCollection)

@@ -34,7 +34,7 @@
             <th>Description</th>
             <th>Duration</th>
             <th>Location</th>
-	    <th>Date Posted</th>
+	        <th>Posted</th>
             <th>Deadline</th>
             <% if @editable: %>
             <th>Status</th>

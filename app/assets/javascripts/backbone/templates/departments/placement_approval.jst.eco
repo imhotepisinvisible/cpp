@@ -13,7 +13,7 @@
         <a href="/opportunities/<%= @placement.get 'id' %>"><%= @placement.get('position') %></a>
       </div>
       <div class="placement-description">Deadline <%= @placement.getReadableDate('deadline') %></div>
-      <div class="placement-info">Created <%= @placement.getReadableDate('created_at') %></div>
+      <div class="placement-info">Created <%= @placement.getTimeAgo('created_at') %></div>
     </div>
 
     <div class="span2">

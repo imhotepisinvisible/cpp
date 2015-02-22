@@ -3,8 +3,11 @@ class CPP.Models.Email extends CPP.Models.Base
     '/emails' + (if @isNew() then '' else '/' + @id)
 
   getReadableDate: (field) ->
-    Date.parse(@get(field)).toString('dS MMMM yyyy - H:mm')
-
+    moment(@get(field)).format('Do MMMM YYYY - H:mm')
+    
+  getTimeAgo: (field) ->
+    moment(@get(field)).fromNow()
+    
   validation:
     subject:
       required: true
