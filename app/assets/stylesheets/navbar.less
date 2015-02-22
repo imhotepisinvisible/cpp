@@ -1,35 +1,53 @@
 // This file is exclusively for CSS changes to the Navigation Bar
-@import: variablesOverride;
 
 .navbar-fixed-top {
   margin-bottom: 0px;
 }
+
+// Inner for background effects
+// Gradient is applied to its own element because overflow visible is not honored by IE when filter is present
 .navbar-inner {
-  padding: 0px;
- // margin: 0px -40px;
+  min-height: @navbarHeight;
+  padding-left:  20px;
+  padding-right: 20px;
+  #gradient > .vertical(@navbarBackgroundHighlight, @navbarBackground);
+  border: 0px solid @navbarBorder;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);  
+
+  // Prevent floats from breaking the navbar
+  .clearfix();
 }
 
-// the brand
+// Brand: website or project name
+// -------------------------
 .navbar .brand {
+  max-height: @navbarHeight;
+  max-width: 150px;
+  height: auto;
+  width: auto;
   float: left;
   display: block;
-  // vertically center the text given @navbarHeight
+  #gradient > .vertical(#006EAF,darken(#006EAF, 5%));
+  // Vertically center the text given @navbarHeight
   padding: ((@navbarHeight - @baseLineHeight) / 2) 20px ((@navbarHeight - @baseLineHeight) / 2);
   margin-left: -20px; // negative indent to left-align the text down the page
   font-size: 20px;
   font-weight: 200;
-  //color: @navbarBrandColor;
-  //text-shadow: 0 1px 0 @navbarBackgroundHighlight;
+  // color: @navbarBrandColor;
+  text-shadow: 0 1px 0 @navbarBackgroundHighlight;
   &:hover,
   &:focus {
     text-decoration: none;
   }
 }
 
-// #nav {
-//   width: 100%;
-//   float: left;
-//   margin: 0 0 1em 0;
-//   padding: 0;
-//   background-color: #f2f2f2;
-//   border-bottom: 1px solid #ccc;  }
+
+
+// NAVIGATION
+// ----------
+
+// Links (this fixes the issue with the navbar, but the new variable values aren't being picked up)
+.navbar .nav > li > a {
+  padding: 29px 15px 29px;
+  //padding: ((@navbarHeight - @baseLineHeight) / 2) 15px ((@navbarHeight - @baseLineHeight) / 2);
+}
