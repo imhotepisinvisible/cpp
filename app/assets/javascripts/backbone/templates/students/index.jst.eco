@@ -10,7 +10,7 @@
           New Student
         </a>
       <% end %>
-      <% if isCompanyAdmin(): %>
+      <% if isAdmin(): %>
         <div class="btn pull-right button-export-cvs">
           Download CVs
         </div>
