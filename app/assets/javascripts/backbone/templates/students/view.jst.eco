@@ -54,238 +54,254 @@
       <div class="row-fluid">
         <div class="span12" id="student-profile-body">
 
-
-
-
           <!-- Navigation Tabs -->
           <div class="row-fluid">
             <div class="span12">
 
 <!-- need to put in here that the tabs are 100%, 50% and 33% respectively -->
-              <div class="tabbable"> <!-- Only required for left/right tabs -->
-                <ul class="nav nav-tabs">
-                  <li class="active"><a href="#tab1" data-toggle="tab">Section 1</a></li>
-                  <li><a href="#tab2" data-toggle="tab">Section 2</a></li>
-                </ul>
-
+              <div class="tabbable full-width-tabs">
+                  <ul class="nav nav-tabs">
+                      <li class="active take-all-space-you-can"><a href="#tab-one" data-toggle="tab">Profile</a></li>
+                      <li class="take-all-space-you-can"><a href="#tab-two" data-toggle="tab">Curriculum Vitae</a></li>
+                  </ul>
+              </div>
             </div>
-          </div>
 
-          <!-- Content of the navigation tabs -->
-          <div class="row-fluid">
-            <div class="span12">
+            <!-- Content of the navigation tabs -->
+            <div class="row-fluid">
+              <div class="span12">
 
                 <div class="tab-content">
-                  <div class="tab-pane active" id="tab1">
-                    <p>I'm in Section 1.</p>
-                  </div>
-                  <div class="tab-pane" id="tab2">
-                    <p>Howdy, I'm in Section 2.</p>
-                  </div>
-                </div>
+                    <div class="tab-pane active" id="tab-one">
+                            
+                            <!-- CONTENTS OF TAB ONE -->
+                            <div class="row-fluid">          
+                                      <!-- Documents & Contact Me (Column 1 of 3) -->
+                                      <div class="span4 colour-card">
+
+                                        <!-- Documents Header -->
+                                        <h1 class="section-header colour-header">
+                                          <i class="icon-file"></i> Documents
+                                        </h1>
+
+                                        <% if ((@student.get 'cv_file_name') or (@student.get 'transcript_file_name') or (@student.get 'covering_letter_file_name')): %>
+                                          
+                                          <!-- Documents Body (Table format) -->
+                                          <div class="row-fluid">
+                                            <div class="span12">
+                                              <table class="table table-striped">
+
+                                                <% if @student.get 'cv_file_name': %>
+                                                  <tr>
+                                                    <td>Curriculum Vitae</td>
+                                                    <td>
+                                                      <div class="btn-group pull-right">
+                                                        <a class="btn" href="<%= '/students/' + @student.id + '/documents/cv' %>"><i class="icon-download-alt"/></a>
+                                                        <a class="btn" id="preview-cv" href="<%= '/students/' + @student.id + '/documents/cv?preview=1' %>"><i class="icon-eye-open"/></a>
+                                                      </div>
+                                                    </td>
+                                                  </tr>
+                                                <% end %>
+
+                                                <% if @student.get 'transcript_file_name': %>
+                                                  <tr>
+                                                    <td>Transcript</td>
+                                                    <td>
+                                                      <div class="btn-group pull-right">
+                                                        <a class="btn" href="<%= '/students/' + @student.id + '/documents/transcript' %>"><i class="icon-download-alt"/></a>
+                                                        <a class="btn" id="preview-cv" href="<%= '/students/' + @student.id + '/documents/transcript?preview=1' %>"><i class="icon-eye-open"/></a>
+                                                      </div>
+                                                    </td>
+                                                  </tr>
+                                                <% end %>
+
+                                                <% if @student.get 'covering_letter_file_name': %>
+                                                  <tr>
+                                                    <td>Covering Letter</td>
+                                                    <td>
+                                                      <div class="btn-group pull-right">
+                                                        <a class="btn" href="<%= '/students/' + @student.id + '/documents/covering_letter' %>"><i class="icon-download-alt"/></a>
+                                                        <a class="btn" id="preview-cv" href="<%= '/students/' + @student.id + '/documents/covering_letter?preview=1' %>"><i class="icon-eye-open"/></a>
+                                                      </div>
+                                                    </td>
+                                                  </tr>
+                                                <% end %>
+
+                                              </table>
+                                            </div>
+                                          </div>
+
+                                          <!-- Contact Me Section-->
+                                          <div class="row-fluid">
+                                            <div class="span12">
+
+                                              <!-- Contact Me header -->
+                                              <h1 class="section-header colour-header">
+                                                <i class="icon-envelope"></i> Contact Me
+                                              </h1>
+
+                                              <!-- Contact Me Body -->
+                                              <% if isAdmin(): %>
+                                                <a class="btn btn-primary button-student-register" href="mailto:<%= @student.get('email') %>">Contact me!</a>
+                                              <% else: %>
+                                                <div class="btn btn-primary button-student-register">Contact me!</div>
+                                              <% end %>
+
+                                            </div>
+                                          </div>
+
+                                        <!-- if you haven't got a CV,Transcript or Covering Letter -->
+                                        <% else: %>
+                                          <div class="empty-student-profile-field-container">
+                                            <i class="icon-file empty-student-profile-field"/>
+                                          </div>
+                                        <% end %>
+
+                                      </div>  <!-- end of First Column -->
+
+
+                                      <!-- Column2: About Me -->
+                                      <div class="span4 colour-card">
+
+                                        <!-- Header (about me) -->
+                                        <h1 class="section-header colour-header">
+                                          <i class="icon-user"></i> About Me
+                                        </h1>
+                           
+                                        <!-- Body (about me) -->
+                                        <div class="row-fluid">
+                                          <div class="span12">
+
+                                            <% if @student.get('bio'): %>
+                                              <p>
+                                                <%- @student.get('bio').replace(/\n/g, "<br/>") %>
+                                              </p>
+                                            <% else: %>
+                                              <div class="empty-student-profile-field-container">
+                                                <i class="icon-user empty-student-profile-field"/>
+                                              </div>
+                                            <% end %>
+
+                                          </div>
+                                        </div>
+                                      </div>
+
+
+                                      <!-- Column3: Passions - skills, interests and year groups? -->
+                                      <!--  this bit is implemented badly - should be like a list rather 
+                                      that being separated using spanning divs -->
+                                      <div class="span4 colour-card">
+
+                                        <!-- Passions Header -->
+                                        <h1 class="section-header colour-header">
+                                          <i class="icon-heart"></i> Passions
+                                        </h1>
+
+                                        <div class="row-fluid">
+
+                                          <!-- Skills -->
+                                          <div class="span12">
+                                            <div class="tag-category">
+
+                                              <div class="tag-category-header">
+                                                Skills
+                                              </div>
+
+                                              <% if @student.get('skill_list').length > 0: %>
+                                                <% for i, tag of @student.get('skill_list'): %>
+                                                  <span class="label label-success tag year-group-tag">
+                                                    <%= tag %>
+                                                  </span>
+                                                <% end %>
+                                              <% else: %>
+                                                No Skills Tagged
+                                              <% end %>
+
+                                            </div>
+                                          </div>
+
+                                          <!-- Interests -->
+                                          <div class="span12">
+                                            <div class="tag-category">
+
+                                              <div class="tag-category-header">
+                                                Interests
+                                              </div>
+
+                                              <% if @student.get('interest_list').length > 0: %>
+                                                <% for i, tag of @student.get('interest_list'): %>
+                                                  <span class="label label-warning tag year-group-tag">
+                                                    <%= tag %>
+                                                  </span>
+                                                <% end %>
+                                              <% else: %>
+                                                No Interests Tagged
+                                              <% end %>
+
+                                            </div>
+                                          </div>
+
+                                          <!-- Year Groups -->
+                                          <div class="span12">
+                                            <div class="tag-category">
+
+                                              <div class="tag-category-header">
+                                                Year Groups
+                                              </div>
+
+                                              <% if @student.get('year_group_list').length > 0: %>
+                                                <% for i, tag of @student.get('year_group_list'): %>
+                                                  <span class="label label-info tag year-group-tag">
+                                                    <%= tag %>
+                                                  </span>
+                                                <% end %>
+                                              <% else: %>
+                                                No Year Groups Tagged
+                                              <% end %>
+
+                                            </div>
+                                          </div>
+
+                                        </div> <!-- end of passions row-fluid -->
+                                      </div> <!-- end of passions column -->
+
+                                    
+                                    <!-- END of Main Body -->
+                                  </div> 
+                            </div>
+                    <div class="tab-pane" id="tab-two">
+                        
+                      <!-- asking if the student has a CV??  then do the following, where do you put the else statement?-->
+                        <div id=" ">
+                          <% if (@student.get 'cv_file_name'): %>
+                            <div class="row">
+                                <div class="span12" id="student-profile-body-container">
+                                  <div class="row">
+                                    <div class="span12" id="student-profile-body">
+                                        <div>
+                                          <object width="100%" height="1000px" type="application/pdf" data="<%= '/students/' + @student.id + '/documents/cv?preview=1' %>">
+                                          <p>Your browser doesn't support PDF rendering, so can <a href="<%= '/students/' + @student.id + '/documents/cv' %>">click here to download the PDF file.</a></p>
+                                          </object>
+                                        </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                          <% else: %>
+                             <p> You need to upload a CV, or else your profile will not be shown </p>
+                         <% end %>
+                        </div>
+
+                    </div>  
+                </div> 
+
               </div>
-            
             </div>
+
           </div>
+        </div> <!-- /tabbable -->
 
 
-
-
-          
-          <div class="row-fluid">
-            
-            <!-- Documents & Contact Me (Column 1 of 3) -->
-            <div class="span4">
-
-              <!-- Documents Header -->
-              <h1 class="section-header">
-                <i class="icon-file"></i> Documents
-              </h1>
-
-              <% if ((@student.get 'cv_file_name') or (@student.get 'transcript_file_name') or (@student.get 'covering_letter_file_name')): %>
-                
-                <!-- Documents Body (Table format) -->
-                <div class="row-fluid">
-                  <div class="span12">
-                    <table class="table table-striped">
-
-                      <% if @student.get 'cv_file_name': %>
-                        <tr>
-                          <td>Curriculum Vitae</td>
-                          <td>
-                            <div class="btn-group pull-right">
-                              <a class="btn" href="<%= '/students/' + @student.id + '/documents/cv' %>"><i class="icon-download-alt"/></a>
-                              <a class="btn" id="preview-cv" href="<%= '/students/' + @student.id + '/documents/cv?preview=1' %>"><i class="icon-eye-open"/></a>
-                            </div>
-                          </td>
-                        </tr>
-                      <% end %>
-
-                      <% if @student.get 'transcript_file_name': %>
-                        <tr>
-                          <td>Transcript</td>
-                          <td>
-                            <div class="btn-group pull-right">
-                              <a class="btn" href="<%= '/students/' + @student.id + '/documents/transcript' %>"><i class="icon-download-alt"/></a>
-                              <a class="btn" id="preview-cv" href="<%= '/students/' + @student.id + '/documents/transcript?preview=1' %>"><i class="icon-eye-open"/></a>
-                            </div>
-                          </td>
-                        </tr>
-                      <% end %>
-
-                      <% if @student.get 'covering_letter_file_name': %>
-                        <tr>
-                          <td>Covering Letter</td>
-                          <td>
-                            <div class="btn-group pull-right">
-                              <a class="btn" href="<%= '/students/' + @student.id + '/documents/covering_letter' %>"><i class="icon-download-alt"/></a>
-                              <a class="btn" id="preview-cv" href="<%= '/students/' + @student.id + '/documents/covering_letter?preview=1' %>"><i class="icon-eye-open"/></a>
-                            </div>
-                          </td>
-                        </tr>
-                      <% end %>
-
-                    </table>
-                  </div>
-                </div>
-
-                <!-- Contact Me Section-->
-                <div class="row-fluid">
-                  <div class="span12">
-
-                    <!-- Contact Me header -->
-                    <h1 class="section-header">
-                      <i class="icon-envelope"></i> Contact Me
-                    </h1>
-
-                    <!-- Contact Me Body -->
-                    <% if isAdmin(): %>
-                      <a class="btn btn-primary button-student-register" href="mailto:<%= @student.get('email') %>">Contact me!</a>
-                    <% else: %>
-                      <div class="btn btn-primary button-student-register">Contact me!</div>
-                    <% end %>
-
-                  </div>
-                </div>
-
-              <!-- if you haven't got a CV,Transcript or Covering Letter -->
-              <% else: %>
-                <div class="empty-student-profile-field-container">
-                  <i class="icon-file empty-student-profile-field"/>
-                </div>
-              <% end %>
-
-            </div>  <!-- end of First Column -->
-
-
-            <!-- Column2: About Me -->
-            <div class="span4">
-
-              <!-- Header (about me) -->
-              <h1 class="section-header">
-                <i class="icon-user"></i> About Me
-              </h1>
- 
-              <!-- Body (about me) -->
-              <div class="row-fluid">
-                <div class="span12">
-
-                  <% if @student.get('bio'): %>
-                    <p>
-                      <%- @student.get('bio').replace(/\n/g, "<br/>") %>
-                    </p>
-                  <% else: %>
-                    <div class="empty-student-profile-field-container">
-                      <i class="icon-user empty-student-profile-field"/>
-                    </div>
-                  <% end %>
-
-                </div>
-              </div>
-            </div>
-
-
-            <!-- Column3: Passions - skills, interests and year groups? -->
-            <!--  this bit is implemented badly - should be like a list rather 
-            that being separated using spanning divs -->
-            <div class="span4">
-
-              <!-- Passions Header -->
-              <h1 class="section-header">
-                <i class="icon-heart"></i> Passions
-              </h1>
-
-              <div class="row-fluid">
-
-                <!-- Skills -->
-                <div class="span12">
-                  <div class="tag-category">
-
-                    <div class="tag-category-header">
-                      Skills
-                    </div>
-
-                    <% if @student.get('skill_list').length > 0: %>
-                      <% for i, tag of @student.get('skill_list'): %>
-                        <span class="label label-success tag year-group-tag">
-                          <%= tag %>
-                        </span>
-                      <% end %>
-                    <% else: %>
-                      No Skills Tagged
-                    <% end %>
-
-                  </div>
-                </div>
-
-                <!-- Interests -->
-                <div class="span12">
-                  <div class="tag-category">
-
-                    <div class="tag-category-header">
-                      Interests
-                    </div>
-
-                    <% if @student.get('interest_list').length > 0: %>
-                      <% for i, tag of @student.get('interest_list'): %>
-                        <span class="label label-warning tag year-group-tag">
-                          <%= tag %>
-                        </span>
-                      <% end %>
-                    <% else: %>
-                      No Interests Tagged
-                    <% end %>
-
-                  </div>
-                </div>
-
-                <!-- Year Groups -->
-                <div class="span12">
-                  <div class="tag-category">
-
-                    <div class="tag-category-header">
-                      Year Groups
-                    </div>
-
-                    <% if @student.get('year_group_list').length > 0: %>
-                      <% for i, tag of @student.get('year_group_list'): %>
-                        <span class="label label-info tag year-group-tag">
-                          <%= tag %>
-                        </span>
-                      <% end %>
-                    <% else: %>
-                      No Year Groups Tagged
-                    <% end %>
-
-                  </div>
-                </div>
-
-              </div> <!-- end of passions row-fluid -->
-            </div> <!-- end of passions column -->
-
-          
-          <!-- END of Main Body -->
-        </div> 
       </div>
     </div>
   </div>
