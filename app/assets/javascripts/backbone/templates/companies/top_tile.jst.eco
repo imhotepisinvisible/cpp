@@ -1,6 +1,6 @@
 <div class="row-fluid">
-  <div class="span9">
-    <div class="thumbnail company-tile">
+  <div class="span12">
+    <div class="shadow-card company-tile"> 
       <div class="row-fluid top-tile-row">
         <div class="span6">
           <img src="<%= @company.get('logo_url') %>" />
