@@ -47,6 +47,13 @@
   </div>
 </div>
 
+<!-- student summary -->
+<div class="row-fluid">
+  <div class="span12" id="student-summary">
+    <p> "This will be a short amount of text, properly embedded from the database. This will be a short amount of text, properly embedded from the database. This will be a short amount of text, properly embedded from the database. This will be a short amount of text, properly embedded from the database. This will be a short amount of text, properly embedded from the database."
+  </div>
+</div>
+
 <!-- Main Body of the student profile -->
 <div class="row-fluid">
   <div class="span12" id="student-profile-body-container">
@@ -74,7 +81,7 @@
                 <div class="tab-pane active" id="tab-one">
 
                   <!-- CONTENTS OF TAB ONE -->
-                  <div class="row-fluid">          
+                  <div class="span9 row-fluid">          
                     <!-- Documents & Contact Me (Column 1 of 3) -->
                     <div class="span4 colour-card">
 
@@ -239,10 +246,14 @@
                         </div>
                       </div>
                     </div>
+                  </div>
 
-                    <!-- END of Main Body -->
-                  </div> 
-                </div>
+                  <div class="span3 well">
+                    <p> this well needs to be stretched the full length </p>
+                  </div>
+
+                </div> <!-- END of Main Body -->
+
                 <div class="tab-pane" id="tab-two">
 
                   <!-- asking if the student has a CV??  then do the following, where do you put the else statement?-->
