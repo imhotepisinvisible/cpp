@@ -1,4 +1,4 @@
-<div class="row section-header">
+<div class="row-fluid section-header">
   <div class="span9">
      <h1><%= @event.get 'title' %></h1>
   </div>
@@ -12,9 +12,9 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row-fluid">
   <div class="span6">
-    <div class="row">
+    <div class="row-fluid">
       <div class="span6" id="description">
         <h1 class="section-header"><i class="icon-info-sign"></i> Description</h1>
         <div><%= @event.get 'description' %></div>
@@ -22,13 +22,13 @@
     </div>
 
     <div class="span6">
-      <div class="row">
+      <div class="row-fluid">
 
         <h1 class="section-header">
           <i class="icon-tags"></i> Tags
         </h1>
 
-        <div class="row">
+        <div class="row-fluid">
           <div class="span6">
             <div class="tag-category">
               <div class="tag-category-header">
@@ -47,7 +47,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row-fluid">
           <div class="span6">
             <div class="tag-category">
               <div class="tag-category-header">
@@ -66,7 +66,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row-fluid">
           <div class="span6">
             <div class="tag-category">
               <div class="tag-category-header">
@@ -92,7 +92,7 @@
 
   </div>
   <div class="span6" >
-    <div class="row">
+    <div class="row-fluid">
       <div class="span6" id="date">
         <h1 class="section-header"><i class="icon-time"></i> Where and When</h1>
         <table class="table table-striped">
@@ -136,9 +136,9 @@
       </div>
     </div>
 
-    <div class="row capacity_container">
+    <div class="row-fluid capacity_container">
       <div class="span6">
-        <div class="row">
+        <div class="row-fluid">
           <div class="span6">
             <h1 class="section-header">
               <i class="icon-list"></i> <%= if window.isStudent() then 'Sign Up' else 'Attendees' %>
@@ -146,7 +146,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row-fluid">
           <% if @event.get("capacity"): %>
             <div class="span4">
               <div id="capacity-progress" class="progress progress-<%= @event.getCapacityClass() %>">
@@ -166,7 +166,7 @@
           <% end %>
         </div>
 
-        <div class="row">
+        <div class="row-fluid">
           <% if @student: %>
             <div class="span4">
               <div id="attending-text">

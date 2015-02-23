@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row-fluid">
   <div class="span8">
     <div id="company-name-input-container" style="display:none">
       <h1 class="section-header">
@@ -13,7 +13,7 @@
       </h1>
     </div>
 
-    <div class="row">
+    <div class="row-fluid">
       <div class="span4">
         <div id="company-logo-large company-logo-img-container"
              class="upload-container img-polaroid <%= "missing-document" unless @company.get('logo_file_name') %> image-buttons-container">
@@ -59,7 +59,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row-fluid">
   <div class="span6" id="events-partial">
 
   </div>
@@ -67,7 +67,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row-fluid">
   <div class="span6" id="emails-partial"></div>
   <div class="span6" id="stats-partial">
     <h1 class="section-header">
@@ -78,7 +78,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row-fluid">
   <div class="span6">
     <div id="edit-admins"></div>
   </div>

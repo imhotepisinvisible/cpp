@@ -2,14 +2,14 @@
   Email - <%= @email.get 'subject' %>
 </h1>
 
-<div class="row">
+<div class="row-fluid">
   <div class="span12" id="description">
     <h1 class="section-header"><i class="icon-info-sign"></i>  Contents</h1>
     <iframe class="email-preview" src="/emails/<%= @email.id %>/preview"></iframe>
   </div>
 </div>
 
-<div class="row">
+<div class="row-fluid">
   <div class="span6" id="date">
     <h1 class="section-header"><i class="icon-time"></i> History</h1>
     <table class="table table-striped">

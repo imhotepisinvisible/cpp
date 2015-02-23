@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row-fluid">
   <div class="span8">
     <h1 class="section-header">
       <i class="icon-briefcase"></i>
@@ -15,7 +15,7 @@
         </span>
       <% end %>
     </h1>
-    <div class="row">
+    <div class="row-fluid">
       <div class="span4">
         <div class="company-logo-large">
           <img src="<%= @company.get('logo_url') %>">
@@ -31,13 +31,13 @@
     <div id="contacts-partial"></div>
   </div>
 </div>
-<div class="row">
+<div class="row-fluid">
   <div class="span6" id="events-partial"></div>
   <div class="span6" id="placements-partial"></div>
 </div>
 
 <% if !isStudent(): %>
-<div class="row">
+<div class="row-fluid">
   <div class="span6" id="emails-partial"></div>
   <div class="span6" id="stats-partial">
     <h1 class="section-header">

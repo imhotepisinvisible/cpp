@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row-fluid">
   <div class="span3">
       <div class="label label-info interest-tag fltr-tags">
       </div>

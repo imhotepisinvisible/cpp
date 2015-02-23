@@ -1,4 +1,4 @@
-<div class="row section-header">
+<div class="row-fluid section-header">
   <div class="span9">
      <h1><%= @placement.company.get('name') %> - <%= @placement.get 'position' %></h1>
   </div>
@@ -12,9 +12,9 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row-fluid">
   <div class="span6">
-    <div class="row">
+    <div class="row-fluid">
       <div class="span6" id="description">
         <h1 class="section-header"><i class="icon-info-sign"></i>  Description</h1>
         <%- @placement.get('description').replace(/\n/g, '<br>') %>
@@ -22,13 +22,13 @@
     </div>
 
 
-    <div class="row">
+    <div class="row-fluid">
       <div class="span6">
         <h1 class="section-header">
           <i class="icon-tags"></i> Tags
         </h1>
 
-        <div class="row">
+        <div class="row-fluid">
           <div class="span6">
             <div class="tag-category">
               <div class="tag-category-header">
@@ -47,7 +47,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row-fluid">
           <div class="span6">
             <div class="tag-category">
               <div class="tag-category-header">
@@ -66,7 +66,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row-fluid">
           <div class="span6">
             <div class="tag-category">
               <div class="tag-category-header">

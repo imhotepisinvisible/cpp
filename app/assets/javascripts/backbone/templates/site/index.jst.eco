@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row-fluid">
   <div class="span12">
     <h1 class="section-header">Corporate Partnership Programme:Connect</h1>
   </div>
@@ -19,7 +19,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row-fluid">
   <div class="span6">
     <h1 class="section-header"><i class="icon-user"></i> Work With The Best</h1>
     <ul>
@@ -48,7 +48,7 @@
     </p>
   </div>
 </div>
-<div class="row">
+<div class="row-fluid">
   <div class="span6">
     <a class="btn btn-primary button-student-register" href="/register">
       Sounds Good, Sign Me Up!
@@ -61,9 +61,9 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row-fluid">
   <div class="span12 company-bar">
-    <div class="row">
+    <div class="row-fluid">
       <div class="span2"><img src="/assets/company_logos/google_logo.jpg"/></div>
       <div class="span2"><img src="/assets/company_logos/facebook_logo.jpg"/></div>
       <div class="span2"><img src="/assets/company_logos/amazon_logo.jpg"/></div>

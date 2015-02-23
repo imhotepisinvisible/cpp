@@ -1,16 +1,16 @@
-<div class="row">
+<div class="row-fluid">
 	<div class="span3">
     <h3 for="fltr-search"><%= @filter.name %></h3>
   </div>
 </div>
-<div class="row">
+<div class="row-fluid">
 	<div class="span3">
 	  <div class="tag-category">
 	    <div class="skill-tags-form"></div>
 	  </div>
 	</div>
 </div>
-<div class="row">
+<div class="row-fluid">
 	<div class="span3">
 	  <div class="tag-category">
 	    <div class="interest-tags-form"></div>

@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row-fluid">
   <div class="span3">
     <h3 for="fltr-date"><%= @filter.name %></h3>
   </div>

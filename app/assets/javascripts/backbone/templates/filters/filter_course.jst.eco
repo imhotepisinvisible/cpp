@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row-fluid">
   <div class="span3">
   	<select id="<%= @filter.attribute %>" class="fltr-course">
   		<option value="">All Courses</option>
