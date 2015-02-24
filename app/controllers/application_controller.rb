@@ -17,9 +17,13 @@ class ApplicationController < ActionController::Base
 
   # If @current_user is set, returns it else sets and returns
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    warden.user
   end
 
+  def warden
+    env['warden']
+  end
+  
   def require_login
     raise CanCan::AccessDenied unless current_user
   end

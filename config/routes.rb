@@ -72,7 +72,11 @@ CPP::Application.routes.draw do
   resources :courses
 
   require 'resque_scheduler/server'
-  mount Resque::Server, :at => "/resque"
+  #namespace :admin do
+  constraints CanAccessResque do
+    mount Resque::Server, :at => "/resque"
+  end
+  #end
 
   # Pass all other routes through to Backbone
   class XHRConstraint

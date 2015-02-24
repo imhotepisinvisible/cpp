@@ -352,6 +352,8 @@ GEM
       timeliness (~> 0.3.6)
     vegas (0.1.11)
       rack (>= 1.0.0)
+    warden (1.2.3)
+      rack (>= 1.0)
     websocket (1.0.6)
     will_paginate (3.0.3)
     workflow (1.1.0)
@@ -429,5 +431,6 @@ DEPENDENCIES
   underscore-rails
   unicorn
   validates_timeliness
+  warden
   will_paginate
   workflow

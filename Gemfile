@@ -27,6 +27,7 @@ gem 'obscenity'                   # Obscenity filter
 gem 'lorem'                       # Simple Lorem
 gem 'impressionist'               # Stats & Logging
 gem 'workflow'                    # Handling approval states
+gem 'warden'                      # More customiseable authorisation
 
 # UI/Appearance Related Gems
 gem 'less-rails'                  # Less required for Bootstrap
