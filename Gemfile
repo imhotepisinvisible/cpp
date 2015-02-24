@@ -21,6 +21,7 @@ gem 'paperclip'                   # Nice model attachment
 gem 'aws-sdk'                     # AWS SDK for paperclip uploads
 gem 'redis'                       # Allows connection to redis server
 gem 'resque', :require => 'resque/server'                      # Job Queueing system
+gem 'resque-scheduler', '~> 2.2.0' #, :require => 'resque_scheduler' # Job scheduling
 gem 'resque_mailer'               # Email queueing gem
 gem 'obscenity'                   # Obscenity filter
 gem 'lorem'                       # Simple Lorem

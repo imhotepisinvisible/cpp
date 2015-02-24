@@ -71,6 +71,7 @@ CPP::Application.routes.draw do
 
   resources :courses
 
+  require 'resque_scheduler/server'
   mount Resque::Server, :at => "/resque"
 
   # Pass all other routes through to Backbone
