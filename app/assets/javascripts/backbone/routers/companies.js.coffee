@@ -17,6 +17,11 @@ class CPP.Routers.Companies extends Backbone.Router
     else
         view = new CPP.Views.CompaniesIndex collection: companies
     companies.fetch
+      success: ->
+        if isStudent() # why ComapaniesIndex not Companies.index
+          view = new CPP.Views.CompaniesStudentIndex collection: companies
+        else
+          view = new CPP.Views.CompaniesIndex collection: companies
       error: ->
         notify "error", "Couldn't fetch companies"
 

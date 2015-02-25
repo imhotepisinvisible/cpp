@@ -42,15 +42,33 @@ class UserMailer < ActionMailer::Base
     puts "ACCOUNT_DEACTIVATED_EMAIL"
     subject = "CPP Account Deactivated"
     @name = user.first_name
-    @url = "https://cpp.doc.ic.ac.uk/"
+    @url = Rails.application.config.absolute_site_url 
     mail(:to => user.email, :subject => subject)
   end
 
-    def account_reminder(user)
+  def account_reminder(user)
     puts "ACCOUNT_REMINDER_EMAIL"
     subject = "CPP Account Reminder"
     @name = user.first_name
-    @url = "https://cpp.doc.ic.ac.uk/"
+    @url = Rails.application.config.absolute_site_url 
     mail(:to => user.email, :subject => subject)
   end
+
+  def validate_event_email(address, event)
+    puts "VALIDATE EVENT EMAIL"
+    subject = "New CPP event created"
+    @event = event
+    mail(:to => address, :subject => subject)
+      @url = Rails.application.config.absolute_site_url    
+    mail(:to => address, :subject => subject)
+  end
+
+  def validate_placement_email(address, placement)
+    puts "VALIDATE PLACEMENT EMAIL"
+    subject = "New placement posted on CPP"
+    @placement = placement 
+    @url = Rails.application.config.absolute_site_url    
+    mail(:to => address, :subject => subject)
+  end
+  
 end

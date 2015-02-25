@@ -23,6 +23,7 @@ window.CPP =
     new CPP.Routers.CompanyContacts
     new CPP.Routers.ForgotPassword
     new CPP.Routers.Departments
+    new CPP.Routers.Courses
     #new CPP.Routers.Site
     Backbone.history.start({pushState: true})
     #Backbone.history.start()
@@ -68,7 +69,7 @@ $(document).on "click", "a[href^='/']", (event) ->
   href = $(event.currentTarget).attr('href')
 
   # chain 'or's for other black list routes
-  passThrough = href.indexOf('logout') >= 0 || href.indexOf('courses') >= 0 || href.indexOf('documents') >= 0 || href.indexOf('.csv') >= 0
+  passThrough = href.indexOf('logout') >= 0 || href.indexOf('documents') >= 0 || href.indexOf('.csv') >= 0
 
   # Allow shift+click for new tabs, etc.
   if !passThrough && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey
