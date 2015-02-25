@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   impressionist
 
   load_and_authorize_resource
-  respond_to :json
+  respond_to :json, :html
   before_filter :require_login
 
   # Find all events the current user has access to
@@ -43,6 +43,27 @@ class EventsController < ApplicationController
     @events = current_user.events.scoped.with_new_state
     respond_with @events
   end
+  
+  def email_approve
+    if !current_user.is_department_admin?
+      redirect_to root_path
+    elsif @event.approved? or @event.rejected?
+      @status = @event.current_state
+      redirect_to @event, :notice => "Event already " + "#{@status}" 
+    else 
+      @event = Event.find(params[:id])
+      if @event.approve!        
+        redirect_to @event, :notice => "Event approved"
+      else
+        redirect_to @event, :notice => "Unprocessable entity"
+      end
+    end
+  end
+
+  #@event        
+  #respond_with @event, :location => @event do |format|
+  #format.html { redirect_to @event }        
+  #end
 
   def approve
     @event = Event.find(params[:id])
@@ -52,6 +73,24 @@ class EventsController < ApplicationController
       respond_with @event, status: :unprocessable_entity
     end
   end
+
+  def email_reject
+    if !current_user.is_department_admin?
+      redirect_to root_path
+    elsif @event.approved? or @event.rejected?
+      @status = @event.current_state
+      redirect_to @event, :notice => "Event already " + "#{@status}" 
+    else
+      @event = Event.find(params[:id])
+      if @event.reject!
+        redirect_to @event, :notice => "Event rejected"
+      else
+        redirect_to @event, :notice => "Unprocessable entity"
+      end
+    end
+  end
+
+
 
   def reject
     @event = Event.find(params[:id])
@@ -86,10 +125,10 @@ class EventsController < ApplicationController
   end
 
   # POST /events
-  # POST /events.json
+  # POST /events.json   #todo get email from admins 
   def create
     @event = Event.new(params[:event])
-
+    @admins = DepartmentAdministrator.all
     if params.has_key? :departments
       @event.departments = params[:departments].map{ |id| Department.find(id) }
     else
@@ -98,10 +137,10 @@ class EventsController < ApplicationController
 
     if @event.save 
       respond_with @event, status: :created, location: @event
-      #UserMailer.send_email("henry.lake10@ic.ac.uk","password","body").deliver
-        #head :no_content
-      UserMailer.validate_event_email("henry.lake10@ic.ac.uk", @event).deliver
-        head :no_content
+      @admins.each do |admin|
+        UserMailer.validate_event_email(admin.email, @event).deliver
+          head :no_content
+      end
     else
       respond_with @event, status: :unprocessable_entity
     end

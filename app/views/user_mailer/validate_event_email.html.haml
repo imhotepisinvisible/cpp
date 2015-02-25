@@ -1,17 +1,17 @@
 !!! 5
 %html
   %body
-    %h1 A new event has been posted on CPP 
-    <!-- %p= @event.name -->
-    %p Title:
+    %h1 <center>A new event has been posted on CPP</center> 
+    %p <b>Title:</b>
     %p= @event.title
-    %p Start Date:
-    %p= @event.start_date
-    %p End Date: 
-    %p= @event.end_date
-    %p Description:
+    %p <b>Description</b>
     %p= @event.description
-    %p Created At:
+    %p <b>Date:</b>
+    %p= @event.start_date
+    %p   
+    %p <b>Created At:</b>
     %p= @event.created_at
-    %p Please login and approve/reject the event
-    %p If you are not Will or Victoria... woops. 
+    %p Please login before approving or rejecting the event using the links below
+    %p= link_to "Approve", "#{@url}/events/#{@event.id}/approve", :class => "button", :method => :get
+    %p=	link_to "Reject",  "#{@url}/events/#{@event.id}/reject", :class => "button", :method => :get
+

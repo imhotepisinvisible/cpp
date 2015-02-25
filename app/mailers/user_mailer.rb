@@ -56,10 +56,9 @@ class UserMailer < ActionMailer::Base
 
   def validate_event_email(address, event)
     puts "VALIDATE EVENT EMAIL"
-    subject = "New CPP event created"
-    @event = event
-    mail(:to => address, :subject => subject)
-      @url = Rails.application.config.absolute_site_url    
+    subject = "New event posted on CPP"
+    @event = event 
+    @url = Rails.application.config.absolute_site_url    
     mail(:to => address, :subject => subject)
   end
 
@@ -70,5 +69,5 @@ class UserMailer < ActionMailer::Base
     @url = Rails.application.config.absolute_site_url    
     mail(:to => address, :subject => subject)
   end
-  
+
 end

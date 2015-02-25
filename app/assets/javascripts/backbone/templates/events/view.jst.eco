@@ -132,6 +132,14 @@
               <% end %>
             </td>
           </tr>
+	  <tr>
+	    <td>
+              Status:
+            </td>
+            <td>
+              <%= @event.get('workflow_state') %> 
+            </td>
+          </tr>
         </table>
       </div>
     </div>

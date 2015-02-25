@@ -21,6 +21,10 @@ CPP::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
+  #set dev url 
+  #config.absolute_site_url = "#{request.protocol}#{request.host}" 
+  config.absolute_site_url =  "http://localhost:3000"
+
   # Set up mailcatcher
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = { :address => "mailcatcher", :port => 1025 }
