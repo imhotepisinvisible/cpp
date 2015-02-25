@@ -10,10 +10,8 @@ class SessionsController < ApplicationController
   # Create new session for a user
   #
   def create
-    user = User.find_by_email(params[:session][:email])
-    if user && user.authenticate(params[:session][:password])
-      session[:user_id] = user.id
-
+    user = warden.authenticate
+    if user
       case user.type
       when "Student"
         redirect_to "/"
@@ -33,7 +31,7 @@ class SessionsController < ApplicationController
   # End session, log out
   #
   def destroy
-    session[:user_id] = nil
+    warden.logout
     redirect_to root_url, :notice => "Logged out!"
   end
 end

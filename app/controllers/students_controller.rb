@@ -252,4 +252,22 @@ class StudentsController < ApplicationController
 
     respond_with ok_students[0..4]
   end
+
+  # Suspends all students then emails them
+  #
+  # PUT /students/suspend
+  def suspend # PASS in collection from AJAX query
+    if params.has_key? :students
+      @students = params[:students].split(',')[0]
+      @students.each do |id|
+        student = Student.find(id)
+        student.update_attributes(active: 'f')
+        # Send an email/add to email list
+        Resque.enqueue(Deactivate, id)
+      end
+      respond_to do |format|
+        format.json {head :ok}
+      end  
+    end
+  end
 end

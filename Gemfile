@@ -20,7 +20,8 @@ gem 'newrelic_rpm'                # Newrelic Monitoring
 gem 'paperclip'                   # Nice model attachment
 gem 'aws-sdk'                     # AWS SDK for paperclip uploads
 gem 'redis'                       # Allows connection to redis server
-gem 'resque'                      # Job Queueing system
+gem 'resque', :require => 'resque/server'                      # Job Queueing system
+gem 'resque-scheduler', '~> 2.2.0' #, :require => 'resque_scheduler' # Job scheduling
 gem 'resque_mailer'               # Email queueing gem
 gem 'obscenity'                   # Obscenity filter
 gem 'lorem'                       # Simple Lorem
@@ -28,6 +29,7 @@ gem 'impressionist'               # Stats & Logging
 gem 'workflow'                    # Handling approval states
 gem 'rubyzip', '>= 1.0.0'         # will load new rubyzip version
 gem 'zip-zip'                     # will load compatibility for old rubyzip API.
+gem 'warden'                      # More customiseable authorisation
 
 # UI/Appearance Related Gems
 gem 'less-rails'                  # Less required for Bootstrap

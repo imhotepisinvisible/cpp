@@ -87,6 +87,7 @@ class Ability
       can :manage, Student do |student|
         student.departments.map(&:id).include? user.department_id
       end
+      can :manage, Resque
     end
 
     unless user.type.nil?

@@ -72,6 +72,13 @@ CPP::Application.routes.draw do
 
   resources :courses
 
+  require 'resque_scheduler/server'
+  #namespace :admin do
+  constraints CanAccessResque do
+    mount Resque::Server, :at => "/resque"
+  end
+  #end
+
   # Pass all other routes through to Backbone
   class XHRConstraint
     def matches?(request)
@@ -120,6 +127,7 @@ CPP::Application.routes.draw do
     get 'suggested_degrees', :on => :collection, :action => :suggested_degrees
     delete '/documents/:document_type', :on => :member, :action => :delete_document
     get '/documents/:document_type', :on => :member, :action => :download_document
+    put 'suspend', :on => :collection, :action => :suspend
   end
 
   resources :tagged_emails
@@ -168,9 +176,7 @@ CPP::Application.routes.draw do
   match 'tags/reject_interests' => 'tags#reject_interests'
   match 'tags/validate' => 'tags#validate'
 
-
-
-  # See how all your routes lay out with "rake routes"
+   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.

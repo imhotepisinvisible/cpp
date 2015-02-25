@@ -37,4 +37,20 @@ class UserMailer < ActionMailer::Base
     subject = "CPP Account Deleted"
     mail(:to => user.email, :subject => subject)
   end
+
+  def account_deactivated(user)
+    puts "ACCOUNT_DEACTIVATED_EMAIL"
+    subject = "CPP Account Deactivated"
+    @name = user.first_name
+    @url = "https://cpp.doc.ic.ac.uk/"
+    mail(:to => user.email, :subject => subject)
+  end
+
+    def account_reminder(user)
+    puts "ACCOUNT_REMINDER_EMAIL"
+    subject = "CPP Account Reminder"
+    @name = user.first_name
+    @url = "https://cpp.doc.ic.ac.uk/"
+    mail(:to => user.email, :subject => subject)
+  end
 end
