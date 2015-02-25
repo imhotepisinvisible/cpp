@@ -29,6 +29,7 @@ class CPP.Views.Students.Index extends CPP.Views.Base
   # Remove all students, then for each student
   # in the collection passed in, render the student
   renderStudents: (col) ->
+    @collection = col
     @$('#students').html("")
     col.each (student) =>
       view = new CPP.Views.Students.Item(model: student, editable: @editable, courses: @courses)
@@ -85,15 +86,18 @@ class CPP.Views.Students.Index extends CPP.Views.Base
 
   suspend: (e) -> 
     e.preventDefault()
-    if confirm("Suspend all Student accounts?")
-      $.ajax
-        url: "students/suspend"
-        type: 'PUT'
-        dataType : 'html'
-        data: 
-          students: @collection.pluck('id')
-        success: =>
-          notify 'success', "All student accounts suspended" 
+    if @collection.length > 0
+      if confirm("Suspend all Student accounts?")
+        $.ajax
+          url: "students/suspend"
+          type: 'PUT'
+          dataType : 'html'
+          data: 
+            students: @collection.pluck('id')
+          success: =>
+            notify 'success', "All student accounts suspended" 
+    else
+      notify('error', "No students in list")     
   @
 
 
