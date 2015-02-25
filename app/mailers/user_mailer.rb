@@ -40,16 +40,18 @@ class UserMailer < ActionMailer::Base
 
   def validate_event_email(address, event)
     puts "VALIDATE EVENT EMAIL"
-    subject = "New CPP event created"
-    @event = event
-    #@user = user 
-    #@url = "http://localhost:3000/events/"+ event.id + "/approve"
+    subject = "New event posted on CPP"
+    @event = event 
+    @url = Rails.application.config.absolute_site_url    
     mail(:to => address, :subject => subject)
   end
 
-  
-    
-
- 
+  def validate_placement_email(address, placement)
+    puts "VALIDATE PLACEMENT EMAIL"
+    subject = "New placement posted on CPP"
+    @placement = placement 
+    @url = Rails.application.config.absolute_site_url    
+    mail(:to => address, :subject => subject)
+  end
 
 end

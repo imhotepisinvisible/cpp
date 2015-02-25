@@ -53,8 +53,12 @@ CPP::Application.routes.draw do
   
   # Non-Backbone Routes
   get ":controller/:id/stat_show", :action => "stat_show"
-  get "events/:id/approve" => "events#approve"
-  get "events/:id/reject" => "events#reject"
+
+  get "events/:id/approve" => "events#email_approve"
+  get "events/:id/reject" => "events#email_reject"
+  
+  get "placements/:id/approve" => "placements#email_approve"
+  get "placements/:id/reject" => "placements#email_reject"
 
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
@@ -92,7 +96,7 @@ CPP::Application.routes.draw do
     post '/register', :on => :member, :action => :register
     post '/unregister', :on => :member, :action => :unregister
     get :pending, :on => :collection
-    get :approve, :on => :member
+    #get :approve, :on => :member
     put :approve, :on => :member
     put :reject, :on => :member
     get :attending_students, :on => :member
