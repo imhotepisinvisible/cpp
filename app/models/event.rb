@@ -102,9 +102,15 @@ class Event < ActiveRecord::Base
     result[:stat_count] = @stat_count
     result[:company_name] = company.name
     result[:company_logo_url] = company.logo.url(:thumbnail)
-    result[:start_date] = start_date.to_datetime.iso8601
-    result[:deadline] = deadline.to_datetime.iso8601
-    result[:end_date] = end_date.to_datetime.iso8601
+    unless start_date.nil?
+      result[:start_date] = start_date.to_datetime.iso8601
+    end
+    unless deadline.nil?
+      result[:deadline] = deadline.to_datetime.iso8601
+    end
+    unless end_date.nil?
+      result[:end_date] = end_date.to_datetime.iso8601
+    end
     return result
   end
 
