@@ -11,5 +11,5 @@
     %p <b>Created At:</b>
     %p= @placement.created_at
     %p Please login before approving or rejecting the opportunity using the links below
-    %p= link_to "Approve", "#{@url}/placements/#{@placement.id}/approve", :class => "button", :method => :get
-    %p=	link_to "Reject",  "#{@url}/placements/#{@placement.id}/reject", :class => "button", :method => :get
+    %p= link_to "Approve", "#{@url}/opportunities/#{@placement.id}/approve", :class => "button", :method => :get
+    %p=	link_to "Reject",  "#{@url}/opportunities/#{@placement.id}/reject", :class => "button", :method => :get
