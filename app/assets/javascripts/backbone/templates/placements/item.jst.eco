@@ -4,7 +4,13 @@
 <td><%= @placement.get 'duration' %></td>
 <td><%= @placement.get 'location' %></td>
 <td><%= moment(@placement.get 'created_at').fromNow() %></td>
-<td><%= moment(@placement.get 'deadline').format(getDateFormat()) %></td>
+            <td>
+              <% if @placement.get 'deadline': %>
+                <%= moment(@placement.get('deadline')).format(getDateFormat()) %>
+              <% else: %>
+                No deadline set.
+              <% end %>
+            </td>
 
 <% if @editable: %>
 <td><%= @placement.get 'workflow_state' %></td>

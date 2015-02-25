@@ -132,14 +132,16 @@
               <% end %>
             </td>
           </tr>
-	  <tr>
-	    <td>
+          <% if isAdmin(): %>
+	      <tr>
+	        <td>
               Status:
             </td>
             <td>
               <%= @event.get('workflow_state') %> 
             </td>
           </tr>
+          <% end %>
         </table>
       </div>
     </div>
