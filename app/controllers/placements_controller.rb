@@ -22,6 +22,11 @@ class PlacementsController < ApplicationController
     if params.keys.include? "limit"
       @placements = @placements.limit(params[:limit])
     end
+    
+    # if a deadline has been included, then only get items after this date
+    if params.keys.include? "deadline"
+      @placements = @placements.where("deadline > ? OR deadline IS NULL", params[:deadline])
+    end
 
     if current_user && current_user.is_student?
       @placements = @placements.with_approved_state.select {|p| can? :show, p.company }

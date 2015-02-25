@@ -51,9 +51,8 @@ class CPP.Routers.Students extends Backbone.Router
     
     # Fetch 3 events and placements for dashboard
     #deferreds = []     
-    now = new Date() 
-    student.events.fetch({ data: $.param({ limit: 3 , start_date: now.toISOString()}) })
-    student.placements.fetch({ data: $.param({ limit: 3, deadline: now.toISOString()}) })
+    student.events.fetch({ data: $.param({ limit: 3 , start_date: moment().toISOString()}) })
+    student.placements.fetch({ data: $.param({ limit: 3, deadline: moment().toISOString()}) })
        
   # Student administration page
   admin: (id) ->
