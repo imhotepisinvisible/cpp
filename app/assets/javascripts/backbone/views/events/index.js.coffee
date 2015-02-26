@@ -6,25 +6,28 @@ class CPP.Views.Events.Index extends CPP.Views.Base
 
   events: -> _.extend {}, CPP.Views.Base::events,
     "click .company-logo-header"      : "viewCompany"
-
+    "click"                           : "addPage"
 
   # Bind reset and filter events to render and renderEvents so that on change
   # the views change.
   initialize: ->
-    @collection.on "fetch", (->
-    	@$('#events-table').html "<div class=\"loading\"></div>"
-    	return), @
+    #@collection.on "fetch", (->
+    #	@$('#events-table').html "<div class=\"loading\"></div>"
+    #	return), @
     @collection.bind 'reset', @render, @
     @collection.bind 'filter', @renderEvents, @
     @editable = isAdmin()
     @render()
 
+  addPage: ->
+    @collection.getNextPage({remove: false})
+    console.log(@collection)
+  @
+
   # Render events
   render: ->
     $(@el).html(@template(events: @collection, editable: @editable))
-    console.log("1")
     @renderEvents(@collection)
-    console.log("2")
     @renderFilters()
   @
 
@@ -48,7 +51,6 @@ class CPP.Views.Events.Index extends CPP.Views.Base
         {name: "Starting After",
         type: 'date',
         attribute: 'start_date'
-        default: Date.today().toString(getDateFormat())#'dd/MM/yyyy')
         scope: ''},
         {name: "Company"
         type: "text"
