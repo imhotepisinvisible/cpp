@@ -24,13 +24,15 @@ class CPP.Views.Events.Index extends CPP.Views.Base
     @render()
 
   addPage: ->
-    @collection.getNextPage({remove: false})
+    @collection.getNextPage()
     console.log(@collection)
   @
 
   scrollevent: ->
     if $(window).scrollTop() + $(window).height() > $(document).height() - 20
-      console.log("boobs")
+      #Fetch next collection page here
+      console.log(@collection)
+  @ 
 
   # Render events
   render: ->
