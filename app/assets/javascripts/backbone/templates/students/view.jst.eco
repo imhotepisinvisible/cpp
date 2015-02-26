@@ -27,7 +27,7 @@
           </p>
           <p id="student-profile-intro-status">
             <% if @student.get('course_id') != null: %>
-              Studying <%= @student.courses.models[@student.get 'course_id'].attributes.name %>
+              Studying <%= @courses.get(@student.get 'course_id').attributes.name %>
               <br>
             <% end %>
             <% if @student.get('year') >= 2000: %>

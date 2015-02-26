@@ -6,7 +6,7 @@
 	<% end %>
 <td>
 	<% if @student.get('course_id') != null: %>
-		<%= @courses.models[@student.get 'course_id'].attributes.name %>
+		<%= @courses.get(@student.get 'course_id').attributes.name %>
 	<% end %>
 </td>
 
