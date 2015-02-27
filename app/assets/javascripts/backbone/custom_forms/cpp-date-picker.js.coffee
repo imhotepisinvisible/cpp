@@ -22,10 +22,11 @@ class Backbone.Form.editors.Datepicker extends Backbone.Form.editors.Base
     super(options)
 
     @$el.datepicker
-      format: getDatePickerFormat() #"dd/MM/yyyy"
+      format: getDatePickerFormat() #"dd/mm/yyyy"
       weekStart: 1
       if @value
-        @setValue(Date.parse(@value).toString(getDatePickerFormat())) #'dd/MM/yyyy'))
+        @setValue(@value)
+        
     @$el.datepicker().on 'changeDate', =>
       @$el.datepicker("hide")
     @setValue(@value)
@@ -33,14 +34,14 @@ class Backbone.Form.editors.Datepicker extends Backbone.Form.editors.Base
   # Backbone form interface
   # Get date
   getValue: =>
-    Date.parseExact(@$el.val(), getDatePickerFormat()) #"dd/MM/yyyy")
+    moment(@$el.val(), getDateFormat()).toDate()
 
   # Set date
   setValue: (date) =>
     if date == null || date.toString() == (new Date(null)).toString()
       @$el.val("")
     else
-      @$el.val(date.toString(getDatePickerFormat())) #"dd/MM/yyyy"))
+      @$el.val(moment(date).format(getDateFormat()))
 
   # Render
   render: =>

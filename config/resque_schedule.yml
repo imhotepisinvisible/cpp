@@ -1,0 +1,5 @@
+#Reminder:
+#  every:
+#    - "1d"
+#  queue: reminders
+#  description: "This job runs daily to remind inactive students to use the site"

@@ -1,0 +1,15 @@
+!!! 5
+%html
+  %body
+    %h1 <center>A new opportunity has been posted on CPP</center> 
+    %p <b>Position:</b>
+    %p= @placement.position
+    %p <b>Description</b>
+    %p= @placement.description
+    %p <b>Location</b>
+    %p= @placement.location
+    %p <b>Created At:</b>
+    %p= @placement.created_at
+    %p Please login before approving or rejecting the opportunity using the links below
+    %p= link_to "Approve", "#{@url}/opportunities/#{@placement.id}/approve", :class => "button", :method => :get
+    %p=	link_to "Reject",  "#{@url}/opportunities/#{@placement.id}/reject", :class => "button", :method => :get

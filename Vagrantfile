@@ -9,11 +9,15 @@ docker rm $(docker ps -a -q)
 docker build -t postgres /app/docker/postgres
 docker build -t rails /app
 docker build -t redis /app/docker/redis/
+docker build -t mailcatcher /app/docker/mailcatcher/
+docker build -t resque-worker /app/docker/resque-worker/
 
 # Run and link the containers
 docker run -d --name postgres -e POSTGRESQL_USER=docker -e POSTGRESQL_PASS=docker postgres:latest
 docker run -d --name redis redis:latest
-docker run -d -p 3000:3000 -v /app:/app --link redis:redis --link postgres:db --name rails rails:latest
+docker run -d -p 1080:1080 --name mailcatcher mailcatcher:latest
+docker run -d -v /app:/app --name resque-worker --link redis:redis resque-worker:latest
+docker run -d -p 3000:3000 -v /app:/app --link redis:redis --link postgres:db --link mailcatcher:mailcatcher --link resque-worker:resque-worker --name rails rails:latest
 
 SCRIPT
 
@@ -22,6 +26,8 @@ SCRIPT
 $start = <<SCRIPT
 docker start postgres
 docker start redis
+docker start mailcatcher
+docker start resque-worker
 docker start rails
 SCRIPT
 
@@ -40,6 +46,9 @@ Vagrant.configure("2") do |config|
 
   # Rails Server Port Forwarding
   config.vm.network "forwarded_port", guest: 3000, host: 3000
+  
+  # Mailcatcher Port
+  config.vm.network "forwarded_port", guest: 1080, host: 1080
 
   # Ubuntu
   config.vm.box = "ubuntu/trusty64"

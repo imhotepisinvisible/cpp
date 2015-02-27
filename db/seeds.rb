@@ -50,7 +50,7 @@ oliver = FactoryGirl.create :student,  {
   password_confirmation: "cppcppcpp",
   year: 3,
   bio: "Placeholder Text",
-  course_id: 13,
+  course_id: 14,
   departments: [computing_department]
 }
 
@@ -67,7 +67,7 @@ isb14 = FactoryGirl.create :student,  {
   password_confirmation: "cppcppcpp",
   year: 3,
   bio: "Placeholder Text.",
-  course_id: 13,
+  course_id: 14,
   departments: [computing_department]
 }
 
@@ -84,7 +84,7 @@ hwl214 = FactoryGirl.create :student,  {
   password_confirmation: "cppcppcpp",
   year: 3,
   bio: "Placeholder Text.",
-  course_id: 13,
+  course_id: 14,
   departments: [computing_department]
 }
 
@@ -96,7 +96,7 @@ sg5414 = FactoryGirl.create :student,  {
   password_confirmation: "cppcppcpp",
   year: 3,
   bio: "Placeholder Text.",
-  course_id: 13,
+  course_id: 14,
   departments: [computing_department]
 }
 
@@ -108,7 +108,7 @@ al4209 = FactoryGirl.create :student,  {
   password_confirmation: "cppcppcpp",
   year: 3,
   bio: "Placeholder Text.",
-  course_id: 13,
+  course_id: 14,
   departments: [computing_department]
 }
 

@@ -86,8 +86,7 @@ class CPP.Views.Company.Signup extends CPP.Views.Base
   # Redirect to edit page on signup
   redirect: (model) ->
     go = ->
-      window.location = '/companies/' + model.get('company_id') + '/edit'
-      window.location.reload(true)
+      Backbone.history.navigate("/companies/" + model.get('company_id') + "/edit", trigger: true)
 
     if @login
       # Log in as new company admin, then navigate to company edit page

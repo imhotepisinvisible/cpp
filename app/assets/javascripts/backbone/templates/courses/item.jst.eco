@@ -1,0 +1,7 @@
+<td><%= @course.get 'name' %></td>
+<td>
+  <div class="btn-group pull-right">    
+    <div class="btn btn-small button-course-delete"><i class="icon-trash" /></div>
+    <div class="btn btn-small button-course-edit"><i class="icon-pencil" /></div>
+  </div>
+</td>

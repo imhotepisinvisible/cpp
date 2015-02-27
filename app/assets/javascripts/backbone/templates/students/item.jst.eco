@@ -6,7 +6,7 @@
 	<% end %>
 <td>
 	<% if @student.get('course_id') != null: %>
-		<%= @courses.models[@student.get 'course_id'].attributes.name %>
+		<%= @courses.get(@student.get 'course_id').attributes.name %>
 	<% end %>
 </td>
 
@@ -23,7 +23,7 @@
   </div>
 </td>
 
-<% date = Date.parse(@student.get('updated_at'))%>
+<% date = moment(@student.get('updated_at'))%>
 <td>
-  <%= date.toString("dd/MM/yyyy") %>
+  <%= date.format(getDateFormat()) %>
 </td>

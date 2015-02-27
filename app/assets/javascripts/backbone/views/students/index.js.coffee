@@ -4,6 +4,11 @@ class CPP.Views.Students.Index extends CPP.Views.Base
   el: '#app'
   template: JST['backbone/templates/students/index']
 
+  # Bind event listeners
+  events: -> _.extend {}, CPP.Views.Base::events,
+    'click .button-export-cvs' : 'exportCVs'
+    "click .button-student-suspend": "suspend"
+
   # Bind to update placement collection
   initialize: ->
     @collection.on "fetch", (->
@@ -26,10 +31,15 @@ class CPP.Views.Students.Index extends CPP.Views.Base
   # Remove all students, then for each student
   # in the collection passed in, render the student
   renderStudents: (col) ->
+    @collection = col
     @$('#students').html("")
     col.each (student) =>
       view = new CPP.Views.Students.Item(model: student, editable: @editable, courses: @courses)
       @$('#students').append(view.render().el)
+  @
+
+  exportCVs: ->
+    window.location = "export_cvs?students=" + @collection.pluck("id")
   @
 
   # Define the filters to render
@@ -65,3 +75,36 @@ class CPP.Views.Students.Index extends CPP.Views.Base
       data: @collection
       courses: @courses
   @
+
+  work: -> 
+    students = new CPP.Collections.Students
+    students.fetch
+      success: (students) ->
+        students.each (student) ->
+          student.set("active", false)
+          student.save {},
+            wait: true
+            forceUpdate: true
+            success: (student, response) ->
+              console.log(first_name + "updated")
+            error: (student, response) ->
+              console.log(first_name + "not updated")
+
+  suspend: (e) -> 
+    e.preventDefault()
+    if @collection.length > 0
+      if confirm("Suspend all Student accounts?")
+        $.ajax
+          url: "students/suspend"
+          type: 'PUT'
+          dataType : 'html'
+          data: 
+            students: @collection.pluck('id')
+          success: =>
+            notify 'success', "All student accounts suspended" 
+    else
+      notify('error', "No students in list")     
+  @
+
+
+                

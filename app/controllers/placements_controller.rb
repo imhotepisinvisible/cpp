@@ -22,6 +22,11 @@ class PlacementsController < ApplicationController
     if params.keys.include? "limit"
       @placements = @placements.limit(params[:limit])
     end
+    
+    # if a deadline has been included, then only get items after this date
+    if params.keys.include? "deadline"
+      @placements = @placements.where("deadline > ? OR deadline IS NULL", params[:deadline])
+    end
 
     if current_user && current_user.is_student?
       @placements = @placements.with_approved_state.select {|p| can? :show, p.company }
@@ -39,12 +44,44 @@ class PlacementsController < ApplicationController
     respond_with @placements
   end
 
+  def email_approve
+    if !current_user.is_department_admin?
+      redirect_to root_path
+    elsif @placement.approved? or @placement.rejected?
+      @status = @placement.current_state
+      redirect_to @placement, :notice => "Opportunity already " + "#{@status}" 
+    else 
+      @placement = Placement.find(params[:id])
+      if @placement.approve!        
+        redirect_to @placement, :notice => "Opportunity approved"
+      else
+        redirect_to @placement, :notice => "Unprocessable entity"
+      end
+    end
+  end
+
   def approve
     @placement = Placement.find(params[:id])
     if @placement.approve!
       respond_with @placement
     else
       respond_with @placement, status: :unprocessable_entity
+    end
+  end
+
+  def email_reject
+    if !current_user.is_department_admin?
+      redirect_to root_path
+    elsif @placement.approved? or @placement.rejected?
+      @status = @placement.current_state
+      redirect_to @placement, :notice => "Opportunity already " + "#{@status}" 
+    else
+      @placement = Placement.find(params[:id])
+      if @placement.reject!
+        redirect_to @placement, :notice => "Opportunity rejected"
+      else
+        redirect_to @placement, :notice => "Unprocessable entity"
+      end
     end
   end
 
@@ -80,7 +117,8 @@ class PlacementsController < ApplicationController
   # POST /placements
   # POST /placements.json
   def create
-    @placement = Placement.new(params[:placement])
+    @placement = Placement.new(params[:placement])    
+    @admins = DepartmentAdministrator.all
 
     if params.has_key? :departments
       @placement.departments = params[:departments].map{ |id| Department.find(id) }
@@ -90,6 +128,10 @@ class PlacementsController < ApplicationController
 
     if @placement.save
       respond_with @placement, status: :created, location: @placement
+      @admins.each do |admin|
+        UserMailer.validate_placement_email(admin.email, @placement).deliver
+          head :no_content
+      end
     else
       respond_with @placement, status: :unprocessable_entity
     end
