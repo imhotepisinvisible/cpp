@@ -25,7 +25,8 @@
   min-height: @navbarHeight;
   padding-left:  20px;
   padding-right: 20px;
-  #gradient > .vertical(@navbarBackgroundHighlight, @navbarBackground);
+  #gradient > .vertical(#006EAF,darken(#006EAF, 5%));
+  // #gradient > .vertical(@navbarBackgroundHighlight, @navbarBackground);
   border: 0px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);  
 
@@ -38,7 +39,7 @@
 .navbar .brand {
   max-height: @navbarHeight;
   max-width: 200px;
-  position: fixed;
+  position: inherit;
   margin: 0px;
   left: 0;
   top: 0;
@@ -46,11 +47,11 @@
   width: auto;
   float: left;
   display: block;
-  #gradient > .vertical(#006EAF,darken(#006EAF, 5%));
+  // #gradient > .vertical(#006EAF,darken(#006EAF, 5%));
   // Vertically center the text given @navbarHeight
-  padding: 10px; //((@navbarHeight - @baseLineHeight) / 2) 20px ((@navbarHeight - @baseLineHeight) / 2);
+  padding: 8px; //((@navbarHeight - @baseLineHeight) / 2) 20px ((@navbarHeight - @baseLineHeight) / 2);
   // margin-left: -20px; // negative indent to left-align the text down the page
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 200;
   // color: @navbarBrandColor;
   text-shadow: 0 1px 0 @navbarBackgroundHighlight;
@@ -67,12 +68,24 @@
 .navbar .nav {
   // margin: 0px 20px 0px 0px;
   padding-left: 20px;
-  margin-left: 100px;
+  margin-left: 20px;
+  font-size: 16px;
 }
 
 // Links (this fixes the issue with the navbar, but the new variable values aren't being picked up)
 .navbar .nav > li > a {
   //padding: 29px 15px 29px; // only hard-coded here because the variables don't quite work...
   padding: ((@navbarHeight - @baseLineHeight) / 2) 15px ((@navbarHeight - @baseLineHeight) / 2);
+  text-shadow: none;
+}
 
+.fixed-position {
+  position: fixed;
+  width: 100%;
+}
+
+.navbar-static-top .container,
+.navbar-fixed-top .container,
+.navbar-fixed-bottom .container {
+  width: 100%
 }
