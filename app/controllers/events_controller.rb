@@ -13,7 +13,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = current_user.events.scoped.paginate(:page => params[:page], :per_page => params[:per_page])
+    @events = current_user.events.scoped
     
     if params.keys.include? "company_id"
       @events = @events.where(:company_id => params[:company_id])
@@ -31,11 +31,11 @@ class EventsController < ApplicationController
     if current_user && current_user.is_student?
       @events = @events.with_approved_state.select {|e| can? :show, e.company}
       @events.sort_by! {|e| [-e.relevance(current_user.id), e.company.name] }
-      respond_with @events.as_json({:student_id => current_user.id})
+      paginate json: @events.as_json({:student_id => current_user.id})
     elsif current_user && current_user.is_department_admin?
-      respond_with @events.select{ |e| e.departments.map(&:id).include? current_user.department_id }
+      paginate json: @events.select{ |e| e.departments.map(&:id).include? current_user.department_id }
     else
-      respond_with @events
+      paginate json: @events
     end
   end
 

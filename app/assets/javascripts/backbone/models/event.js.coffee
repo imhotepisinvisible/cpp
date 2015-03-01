@@ -84,5 +84,7 @@ class CPP.Collections.Events extends CPP.Collections.Base
 class CPP.Collections.EventsPager extends Backbone.PageableCollection
   model: CPP.Models.Event
   url: '/events'
+  mode: 'infinite'
+  
   state:
-    pageSize: 5  
+    pageSize: 10  

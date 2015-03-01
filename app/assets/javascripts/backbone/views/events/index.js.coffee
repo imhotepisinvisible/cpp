@@ -6,7 +6,6 @@ class CPP.Views.Events.Index extends CPP.Views.Base
 
   events: -> _.extend {}, CPP.Views.Base::events,
     "click .company-logo-header"      : "viewCompany"
-    "click"                           : "addPage"
 
   # Bind reset and filter events to render and renderEvents so that on change
   # the views change.
@@ -14,9 +13,10 @@ class CPP.Views.Events.Index extends CPP.Views.Base
     # bind scrolling in the window to scrollevent
     _.bindAll this, 'scrollevent'
     $(window).scroll @scrollevent 
+    
     #display ajax spinner whilst waiting for the collection to finish loading
     @collection.on "fetch", (->
-    	@$('#events-table').html "<div class=\"loading\"></div>"
+    	@$('#events-table').append "<div class=\"loading\"></div>"
     	return), @
     @collection.bind 'reset', @render, @
     @collection.bind 'filter', @renderEvents, @
@@ -24,21 +24,23 @@ class CPP.Views.Events.Index extends CPP.Views.Base
     @render()
 
   addPage: ->
-    @collection.getNextPage()
-    console.log(@collection)
+    if @collection.hasNextPage()
+      @collection.getNextPage()
   @
 
   scrollevent: ->
     if $(window).scrollTop() + $(window).height() > $(document).height() - 20
-      #Fetch next collection page here
-      console.log(@collection)
+      if @collection.hasNextPage()
+        @collection.getNextPage()
   @ 
 
   # Render events
   render: ->
-    $(@el).html(@template(events: @collection, editable: @editable))
-    @renderEvents(@collection)
+    $(@el).html(@template(events: @collection.fullCollection, editable: @editable))
+    @renderEvents(@collection.fullCollection)
     @renderFilters()
+    if $(document).height() <= $(window).height()
+      @addPage()
   @
 
   # Render each event item
@@ -75,7 +77,7 @@ class CPP.Views.Events.Index extends CPP.Views.Base
         attribute: "location"
         scope: ''},
       ]
-      data: @collection
+      data: @collection.fullCollection
   @
 
   # Navigate to company page

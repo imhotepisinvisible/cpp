@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Config/Server
 gem 'thin'                        # Better server :)
 gem 'unicorn'                     # Unicorn webserver: better for running on a VM
-gem 'rails', '3.2.1'             # Running on rails, wooo
+gem 'rails', '3.2.1'              # Running on rails, wooo
 gem 'therubyracer', '0.12.1'      # Javascript Engine
 
 # Back End Gems
@@ -35,11 +35,11 @@ gem 'warden'                      # More customiseable authorisation
 gem 'less-rails'                  # Less required for Bootstrap
 gem 'twitter-bootstrap-rails'     # Twitter Bootstrap <3 Rails
 gem 'bourbon'                     # Nice SCSS mixins
-gem 'font-awesome-rails' # Font Awesome = Icons
+gem 'font-awesome-rails'          # Font Awesome = Icons
 gem "google_visualr", ">= 2.1"    # Google Charts
 gem 'tinymce-rails'               # WYSIWYG editor for emails
-gem 'will_paginate'               # Basic Pagination
-gem 'bootstrap-will_paginate'     # Bootstrap Pagination Integration
+gem 'kaminari'                    # Pagination of backend collections
+gem 'api-pagination'              # Give backbone the pagination information
 gem 'jquery-ui-rails'             # JQuery user interface plugin
 
 # JS Frameworks/Plugins

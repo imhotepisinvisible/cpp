@@ -16,9 +16,6 @@
     <h1 class="section-header">
     <i class="icon-calendar"></i>
     Events <%= " by " + @events.company.get('name') if @events.company? %>
-    <a class="btn addNext">
-            Add Page
-          </a>
       <% if @editable: %>
         <% if @events.company?: %>
           <a href="/companies/<%= @events.company.get('id') %>/events/new" class="btn pull-right button-add-event">
