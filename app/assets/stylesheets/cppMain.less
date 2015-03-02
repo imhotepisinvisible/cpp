@@ -45,7 +45,7 @@ textarea[name=description] {
 }
 
 .section-header {
-  border-bottom: 1px solid #444;
+
 }
 
 .shadow-card {
@@ -70,15 +70,51 @@ textarea[name=description] {
 
 .colour-header {
   margin: 0px;
-  padding: 15px;
-  background-color: #02893B;
+  padding: 5px 15px;
+  background-color: #66A40A;
   color: #ffffff;
+  border-bottom: 1px solid #444;
 }
 
 .colour-body {
   margin: 0px;
   padding: 15px;
 }
+
+.colour-card-horizontal {
+  border: 1px solid #d5d8d9;
+  -moz-box-shadow: #C3C6C7 2px 2px 5px -2px;
+  -webkit-box-shadow: #C3C6C7 2px 2px 5px -2px;
+  box-shadow: #C3C6C7 2px 2px 5px -2px;
+  background: #fff;
+  overflow: hidden;
+  margin: 15px 0px;
+} // note: at the moment this is the same as the shawow-card
+
+.colour-header-horizontal {
+  float: left;
+  width: 28.5%;
+  margin: 0px;
+  padding: 5px 15px;
+  background-color: #379F9F;
+  color: #ffffff;
+}
+
+.colour-header-bottom{
+
+}
+
+.colour-body-horizontal {
+  padding: 15px 15px;
+  position: relative;
+  left: 0;
+  display: block;
+  float: left;
+  margin: 0 10px 0 0;
+}
+
+
+
 
 .media-side-card {
 
@@ -193,6 +229,10 @@ img.center {
     width:100%;
 }
 
+#full-width-margins {
+  margin: 0px -26px;
+}
+
 // TABS
 // ----
 
@@ -224,8 +264,46 @@ img.center {
 .nav-tabs > .active > a:hover,
 .nav-tabs > .active > a:focus {
   color: #ffffff;
-  background-color: @navbarBrandColor;
+  background-color: #02893B;
   border: 0px;
   border-bottom-color: transparent;
   cursor: default;
+}
+
+.well {
+  box-shadow: #C3C6C7 3px 0px 6px -2px inset;
+  border-radius: 0px;
+  top: 0;
+  right: 24px;
+  border-right: 1px solid #d5d8d9;
+  background-color: #ebeeee;
+  background: #ebeeee !important;
+  position: initial;
+  height: 100%;
+  border-right: 1px solid #d5d8d9;
+  border-bottom: 1px solid #d5d8d9;
+  padding: 10px;
+
+}
+
+#well-margin {
+  margin: 0px;
+}
+
+.fill {
+  min-height: 100%;
+  height: 100%;
+
+  // display: block;
+  // position:absolute;
+  // height:auto;
+  // bottom:0;
+  // top:0;
+  // left:0;
+  // right:0;
+  // margin-top:20px;
+  // margin-bottom:20px;
+  // margin-right:80px;
+  // margin-left:80px;
+  // background-color: green;
 }

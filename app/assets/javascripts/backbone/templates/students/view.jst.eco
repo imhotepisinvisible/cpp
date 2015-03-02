@@ -65,7 +65,7 @@
           <div class="span12">
 
             <!-- need to put in here that the tabs are 100%, 50% and 33% respectively -->
-            <div class="tabbable full-width-tabs">
+            <div class="tabbable full-width-tabs" id="full-width-margins">
               <ul class="nav nav-tabs">
                 <li class="active take-all-space-you-can"><a href="#tab-one" data-toggle="tab">Profile</a></li>
                 <li class="take-all-space-you-can"><a href="#tab-two" data-toggle="tab">Curriculum Vitae</a></li>
@@ -80,11 +80,55 @@
               <div class="tab-content">
                 <div class="tab-pane active" id="tab-one">
 
-                  <!-- CONTENTS OF TAB ONE -->
-                  <div class="span9 row-fluid">          
-                    <!-- Documents & Contact Me (Column 1 of 3) -->
-                    <div class="span4 colour-card">
+                  <div class="span9">
+                  <div class="row-fluid">
+                      
 
+                    <div class="colour-card-horizontal">
+                      <!-- Header (about me) -->
+
+                      <div class="colour-header-horizontal">
+                        <h1 class="section-header">
+                          <i class="icon-user"></i> About Me
+                        </h1>
+                        <div class="colour-header-bottom">
+                            <p> bottom text </p>
+                        </div>
+                      </div>
+
+                      <!-- body -->
+                      <div class="colour-body-horizontal"> <!-- removed row-fluid --> 
+
+                        <% if @student.get('bio'): %>
+                        <p>
+                          <%- @student.get('bio').replace(/\n/g, "<br/>") %>
+                        </p>
+                        <% else: %>
+                        <div class="empty-student-profile-field-container">
+                          <i class="icon-user empty-student-profile-field"/>
+                        </div>
+                        <% end %>
+
+                      </div>
+                    </div>
+
+
+
+
+
+
+                  </div>
+
+
+                  <!-- CONTENTS OF TAB ONE -->
+                  <div class="row-fluid">          
+                    <!-- Documents & Contact Me (Column 1 of 3) -->
+
+                    <!-- COLUMN ONE -->
+                    <div class="span4">
+
+                      <!-- CARD ONE -->
+                      <div class="colour-card">
                       <!-- Documents Header -->
                       <h1 class="section-header colour-header">
                         <i class="icon-file"></i> Documents
@@ -141,12 +185,16 @@
                       </div>
                       <% end %>
 
+  
+                      </div>
                     </div>  <!-- end of First Column -->
 
 
                     <!-- Column2: About Me -->
-                    <div class="span4 colour-card">
-
+                    <!-- COLUMN TWO -->
+                    <div class="span4">
+  
+                      <div class="colour-card">
                       <!-- Header (about me) -->
                       <h1 class="section-header colour-header">
                         <i class="icon-user"></i> About Me
@@ -168,9 +216,39 @@
                       </div>
                     </div>
 
-                    <!-- Column3: Passions - skills, interests and year groups? -->
-                    <div class="span4 colour-card">
 
+                    <!-- Year Groups -->
+                    <div class="colour-card">
+
+                      <!-- Interests Header -->
+                      <h1 class="section-header colour-header">
+                        <i class="icon-heart"></i> Year Groups
+                      </h1>
+
+                      <!-- body -->
+                      <div class="colour-body">
+                        <div class="tag-category">
+                          <% if @student.get('year_group_list').length > 0: %>
+                          <% for i, tag of @student.get('year_group_list'): %>
+                          <span class="label label-info tag year-group-tag">
+                            <%= tag %>
+                          </span>
+                          <% end %>
+                          <% else: %>
+                          No Year Groups Tagged
+                          <% end %>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    </div>
+
+                    <!-- Column3: Passions - skills, interests and year groups? -->
+                    <!-- COLUMN THREE -->
+                    <div class="span4">
+
+                      <div class="colour-card">
                       <!-- Passions Header -->
                       <h1 class="section-header colour-header">
                         <i class="icon-heart"></i> Skills
@@ -193,11 +271,12 @@
 
                         </div>
                       </div>
+
                     </div>
 
 
                     <!-- Interests -->
-                    <div class="span4 colour-card">
+                    <div class="colour-card">
 
                       <!-- Interests Header -->
                       <h1 class="section-header colour-header">
@@ -222,34 +301,17 @@
                       </div>
                     </div>
 
-                    <!-- Year Groups -->
-                    <div class="span4 colour-card">
 
-                      <!-- Interests Header -->
-                      <h1 class="section-header colour-header">
-                        <i class="icon-heart"></i> Year Groups
-                      </h1>
-
-                      <!-- body -->
-                      <div class="colour-body">
-                        <div class="tag-category">
-                          <% if @student.get('year_group_list').length > 0: %>
-                          <% for i, tag of @student.get('year_group_list'): %>
-                          <span class="label label-info tag year-group-tag">
-                            <%= tag %>
-                          </span>
-                          <% end %>
-                          <% else: %>
-                          No Year Groups Tagged
-                          <% end %>
-
-                        </div>
-                      </div>
                     </div>
+
+                  </div>
                   </div>
 
-                  <div class="span3 well">
+<!-- CANT GET THIS FULL HEIGHT - GAH! -->
+                  <div class="span3 fill">
+                    <div class="well">
                     <p> this well needs to be stretched the full length </p>
+                    </div>
                   </div>
 
                 </div> <!-- END of Main Body -->

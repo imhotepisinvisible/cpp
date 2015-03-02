@@ -9,10 +9,13 @@
   display: block;
   position: relative;
   float: left;
-  margin-bottom: 15px;
   padding: 15px;
   background-color: #02893B;
   color: #ffffff;
+
+  width: calc(~'100% + 52px');
+  margin: -1px -25px;
+  // margin-bottom: 15px;
 }
 
 #student-profile-header {
@@ -22,13 +25,17 @@
   #student-profile-intro {
 
     #student-profile-intro-name {
-
+      font-size: 30px;
     }
   }
 }
 
+#student-profile-intro-status {
+  font-size: 16px;
+}
+
 #student-profile-key-info {
-  padding: 31px 15px; // better as some function: ((@student-profile-height - @baseLineHeight) / 2) 20px ((@student-profile-height - @baseLineHeight) / 2);
+  padding: 15px 30px; // better as some function: ((@student-profile-height - @baseLineHeight) / 2) 20px ((@student-profile-height - @baseLineHeight) / 2);
   position: relative;
   left: 0;
   display: block;
@@ -44,9 +51,9 @@
 #student-profile-img {
 
   // this bit needs to be fixed to be proportional...?
-  width: 170px;
-  height: 170px;  
-  max-width: 170px;
+  // width: 200px;
+  // height: 200px;  
+  max-height: 200px;
 
 }
 
