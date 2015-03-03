@@ -80,7 +80,7 @@
               <div class="tab-content">
                 <div class="tab-pane active" id="tab-one">
 
-                  <div class="span9">
+                  <div class="span9" id="centre-span">
                   <div class="row-fluid">
                       
 
@@ -308,12 +308,12 @@
                   </div>
 
 <!-- CANT GET THIS FULL HEIGHT - GAH! -->
-                  <div class="span3 fill">
+ <!--                  <div class="span3 fill">
                     <div class="well">
                     <p> this well needs to be stretched the full length </p>
                     </div>
                   </div>
-
+ -->
                 </div> <!-- END of Main Body -->
 
                 <div class="tab-pane" id="tab-two">
