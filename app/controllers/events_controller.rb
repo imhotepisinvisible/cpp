@@ -45,6 +45,7 @@ class EventsController < ApplicationController
   end
   
   def email_approve
+    require_login
     if !current_user.is_department_admin?
       redirect_to root_path
     elsif @event.approved? or @event.rejected?
@@ -75,6 +76,7 @@ class EventsController < ApplicationController
   end
 
   def email_reject
+    require_login
     if !current_user.is_department_admin?
       redirect_to root_path
     elsif @event.approved? or @event.rejected?
@@ -129,6 +131,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(params[:event])
     @admins = DepartmentAdministrator.all
+    #@company = "googleeees" #company.name
     if params.has_key? :departments
       @event.departments = params[:departments].map{ |id| Department.find(id) }
     else

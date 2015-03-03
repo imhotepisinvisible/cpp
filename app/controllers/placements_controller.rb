@@ -49,7 +49,7 @@ class PlacementsController < ApplicationController
       redirect_to root_path
     elsif @placement.approved? or @placement.rejected?
       @status = @placement.current_state
-      redirect_to @placement, :notice => "Opportunity already " + "#{@status}" 
+      redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Opportunity already " + "#{@status}" 
     else 
       @placement = Placement.find(params[:id])
       if @placement.approve!        
@@ -74,7 +74,7 @@ class PlacementsController < ApplicationController
       redirect_to root_path
     elsif @placement.approved? or @placement.rejected?
       @status = @placement.current_state
-      redirect_to @placement, :notice => "Opportunity already " + "#{@status}" 
+      redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Opportunity already " + "#{@status}" 
     else
       @placement = Placement.find(params[:id])
       if @placement.reject!
