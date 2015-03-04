@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Config/Server
 gem 'thin'                        # Better server :)
 gem 'unicorn'                     # Unicorn webserver: better for running on a VM
-gem 'rails', '3.2.1'              # Running on rails, wooo
+gem 'rails', '3.2.21'             # Running on rails, wooo
 gem 'therubyracer', '0.12.1'      # Javascript Engine
 
 # Back End Gems
@@ -41,6 +41,7 @@ gem 'tinymce-rails'               # WYSIWYG editor for emails
 gem 'kaminari'                    # Pagination of backend collections
 gem 'api-pagination'              # Give backbone the pagination information
 gem 'jquery-ui-rails'             # JQuery user interface plugin
+gem 'backgridjs-rails'
 
 # JS Frameworks/Plugins
 gem 'jquery-rails'                # Add jQuery goodness

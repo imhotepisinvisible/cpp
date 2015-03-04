@@ -36,8 +36,66 @@ class CPP.Views.Events.Index extends CPP.Views.Base
 
   # Render events
   render: ->
+    columns = [
+      {
+        name: ''
+        cell: 'select-row'
+        headerCell: 'select-all'
+      }
+      {
+        name: 'id'
+        label: 'ID'
+        editable: false
+        cell: Backgrid.IntegerCell.extend(orderSeparator: '')
+      }
+      {
+        name: 'company_name'
+        label: 'Company'
+        cell: 'string'
+      }
+      {
+        name: 'title'
+        label: 'Event'
+        cell: 'string'
+      }
+      {
+        name: 'start_date'
+        label: 'Date'
+        cell: 'date'
+      }
+      {
+        name: 'location'
+        label: 'Location'
+        cell: 'string'
+      }
+      {
+        name: 'spaces'
+        label: 'Spaces'
+        cell: 'integer'
+      }
+    ]
+  
     $(@el).html(@template(events: @collection.fullCollection, editable: @editable))
     @renderEvents(@collection.fullCollection)
+    grid = new (Backgrid.Grid)(
+      columns: columns
+      collection: @collection)
+    # Render the grid and attach the root to your HTML document
+    $example2 = $('#events-table')
+    $example2.append grid.render().el
+    # Initialize the paginator
+    paginator = new (Backgrid.Extension.Paginator)(collection: @collection)
+    # Render the paginator
+    $example2.after paginator.render().el
+    # Initialize a client-side filter to filter on the client
+    # mode pageable collection's cache.
+    #filter = new (Backgrid.Extension.ClientSideFilter)(
+    #  collection: pageableTerritories
+    #  fields: [ 'name' ])
+    # Render the filter
+    #$example2.before filter.render().el
+
+    
     @renderFilters()
     if $(document).height() <= $(window).height()
       @addPage()
