@@ -101,6 +101,8 @@ class CPP.Views.Students.Index extends CPP.Views.Base
           data: 
             students: @collection.pluck('id')
           success: =>
+            @collection.fetch 
+            console.log(@collectino)
             notify 'success', "All student accounts suspended" 
     else
       notify('error', "No students in list")     

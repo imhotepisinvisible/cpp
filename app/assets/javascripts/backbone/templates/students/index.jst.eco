@@ -28,12 +28,15 @@
             <th>Last Name</th>
             <th>Graduating in</th>
             <th>Course</th>
-            <th class="btn-column"></th>
+            <th class="btn-column">Actions</th>
             <th>Updated On</th>
+            <% if (@editable): %>
+            <th>Visible</th>
+            <% end %>
           </tr>
         </thead>
         <tbody class="cpp-tbl" id="students">
-          <tr><td colspan="<%= 5 + (@editable ? 1 : 0) %>"><div class="loading"></div></td></tr>
+          <tr><td colspan="<%= 6 + (@editable ? 1 : 0) %>"><div class="loading"></div></td></tr>
         </tbody>
       </table>
     <% else: %>

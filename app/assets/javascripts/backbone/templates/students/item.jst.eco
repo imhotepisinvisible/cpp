@@ -18,7 +18,7 @@
     <% end %>
     <% if @editable: %>
     <div class="btn btn-small button-student-edit"><i class="icon-pencil" /></div>
-    <div class="btn btn-small button-student-delete btn-danger"><i class="icon-trash" /></div>
+    <div class="btn btn-small button-student-delete btn-danger"><i class="icon-trash" /></div> 
     <% end %>
   </div>
 </td>
@@ -27,3 +27,14 @@
 <td>
   <%= date.format(getDateFormat()) %>
 </td>
+<% if (@editable): %>
+<td>
+  <div>
+    <% if (@student.get 'active'): %>
+    <i class="icon-ok" />
+    <% else: %>
+    <i class="icon-remove" />
+    <% end %>
+  </div>
+</td>
+<% end %>
