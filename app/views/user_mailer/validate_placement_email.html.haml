@@ -1,17 +1,30 @@
 !!! 5
 %html
   %body
-    %h1 <center>A new opportunity has been posted on CPP</center> 
-    %p <b>Position:</b>
-    %p= @placement.position
-    %p <b>Company:</b>
-    %p= @company.name
-    %p <b>Description</b>
-    %p= @placement.description
-    %p <b>Location</b>
-    %p= @placement.location
-    %p <b>Created At:</b>
-    %p= @placement.created_at
-    %p Please login before approving or rejecting the <a href="#{@url}/opportunities/#{@placement.id}">opportunity</a> using the links below
-    %p= link_to "Approve", "#{@url}/opportunities/#{@placement.id}/approve", :class => "button", :method => :get
-    %p=	link_to "Reject",  "#{@url}/opportunities/#{@placement.id}/reject", :class => "button", :method => :get
+    %h1
+      %center A new opportunity has been posted on CPP
+    %p
+      %strong Company:
+      %span= @company.name
+    %p
+      %strong Position:
+      %span= @placement.position
+    %p
+      %strong Description:
+      %span= @placement.description
+    %p
+      %strong Location:
+      %span= @placement.location
+    %p
+      %strong Deadline:
+      %span= @placement.deadline
+    %p
+      %strong Created At:
+      %span= @placement.created_at
+    %p
+      Please login before approving or rejecting the
+      =link_to "opportunity", "#{@url}/opportunities/#{@placement.id}"
+      using the links below
+    %p
+      =link_to "Approve", "#{@url}/opportunities/#{@placement.id}/approve", :class => "button", :method => :get
+      =link_to "Reject",  "#{@url}/opportunities/#{@placement.id}/reject", :class => "button", :method => :get

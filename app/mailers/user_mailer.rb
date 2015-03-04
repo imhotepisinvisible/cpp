@@ -59,7 +59,7 @@ class UserMailer < ActionMailer::Base
     @company = Company.find_by_id(@event.company_id)
     @url = Rails.application.config.absolute_site_url 
     puts "VALIDATE EVENT EMAIL"
-    subject = "CPP event posted by #{@company.name}: #{@event.title}"   
+    subject = "[CPP][New Event] #{@company.name}: #{@event.title}"   
     mail(:to => address, :subject => subject)
   end
 
@@ -68,7 +68,7 @@ class UserMailer < ActionMailer::Base
     @company = Company.find_by_id(@placement.company_id)
     @url = Rails.application.config.absolute_site_url  
     puts "VALIDATE PLACEMENT EMAIL"
-    subject = "CPP opportunity posted by #{@company.name}: #{@placement.position}"
+    subject = "[CPP][New Opportunity] #{@company.name}: #{@placement.position}"
     mail(:to => address, :subject => subject)
   end
 
