@@ -40,7 +40,7 @@
         <select id="student-course-input" class="student-profile-select">
           <option value="">Select a course</option>
           <% for course of (@courses.models): %>
-          <option value="<%= course %>"><%= @courses.models[course].get('name') %></option>
+          <option value="<%= @courses.models[course].get('id') %>"><%= @courses.models[course].get('name') %></option>
           <% end %>
         </select>
         </span>

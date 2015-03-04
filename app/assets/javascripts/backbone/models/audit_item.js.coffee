@@ -9,7 +9,7 @@ class CPP.Models.AuditItem extends Backbone.Model
       else 'icon-circle'
 
   getReadableTimestamp: ->
-    Date.parse(@get('timestamp')).toString('dS MMMM yyyy - H:mm')
+    moment(@get('timestamp')).format('Do MMMM YYYY - H:mm')
 
 class CPP.Collections.AuditItems extends Backbone.Collection
   url: '/audit_items'

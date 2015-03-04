@@ -72,7 +72,10 @@ class CPP.Models.Event extends CPP.Models.Base
     @get('capacity') - @getFilled()
 
   getReadableDate: (field) ->
-    Date.parse(@get(field)).toString('dS MMMM yyyy - H:mm')
+    moment(@get(field)).format('Do MMMM YYYY - H:mm')
+    
+  getTimeAgo: (field) ->
+    moment(@get(field)).fromNow()
 
 class CPP.Collections.Events extends CPP.Collections.Base
   url: '/events'

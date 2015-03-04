@@ -32,12 +32,12 @@
           </p>
           <p id="student-profile-intro-status">
             <% if @student.get('course_id') != null: %>
-            Studying <%= @student.courses.models[@student.get 'course_id'].attributes.name %>
-            <br>
+              Studying <%= @courses.get(@student.get 'course_id').attributes.name %>
+              <br>
             <% end %>
             <% if @student.get('year') >= 2000: %>
-            Graduating in <%= @student.get 'year' %>
-            <br>
+              Graduating in <%= @student.get 'year' %>
+              <br>
             <% end %>
             <%= @student.get 'looking_for' %>
           </p>

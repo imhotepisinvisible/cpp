@@ -14,7 +14,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require date
+//= require moment
 //= require underscore
 //= require highcharts
 //

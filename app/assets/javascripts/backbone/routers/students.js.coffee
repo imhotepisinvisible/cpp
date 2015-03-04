@@ -42,18 +42,17 @@ class CPP.Routers.Students extends Backbone.Router
 
     student = @getStudentFromID(id)
     unless student
-      notify "error", "Invalid Student"         
+      notify "error", "Invalid Student"
     
-    new CPP.Views.Students.Edit model: student
     student.fetch
       error: ->
         notify "error", "Couldn't fetch student"
     
+    new CPP.Views.Students.Edit model: student
+    
     # Fetch 3 events and placements for dashboard
-    #deferreds = []     
-    now = new Date() 
-    student.events.fetch({ data: $.param({ limit: 3 , start_date: now.toISOString()}) })
-    student.placements.fetch({ data: $.param({ limit: 3, deadline: now.toISOString()}) })
+    student.events.fetch({ data: $.param({ limit: 3 , start_date: moment().toISOString()}) })
+    student.placements.fetch({ data: $.param({ limit: 3, deadline: moment().toISOString()}) })
        
   # Student administration page
   admin: (id) ->

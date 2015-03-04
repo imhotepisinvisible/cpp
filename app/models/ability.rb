@@ -57,6 +57,7 @@ class Ability
       # Only allow companies that have been approved to see students.
       if user.company.department_registrations.where(:status => 3).size > 0
         can :index, Student
+        can :export_cvs, Student
       end
     when "DepartmentAdministrator"
       can :manage, Course
@@ -86,6 +87,7 @@ class Ability
       can :manage, Student do |student|
         student.departments.map(&:id).include? user.department_id
       end
+      can :manage, Resque
     end
 
     unless user.type.nil?

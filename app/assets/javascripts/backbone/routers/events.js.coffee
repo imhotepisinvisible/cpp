@@ -20,7 +20,7 @@ class CPP.Routers.Events extends Backbone.Router
   index: ->
     events = new CPP.Collections.Events
     new CPP.Views.Events.Index collection: events
-    events.fetch
+    events.fetch({ data: $.param({start_date: moment().toISOString()}) })
       error: ->
         notify "error", "Couldn't fetch events"
 

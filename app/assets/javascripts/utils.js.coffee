@@ -148,7 +148,7 @@ window.userId = ->
 
 # Create global function for dates to return in 15/12/2015 format
 window.getDateFormat = ->
-        'dd/MM/yyyy'
+        'DD/MM/YYYY'
 # Datepicker uses different meaning for 'MM', so needs separate function
 window.getDatePickerFormat = ->
         'dd/mm/yyyy'

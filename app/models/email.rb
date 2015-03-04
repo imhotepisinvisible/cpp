@@ -71,4 +71,11 @@ class Email < ActiveRecord::Base
 		end
 	end
 
+  def as_json(options={})
+    result = super()
+    result[:company_name] = company.name
+    result[:company_logo_url] = company.logo.url(:thumbnail)
+    return result
+  end
+
 end

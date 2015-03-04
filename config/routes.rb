@@ -54,6 +54,12 @@ CPP::Application.routes.draw do
   # Non-Backbone Routes
   get ":controller/:id/stat_show", :action => "stat_show"
 
+  get "events/:id/approve" => "events#email_approve"
+  get "events/:id/reject" => "events#email_reject"
+  
+  get "placements/:id/approve" => "placements#email_approve"
+  get "placements/:id/reject" => "placements#email_reject"
+
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   get "emails/:id/preview" => "emails#preview"
@@ -65,11 +71,19 @@ CPP::Application.routes.draw do
   get "events/top_5" => "events#top_5"
   get "placements/top_5" => "placements#top_5"
   
-  get ':controller/:id/documents/:document_type', :action => :download_document
+  get 'students/:id/documents/:document_type' => 'students#download_document'
+  get 'export_cvs' => 'students#export_cvs'
 
   resources :sessions
 
-  resources :courses
+  
+
+  require 'resque_scheduler/server'
+  #namespace :admin do
+  constraints CanAccessResque do
+    mount Resque::Server, :at => "/resque"
+  end
+  #end
 
   # Pass all other routes through to Backbone
   class XHRConstraint
@@ -82,14 +96,15 @@ CPP::Application.routes.draw do
   resources :users do
     put 'change_password', :on => :collection, :action => :change_password
     put 'forgot_password', :on => :collection, :action => :forgot_password
-  end
-
+  end  
   resources :audit_items
   resources :companies
+  resources :courses
   resources :events do
     post '/register', :on => :member, :action => :register
     post '/unregister', :on => :member, :action => :unregister
     get :pending, :on => :collection
+    #get :approve, :on => :member
     put :approve, :on => :member
     put :reject, :on => :member
     get :attending_students, :on => :member
@@ -119,6 +134,7 @@ CPP::Application.routes.draw do
     get 'suggested_degrees', :on => :collection, :action => :suggested_degrees
     delete '/documents/:document_type', :on => :member, :action => :delete_document
     get '/documents/:document_type', :on => :member, :action => :download_document
+    put 'suspend', :on => :collection, :action => :suspend
   end
 
   resources :tagged_emails
@@ -167,9 +183,7 @@ CPP::Application.routes.draw do
   match 'tags/reject_interests' => 'tags#reject_interests'
   match 'tags/validate' => 'tags#validate'
 
-
-
-  # See how all your routes lay out with "rake routes"
+   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.

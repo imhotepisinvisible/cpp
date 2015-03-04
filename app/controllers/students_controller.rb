@@ -120,10 +120,17 @@ class StudentsController < ApplicationController
     document = (@student.send "#{document_type}".to_sym).path
     ext = File.extname document
     unless document.nil?
-      if (params.has_key? :preview)
-        send_file document, :filename => "#{@student.last_name}_#{@student.first_name}_#{document_type}#{ext}", :disposition => 'inline'
+      if File.exist?(document)
+        if (params.has_key? :preview)
+          send_file document, :filename => "#{@student.last_name}_#{@student.first_name}_#{document_type}#{ext}", :disposition => 'inline'
+        else
+          send_file document, :filename => "#{@student.last_name}_#{@student.first_name}_#{document_type}#{ext}"
+        end
       else
-        send_file document, :filename => "#{@student.last_name}_#{@student.first_name}_#{document_type}#{ext}"
+        @student.send "#{document_type}=".to_sym, nil
+        @student.save
+        redirect_to root_path
+        return
       end
     else
       head :no_content
@@ -142,6 +149,36 @@ class StudentsController < ApplicationController
       respond_with @student
     else
       respond_with @student, status: :unprocessable_entity
+    end
+  end
+
+  # Bulk download CVs
+  #
+  # GET /students/export_cvs
+  # TODO: Queue this with resque...
+  def export_cvs
+    if params.has_key? :students
+        t = Tempfile.new("my-temp-filename-#{Time.now}")
+        Zip::File.open(t.path, Zip::File::CREATE) do |zipfile|
+            @students = params[:students].split(',')
+            @students = @students.uniq
+            @students.each do |id|
+                begin
+                    student = Student.find(id)
+                    title = "#{student.id}-#{student.last_name}#{student.first_name}-cv.pdf"
+                    cv_url = (student.send :cv).path
+                    zipfile.add(title, cv_url) if cv_url.present? && File.exist?(cv_url)
+                rescue ActiveRecord::RecordNotFound
+                end
+            end
+            zipfile.add("CVs.txt", File.join(Rails.root, "app", "assets", "files", "CVs.txt" ))
+        end
+        send_file t.path, :type => 'application/zip',
+                                     :disposition => 'attachment',
+                                     :filename => "CVs.zip"
+        t.close
+    else
+        redirect_to root_path
     end
   end
 
@@ -214,5 +251,23 @@ class StudentsController < ApplicationController
     ok_students.each { |s| s.stat_count = student_id_counts[s.id] }
 
     respond_with ok_students[0..4]
+  end
+
+  # Suspends all students then emails them
+  #
+  # PUT /students/suspend
+  def suspend # PASS in collection from AJAX query
+    if params.has_key? :students
+      @students = params[:students].split(',')[0]
+      @students.each do |id|
+        student = Student.find(id)
+        student.update_attributes(active: 'f')
+        # Send an email/add to email list
+        Resque.enqueue(Deactivate, id)
+      end
+      respond_to do |format|
+        format.json {head :ok}
+      end  
+    end
   end
 end

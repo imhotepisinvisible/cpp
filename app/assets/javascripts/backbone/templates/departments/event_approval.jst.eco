@@ -1,10 +1,26 @@
 <div class="item">
   <div class="approval-display-container">
-    <span class="event-name"><%= @event.get 'company_name' %>: <a href="/events/<%= @event.get 'id' %>"><%= @event.get 'title' %></a></span>
-    <div class="btn-container btn-group">
-      <div class="btn btn-primary btn-approve">Approve</div>
-      <div class="btn btn-danger btn-reject">Reject</div>
+    <div class="row-fluid">
+
+    <div class="span2">
+      <div class="company-logo-header">
+        <a href="/companies/<%= @event.get 'company_id' %>"><img src="<%= @event.get('company_logo_url') %>"></a>
+      </div>
+    </div>
+
+    <div class="span8">
+      <div class="event-name">
+        <a href="/events/<%= @event.get 'id' %>"><%= @event.get('title') %></a>
+      </div>
+      <div class="event-description"><%= @event.getReadableDate('start_date') %></div>
+      <div class="event-info">Created <%= @event.getTimeAgo('created_at') %></div>
+    </div>
+
+    <div class="span2">
+      <div class="btn-group pull-right">
+        <div class="btn btn-primary btn-approve"><i class="icon-ok" /></div>
+        <div class="btn btn-danger btn-reject"><i class="icon-remove" /></div>
+      </div>
     </div>
   </div>
-
 </div>

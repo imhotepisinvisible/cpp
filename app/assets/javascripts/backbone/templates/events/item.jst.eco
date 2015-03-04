@@ -7,9 +7,9 @@
   <% end %>
 </td>
 
-<% date = Date.parse(@event.get('start_date'))%>
+<% date = moment(@event.get('start_date'))%>
 <td>
-  <%= date.toString(getDateFormat()) %>
+  <%= date.format(getDateFormat()) %>
 </td>
 <td><%= @event.get 'location' %></td>
 <td><i class="icon-<%= if @hasSpaces then 'ok' else 'remove' %>"></i></td>

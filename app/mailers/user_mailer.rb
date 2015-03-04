@@ -37,4 +37,37 @@ class UserMailer < ActionMailer::Base
     subject = "CPP Account Deleted"
     mail(:to => user.email, :subject => subject)
   end
+
+  def account_deactivated(user)
+    puts "ACCOUNT_DEACTIVATED_EMAIL"
+    subject = "CPP Account Deactivated"
+    @name = user.first_name
+    @url = Rails.application.config.absolute_site_url 
+    mail(:to => user.email, :subject => subject)
+  end
+
+  def account_reminder(user)
+    puts "ACCOUNT_REMINDER_EMAIL"
+    subject = "CPP Account Reminder"
+    @name = user.first_name
+    @url = Rails.application.config.absolute_site_url 
+    mail(:to => user.email, :subject => subject)
+  end
+
+  def validate_event_email(address, event)
+    puts "VALIDATE EVENT EMAIL"
+    subject = "New event posted on CPP"
+    @event = event 
+    @url = Rails.application.config.absolute_site_url    
+    mail(:to => address, :subject => subject)
+  end
+
+  def validate_placement_email(address, placement)
+    puts "VALIDATE PLACEMENT EMAIL"
+    subject = "New placement posted on CPP"
+    @placement = placement 
+    @url = Rails.application.config.absolute_site_url    
+    mail(:to => address, :subject => subject)
+  end
+
 end

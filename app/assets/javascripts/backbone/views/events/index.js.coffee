@@ -46,7 +46,6 @@ class CPP.Views.Events.Index extends CPP.Views.Base
         {name: "Starting After",
         type: 'date',
         attribute: 'start_date'
-        default: Date.today().toString(getDateFormat())#'dd/MM/yyyy')
         scope: ''},
         {name: "Company"
         type: "text"

@@ -20,12 +20,16 @@ gem 'newrelic_rpm'                # Newrelic Monitoring
 gem 'paperclip'                   # Nice model attachment
 gem 'aws-sdk'                     # AWS SDK for paperclip uploads
 gem 'redis'                       # Allows connection to redis server
-gem 'resque'                      # Job Queueing system
+gem 'resque', :require => 'resque/server'                      # Job Queueing system
+gem 'resque-scheduler', '~> 2.2.0' #, :require => 'resque_scheduler' # Job scheduling
 gem 'resque_mailer'               # Email queueing gem
 gem 'obscenity'                   # Obscenity filter
 gem 'lorem'                       # Simple Lorem
 gem 'impressionist'               # Stats & Logging
 gem 'workflow'                    # Handling approval states
+gem 'rubyzip', '>= 1.0.0'         # will load new rubyzip version
+gem 'zip-zip'                     # will load compatibility for old rubyzip API.
+gem 'warden'                      # More customiseable authorisation
 
 # UI/Appearance Related Gems
 gem 'less-rails'                  # Less required for Bootstrap
@@ -45,7 +49,7 @@ gem 'backbone-validation-rails'   # Adds model validation in Backbone
 gem 'underscore-rails'            # Templating for backboneJS
 gem 'rails-backbone-forms', '0.11.1' # Client side form validation
 gem 'bootstrap-datepicker-rails'  # Date picker
-gem 'datejs-rails'                # Nicer date manipulation in Javascript
+gem 'momentjs-rails'              # Nicer date manipulation in Javascript
 gem 'jquery-fileupload-rails'     # File upload
 gem 'rails-bootstrap-toggle-buttons' # On/Off switches
 gem 'highcharts-rails'

@@ -50,8 +50,11 @@ class CPP.Models.Placement extends CPP.Models.Base
       type: "Text"
 
   getReadableDate: (field) ->
-    Date.parse(@get(field)).toString('dS MMMM yyyy - H:mm')
-
+    moment(@get(field)).format('Do MMMM YYYY - H:mm')
+    
+  getTimeAgo: (field) ->
+    moment(@get(field)).fromNow()
+    
 class CPP.Collections.Placements extends CPP.Collections.Base
   url: '/placements'
   model: CPP.Models.Placement
