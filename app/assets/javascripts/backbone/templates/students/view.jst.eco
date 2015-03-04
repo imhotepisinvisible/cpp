@@ -44,9 +44,16 @@
             <% end %>
             <%= @student.get 'looking_for' %>
           </p>
-            <div class="btn-group pull-right">
-              <a class="btn" href="<%= '/students/' + @student.id + '/documents/cv' %>"><i class="icon-download-alt"/></a>
+
+            <!--  download CV -->
+          <div class="pull-right">
+              <a class="link-accent" href="<%= '/students/' + @student.id + '/documents/cv' %>">Download CV</a>
           </div>
+            <!-- contact -->
+            <div class="pull-right">
+                <a class="link-accent" href="mailto:<%= @student.get('email') %>">Contact</a>
+          </div>  
+
         </div>
       </div>
     </div>

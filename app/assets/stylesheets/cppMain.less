@@ -4,7 +4,10 @@
 // cannot include top link in .less for some reason
 // @import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,300,300italic,400italic,600,700);
 @import url(http://fonts.googleapis.com/css?family=Fira+Sans);
-
+@font-face {
+    font-family: 'imperial-icons'; /*a name to be used later*/
+    src: url('/imperial-icons.woff'); /*URL to font*/
+}
 // /* Site Settings */
 
 /* Main Site Styles (tags etc) */
@@ -321,4 +324,43 @@ img.center {
   float: none;
   margin-left: auto;
   margin-right: auto;
+}
+
+.link-accent {
+  // text-transform: uppercase;
+  text-decoration: none;
+  font-size: 16px;
+  // font-weight: bold;
+  color: #161515;
+  display: inline-block;
+  position: relative;
+  padding-right: 20px;
+  padding-left: 15px;
+  // line-height: 1.1;
+
+  &:hover, &:focus, &:active, &.active, &.disabled, &[disabled] {
+    color: #66A40A;
+    text-decoration: none;
+  }
+}
+
+.link-accent::after{
+  content: "s";
+  font-family: 'imperial-icons';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-indent: 0px;
+  font-size: 18px;
+  position: absolute;
+  margin: -10px -5px 5px 5px;
+  right: 0;
+  top: 50%;
+  height: 24px;
+  color: #66A40A;
 }
