@@ -89,3 +89,18 @@
 .navbar-fixed-bottom .container {
   width: 100%
 }
+
+
+// Navbar button for toggling navbar items in responsive layouts
+// These definitions need to come after '.navbar .btn'
+.navbar .btn-navbar {
+
+  background:none;
+  border:none;
+  box-shadow:none;
+
+  &:hover, &:focus, &:active, &.active, &.disabled, &[disabled] {
+    background: none;
+  }
+
+}
