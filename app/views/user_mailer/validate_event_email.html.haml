@@ -1,19 +1,29 @@
 !!! 5
 %html
   %body
-    %h1 <center>A new event has been posted on CPP</center> 
-    %p <b>Title:</b>
-    %p= @event.title
-    %p <b>Company:</b>
-    %p= @company.name
-    %p <b>Description</b>
-    %p= @event.description
-    %p <b>Date:</b>
-    %p= @event.start_date
-    %p <b>Created At:</b>
-    %p= @event.created_at
-    %p Please login before approving or rejecting the <a href="#{@url}/events/#{@event.id}">event</a> using the links below
-    %p= link_to "Approve", "#{@url}/events/#{@event.id}/approve", :class => "button", :method => :get
-    %p=	link_to "Reject",  "#{@url}/events/#{@event.id}/reject", :class => "button", :method => :get
+    %h1
+      %center A new event has been posted on CPP
+    %p
+      %strong Company:
+      %span= @company.name
+    %p
+      %strong Title:
+      %span= @event.title
+    %p
+      %strong Description:
+      %span= @event.description
+    %p
+      %strong Date:
+      %span= @event.start_date
+    %p
+      %strong Created At:
+      %span= @event.created_at
+    %p
+      Please login before approving or rejecting the
+      =link_to "event", "#{@url}/events/#{@event.id}"
+      using the links below
+    %p
+      =link_to "Approve", "#{@url}/events/#{@event.id}/approve", :class => "button", :method => :get
+      =link_to "Reject",  "#{@url}/events/#{@event.id}/reject", :class => "button", :method => :get
     
  

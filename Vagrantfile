@@ -16,8 +16,8 @@ docker build -t resque-worker /app/docker/resque-worker/
 docker run -d --name postgres -e POSTGRESQL_USER=docker -e POSTGRESQL_PASS=docker postgres:latest
 docker run -d --name redis redis:latest
 docker run -d -p 1080:1080 --name mailcatcher mailcatcher:latest
+docker run -d -p 3000:3000 -v /app:/app --link redis:redis --link postgres:db --link mailcatcher:mailcatcher --name rails rails:latest
 docker run -d -v /app:/app --name resque-worker --link redis:redis resque-worker:latest
-docker run -d -p 3000:3000 -v /app:/app --link redis:redis --link postgres:db --link mailcatcher:mailcatcher --link resque-worker:resque-worker --name rails rails:latest
 
 SCRIPT
 
@@ -27,8 +27,8 @@ $start = <<SCRIPT
 docker start postgres
 docker start redis
 docker start mailcatcher
-docker start resque-worker
 docker start rails
+docker start resque-worker
 SCRIPT
 
 VAGRANTFILE_API_VERSION = "2"

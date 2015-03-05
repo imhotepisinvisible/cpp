@@ -91,7 +91,7 @@ class CPP.Views.Students.Index extends CPP.Views.Base
               console.log(first_name + "not updated")
 
   suspend: (e) -> 
-    e.preventDefault()
+  #  e.preventDefault()
     if @collection.length > 0
       if confirm("Suspend all Student accounts?")
         $.ajax
@@ -101,9 +101,9 @@ class CPP.Views.Students.Index extends CPP.Views.Base
           data: 
             students: @collection.pluck('id')
           success: =>
-            notify 'success', "All student accounts suspended" 
+            notify 'success', "All student accounts suspended"
     else
-      notify('error', "No students in list")     
+      notify('error', "No students in list")
   @
 
 

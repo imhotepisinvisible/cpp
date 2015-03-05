@@ -44,9 +44,13 @@ class EventsController < ApplicationController
     respond_with @events
   end
   
+<<<<<<< HEAD
   def email_approve 
     @event = Event.find(params[:id]) 
     @companyAdmin = CompanyAdministrator.find_by_company_id(@event.company_id)    
+=======
+  def email_approve
+>>>>>>> origin/staging
     if !current_user.is_department_admin?
       redirect_to root_path
     elsif @event.approved? or @event.rejected?
@@ -74,7 +78,6 @@ class EventsController < ApplicationController
   end
 
   def email_reject
-    require_login
     if !current_user.is_department_admin?
       redirect_to root_path
     elsif @event.approved? or @event.rejected?
@@ -124,8 +127,8 @@ class EventsController < ApplicationController
     respond_with @event
   end
 
-  # POST /events
-  # POST /events.json 
+
+  # POST /events.json
   def create
     @event = Event.new(params[:event])
     @admins = DepartmentAdministrator.all
