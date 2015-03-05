@@ -72,14 +72,16 @@ class EventsController < ApplicationController
   end
 
   def email_reject
+    @event = Event.find(params[:id]) 
+    @companyAdmin = CompanyAdministrator.find_by_company_id(@event.company_id)
     if !current_user.is_department_admin?
       redirect_to root_path
     elsif @event.approved? or @event.rejected?
       @status = @event.current_state
       redirect_to @event, :notice => "Event already " + "#{@status}" 
-    else
-      @event = Event.find(params[:id])
+    else      
       if @event.reject!
+        UserMailer.rejected_event_email(@companyAdmin.email, @event).deliver 
         redirect_to @event, :notice => "Event rejected"
       else
         redirect_to @event, :notice => "Unprocessable entity"

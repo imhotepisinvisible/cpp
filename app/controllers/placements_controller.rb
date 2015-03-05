@@ -72,14 +72,16 @@ class PlacementsController < ApplicationController
   end
 
   def email_reject
+    @placement = Placement.find(params[:id])
+    @companyAdmin = CompanyAdministrator.find_by_company_id(@placement.company_id)
     if !current_user.is_department_admin?
       redirect_to root_path
     elsif @placement.approved? or @placement.rejected?
       @status = @placement.current_state
       redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Opportunity already " + "#{@status}" 
-    else
-      @placement = Placement.find(params[:id])
+    else      
       if @placement.reject!
+        UserMailer.rejected_opportunity_email(@companyAdmin.email, @placement).deliver 
         redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Opportunity rejected"
       else
         redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Unprocessable entity"
