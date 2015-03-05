@@ -1,8 +1,21 @@
 !!! 5
 %html
   %body
-    %h1 <center>Your event has been approved to appear on CPP</center>
-    %p Congratulations! The following event has been approved. 
-    %p <b>Title:</b>
-    %p= @event.title
-   
+    %h1
+      %center Your event has been approved to appear on CPP
+    %p
+      %strong Company:
+      %span= @company.name
+    %p
+      %strong Title:
+      %span= @event.title
+    %p
+      %strong Description:
+      %span= @event.description
+    %p
+      %strong Date:
+      %span= @event.start_date
+    %p
+      %strong Created At:
+      %span= @event.created_at
+ 

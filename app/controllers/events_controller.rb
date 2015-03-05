@@ -44,19 +44,16 @@ class EventsController < ApplicationController
     respond_with @events
   end
   
-<<<<<<< HEAD
+
   def email_approve 
     @event = Event.find(params[:id]) 
     @companyAdmin = CompanyAdministrator.find_by_company_id(@event.company_id)    
-=======
+
   def email_approve
->>>>>>> origin/staging
     if !current_user.is_department_admin?
       redirect_to root_path
     elsif @event.approved? or @event.rejected?
       @status = @event.current_state 
-      #UserMailer.approved_event_email(@companyAdmin.email, @event).deliver
-        #head :no_content
       redirect_to @event, :notice => "Event already " + "#{@status}"      
     else       
       if @event.approve!        
