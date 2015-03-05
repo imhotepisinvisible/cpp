@@ -30,7 +30,7 @@
 <% if (@editable): %>
 <td>
   <div>
-    <% if (@student.get 'active'): %>
+    <% if (@student.reasonsProfileInactive().length == 0): %>
     <i class="icon-ok" />
     <% else: %>
     <i class="icon-remove" />
