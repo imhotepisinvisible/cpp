@@ -81,4 +81,12 @@ class UserMailer < ActionMailer::Base
     mail(:to => address, :subject => subject)
   end
 
+  def approved_opportunity_email(address, placement)
+    @placement = placement
+    @company = Company.find_by_id(@placement.company_id)
+    puts "OPPORTUNITY APPROVED"
+    subject = "[CPP OPPORTUNITY] #{@placement.position} APPROVED"
+    mail(:to => address, :subject => subject)
+  end
+
 end

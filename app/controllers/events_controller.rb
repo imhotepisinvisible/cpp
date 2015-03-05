@@ -43,13 +43,10 @@ class EventsController < ApplicationController
     @events = current_user.events.scoped.with_new_state
     respond_with @events
   end
-  
-
-  def email_approve 
-    @event = Event.find(params[:id]) 
-    @companyAdmin = CompanyAdministrator.find_by_company_id(@event.company_id)    
-
+        
   def email_approve
+    @event = Event.find(params[:id]) 
+    @companyAdmin = CompanyAdministrator.find_by_company_id(@event.company_id)
     if !current_user.is_department_admin?
       redirect_to root_path
     elsif @event.approved? or @event.rejected?
