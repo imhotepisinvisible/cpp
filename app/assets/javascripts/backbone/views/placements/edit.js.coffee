@@ -54,6 +54,10 @@ class CPP.Views.Placements.Edit extends CPP.Views.Base
   submitPlacement: ->
     if @form.validate() == null
       @form.commit()
+      if (moment(@model.get("deadline")).diff(moment("0000-01-01T01:00:00+00:00")) == 0)
+        @model.set({ deadline: null })
+      if (moment(@model.get("interview_date")).diff(moment("0000-01-01T01:00:00+00:00")) == 0)
+        @model.set({ interview_date: null })
       @model.save {},
         wait: true
         forceUpdate: true

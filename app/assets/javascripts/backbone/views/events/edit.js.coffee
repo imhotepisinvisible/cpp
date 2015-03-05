@@ -61,6 +61,8 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
   submitEvent: ->
     if @form.validate() == null
       @form.commit()
+      if (moment(@model.get("deadline")).diff(moment("0000-01-01T01:00:00+00:00")) == 0)
+        @model.set({ deadline: null })
       @model.save {},
         wait: true
         forceUpdate: true
