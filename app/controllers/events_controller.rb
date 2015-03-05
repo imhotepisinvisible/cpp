@@ -44,27 +44,25 @@ class EventsController < ApplicationController
     respond_with @events
   end
   
-  def email_approve
-    require_login
+  def email_approve 
+    @event = Event.find(params[:id]) 
+    @companyAdmin = CompanyAdministrator.find_by_company_id(@event.company_id)    
     if !current_user.is_department_admin?
       redirect_to root_path
     elsif @event.approved? or @event.rejected?
-      @status = @event.current_state
-      redirect_to @event, :notice => "Event already " + "#{@status}" 
-    else 
-      @event = Event.find(params[:id])
+      @status = @event.current_state 
+      #UserMailer.approved_event_email(@companyAdmin.email, @event).deliver
+        #head :no_content
+      redirect_to @event, :notice => "Event already " + "#{@status}"      
+    else       
       if @event.approve!        
-        redirect_to @event, :notice => "Event approved"
+        UserMailer.approved_event_email(@companyAdmin.email, @event).deliver 
+        redirect_to @event, :notice => "Event approved"       
       else
-        redirect_to @event, :notice => "Unprocessable entity"
+        redirect_to @event, :notice => "Unprocessable entity" 
       end
     end
   end
-
-  #@event        
-  #respond_with @event, :location => @event do |format|
-  #format.html { redirect_to @event }        
-  #end
 
   def approve
     @event = Event.find(params[:id])
@@ -127,11 +125,10 @@ class EventsController < ApplicationController
   end
 
   # POST /events
-  # POST /events.json   #todo get email from admins 
+  # POST /events.json 
   def create
     @event = Event.new(params[:event])
     @admins = DepartmentAdministrator.all
-    #@company = "googleeees" #company.name
     if params.has_key? :departments
       @event.departments = params[:departments].map{ |id| Department.find(id) }
     else

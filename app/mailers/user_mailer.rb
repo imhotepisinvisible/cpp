@@ -72,4 +72,13 @@ class UserMailer < ActionMailer::Base
     mail(:to => address, :subject => subject)
   end
 
+  def approved_event_email(address, event)
+    @event = event
+    @company = Company.find_by_id(@event.company_id)
+    @companyAdmin = CompanyAdministrator.find_by_company_id(@event.company_id)
+    puts "EVENT APPROVED"
+    subject = "[CPP EVENT]: #{@event.title} APPROVED"
+    mail(:to => address, :subject => subject)
+  end
+
 end
