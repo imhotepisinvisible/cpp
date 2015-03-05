@@ -5,6 +5,7 @@ class CPP.Views.CompaniesItem extends CPP.Views.Base
   events: -> _.extend {}, CPP.Views.Base::events,
     "click .button-company-edit"   : "editCompany"
     "click .button-company-reject" : "reject"
+    "click .button-company-delete" : "deleteCompany"
     "click .button-company-contacts-edit" : 'editContacts'
     "click"                        : "viewCompany"
 
@@ -35,6 +36,17 @@ class CPP.Views.CompaniesItem extends CPP.Views.Base
     # Prevent event from triggering click on item to navigate to view
     e.stopPropagation()
     @changeStatus CPP_APPROVAL_STATUS.REJECTED, 'rejected, consider emailing this company to explain why.'
+    
+  # Delete event and update on server
+  deleteCompany: (e) ->
+    # Remove item from view
+    e.stopPropagation()
+    @model.destroy
+      wait: true
+      success: (model, response) ->
+        notify "success", "Company deleted"
+      error: (model, response) ->
+        notify "error", "Company could not be deleted"
 
   # Change approval status of company
   changeStatus: (status, message) ->

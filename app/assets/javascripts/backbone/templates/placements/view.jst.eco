@@ -6,7 +6,7 @@
     <a href="/companies/<%= @placement.company.id %>" class="pull-right">
       <img class="company-logo-img" src="<%= @placement.company.get('logo_url') %>">
     </a>
-    <% if @admin: %>
+    <% if isAdmin(): %>
       <a class="btn pull-right" href="/opportunities/<%= @placement.id %>/edit">Edit</a>
     <% end %>
   </div>
@@ -109,6 +109,9 @@
       <%- addPlacementTableRow(@placement, 'application_procedure', 'Application Procedure') %>
       <%- addPlacementTableRow(@placement, 'interview_date', 'Interview Date') %>
       <%- addPlacementTableRow(@placement, 'other', 'Other Information') %>
+      <% if isAdmin(): %>
+        <%- addPlacementTableRow(@placement, 'workflow_state', 'Status') %>
+      <% end %>
     </table>
   </div>
 </div>

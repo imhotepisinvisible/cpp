@@ -55,18 +55,20 @@ class UserMailer < ActionMailer::Base
   end
 
   def validate_event_email(address, event)
+    @event = event
+    @company = Company.find_by_id(@event.company_id)
+    @url = Rails.application.config.absolute_site_url 
     puts "VALIDATE EVENT EMAIL"
-    subject = "New event posted on CPP"
-    @event = event 
-    @url = Rails.application.config.absolute_site_url    
+    subject = "[CPP][New Event] #{@company.name}: #{@event.title}"   
     mail(:to => address, :subject => subject)
   end
 
   def validate_placement_email(address, placement)
-    puts "VALIDATE PLACEMENT EMAIL"
-    subject = "New placement posted on CPP"
     @placement = placement 
-    @url = Rails.application.config.absolute_site_url    
+    @company = Company.find_by_id(@placement.company_id)
+    @url = Rails.application.config.absolute_site_url  
+    puts "VALIDATE PLACEMENT EMAIL"
+    subject = "[CPP][New Opportunity] #{@company.name}: #{@placement.position}"
     mail(:to => address, :subject => subject)
   end
 

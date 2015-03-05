@@ -49,13 +49,13 @@ class PlacementsController < ApplicationController
       redirect_to root_path
     elsif @placement.approved? or @placement.rejected?
       @status = @placement.current_state
-      redirect_to @placement, :notice => "Opportunity already " + "#{@status}" 
+      redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Opportunity already " + "#{@status}" 
     else 
       @placement = Placement.find(params[:id])
       if @placement.approve!        
-        redirect_to @placement, :notice => "Opportunity approved"
+        redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Opportunity approved"
       else
-        redirect_to @placement, :notice => "Unprocessable entity"
+        redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Unprocessable entity"
       end
     end
   end
@@ -74,13 +74,13 @@ class PlacementsController < ApplicationController
       redirect_to root_path
     elsif @placement.approved? or @placement.rejected?
       @status = @placement.current_state
-      redirect_to @placement, :notice => "Opportunity already " + "#{@status}" 
+      redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Opportunity already " + "#{@status}" 
     else
       @placement = Placement.find(params[:id])
       if @placement.reject!
-        redirect_to @placement, :notice => "Opportunity rejected"
+        redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Opportunity rejected"
       else
-        redirect_to @placement, :notice => "Unprocessable entity"
+        redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Unprocessable entity"
       end
     end
   end

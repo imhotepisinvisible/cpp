@@ -34,4 +34,9 @@ class SessionsController < ApplicationController
     warden.logout
     redirect_to root_url, :notice => "Logged out!"
   end
+
+  def warden_fail
+    redirect_to root_path 
+  end
+  
 end

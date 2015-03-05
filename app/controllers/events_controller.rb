@@ -60,11 +60,6 @@ class EventsController < ApplicationController
     end
   end
 
-  #@event        
-  #respond_with @event, :location => @event do |format|
-  #format.html { redirect_to @event }        
-  #end
-
   def approve
     @event = Event.find(params[:id])
     if @event.approve!
@@ -125,7 +120,7 @@ class EventsController < ApplicationController
   end
 
   # POST /events
-  # POST /events.json   #todo get email from admins 
+  # POST /events.json
   def create
     @event = Event.new(params[:event])
     @admins = DepartmentAdministrator.all

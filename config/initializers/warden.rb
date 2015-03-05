@@ -1,5 +1,6 @@
 Rails.application.config.middleware.use Warden::Manager do |manager|
     manager.default_strategies :password
+    manager.failure_app = SessionsController.action(:warden_fail)
 end
 
 Warden::Manager.serialize_into_session do |user|
