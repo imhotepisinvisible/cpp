@@ -6,13 +6,14 @@ class CPP.Views.Events.Index extends CPP.Views.Base
 
   events: -> _.extend {}, CPP.Views.Base::events,
     "click .company-logo-header"      : "viewCompany"
+    'click tr'                        : 'ViewEvent'
 
   # Bind reset and filter events to render and renderEvents so that on change
   # the views change.
   initialize: ->
     # bind scrolling in the window to scrollevent
-    _.bindAll this, 'scrollevent'
-    $(window).scroll @scrollevent 
+    #_.bindAll this, 'scrollevent'
+    #$(window).scroll @scrollevent 
     
     #display ajax spinner whilst waiting for the collection to finish loading
     @collection.on "fetch", (->
@@ -28,11 +29,11 @@ class CPP.Views.Events.Index extends CPP.Views.Base
       @collection.getNextPage()
   @
 
-  scrollevent: ->
-    if $(window).scrollTop() + $(window).height() > $(document).height() - 20
-      if @collection.hasNextPage()
-        @collection.getNextPage()
-  @ 
+  #scrollevent: ->
+  #  if $(window).scrollTop() + $(window).height() > $(document).height() - 20
+  #    if @collection.hasNextPage()
+  #      @collection.getNextPage()
+  #@ 
 
   # Render events
   render: ->
@@ -43,50 +44,63 @@ class CPP.Views.Events.Index extends CPP.Views.Base
         headerCell: 'select-all'
       }
       {
-        name: 'id'
-        label: 'ID'
-        editable: false
-        cell: Backgrid.IntegerCell.extend(orderSeparator: '')
-      }
-      {
-        name: 'company_name'
+        name: 'company_logo_url'
         label: 'Company'
-        cell: 'string'
+        editable: false
+        cell: 'image'
       }
       {
         name: 'title'
         label: 'Event'
         cell: 'string'
+        editable: false
       }
       {
         name: 'start_date'
         label: 'Date'
         cell: 'date'
+        editable: false
       }
       {
         name: 'location'
         label: 'Location'
         cell: 'string'
+        editable: false
       }
       {
         name: 'spaces'
-        label: 'Spaces'
-        cell: 'integer'
+        label: 'Spaces Remaining'
+        #http://stackoverflow.com/questions/20093844/backgrid-formatter-adding-values-from-other-columns/20233521
+        cell: Backgrid.Cell.extend(render: ->
+          capacity = @model.get('capacity')
+          @$el.text capacity
+          # MUST do this for the grid to not error out
+          @
+        )
+        editable: false
+      }
+      {
+        name: 'workflow_state'
+        label: 'Status'
+        cell: 'string'
+        editable: false
       }
     ]
   
     $(@el).html(@template(events: @collection.fullCollection, editable: @editable))
     @renderEvents(@collection.fullCollection)
     grid = new (Backgrid.Grid)(
+      row: ModelRow
       columns: columns
-      collection: @collection)
+      collection: @collection.fullCollection
+      footer: Backgrid.Extension.Infinator.extend(scrollToTop: false))
     # Render the grid and attach the root to your HTML document
     $example2 = $('#events-table')
     $example2.append grid.render().el
     # Initialize the paginator
-    paginator = new (Backgrid.Extension.Paginator)(collection: @collection)
+    #paginator = new (Backgrid.Extension.Paginator)(collection: @collection)
     # Render the paginator
-    $example2.after paginator.render().el
+    #$example2.after paginator.render().el
     # Initialize a client-side filter to filter on the client
     # mode pageable collection's cache.
     #filter = new (Backgrid.Extension.ClientSideFilter)(
@@ -97,8 +111,8 @@ class CPP.Views.Events.Index extends CPP.Views.Base
 
     
     @renderFilters()
-    if $(document).height() <= $(window).height()
-      @addPage()
+    #if $(document).height() <= $(window).height()
+    #  @addPage()
   @
 
   # Render each event item
@@ -142,3 +156,7 @@ class CPP.Views.Events.Index extends CPP.Views.Base
   viewCompany: ->
     if @collection.company
       Backbone.history.navigate("companies/" + @collection.company.id, trigger: true)
+      
+  viewEvent: (e) ->
+    model = $(e.target).parent().data('model')
+    Backbone.history.navigate("events/" + model.id, trigger: true)

@@ -29,7 +29,7 @@
       <% end %>
 
     </h1>
-    <div id="events-table">
+    <div class="infinite-container" id="events-table">
     <% if @events.length > 0: %>
       <table class="table table-bordered table-hover table-clickable">
         <thead>
