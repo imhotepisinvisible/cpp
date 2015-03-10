@@ -11,12 +11,10 @@ class DepartmentAdministrator < User
   ###################### Declare associations ########################
   belongs_to :department
 
-  has_one  :organisation, :through => :department
-
   has_many :companies,
            :through => :department,
            :uniq => true,
-           :source => :all_companies
+           :source => :companies
   has_many :events,
            :through => :companies,
            :uniq => true

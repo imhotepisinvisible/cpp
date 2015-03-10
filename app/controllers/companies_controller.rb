@@ -12,9 +12,10 @@ class CompaniesController < ApplicationController
   # GET /companies.json
   def index
     if current_user.is_student?
-      respond_with current_user.companies.as_json({:student_id => current_user.id})
+      @companies = Company.where(:reg_status => [2,3])
+      respond_with @companies.as_json({:student_id => current_user.id})
     elsif
-      respond_with current_user.companies
+      respond_with Company.all
     end
   end
 
@@ -22,26 +23,32 @@ class CompaniesController < ApplicationController
   #
   # GET departments/1/companies/pending
   def pending
-    department = Department.find(params[:department_id])
-    respond_with department.pending_companies
+    @companies = Company.where(:reg_status => 1)
+    respond_with @companies
   end
 
   # Approve company for given department
   #
   # PUT departments/1/companies/1/approve
   def approve
-    department_registration = DepartmentRegistration.find_by_department_id_and_company_id(params[:department_id], params[:company_id])
-    department_registration.approved = true
-    department_registration.save!
+    @company = Company.find(params[:id])
+    if @company.approve!
+      respond_with @company
+    else
+      respond_with @company, status: :unprocessable_entity
+    end
   end
 
   # Reject company for given department
   #
   # PUT departments/1/companies/1/reject
   def reject
-    department_registration = DepartmentRegistration.find_by_department_id_and_company_id(params[:department_id], params[:company_id])
-    department_registration.approved = false
-    department_registration.save!
+    @company = Company.find(params[:id])
+    if @company.reject!
+      respond_with @company
+    else
+      respond_with @company, status: :unprocessable_entity
+    end
   end
 
   # Show company
@@ -73,29 +80,6 @@ class CompaniesController < ApplicationController
   # POST /companies.json
   def create
     @company = Company.new(params[:company])
-    if current_user
-      @company.organisation_id = current_user.organisation.id
-    else
-      # Set organisation to Imperial College
-      # This is because we don't have full multi-org support yet, it means all
-      # companies are created belonging to Imperial. It's not nice, but it's not
-      # something which could really be put in a variable either for the time being.
-      @company.organisation_id = Organisation.where(name: "Imperial College London")[0].id
-    end
-
-    if params.has_key? :departments
-      departments = params[:departments].map{ |id| Department.find(id) }
-    else
-      departments = []
-    end
-    @company.pending_departments = departments
-
-    # Automatically 'request' approval for company's departments
-    departments.each do |dept|
-      dept_reg = DepartmentRegistration.find_or_create_by_company_id_and_department_id(@company.id, dept.id)
-      dept_reg.status = 1
-      dept_reg.save
-    end
 
     if @company.save
       respond_with @company, status: :created, location: @company
@@ -147,7 +131,7 @@ class CompaniesController < ApplicationController
     end
   end
 
-  # Delete company logo
+  # Set company rating
   #
   # POST /companies/1/set_rating
   def set_rating
@@ -183,7 +167,7 @@ class CompaniesController < ApplicationController
     respond_with data
   end
 
-  # Return student views for all companies over past week
+  # Return student views for all companies from all time
   #
   # GET /companies/view_stats_all
   def view_stats_all

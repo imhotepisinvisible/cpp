@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Config/Server
 gem 'thin'                        # Better server :)
 gem 'unicorn'                     # Unicorn webserver: better for running on a VM
-gem 'rails', '3.2.1'             # Running on rails, wooo
+gem 'rails', '3.2.21'             # Running on rails, wooo
 gem 'therubyracer', '0.12.1'      # Javascript Engine
 
 # Back End Gems
@@ -89,6 +89,7 @@ group :test, :development do
   gem 'rspec-rails'           # Use RSpec for Testing
   gem 'rspec-instafail'       # Add instafail so broken/failing tests don't take ages
   gem 'shoulda-matchers'      # Helpful for RSpec testing
+  gem 'simplecov'             # For code coverage stats
 
   gem 'pry-rails'             # Awesome developer console http://pryrepl.org/
   gem 'faker'                 # For faking data

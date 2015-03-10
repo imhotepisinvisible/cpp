@@ -12,9 +12,13 @@ class StudentsController < ApplicationController
   # GET /students.json
   def index
     if current_user.is_company_admin?
-      @students = current_user.company.accessible_students
-    elsif current_user.is_department_admin?
-      @students = current_user.department.students
+      if current_user.company.reg_status == 3
+        @students = Student.scoped
+      else
+        @students = []
+      end
+    #elsif current_user.is_department_admin?
+    #  @students = current_user.department.students
     else
       @students = Student.scoped
     end
@@ -56,13 +60,6 @@ class StudentsController < ApplicationController
   def create
     @student = Student.new(params[:student])
 
-    if params.has_key? :departments
-      departments = params[:departments].map{ |id| Department.find(id) }
-    else
-      departments = []
-    end
-    @student.departments = departments
-
     if @student.save
       respond_with @student, status: :created, location: @student
     else
@@ -93,7 +90,7 @@ class StudentsController < ApplicationController
     end
   end
 
-  # Delete specified student peremantnly. End the session (ie log out) if
+  # Delete specified student permanently. End the session (ie log out) if
   # current user is student.
   # Don't log out otherwise (department deleting student)
   #

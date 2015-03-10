@@ -1,3 +1,19 @@
+#https://www.stormconsultancy.co.uk/blog/development/tools-plugins/generating-code-coverage-metrics-for-a-ruby-on-rails-project-with-simplecov/
+# Generate coverage with `COVERAGE=true bundle exec rake spec`
+require 'simplecov'
+SimpleCov.start do
+  add_filter '/spec/'
+  add_filter '/config/'
+  add_filter '/lib/'
+  add_filter '/vendor/'
+  add_filter '/test/'
+ 
+  add_group 'Controllers', 'app/controllers'
+  add_group 'Models', 'app/models'
+  add_group 'Helpers', 'app/helpers'
+  add_group 'Mailers', 'app/mailers'
+  add_group 'Views', 'app/views'
+end if ENV["COVERAGE"]
 require 'spork'
 
 Spork.prefork do
@@ -18,7 +34,6 @@ Spork.prefork do
 
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
-  require 'rspec/autorun'
 
   require 'mocha'
 
@@ -39,7 +54,6 @@ Spork.prefork do
     # If you're using Devise, you can uncomment the following:
     # config.include Devise::TestHelpers, type: :controller
 
-    config.treat_symbols_as_metadata_keys_with_true_values = true
     config.filter_run focus: true
     config.run_all_when_everything_filtered = true
 
