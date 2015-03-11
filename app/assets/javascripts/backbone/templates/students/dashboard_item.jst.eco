@@ -1,0 +1,17 @@
+<%= @event.get 'title' %>
+<!-- <td><img class="small-company-logo" src="<%= @event.get 'company_logo_url' %>"/></td> -->
+<!-- <td> -->
+<!--   <%= @event.get 'title' %> -->
+<!--   <br/> -->
+<!--   <% if @event.get('requirements'): %> -->
+<!--     <span class="label label-warning">requirements</span> -->
+<!--   <% end %> -->
+<!-- </td> -->
+
+<!-- <% date = moment(@event.get('start_date'))%> -->
+<!-- <td> -->
+<!--   <%= date.format(getDateFormat()) %> -->
+<!-- </td> -->
+<!-- <td><%= @event.get 'location' %></td> -->
+
+

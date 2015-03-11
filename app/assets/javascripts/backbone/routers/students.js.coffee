@@ -6,6 +6,7 @@ class CPP.Routers.Students extends Backbone.Router
       'students/:id/edit': 'edit'
       'students/:id/settings': 'settings'
       'departments/:id/students/signup': 'signup'
+      'students/:id/dashboard': 'dashboard'
 
       'edit': 'edit'
       'profile_preview': 'view'
@@ -34,7 +35,7 @@ class CPP.Routers.Students extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch student"
 
-  # Student dashboard
+  # Student edit
   edit: (id) ->
     if isCompanyAdmin()
       window.history.back()
@@ -102,4 +103,40 @@ class CPP.Routers.Students extends Backbone.Router
     else
       return false
 
-                  
+     # Student dashboard
+  dashboard: (id) ->
+    student = @getStudentFromID(id)
+    student.fetch
+      error: ->
+        notify "error", "Couldn't fetch student"    
+    new CPP.Views.Students.Dashboard collection: student.events    
+    student.events.fetch  
+      error: ->
+        notify "error", "Couldn't fetch "
+
+
+
+#if not isStudent()
+#      window.history.back()
+#      return false
+
+
+  
+  #  # Student dashboard
+  # dashboard: (id) ->
+  #   if not isStudent()
+  #     window.history.back()
+  #     return false
+  #   events = new CPP.Collections.Events
+  #   newitems = new CPP.Collections.Placements
+  #   events.fetch
+  #     success: -> 
+  #       newitems.fecth
+  #          success: -> 
+  #            newitems.add(events.toJSON())    
+  #            new CPP.Views.Students.Dashboard collection: newitems
+  #          error: ->
+  #            notify "error", "Couldn't fetch opportunities"
+  #     error: ->
+  #       notify "error", "Couldn't fetch events"
+            
