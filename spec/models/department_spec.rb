@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Department do
   subject { FactoryGirl.build :department }
