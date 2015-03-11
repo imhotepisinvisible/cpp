@@ -1,3 +1,28 @@
+<div id="span-card">
+  <div id="splash-card-text-left"> 
+    <!--
+    <h1 class="splash-card-text-header"></i> What does CPP provide for <font color="red">Employers</font>?</h1>
+    <ul>
+      <li>Want to be seen and targeted by some of the best IT companies in the world?</li>
+      <li>Want to only receive the emails you <b>want</b> to receive?</li>
+      <li>Want to attend fantastic events organised by industry?</li>
+      <li>Want a fast track way of securing a placement?</li>
+    </ul>
+    -->
+  </div>
+  <div id="splash-card-pic-right"> </div>
+</div>
+
+<div id="span-card">
+  <div id="splash-card-pic-left"> </div>
+  <div id="splash-card-text-right"> </div>
+</div>
+
+<div id="span-card">
+  <div id="splash-card-text-left"> </div>
+  <div id="splash-card-pic-right"> </div>  
+</div>
+
 <div class="row-fluid">
   <div class="span12">
     <h1 class="section-header">Corporate Partnership Programme:Connect</h1>
