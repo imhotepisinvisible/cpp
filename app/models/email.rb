@@ -32,8 +32,8 @@ class Email < ActiveRecord::Base
 
 
   ####################### Disallow Profanity ########################
-  #validates :body, obscenity: { message: "Profanity is not allowed!" }
-  #validates :subject, obscenity: { message: "Profanity is not allowed!" }
+  validates :body, obscenity: { message: "Profanity is not allowed!" }
+  validates :subject, obscenity: { message: "Profanity is not allowed!" }
 
   #################### Validates inclusion ##########################
   validates_inclusion_of :state, :in => %w( Rejected Pending Approved Postponed )

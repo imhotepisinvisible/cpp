@@ -12,9 +12,7 @@ class DepartmentAdministrator < User
   belongs_to :department
 
   has_many :companies,
-           :through => :department,
-           :uniq => true,
-           :source => :companies
+           :uniq => true
   has_many :events,
            :through => :companies,
            :uniq => true
