@@ -35,7 +35,7 @@ gem 'warden'                      # More customiseable authorisation
 gem 'less-rails'                  # Less required for Bootstrap
 gem 'twitter-bootstrap-rails'     # Twitter Bootstrap <3 Rails
 gem 'bourbon'                     # Nice SCSS mixins
-gem 'font-awesome-rails' # Font Awesome = Icons
+gem 'font-awesome-rails', '~> 3.2.1' # Font Awesome = Icons
 gem "google_visualr", ">= 2.1"    # Google Charts
 gem 'tinymce-rails'               # WYSIWYG editor for emails
 gem 'will_paginate'               # Basic Pagination
