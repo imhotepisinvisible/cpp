@@ -83,7 +83,15 @@
                     <!-- student summary -->
           <div class="row-fluid">
             <div class="span12" id="student-summary">
-              <p> "This will be a short amount of text, properly embedded from the database. This will be a short amount of text, properly embedded from the database. This will be a short amount of text, properly embedded from the database. This will be a short amount of text, properly embedded from the database. This will be a short amount of text, properly embedded from the database."
+                <% if @student.get('bio'): %>
+                      <p>
+                        <%- @student.get('bio').replace(/\n/g, "<br/>") %>
+                      </p>
+                <% else: %>
+                  <div class="empty-student-profile-field-container">
+                        <i class="icon-user empty-student-profile-field"/>
+                  </div>
+                <% end %>
             </div>
           </div>
 
