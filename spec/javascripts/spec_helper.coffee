@@ -13,6 +13,9 @@
 #= require application
 #= require site
 #= require helpers/jasmine-sinon.js
+#= require support/sinon
+
+#= require support/jasmine-jquery-1.7.0
 #
 # Deferring execution
 # If you're using CommonJS, RequireJS or some other asynchronous library you can defer execution. Call

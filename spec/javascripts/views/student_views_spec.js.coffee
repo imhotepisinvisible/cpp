@@ -1,10 +1,10 @@
 describe "Students Views", ->
   describe "Signup View", ->
     beforeEach ->
-      @form = new Backbone.Form schema: {}
-      @backboneFormStub = sinon.stub(window.Backbone, "Form").returns(@form)
       @model = new Backbone.Model()
       @view = new CPP.Views.Students.Signup model: @model
+      @form = new Backbone.Form schema: {}
+      @backboneFormStub = sinon.stub(window.Backbone, "Form").returns(@form)
 
     afterEach ->
       window.Backbone.Form.restore()
