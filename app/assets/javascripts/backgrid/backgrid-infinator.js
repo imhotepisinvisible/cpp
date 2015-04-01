@@ -25,7 +25,7 @@
     className: "infinator",
 
     /** @property */
-    throttleWait: 100,
+    throttleWait: 200,
 
     /** @property */
     scrollToTop: false,

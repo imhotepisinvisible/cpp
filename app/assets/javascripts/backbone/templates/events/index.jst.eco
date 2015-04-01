@@ -30,28 +30,7 @@
 
     </h1>
     <div class="infinite-container" id="events-table">
-    <% if @events.length > 0: %>
-      <table class="table table-bordered table-hover table-clickable">
-        <thead>
-          <tr>
-            <th>Company</th>
-            <th>Event</th>
-            <th>Date</th>
-            <th>Location</th>
-            <th>Spaces</th>
-            <% if @editable: %>
-            <th>Status</th>
-            <th class="btn-column"></th>
-            <% end %>
-          </tr>
-        </thead>
-        <tbody class="cpp-tbl" id="events">
-          <tr><td colspan="<%= 5 + (@editable ? 2 : 0) %>"><div class="loading"></div></td></tr>
-        </tbody>
-      </table>
-    <% else: %>
-      <p>No events created yet!</p>
-    <% end %>
+
     </div>
   </div>
 </div>

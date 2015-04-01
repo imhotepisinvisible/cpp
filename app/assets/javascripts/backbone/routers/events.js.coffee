@@ -20,7 +20,7 @@ class CPP.Routers.Events extends Backbone.Router
   index: ->
     events = new CPP.Collections.EventsPager
     new CPP.Views.Events.Index collection: events
-    events.fetch#({ data: $.param({start_date: moment().toISOString()}) })  TODO: make this work with backbone paginator
+    events.getFirstPage#({ data: $.param({start_date: moment().toISOString()}) })  TODO: make this work with backbone paginator
       error: ->
         console.log(events)
         notify "error", "Couldn't fetch events"

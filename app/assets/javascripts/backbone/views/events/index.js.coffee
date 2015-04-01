@@ -6,15 +6,11 @@ class CPP.Views.Events.Index extends CPP.Views.Base
 
   events: -> _.extend {}, CPP.Views.Base::events,
     "click .company-logo-header"      : "viewCompany"
-    'click tr'                        : 'ViewEvent'
+    'click tr'                        : 'viewEvent'
 
   # Bind reset and filter events to render and renderEvents so that on change
   # the views change.
   initialize: ->
-    # bind scrolling in the window to scrollevent
-    #_.bindAll this, 'scrollevent'
-    #$(window).scroll @scrollevent 
-    
     #display ajax spinner whilst waiting for the collection to finish loading
     @collection.on "fetch", (->
     	@$('#events-table').append "<div class=\"loading\"></div>"
@@ -23,17 +19,6 @@ class CPP.Views.Events.Index extends CPP.Views.Base
     @collection.bind 'filter', @renderEvents, @
     @editable = isAdmin()
     @render()
-
-  addPage: ->
-    if @collection.hasNextPage()
-      @collection.getNextPage()
-  @
-
-  #scrollevent: ->
-  #  if $(window).scrollTop() + $(window).height() > $(document).height() - 20
-  #    if @collection.hasNextPage()
-  #      @collection.getNextPage()
-  #@ 
 
   # Render events
   render: ->
@@ -88,31 +73,35 @@ class CPP.Views.Events.Index extends CPP.Views.Base
     ]
   
     $(@el).html(@template(events: @collection.fullCollection, editable: @editable))
-    @renderEvents(@collection.fullCollection)
+    #@renderEvents(@collection.fullCollection)
     grid = new (Backgrid.Grid)(
+      className: "backgrid table-hover table-clickable",
       row: ModelRow
       columns: columns
       collection: @collection.fullCollection
       footer: Backgrid.Extension.Infinator.extend(scrollToTop: false))
+      
     # Render the grid and attach the root to your HTML document
-    $example2 = $('#events-table')
-    $example2.append grid.render().el
+    $table = $('#events-table')
+    $table.append grid.render().el
+    
     # Initialize the paginator
     #paginator = new (Backgrid.Extension.Paginator)(collection: @collection)
     # Render the paginator
-    #$example2.after paginator.render().el
+    #$table.after paginator.render().el
+    
     # Initialize a client-side filter to filter on the client
     # mode pageable collection's cache.
     #filter = new (Backgrid.Extension.ClientSideFilter)(
     #  collection: pageableTerritories
     #  fields: [ 'name' ])
     # Render the filter
-    #$example2.before filter.render().el
+    #$table.before filter.render().el
 
-    
-    @renderFilters()
     #if $(document).height() <= $(window).height()
-    #  @addPage()
+    #  @collection.getNextPage()
+      
+    @renderFilters()
   @
 
   # Render each event item

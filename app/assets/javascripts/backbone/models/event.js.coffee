@@ -87,4 +87,4 @@ class CPP.Collections.EventsPager extends Backbone.PageableCollection
   mode: 'infinite'
   
   state:
-    pageSize: 10  
+    pageSize: 20  
