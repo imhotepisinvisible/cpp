@@ -80,3 +80,11 @@ class CPP.Models.Event extends CPP.Models.Base
 class CPP.Collections.Events extends CPP.Collections.Base
   url: '/events'
   model: CPP.Models.Event
+
+class CPP.Collections.EventsPager extends Backbone.PageableCollection
+  model: CPP.Models.Event
+  url: '/events'
+  mode: 'infinite'
+  
+  state:
+    pageSize: 10  

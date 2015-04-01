@@ -38,9 +38,10 @@ gem 'bourbon'                     # Nice SCSS mixins
 gem 'font-awesome-rails', '~> 3.2.1' # Font Awesome = Icons
 gem "google_visualr", ">= 2.1"    # Google Charts
 gem 'tinymce-rails'               # WYSIWYG editor for emails
-gem 'will_paginate'               # Basic Pagination
-gem 'bootstrap-will_paginate'     # Bootstrap Pagination Integration
+gem 'kaminari'                    # Pagination of backend collections
+gem 'api-pagination'              # Give backbone the pagination information
 gem 'jquery-ui-rails'             # JQuery user interface plugin
+gem 'backgridjs-rails'
 
 # JS Frameworks/Plugins
 gem 'jquery-rails'                # Add jQuery goodness
@@ -53,6 +54,7 @@ gem 'momentjs-rails'              # Nicer date manipulation in Javascript
 gem 'jquery-fileupload-rails'     # File upload
 gem 'rails-bootstrap-toggle-buttons' # On/Off switches
 gem 'highcharts-rails'
+gem 'backbone-paginator-rails'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3' # SASS for nicer CSS

@@ -15,8 +15,7 @@
   <div class="span9">
     <h1 class="section-header">
     <i class="icon-calendar"></i>
-      Events <%= " by " + @events.company.get('name') if @events.company? %>
-
+    Events <%= " by " + @events.company.get('name') if @events.company? %>
       <% if @editable: %>
         <% if @events.company?: %>
           <a href="/companies/<%= @events.company.get('id') %>/events/new" class="btn pull-right button-add-event">
@@ -30,7 +29,7 @@
       <% end %>
 
     </h1>
-    <div id="events-table">
+    <div class="infinite-container" id="events-table">
     <% if @events.length > 0: %>
       <table class="table table-bordered table-hover table-clickable">
         <thead>

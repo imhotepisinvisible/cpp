@@ -31,11 +31,11 @@ class EventsController < ApplicationController
     if current_user && current_user.is_student?
       @events = Event.with_approved_state.select {|e| can? :show, e.company}
       @events.sort_by! {|e| [-e.relevance(current_user.id), e.company.name] }
-      respond_with @events.as_json({:student_id => current_user.id})
+      paginate json: @events.as_json({:student_id => current_user.id})
     elsif current_user && current_user.is_department_admin?
-      respond_with @events
+      paginate json: @events
     else
-      respond_with @events
+      paginate json: @events
     end
   end
 
