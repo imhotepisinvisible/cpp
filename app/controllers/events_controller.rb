@@ -13,7 +13,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = current_user.events.scoped
+    #@events = Event.all
 
     if params.keys.include? "company_id"
       @events = @events.where(:company_id => params[:company_id])
@@ -29,18 +29,18 @@ class EventsController < ApplicationController
     end
 
     if current_user && current_user.is_student?
-      @events = @events.with_approved_state.select {|e| can? :show, e.company}
+      @events = Event.with_approved_state.select {|e| can? :show, e.company}
       @events.sort_by! {|e| [-e.relevance(current_user.id), e.company.name] }
       respond_with @events.as_json({:student_id => current_user.id})
     elsif current_user && current_user.is_department_admin?
-      respond_with @events.select{ |e| e.departments.map(&:id).include? current_user.department_id }
+      respond_with @events
     else
       respond_with @events
     end
   end
 
   def pending
-    @events = current_user.events.scoped.with_new_state
+    @events = Event.with_new_state
     respond_with @events
   end
         
@@ -89,8 +89,6 @@ class EventsController < ApplicationController
     end
   end
 
-
-
   def reject
     @event = Event.find(params[:id])
     if @event.reject!
@@ -113,7 +111,7 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
-    respond_with @event.as_json({:depts => @event.departments.map { |d| d.id }})
+    respond_with @event.as_json
   end
 
   # GET /events/new
@@ -128,11 +126,6 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(params[:event])
     @admins = DepartmentAdministrator.all
-    if params.has_key? :departments
-      @event.departments = params[:departments].map{ |id| Department.find(id) }
-    else
-      @event.departments = []
-    end
 
     if @event.save 
       respond_with @event, status: :created, location: @event
@@ -149,12 +142,6 @@ class EventsController < ApplicationController
   # PUT /events/1.json
   def update
     @event = Event.find(params[:id])
-
-    if params.has_key? :departments
-      @event.departments = params[:departments].map{ |id| Department.find(id) }
-    else
-      @event.departments = []
-    end
 
     @event.assign_attributes(params[:event])
 
@@ -190,6 +177,7 @@ class EventsController < ApplicationController
       respond_with @event, status: :unprocessable_entity
     end
   end
+  
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy

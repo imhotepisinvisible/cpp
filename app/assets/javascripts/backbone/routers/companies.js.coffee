@@ -18,7 +18,7 @@ class CPP.Routers.Companies extends Backbone.Router
         view = new CPP.Views.CompaniesIndex collection: companies
     companies.fetch
       success: ->
-        if isStudent() # why ComapaniesIndex not Companies.index
+        if isStudent()
           view = new CPP.Views.CompaniesStudentIndex collection: companies
         else
           view = new CPP.Views.CompaniesIndex collection: companies
@@ -33,7 +33,7 @@ class CPP.Routers.Companies extends Backbone.Router
     deferreds = []
     deferreds.push(company.events.fetch({ data: $.param({ limit: 3}) }))
     deferreds.push(company.placements.fetch({ data: $.param({ limit: 3}) }))
-    deferreds.push(company.departments.fetch())
+    #deferreds.push(company.departments.fetch())
 
     if isAdmin()
       deferreds.push(company.emails.fetch({ data: $.param({ limit: 3}) }))

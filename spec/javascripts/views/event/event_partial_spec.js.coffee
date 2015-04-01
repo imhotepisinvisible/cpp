@@ -56,7 +56,7 @@ describe "Events partial", ->
 
             it "should link to add an event for a specific company", ->
               expect(@eventsPartial.$el.find('.button-add-event'))
-                .toHaveAttr('href', "#/companies/#{@company.get('id')}/events/new")
+                .toHaveAttr('href', "/companies/#{@company.get('id')}/events/new")
 
           describe "view all button", ->
             it "should be displayed", ->
@@ -64,7 +64,7 @@ describe "Events partial", ->
 
             it "should link to events for a specific company", ->
               expect(@eventsPartial.$el.find('.button-all-events'))
-                .toHaveAttr('href', "#/companies/#{@company.get('id')}/events")
+                .toHaveAttr('href', "/companies/#{@company.get('id')}/events")
 
       describe "for a general event list", ->
         beforeEach ->
@@ -76,7 +76,7 @@ describe "Events partial", ->
 
           it "should link to add a general event", ->
             expect(@eventsPartial.$el.find('.button-add-event'))
-              .toHaveAttr('href', '#/events/new')
+              .toHaveAttr('href', '/events/new')
 
         describe "view all button", ->
           it "should be displayed", ->
@@ -84,7 +84,7 @@ describe "Events partial", ->
 
           it "should link to general events", ->
             expect(@eventsPartial.$el.find('.button-all-events'))
-              .toHaveAttr('href', '#/events')
+              .toHaveAttr('href', '/events')
 
     describe "when not editable", ->
       beforeEach ->
@@ -105,7 +105,7 @@ describe "Events partial", ->
 
           it "should link to events for a specific company", ->
             expect(@eventsPartial.$el.find('.button-all-events'))
-              .toHaveAttr('href', "#/companies/#{@company.get('id')}/events")
+              .toHaveAttr('href', "/companies/#{@company.get('id')}/events")
 
       describe "for a general event list", ->
         beforeEach ->
@@ -121,4 +121,4 @@ describe "Events partial", ->
 
           it "should link to general events", ->
             expect(@eventsPartial.$el.find('.button-all-events'))
-              .toHaveAttr('href', '#/events')
+              .toHaveAttr('href', '/events')

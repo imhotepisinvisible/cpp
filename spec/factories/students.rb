@@ -2,7 +2,6 @@
 
 FactoryGirl.define do
   factory :student, parent: :user, :class => "Student" do
-    departments {[FactoryGirl.create(:department)]}
     standard_bio
     first_year
     looking_for {["Not looking for anything", "Looking for a Summer Placement", "Looking for an Industrial Placement"].sample}

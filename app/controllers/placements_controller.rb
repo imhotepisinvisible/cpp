@@ -13,7 +13,7 @@ class PlacementsController < ApplicationController
   # GET /placements
   # GET /placements.json
   def index
-    @placements = current_user.placements.scoped
+    #@placements = Placements.all
 
     if params.keys.include? "company_id"
       @placements = @placements.where(:company_id => params[:company_id])
@@ -29,18 +29,18 @@ class PlacementsController < ApplicationController
     end
 
     if current_user && current_user.is_student?
-      @placements = @placements.with_approved_state.select {|p| can? :show, p.company }
+      @placements = Placement.with_approved_state.select {|p| can? :show, p.company }
       @placements = @placements.sort_by {|p| [-p.relevance(current_user.id), p.company.name] }
       respond_with @placements.as_json({:student_id => current_user.id})
     elsif current_user && current_user.is_department_admin?
-      respond_with @placements.select{ |p| p.departments.map(&:id).include? current_user.department_id }
+      respond_with @placements
     else
       respond_with @placements
     end
   end
 
   def pending
-    @placements = current_user.placements.scoped.with_new_state
+    @placements = Placement.with_new_state
     respond_with @placements
   end
 
@@ -104,7 +104,7 @@ class PlacementsController < ApplicationController
   # GET /placements/1.json
   def show
     @placement = Placement.find(params[:id])
-    respond_with @placement.as_json({:depts => @placement.departments.map { |d| d.id }})
+    respond_with @placement.as_json
   end
 
   # Create new placement
@@ -124,12 +124,6 @@ class PlacementsController < ApplicationController
     @placement = Placement.new(params[:placement])    
     @admins = DepartmentAdministrator.all
 
-    if params.has_key? :departments
-      @placement.departments = params[:departments].map{ |id| Department.find(id) }
-    else
-      @placement.departments = []
-    end
-
     if @placement.save
       respond_with @placement, status: :created, location: @placement
       @admins.each do |admin|
@@ -147,12 +141,6 @@ class PlacementsController < ApplicationController
   # PUT /placements/1.json
   def update
     @placement = Placement.find(params[:id])
-
-    if params.has_key? :departments
-      @placement.departments = params[:departments].map{ |id| Department.find(id) }
-    else
-      @placement.departments = []
-    end
 
     if @placement.update_attributes(params[:placement])
       head :no_content

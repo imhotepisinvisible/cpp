@@ -19,12 +19,11 @@ class Student < User
   acts_as_paranoid
 
   ###################### Declare associations ########################
-  has_and_belongs_to_many :departments, :foreign_key => :user_id
-
-  has_many :companies,  :through => :departments, :uniq => true
-  has_many :events,     :through => :departments, :uniq => true
-  has_many :placements, :through => :companies, :uniq => true
+  has_many :companies, :uniq => true
+  has_many :events, :uniq => true
+  has_many :placements, :uniq => true
   has_many :student_company_ratings
+  has_many :organisation_domains
 
   has_one :course
 
@@ -38,7 +37,6 @@ class Student < User
 
 
   ######################### Validate fields #########################
-  validates :departments, :presence => { :message => "Must belong to at least one department" }
   validates :bio, :length => { :maximum => 500 }
   validate :valid_email?
 
@@ -93,15 +91,9 @@ class Student < User
 
   # Ensures email domain matches one of organisation specified emails
   def valid_email?
-    if departments.blank? # Can't have org if no departments
-      errors.add(:email, "Cannot validate email without department")
-      return false
-    end
-
-    organisation = departments.first.organisation
-    if organisation.organisation_domains.any?
+    if OrganisationDomain.all.any?
       match = false
-      organisation.organisation_domains.each do |org_domain|
+      OrganisationDomain.all.each do |org_domain|
         unless /\A([^@\s]+)@#{org_domain.domain}/.match(email).nil?
           match = true
           break
@@ -110,7 +102,7 @@ class Student < User
 
       if !match
         domains = []
-        organisation.organisation_domains.each do |org_domain|
+        OrganisationDomain.all.each do |org_domain|
           domains << org_domain.domain
         end
         errors.add(:email, "Email domain must be one of #{domains.join(", ")}")

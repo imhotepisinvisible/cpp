@@ -11,7 +11,6 @@
 
 class OrganisationDomain < ActiveRecord::Base
   ###################### Declare associations ########################
-  belongs_to :organisation
 
   ######################### Ensure present ##########################
   validates :domain, :presence => true

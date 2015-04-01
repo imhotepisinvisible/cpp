@@ -1,0 +1,34 @@
+describe "Company View", ->
+  beforeEach ->
+    setFixtures(sandbox id: "app")
+
+    @companyAttrs = 
+
+    @attrs =
+      first_name: 'Captain'
+      last_name: 'Test'
+      role: 'Tester'
+      email: 'test@test.com'
+      password: 'cppcppcpp'
+      password_confirmation: 'cppcppcpp'
+
+   @attrs1 =
+      first_name: 'Corporal'
+      last_name: 'Junior'
+      role: 'Second Tester'
+      email: 'test2@test.com'
+      password: 'cppcppcpp'
+      password_confirmation: 'cppcppcpp'
+
+    company_contact = new CPP.Models.CompanyContact @attrs
+    company_contact2 = new CPP.Models.CompanyContact @attrs1
+
+    contacts = new CPP.Collections.CompanyContacts
+
+    contacts.add(company_contact)
+    contacts.add(company_contact2)
+    
+    @view = CPP.Views.Contacts.PartialEdit
+            collection: contacts
+            company_id: id
+

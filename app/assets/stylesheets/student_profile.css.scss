@@ -21,7 +21,6 @@
   @include border-bottom-radius($border_radius);
   @include border-left-radius($border_radius);
   @include border-right-radius($border_radius);
-  @include box-shadow(0 1px 2px rgba(0, 0, 0, .075));
 }
 
 #student-profile-img {
@@ -37,7 +36,6 @@
   @include border-bottom-radius($border_radius);
   @include border-left-radius($border_radius);
   @include border-right-radius($border_radius);
-  @include box-shadow(0 1px 2px rgba(0, 0, 0, .075));
 }
 
 .profile-image-deactivated {
@@ -52,9 +50,6 @@
   background: #efefef;
   padding: 15px 15px 15px 30px;
   margin-left: 0px;
-  @include box-shadow(inset 0  10px 10px -10px rgba(104, 104, 104, 0.5),
-                      inset 0 -10px 10px -10px rgba(104, 104, 104, 0.5));
-
   #student-profile-toggle {
     text-align: center;
   }
