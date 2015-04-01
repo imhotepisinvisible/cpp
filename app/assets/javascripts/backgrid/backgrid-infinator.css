@@ -1,0 +1,31 @@
+/*
+  backgrid-infinator
+  https://github.com/bhvaleri/backgrid-infinator
+
+  Copyright (c) 2013 Bill Valeriote
+  Licensed under the MIT @license.
+*/
+
+.infinite-container {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: auto;
+  border: 0;
+}
+
+.to-top {
+  position: fixed;
+  width: 55px;
+  height: 55px;
+  bottom: -100px;
+  right: 10px;
+  cursor: pointer;
+  background-color: #DDD;
+  color: #333;
+  opacity: 0.5;
+  border: 1px solid transparent;
+  border-radius: 50%;
+}
+
