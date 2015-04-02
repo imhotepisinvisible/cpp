@@ -15,8 +15,7 @@
   <div class="span9">
     <h1 class="section-header">
     <i class="icon-calendar"></i>
-      Events <%= " by " + @events.company.get('name') if @events.company? %>
-
+    Events <%= " by " + @events.company.get('name') if @events.company? %>
       <% if @editable: %>
         <% if @events.company?: %>
           <a href="/companies/<%= @events.company.get('id') %>/events/new" class="btn pull-right button-add-event">
@@ -30,29 +29,8 @@
       <% end %>
 
     </h1>
-    <div id="events-table">
-    <% if @events.length > 0: %>
-      <table class="table table-bordered table-hover table-clickable">
-        <thead>
-          <tr>
-            <th>Company</th>
-            <th>Event</th>
-            <th>Date</th>
-            <th>Location</th>
-            <th>Spaces</th>
-            <% if @editable: %>
-            <th>Status</th>
-            <th class="btn-column"></th>
-            <% end %>
-          </tr>
-        </thead>
-        <tbody class="cpp-tbl" id="events">
-          <tr><td colspan="<%= 5 + (@editable ? 2 : 0) %>"><div class="loading"></div></td></tr>
-        </tbody>
-      </table>
-    <% else: %>
-      <p>No events created yet!</p>
-    <% end %>
+    <div class="infinite-container" id="events-table">
+
     </div>
   </div>
 </div>
