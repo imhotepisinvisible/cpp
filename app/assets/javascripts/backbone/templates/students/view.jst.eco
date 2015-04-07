@@ -12,8 +12,9 @@
 
     <!-- Student Profile Photo and Key Info -->
     <div class="row-fluid">
-      <div class="span12" id="student-profile-header">
+      <div class="span12" id="student-profile-header"><!--  responsive issues arise here -->
 
+      <div class="full-borderless-card">
      <!--    <div class="row-fluid">
           <div class="span12"> -->
 
@@ -38,7 +39,7 @@
 
               <!-- Student 'about me' -->
               <div id="about-header">
-                About
+                Summary
               </div>
 
               <div id="about-content">
@@ -67,6 +68,7 @@
 
 <!--           </div>
         </div> -->
+        </div>
       </div>
     </div>
 
