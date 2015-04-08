@@ -1,78 +1,90 @@
 <div id="profile-warnings-container">
 </div>
 
+<!-- Student Profile Photo and Key Info -->
 <div id="student-profile-header" class="row-fluid">
-  <div class="span3">
 
+<!-- Profile Image Upload -->
+  <div class="span3">
     <div id="student-profile-img-container"
 
-      class="upload-container <%= "missing-document" unless @student.get('profile_picture_file_name') %> image-buttons-container">
-      <% if @student.get 'profile_picture_file_name': %>
-      <img src="/students/<%= @student.get 'id' %>/documents/profile_picture" id="student-profile-img">
-      <% else: %>
-      <img src="/assets/default_profile.png" id="student-profile-img">
-      <% end %>
+    class="upload-container <%= "missing-document" unless @student.get('profile_picture_file_name') %> image-buttons-container">
 
-      <div class="image-buttons">
-        <form class="form-inline hidden">
-          <input class="file-input" id="file-profile-picture" type="file" name="student[profile_picture]" size="20">
-        </form>
-        <div class="btn upload-document" id="upload-profile-picture" <%= addTooltip(@student.get('tooltip'), 'Upload your profile picture', 'top') %>><i class="icon-upload-alt"/></div>
-        <div class="btn btn-danger delete-document" id="delete-profile-picture" <%= addTooltip(@student.get('tooltip'), 'Delete your profile picture', 'top') %>><i class="icon-trash" /></div>
-      </div>
+    <% if @student.get 'profile_picture_file_name': %>
+    <img src="/students/<%= @student.get 'id' %>/documents/profile_picture" id="student-profile-img">
+    <% else: %>
+    <img src="/assets/default_profile.png" id="student-profile-img">
+    <% end %>
 
-      <div class="progress progress-info progress-upload" style="display:none">
-        <div id="progress-profile-picture" class="bar"></div>
-      </div>
+    <div class="image-buttons">
+
+      <form class="form-inline hidden">
+        <input class="file-input" id="file-profile-picture" type="file" name="student[profile_picture]" size="20">
+      </form>
+
+      <div class="btn upload-document" id="upload-profile-picture" <%= addTooltip(@student.get('tooltip'), 'Upload your profile picture', 'top') %>><i class="icon-upload-alt"/></div>
+
+      <div class="btn btn-danger delete-document" id="delete-profile-picture" <%= addTooltip(@student.get('tooltip'), 'Delete your profile picture', 'top') %>><i class="icon-trash" /></div>
 
     </div>
 
-    <div class="clearfix"></div>
+    <div class="progress progress-info progress-upload" style="display:none">
+
+      <div id="progress-profile-picture" class="bar"></div>
+
+    </div>
+
   </div>
 
+  <div class="clearfix"></div>
+</div> <!--  Image Upload End -->
 
-  <div class="span9">
-    <div id="student-profile-intro">
+<!-- Key info; name, about me -->
+<div class="span9">
+  <div id="student-profile-intro">
 
-      <div class="row-fluid">
-        <div id="student-name-input-container" style="display:none">
-          <input type="text" class="span8" id="student-name-editor" value="<%= @student.get 'first_name' %> <%= @student.get 'last_name' %>">
-        </div>
-        <div id="student-name-container">
-          <span id="student-profile-intro-name" class="student-editable" <%= addTooltip(@student.get('tooltip'), 'Click to edit your name', 'right') %>>
-          <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
-          </span>
-        </div>
+    <div class="row-fluid">
+      <div id="student-name-input-container" style="display:none">
+        <input type="text" class="span8" id="student-name-editor" value="<%= @student.get 'first_name' %> <%= @student.get 'last_name' %>">
       </div>
+      <div id="student-name-container">
+        <span id="student-profile-intro-name" class="student-editable" <%= addTooltip(@student.get('tooltip'), 'Click to edit your name', 'right') %>>
+          <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
+        </span>
+      </div>
+    </div>
 
-      <div class="row-fluid">
-        <span>Studying</span>
-        <span id="student-degree-input-container">
+    <!-- Course Input -->
+    <div class="row-fluid">
+      <span>Studying</span>
+      <span id="student-degree-input-container">
         <select id="student-course-input" class="student-profile-select">
           <option value="">Select a course</option>
           <% for course of (@courses.models): %>
           <option value="<%= @courses.models[course].get('id') %>"><%= @courses.models[course].get('name') %></option>
           <% end %>
         </select>
-        </span>
-      </div>
+      </span>
+    </div>
 
-      <div class="row-fluid">
-        <span>Graduating in </span>
-        <span>
-          <select id="year-input" class="student-profile-select">
-            <option value="">Pick a Year</option>
-            <% for year in [2000..2020]: %>
-              <option value="<%= year %>"><%= year %></option>
-            <% end %>
-          </select>
+    <!-- Graduating Input -->
+    <div class="row-fluid">
+      <span>Graduating in </span>
+      <span>
+        <select id="year-input" class="student-profile-select">
+          <option value="">Pick a Year</option>
+          <% for year in [2000..2020]: %>
+          <option value="<%= year %>"><%= year %></option>
+          <% end %>
+        </select>
         <!-- <input type="text" placeholder="e.g. 2014" id="year-input" class="student-profile-input" value="<%= @student.get 'year' %>"> -->
-        </span>
-      </div>
+      </span>
+    </div>
 
-      <div class="row-fluid">
-        <span>
-    <select id="looking-for-select" class="span8 student-profile-select" <%= addTooltip(@student.get('tooltip'), 'Select the status that best matches you', 'right') %>>
+    <!-- Looking for Input -->
+    <div class="row-fluid">
+      <span>
+        <select id="looking-for-select" class="span8 student-profile-select" <%= addTooltip(@student.get('tooltip'), 'Select the status that best matches you', 'right') %>>
           <option value="">Select your employment status</option>
           <option><%= looking_fors.industrial %></option>
           <option><%= looking_fors.summer %></option>
@@ -82,190 +94,202 @@
           <option><%= looking_fors.summerSecured %></option>
           <option><%= looking_fors.industrialSecured %></option>
         </select>
-        </span>
-      </div>
-
+      </span>
     </div>
+
   </div>
+</div>
 
 
 </div>
 </div>
 
 <div class="row-fluid">
-<div class="span12" id="student-profile-body-container">
+  <div class="span12" id="student-profile-body-container">
 
-  <div class="row-fluid">
-    <div class="span12" id="student-profile-body">
+    <div class="row-fluid">
+      <div class="span12" id="student-profile-body">
 
-      <div class="row-fluid">
-        <div class="span4">
+        <div class="row-fluid">
+          <div class="span4">
 
-          <h1 class="section-header">
-          <i class="icon-file"></i> Documents
-          </h1>
+          <!-- Document Uploads -->
+            <h1 class="section-header">
+              <i class="icon-file"></i> Documents
+            </h1>
 
-          <div class="row-fluid">
-            <div class="span12">
+            <div class="row-fluid">
+              <div class="span12">
 
-              <table class="table table-striped">
-                <tr>
-                  <td id="table-cv" class="upload-container <%= "missing-document" unless @student.get('cv_file_name') %>">
-
-                    <div>
-                      Curriculum Vitae
-                      <form class="form-inline hidden">
-                        <input class="file-input" id="file-cv" type="file" name="student[cv]" size="20">
-                      </form>
-                      <div class="pull-right btn-group">
-                        <div class="btn upload-document" id="upload-cv" <%= addTooltip(@student.get('tooltip'), 'Upload your CV', 'top') %>><i class="icon-upload-alt"/></div>
-                        <a class="btn download-document" id="download-cv" href="<%= '/students/' + @student.id + '/documents/cv' %>" <%= addTooltip(@student.get('tooltip'), 'Download your CV', 'top') %>><i class="icon-download-alt"/></a>
-                        <div class="btn btn-danger delete-document" id="delete-cv" <%= addTooltip(@student.get('tooltip'), 'Delete your CV', 'top') %>><i class="icon-trash" /></div>
-                      </div>
-                    </div>
-
-                    <div class="clearfix"></div>
-                    <div class="progress progress-info progress-upload" style="display:none">
-
-                      <div id="progress-cv" class="bar">
-                      </div>
-
-                    </td>
-                  </tr>
-
-
+              <!-- Table ! REMOVE ! -->
+                <table class="table table-striped">
+                  
+                  <!-- CV Upload -->
                   <tr>
-                    <td id="table-transcript" class="upload-container <%= "missing-document" unless @student.get('transcript_file_name') %>">
-                      
+                    <td id="table-cv" class="upload-container <%= "missing-document" unless @student.get('cv_file_name') %>">
+
                       <div>
-                        Transcript
+                        Curriculum Vitae
                         <form class="form-inline hidden">
-                          <input class="file-input" id="file-transcript" type="file" name="student[transcript]" size="20">
+                          <input class="file-input" id="file-cv" type="file" name="student[cv]" size="20">
                         </form>
                         <div class="pull-right btn-group">
-                          <div class="btn upload-document" id="upload-transcript" <%= addTooltip(@student.get('tooltip'), 'Upload your Transcript', 'top') %>><i class="icon-upload-alt"/></div>
-                          <a class="btn download-document" id="download-transcript" href="<%= '/students/' + @student.id + '/documents/transcript' %>" <%= addTooltip(@student.get('tooltip'), 'Download your Transcript', 'top') %>>
-                            <i class="icon-download-alt"/>
-                          </a>
-                          <div class="btn btn-danger delete-document" id="delete-transcript" <%= addTooltip(@student.get('tooltip'), 'Delete your Transcript', 'top') %>><i class="icon-trash" /></div>
+                          <div class="btn upload-document" id="upload-cv" <%= addTooltip(@student.get('tooltip'), 'Upload your CV', 'top') %>><i class="icon-upload-alt"/></div>
+                          <a class="btn download-document" id="download-cv" href="<%= '/students/' + @student.id + '/documents/cv' %>" <%= addTooltip(@student.get('tooltip'), 'Download your CV', 'top') %>><i class="icon-download-alt"/></a>
+                          <div class="btn btn-danger delete-document" id="delete-cv" <%= addTooltip(@student.get('tooltip'), 'Delete your CV', 'top') %>><i class="icon-trash" /></div>
                         </div>
                       </div>
 
                       <div class="clearfix"></div>
-
                       <div class="progress progress-info progress-upload" style="display:none">
-                        <div id="progress-transcript" class="bar">
+
+                        <div id="progress-cv" class="bar">
                         </div>
 
                       </td>
-                    </tr>
+                    </tr> <!-- end of CV upload -->
 
+                    <!-- Uploading Transcript !REMOVE! -->
                     <tr>
-                      <td id="table-covering_letter" class="upload-container <%= "missing-document" unless @student.get('covering_letter_file_name') %>">
-                        
+                      <td id="table-transcript" class="upload-container <%= "missing-document" unless @student.get('transcript_file_name') %>">
+
                         <div>
-                          Covering Letter
+                          Transcript
                           <form class="form-inline hidden">
-                            <input class="file-input" id="file-covering-letter" type="file" name="student[covering_letter]" size="20">
+                            <input class="file-input" id="file-transcript" type="file" name="student[transcript]" size="20">
                           </form>
                           <div class="pull-right btn-group">
-                            <div class="btn upload-document" id="upload-covering-letter" <%= addTooltip(@student.get('tooltip'), 'Upload your Covering Letter', 'top') %>><i class="icon-upload-alt"/></div>
-                            <a class="btn download-document" id="download-covering-letter" href="<%= '/students/' + @student.id + '/documents/covering_letter' %>" <%= addTooltip(@student.get('tooltip'), 'Download your Covering Letter', 'top') %>>
+                            <div class="btn upload-document" id="upload-transcript" <%= addTooltip(@student.get('tooltip'), 'Upload your Transcript', 'top') %>><i class="icon-upload-alt"/></div>
+                            <a class="btn download-document" id="download-transcript" href="<%= '/students/' + @student.id + '/documents/transcript' %>" <%= addTooltip(@student.get('tooltip'), 'Download your Transcript', 'top') %>>
                               <i class="icon-download-alt"/>
                             </a>
-                            <div class="btn btn-danger delete-document" id="delete-covering-letter" <%= addTooltip(@student.get('tooltip'), 'Delete your Covering Letter', 'top') %>><i class="icon-trash" /></div>
+                            <div class="btn btn-danger delete-document" id="delete-transcript" <%= addTooltip(@student.get('tooltip'), 'Delete your Transcript', 'top') %>><i class="icon-trash" /></div>
                           </div>
                         </div>
 
                         <div class="clearfix"></div>
-                        <div class="progress progress-info progress-upload" style="display:none">
 
-                          <div id="progress-covering-letter" class="bar">
+                        <div class="progress progress-info progress-upload" style="display:none">
+                          <div id="progress-transcript" class="bar">
                           </div>
 
                         </td>
                       </tr>
 
-                    </table>
+                      <!-- Upload Covering Letter !REMOVE! -->
+                      <tr>
+                        <td id="table-covering_letter" class="upload-container <%= "missing-document" unless @student.get('covering_letter_file_name') %>">
 
-                  </div>
-                </div>
-              </div>
+                          <div>
+                            Covering Letter
+                            <form class="form-inline hidden">
+                              <input class="file-input" id="file-covering-letter" type="file" name="student[covering_letter]" size="20">
+                            </form>
+                            <div class="pull-right btn-group">
+                              <div class="btn upload-document" id="upload-covering-letter" <%= addTooltip(@student.get('tooltip'), 'Upload your Covering Letter', 'top') %>><i class="icon-upload-alt"/></div>
+                              <a class="btn download-document" id="download-covering-letter" href="<%= '/students/' + @student.id + '/documents/covering_letter' %>" <%= addTooltip(@student.get('tooltip'), 'Download your Covering Letter', 'top') %>>
+                                <i class="icon-download-alt"/>
+                              </a>
+                              <div class="btn btn-danger delete-document" id="delete-covering-letter" <%= addTooltip(@student.get('tooltip'), 'Delete your Covering Letter', 'top') %>><i class="icon-trash" /></div>
+                            </div>
+                          </div>
 
-              <div class="span4">
+                          <div class="clearfix"></div>
+                          <div class="progress progress-info progress-upload" style="display:none">
 
-                <h1 class="section-header">
-                <i class="icon-user"></i> About Me
-                </h1>
+                            <div id="progress-covering-letter" class="bar">
+                            </div>
 
-                <div class="row-fluid">
-                  <div class="span12">
+                          </td>
+                        </tr>
 
-                    <div id="student-bio-input-container" style="display:none">
-                      <textarea id="student-bio-editor">
-                      <%= @student.get('bio') %>
-                      </textarea>
-                    </div>
-                    <div id="student-bio-container">
-                      <p id="student-bio" class="student-editable <%= if not @student.get('bio') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to edit your "About Me" section', 'bottom') %>>
-                      <% if @student.get('bio'): %>
-                      <%- @student.get('bio').replace(/\n/g, "<br/>") %>
-                      <% else: %>
-                      Click here to add an About Me!
-                      <% end %>
-                      </p>
-                    </div>
+                        <!-- End of covering Letter  -->
 
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="span4">
-
-                <h1 class="section-header">
-                <i class="icon-heart"></i> Passions
-                </h1>
-
-                <div class="row-fluid">
-                  <div class="span12">
-                    <div class="row-fluid">
-
-                      <div class="span12">
-                        <div class="tag-category">
-                          <div class="skill-tags-form"></div>
-                        </div>
-                      </div>
-
-                      <div class="span12">
-                        <div class="tag-category">
-                          <div class="interest-tags-form"></div>
-                        </div>
-                      </div>
-
-                      <div class="span12">
-                        <div class="tag-category">
-                          <div class="year-group-tags-form"></div>
-                        </div>
-                      </div>
+                      </table> <!-- end of uploads table (stop table) -->
 
                     </div>
                   </div>
                 </div>
-                
-              </div>
 
+                <!-- About me section upload -->
+                <div class="span4">
+
+                  <h1 class="section-header">
+                    <i class="icon-user"></i> About Me
+                  </h1>
+
+                  <div class="row-fluid">
+                    <div class="span12">
+
+                      <div id="student-bio-input-container" style="display:none">
+                        <textarea id="student-bio-editor">
+                          <%= @student.get('bio') %>
+                        </textarea>
+                      </div>
+                      <div id="student-bio-container">
+                        <p id="student-bio" class="student-editable <%= if not @student.get('bio') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to edit your "About Me" section', 'bottom') %>>
+                          <% if @student.get('bio'): %>
+                          <%- @student.get('bio').replace(/\n/g, "<br/>") %>
+                          <% else: %>
+                          Click here to add an About Me!
+                          <% end %>
+                        </p>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Passions section... !Remove! -->
+                <div class="span4">
+
+                  <h1 class="section-header">
+                    <i class="icon-heart"></i> Passions
+                  </h1>
+
+                  <div class="row-fluid">
+                    <div class="span12">
+                      <div class="row-fluid">
+
+                        <!-- Maybe Keep skills for now, move -->
+                        <div class="span12">
+                          <div class="tag-category">
+                            <div class="skill-tags-form"></div>
+                          </div>
+                        </div>
+
+                        <div class="span12">
+                          <div class="tag-category">
+                            <div class="interest-tags-form"></div>
+                          </div>
+                        </div>
+
+                        <div class="span12">
+                          <div class="tag-category">
+                            <div class="year-group-tags-form"></div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
             </div>
           </div>
-        </div>
 
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Delete these, don't inlude this here! -->
+    <div class="row-fluid" id="opportunities-container">
+      <div class="span6" id="events-partial">
+      </div>
+      <div class="span6" id="placements-partial">
       </div>
     </div>
-
-  </div>
-  <div class="row-fluid" id="opportunities-container">
-    <div class="span6" id="events-partial">
-    </div>
-    <div class="span6" id="placements-partial">
-    </div>
-  </div>
