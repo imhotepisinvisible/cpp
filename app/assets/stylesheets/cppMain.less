@@ -212,11 +212,14 @@ img.center {
 
 .image-buttons-container{
    position:relative;
+   display: inline-block;
 }
 .image-buttons{
-   position:absolute;
-   right:10px;
-   bottom:10px;
+   display: inline-block;
+   position: relative;
+   padding: 10px;
+   // right:10px;
+   // bottom:10px;
 }
 
 .table-clickable tr td {
@@ -365,10 +368,33 @@ img.center {
   &:hover, &:focus, &:active, &.active, &.disabled, &[disabled] {
     color: #0088cc;
     text-decoration: none;
+    cursor: pointer;
+    cursor: hand;
   }
-
-
 }
+
+.image-button-links {
+  display: inline-block;
+  position: relative;
+  padding-right: 20px;
+  padding-left: 15px;
+  color: #dddddd;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.good { 
+  &:hover {
+    color: green;
+  }
+}
+
+.bad {
+  &:hover {
+    color: red;
+  }
+}
+
 
 .first-padding{
   padding-left: 0px;
