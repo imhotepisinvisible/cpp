@@ -32,10 +32,9 @@
             </div>
 
             <div id="about-job-content">
-              <div class="span6" id="description">
-                <h1 class="section-header">Description</h1>
+              <p>
                 <%- @placement.get('description').replace(/\n/g, '<br>') %>
-              </div>
+              </p>
             </div>
 
             <!-- Useful info -->
@@ -44,6 +43,8 @@
               <a class="link-accent first-padding">Download Job Spec</a>
               <!-- Contact -->
               <a class="link-accent">Contact</a>
+              <!-- Apply through external link -->
+              <a class="link-accent">Apply</a>
             </div>
 
           </div>
@@ -103,12 +104,12 @@
 
                         <!-- Apply By -->
                         <div class="span3">
-                            <div class="summary-subject">
-                              Deadline
-                            </div>
-                            <div class="summary-content">
-                          <%= @placement.getReadableDate('deadline') %>
-                            </div>
+                          <div class="summary-subject">
+                            Deadline
+                          </div>
+                          <div class="summary-content">
+                            <%= @placement.getReadableDate('deadline') %>
+                          </div>
                         </div>
 
                       </div>
@@ -123,8 +124,28 @@
                         <!-- Requirements Section -->
                         <div class="span6">
                           <h1 class="section-header">
-                            Requirements
+                            Requirements & Responsibilities
                           </h1>
+
+                          <div class="row-fluid">
+                            <div class="span12">
+                              <div class="content-row">
+                                <div class="content-primary">
+                                  Skills
+                                </div>
+                                <% if @placement.get('skill_list').length > 0: %>
+                                <% for i, tag of @placement.get('skill_list'): %>
+                                <span class="content-secondary tag-margin">
+                                  / <%= tag %>  
+                                </span>
+                                <% end %>
+                                <% else: %>
+                                No Skills Tagged
+                                <% end %>
+                              </div>
+                            </div>
+                          </div>
+
 
                           <!-- Example Formatting -->
                           <div class="row-fluid">
@@ -145,32 +166,66 @@
 
                         </div>
 
-                  <div class="span6">
+                        <div class="span6">
 
-                    <!-- These could be editable fields for the companies to fill in as they see fit -->
-                    <h1 class="section-header">
-                      Responsibilities
-                    </h1>
+                          <!-- These could be editable fields for the companies to fill in as they see fit -->
+                          <h1 class="section-header">
+                            Other
+                          </h1>
 
-                    <!-- AGAIN NEEDS TO LINK TO DATABASE -->
-                    <div class="row-fluid">
-                      <div class="span12">
+                          <!-- AGAIN NEEDS TO LINK TO DATABASE -->
 
-                        <div class="content-row">
-                          <div class="content-primary">
-                            Management
+                          <!-- Benefits -->
+                          <div class="row-fluid">
+                            <div class="span12">
+
+                              <div class="content-row">
+                                <div class="content-primary">
+                                  Benefits
+                                </div>
+                                <div class="content-secondary">
+                                  <%= @placement.get('benefits') %>
+                                </div>
+                              </div>
+
+                            </div>
                           </div>
-                          <div class="content-secondary">
-                            servers / your work
+
+
+                          <!-- Application Proceedure -->
+                          <div class="row-fluid">
+                            <div class="span12">
+
+                              <div class="content-row">
+                                <div class="content-primary">
+                                  Application Proceedure
+                                </div>
+                                <div class="content-secondary">
+                                  <%= @placement.get('application_procedure') %>
+                                </div>
+                              </div>
+
+                            </div>
                           </div>
+
+                          <!-- Other -->
+                          <div class="row-fluid">
+                            <div class="span12">
+
+                              <div class="content-row">
+                                <div class="content-primary">
+                                  Other
+                                </div>
+                                <div class="content-secondary">
+                                  <%= @placement.get('other') %>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+
                         </div>
 
-                      </div>
-                    </div>
-
-
-                  </div>
-
 
                       </div>
                     </div>
@@ -179,57 +234,6 @@
                 </div>
               </div>
 
-
-
-              <!-- Description  -->
-              <div class="span6">
-
-                <div class="row-fluid">
-                  <div class="span6" id="description">
-                    <h1 class="section-header">Description</h1>
-                    <%- @placement.get('description').replace(/\n/g, '<br>') %>
-                  </div>
-                </div>
-
-              </div>
-
-              <!-- Main Details -->
-              <div class="span6" id="date">
-
-                <!-- Details Header -->
-                <h1 class="section-header">Details</h1>
-
-                <!-- Details Table... -->
-                <table class="table table-striped">
-
-                  <% if @placement.get('deadline'): %>
-                  <tr>
-                    <td>
-                      Apply By:
-                    </td>
-                    <td>
-                      <%= @placement.getReadableDate('deadline') %>
-                    </td>
-                  </tr>
-                  <% end %>
-
-                  <%- addPlacementTableRow(@placement, 'duration', 'Duration') %>
-                  <%- addPlacementTableRow(@placement, 'location', 'Location') %>
-                  <%- addPlacementTableRow(@placement, 'salary', 'Salary') %>
-                  <%- addPlacementTableRow(@placement, 'benefits', 'Benefits') %>
-                  <%- addPlacementTableRow(@placement, 'application_procedure', 'Application Procedure') %>
-                  <%- addPlacementTableRow(@placement, 'interview_date', 'Interview Date') %>
-                  <%- addPlacementTableRow(@placement, 'other', 'Other Information') %>
-
-                  <% if isAdmin(): %>
-                  <%- addPlacementTableRow(@placement, 'workflow_state', 'Status') %>
-                  <% end %>
-
-                </table>
-
-
-
-              </div>
             </div>
           </div>
         </div>
