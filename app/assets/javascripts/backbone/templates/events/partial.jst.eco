@@ -1,22 +1,31 @@
 <h1 class="section-header">
+
   <i class="icon-calendar"></i>
   Events
+
   <div class="btn-group pull-right">
+
     <% if @company?: %>
+
       <a href="/companies/<%= @company.get('id') %>/events" class="btn button-all-events">All</a>
       <% if @editable: %>
         <a href="/companies/<%= @company.get('id') %>/events/new" class="btn button-add-event">
           <i class="icon-plus"></i>
         </a>
       <% end %>
+
     <% else: %>
+
       <a href="/events" class="btn button-all-events">All</a>
+
       <% if @editable: %>
         <a href="/events/new" class="btn button-add-event">
           <i class="icon-plus"></i>
         </a>
       <% end %>
+      
     <% end %>
+
   </div>
 </h1>
 <ul id="events" class="opportunity-list">

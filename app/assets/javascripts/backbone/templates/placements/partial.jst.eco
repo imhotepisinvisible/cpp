@@ -1,23 +1,32 @@
 <h1 class="section-header">
+
   <i class="icon-folder-open"></i>
   Opportunities
+
   <div class="btn-group pull-right">
+
     <% if @company?: %>
+
       <a href="/companies/<%= @company.get('id') %>/opportunities" class="btn">All</a>
       <% if @editable: %>
         <a href="/companies/<%= @company.get('id') %>/opportunities/new" class="btn">
           <i class="icon-plus"></i>
         </a>
       <% end %>
+
     <% else: %>
       <a href="/opportunities" class="btn">All</a>
+
       <% if @editable: %>
         <a href="/opportunities/new" class="btn">
           <i class="icon-plus"></i>
         </a>
       <% end %>
+
     <% end %>
+
   </div>
+  
 </h1>
 <ul id="placements" class="opportunity-list">
 </ul>

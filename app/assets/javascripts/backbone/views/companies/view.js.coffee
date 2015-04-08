@@ -44,8 +44,8 @@ class CPP.Views.CompaniesView extends CPP.Views.CompaniesItem
         company: @model
         collection: @model.emails
 
-      new CPP.Views.Companies.StatsPartial
-        company: @model
+      # new CPP.Views.Companies.StatsPartial
+      #   company: @model
 
     @
 
