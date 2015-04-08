@@ -41,9 +41,9 @@ class CPP.Views.Users.ForgotPassword extends CPP.Views.Base
     @initForm()
     @renderForm()
     $.ajax
-      url: "/users/forgot_password"
-      data: data
-      type: 'PUT'
+      url: "/users/password"
+      data: {'user[email]' : data['email']}
+      type: 'POST'
       success: (data) ->
         notify "success", "Password reset", 2000
         setTimeout(

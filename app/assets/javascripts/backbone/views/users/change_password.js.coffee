@@ -45,10 +45,11 @@ class CPP.Views.Users.ChangePassword extends CPP.Views.Base
   # Save changed password
   savePassword: (e) ->
     if @passwordForm.validate() == null
-      data = @passwordForm.getValue()
+      formData = @passwordForm.getValue()
+      data = {'user[email]' : window.CPP.CurrentUser.get('email'), 'user[password]' : formData['password'], 'user[password_confirmation]' : formData['password_confirmation'], 'user[current_password]' : formData['old_password']}
 
       $.ajax
-        url: "/users/change_password"
+        url: "/users"
         data: data
         type: 'PUT'
         success: (data) ->
