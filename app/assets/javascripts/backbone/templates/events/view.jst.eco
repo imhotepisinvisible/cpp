@@ -1,212 +1,180 @@
-<div class="row-fluid section-header">
-  <div class="span9">
-     <h1><%= @event.get 'title' %></h1>
-  </div>
-  <div class="company-logo-header span3">
-    <a href="/companies/<%= @event.company.id %>" class="pull-right">
-      <img class="company-logo-img" src="<%= @event.company.get('logo_url') %>">
-    </a>
-    <% if @admin: %>
-      <a class="btn pull-right" href="/events/<%= @event.id %>/edit">Edit</a>
-    <% end %>
-  </div>
-</div>
-
 <div class="row-fluid">
-  <div class="span6">
+  <div class="span9" id="centre-span-border">
+
+    <!-- Primary Info -->
     <div class="row-fluid">
-      <div class="span6" id="description">
-        <h1 class="section-header"><i class="icon-info-sign"></i> Description</h1>
-        <div><%= @event.get 'description' %></div>
+      <div class="span12" id="placement-header">
+
+        <div class="full-borderless-card">
+
+          <!-- Company Logo -->
+          <div class="company-logo-header span3">
+            <a href="/companies/<%= @event.company.id %>">
+              <img class="company-logo-img" src="<%= @event.company.get('logo_url') %>">
+            </a>
+            <!-- Ability to edit -->
+            <% if @admin: %>
+            <a class="image-buttons pull-right" href="/events/<%= @event.id %>/edit">Edit</a>
+            <% end %>
+          </div>
+
+          <!-- Event Summary -->
+          <div class="span9">
+
+            <!-- event title -->
+            <div id="event-title">
+             <%= @event.get 'title' %>
+           </div>
+
+           <!-- Useful Connections -->
+           <div class="row-fluid">
+
+            <% if @student: %>
+
+            <!-- <div class="span4"> -->
+            <div id="attending-text">
+              <% if @attending: %>
+              You are attending this event
+              <% else: %>
+              You are not attending this event
+              <% end %>
+            </div>
+            <!-- </div> -->
+
+            <!-- <div class="span2"> -->
+            <div class="image-button-links">
+              <% if @attending: %>
+              I don't want to go
+              <% else: %>
+              Sign me up!
+              <% end %>
+            </div>
+            <!-- </div> -->
+
+            <% else if @admin: %>
+
+            <div id="event-email">
+              <a class="link-accent first-padding" href="/events/<%= @event.id %>/students">View Attendees</a>
+              <a class="link-accent" href="/events/<%= @event.id %>/email_attendees">Email Attendees</a>
+              <a class="link-accent" href="/events/<%= @event.id %>/emails">View Emails Sent</a>
+            </div>
+
+            <% end %>
+
+          </div>
+
+          <!-- Useful Info -->
+          <div>
+            <!-- Download Job Specification PDF -->
+            <a class="link-accent first-padding">Download Slides</a>
+            <!-- Contact -->
+            <a class="link-accent">Contact</a>
+            <!-- Apply through external link -->
+            <a class="link-accent">RSVP</a>
+          </div>
+
+        </div>
       </div>
     </div>
+  </div> <!-- end of header -->
 
-    <div class="span6">
+  <!-- Main Body of the Event Profile -->
+  <div class="row-fluid">
+    <div class="span12" id="event-body-container">
+
       <div class="row-fluid">
+        <div class="span12" id="event-body">
 
-        <h1 class="section-header">
-          <i class="icon-tags"></i> Tags
-        </h1>
+          <!-- Job Summary Elements -->
+          <div class="row-fluid">
+            <div class="span12">
 
-        <div class="row-fluid">
-          <div class="span6">
-            <div class="tag-category">
-              <div class="tag-category-header">
-                Skills
+              <div class="full-width-card">
+
+                <!-- Full-Width Header -->
+                <div class="full-header">
+                  <div class="row-fluid">
+                    <div class="span12">
+
+                      <!-- Location -->
+                      <div class="span3">
+                        <div class="summary-subject">
+                          Location
+                        </div>
+                        <div class="summary-content">
+                          <%= @event.get('location') %>
+                        </div>
+                      </div>
+
+                      <!-- Start Date -->
+                      <div class="span3">
+                        <div class="summary-subject">
+                          Start
+                        </div>
+                        <div class="summary-content">
+                          <%= moment(@event.get('start_date')).format('DD/MM/YYYY HH:mm') %>
+                        </div>
+                      </div>
+
+                      <!-- End Date -->
+                      <div class="span3">
+                        <div class="summary-subject">
+                          End
+                        </div>
+                        <div class="summary-content">
+                          <%= moment(@event.get('end_date')).format('DD/MM/YYYY HH:mm') %>
+                        </div>
+                      </div>
+
+                      <!-- Spaces Remaining -->
+                      <div class="span3">
+                        <div class="summary-subject">
+                          Spaces Filled
+                        </div>
+                        <div class="summary-content">
+                          <% if @event.get("capacity"): %>
+                          <%= @event.getFilled() %> / <%= @event.get("capacity") %>
+                          <% else: %>
+                          <%= @event.getFilled() %>
+                          <% end %>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="full-body">
+                  <div class="row-fluid">
+                    <div class="span12">
+
+                     <div id="about-event-header">
+                      Summary Description
+                    </div>
+
+                    <div id="about-event-content">
+                      <p>
+                        <%= @event.get 'description' %>
+                      </p>
+                    </div>
+
+                  </div>
+                </div>
               </div>
-              <% if @event.get('skill_list').length > 0: %>
-                <% for i, tag of @event.get('skill_list'): %>
-                  <span class="label label-success tag year-group-tag">
-                    <%= tag %>
-                  </span>
-                <% end %>
-              <% else: %>
-                No Skills Tagged
-              <% end %>
+
+
             </div>
+
           </div>
-        </div>
-
-        <div class="row-fluid">
-          <div class="span6">
-            <div class="tag-category">
-              <div class="tag-category-header">
-                Interests
-              </div>
-              <% if @event.get('interest_list').length > 0: %>
-                <% for i, tag of @event.get('interest_list'): %>
-                  <span class="label label-warning tag year-group-tag">
-                    <%= tag %>
-                  </span>
-                <% end %>
-              <% else: %>
-                No Interests Tagged
-              <% end %>
-            </div>
-          </div>
-        </div>
-
-        <div class="row-fluid">
-          <div class="span6">
-            <div class="tag-category">
-              <div class="tag-category-header">
-                Year Groups
-              </div>
-              <% if @event.get('year_group_list').length > 0: %>
-                <% for i, tag of @event.get('year_group_list'): %>
-                  <span class="label label-info tag year-group-tag">
-                    <%= tag %>
-                  </span>
-                <% end %>
-              <% else: %>
-                No Year Groups Tagged
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
-
-  </div>
-  <div class="span6" >
-    <div class="row-fluid">
-      <div class="span6" id="date">
-        <h1 class="section-header"><i class="icon-time"></i> Where and When</h1>
-        <table class="table table-striped">
-          <tr>
-            <td>
-              Location:
-            </td>
-            <td>
-              <%= @event.get('location') %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Start Date:
-            </td>
-            <td>
-              <%= moment(@event.get('start_date')).format('DD/MM/YYYY HH:mm') %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              End Date:
-            </td>
-            <td>
-              <%= moment(@event.get('end_date')).format('DD/MM/YYYY HH:mm') %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Deadline:
-            </td>
-            <td>
-              <% if @event.get 'deadline': %>
-                <%= moment(@event.get('deadline')).format('DD/MM/YYYY HH:mm') %>
-              <% else: %>
-                No deadline set.
-              <% end %>
-            </td>
-          </tr>
-          <% if isAdmin(): %>
-	      <tr>
-	        <td>
-              Status:
-            </td>
-            <td>
-              <%= @event.get('workflow_state') %> 
-            </td>
-          </tr>
-          <% end %>
-        </table>
-      </div>
-    </div>
-
-    <div class="row-fluid capacity_container">
-      <div class="span6">
-        <div class="row-fluid">
-          <div class="span6">
-            <h1 class="section-header">
-              <i class="icon-list"></i> <%= if window.isStudent() then 'Sign Up' else 'Attendees' %>
-            </h1>
-          </div>
-        </div>
-
-        <div class="row-fluid">
-          <% if @event.get("capacity"): %>
-            <div class="span4">
-              <div id="capacity-progress" class="progress progress-<%= @event.getCapacityClass() %>">
-                <div id="capacity-bar" class="bar" style="width: <%= @event.getPercentageCapacity() %>%"></div>
-              </div>
-            </div>
-
-            <div class="span2">
-              <div id="capacity-text" class="well"><%= @event.getFilled() %> / <%= @event.get("capacity") %></div>
-            </div>
-          <% else: %>
-            <div class="span6">
-              <div class="well">
-                <span id="number-attending"><%= @event.getFilled() %></span> Attending
-              </div>
-            </div>
-          <% end %>
-        </div>
-
-        <div class="row-fluid">
-          <% if @student: %>
-            <div class="span4">
-              <div id="attending-text">
-                <% if @attending: %>
-                    You are attending this event
-                <% else: %>
-                    You are not attending this event
-                <% end %>
-              </div>
-            </div>
-
-            <div class="span2">
-              <div class="btn btn-primary btn-signup-student">
-                <% if @attending: %>
-                  I don't want to go
-                <% else: %>
-                  Sign me up!
-                <% end %>
-              </div>
-            </div>
-          <% else if @admin: %>
-            <div class="span6" id="event-email">
-              <a class="btn" href="/events/<%= @event.id %>/students">View Attendees</a>
-              <a class="btn btn-primary" href="/events/<%= @event.id %>/email_attendees">Email Attendees</a>
-              <a class="btn" href="/events/<%= @event.id %>/emails">View Emails Sent</a>
-            </div>
-          <% end %>
         </div>
 
       </div>
     </div>
+
   </div>
 </div>
+
+</div>
+</div>
+
