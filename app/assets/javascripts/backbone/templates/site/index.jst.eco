@@ -10,17 +10,17 @@
     </ul>
     -->
   </div>
-  <div id="splash-card-pic-right-students"> </div>
+  <div id="splash-card-pic-right-students" class="right"> </div>
 </div>
 
 <div id="span-card">
-  <div id="splash-card-pic-left-companies"> </div>
+  <div id="splash-card-pic-left-companies" class="left"> </div>
   <div id="splash-card-text-right"> </div>
 </div>
 
 <div id="span-card">
   <div id="splash-card-text-left"> </div>
-  <div id="splash-card-pic-right-alumni"> </div>  
+  <div id="splash-card-pic-right-alumni" class="right"> </div>  
 </div>
 
 <div class="row-fluid">
