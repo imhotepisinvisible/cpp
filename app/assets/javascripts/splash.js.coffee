@@ -1,21 +1,10 @@
 checkY = (height) ->
+  console.log "check"
   if $(window).scrollTop() > height-60
   	$('.navbar-inner').show()
   else
    	$('.navbar-inner').hide()
   return
-
-$(window).scroll ->
-  height = $(window).height();
-  checkY(height)
-  setSplashHeight(height)
-  setSplashContainerPos(height)
-  return
-
-# Do this on load just in case the user starts half way down the page
-height = $(window).height
-checkY(height)
-$('.navbar-inner').hide()
 
 setSplashHeight = (height) ->
   $('#splash-header').css('height',height)
@@ -23,3 +12,19 @@ setSplashHeight = (height) ->
 setSplashContainerPos = (height) ->
   pos = (height-260)/2
   $('#splash-header-container').css('margin-top',pos)
+
+$(window).scroll ->
+  height = $(window).height();
+  checkY(height)
+
+$(window).resize ->
+  height = $(window).height();
+  checkY(height)
+  setSplashHeight(height)
+  setSplashContainerPos(height)
+
+$(document).ready ->
+  $('.navbar-inner').hide()
+  height = $(window).height();
+  setSplashHeight(height)
+  setSplashContainerPos(height)
