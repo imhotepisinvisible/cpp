@@ -25,6 +25,6 @@ class DepartmentAdministrator < User
 
   # Returns JSON object 
   def as_json(options={})
-    super(:except => [:password_digest], :methods => [:type])
+    super(:methods => [:type])
   end
 end

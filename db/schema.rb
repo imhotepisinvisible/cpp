@@ -203,7 +203,7 @@ ActiveRecord::Schema.define(:version => 20150408140517) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email",                        :default => "",                         :null => false
-    t.string   "password_digest"
+    t.string   "encrypted_password",           :default => "",                         :null => false
     t.datetime "deleted_at"
     t.boolean  "tooltip",                      :default => true
     t.integer  "year"
@@ -233,7 +233,6 @@ ActiveRecord::Schema.define(:version => 20150408140517) do
     t.integer  "covering_letter_file_size"
     t.datetime "covering_letter_updated_at"
     t.integer  "course_id"
-    t.string   "encrypted_password",           :default => "",                         :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

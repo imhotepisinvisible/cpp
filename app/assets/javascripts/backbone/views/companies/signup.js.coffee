@@ -24,28 +24,26 @@ class CPP.Views.CompanyAdministrator.Signup extends CPP.Views.Base
     validateField(@form, field) for field of @form.fields
     @
 
-  # Save the company adminsitrator
+  # Save the company administrator
   submit: (e) ->
     if @form.validate() == null
-      @form.commit()
-      @model.set 'company_id', @company.get 'id'
-      @model.save {},
-        wait: true
-        forceUpdate: true
-        success: (model, response) =>
-          notify "success", "Registered"
-          @redirect(model)
-          
-        error: (model, response) =>
-          if response.responseText
-            errorlist = JSON.parse response.responseText
+      data = {}
+      data['user'] = @form.getValue()
+      data['user[type]'] = 'CompanyAdministrator'
+      data['user[company_id]'] = @company.get 'id'
+      $.ajax
+        url: "/users.json"
+        data: data
+        type: 'POST'
+        success: (data) =>
+          notify "success", "Registered", 2000
+          setTimeout(
+            -> Backbone.history.navigate("companies/" + _this.company.get('id') + "/edit", trigger: true)
+          , 2500)
+        error: (data) =>
+          if data.responseText
+            errorlist = JSON.parse data.responseText
             for field, errors of errorlist.errors
               if field of @form.fields
                 @form.fields[field].setError(errors.join ', ')
-
           notify "error", "Unable to register, please resolve issues below."
-      
-  # Redirect to company edit page
-  redirect: (model) ->
-    window.location = '/companies/' + model.get('company_id') + '/edit'
-    window.location.reload(true)

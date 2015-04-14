@@ -36,23 +36,21 @@ class CPP.Views.Users.ForgotPassword extends CPP.Views.Base
   # Submit the password change 
   submitPassword: ->
    if @form.validate() == null
-    data = @form.getValue()
-    # Clear the form before sending data
-    @initForm()
-    @renderForm()
+    data = {}
+    data['user'] = @form.getValue()
     $.ajax
-      url: "/users/password"
-      data: {'user[email]' : data['email']}
+      url: "/users/password.json"
+      data: data
       type: 'POST'
       success: (data) ->
         notify "success", "Password reset", 2000
         setTimeout(
-          -> window.location = '/'
+          -> Backbone.history.navigate("/", trigger: true)
         , 2500)
-      error: (data) ->
-        response = JSON.parse data.responseText
-        if response.errors
-          window.displayErrorMessages response.errors
-        else
-          notify 'error', 'Unable to change password'
-
+      error: (data) =>
+        if data.responseText
+          errorlist = JSON.parse data.responseText
+          for field, errors of errorlist.errors
+            if field of @form.fields
+              @form.fields[field].setError(errors.join ', ')
+        notify "error", "Email address not found."

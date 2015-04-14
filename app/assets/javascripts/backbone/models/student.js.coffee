@@ -22,8 +22,6 @@ class CPP.Models.Student extends CPP.Models.Base
     email:
       required: true
       pattern: 'email'
-    departments:
-      required: true
     year:
       pattern: 'number'
 
@@ -34,11 +32,6 @@ class CPP.Models.Student extends CPP.Models.Base
     last_name:
       type: "Text"
       title: "Last Name*"
-    departments:
-      type: "Checkboxes"
-      title: "Department(s)*"
-      options: @allDepartments
-      editorClass: "departments-checkbox"
     email:
       type: "Text"
       title: "Email*"
