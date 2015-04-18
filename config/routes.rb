@@ -1,6 +1,15 @@
 CPP::Application.routes.draw do
 
-  devise_for :users
+  devise_for :users, :skip => :registrations
+  devise_for :students, :skip => :sessions
+  devise_for :department_administrators, :skip => :sessions
+  devise_for :company_administrators, :skip => :sessions
+  
+  as :user do
+    delete '/logout', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+    get '/login', :to => 'devise/sessions#new', :as => :new_user_session
+    post '/login', :to => 'devise/sessions#create', :as => :user_session
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

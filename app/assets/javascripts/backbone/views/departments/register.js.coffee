@@ -31,11 +31,10 @@ class CPP.Views.DepartmentAdministrator.Register extends CPP.Views.Base
   submit: (e) ->
     if @form.validate() == null
       data = {}
-      data['user'] = @form.getValue()
-      data['user[type]'] = 'DepartmentAdministrator'
-      data['user[department_id]'] = @dept.id
+      data['department_administrator'] = @form.getValue()
+      data['department_administrator[department_id]'] = @dept.id
       $.ajax
-        url: "/users.json"
+        url: "/department_administrators.json"
         data: data
         type: 'POST'
         success: (data) =>

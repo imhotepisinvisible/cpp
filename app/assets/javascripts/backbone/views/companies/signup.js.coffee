@@ -28,11 +28,10 @@ class CPP.Views.CompanyAdministrator.Signup extends CPP.Views.Base
   submit: (e) ->
     if @form.validate() == null
       data = {}
-      data['user'] = @form.getValue()
-      data['user[type]'] = 'CompanyAdministrator'
-      data['user[company_id]'] = @company.get 'id'
+      data['company_administrator'] = @form.getValue()
+      data['company_administrator[company_id]'] = @company.get 'id'
       $.ajax
-        url: "/users.json"
+        url: "/company_administrators.json"
         data: data
         type: 'POST'
         success: (data) =>

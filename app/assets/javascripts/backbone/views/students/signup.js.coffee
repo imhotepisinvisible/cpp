@@ -43,10 +43,9 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
     if @form.validate() == null
     
       data = {}
-      data['user'] = @form.getValue()
-      data['user[type]'] = 'Student'
+      data['student'] = @form.getValue()
       $.ajax
-        url: "/users.json"
+        url: "/students.json"
         data: data
         type: 'POST'
         success: (data) ->
