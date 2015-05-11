@@ -1,6 +1,6 @@
 CPP.Views.Site ||= {}
 
-# Site index page 
+# Site index page
 class CPP.Views.Site.Index extends CPP.Views.Base
   el: "#app"
   template: JST['backbone/templates/site/index']

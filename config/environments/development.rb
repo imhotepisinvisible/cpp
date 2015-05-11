@@ -21,8 +21,8 @@ CPP::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  #set dev url 
-  #config.absolute_site_url = "#{request.protocol}#{request.host}" 
+  #set dev url
+  #config.absolute_site_url = "#{request.protocol}#{request.host}"
   config.absolute_site_url =  "http://localhost:3000"
 
   # Set up mailcatcher

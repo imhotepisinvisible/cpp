@@ -55,6 +55,23 @@
         </div>
       </div>
     </div>
+      <div id="splash-login-box" style="position:absolute; right:0; margin-right: 30px; margin-bottom: 30px height:100px">
+        <%= simple_form_for :session, url: sessions_path, :html => { :class => 'form-horizontal' } do |f| %>
+          <%= f.input :email, :wrapper => :prepend, :label => "Email" do %>
+            <%= content_tag :span, (raw '<i class="icon-user"></i>'), :class => "add-on abbn" %>
+            <%= f.input_field :email %>
+          <% end %>
+          <%= f.input :password, :wrapper => :prepend, :label => "Password" do %>
+            <%= content_tag :span, (raw '<i class="icon-lock"></i>'), :class => "add-on abbn" %>
+            <%= f.input_field :password %>
+          <% end %>
+          <div class="control-group">
+            <div class="controls">
+              <button type="submit" class="btn">Sign in</button>
+            </div>
+          </div>
+        <% end %>
+      </div>
   </div>
 
   <div class="container" id="main-container">
