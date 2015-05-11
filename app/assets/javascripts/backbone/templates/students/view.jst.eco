@@ -205,7 +205,7 @@
                                   Github
                                 </div>
                                 <div class="content-secondary">
-                                  link-to-github
+                                  <%= @student.get('user_link').gitHub %>
                                 </div>
                               </div>
 

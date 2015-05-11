@@ -50,12 +50,12 @@
 
             <!-- Student name editing -->
               <div id="student-name-input-container" style="display:none">
-                <input type="text" class="span8" id="student-name-editor" value="<%= @student.get 'first_name' %> <%= @student.get 'last_name' %>">
+                <input type="text" class="span8" id="student-name-editor" value="<%= @student.get('first_name') %> <%= @student.get('last_name') %>">
               </div>
 
               <div id="student-name-container">
                 <span id="student-profile-intro-name" class="student-editable" <%= addTooltip(@student.get('tooltip'), 'Click to edit your name', 'right') %>>
-                  <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
+                  <%= @student.get('first_name') %> <%= @student.get('last_name') %>
                 </span>
               </div>
 
@@ -75,7 +75,7 @@
                     <div id="student-bio-container">
                       <p id="student-bio" class="student-editable <%= if not @student.get('bio') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to edit your "About Me" section', 'bottom') %>>
                         <% if @student.get('bio'): %>
-                        <%- @student.get('bio').replace(/\n/g, "<br/>") %>
+                          <%= @student.get('bio').replace(/\n/g, "<br/>") %>
                         <% else: %>
                         Click here to add an About Me!
                         <% end %>
@@ -259,7 +259,8 @@
                                 Github
                               </div>
                               <div class="content-secondary">
-                                link-to-github
+
+
                               </div>
                             </div>
 

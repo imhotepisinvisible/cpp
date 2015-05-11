@@ -27,6 +27,7 @@ class Student < User
   has_many :student_company_ratings
 
   has_one :course
+  has_one :user_link
 
   has_and_belongs_to_many :registered_events,
                           :join_table => :student_event_registrations,
@@ -63,11 +64,15 @@ class Student < User
       :content_type => { :content_type => ["image/jpeg", "image/png"],
                           message: "Must be a jpeg or png file"}
 
+  ################ Load nested email attributes ################
+  accepts_nested_attributes_for :user_link, allow_destroy: true
+
+
   ############## Attributes can be set via mass assignment ############
   attr_accessible :year, :bio, :degree, :email, :cv, :transcript,
                   :covering_letter, :profile_picture, :skill_list,
                   :interest_list, :reject_skill_list, :reject_interest_list,
-                  :year_group_list, :active, :looking_for, :tooltip, :course_id
+                  :year_group_list, :active, :looking_for, :tooltip, :course_id, :user_link_attributes
 
   ####################################################################
   # Attributes not to store in database direectly and exist
@@ -125,7 +130,7 @@ class Student < User
 
   # Returns JSON object
   def as_json(options={})
-    result = super(:except => [:password_digest], :methods => [:skill_list, :interest_list, :year_group_list, :reject_skill_list, :reject_interest_list, :type])
+    result = super(:except => [:password_digest], :include => :user_link, :methods => [:skill_list, :interest_list, :year_group_list, :reject_skill_list, :reject_interest_list, :type])
     result[:stat_count] = @stat_count
     return result
   end
