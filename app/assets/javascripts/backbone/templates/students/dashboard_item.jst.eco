@@ -33,3 +33,40 @@
 <!--     </div> -->
 <!--   </div> -->
 <!-- </div> -->
+
+<!-- <div class="row" id="opportunities-container"> -->
+<!--     <div class="span6" id="placements-partial"> -->
+<!--     </div> -->
+<!--     <div class="span6" id="events-partial"> -->
+<!--     </div> -->
+<!--   </div> -->
+
+
+ <!-- LATEST -->
+<!-- <div class="row"> -->
+<!--   <div class="span12"> -->
+<!--     <h1 class="section-header"><i class="icon-dashboard"></i> Student Dashboard</h1> -->
+<!--   </div> -->
+<!--   </h1> -->
+<!--    <div id="items-table"> -->
+<!--     <% if @events.length > 0: %> -->
+<!--       <table class="table table-bordered table-hover table-clickable"> -->
+<!--         <thead> -->
+<!--           <tr> -->
+<!--             <th>Name</th> -->
+<!-- 	    <th>Name</th> -->
+<!-- 	    <th>Name</th> -->
+<!--           </tr> -->
+<!--         </thead> -->
+<!--         <tbody class="cpp-tbl" id="items"> -->
+<!--           <tr><td colspan="<%= 3 %>"><div class="loading"></div></td></tr> -->
+<!--         </tbody> -->
+<!--       </table> -->
+<!--     <% else: %> -->
+<!--       <p>No Events!</p> -->
+<!--     <% end %> -->
+<!--     </div> -->
+<!--   </div> -->
+<!-- </div> -->
+
+    

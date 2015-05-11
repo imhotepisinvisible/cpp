@@ -81,10 +81,25 @@ class CPP.Collections.Events extends CPP.Collections.Base
   url: '/events'
   model: CPP.Models.Event
 
+
+class CPP.Collections.EventsRecent extends CPP.Collections.Base
+  url: '/events'
+  model: CPP.Models.Event
+  sortKey: 'created_at'
+  mode: 'infinite'
+  comparator: (eventA, eventB) ->
+          if eventA.get(this.sortKey) > eventB.get(this.sortKey) then -1
+          else if eventB.get(this.sortKey) > eventA.get(this.sortKey) then 1
+          else 0
+  state:
+    pageSize: 3
+
+
 class CPP.Collections.EventsPager extends Backbone.PageableCollection
   model: CPP.Models.Event
   url: '/events'
   mode: 'infinite'
+ 
   
   state:
     pageSize: 20  

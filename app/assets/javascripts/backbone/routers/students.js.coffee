@@ -118,11 +118,30 @@ class CPP.Routers.Students extends Backbone.Router
       notify "error", "Invalid Student"    
     student.fetch
       error: ->
-        notify "error", "Couldn't fetch student"    
-    new CPP.Views.Students.Dashboard model: student    
+        notify "error", "Couldn't fetch student"
+    #new CPP.Views.Students.Dashboard model: student
+    events = new CPP.Collections.EventsRecent
+    #new CPP.Views.Students.Dashboard collection: events
+    #events.getFirstPage
+    #events.fetch({async:false, data: $.param({ limit: 3}) })
+    
+   
+    #events.fetch({async:false, data: $.param({limit: 1, start_date: moment().toISOString()}) })
+    #placements = new CPP.Collections.PlacementsRecent
+    #placements.fetch({async:false})
+    #events.add(placements.toJSON())
+    
+    new CPP.Views.Students.Dashboard collection: events
+    events.fetch({data: $.param({ limit: 3}) })
+    
+    #
+    #success: ->
+    #    new CPP.Views.Students.Dashboard collection: events
+    #  error: ->
+    #    notify "error", "Couldn't fetch events"
     # Fetch 3 events and placements for dashboard
-    student.events.fetch({ data: $.param({ limit: 10 , start_date: moment().toISOString()}) })
-    student.placements.fetch({ data: $.param({ limit: 10, deadline: moment().toISOString()}) })
+    #student.events.fetch({ data: $.param({ limit: 10 , start_date: moment().toISOString()}) })
+    #student.placements.fetch({ data: $.param({ limit: 10, deadline: moment().toISOString()}) })
 
 
 
