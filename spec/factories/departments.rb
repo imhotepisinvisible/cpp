@@ -2,7 +2,6 @@
 
 FactoryGirl.define do
   factory :department do
-    organisation {FactoryGirl.create(:organisation_with_domains)}
     name "Department of Computing"
 
     settings_notifier_placement { Faker::Lorem.sentences(3) }

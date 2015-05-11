@@ -19,11 +19,9 @@ class Student < User
   acts_as_paranoid
 
   ###################### Declare associations ########################
-  has_and_belongs_to_many :departments, :foreign_key => :user_id
-
-  has_many :companies,  :through => :departments, :uniq => true
-  has_many :events,     :through => :departments, :uniq => true
-  has_many :placements, :through => :companies, :uniq => true
+  has_many :companies, :uniq => true
+  has_many :events, :uniq => true
+  has_many :placements, :uniq => true
   has_many :student_company_ratings
 
   has_one :course
@@ -38,10 +36,7 @@ class Student < User
 
 
   ######################### Validate fields #########################
-  validates :departments, :presence => { :message => "Must belong to at least one department" }
   validates :bio, :length => { :maximum => 500 }
-  validate :valid_email?
-
 
   ######################### Disallow Profanity #########################
   validates :bio, obscenity: { message: "Profanity is not allowed!" }
@@ -67,7 +62,7 @@ class Student < User
   attr_accessible :year, :bio, :degree, :email, :cv, :transcript,
                   :covering_letter, :profile_picture, :skill_list,
                   :interest_list, :reject_skill_list, :reject_interest_list,
-                  :year_group_list, :active, :looking_for, :tooltip, :course_id
+                  :year_group_list, :active, :looking_for, :tooltip, :course_id, :cid
 
   ####################################################################
   # Attributes not to store in database direectly and exist
@@ -91,47 +86,35 @@ class Student < User
     !cv_file_size.nil?
   end
 
-  # Ensures email domain matches one of organisation specified emails
-  def valid_email?
-    if departments.blank? # Can't have org if no departments
-      errors.add(:email, "Cannot validate email without department")
-      return false
-    end
-
-    organisation = departments.first.organisation
-    if organisation.organisation_domains.any?
-      match = false
-      organisation.organisation_domains.each do |org_domain|
-        unless /\A([^@\s]+)@#{org_domain.domain}/.match(email).nil?
-          match = true
-          break
-        end
-      end
-
-      if !match
-        domains = []
-        organisation.organisation_domains.each do |org_domain|
-          domains << org_domain.domain
-        end
-        errors.add(:email, "Email domain must be one of #{domains.join(", ")}")
-      end
-    end
-  end
-
   # Creates a new audit item for when the model was last created/updated
   def to_audit_item
     AuditItem.new(self, created_at, 'student', "#{full_name} signed up!", "students/#{id}")
   end
 
+  def send_admin_approval
+    unless @raw_confirmation_token
+      generate_confirmation_token!
+    end
+
+    opts = pending_reconfirmation? ? { to: unconfirmed_email } : { }
+    send_devise_notification(:approval_instructions, @raw_confirmation_token, opts)
+  end
+
   # Returns JSON object
   def as_json(options={})
-    result = super(:except => [:password_digest], :methods => [:skill_list, :interest_list, :year_group_list, :reject_skill_list, :reject_interest_list, :type])
+    result = super(:methods => [:skill_list, :interest_list, :year_group_list, :reject_skill_list, :reject_interest_list, :type])
     result[:stat_count] = @stat_count
+    result[:confirmed] = confirmed_at?
     return result
   end
 
   def as_csv()
     attributes.except("password_digest")
+  end
+
+  after_create :send_created
+  def send_created
+    UserMailer.account_created(self).deliver
   end
 
 end

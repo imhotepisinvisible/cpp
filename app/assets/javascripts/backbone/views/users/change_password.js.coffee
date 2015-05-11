@@ -12,7 +12,10 @@ class CPP.Views.Users.ChangePassword extends CPP.Views.Base
   initialize: ->
     @passwordForm = new Backbone.Form
       schema:
-        old_password:
+        email:
+          type: "Text"
+          title: "Email Address"
+        current_password:
           type: "Password"
           title: "Old Password"
         password:
@@ -45,17 +48,19 @@ class CPP.Views.Users.ChangePassword extends CPP.Views.Base
   # Save changed password
   savePassword: (e) ->
     if @passwordForm.validate() == null
-      data = @passwordForm.getValue()
-
+      data = {}
+      data['user'] = @passwordForm.getValue()
       $.ajax
-        url: "/users/change_password"
+        url: "/users.json"
         data: data
         type: 'PUT'
-        success: (data) ->
+        success: (data) =>
           notify "success", "Password changed"
-        error: (data) ->
-          response = JSON.parse data.responseText
-          if response.errors
-            window.displayErrorMessages response.errors
-          else
-            notify 'error', 'Unable to change password'
+          @cancelPassword
+        error: (data) =>
+          if data.responseText
+            errorlist = JSON.parse data.responseText
+            for field, errors of errorlist.errors
+              if field of @passwordForm.fields
+                @passwordForm.fields[field].setError(errors.join ', ')
+          notify "error", "Unable to change password, please resolve issues below."

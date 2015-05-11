@@ -11,19 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140811152450) do
+ActiveRecord::Schema.define(:version => 20150511093414) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.integer  "organisation_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
     t.string   "career_link"
+    t.integer  "reg_status",        :default => 0
   end
 
   create_table "company_contacts", :force => true do |t|
@@ -188,18 +189,21 @@ ActiveRecord::Schema.define(:version => 20140811152450) do
     t.datetime "created_at"
   end
 
-  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], :name => "taggings_idx", :unique => true
   add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
 
   create_table "tags", :force => true do |t|
-    t.string "name"
+    t.string  "name"
+    t.integer "taggings_count", :default => 0
   end
+
+  add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "email"
-    t.string   "password_digest"
+    t.string   "email",                        :default => "",                         :null => false
+    t.string   "encrypted_password",           :default => "",                         :null => false
     t.datetime "deleted_at"
     t.boolean  "tooltip",                      :default => true
     t.integer  "year"
@@ -229,8 +233,23 @@ ActiveRecord::Schema.define(:version => 20140811152450) do
     t.integer  "covering_letter_file_size"
     t.datetime "covering_letter_updated_at"
     t.integer  "course_id"
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                :default => 0,                          :null => false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "cid",                          :default => ""
   end
 
+  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["course_id"], :name => "index_users_on_course_id"
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

@@ -19,7 +19,7 @@
 //= require highcharts
 //
 // JQUERY UI/WIDGETS
-//= require jquery.ui.sortable
+//= require jquery-ui/sortable
 //= require jquery-fileupload/basic
 //= require tinymce-jquery
 //= require bootstrap-toggle-buttons

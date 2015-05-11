@@ -14,11 +14,11 @@ class CPP.Models.Company extends CPP.Models.Base
     @company_contacts = new CPP.Collections.CompanyContacts
     @company_contacts.url = '/companies/' + this.id + '/company_contacts'
 
-    @departments = new CPP.Collections.Departments
-    @departments.url = '/companies/' + this.id + '/departments'
+    #@departments = new CPP.Collections.Departments
+    #@departments.url = '/companies/' + this.id + '/departments'
 
-    @allDepartments = new CPP.Collections.Departments
-    @allDepartments.url = '/departments'
+    #@allDepartments = new CPP.Collections.Departments
+    #@allDepartments.url = '/departments'
 
   toString: ->
     return this.get 'name'
@@ -57,11 +57,11 @@ class CPP.Models.Company extends CPP.Models.Base
     career_link:
       type: "Text"
       title: "Career Page URL"
-    departments:
-      type: "Checkboxes"
-      title: "Departments*"
-      options: @allDepartments
-      editorClass: "departments-checkbox"
+    #departments:
+    #  type: "Checkboxes"
+    #  title: "Departments*"
+    #  options: @allDepartments
+    #  editorClass: "departments-checkbox"
 
 
 class CPP.Collections.Companies extends CPP.Collections.Base

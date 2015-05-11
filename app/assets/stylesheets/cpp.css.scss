@@ -1,0 +1,251 @@
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,300,300italic,400italic,600,700);
+@import url(https://fonts.googleapis.com/css?family=Give+You+Glory);
+@import url(https://fonts.googleapis.com/css?family=Arvo);
+
+/* Site Settings */
+$border_radius: 6px;
+
+/* Main Site Styles (tags etc) */
+body {
+  background-color: #d0d0d0;
+  background-image: url('/assets/navy_blue.png');
+}
+
+h1 {
+  font-family: 'Arvo', serif;
+  line-height: 46px;
+}
+
+a.brand {
+  font-family: 'Arvo', serif;
+}
+
+textarea {
+  resize: none;
+}
+
+textarea[name=description] {
+  resize: both;
+  height: 150px;
+  width: 50%;
+}
+
+#filters {
+  input {
+    width: 95%;
+  }
+  select {
+    width: 100%;
+  }
+  .tag-input {
+    width: 40%;
+  }
+}
+
+.section-header {
+  border-bottom: 1px solid #444;
+}
+
+/* Layout */
+
+#app {
+  padding-bottom: 10px;
+}
+#main-container {
+  padding: 15px 15px 0px 15px;
+  background-color: #ffffff;
+  border: 1px solid #DDD;
+  overflow: hidden;
+  @include border-top-radius($border_radius);
+  @include border-bottom-radius($border_radius);
+  @include border-left-radius($border_radius);
+  @include border-right-radius($border_radius);
+}
+
+.footer{
+  color: #ccc;
+  padding-top: 10px;
+  font-weight: 300;
+
+  a {
+    color: #ccc;
+    &:hover {
+      color: #ccc;
+    }
+  }
+}
+
+.link {
+  color: #08C;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+img.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Notifications */
+.centre-span{
+  margin:0 auto;
+  float:none;
+  height:0;
+  position:relative;
+}
+
+.centre-text{
+  text-align:center;
+}
+
+/* Forms */
+
+.form-cancel {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+/* Event/Placement Lists */
+.opportunity-list{
+  list-style: none;
+  margin: 0px 0px 10px 0px;
+  padding: 0px;
+
+  li {
+    .item {
+      padding: 10px 5px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      display: block;
+      text-decoration: none;
+      color: #444;
+
+      // .btn {
+      //   display: none;
+      // }
+
+      .link-title {
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+
+      .link-description{
+        margin-top: 5px;
+      }
+
+
+      &:hover{
+        background: #efefef;
+        text-decoration: none;
+
+        // .btn{
+        //   display: block;
+        // }
+      }
+    }
+  }
+}
+
+#star-rating {
+  &:hover{
+    color: #FDD017;
+  }
+}
+
+#ban-rating {
+  &:hover{
+    color: #B00000;
+  }
+}
+
+.ban-icon {
+  padding-top: 8px;
+  font-size: 20px;
+  color: #6D6968;
+}
+
+.fav-icon {
+  padding-top: 8px;
+  font-size: 25px;
+  color: #6D6968;
+  padding-right: 5px;
+}
+
+.company-tile-blurb {
+  padding-top: 4px;
+}
+
+.golden-star {
+  color: #FDD017;
+}
+
+.red-ban {
+  color: #B00000;
+}
+
+.departments-checkbox {
+  list-style: none;
+  margin-left: 0px;
+  li {
+    label {
+      display: inline;
+      padding-left: 8px;
+      vertical-align: -4px;
+    }
+  }
+}
+
+.image-buttons-container{
+   position:relative;
+}
+.image-buttons{
+   position:absolute;
+   right:10px;
+   bottom:10px;
+}
+
+.table-clickable tr td {
+  cursor: pointer;
+}
+
+.loading {
+  background: url('/assets/ajax-loader.gif') center center no-repeat;
+  min-height: 30px;
+}
+
+.button-student-register{
+  width: 100%;
+  font-size: 20px;
+  text-align: center;
+  padding: 15px;
+  @include box-sizing(border-box);
+}
+
+.row-top-space {
+  margin-top: 20px;
+}
+
+.tooltip {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 14px;
+  font-weight: normal;
+}
+
+.company-bar {
+  margin-top: 30px;
+  padding: 10px 10px 10px 0px;
+  border-top: 1px double #ccc;
+}
+
+form ul {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+.top-5-icon {
+  color: #FDD017;
+}

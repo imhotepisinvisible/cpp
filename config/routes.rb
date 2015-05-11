@@ -1,5 +1,16 @@
 CPP::Application.routes.draw do
 
+  devise_for :users, :skip => :registrations
+  devise_for :students, :skip => :sessions
+  devise_for :department_administrators, :skip => :sessions
+  devise_for :company_administrators, :skip => :sessions
+
+  as :user do
+    delete '/logout', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+    get '/login', :to => 'devise/sessions#new', :as => :new_user_session
+    post '/login', :to => 'devise/sessions#create', :as => :user_session
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -50,18 +61,16 @@ CPP::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'site#index'
-  
+
   # Non-Backbone Routes
   get ":controller/:id/stat_show", :action => "stat_show"
 
   get "events/:id/approve" => "events#email_approve"
   get "events/:id/reject" => "events#email_reject"
-  
+
   get "opportunities/:id/approve" => "placements#email_approve"
   get "opportunities/:id/reject" => "placements#email_reject"
 
-  get "logout" => "sessions#destroy", :as => "logout"
-  get "login" => "sessions#new", :as => "login"
   get "emails/:id/preview" => "emails#preview"
 
   get "events/:event_id/departments/approved" => "departments#approved"
@@ -70,13 +79,11 @@ CPP::Application.routes.draw do
   get "companies/top_5" => "companies#top_5"
   get "events/top_5" => "events#top_5"
   get "placements/top_5" => "placements#top_5"
-  
+
   get 'students/:id/documents/:document_type' => 'students#download_document'
   get 'export_cvs' => 'students#export_cvs'
 
-  resources :sessions
-
-  
+  get 'students/:id/request_approval' => 'students#request_approval'
 
   require 'resque_scheduler/server'
   #namespace :admin do
@@ -93,10 +100,6 @@ CPP::Application.routes.draw do
   end
   match '(*url)' => 'site#index', :constraints => XHRConstraint.new
 
-  resources :users do
-    put 'change_password', :on => :collection, :action => :change_password
-    put 'forgot_password', :on => :collection, :action => :forgot_password
-  end  
   resources :audit_items
   resources :companies
   resources :courses

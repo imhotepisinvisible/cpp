@@ -25,12 +25,11 @@ class Event < ActiveRecord::Base
   default_scope order('start_date ASC')
 
   ###################### Declare associations ########################
-	belongs_to :company
+  belongs_to :company
   has_and_belongs_to_many :registered_students,
                           :join_table => :student_event_registrations,
                           :association_foreign_key => "user_id",
                           :class_name => "Student"
-  has_and_belongs_to_many :departments
 
   ########################## Declare tags ############################
   acts_as_taggable_on :skills, :interests, :year_groups
@@ -42,7 +41,6 @@ class Event < ActiveRecord::Base
 	validates :location,     :presence => true
   validates :start_date,   :presence => true
   validates :end_date,     :presence => true
-  validates :departments,  :presence => { :message => "Events must belong to at least one department" }
 
   ####################### Disallow Profanity ########################
   validates :description, obscenity: {message: "Profanity is not allowed!"}

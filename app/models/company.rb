@@ -17,27 +17,15 @@ class Company < ActiveRecord::Base
   is_impressionable
 
   ###################### Declare associations ########################
-  belongs_to :organisation
-
   has_many :events
   has_many :placements
   has_many :emails
   has_many :company_administrators, :dependent => :destroy
   has_many :company_contacts
   has_many :student_company_ratings
-  has_many :department_registrations, :conditions => { :status => [2, 3] }
 
-  has_many :departments, :through => :department_registrations
-  has_many :accessible_students, :through => :departments,
+  has_many :accessible_students,
            :class_name => "Student", :source => :students
-  has_many :pending_department_registrations, :conditions => { :status => 1 },
-           :class_name => "DepartmentRegistration"
-  has_many :pending_departments, :through => :pending_department_registrations,
-           :class_name => "Department", :source => :department
-
-  has_many :all_department_registrations, :class_name => "DepartmentRegistration"
-  has_many :all_departments, :through => :all_department_registrations,
-           :class_name => "Department", :source => :department
 
   ######################### Declare tags ###########################
   acts_as_taggable_on :skills, :interests, :year_groups
@@ -60,14 +48,6 @@ class Company < ActiveRecord::Base
   ######################### Ensure present #########################
   validates :name,            :presence => true
   validates :description,     :presence => true
-  validates :organisation_id, :presence => true
-
-  validates :pending_departments,
-            :presence => { :message => "Must belong to at least one department" },
-            :if => lambda { self.departments.empty? }
-  validates :departments,
-            :presence => { :message => "Must belong to at least one department" },
-            :if => lambda { self.pending_departments.empty? }
 
   ######################### Ensure unique #########################
   validates :name, :uniqueness => true
@@ -130,11 +110,11 @@ class Company < ActiveRecord::Base
       result[:rating] = rating(options[:student_id])
     end
 
-    dept_reg = DepartmentRegistration.find_by_company_id(id)
-    result[:status] = dept_reg.status
+    result[:status] = reg_status
 
     result[:stat_count] = @stat_count
 
     return result
   end
+
 end

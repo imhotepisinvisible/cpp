@@ -29,9 +29,9 @@ class DepartmentsController < ApplicationController
   def get_status
     require_login
     raise unless params.has_key? :company_id
-    dept_reg = DepartmentRegistration.find_or_create_by_company_id_and_department_id(params[:company_id], params[:department_id])
+    dept_reg = Company.find_or_create_by_id(params[:company_id])
 
-    respond_with dept_reg.status
+    respond_with dept_reg.reg_status
   end
 
   # Sets approval status for company
@@ -41,8 +41,8 @@ class DepartmentsController < ApplicationController
     require_login
     raise unless params.has_key? :company_id
     raise unless params.has_key? :status
-    dept_reg = DepartmentRegistration.find_or_create_by_company_id_and_department_id(params[:company_id], params[:department_id])
-    dept_reg.status = params[:status]
+    dept_reg = Company.find_or_create_by_id(params[:company_id])
+    dept_reg.reg_status = params[:status]
     if dept_reg.save
       head :no_content
     else
@@ -54,8 +54,8 @@ class DepartmentsController < ApplicationController
   def apply
     require_login
     raise unless params.has_key? :company_id
-    dept_reg = DepartmentRegistration.find_or_create_by_company_id_and_department_id(params[:company_id], params[:department_id])
-    dept_reg.status = CPPApprovalStatus.PENDING
+    dept_reg = Company.find_or_create_by_id(params[:company_id])
+    dept_reg.reg_status = CPPApprovalStatus.PENDING
     if dept_reg.save
       head :no_content
     else

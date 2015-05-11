@@ -19,7 +19,7 @@ shared_examples_for "a user" do
       it {should validate_presence_of(field)}
     end
 
-    it { should ensure_length_of(:password).
+    it { should validate_length_of(:password).
       is_at_least(8).
       with_message(/password is too short/)
     }

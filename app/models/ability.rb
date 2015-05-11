@@ -23,19 +23,14 @@ class Ability
     case user.type
     when nil
       can :create, Student
+      can :request_approval, Student
       can :read, Department
     when "Student"
       can :manage, Student, :id => user.id
       cannot :index, Student
-      can [:read, :register, :unregister, :attending_students], Event do |event|
-        share_departments?(user, event)
-      end
-      can :read, Placement do |placement|
-        share_departments?(user, placement.company)
-      end
-      can [:read, :download_document, :set_rating], Company do |company|
-        share_departments?(user, company)
-      end
+      can [:read, :register, :unregister, :attending_students], Event
+      can :read, Placement
+      can [:read, :download_document, :set_rating], Company
       can :read, Course
     when "CompanyAdministrator"
       can :manage, Event, :company_id => user.company_id
@@ -47,46 +42,32 @@ class Ability
       can :manage, Company, :id => user.company_id
       can :manage, CompanyAdministrator, :id => user.id
       can :apply, Department
-      can [:show, :download_document], Student do |student|
-        member_dept_regs = user.company.department_registrations.where(:status => 3)
-        member_depts = member_dept_regs.map{ |r| r.department.id }
-        student_depts = student.departments.map(&:id)
-        intersect?(member_depts, student_depts)
-      end
       can :read, Course
+      can :index, Student
       # Only allow companies that have been approved to see students.
-      if user.company.department_registrations.where(:status => 3).size > 0
-        can :index, Student
+      if user.company.reg_status == 3
         can :export_cvs, Student
+        can :show, Student
+        can :download_document, Student
       end
     when "DepartmentAdministrator"
       can :manage, Course
       can :manage, DepartmentAdministrator, :id => user.id
       can :create, CompanyAdministrator
-      can :manage, CompanyAdministrator do |company_admin|
-        company_admin.company.all_departments.map(&:id).include? user.department_id
-      end
-      can :manage, Department, :id => user.department_id
+      can :manage, CompanyAdministrator
+      can :manage, Department
       #can :manage, Email do |email|
       #  email.company.all_departments.map(&:id).include? user.department_id
       #end
       can :manage, Email
       can :create, Company
-      can :manage, Company do |company|
-        company.all_departments.map(&:id).include? user.department_id
-      end
+      can :manage, Company
       can :create, Event
-      can :manage, Event do |event|
-        event.departments.map(&:id).include? user.department_id
-      end
+      can :manage, Event
       can :create, Placement
-      can :manage, Placement do |placement|
-        placement.departments.map(&:id).include? user.department_id
-      end
+      can :manage, Placement
       can :create, Student
-      can :manage, Student do |student|
-        student.departments.map(&:id).include? user.department_id
-      end
+      can :manage, Student
       can :manage, Resque
     end
 
@@ -95,17 +76,4 @@ class Ability
     end
   end
 
-  # Returns true if entities a and b share departments
-  # a - list of departments
-  # b - list of departments
-  def share_departments?(a, b)
-    intersect?(a.departments.map(&:id), b.departments.map(&:id))
-  end
-
-  # Returns true if lists a and b intersect, false otherwise
-  # a - list of objects
-  # b - list of objects
-  def intersect?(a, b)
-    !(a & b).empty?
-  end
 end
