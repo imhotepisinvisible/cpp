@@ -71,7 +71,7 @@ module CPP
       g.form_builder :simple_form
       g.template_engine :erb
     end
-    
+
     config.to_prepare do
       DeviseController.respond_to :html, :json
     end

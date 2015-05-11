@@ -65,7 +65,7 @@ class Student < User
   attr_accessible :year, :bio, :degree, :email, :cv, :transcript,
                   :covering_letter, :profile_picture, :skill_list,
                   :interest_list, :reject_skill_list, :reject_interest_list,
-                  :year_group_list, :active, :looking_for, :tooltip, :course_id
+                  :year_group_list, :active, :looking_for, :tooltip, :course_id, :cid
 
   ####################################################################
   # Attributes not to store in database direectly and exist
@@ -115,15 +115,30 @@ class Student < User
     AuditItem.new(self, created_at, 'student', "#{full_name} signed up!", "students/#{id}")
   end
 
+  def send_admin_approval
+    unless @raw_confirmation_token
+      generate_confirmation_token!
+    end
+
+    opts = pending_reconfirmation? ? { to: unconfirmed_email } : { }
+    send_devise_notification(:approval_instructions, @raw_confirmation_token, opts)
+  end
+
   # Returns JSON object
   def as_json(options={})
     result = super(:methods => [:skill_list, :interest_list, :year_group_list, :reject_skill_list, :reject_interest_list, :type])
     result[:stat_count] = @stat_count
+    result[:confirmed] = confirmed_at?
     return result
   end
 
   def as_csv()
     attributes.except("password_digest")
+  end
+
+  after_create :send_created
+  def send_created
+    UserMailer.account_created(self).deliver
   end
 
 end

@@ -105,6 +105,16 @@ class StudentsController < ApplicationController
     head :no_content
   end
 
+  # Request admin approval for a student with the specified id
+  #
+  # GET /students/1/request_approval
+  def request_approval
+    @student = Student.find(params[:id])
+    # if needs approval...
+    @student.send_admin_approval
+    redirect_to root_path
+  end
+
   # Download student document, e.g. CV
   #
   # GET /students/1/:document_type/:view_type
@@ -264,7 +274,7 @@ class StudentsController < ApplicationController
       end
       respond_to do |format|
         format.json {head :ok}
-      end  
+      end
     end
   end
 end

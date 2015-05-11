@@ -4,7 +4,7 @@ CPP::Application.routes.draw do
   devise_for :students, :skip => :sessions
   devise_for :department_administrators, :skip => :sessions
   devise_for :company_administrators, :skip => :sessions
-  
+
   as :user do
     delete '/logout', :to => 'devise/sessions#destroy', :as => :destroy_user_session
     get '/login', :to => 'devise/sessions#new', :as => :new_user_session
@@ -61,13 +61,13 @@ CPP::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'site#index'
-  
+
   # Non-Backbone Routes
   get ":controller/:id/stat_show", :action => "stat_show"
 
   get "events/:id/approve" => "events#email_approve"
   get "events/:id/reject" => "events#email_reject"
-  
+
   get "opportunities/:id/approve" => "placements#email_approve"
   get "opportunities/:id/reject" => "placements#email_reject"
 
@@ -79,10 +79,12 @@ CPP::Application.routes.draw do
   get "companies/top_5" => "companies#top_5"
   get "events/top_5" => "events#top_5"
   get "placements/top_5" => "placements#top_5"
-  
+
   get 'students/:id/documents/:document_type' => 'students#download_document'
   get 'export_cvs' => 'students#export_cvs'
-  
+
+  get 'students/:id/request_approval' => 'students#request_approval'
+
   require 'resque_scheduler/server'
   #namespace :admin do
   constraints CanAccessResque do

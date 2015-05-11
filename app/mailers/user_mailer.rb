@@ -42,7 +42,15 @@ class UserMailer < ActionMailer::Base
     puts "ACCOUNT_DEACTIVATED_EMAIL"
     subject = "CPP Account Deactivated"
     @name = user.first_name
-    @url = Rails.application.config.absolute_site_url 
+    @url = Rails.application.config.absolute_site_url
+    mail(:to => user.email, :subject => subject)
+  end
+
+  def account_created(user)
+    puts "ACCOUNT CREATED EMAIL"
+    subject = "CPP Account Created"
+    @url = Rails.application.config.absolute_site_url
+    @id = user.id
     mail(:to => user.email, :subject => subject)
   end
 
@@ -50,23 +58,23 @@ class UserMailer < ActionMailer::Base
     puts "ACCOUNT_REMINDER_EMAIL"
     subject = "CPP Account Reminder"
     @name = user.first_name
-    @url = Rails.application.config.absolute_site_url 
+    @url = Rails.application.config.absolute_site_url
     mail(:to => user.email, :subject => subject)
   end
 
   def validate_event_email(address, event)
     @event = event
     @company = Company.find_by_id(@event.company_id)
-    @url = Rails.application.config.absolute_site_url 
+    @url = Rails.application.config.absolute_site_url
     puts "VALIDATE EVENT EMAIL"
-    subject = "[CPP][New Event] #{@company.name}: #{@event.title}"   
+    subject = "[CPP][New Event] #{@company.name}: #{@event.title}"
     mail(:to => address, :subject => subject)
   end
 
   def validate_placement_email(address, placement)
-    @placement = placement 
+    @placement = placement
     @company = Company.find_by_id(@placement.company_id)
-    @url = Rails.application.config.absolute_site_url  
+    @url = Rails.application.config.absolute_site_url
     puts "VALIDATE PLACEMENT EMAIL"
     subject = "[CPP][New Opportunity] #{@company.name}: #{@placement.position}"
     mail(:to => address, :subject => subject)
