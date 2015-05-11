@@ -23,7 +23,6 @@ class Student < User
   has_many :events, :uniq => true
   has_many :placements, :uniq => true
   has_many :student_company_ratings
-  has_many :organisation_domains
 
   has_one :course
 
@@ -38,8 +37,6 @@ class Student < User
 
   ######################### Validate fields #########################
   validates :bio, :length => { :maximum => 500 }
-  validate :valid_email?
-
 
   ######################### Disallow Profanity #########################
   validates :bio, obscenity: { message: "Profanity is not allowed!" }
@@ -87,27 +84,6 @@ class Student < User
     !course_id.blank? &&
     !year.blank? &&
     !cv_file_size.nil?
-  end
-
-  # Ensures email domain matches one of organisation specified emails
-  def valid_email?
-    if OrganisationDomain.all.any?
-      match = false
-      OrganisationDomain.all.each do |org_domain|
-        unless /\A([^@\s]+)@#{org_domain.domain}/.match(email).nil?
-          match = true
-          break
-        end
-      end
-
-      if !match
-        domains = []
-        OrganisationDomain.all.each do |org_domain|
-          domains << org_domain.domain
-        end
-        errors.add(:email, "Email domain must be one of #{domains.join(", ")}")
-      end
-    end
   end
 
   # Creates a new audit item for when the model was last created/updated
