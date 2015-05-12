@@ -33,7 +33,7 @@ class CPP.Routers.Students extends Backbone.Router
 
   # Student dashboard
   edit: (id) ->
-    if isCompanyAdmin()
+    if isCompanyAdmin() or (id and isStudent())
       window.history.back()
       return false
 
