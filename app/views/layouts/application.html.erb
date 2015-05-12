@@ -7,7 +7,7 @@
   <![endif]-->
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
-  <%= javascript_include_tag "splash" %>
+
   <% if controller_name == "site" %>
     <%= javascript_include_tag controller_name %>
   <% end %>
@@ -44,6 +44,8 @@
 
   </div>
 
+  <% if !user_signed_in? %>
+  <%= javascript_include_tag "splash" %>
   <div id="splash-header" style="background-image: url('assets/hand.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <!--<img src="assets/hand.jpg" id="splash-header-pic">-->
     <div id="splash-header-container">
@@ -71,6 +73,7 @@
         <% end %>
     </div>
   </div>
+  <% end %>
 
 </div>
 
