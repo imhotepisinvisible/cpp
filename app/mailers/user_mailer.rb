@@ -80,4 +80,38 @@ class UserMailer < ActionMailer::Base
     mail(:to => "cpp@doc.ic.ac.uk", :subject => subject)
   end
 
+  def approved_event_email(address, event)
+    @event = event
+    @company = Company.find_by_id(@event.company_id)
+    @companyAdmin = CompanyAdministrator.find_by_company_id(@event.company_id)
+    puts "EVENT APPROVED"
+    subject = "[CPP Event]: #{@event.title} Approved"
+    mail(:to => address, :subject => subject)
+  end
+
+  def approved_opportunity_email(address, placement)
+    @placement = placement
+    @company = Company.find_by_id(@placement.company_id)
+    puts "OPPORTUNITY APPROVED"
+    subject = "[CPP Opportunity] #{@placement.position} Approved"
+    mail(:to => address, :subject => subject)
+  end
+
+  def rejected_event_email(address, event)
+    @event = event
+    @company = Company.find_by_id(@event.company_id)
+    @companyAdmin = CompanyAdministrator.find_by_company_id(@event.company_id)
+    puts "EVENT REJECTED"
+    subject = "[CPP Event]: #{@event.title} Rejected"
+    mail(:to => address, :subject => subject)
+  end
+
+  def rejected_opportunity_email(address, placement)
+    @placement = placement
+    @company = Company.find_by_id(@placement.company_id)
+    puts "OPPORTUNITY REJECTED"
+    subject = "[CPP Opportunity] #{@placement.position} Rejected"
+    mail(:to => address, :subject => subject)
+  end
+
 end

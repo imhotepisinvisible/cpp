@@ -11,6 +11,8 @@ class CPP.Models.Student extends CPP.Models.Base
 
     @courses = new CPP.Collections.Courses
 
+
+
   url: ->
     '/students' + (if @isNew() then '' else '/' + @id)
 

@@ -7,6 +7,7 @@ class CPP.Routers.Students extends Backbone.Router
       'students/:id/settings': 'settings'
       'departments/:id/students/signup': 'signup'
 
+      'dashboard': 'dashboard'
       'edit': 'edit'
       'profile_preview': 'view'
       'settings': 'settings'
@@ -31,7 +32,7 @@ class CPP.Routers.Students extends Backbone.Router
       error: ->
         notify "error", "Couldn't fetch student"
 
-  # Student dashboard
+  # Student edit
   edit: (id) ->
     if isCompanyAdmin() or (id and isStudent())
       window.history.back()
@@ -98,3 +99,12 @@ class CPP.Routers.Students extends Backbone.Router
       return CPP.CurrentUser
     else
       return false
+
+  #Student dashboard
+  dashboard: ->
+    events = new CPP.Collections.EventsRecent
+    events.fetch({async:false})
+    placements = new CPP.Collections.PlacementsRecent
+    placements.fetch({async:false})
+    events.add(placements.toJSON())
+    new CPP.Views.Students.Dashboard collection: events

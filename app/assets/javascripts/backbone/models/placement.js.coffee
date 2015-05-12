@@ -58,3 +58,12 @@ class CPP.Models.Placement extends CPP.Models.Base
 class CPP.Collections.Placements extends CPP.Collections.Base
   url: '/placements'
   model: CPP.Models.Placement
+
+class CPP.Collections.PlacementsRecent extends CPP.Collections.Base
+  url: '/placements'
+  model: CPP.Models.Placement
+  sortKey: 'created_at'
+  comparator: (placementA, placementB) ->
+          if placementA.get(this.sortKey) > placementB.get(this.sortKey) then -1
+          else if placementB.get(this.sortKey) > placementA.get(this.sortKey) then 1
+          else 0

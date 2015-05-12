@@ -1,0 +1,26 @@
+!!! 5
+%html
+  %body
+    %h1
+      %center Your event has been rejected and will not appear on CPP
+    %p
+      %strong Event details
+    %p
+      %strong Company:
+      %span= @company.name
+    %p
+      %strong Title:
+      %span= @event.title
+    %p
+      %strong Description:
+      %span= @event.description
+    %p
+      %strong Date:
+      %span= @event.start_date
+    %p
+      %strong Created At:
+      %span= @event.created_at
+    %p
+      If you wish to find out the reason for the event being rejected,
+      please contact the site admins Will and Victoria.
+ 

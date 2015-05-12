@@ -36,3 +36,6 @@ class CPP.Routers.Courses extends Backbone.Router
         new CPP.Views.Courses.Edit model: course
       error: -> 
         notify "error", "Couldn't fetch course"
+
+
+ 
