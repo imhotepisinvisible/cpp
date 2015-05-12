@@ -123,16 +123,16 @@ class CPP.Routers.Students extends Backbone.Router
     events = new CPP.Collections.EventsRecent
     #new CPP.Views.Students.Dashboard collection: events
     #events.getFirstPage
-    #events.fetch({async:false, data: $.param({ limit: 3}) })
+    events.fetch({async:false, data: $.param({ limit: 3}) })
     
    
     #events.fetch({async:false, data: $.param({limit: 1, start_date: moment().toISOString()}) })
-    #placements = new CPP.Collections.PlacementsRecent
-    #placements.fetch({async:false})
+    placements = new CPP.Collections.PlacementsRecent
+    placements.fetch({async:false})
     #events.add(placements.toJSON())
     
     new CPP.Views.Students.Dashboard collection: events
-    events.fetch({data: $.param({ limit: 3}) })
+    #events.fetch({data: $.param({ limit: 3}) })
     
     #
     #success: ->

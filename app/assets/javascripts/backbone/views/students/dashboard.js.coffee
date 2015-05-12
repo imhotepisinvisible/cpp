@@ -15,15 +15,19 @@ class CPP.Views.Students.Dashboard extends CPP.Views.Base
     #@collection = @model.events  
     #@collection = new CPP.Collections.Events
     #@collection.fetch({async:false})
-    
+    @collection.reset(@collection.first(15))
     @collection.on "fetch", (->
     	@$('#events-table').append "<div class=\"loading\"></div>"
     	return), @
     @collection.bind 'reset', @render, @
+    #@first10 = @collection.first(10);
+    #@collection.reset(@collection.first(10))    
     @editable = isAdmin()
-    #@collection.reset(@collection.first(2))
-    @models = _.toArray(@collection)
-    @model  = _.first(@models) 
+    @first = @collection.first();
+    #@second = @collection.at
+    
+    #@models = _.toArray(@collection)
+    #@model  = _.first(@models) 
     #@models = @collection #.first(3)
     #_.each(@collection.first(3), @render)
     #@collction.add(@placements.toJSON())
@@ -49,59 +53,63 @@ class CPP.Views.Students.Dashboard extends CPP.Views.Base
         headerCell: 'select-all'
       }
       {
+        name: 'type'
+        label: 'Type'        
+        cell: Backgrid.Cell.extend(render: ->
+          if @model.get('title')
+            itemtype = 'Event'
+          else
+            itemtype = 'Opportunity'                      
+          @$el.text itemtype
+          # MUST do this for the grid to not error out
+          @
+        )
+        editable: false
+      }      
+      {
         name: 'company_logo_url'
         label: 'Company'
         editable: false
         cell: 'image'
       }
       {
-        #if @editable
-        #  name: 'title'
-        name: 'position'  
-        #name: 'position'
-        label: 'Event'
-        cell: 'string'
-        editable: false
-      }
-      {
-        name: 'start_date'
-        label: 'Date'
-        cell: 'date'
-        editable: false
-      }
-      {
-        name: 'created_at'
-        label: 'Posted'
-        cell: 'date'
-        editable: false
-      }
-      {
-        name: 'location'
-        label: 'Location'
-        cell: 'string'
-        editable: false
-      }
-      {
-        name: 'spaces'
-        label: 'Spaces Remaining'        
+        name: 'title'
+        label: 'Title'        
         cell: Backgrid.Cell.extend(render: ->
-          capacity = @model.get('capacity')
-          @$el.text capacity
+          if @model.get('title')
+            itemname = @model.get('title')
+          else
+            itemname = @model.get('position')                      
+          @$el.text itemname
           # MUST do this for the grid to not error out
           @
         )
         editable: false
       }
       {
-        name: 'workflow_state'
-        label: 'Status'
-        cell: 'string'
+        name: 'Date/Deadline'
+        label: 'Date/Deadline'        
+        cell: Backgrid.Cell.extend(render: ->
+          if @model.get('title')
+            itemdate = @model.get('start_date')
+          else
+            itemdate = @model.get('deadline')                      
+          @$el.text itemdate
+          # MUST do this for the grid to not error out
+          @
+        )
+        editable: false
+      } 
+      {
+        name: 'created_at'
+        label: 'Posted'
+        cell: 'date'
         editable: false
       }
     ]
   
-    $(@el).html(@template(events: @collection, editable: @editable, model: @model))
-    @renderClosing(@collection)
+    $(@el).html(@template(events: @collection, editable: @editable, item: @first))
+    #@renderClosing(@collection)
     grid = new (Backgrid.Grid)(
       className: "backgrid table-hover table-clickable",
       row: ModelRow
