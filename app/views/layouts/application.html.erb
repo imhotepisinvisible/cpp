@@ -45,7 +45,6 @@
   </div>
 
   <% if !user_signed_in? %>
-  <%= javascript_include_tag "splash" %>
   <div id="splash-header" style="background-image: url('assets/hand.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <!--<img src="assets/hand.jpg" id="splash-header-pic">-->
     <div id="splash-header-container">
@@ -57,21 +56,10 @@
         </div>
       </div>
     </div>
-      <div id="splash-login-box" style="position:absolute; right:0; margin-right: 40px; margin-bottom: 30px height:100px">
-        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <%= f.input :email, :wrapper => :prepend, :label => "Email" do %>
-          <%= content_tag :span, (raw '<i class="icon-user"></i>'), :class => "add-on abbn" %>
-          <%= f.input_field :email %>
-        <% end %>
-        <%= f.input :password, :wrapper => :prepend, :label => "Password" do %>
-          <%= content_tag :span, (raw '<i class="icon-lock"></i>'), :class => "add-on abbn" %>
-          <%= f.input_field :password %>
-        <% end %>
-          <div>
-            <%= f.button :submit, "Log in" %>
-          </div>
-        <% end %>
-    </div>
+      <div id="splash-login-box" style="position:absolute; right:0; bottom:0; margin-right: 50px; margin-bottom: 50px;">
+        <div id="splash-button"><a href="/register">Login</a></div>
+        <div id="splash-button"><a href="/register">Sign Up</a></div>
+      </div>
   </div>
   <% end %>
 
@@ -96,6 +84,10 @@
     </div>
   </footer>
   <%= render 'layouts/analytics' %>
+
+  <form name="ignore_me">
+      <input type="hidden" id="page_is_dirty" name="page_is_dirty" value="0" />
+  </form>
 
 </body>
 </html>

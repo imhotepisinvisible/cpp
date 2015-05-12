@@ -9,9 +9,9 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-submit': 'submitStudent'
     'keydown' : 'enterPress'
-           
+
   # If department admin then remove department from schema
-  # Define signup form 
+  # Define signup form
   initialize: (options) ->
     @login = options.login
 
@@ -29,6 +29,8 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
   render: ->
     $(@el).html(@template(student: @model))
     super
+    $("#splash-header").hide()
+    $('.navbar-inner').show()
     $('.form').append(@form.el)
     Backbone.Validation.bind @form
     validateField(@form, field) for field of @form.fields
@@ -41,7 +43,7 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
   # Submit form, validate and save fields
   submitStudent: ->
     if @form.validate() == null
-    
+
       data = {}
       data['student'] = @form.getValue()
       $.ajax
