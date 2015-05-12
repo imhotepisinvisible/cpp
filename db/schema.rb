@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150511093414) do
+ActiveRecord::Schema.define(:version => 20150512155313) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,10 @@ ActiveRecord::Schema.define(:version => 20150511093414) do
     t.datetime "logo_updated_at"
     t.string   "career_link"
     t.integer  "reg_status",        :default => 0
+    t.string   "size"
+    t.string   "sector"
+    t.string   "hq"
+    t.integer  "founded"
   end
 
   create_table "company_contacts", :force => true do |t|
@@ -247,6 +251,11 @@ ActiveRecord::Schema.define(:version => 20150511093414) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "cid",                          :default => ""
+    t.string   "gitHub"
+    t.string   "linkedIn"
+    t.string   "personal"
+    t.string   "other"
+    t.string   "available"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
