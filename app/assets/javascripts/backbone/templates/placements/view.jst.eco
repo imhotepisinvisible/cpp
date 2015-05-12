@@ -1,117 +1,243 @@
-<div class="row-fluid section-header">
-  <div class="span9">
-     <h1><%= @placement.company.get('name') %> - <%= @placement.get 'position' %></h1>
-  </div>
-  <div class="company-logo-header span3">
-    <a href="/companies/<%= @placement.company.id %>" class="pull-right">
-      <img class="company-logo-img" src="<%= @placement.company.get('logo_url') %>">
-    </a>
-    <% if isAdmin(): %>
-      <a class="btn pull-right" href="/opportunities/<%= @placement.id %>/edit">Edit</a>
-    <% end %>
-  </div>
-</div>
-
 <div class="row-fluid">
-  <div class="span6">
+  <div class="span9" id="centre-span-border">
+
+    <!-- Job Logo and Key Summary info -->
     <div class="row-fluid">
-      <div class="span6" id="description">
-        <h1 class="section-header"><i class="icon-info-sign"></i>  Description</h1>
-        <%- @placement.get('description').replace(/\n/g, '<br>') %>
+      <div class="span12" id="placement-header">
+
+        <div class="full-borderless-card">
+
+          <!-- Company Logo -->
+          <div class="company-logo-header span3">
+            <a href="/companies/<%= @placement.company.id %>">
+              <img class="company-logo-img" src="<%= @placement.company.get('logo_url') %>">
+            </a>
+            <!-- Ability to edit -->
+            <% if isAdmin(): %>
+            <a class="image-buttons pull-right" href="/opportunities/<%= @placement.id %>/edit">Edit</a>
+            <% end %>
+          </div>
+
+          <!-- Job Summary -->
+          <div class="span9">
+
+            <!-- Title -->
+            <div id="job-title">
+              <%= @placement.company.get('name') %> - <%= @placement.get 'position' %>
+            </div>
+
+            <!-- Short description -->
+            <div id="about-job-header">
+              Summary Description
+            </div>
+
+            <div id="about-job-content">
+              <p>
+                <%- @placement.get('description').replace(/\n/g, '<br>') %>
+              </p>
+            </div>
+
+            <!-- Useful info -->
+            <div>
+              <!-- Download Job Specification PDF -->
+              <a class="link-accent first-padding">Download Job Spec</a>
+              <!-- Contact -->
+              <a class="link-accent">Contact</a>
+              <!-- Apply through external link -->
+              <a class="link-accent">Apply</a>
+            </div>
+
+          </div>
+
+        </div>
+      </div> 
+    </div> <!-- end of header -->
+
+    <!-- Main Body of the Job Profile -->
+    <div class="row-fluid">
+      <div class="span12" id="job-body-container">
+
+        <div class="row-fluid">
+          <div class="span12" id="job-body">
+
+            <!-- Job Summary Elements -->
+            <div class="row-fluid">
+              <div class="span12">
+
+                <div class="full-width-card">
+
+                  <!-- Full-Width Header -->
+                  <div class="full-header">
+                    <div class="row-fluid">
+                      <div class="span12">
+
+
+                        <!-- Location -->
+                        <div class="span3">
+                          <div class="summary-subject">
+                            Location
+                          </div>
+                          <div class="summary-content">
+                            <%= @placement.get('location') %>
+                          </div>
+                        </div>
+
+                        <!-- Salary -->
+                        <div class="span3">
+                          <div class="summary-subject">
+                            Salary
+                          </div>
+                          <div class="summary-content">
+                            <%= @placement.get('salary') %>
+                          </div>
+                        </div>
+
+                        <!-- Duration -->
+                        <div class="span3">
+                          <div class="summary-subject">
+                            Duration
+                          </div>
+                          <div class="summary-content">
+                            <%= @placement.get('duration') %>
+                          </div>
+                        </div>
+
+                        <!-- Apply By -->
+                        <div class="span3">
+                          <div class="summary-subject">
+                            Deadline
+                          </div>
+                          <div class="summary-content">
+                            <%= @placement.getReadableDate('deadline') %>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Fill=width body (non-coloured part) -->
+                  <div class="full-body">
+                    <div class="row-fluid">
+                      <div class="span12">
+
+                        <!-- Requirements Section -->
+                        <div class="span6">
+                          <h1 class="section-header">
+                            Requirements & Responsibilities
+                          </h1>
+
+                          <div class="row-fluid">
+                            <div class="span12">
+                              <div class="content-row">
+                                <div class="content-primary">
+                                  Skills
+                                </div>
+                                <% if @placement.get('skill_list').length > 0: %>
+                                <% for i, tag of @placement.get('skill_list'): %>
+                                <span class="content-secondary tag-margin">
+                                  / <%= tag %>  
+                                </span>
+                                <% end %>
+                                <% else: %>
+                                No Skills Tagged
+                                <% end %>
+                              </div>
+                            </div>
+                          </div>
+
+
+                          <!-- Example Formatting -->
+                          <div class="row-fluid">
+                            <div class="span12">
+
+                              <!-- NEEDS TO BE EDITABLE / LINK TO DATABASE -->
+                              <div class="content-row">
+                                <div class="content-primary">
+                                  Experience with
+                                </div>
+                                <div class="content-secondary">
+                                  C++ / Javascript / Python
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="span6">
+
+                          <!-- These could be editable fields for the companies to fill in as they see fit -->
+                          <h1 class="section-header">
+                            Other
+                          </h1>
+
+                          <!-- AGAIN NEEDS TO LINK TO DATABASE -->
+
+                          <!-- Benefits -->
+                          <div class="row-fluid">
+                            <div class="span12">
+
+                              <div class="content-row">
+                                <div class="content-primary">
+                                  Benefits
+                                </div>
+                                <div class="content-secondary">
+                                  <%= @placement.get('benefits') %>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+
+
+                          <!-- Application Proceedure -->
+                          <div class="row-fluid">
+                            <div class="span12">
+
+                              <div class="content-row">
+                                <div class="content-primary">
+                                  Application Proceedure
+                                </div>
+                                <div class="content-secondary">
+                                  <%= @placement.get('application_procedure') %>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+
+                          <!-- Other -->
+                          <div class="row-fluid">
+                            <div class="span12">
+
+                              <div class="content-row">
+                                <div class="content-primary">
+                                  Other
+                                </div>
+                                <div class="content-secondary">
+                                  <%= @placement.get('other') %>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+
+                        </div>
+
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
-
-    <div class="row-fluid">
-      <div class="span6">
-        <h1 class="section-header">
-          <i class="icon-tags"></i> Tags
-        </h1>
-
-        <div class="row-fluid">
-          <div class="span6">
-            <div class="tag-category">
-              <div class="tag-category-header">
-                Skills
-              </div>
-              <% if @placement.get('skill_list').length > 0: %>
-                <% for i, tag of @placement.get('skill_list'): %>
-                  <span class="label label-success tag year-group-tag">
-                    <%= tag %>
-                  </span>
-                <% end %>
-              <% else: %>
-                No Skills Tagged
-              <% end %>
-            </div>
-          </div>
-        </div>
-
-        <div class="row-fluid">
-          <div class="span6">
-            <div class="tag-category">
-              <div class="tag-category-header">
-                Interests
-              </div>
-              <% if @placement.get('interest_list').length > 0: %>
-                <% for i, tag of @placement.get('interest_list'): %>
-                  <span class="label label-warning tag year-group-tag">
-                    <%= tag %>
-                  </span>
-                <% end %>
-              <% else: %>
-                No Interests Tagged
-              <% end %>
-            </div>
-          </div>
-        </div>
-
-        <div class="row-fluid">
-          <div class="span6">
-            <div class="tag-category">
-              <div class="tag-category-header">
-                Year Groups
-              </div>
-              <% if @placement.get('year_group_list').length > 0: %>
-                <% for i, tag of @placement.get('year_group_list'): %>
-                  <span class="label label-info tag year-group-tag">
-                    <%= tag %>
-                  </span>
-                <% end %>
-              <% else: %>
-                No Year Groups Tagged
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="span6" id="date">
-    <h1 class="section-header"><i class="icon-pushpin"></i>  Details</h1>
-    <table class="table table-striped">
-      <% if @placement.get('deadline'): %>
-        <tr>
-          <td>
-            Apply By:
-          </td>
-          <td>
-            <%= @placement.getReadableDate('deadline') %>
-          </td>
-        </tr>
-      <% end %>
-      <%- addPlacementTableRow(@placement, 'duration', 'Duration') %>
-      <%- addPlacementTableRow(@placement, 'location', 'Location') %>
-      <%- addPlacementTableRow(@placement, 'salary', 'Salary') %>
-      <%- addPlacementTableRow(@placement, 'benefits', 'Benefits') %>
-      <%- addPlacementTableRow(@placement, 'application_procedure', 'Application Procedure') %>
-      <%- addPlacementTableRow(@placement, 'interview_date', 'Interview Date') %>
-      <%- addPlacementTableRow(@placement, 'other', 'Other Information') %>
-      <% if isAdmin(): %>
-        <%- addPlacementTableRow(@placement, 'workflow_state', 'Status') %>
-      <% end %>
-    </table>
   </div>
 </div>

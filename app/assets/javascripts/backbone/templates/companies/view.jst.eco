@@ -1,50 +1,74 @@
 <div class="row-fluid">
   <div class="span8">
+
+  <!-- Company Key Info: Header -->
     <h1 class="section-header">
-      <i class="icon-briefcase"></i>
       <%= @company.get 'name' %>
+
+      <!-- Admin, with editing header -->
       <% if isDepartmentAdmin(): %>
         <div class="btn-group pull-right">
 	  <div class="btn btn-small button-company-edit"><i class="icon-pencil" /></div>
         </div>
       <% end %>
+
+      <!-- Student, with favouriting header -->
       <% if window.isStudent(): %>
         </span>
           <span id="ban-rating" class="fav-icon pull-right <%= @company.getBanClass() %>" <%= addTooltip(@tooltip, 'Click here to never receive emails from this company', 'top') %>></span>
           <span id="star-rating" class="fav-icon pull-right <%= @company.getStarClass() %>" <%= addTooltip(@tooltip, 'Click here to always receive emails from this company', 'top') %>></span>
         </span>
       <% end %>
+
     </h1>
+
+
     <div class="row-fluid">
+
+    <!-- Company Key Info: Logo-->
       <div class="span4">
         <div class="company-logo-large">
           <img src="<%= @company.get('logo_url') %>">
         </div>
       </div>
+
+      <!-- Company Key Info: Description -->
       <div class="span4">
         <%= @company.get 'description' %>
       </div>
-    </div>
-  </div>
 
+    </div>
+
+  </div> <!-- end of span 8 -->
+
+  <!-- Company Contact Details -->
   <div class="span4">
     <div id="contacts-partial"></div>
   </div>
+
 </div>
+
 <div class="row-fluid">
+  <!-- Events offered, in another template -->
   <div class="span6" id="events-partial"></div>
+  <!-- Placements offered, in another template -->
   <div class="span6" id="placements-partial"></div>
 </div>
 
 <% if !isStudent(): %>
+
 <div class="row-fluid">
+
   <div class="span6" id="emails-partial"></div>
-  <div class="span6" id="stats-partial">
+
+<!--   <div class="span6" id="stats-partial">
     <h1 class="section-header">
       <i class="icon-tasks"></i>
       Stats
     </h1>
     <div id="orders_chart"></div>
-  </div>
+  </div> -->
+
 </div>
+
 <% end %>
