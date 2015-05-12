@@ -6,7 +6,7 @@ class CPP.Routers.Students extends Backbone.Router
       'students/:id/edit': 'edit'
       'students/:id/settings': 'settings'
       'departments/:id/students/signup': 'signup'
-      'students/:id/dashboard': 'dashboard'
+      'dashboard': 'dashboard'
 
       'edit': 'edit'
       'profile_preview': 'view'
@@ -103,14 +103,8 @@ class CPP.Routers.Students extends Backbone.Router
     else
       return false
 
-     # Student dashboard
-  dashboard: (id) ->
-    student = @getStudentFromID(id)
-    unless student
-      notify "error", "Invalid Student"    
-    student.fetch
-      error: ->
-        notify "error", "Couldn't fetch student"
+    #Student dashboard
+  dashboard: () ->
     events = new CPP.Collections.EventsRecent
     events.fetch({async:false})
     placements = new CPP.Collections.PlacementsRecent
