@@ -57,12 +57,8 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
-    if current_user.is_student?
-      respond_with current_user.companies.find(params[:id]).as_json({:student_id => current_user.id})
-    else
-      @company = Company.find(params[:id])
-      respond_with @company
-    end
+    @company = Company.find(params[:id])
+    respond_with @company
   end
 
   # Create new company
