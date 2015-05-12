@@ -55,24 +55,24 @@
         </div>
       </div>
     </div>
-      <div id="splash-login-box" style="position:absolute; right:0; margin-right: 30px; margin-bottom: 30px height:100px">
-        <%= simple_form_for :session, url: sessions_path, :html => { :class => 'form-horizontal' } do |f| %>
-          <%= f.input :email, :wrapper => :prepend, :label => "Email" do %>
-            <%= content_tag :span, (raw '<i class="icon-user"></i>'), :class => "add-on abbn" %>
-            <%= f.input_field :email %>
-          <% end %>
-          <%= f.input :password, :wrapper => :prepend, :label => "Password" do %>
-            <%= content_tag :span, (raw '<i class="icon-lock"></i>'), :class => "add-on abbn" %>
-            <%= f.input_field :password %>
-          <% end %>
-          <div class="control-group">
-            <div class="controls">
-              <button type="submit" class="btn">Sign in</button>
-            </div>
+      <div id="splash-login-box" style="position:absolute; right:0; margin-right: 40px; margin-bottom: 30px height:100px">
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= f.input :email, :wrapper => :prepend, :label => "Email" do %>
+          <%= content_tag :span, (raw '<i class="icon-user"></i>'), :class => "add-on abbn" %>
+          <%= f.input_field :email %>
+        <% end %>
+        <%= f.input :password, :wrapper => :prepend, :label => "Password" do %>
+          <%= content_tag :span, (raw '<i class="icon-lock"></i>'), :class => "add-on abbn" %>
+          <%= f.input_field :password %>
+        <% end %>
+          <div>
+            <%= f.button :submit, "Log in" %>
           </div>
         <% end %>
-      </div>
+    </div>
   </div>
+
+</div>
 
   <div class="container" id="main-container">
     <div class="row-fluid">
@@ -86,7 +86,7 @@
 
   <footer class="container">
     <div class="row-fluid footer">
-      <div class="span6" id="centre-span">
+      <div class="span6" id="centre-span" style="font-size:15px">
         &copy; <%= Time.now.year %>.
         Found a bug or want to improve CPP:Connect yourself? Head over to <a href="https://gitlab.doc.ic.ac.uk/og514/cpp" title="CPP on Gitlab">Gitlab</a>
       </div>

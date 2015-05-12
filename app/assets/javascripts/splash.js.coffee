@@ -13,7 +13,7 @@ setSplashContainerPos = (height) ->
   $('#splash-header-container').css('margin-top',pos)
 
 setSplashLogin = (height) ->
-  $('#splash-login-box').css('margin-top',height-150)
+  $('#splash-login-box').css('margin-top',height-200)
 
 $(window).scroll ->
   height = $(window).height();

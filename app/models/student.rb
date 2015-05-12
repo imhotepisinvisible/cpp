@@ -112,7 +112,6 @@ class Student < User
     attributes.except("password_digest")
   end
 
-  after_create :send_created
   def send_created
     UserMailer.account_created(self).deliver
   end

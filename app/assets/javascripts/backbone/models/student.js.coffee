@@ -22,6 +22,8 @@ class CPP.Models.Student extends CPP.Models.Base
     email:
       required: true
       pattern: 'email'
+    cid:
+      required: true
     year:
       pattern: 'number'
 
