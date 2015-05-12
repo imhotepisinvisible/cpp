@@ -10,37 +10,16 @@
 #   t.datetime "updated_at",      :null => false
 
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me,
+                  :first_name, :last_name
   ##################### On delete hide record ########################
   # acts_as_paranoid
-
-  ###################### Password encryption #########################
-  has_secure_password
-
-
-  ######################### Ensure present ###########################
-  validates :email,           :presence => true
-  validates :password_digest, :presence => true, :on => :create
-  validates :first_name,      :presence => true
-  validates :last_name,       :presence => true
-
-
-  ########################## Ensure unique ##########################
-  validates :email, :uniqueness => true
-
-
-  ######################### Ensure length ###########################
-  validates :password, :length => {
-    :minimum => 8,
-    :too_short => "password is too short, must be at least %{count} characters"
-  }, :on => :create
-
-
-  ###################################################################
-  # Attributes not to store in database direectly and exist
-  # for life of object
-  # #################################################################
-  attr_accessible :email, :first_name, :last_name, :password, 
-                  :password_confirmation
 
   def is_student?
     self.class.name == "Student"

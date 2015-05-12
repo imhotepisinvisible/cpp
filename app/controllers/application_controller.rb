@@ -14,15 +14,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
-  # If @current_user is set, returns it else sets and returns
-  def current_user
-    warden.user
-  end
-
-  def warden
-    env['warden']
-  end
   
   def require_login
     raise CanCan::AccessDenied unless current_user
@@ -31,7 +22,4 @@ class ApplicationController < ActionController::Base
   def customheaders
     response.headers['Vary'] = 'Accept'
   end
-
-  # Lets us use current_user in our views and throughout our controllers
-  helper_method :current_user
 end

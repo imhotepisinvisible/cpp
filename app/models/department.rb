@@ -16,7 +16,6 @@ class Department < ActiveRecord::Base
   has_many :students
   has_many :events
   has_many :placements
-  has_many :organisation_domains
 
   ###################### Ensure present #######################
   validates :name,            :presence => true

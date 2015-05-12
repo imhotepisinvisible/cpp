@@ -1,0 +1,5 @@
+<p>Someone has requested approval for their account: <%= @resource.first_name %> <%= @resource.last_name %> with CID <%= @resource.cid %></p>
+
+<p>You can confirm their account through the link below:</p>
+
+<p><%= link_to 'Confirm account', confirmation_url(@resource, confirmation_token: @token) %></p>

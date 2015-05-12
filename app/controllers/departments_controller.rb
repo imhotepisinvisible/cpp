@@ -29,7 +29,7 @@ class DepartmentsController < ApplicationController
   def get_status
     require_login
     raise unless params.has_key? :company_id
-    dept_reg = Company.find_or_create_by_company_id(params[:company_id])
+    dept_reg = Company.find_or_create_by_id(params[:company_id])
 
     respond_with dept_reg.reg_status
   end

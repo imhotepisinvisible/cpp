@@ -32,6 +32,7 @@
             <th>Updated On</th>
             <% if (@editable): %>
             <th>Visible</th>
+            <th>Confirmed</th>
             <% end %>
           </tr>
         </thead>

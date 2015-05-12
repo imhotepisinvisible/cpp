@@ -9,7 +9,6 @@ gem 'therubyracer', '0.12.1'      # Javascript Engine
 # Back End Gems
 gem 'validates_timeliness'        # Date/Time Validation
 gem 'cantango'                    # Nice RBAC
-gem 'bcrypt-ruby', '~>3.0.0'      # For password encryption
 gem 'haml-rails'                  # Support HAML Templates in Rails
 gem 'simple_form'                 # Nicer forms in rails
 gem 'rufus-scheduler'             # Task Scheduling
@@ -29,7 +28,7 @@ gem 'impressionist'               # Stats & Logging
 gem 'workflow'                    # Handling approval states
 gem 'rubyzip', '>= 1.0.0'         # will load new rubyzip version
 gem 'zip-zip'                     # will load compatibility for old rubyzip API.
-gem 'warden'                      # More customiseable authorisation
+gem 'devise'                      # More customiseable authorisation
 
 # UI/Appearance Related Gems
 gem 'less-rails'                  # Less required for Bootstrap

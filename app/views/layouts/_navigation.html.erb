@@ -6,9 +6,10 @@
   <ul class="nav">
     <% if current_user %>
       <% if current_user.type == "Student" %>
-      <li><a href="/companies">Companies</a></li>
-      <li><a href="/events">Events</a></li>
-      <li><a href="/opportunities">Opportunities</a></li>
+        <li><a href="/companies">Companies</a></li>
+        <li><a href="/events">Events</a></li>
+        <li><a href="/opportunities">Opportunities</a></li>
+        <li><a href="/students">Students</a></li>
       <% elsif current_user.type == "CompanyAdministrator" %>
         <li><a href="/companies/<%= current_user.company_id %>/edit">Manage Company Profile</a></li>
         <li><a href="/students">Students</a></li>
@@ -42,12 +43,12 @@
         <% end %>
         <li><a href="/<%= settings_path %>">Account Settings</a></li>
         <li class="divider"></li>
-        <li><a href="/logout">Log Out</a></li>
+        <li><%= link_to 'Log Out', destroy_user_session_path, :method=>'delete' %></li>
       </ul>
     </li>
   </ul>
 <% else %>
-  <%= form_for :session, url: sessions_path, html: {class: "navbar-form pull-right"} do |f| %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "navbar-form pull-right"}) do |f| %>
     <%= f.text_field :email, class: "input-small", placeholder: "Email" %>
     <%= f.password_field :password, class: "input-small", placeholder: "Password" %>
     <ul class="nav pull-right">

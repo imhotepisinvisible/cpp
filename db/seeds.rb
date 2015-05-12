@@ -18,15 +18,6 @@ year_group_tags = [ '1st Year', '2nd Year', '3rd Year', '4th Year' ]
 skills_tags = [ 'C', 'C++', 'Java', 'Ruby', 'Haskell' ]
 interests_tags = [ 'Web Development', 'Banking', 'Games Development', 'Business' ]
 
-# Imperial Email Domains
-FactoryGirl.create :organisation_domain, {
-  domain: "imperial.ac.uk",
-}
-
-FactoryGirl.create :organisation_domain, {
-  domain: "ic.ac.uk",
-}
-
 computing_department = FactoryGirl.create :department, {
   name: "Department of Computing",
   settings_notifier_placement: "If this is your first placement you're offering, make sure you send back a placement performa and a health and safety form which can be found on https://www.doc.ic.ac.uk/internal/industrialplacements/employers/IPproforma12-studentorganised.doc and https://www.doc.ic.ac.uk/internal/industrialplacements/employers/Placement_Provider_Information_Form_2012.doc",
@@ -41,7 +32,8 @@ oliver = FactoryGirl.create :student,  {
   password_confirmation: "cppcppcpp",
   year: 3,
   bio: "Placeholder Text",
-  course_id: 14
+  course_id: 14,
+  cid: "og514"
 }
 
 oliver.skill_list = ["Ruby on Rails", "Backbone.js", "Java", "Coffeescript", "Javascript", "HTML", "CSS"]
@@ -57,7 +49,8 @@ isb14 = FactoryGirl.create :student,  {
   password_confirmation: "cppcppcpp",
   year: 3,
   bio: "Placeholder Text.",
-  course_id: 14
+  course_id: 14,
+  cid: "isb14"
 }
 
 isb14.skill_list = skills_tags
@@ -73,7 +66,8 @@ hwl214 = FactoryGirl.create :student,  {
   password_confirmation: "cppcppcpp",
   year: 3,
   bio: "Placeholder Text.",
-  course_id: 14
+  course_id: 14,
+  cid: "hwl214"
 }
 
 sg5414 = FactoryGirl.create :student,  {
@@ -84,7 +78,8 @@ sg5414 = FactoryGirl.create :student,  {
   password_confirmation: "cppcppcpp",
   year: 3,
   bio: "Placeholder Text.",
-  course_id: 14
+  course_id: 14,
+  cid: "sg5414"
 }
 
 al4209 = FactoryGirl.create :student,  {
@@ -95,7 +90,8 @@ al4209 = FactoryGirl.create :student,  {
   password_confirmation: "cppcppcpp",
   year: 3,
   bio: "Placeholder Text.",
-  course_id: 14
+  course_id: 14,
+  cid: "al4209"
 }
 
 hwl214.skill_list = skills_tags

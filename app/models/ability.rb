@@ -23,10 +23,12 @@ class Ability
     case user.type
     when nil
       can :create, Student
+      can :request_approval, Student
       can :read, Department
     when "Student"
       can :manage, Student, :id => user.id
-      cannot :index, Student
+      can :index, Student
+      can :show, Student
       can [:read, :register, :unregister, :attending_students], Event
       can :read, Placement
       can [:read, :download_document, :set_rating], Company

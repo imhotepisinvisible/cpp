@@ -41,23 +41,22 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
   # Submit form, validate and save fields
   submitStudent: ->
     if @form.validate() == null
-      @form.commit()
-      @model.save {},
-        wait: true
-        forceUpdate: true
-        success: (model, response) =>
-          notify "success", "Registered"
-          if @login
-            $.post '/sessions', { session: { email: @model.get('email'), password: @model.get('password') } }, (data) ->
-              window.location = '/students/' + model.get('id') + '/edit'
-              window.location.reload(true)
-          else
-            Backbone.history.navigate("/students/#{model.id}/edit", trigger: true)
-        error: (model, response) =>
-          if response.responseText
-            errorlist = JSON.parse response.responseText
+    
+      data = {}
+      data['student'] = @form.getValue()
+      $.ajax
+        url: "/students.json"
+        data: data
+        type: 'POST'
+        success: (data) ->
+          notify "success", "Registered", 2000
+          setTimeout(
+            -> window.location = '/'
+          , 2500)
+        error: (data) =>
+          if data.responseText
+            errorlist = JSON.parse data.responseText
             for field, errors of errorlist.errors
               if field of @form.fields
                 @form.fields[field].setError(errors.join ', ')
-
           notify "error", "Unable to register, please resolve issues below."
