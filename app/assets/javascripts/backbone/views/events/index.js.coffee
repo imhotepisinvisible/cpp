@@ -12,11 +12,11 @@ class CPP.Views.Events.Index extends CPP.Views.Base
   # the views change.
   initialize: ->
     #display ajax spinner whilst waiting for the collection to finish loading
-    @collection.on "fetch", (->
-    	@$('#events-table').append "<div class=\"loading\"></div>"
-    	return), @
-    @collection.bind 'reset', @render, @
-    @collection.bind 'filter', @renderEvents, @
+    #@collection.on "fetch", (->
+    #	@$('#events-table').append "<div class=\"loading\"></div>"
+    #	return), @
+    #@collection.bind 'reset', @render, @
+    #@collection.bind 'filter', @renderEvents, @
     @editable = isAdmin()
     @render()
 
@@ -79,6 +79,7 @@ class CPP.Views.Events.Index extends CPP.Views.Base
       row: ModelRow
       columns: columns
       collection: @collection)
+      #emptyText: "No data to display")
       #footer: Backgrid.Extension.Infinator.extend(scrollToTop: false))
 
     # Render the grid and attach the root to your HTML document
@@ -94,14 +95,14 @@ class CPP.Views.Events.Index extends CPP.Views.Base
     # mode pageable collection's cache.
     filter = new (Backgrid.Extension.ClientSideFilter)(
       collection: @collection
-      fields: [ 'title' ])
+      fields: [ 'company_logo_url', 'title', 'start_date', 'location', 'status' ])
     # Render the filter
     $table.before filter.render().el
 
     #if $(document).height() <= $(window).height()
     #  @collection.getNextPage()
 
-    @renderFilters()
+    #@renderFilters()
   @
 
   # Render each event item
