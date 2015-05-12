@@ -73,7 +73,7 @@ class CPP.Models.Event extends CPP.Models.Base
 
   getReadableDate: (field) ->
     moment(@get(field)).format('Do MMMM YYYY - H:mm')
-    
+
   getTimeAgo: (field) ->
     moment(@get(field)).fromNow()
 
@@ -84,7 +84,7 @@ class CPP.Collections.Events extends CPP.Collections.Base
 class CPP.Collections.EventsPager extends Backbone.PageableCollection
   model: CPP.Models.Event
   url: '/events'
-  mode: 'infinite'
-  
+  mode: 'client'
+
   state:
-    pageSize: 20  
+    pageSize: 20

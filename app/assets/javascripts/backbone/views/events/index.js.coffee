@@ -71,36 +71,36 @@ class CPP.Views.Events.Index extends CPP.Views.Base
         editable: false
       }
     ]
-  
-    $(@el).html(@template(events: @collection.fullCollection, editable: @editable))
+
+    $(@el).html(@template(events: @collection, editable: @editable))
     #@renderEvents(@collection.fullCollection)
     grid = new (Backgrid.Grid)(
       className: "backgrid table-hover table-clickable",
       row: ModelRow
       columns: columns
-      collection: @collection.fullCollection
-      footer: Backgrid.Extension.Infinator.extend(scrollToTop: false))
-      
+      collection: @collection)
+      #footer: Backgrid.Extension.Infinator.extend(scrollToTop: false))
+
     # Render the grid and attach the root to your HTML document
     $table = $('#events-table')
     $table.append grid.render().el
-    
+
     # Initialize the paginator
-    #paginator = new (Backgrid.Extension.Paginator)(collection: @collection)
+    paginator = new (Backgrid.Extension.Paginator)(collection: @collection)
     # Render the paginator
-    #$table.after paginator.render().el
-    
+    $table.after paginator.render().el
+
     # Initialize a client-side filter to filter on the client
     # mode pageable collection's cache.
-    #filter = new (Backgrid.Extension.ClientSideFilter)(
-    #  collection: pageableTerritories
-    #  fields: [ 'name' ])
+    filter = new (Backgrid.Extension.ClientSideFilter)(
+      collection: @collection
+      fields: [ 'title' ])
     # Render the filter
-    #$table.before filter.render().el
+    $table.before filter.render().el
 
     #if $(document).height() <= $(window).height()
     #  @collection.getNextPage()
-      
+
     @renderFilters()
   @
 
@@ -145,7 +145,7 @@ class CPP.Views.Events.Index extends CPP.Views.Base
   viewCompany: ->
     if @collection.company
       Backbone.history.navigate("companies/" + @collection.company.id, trigger: true)
-      
+
   viewEvent: (e) ->
     model = $(e.target).parent().data('model')
     Backbone.history.navigate("events/" + model.id, trigger: true)
