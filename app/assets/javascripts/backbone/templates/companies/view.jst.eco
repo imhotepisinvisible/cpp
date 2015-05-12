@@ -86,13 +86,23 @@
                     <div class="row-fluid">
                       <div class="span12">
 
+                        <!-- Founded When -->
+                        <div class="span3">
+                          <div class="summary-subject">
+                            Founded
+                          </div>
+                          <div class="summary-content">
+                            <%= @company.get('founded') %>
+                          </div>
+                        </div>
+
                         <!-- Company Size -->
                         <div class="span3">
                           <div class="summary-subject">
                             Size
                           </div>
                           <div class="summary-content">
-                            Company Size Dropdown!!
+                            <%= @company.get('size') %>
                           </div>
                         </div>
 
@@ -102,7 +112,7 @@
                             Sector
                           </div>
                           <div class="summary-content">
-                            Company Sector Dropdown!!
+                            <%= @company.get('sector') %>
                           </div>  
                         </div>
 
@@ -112,17 +122,7 @@
                             HQ
                           </div>
                           <div class="summary-content">
-                            Where are you based?
-                          </div>
-                        </div>
-
-                        <!-- Standard Application Proceedure -->
-                        <div class="span3">
-                          <div class="summary-subject">
-                            Applications
-                          </div>
-                          <div class="summary-content">
-                            i.e 3 stage application
+                            <%= @company.get('hq') %>
                           </div>
                         </div>
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150511103339) do
+ActiveRecord::Schema.define(:version => 20150512155313) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -24,6 +24,10 @@ ActiveRecord::Schema.define(:version => 20150511103339) do
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
     t.string   "career_link"
+    t.string   "size"
+    t.string   "sector"
+    t.string   "hq"
+    t.integer  "founded"
   end
 
   create_table "company_contacts", :force => true do |t|
@@ -108,6 +112,8 @@ ActiveRecord::Schema.define(:version => 20150511103339) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.string   "workflow_state"
+    t.string   "contact"
+    t.string   "link"
   end
 
   create_table "impressions", :force => true do |t|
@@ -229,6 +235,11 @@ ActiveRecord::Schema.define(:version => 20150511103339) do
     t.integer  "covering_letter_file_size"
     t.datetime "covering_letter_updated_at"
     t.integer  "course_id"
+    t.string   "gitHub"
+    t.string   "linkedIn"
+    t.string   "personal"
+    t.string   "other"
+    t.string   "available"
   end
 
   add_index "users", ["course_id"], :name => "index_users_on_course_id"

@@ -6,7 +6,7 @@ class CPP.Views.Events.View extends CPP.Views.Base
 
   # Bind event listeners
   events: -> _.extend {}, CPP.Views.Base::events,
-    'click .btn-signup-student': 'signup'
+    'click #btn-signup-student': 'signup'
 
   # If student record that the event has been viewed by a student
   # for companies to use later
@@ -63,6 +63,6 @@ class CPP.Views.Events.View extends CPP.Views.Base
     $('#capacity-progress').removeClass 'progress-info progress-danger progress-warning'
     $('#capacity-progress').addClass "progress-#{@model.getCapacityClass()}"
     $('#capacity-bar').width("#{@model.getPercentageCapacity()}%")
-    $('.btn-signup-student').html(if attending then "I don't want to go" else "Sign me up!")
+    $('#btn-signup-student').html(if attending then "Relinquish my ticket" else "Sign me up!")
     $('#attending-text').html('You are ' + (unless attending then 'not ' else '') + 'attending this event')
     $('#number-attending').html(@model.getFilled())

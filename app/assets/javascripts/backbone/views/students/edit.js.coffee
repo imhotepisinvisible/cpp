@@ -17,12 +17,22 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     'submit #skill-tag-form': 'addSkill'
     'change #looking-for-select' : 'changeLookingFor'
     'blur #year-input' : 'changeYear'
+    'blur #available-input' : 'changeAvailable'
     'change #student-course-input' : 'changeCourse'
     'keyup #student-name-input-container' : 'stopEditOnEnter'
     'keyup #student-degree-input-container': 'stopEditOnEnter'
     
     'click #student-gitHub-container': 'gitEdit'
     'blur #student-gitHub-input-container':'gitStopEdit'
+
+    'click #student-linkedIn-container': 'linkedInEdit'
+    'blur #student-linkedIn-input-container':'linkedInStopEdit'
+
+    'click #student-personal-container': 'personalEdit'
+    'blur #student-personal-input-container':'personalStopEdit'
+
+    'click #student-other-container': 'otherEdit'
+    'blur #student-other-input-container':'otherStopEdit'
 
 
   # Setup skills, interests and year tag editors
@@ -110,6 +120,11 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     if @model.get('year') != null
       for option in $('#year-input').children()
         if parseInt($(option).val()) == @model.get('year')
+          $(option).attr('selected', 'selected')
+
+    if @model.get('available') != null
+      for option in $('#available-input').children()
+        if $(option).val() == @model.get('available')
           $(option).attr('selected', 'selected')
     super
     @
@@ -209,8 +224,35 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
 
   # Stop inline git edit and save changes
   gitStopEdit: ->
-    window.inPlaceStopEdit @model, 'student', 'gitHub', 'Click here to add a gitHub link!', ((gitHub) ->
+    window.inPlaceStopEdit @model, 'student', 'gitHub', 'Click here to add a link', ((gitHub) ->
       gitHub.replace(/\n/g, "<br/>"))
+
+  # Show inline git edit
+  linkedInEdit: ->
+    window.inPlaceEdit @model, 'student', 'linkedIn'
+
+  # Stop inline git edit and save changes
+  linkedInStopEdit: ->
+    window.inPlaceStopEdit @model, 'student', 'linkedIn', 'Click here to add a link', ((linkedIn) ->
+      linkedIn.replace(/\n/g, "<br/>"))
+
+  # Show inline git edit
+  personalEdit: ->
+    window.inPlaceEdit @model, 'student', 'personal'
+
+  # Stop inline git edit and save changes
+  personalStopEdit: ->
+    window.inPlaceStopEdit @model, 'student', 'personal', 'Click here to add a link', ((personal) ->
+      personal.replace(/\n/g, "<br/>"))
+
+  # Show inline git edit
+  otherEdit: ->
+    window.inPlaceEdit @model, 'student', 'other'
+
+  # Stop inline git edit and save changes
+  otherStopEdit: ->
+    window.inPlaceStopEdit @model, 'student', 'other', 'Click to add a link', ((other) ->
+      other.replace(/\n/g, "<br/>"))
 
 
   # Show inline name edit
@@ -328,6 +370,25 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
         notify 'success', 'Year updated'
       error: (model, response) =>
         notify 'error', 'Could not update year'
+
+  # Update and save year field highlight 
+  changeAvailable: (e) ->
+    available = $(e.currentTarget).val()
+    if available
+      $(e.currentTarget).removeClass('missing')
+    else
+      available = null
+      $(e.currentTarget).addClass('missing')
+      return
+
+    @model.set 'available', available
+    @model.save {},
+      wait: true
+      forceUpdate: true
+      success: (model, response) =>
+        notify 'success', 'Availability updated'
+      error: (model, response) =>
+        notify 'error', 'Could not update when available'
 
   changeCourse: (e) ->
     courseId = parseInt($(e.currentTarget).val())
