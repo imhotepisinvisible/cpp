@@ -6,6 +6,7 @@ class DeviseMailer < Devise::Mailer
   def confirmation_instructions(record, token, opts={})
     if record.is_student?
       opts[:to] = record.cid + "@imperial.ac.uk"
+      record.send_created
     end
     super
   end
