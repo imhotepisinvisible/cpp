@@ -16,7 +16,7 @@
             class="upload-container <%= "missing-document" unless @student.get('profile_picture_file_name') %> image-buttons-container">
 
             <% if @student.get 'profile_picture_file_name': %>
-            <img src="/students/<%= @student.get 'id' %>/documents/profile_picture" id="student-profile-img">
+            <img src="<%= @student.get 'profile_thumb' %>" id="student-profile-img">
             <% else: %>
             <img src="/assets/default_profile.png" id="student-profile-img">
             <% end %>

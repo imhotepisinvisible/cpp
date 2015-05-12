@@ -47,7 +47,7 @@ class Student < User
   has_attached_file :cv, :styles => { :img => ["1240x1754", :png] }
   has_attached_file :transcript
   has_attached_file :covering_letter
-  has_attached_file :profile_picture,
+  has_attached_file :profile_picture, :styles => { :thumb => "180x180#" },
                     :default_url => '/assets/default_profile.png'
 
   validates_attachment :cv, :transcript, :covering_letter,
@@ -106,6 +106,7 @@ class Student < User
     result[:stat_count] = @stat_count
     result[:confirmed] = confirmed_at?
     result[:cv_img] = cv.url(:img)
+    result[:profile_thumb] = profile_picture.url(:thumb)
     return result
   end
 
