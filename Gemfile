@@ -66,8 +66,8 @@ group :development, :test do
   gem 'spork-rails'           # Spork for pre-loading RSpec
   gem 'shoulda-matchers'      # Helpful for RSpec testing
   gem 'simplecov'             # For code coverage stats
-  
-  gem 'teaspoon'              # Javascript TDD/BDD runner (includes Jasmine)
+
+  gem 'teaspoon-jasmine'      # Javascript TDD/BDD runner (includes Jasmine)
   gem 'phantomjs'             # For running headless tests
 
   gem 'pry-rails'             # Awesome developer console http://pryrepl.org/

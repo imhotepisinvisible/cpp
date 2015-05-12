@@ -72,16 +72,12 @@ Teaspoon.configure do |config|
     # Partial to be rendered in the body tag of the runner. You can define your own to create a custom body structure.
     #suite.body_partial = "body"
 
-    # Assets to be ignored when generating coverage reports. Accepts an array of filenames or regular expressions. The
-    # default excludes assets from vendor, gems and support libraries.<br/><br/>
-    suite.no_coverage = [%r{/lib/ruby/gems/}, %r{/vendor/assets/}, %r{/support/}, %r{/(.+)_helper.}, %r{/spec/javascripts/}, %r{/app/assets/javascripts/backbone/templates/}]
-
     # Hooks allow you to use `Teaspoon.hook("fixtures")` before, after, or during your spec run. This will make a
     # synchronous Ajax request to the server that will call all of the blocks you've defined for that hook name.
     #suite.hook :fixtures, proc{ }
 
     # Determine whether specs loaded into the test harness should be embedded as individual script tags or concatenated
-    # into a single file. Similar to Rails' asset `debug: true` and `config.assets.debug = true` options. By default, 
+    # into a single file. Similar to Rails' asset `debug: true` and `config.assets.debug = true` options. By default,
     # Teaspoon expands all assets to provide more valuable stack traces that reference individual source files.
     #suite.expand_assets = false
 
@@ -174,6 +170,10 @@ Teaspoon.configure do |config|
     # The path that the coverage should be written to - when there's an artifact to write to disk.
     # Note: Relative to `config.root`.
     coverage.output_path = "coverage"
+
+    # Assets to be ignored when generating coverage reports. Accepts an array of filenames or regular expressions. The
+    # default excludes assets from vendor, gems and support libraries.<br/><br/>
+    coverage.ignore = [%r{/lib/ruby/gems/}, %r{/vendor/assets/}, %r{/support/}, %r{/(.+)_helper.}, %r{/spec/javascripts/}, %r{/app/assets/javascripts/backbone/templates/}]
 
     # Various thresholds requirements can be defined, and those thresholds will be checked at the end of a run. If any
     # aren't met the run will fail with a message. Thresholds can be defined as a percentage (0-100), or nil.

@@ -293,6 +293,8 @@ GEM
       i18n
     teaspoon (1.0.2)
       railties (>= 3.2.5, < 5)
+    teaspoon-jasmine (2.2.0)
+      teaspoon (>= 1.0.0)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
@@ -390,7 +392,7 @@ DEPENDENCIES
   simplecov
   spork-rails
   sqlite3
-  teaspoon
+  teaspoon-jasmine
   therubyracer (= 0.12.1)
   thin
   tinymce-rails
