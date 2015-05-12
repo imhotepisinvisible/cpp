@@ -110,8 +110,9 @@ class StudentsController < ApplicationController
   # GET /students/1/request_approval
   def request_approval
     @student = Student.find(params[:id])
-    # if needs approval...
-    @student.send_admin_approval
+    unless @student.confirmed?
+      @student.send_admin_approval
+    end
     redirect_to root_path
   end
 
