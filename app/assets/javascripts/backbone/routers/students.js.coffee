@@ -10,13 +10,10 @@ class CPP.Routers.Students extends Backbone.Router
       'edit': 'edit'
       'profile_preview': 'view'
       'settings': 'settings'
-      'register': 'signup' 
+      'register': 'signup'
 
   # Student index
   index: ->
-    if isStudent()
-      window.history.back()
-      return false
     students = new CPP.Collections.Students
     new CPP.Views.Students.Index collection: students
     students.fetch
@@ -43,17 +40,17 @@ class CPP.Routers.Students extends Backbone.Router
     student = @getStudentFromID(id)
     unless student
       notify "error", "Invalid Student"
-    
+
     student.fetch
       error: ->
         notify "error", "Couldn't fetch student"
-    
+
     new CPP.Views.Students.Edit model: student
-    
+
     # Fetch 3 events and placements for dashboard
     student.events.fetch({ data: $.param({ limit: 3 , start_date: moment().toISOString()}) })
     student.placements.fetch({ data: $.param({ limit: 3, deadline: moment().toISOString()}) })
-       
+
   # Student administration page
   admin: (id) ->
     student = new CPP.Models.Student id: id
@@ -101,5 +98,3 @@ class CPP.Routers.Students extends Backbone.Router
       return CPP.CurrentUser
     else
       return false
-
-                  
