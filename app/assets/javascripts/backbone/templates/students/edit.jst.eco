@@ -50,12 +50,12 @@
 
             <!-- Student name editing -->
               <div id="student-name-input-container" style="display:none">
-                <input type="text" class="span8" id="student-name-editor" value="<%= @student.get 'first_name' %> <%= @student.get 'last_name' %>">
+                <input type="text" class="span8" id="student-name-editor" value="<%= @student.get('first_name') %> <%= @student.get('last_name') %>">
               </div>
 
               <div id="student-name-container">
                 <span id="student-profile-intro-name" class="student-editable" <%= addTooltip(@student.get('tooltip'), 'Click to edit your name', 'right') %>>
-                  <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
+                  <%= @student.get('first_name') %> <%= @student.get('last_name') %>
                 </span>
               </div>
 
@@ -75,7 +75,7 @@
                     <div id="student-bio-container">
                       <p id="student-bio" class="student-editable <%= if not @student.get('bio') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to edit your "About Me" section', 'bottom') %>>
                         <% if @student.get('bio'): %>
-                        <%- @student.get('bio').replace(/\n/g, "<br/>") %>
+                          <%= @student.get('bio').replace(/\n/g, "<br/>") %>
                         <% else: %>
                         Click here to add an About Me!
                         <% end %>
@@ -165,8 +165,10 @@
                         </div>
                         <div class="summary-content">
                           <select id="year-input" class="student-profile-select">
+                          <% Year = new Date %>
+                          <% currentYear = Year.getFullYear() %>
                             <option value="">Pick a Year</option>
-                            <% for year in [2000..2020]: %>
+                            <% for year in [(currentYear - 15)..(currentYear + 10)]: %>
                             <option value="<%= year %>"><%= year %></option>
                             <% end %>
                           </select>
@@ -179,7 +181,7 @@
                           Looking for
                         </div>
                         <div class="summary-content">
-                          <select id="looking-for-select" class="span8 student-profile-select" <%= addTooltip(@student.get('tooltip'), 'Select the status that best matches you', 'right') %>>
+                          <select id="looking-for-select" class="student-profile-select" <%= addTooltip(@student.get('tooltip'), 'Select the status that best matches you', 'right') %>>
                             <option value="">Select your employment status</option>
                             <option><%= looking_fors.industrial %></option>
                             <option><%= looking_fors.summer %></option>
@@ -195,12 +197,21 @@
                       <!-- Looking for, time period/when -->
                       <div class="span3">
                         <div class="summary-subject">
-                          When
+                          Availability 
                         </div>
                         <div class="summary-content">
-                          Placeholder, Summer 2014
+                          <select id="available-input" class="student-profile-select">
+                          <% theYear = new Date %>
+                          <% current_year = theYear.getFullYear() %>
+                            <option value="">Pick a Season and Year</option>
+                            <% for year in [current_year..(current_year + 5)]: %>
+                              <% for season in ['Spring', 'Summer', 'Autumn', 'Winter']: %>
+                                <option value="<%= season + ', ' + year %>"><%= season + ', ' + year %></option>
+                              <% end %>
+                            <% end %>
+                          </select>
                         </div>
-                      </div>
+                      </div>  
 
                     </div>
                   </div>
@@ -259,7 +270,26 @@
                                 Github
                               </div>
                               <div class="content-secondary">
-                                link-to-github
+
+
+                                  <div id="student-gitHub-input-container" style="display:none">
+                                      <textarea id="student-gitHub-editor">
+                                        <%= @student.get('gitHub') %>
+                                      </textarea>
+                                    </div>
+
+                                  <div id="student-gitHub-container">
+                                    <p id="student-gitHub" class="student-editable <%= if not @student.get('gitHub') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to add Github link', 'bottom') %>>
+                                      <% if @student.get('gitHub'): %>
+                                        <%= @student.get('gitHub').replace(/\n/g, "<br/>") %>
+                                      <% else: %>
+                                      Click to add Github link
+                                      <% end %>
+                                    </p>
+                                  </div>
+
+
+
                               </div>
                             </div>
 
@@ -275,7 +305,26 @@
                                 Linkedin
                               </div>
                               <div class="content-secondary">
-                                link-to-linked
+                                
+                              <div id="student-linkedIn-input-container" style="display:none">
+                                      <textarea id="student-linkedIn-editor">
+                                        <%= @student.get('linkedIn') %>
+                                      </textarea>
+                                    </div>
+
+                                  <div id="student-linkedIn-container">
+                                    <p id="student-linkedIn" class="student-editable <%= if not @student.get('linkedIn') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to add LinkedIn link', 'bottom') %>>
+                                      <% if @student.get('linkedIn'): %>
+                                        <%= @student.get('linkedIn').replace(/\n/g, "<br/>") %>
+                                      <% else: %>
+                                      Click to add LinkedIn link
+                                      <% end %>
+                                    </p>
+                                  </div>
+
+
+
+
                               </div>
                             </div>
 
@@ -291,7 +340,59 @@
                                 Personal Website
                               </div>
                               <div class="content-secondary">
-                                link-to-website
+
+                               <div id="student-personal-input-container" style="display:none">
+                                      <textarea id="student-personal-editor">
+                                        <%= @student.get('personal') %>
+                                      </textarea>
+                                    </div>
+
+                                  <div id="student-personal-container">
+                                    <p id="student-personal" class="student-editable <%= if not @student.get('personal') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to add a link to your personal site', 'bottom') %>>
+                                      <% if @student.get('personal'): %>
+                                        <%= @student.get('personal').replace(/\n/g, "<br/>") %>
+                                      <% else: %>
+                                      Click to add a link to your personal site
+                                      <% end %>
+                                    </p>
+                                  </div>
+                                
+  
+
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+
+                        <!-- Link 4: Other website, i.e personal -->
+                        <div class="row-fluid">
+                          <div class="span12">
+
+                            <div class="content-row">
+                              <div class="content-primary">
+                                Other
+                              </div>
+                              <div class="content-secondary">
+
+                               <div id="student-other-input-container" style="display:none">
+                                      <textarea id="student-other-editor">
+                                        <%= @student.get('other') %>
+                                      </textarea>
+                                    </div>
+
+                                  <div id="student-other-container">
+                                    <p id="student-other" class="student-editable <%= if not @student.get('other') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to another link', 'bottom') %>>
+                                      <% if @student.get('other'): %>
+                                        <%= @student.get('other').replace(/\n/g, "<br/>") %>
+                                      <% else: %>
+                                      Click to add a link
+                                      <% end %>
+                                    </p>
+                                  </div>
+                                
+  
+
                               </div>
                             </div>
 

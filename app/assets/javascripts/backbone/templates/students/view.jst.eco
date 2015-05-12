@@ -31,9 +31,23 @@
             <div id="student-profile-key-info">
               <div id="student-profile-intro">
 
-                <p id="student-profile-intro-name">
+                <p>
+                  <div id="student-profile-intro-name">
                   <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
+                  </div>
+
+                  
+                  <% AlumniYear = new Date %>
+                  <% _AlumniYear = AlumniYear.getFullYear() %>
+                  <% graduatingYear = @student.get('year') %>
+                  <% if (graduatingYear < _AlumniYear): %>
+                  <div id="alumni-selector">
+                    Alumni
+                  </div>
+
+                <% end %>
                 </p>
+
 
                 <!-- Student 'about me' -->
                 <div id="about-header">
@@ -118,7 +132,7 @@
                           </div>
                           <div class="summary-content">
                             <% if @student.get('looking_for') != null: %>
-                            Looking for <%= @student.get 'looking_for' %>
+                              <%= @student.get 'looking_for' %>
                             <% end %>
                           </div>
                         </div>
@@ -127,10 +141,12 @@
                         <!-- NEEDS TO BE MADE NON-HARD CODED -->
                         <div class="span3">
                           <div class="summary-subject">
-                            When
+                            Availability
                           </div>
                           <div class="summary-content">
-                            Placeholder, Summer 2014
+                            <% if @student.get('available') != null: %>
+                              <%= @student.get 'available' %>
+                            <% end %>
                           </div>
                         </div>
 
@@ -196,7 +212,20 @@
 
                           <!-- NEEDS TO BE MADE INTERACTIVE/STORE IN DATABASE -->
 
+                          <% if not @student.get('gitHub') and not @student.get('LinkedIn') and not @student.get('personal') and not @student.get('other'): %>
+                            <div class="row-fluid">
+                              <div class="span12">
+                                <div class="content-row">
+                                  <div class="content-primary">
+                                    Student has no links
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          <% end %>
+
                           <!-- Link 1: github -->
+                          <% if @student.get('gitHub'): %>
                           <div class="row-fluid">
                             <div class="span12">
 
@@ -205,14 +234,16 @@
                                   Github
                                 </div>
                                 <div class="content-secondary">
-                                  link-to-github
+                                  <%= @student.get('gitHub') %>
                                 </div>
                               </div>
 
                             </div>
                           </div>
+                          <% end %>
 
                           <!-- Link 2: Linkedin -->
+                          <% if @student.get('linkedIn'): %>
                           <div class="row-fluid">
                             <div class="span12">
 
@@ -221,28 +252,50 @@
                                   Linkedin
                                 </div>
                                 <div class="content-secondary">
-                                  link-to-linked
+                                  <%= @student.get('linkedIn') %>
                                 </div>
                               </div>
 
                             </div>
                           </div>
+                          <% end %>
 
                           <!-- Link 3: Other website, i.e personal -->
+                          <% if @student.get('personal'): %>
+
+                            <div class="row-fluid">
+                              <div class="span12">
+
+                                <div class="content-row">
+                                  <div class="content-primary">
+                                    Personal Website
+                                  </div>
+                                  <div class="content-secondary">
+                                    <%= @student.get('personal') %>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          <% end %>
+
+                          <!-- Link 3: Other website, i.e personal -->
+                          <% if @student.get('other'): %>
                           <div class="row-fluid">
                             <div class="span12">
 
                               <div class="content-row">
                                 <div class="content-primary">
-                                  Personal Website
+                                  Other
                                 </div>
                                 <div class="content-secondary">
-                                  link-to-website
+                                  <%= @student.get('other') %>
                                 </div>
                               </div>
 
                             </div>
                           </div>
+                          <% end %>
 
                         </div> <!-- end of links -->
 

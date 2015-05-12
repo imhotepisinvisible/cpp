@@ -24,6 +24,12 @@ class CPP.Models.Event extends CPP.Models.Base
     title:
       type: 'Text'
       title: "Title*"
+    contact:
+      type: 'Text'
+      title: "Primary Contact*"
+    link:
+      type: 'Text'
+      title: "External Link"
     start_date:
       type: "DateTime"
       title: "Start Date*"

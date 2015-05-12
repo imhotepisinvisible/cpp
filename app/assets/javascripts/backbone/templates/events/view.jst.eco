@@ -41,22 +41,24 @@
             </div>
             <!-- </div> -->
 
-            <!-- <div class="span2"> -->
-            <div class="image-button-links">
-              <% if @attending: %>
-              I don't want to go
-              <% else: %>
-              Sign me up!
-              <% end %>
-            </div>
+
             <!-- </div> -->
 
             <% else if @admin: %>
 
             <div id="event-email">
               <a class="link-accent first-padding" href="/events/<%= @event.id %>/students">View Attendees</a>
-              <a class="link-accent" href="/events/<%= @event.id %>/email_attendees">Email Attendees</a>
-              <a class="link-accent" href="/events/<%= @event.id %>/emails">View Emails Sent</a>
+            <% if @event.get('link'): %>
+              <a class="link-accent" href="http://<%= @event.get('link') %>">
+                External Link
+              </a>
+            <% end %>
+            <!-- Contact -->
+            <% if @event.get('contact'): %>
+              <a class="link-accent" href="mailto:<%= @event.get('contact') %>">
+                Primary Contact
+              </a>
+            <% end %>
             </div>
 
             <% end %>
@@ -66,13 +68,27 @@
           <!-- Useful Info -->
           <div>
             <!-- Download Job Specification PDF -->
-            <a class="link-accent first-padding">Download Slides</a>
-            <!-- Contact -->
-            <a class="link-accent">Contact</a>
+            <% if @student: %>
+              <a class="link-accent first-padding" id="btn-signup-student">
+                <% if @attending: %>
+                Relinquish my ticket
+                <% else: %>
+                Sign me up!
+                <% end %>
+              </a>
+              <% if @event.get('link'): %>
+                <a class="link-accent" href="http://<%= @event.get('link') %>">
+                  External Link
+                </a>
+              <% end %>
+              <!-- Contact -->
+              <% if @event.get('contact'): %>
+                <a class="link-accent" href="mailto:<%= @event.get('contact') %>">
+                  Primary Contact
+                </a>
+              <% end %>
+            <% end %>
             <!-- Apply through external link -->
-            <a class="link-accent">RSVP</a>
-          </div>
-
         </div>
       </div>
     </div>

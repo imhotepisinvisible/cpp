@@ -1,74 +1,178 @@
 <div class="row-fluid">
-  <div class="span8">
-
-  <!-- Company Key Info: Header -->
-    <h1 class="section-header">
-      <%= @company.get 'name' %>
-
-      <!-- Admin, with editing header -->
-      <% if isDepartmentAdmin(): %>
-        <div class="btn-group pull-right">
-	  <div class="btn btn-small button-company-edit"><i class="icon-pencil" /></div>
-        </div>
-      <% end %>
-
-      <!-- Student, with favouriting header -->
-      <% if window.isStudent(): %>
-        </span>
-          <span id="ban-rating" class="fav-icon pull-right <%= @company.getBanClass() %>" <%= addTooltip(@tooltip, 'Click here to never receive emails from this company', 'top') %>></span>
-          <span id="star-rating" class="fav-icon pull-right <%= @company.getStarClass() %>" <%= addTooltip(@tooltip, 'Click here to always receive emails from this company', 'top') %>></span>
-        </span>
-      <% end %>
-
-    </h1>
-
-
+  <div class="span9" id="centre-span-border">
+  
+    <!-- Company Profile Photo and Key Info -->
     <div class="row-fluid">
+      <div class="span12" id="student-profile-header">
+        <div class="full-borderless-card">
 
-    <!-- Company Key Info: Logo-->
-      <div class="span4">
-        <div class="company-logo-large">
-          <img src="<%= @company.get('logo_url') %>">
+          <!-- logo -->
+          <div class="span3">
+            <div id="student-profile-img-container"> 
+              <img src="<%= @company.get('logo_url') %>">
+            </div>
+          </div>
+
+          <!-- Key Info -->
+          <div class="span9">
+            <div id="student-profile-key-info">
+              <div id="student-profile-intro">
+
+                <p id="student-profile-intro-name">
+                  <%= @company.get 'name' %>
+                </p>
+
+                <!-- Admin, with editing header -->
+                  <% if isDepartmentAdmin(): %>
+                    <div class="btn-group pull-right">
+                <div class="btn btn-small button-company-edit"><i class="icon-pencil" /></div>
+                    </div>
+                  <% end %>
+
+                  <!-- Student, with favouriting header -->
+                  <% if window.isStudent(): %>
+                    </span>
+                      <span id="ban-rating" class="fav-icon pull-right <%= @company.getBanClass() %>" <%= addTooltip(@tooltip, 'Click here to never receive emails from this company', 'top') %>></span>
+                      <span id="star-rating" class="fav-icon pull-right <%= @company.getStarClass() %>" <%= addTooltip(@tooltip, 'Click here to always receive emails from this company', 'top') %>></span>
+                    </span>
+                  <% end %>
+
+
+                <!-- Company 'about me' -->
+                <div id="about-header">
+                  Summary
+                </div>
+
+                <div id="about-content">
+                  <% if @company.get('description'): %>
+                  <p>
+                    <%- @company.get('description').replace(/\n/g, "<br/>") %>
+                  </p>
+                  <% else: %>
+                  <div class="empty-student-profile-field-container">
+                    <i class="icon-user empty-student-profile-field"/>
+                  </div>
+                  <% end %>
+                </div>
+
+                <!-- Links to all contacts - at the moment in contacts-partial -->
+                <div id="contacts-partial"></div>
+
+              </div>
+            </div>
+          </div>
+
+
+
         </div>
       </div>
-
-      <!-- Company Key Info: Description -->
-      <div class="span4">
-        <%= @company.get 'description' %>
-      </div>
-
     </div>
 
-  </div> <!-- end of span 8 -->
+    <!-- Main body of Company Profile -->
+    <div class="row-fluid">
+      <div class="span12" id="student-profile-body-container">
+        
+        <div class="row-fluid">
+          <div class="span12" id="student-profile-body">
 
-  <!-- Company Contact Details -->
-  <div class="span4">
-    <div id="contacts-partial"></div>
+            <!-- company summary -->
+            <div class="row-fluid">
+              <div class="span12">
+      
+                  <div class="full-width-card">
+
+                  <!-- Full-Width 'header' -->
+                  <div class="full-header">
+                    <div class="row-fluid">
+                      <div class="span12">
+
+                        <!-- Founded When -->
+                        <div class="span3">
+                          <div class="summary-subject">
+                            Founded
+                          </div>
+                          <div class="summary-content">
+                            <%= @company.get('founded') %>
+                          </div>
+                        </div>
+
+                        <!-- Company Size -->
+                        <div class="span3">
+                          <div class="summary-subject">
+                            Size
+                          </div>
+                          <div class="summary-content">
+                            <%= @company.get('size') %>
+                          </div>
+                        </div>
+
+                        <!-- Company Sector -->
+                        <div class="span3">
+                          <div class="summary-subject">
+                            Sector
+                          </div>
+                          <div class="summary-content">
+                            <%= @company.get('sector') %>
+                          </div>  
+                        </div>
+
+                        <!-- Company HeadQuarters Location -->
+                        <div class="span3">
+                          <div class="summary-subject">
+                            HQ
+                          </div>
+                          <div class="summary-content">
+                            <%= @company.get('hq') %>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Full-width body (non-coloured part) -->
+
+                  <div class="full-body">
+                    <div class="row-fluid">
+                      <div class="span12">
+
+                        <!-- Events offered, another template -->
+                        <div class="span6">
+                          <h1 class="section-header">
+                            Events
+                          </h1>
+
+                          <div class="row-fluid">
+                            <div class="span12" id="events-partial">
+                          </div>
+                        </div>
+                        </div>
+
+                        <!-- Placements offered -->
+                        <div class="span6">
+                          <h1 class="section-header">
+                            Opportunities
+                          </h1>
+
+                          <div class="row-fluid">
+                            <div class="span12" id="placements-partial">
+                          </div>
+                        </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  </div>
+
+              </div>
+            </div>
+
+      </div>
+    </div>
+
+
+
   </div>
-
 </div>
-
-<div class="row-fluid">
-  <!-- Events offered, in another template -->
-  <div class="span6" id="events-partial"></div>
-  <!-- Placements offered, in another template -->
-  <div class="span6" id="placements-partial"></div>
-</div>
-
-<% if !isStudent(): %>
-
-<div class="row-fluid">
-
-  <div class="span6" id="emails-partial"></div>
-
-<!--   <div class="span6" id="stats-partial">
-    <h1 class="section-header">
-      <i class="icon-tasks"></i>
-      Stats
-    </h1>
-    <div id="orders_chart"></div>
-  </div> -->
-
-</div>
-
-<% end %>

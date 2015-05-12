@@ -10,6 +10,14 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
     'click .upload-document': 'uploadDocument'
     'click .delete-document': 'deleteDocument'
 
+    'blur #year-input' : 'changeYear'
+    'blur #size-input' : 'changeSize'
+
+    'click #company-hq-container': 'hqEdit'
+    'blur #company-hq-input-container':'hqStopEdit'
+
+    'change #sector-select' : 'changeSector'
+
   # Company dashboard
   initialize: ->
     @model.bind 'change', @render, @
@@ -95,12 +103,12 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
       collection: @model.emails
       editable: true
 
-    new CPP.Views.Stats.LineGraph
-      url: "/companies/#{@model.id}/view_stats"
-      yAxis: 'Views'
-      title: 'Student Views'
-      el: $(@el).find('#orders_chart')
-      type: 'datetime'
+    # new CPP.Views.Stats.LineGraph
+    #   url: "/companies/#{@model.id}/view_stats"
+    #   yAxis: 'Views'
+    #   title: 'Student Views'
+    #   el: $(@el).find('#orders_chart')
+    #   type: 'datetime'
 
     new CPP.Views.Companies.EditAdministrators
       el: $(@el).find('#edit-admins')
@@ -110,7 +118,24 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
     #new CPP.Views.Companies.DepartmentRequests
     #  el: $(@el).find('#departments')
     #  company: @model
+
+    if @model.get('founded') != null
+      for option in $('#year-input').children()
+        if parseInt($(option).val()) == @model.get('founded')
+          $(option).attr('selected', 'selected')
+
+    if @model.get('size') != null
+      for option in $('#size-input').children()
+        if $(option).val() == @model.get('size')
+          $(option).attr('selected', 'selected')
+
+    # Set the default selected looking_for
+    for option in $('#sector-select').children()
+      if $(option).val() == @model.get('sector')
+        $(option).attr('selected', 'selected')
     @
+
+
 
   # Start editing the company name
   companyNameEdit: ->
@@ -128,3 +153,61 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
   descriptionStopEdit: ->
     window.inPlaceStopEdit @model, 'company', 'description', 'Click here to add a description!', ((desc) ->
       desc.replace(/\n/g, "<br/>"))
+
+  changeYear: (e) ->
+    year = parseInt($(e.currentTarget).val())
+    if year
+      $(e.currentTarget).removeClass('missing')
+    else
+      year = null
+      $(e.currentTarget).addClass('missing')
+      return
+
+    @model.set 'founded', year
+    @model.save {},
+      wait: true
+      forceUpdate: true
+      success: (model, response) =>
+        notify 'success', 'Year founded updated'
+      error: (model, response) =>
+        notify 'error', 'Could not update year founded'
+
+  changeSize: (e) ->
+    size = $(e.currentTarget).val()
+    if size
+      $(e.currentTarget).removeClass('missing')
+    else
+      size = null
+      $(e.currentTarget).addClass('missing')
+      return
+
+    @model.set 'size', size
+    @model.save {},
+      wait: true
+      forceUpdate: true
+      success: (model, response) =>
+        notify 'success', 'Size updated'
+      error: (model, response) =>
+        notify 'error', 'Could not update size'
+
+  # Show inline git edit
+  hqEdit: ->
+    window.inPlaceEdit @model, 'company', 'hq'
+
+  # Stop inline git edit and save changes
+  hqStopEdit: ->
+    window.inPlaceStopEdit @model, 'company', 'hq', 'Click to add a link', ((hq) ->
+      hq.replace(/\n/g, "<br/>"))
+
+
+  # Update looking_for field in model and save
+  changeSector: (e) ->
+    sector = $(e.currentTarget).val()
+    @model.set 'sector', sector
+    @model.save {},
+      wait: true
+      forceUpdate: true
+      success: (model, response) =>
+        notify "success", "Updated Sector"
+      error: (model, response) =>
+        notify "error", "Could not update Sector"

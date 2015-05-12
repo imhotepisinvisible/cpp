@@ -59,7 +59,7 @@ class Event < ActiveRecord::Base
   attr_accessible :skill_list, :interest_list, :year_group_list,
                   :title, :start_date, :end_date, :deadline,
                   :description, :location, :capacity,
-                  :company_id, :requirements
+                  :company_id, :requirements, :contact, :link
 
   #################################################################
   # Attributes not to store in database direectly and exist

@@ -58,11 +58,14 @@ class Student < User
       :content_type => { :content_type => ["image/jpeg", "image/png"],
                           message: "Must be a jpeg or png file"}
 
+
+
   ############## Attributes can be set via mass assignment ############
   attr_accessible :year, :bio, :degree, :email, :cv, :transcript,
                   :covering_letter, :profile_picture, :skill_list,
                   :interest_list, :reject_skill_list, :reject_interest_list,
-                  :year_group_list, :active, :looking_for, :tooltip, :course_id, :cid
+                  :year_group_list, :active, :looking_for, :tooltip, :course_id,
+                  :cid, :gitHub, :linkedIn, :personal, :other, :available
 
   ####################################################################
   # Attributes not to store in database direectly and exist

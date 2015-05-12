@@ -109,6 +109,8 @@ ActiveRecord::Schema.define(:version => 20150511093414) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.string   "workflow_state"
+    t.string   "contact"
+    t.string   "link"
   end
 
   create_table "impressions", :force => true do |t|

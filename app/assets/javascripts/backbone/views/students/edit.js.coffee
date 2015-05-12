@@ -14,15 +14,26 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     'blur #student-bio-input-container': 'bioStopEdit'
     'click #student-name-container': 'nameEdit'
     'blur #student-name-input-container': 'nameStopEdit'
-    # 'click #student-degree-container': 'degreeEdit'
-    # 'blur #student-degree-input-container': 'degreeStopEdit'
     'submit #skill-tag-form': 'addSkill'
-    # 'click #btn-toggle-profile' : 'toggleProfile'
     'change #looking-for-select' : 'changeLookingFor'
     'blur #year-input' : 'changeYear'
+    'blur #available-input' : 'changeAvailable'
     'change #student-course-input' : 'changeCourse'
     'keyup #student-name-input-container' : 'stopEditOnEnter'
     'keyup #student-degree-input-container': 'stopEditOnEnter'
+    
+    'click #student-gitHub-container': 'gitEdit'
+    'blur #student-gitHub-input-container':'gitStopEdit'
+
+    'click #student-linkedIn-container': 'linkedInEdit'
+    'blur #student-linkedIn-input-container':'linkedInStopEdit'
+
+    'click #student-personal-container': 'personalEdit'
+    'blur #student-personal-input-container':'personalStopEdit'
+
+    'click #student-other-container': 'otherEdit'
+    'blur #student-other-input-container':'otherStopEdit'
+
 
   # Setup skills, interests and year tag editors
   # Initialise uploads and call render
@@ -109,6 +120,11 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     if @model.get('year') != null
       for option in $('#year-input').children()
         if parseInt($(option).val()) == @model.get('year')
+          $(option).attr('selected', 'selected')
+
+    if @model.get('available') != null
+      for option in $('#available-input').children()
+        if $(option).val() == @model.get('available')
           $(option).attr('selected', 'selected')
     super
     @
@@ -202,19 +218,42 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     window.inPlaceStopEdit @model, 'student', 'bio', 'Click here to add an About Me!', ((bio) ->
       bio.replace(/\n/g, "<br/>"))
 
-  # # Show inline degree edit
-  # degreeEdit: ->
-  #   window.inPlaceEdit @model, 'student', 'degree'
+  # Show inline git edit
+  gitEdit: ->
+    window.inPlaceEdit @model, 'student', 'gitHub'
 
-  # # Stop inline bio edit and save changes  
-  # degreeStopEdit: (e) ->
-  #   deferreds = []
-  #   if e and $('.dropdown-menu').is(':visible') and $('.dropdown-menu:hover').length > 0
-  #     deferreds.push($('.dropdown-menu').click())
+  # Stop inline git edit and save changes
+  gitStopEdit: ->
+    window.inPlaceStopEdit @model, 'student', 'gitHub', 'Click here to add a link', ((gitHub) ->
+      gitHub.replace(/\n/g, "<br/>"))
 
-  #   $.when.apply($, deferreds).done(
-  #     window.inPlaceStopEdit @model, 'student', 'degree', 'N/A degree', _.identity
-  #   )
+  # Show inline git edit
+  linkedInEdit: ->
+    window.inPlaceEdit @model, 'student', 'linkedIn'
+
+  # Stop inline git edit and save changes
+  linkedInStopEdit: ->
+    window.inPlaceStopEdit @model, 'student', 'linkedIn', 'Click here to add a link', ((linkedIn) ->
+      linkedIn.replace(/\n/g, "<br/>"))
+
+  # Show inline git edit
+  personalEdit: ->
+    window.inPlaceEdit @model, 'student', 'personal'
+
+  # Stop inline git edit and save changes
+  personalStopEdit: ->
+    window.inPlaceStopEdit @model, 'student', 'personal', 'Click here to add a link', ((personal) ->
+      personal.replace(/\n/g, "<br/>"))
+
+  # Show inline git edit
+  otherEdit: ->
+    window.inPlaceEdit @model, 'student', 'other'
+
+  # Stop inline git edit and save changes
+  otherStopEdit: ->
+    window.inPlaceStopEdit @model, 'student', 'other', 'Click to add a link', ((other) ->
+      other.replace(/\n/g, "<br/>"))
+
 
   # Show inline name edit
   nameEdit: ->
@@ -300,17 +339,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       error: (model, response) ->
         notify "error", "Failed to add tag"
 
-  # Profile preferences toggle
-  #toggleProfile: (e) ->
-  #  tt = $('#student-profile-toggle-text')
-  #  ttContainer = $('#student-profile-toggle-text-container')
-  #  $('#student-profile-body').slideToggle 'fast', ->
-  #    if $('#student-profile-body').is ":hidden"
-  #      tt.html("Advanced Profile Settings")
-  #      ttContainer.find('i').show()
-  #    else
-  #      tt.html("Hide Advanced Profile Settings")
-  #      ttContainer.find('i').hide()
 
   # Update looking_for field in model and save
   changeLookingFor: (e) ->
@@ -342,6 +370,25 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
         notify 'success', 'Year updated'
       error: (model, response) =>
         notify 'error', 'Could not update year'
+
+  # Update and save year field highlight 
+  changeAvailable: (e) ->
+    available = $(e.currentTarget).val()
+    if available
+      $(e.currentTarget).removeClass('missing')
+    else
+      available = null
+      $(e.currentTarget).addClass('missing')
+      return
+
+    @model.set 'available', available
+    @model.save {},
+      wait: true
+      forceUpdate: true
+      success: (model, response) =>
+        notify 'success', 'Availability updated'
+      error: (model, response) =>
+        notify 'error', 'Could not update when available'
 
   changeCourse: (e) ->
     courseId = parseInt($(e.currentTarget).val())
