@@ -1,54 +1,44 @@
-<div class="row">
-  <div class="span12">
-    <h1 class="section-header">Corporate Partnership Programme:Connect</h1>
+<div id="span-card" style="margin-top:25px">
+  <div id="splash-card-text-left" style="padding-top:20px; padding-left:20px">
+    <div style="font-size:20px"><b>What does the CPP provide for Students?</b></div>
+      <ul>
+        <li style="margin: 15px 0;">No fuss access to future employers</n></li>
+        <li style="margin: 15px 0;">Keep up to date with events, placements and job opportunities </n></li>
+        <li style="margin: 15px 0;">An online CV viewed by a select group of Corporate Partners</n></li>
+      </ul>
+      <div style="position: absolute; bottom: 40px; right:30px; font-size:20px;">Student sign up</div>
   </div>
-  <div class="span12">
-    <p>
-      Our Corporate Partnership Programme is designed to promote the relationship
-      between the Department of Computing and organisations who wish to recruit our
-      students whilst investing in academic sponsorship. Students register their CVs,
-      skills and interests online. Corporate Partners access the site to recruit students
-      for graduate positions, summer internships and industrial placements. Corporate
-      Partners also receive a package of other benefits aimed at raising their profile
-      amongst our students, such as being able to send emails to students.
-    </p>
-    <p>Alongside the programme, we run the Applications of Computing in Industry lecture series.
-      This timetabled series of talks is given by our Corporate Partners and is designed to
-      inform our students about how Computer Science is applied to meet business challenges.
-    </p>
-  </div>
+  <div id="splash-card-pic-right-students" class="right"> </div>
 </div>
 
-<div class="row">
-  <div class="span6">
-    <h1 class="section-header"><i class="icon-user"></i> Work With The Best</h1>
-    <ul>
-      <li>Want to be seen and targeted by some of the best IT companies in the world?</li>
-      <li>Want to only receive the emails you <b>want</b> to receive?</li>
-      <li>Want to attend fantastic events organised by industry?</li>
-      <li>Want a fast track way of securing a placement?</li>
-    </ul>
-    <p>
-      If the answer to any of these questions is yes, then sign up as a student to CPP:Connect.
-    </p>
-    <p>
-      Get instant access to companies that want to hire you, see events and placements and show off
-      your skills to recruiters from some of the top IT companies in the world.
-    </p>
-  </div>
-  <div class="span6">
-    <h1 class="section-header"><i class="icon-briefcase"></i> Hire The Best</h1>
-    <p>
-      CPP:Connect offers companies access to students at Imperial College Department of Computing.
-      Register your events, contact students and become more connected with Imperial students
-    </p>
-    <p>
-      Interested?  Click below to contact the department and learn more about the benefits
-       of becoming a CPP Partner Company.
-    </p>
-  </div>
+<div id="span-card" style="margin-top:25px">
+  <span id="splash-card-pic-left-companies"> </span>
+  <span id="splash-card-text-right" style="padding-top:20px; padding-right:20px">
+      <div style="font-size:20px"><b>What does the CPP provide for Employers?</b></div>
+      <ul>
+        <li style="margin: 15px 0;">Meet top students at events hosted by imperial </n></li>
+        <li style="margin: 15px 0;">Publish jobs and opportunities directly to students</n></li>
+        <li style="margin: 15px 0;">Search students by degree, year of graduation and skills</n></li>
+      </ul>
+      <div style="position: absolute; bottom: 40px; right:30px; font-size:20px;">Employer sign up</div>
+  </span>
 </div>
-<div class="row">
+
+<div id="span-card" style="margin-top:25px">
+  <div id="splash-card-text-left" style="padding-top:20px; padding-left:20px">
+    <div style="font-size:20px"><b>What does the CPP provide for Alumni?</b></div>
+      <ul>
+        <li style="margin: 15px 0;">Gain access to job posting by Corporate Partners</li>
+        <li style="margin: 15px 0;">Keep up to date with employer events and opportunities</li>
+        <li style="margin: 15px 0;">Discover contacts among ex-students and industry partners</li>
+      </ul>
+      <div style="position: absolute; bottom: 40px; right:30px; font-size:20px;">Alumnus sign up</div>
+  </div>
+  <div id="splash-card-pic-right-alumni" class="right"> </div>
+</div>
+
+<!--
+<div class="row-fluid">
   <div class="span6">
     <a class="btn btn-primary button-student-register" href="/register">
       Sounds Good, Sign Me Up!
@@ -60,10 +50,10 @@
     </a>
   </div>
 </div>
-
-<div class="row">
+-->
+<div class="row-fluid">
   <div class="span12 company-bar">
-    <div class="row">
+    <div class="row-fluid">
       <div class="span2"><img src="/assets/company_logos/google_logo.jpg"/></div>
       <div class="span2"><img src="/assets/company_logos/facebook_logo.jpg"/></div>
       <div class="span2"><img src="/assets/company_logos/amazon_logo.jpg"/></div>

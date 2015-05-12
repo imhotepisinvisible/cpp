@@ -1,0 +1,183 @@
+// replaced $ with @
+// replaced @include with .
+// replace #{ $var } with @{ var }
+// trying to take out all non-structural elements & fonts
+// margins removed
+
+#student-summary {
+  border: 0px solid #d5d8d9;
+  display: block;
+  position: relative;
+  float: left;
+  padding: 15px;
+  background-color: #02893B;
+  color: #ffffff;
+
+  width: calc(~'100% + 52px');
+  margin: -1px -25px 10px;
+  // margin-bottom: 15px;
+}
+
+#student-profile-header {
+  // These two lines allow full width
+  width: calc(~'100% + 52px');
+  margin: -1px -25px;
+  #student-profile-intro {
+
+    #student-profile-intro-name {
+      font-size: 30px;
+    }
+  }
+}
+
+#student-profile-intro-status {
+  font-size: 16px;
+}
+
+#student-profile-key-info {
+  padding: 15px 30px; // better as some function: ((@student-profile-height - @baseLineHeight) / 2) 20px ((@student-profile-height - @baseLineHeight) / 2);
+  position: relative;
+  left: 0;
+  display: block;
+  float: left;
+  // margin: 0 10px 0 0;
+  width: calc(~'100% - 200px - 60px'); // this is subtracting the image width and the padding
+}
+
+#student-profile-img-container {
+  float: left;
+  max-height: 200px;
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+}
+
+#student-profile-img {
+
+  width: 100%;
+  height: 100%;  
+  max-height: 200px;
+
+}
+
+.profile-image-deactivated {
+
+}
+
+.profile-text-deactivated {
+  
+}
+
+#student-profile-body-container {
+
+  #student-profile-toggle {
+    text-align: center;
+  }
+}
+
+#opportunities-container {
+
+}
+
+.empty-student-profile-field-container {
+  text-align: center;
+
+  .empty-student-profile-field {
+
+  }
+}
+
+.progress-upload {
+  
+}
+
+#student-bio-editor {
+  width: 100%;
+
+}
+
+.missing {
+  
+}
+
+.missing-document {
+
+  .download-document {
+    display: none;
+  }
+
+  .delete-document {
+    display: none;
+  }
+}
+
+.document-table {
+  
+}
+
+#student-name-editor {
+
+  position: relative;
+}
+
+#year-select {
+  
+}
+
+.student-profile-select {
+
+  width: auto;
+  max-width: 600px;
+
+}
+
+.student-profile-input {
+
+  width: auto;
+}
+
+.select-looking-for {
+
+}
+
+.student-editable {
+ 
+}
+
+#student-name-container {
+  
+}
+
+#student-looking-for-container {
+  
+}
+
+.switch-container {
+  display: inline-block;
+
+  .switch {
+    vertical-align: middle;
+  }
+
+  .switch-text {
+    vertical-align: middle;
+  }
+}
+
+#signup-form {
+  padding-top: 10px;
+}
+
+#student-degree-input-container .dropdown-menu li > a {
+
+}
+
+#centre-span-border {
+  margin:0 auto;
+  float:none;
+  // height:0;
+  position:relative;
+  border: 1px solid #dddddd;
+  padding: 0px 24px;
+  margin-top: 75px;
+}

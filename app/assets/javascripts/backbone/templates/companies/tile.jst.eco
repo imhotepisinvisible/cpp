@@ -1,5 +1,5 @@
-<div class="span3">
-  <div class="thumbnail company-tile">
+<div class="span4">
+  <div class="shadow-card company-tile">
     <div class="company-tile-logo">
       <img src="<%= @company.get('logo_url') %>" />
     </div>

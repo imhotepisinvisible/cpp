@@ -1,7 +1,7 @@
 class CPP.Views.CompaniesStudentIndex extends CPP.Views.Base
   el: "#app"
   template: JST['backbone/templates/companies/student_index']
-  rowDiv: '<div class="row" id="current-tile-row"></div>'
+  rowDiv: '<div class="row-fluid" id="current-tile-row"></div>'
 
   # Company index for students
   initialize: (options) ->

@@ -1,0 +1,366 @@
+// fonts have been overridden to basic font family.
+// removed colors as well
+
+// cannot include top link in .less for some reason
+// @import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,300,300italic,400italic,600,700);
+@import url(http://fonts.googleapis.com/css?family=Fira+Sans);
+@font-face {
+    font-family: 'imperial-icons'; /*a name to be used later*/
+    src: url('/imperial-icons.woff'); /*URL to font*/
+}
+// /* Site Settings */
+
+/* Main Site Styles (tags etc) */
+body {
+  min-width: 320px;
+  min-height: 480px;
+  margin: 0 auto;
+  padding: @navbarHeight 40px 40px 40px;
+  font-family: @sansFontFamily;
+  color: #161515;
+  font-size: 14px;
+  // font-size: 12rem;
+  line-height: 1.6;
+  position: relative;
+  padding-top: 57px; // only here to override, but should work with the variables!
+}
+
+@media (max-width: 979px) {
+  body {
+    padding-top: 0px;
+  }
+}
+
+h1,h2,h3,h4,h5,h6,p {
+  font-family: @sansFontFamily;
+  font-size: @baseFontSize
+}
+
+
+textarea {
+  resize: none;
+}
+
+textarea[name=description] {
+  resize: both;
+  height: 150px;
+  width: 50%;
+}
+
+.section-header {
+
+}
+
+.shadow-card {
+  border: 1px solid #d5d8d9;
+  -moz-box-shadow: #C3C6C7 2px 2px 5px -2px;
+  -webkit-box-shadow: #C3C6C7 2px 2px 5px -2px;
+  box-shadow: #C3C6C7 2px 2px 5px -2px;
+  background: #fff;
+  overflow: hidden;
+  margin: 15px 0px;
+}
+
+.colour-card {
+  border: 1px solid #d5d8d9;
+  -moz-box-shadow: #C3C6C7 1px 1px 5px -2px;
+  -webkit-box-shadow: #C3C6C7 1px 1px 5px -2px;
+  box-shadow: #C3C6C7 1px 1px 5px -2px;
+  background: #fff;
+  overflow: hidden;
+  margin: 15px 0px;
+} // note: at the moment this is the same as the shawow-card
+
+.colour-header {
+  margin: 0px;
+  padding: 5px 15px;
+  background-color: #66A40A;
+  color: #ffffff;
+  border-bottom: 1px solid #444;
+}
+
+.colour-body {
+  margin: 0px;
+  padding: 15px;
+}
+
+.colour-card-horizontal {
+  border: 1px solid #d5d8d9;
+  -moz-box-shadow: #C3C6C7 2px 2px 5px -2px;
+  -webkit-box-shadow: #C3C6C7 2px 2px 5px -2px;
+  box-shadow: #C3C6C7 2px 2px 5px -2px;
+  background: #fff;
+  overflow: hidden;
+  margin: 15px 0px;
+} // note: at the moment this is the same as the shawow-card
+
+.colour-header-horizontal {
+  float: left;
+  width: 28.5%;
+  margin: 0px;
+  padding: 5px 15px;
+  background-color: #379F9F;
+  color: #ffffff;
+}
+
+.colour-header-bottom{
+
+}
+
+.colour-body-horizontal {
+  padding: 15px 15px;
+  position: relative;
+  left: 0;
+  display: block;
+  float: left;
+  margin: 0 10px 0 0;
+}
+
+
+
+
+.media-side-card {
+
+}
+
+.content-side-card {
+
+}
+
+// /* Layout */
+
+.container {
+  width: auto;
+  box-sizing: border-box;
+}
+
+#app {
+  padding-bottom: 10px;
+}
+#main-container {
+  padding: 0px 24px 24px 24px;
+  border: 0px solid #DDD;
+  overflow: hidden;
+  margin: 0px 0px 24px 0px;
+  box-sizing: border-box;
+}
+
+.link {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+img.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Notifications */
+.centre-span{
+  margin:0 auto;
+  float:none;
+  height:0;
+  position:relative;
+}
+
+.centre-text{
+  text-align:center;
+}
+
+/* Forms */
+
+.image-buttons-container{
+   position:relative;
+}
+.image-buttons{
+   position:absolute;
+   right:10px;
+   bottom:10px;
+}
+
+.table-clickable tr td {
+  cursor: pointer;
+}
+
+.loading {
+  background: url('/assets/ajax-loader.gif') center center no-repeat;
+  min-height: 30px;
+}
+
+.button-student-register{
+  width: 100%;
+  text-align: center;
+  padding: 15px;
+}
+
+.row-top-space {
+  margin-top: 20px;
+}
+
+.tooltip {
+
+}
+
+.form ul {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+.top-5-icon {
+
+}
+
+// NAVIGATION TABS
+
+.full-width-tabs > ul.nav.nav-tabs {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    margin-bottom: 0px;
+}
+.full-width-tabs > ul.nav.nav-tabs > li {
+    float: none;
+    display: table-cell;
+}
+.full-width-tabs > ul.nav.nav-tabs > li > a {
+    text-align: center;
+}
+.take-all-space-you-can{
+    width:100%;
+}
+
+#full-width-margins {
+  margin: 0px -25px;
+}
+
+// TABS
+// ----
+
+// Give the tabs something to sit on
+.nav-tabs {
+  border-bottom: 0px;
+}
+// Make the list-items overlay the bottom border
+.nav-tabs > li {
+  margin-bottom: -1px;
+  border-top: 1px solid #dddddd;
+}
+// Actual tabs (as links)
+.nav-tabs > li > a {
+  // border: 1px solid #ddd;
+  margin: 0px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border: 0px;
+  .border-radius(0px 0px 0 0);
+  &:hover,
+  &:focus {
+    border: 0px;
+    // background-color: #236aff;
+    // border-color: @grayLighter @grayLighter #ddd;
+  }
+}
+// Active state, and it's :hover/:focus to override normal :hover/:focus
+.nav-tabs > .active > a,
+.nav-tabs > .active > a:hover,
+.nav-tabs > .active > a:focus {
+  color: #ffffff;
+  background-color: #66A40A;
+  border: 0px;
+  border-bottom-color: transparent;
+  cursor: default;
+}
+
+.well {
+  box-shadow: #C3C6C7 3px 0px 6px -2px inset;
+  border-radius: 0px;
+  top: 0;
+  right: 24px;
+  border-right: 1px solid #d5d8d9;
+  background-color: #ebeeee;
+  background: #ebeeee !important;
+  position: initial;
+  height: 100%;
+  border-right: 1px solid #d5d8d9;
+  border-bottom: 1px solid #d5d8d9;
+  padding: 10px;
+
+}
+
+#well-margin {
+  margin: 0px;
+}
+
+.fill {
+  min-height: 100%;
+  height: 100%;
+
+  // display: block;
+  // position:absolute;
+  // height:auto;
+  // bottom:0;
+  // top:0;
+  // left:0;
+  // right:0;
+  // margin-top:20px;
+  // margin-bottom:20px;
+  // margin-right:80px;
+  // margin-left:80px;
+  // background-color: green;
+}
+
+// to centre a span that is less than 12
+.centre-span {
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#centre-span {
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.link-accent {
+  // text-transform: uppercase;
+  text-decoration: none;
+  font-size: 16px;
+  // font-weight: bold;
+  color: #161515;
+  display: inline-block;
+  position: relative;
+  padding-right: 20px;
+  padding-left: 15px;
+  // line-height: 1.1;
+
+  &:hover, &:focus, &:active, &.active, &.disabled, &[disabled] {
+    color: #66A40A;
+    text-decoration: none;
+  }
+}
+
+.link-accent::after{
+  content: "s";
+  font-family: 'imperial-icons';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-indent: 0px;
+  font-size: 18px;
+  position: absolute;
+  margin: -10px -5px 5px 5px;
+  right: 0;
+  top: 50%;
+  height: 24px;
+  color: #66A40A;
+}

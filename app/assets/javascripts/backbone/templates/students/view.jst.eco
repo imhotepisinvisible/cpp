@@ -1,4 +1,8 @@
-<div class="row" id="profile-inactive-warning" <%- if (@student.get "active") then 'style="display:none"'%>>
+<div class="row-fluid">
+  <div class="span9" id="centre-span-border">
+
+<!-- Warning to signify you need to improve your profile -->
+<div class="row-fluid" id="profile-inactive-warning" <%- if (@student.get "active") then 'style="display:none"'%>>
   <div class="span12">
     <div class="alert alert-error centre-text">
       <p> Profile Inactive! You need to active your profile to enable companies to view it!</p>
@@ -6,21 +10,25 @@
   </div>
 </div>
 
-<div class="row">
+<!-- Student Profile Photo and Key Info -->
+<div class="row-fluid">
   <div class="span12" id="student-profile-header">
-    <div class="row">
-      <div class="span3">
-        <div id="student-profile-img-container" class="img-polaroid">
-          <% if @student.get 'profile_picture_file_name': %>
-            <img src="/students/<%= @student.get 'id' %>/documents/profile_picture" id="student-profile-img">
-          <% else: %>
-            <img src="/assets/default_profile.png" id="student-profile-img">
-          <% end %>
-        </div>
-        <div class="clearfix"></div>
+    <div class="row-fluid">
+
+      <!-- Profile Photo -->
+
+      <div id="student-profile-img-container">  <!-- NOTE: removed polardoid to make full bleed -->
+        <% if @student.get 'profile_picture_file_name': %>
+        <img src="/students/<%= @student.get 'id' %>/documents/profile_picture" id="student-profile-img">
+        <% else: %>
+        <img src="/assets/default_profile.png" id="student-profile-img">
+        <% end %>
       </div>
 
-      <div class="span9">
+
+      <!-- Key Info -->
+      
+      <div id="student-profile-key-info">
         <div id="student-profile-intro">
           <p id="student-profile-intro-name">
             <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
@@ -36,164 +44,270 @@
             <% end %>
             <%= @student.get 'looking_for' %>
           </p>
+
+            <!--  download CV -->
+          <div class="pull-right">
+              <a class="link-accent" href="<%= '/students/' + @student.id + '/documents/cv' %>">Download CV</a>
+          </div>
+            <!-- contact -->
+            <div class="pull-right">
+                <a class="link-accent" href="mailto:<%= @student.get('email') %>">Contact</a>
+          </div>  
+
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="row">
-    <div class="span12" id="student-profile-body-container">
-      <div class="row">
-        <div class="span12" id="student-profile-body">
+<!-- Main Body of the student profile -->
+<div class="row-fluid">
+  <div class="span12" id="student-profile-body-container">
+    <div class="row-fluid">
+      <div class="span12" id="student-profile-body">
 
-          <div class="row">
-            <div class="span4">
-              <h1 class="section-header">
-                <i class="icon-file"></i> Documents
-              </h1>
+        <!-- Navigation Tabs -->
+        <div class="row-fluid">
+          <div class="span12">
 
-              <% if ((@student.get 'cv_file_name') or (@student.get 'transcript_file_name') or (@student.get 'covering_letter_file_name')): %>
-                <div class="row">
-                  <div class="span4">
-                    <table class="table table-striped">
-                      <% if @student.get 'cv_file_name': %>
-                        <tr>
-                          <td>Curriculum Vitae</td>
-                          <td>
-                            <div class="btn-group pull-right">
-                              <a class="btn" href="<%= '/students/' + @student.id + '/documents/cv' %>"><i class="icon-download-alt"/></a>
-                              <a class="btn" id="preview-cv" href="<%= '/students/' + @student.id + '/documents/cv?preview=1' %>"><i class="icon-eye-open"/></a>
-                            </div>
-                          </td>
-                        </tr>
-                      <% end %>
-                      <% if @student.get 'transcript_file_name': %>
-                        <tr>
-                          <td>Transcript</td>
-                          <td>
-                            <div class="btn-group pull-right">
-                              <a class="btn" href="<%= '/students/' + @student.id + '/documents/transcript' %>"><i class="icon-download-alt"/></a>
-                              <a class="btn" id="preview-cv" href="<%= '/students/' + @student.id + '/documents/transcript?preview=1' %>"><i class="icon-eye-open"/></a>
-                            </div>
-                          </td>
-                        </tr>
-                      <% end %>
-                      <% if @student.get 'covering_letter_file_name': %>
-                        <tr>
-                          <td>Covering Letter</td>
-                          <td>
-                            <div class="btn-group pull-right">
-                              <a class="btn" href="<%= '/students/' + @student.id + '/documents/covering_letter' %>"><i class="icon-download-alt"/></a>
-                              <a class="btn" id="preview-cv" href="<%= '/students/' + @student.id + '/documents/covering_letter?preview=1' %>"><i class="icon-eye-open"/></a>
-                            </div>
-                          </td>
-                        </tr>
-                      <% end %>
-                    </table>
-
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="span4">
-                    <h1 class="section-header">
-                      <i class="icon-envelope"></i> Contact Me
-                    </h1>
-                    <% if isAdmin(): %>
-                      <a class="btn btn-primary button-student-register" href="mailto:<%= @student.get('email') %>">Contact me!</a>
-                    <% else: %>
-                      <div class="btn btn-primary button-student-register">Contact me!</div>
-                    <% end %>
-                  </div>
-                </div>
-              <% else: %>
-                <div class="empty-student-profile-field-container">
-                  <i class="icon-file empty-student-profile-field"/>
-                </div>
-              <% end %>
-            </div>
-
-            <div class="span4">
-              <h1 class="section-header">
-                <i class="icon-user"></i> About Me
-              </h1>
-
-              <div class="row">
-                <div class="span4">
-                  <% if @student.get('bio'): %>
-                    <p>
-                      <%- @student.get('bio').replace(/\n/g, "<br/>") %>
-                    </p>
-                  <% else: %>
-                    <div class="empty-student-profile-field-container">
-                      <i class="icon-user empty-student-profile-field"/>
-                    </div>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-
-            <div class="span4">
-              <h1 class="section-header">
-                <i class="icon-heart"></i> Passions
-              </h1>
-
-              <div class="row">
-
-                <div class="span4">
-                  <div class="tag-category">
-                    <div class="tag-category-header">
-                      Skills
-                    </div>
-                    <% if @student.get('skill_list').length > 0: %>
-                      <% for i, tag of @student.get('skill_list'): %>
-                        <span class="label label-success tag year-group-tag">
-                          <%= tag %>
-                        </span>
-                      <% end %>
-                    <% else: %>
-                      No Skills Tagged
-                    <% end %>
-                  </div>
-                </div>
-
-                <div class="span4">
-                  <div class="tag-category">
-                    <div class="tag-category-header">
-                      Interests
-                    </div>
-                    <% if @student.get('interest_list').length > 0: %>
-                      <% for i, tag of @student.get('interest_list'): %>
-                        <span class="label label-warning tag year-group-tag">
-                          <%= tag %>
-                        </span>
-                      <% end %>
-                    <% else: %>
-                      No Interests Tagged
-                    <% end %>
-                  </div>
-                </div>
-
-                <div class="span4">
-                  <div class="tag-category">
-                    <div class="tag-category-header">
-                      Year Groups
-                    </div>
-                    <% if @student.get('year_group_list').length > 0: %>
-                      <% for i, tag of @student.get('year_group_list'): %>
-                        <span class="label label-info tag year-group-tag">
-                          <%= tag %>
-                        </span>
-                      <% end %>
-                    <% else: %>
-                      No Year Groups Tagged
-                    <% end %>
-                  </div>
-                </div>
-              </div>
+            <!-- need to put in here that the tabs are 100%, 50% and 33% respectively -->
+            <div class="tabbable full-width-tabs" id="full-width-margins">
+              <ul class="nav nav-tabs">
+                <li class="active take-all-space-you-can"><a href="#tab-one" data-toggle="tab">Profile</a></li>
+                <li class="take-all-space-you-can"><a href="#tab-two" data-toggle="tab">Curriculum Vitae</a></li>
+              </ul>
             </div>
           </div>
+
+
+                    <!-- student summary -->
+          <div class="row-fluid">
+            <div class="span12" id="student-summary">
+              <p> "This will be a short amount of text, properly embedded from the database. This will be a short amount of text, properly embedded from the database. This will be a short amount of text, properly embedded from the database. This will be a short amount of text, properly embedded from the database. This will be a short amount of text, properly embedded from the database."
+            </div>
+          </div>
+
+          <!-- Content of the navigation tabs -->
+
+          <div class="row-fluid">
+            <div class="span12">
+
+              <div class="tab-content">
+                <div class="tab-pane active" id="tab-one">
+
+                  <div class="span12">
+                  <div class="row-fluid">
+                      
+
+                    <div class="colour-card-horizontal">
+                      <!-- Header (about me) -->
+
+                      <div class="colour-header-horizontal">
+                        <h1 class="section-header">
+                          <i class="icon-user"></i> About Me
+                        </h1>
+                        <div class="colour-header-bottom">
+                            <p> bottom text </p>
+                        </div>
+                      </div>
+
+                      <!-- body -->
+                      <div class="colour-body-horizontal"> <!-- removed row-fluid --> 
+
+                        <% if @student.get('bio'): %>
+                        <p>
+                          <%- @student.get('bio').replace(/\n/g, "<br/>") %>
+                        </p>
+                        <% else: %>
+                        <div class="empty-student-profile-field-container">
+                          <i class="icon-user empty-student-profile-field"/>
+                        </div>
+                        <% end %>
+
+                      </div>
+                    </div>
+
+
+
+
+
+
+                  </div>
+
+
+                  <!-- CONTENTS OF TAB ONE -->
+                  <div class="row-fluid">          
+                    <!-- Documents & Contact Me (Column 1 of 3) -->
+
+                    <!-- COLUMN ONE -->
+                    <div class="span4">
+
+  
+                      <div class="colour-card">
+                      <!-- Header (about me) -->
+                      <h1 class="section-header colour-header">
+                        <i class="icon-user"></i> About Me
+                      </h1>
+
+                      <!-- body -->
+                      <div class="colour-body"> <!-- removed row-fluid --> 
+
+                        <% if @student.get('bio'): %>
+                        <p>
+                          <%- @student.get('bio').replace(/\n/g, "<br/>") %>
+                        </p>
+                        <% else: %>
+                        <div class="empty-student-profile-field-container">
+                          <i class="icon-user empty-student-profile-field"/>
+                        </div>
+                        <% end %>
+
+                      </div>
+                    </div>
+
+                    </div>  <!-- end of First Column -->
+
+
+                    <!-- Column2: About Me -->
+                    <!-- COLUMN TWO -->
+                    <div class="span4">
+
+                    <!-- Year Groups -->
+                    <div class="colour-card">
+
+                      <!-- Interests Header -->
+                      <h1 class="section-header colour-header">
+                        <i class="icon-heart"></i> Year Groups
+                      </h1>
+
+                      <!-- body -->
+                      <div class="colour-body">
+                        <div class="tag-category">
+                          <% if @student.get('year_group_list').length > 0: %>
+                          <% for i, tag of @student.get('year_group_list'): %>
+                          <span class="label label-info tag year-group-tag">
+                            <%= tag %>
+                          </span>
+                          <% end %>
+                          <% else: %>
+                          No Year Groups Tagged
+                          <% end %>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    </div>
+
+                    <!-- Column3: Passions - skills, interests and year groups? -->
+                    <!-- COLUMN THREE -->
+                    <div class="span4">
+
+                      <div class="colour-card">
+                      <!-- Passions Header -->
+                      <h1 class="section-header colour-header">
+                        <i class="icon-heart"></i> Skills
+                      </h1>
+
+                      <div class="colour-body">
+
+                        <!-- Skills -->
+                        <div class="tag-category">
+
+                          <% if @student.get('skill_list').length > 0: %>
+                          <% for i, tag of @student.get('skill_list'): %>
+                          <span class="label label-success tag year-group-tag">
+                            <%= tag %>
+                          </span>
+                          <% end %>
+                          <% else: %>
+                          No Skills Tagged
+                          <% end %>
+
+                        </div>
+                      </div>
+
+                    </div>
+
+
+                    <!-- Interests -->
+                    <div class="colour-card">
+
+                      <!-- Interests Header -->
+                      <h1 class="section-header colour-header">
+                        <i class="icon-heart"></i> Interests
+                      </h1>
+
+                      <!-- body -->
+                      <div class="colour-body">
+                        <div class="tag-category">
+
+                          <% if @student.get('interest_list').length > 0: %>
+                          <% for i, tag of @student.get('interest_list'): %>
+                          <span class="label label-warning tag year-group-tag">
+                            <%= tag %>
+                          </span>
+                          <% end %>
+                          <% else: %>
+                          No Interests Tagged
+                          <% end %>
+
+                        </div>
+                      </div>
+                    </div>
+
+
+                    </div>
+
+                  </div>
+                  </div>
+
+<!-- CANT GET THIS FULL HEIGHT - GAH! -->
+ <!--                  <div class="span3 fill">
+                    <div class="well">
+                    <p> this well needs to be stretched the full length </p>
+                    </div>
+                  </div>
+ -->
+                </div> <!-- END of Main Body -->
+
+                <div class="tab-pane" id="tab-two">
+
+                  <!-- asking if the student has a CV??  then do the following, where do you put the else statement?-->
+                  <div id=" ">
+                    <% if (@student.get 'cv_file_name'): %>
+                    <div class="row-fluid">
+                      <div class="span12" id="student-profile-body-container">
+                        <div class="row-fluid">
+                          <div class="span12" id="student-profile-body">
+                            <div>
+                              <object width="100%" height="1000px" type="application/pdf" data="<%= '/students/' + @student.id + '/documents/cv?preview=1' %>">
+                                <p>Your browser doesn't support PDF rendering, so can <a href="<%= '/students/' + @student.id + '/documents/cv' %>">click here to download the PDF file.</a></p>
+                              </object>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <% else: %>
+                    <p> You need to upload a CV, or else your profile will not be shown </p>
+                    <% end %>
+                  </div>
+
+                </div>  
+              </div> 
+
+            </div>
+          </div>
+
         </div>
+      </div> <!-- /tabbable -->
+
+
     </div>
   </div>
+</div>
+
+
+</div>
 </div>

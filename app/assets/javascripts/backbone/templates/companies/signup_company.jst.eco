@@ -7,7 +7,7 @@
   <p>For the departments option, please select the departments to which you wish to advertise your company. These will then be approved by the appropriate departments. More departments can be added at any time.</p>
 </div>
 
-<div class="row">
+<div class="row-fluid">
   <div class="span6">
     <h2 class="section-header">
       Company Details
@@ -22,7 +22,7 @@
     <div id="admin-form"></div>
   </div>
 </div>
-<div class="row">
+<div class="row-fluid">
   <div class="span12">
     <div class="control-group">
       <div class="controls">

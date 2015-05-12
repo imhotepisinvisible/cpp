@@ -10,7 +10,7 @@
     <%= @email.get 'subject' %> (Editing)
   <% end %>
 </h1>
-<div class="row">
+<div class="row-fluid">
   <div class="span4">
     <div class="company-logo-large">
     </div>
@@ -19,7 +19,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row-fluid">
   <div class="span12">
     <% if (@email.get('state') == "Rejected"): %>
       <h2>Email Rejected!</h2>
@@ -34,7 +34,7 @@
     <div class="form"></div>
   </div>
 </div>
-<div class="row">
+<div class="row-fluid">
   <% if (@type == "tagged") || (@email.get('skill_list') != null): %>
   <div class="span6">
     <h2 class="section-header">Select Recipients</h2>
@@ -71,7 +71,7 @@
   </div>
   <% end %>
 </div>
-<div class="row">
+<div class="row-fluid">
   <div class="span12">
     <h2 class="section-header"></h2>
     <div class="control-group">

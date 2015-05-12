@@ -1,9 +1,9 @@
 <div id="profile-warnings-container">
 </div>
-<div id="student-profile-header" class="row">
+<div id="student-profile-header" class="row-fluid">
   <div class="span3">
     <div id="student-profile-img-container"
-      class="upload-container img-polaroid <%= "missing-document" unless @student.get('profile_picture_file_name') %> image-buttons-container">
+      class="upload-container <%= "missing-document" unless @student.get('profile_picture_file_name') %> image-buttons-container">
       <% if @student.get 'profile_picture_file_name': %>
       <img src="/students/<%= @student.get 'id' %>/documents/profile_picture" id="student-profile-img">
       <% else: %>
@@ -24,7 +24,7 @@
   </div>
   <div class="span9">
     <div id="student-profile-intro">
-      <div class="row">
+      <div class="row-fluid">
         <div id="student-name-input-container" style="display:none">
           <input type="text" class="span8" id="student-name-editor" value="<%= @student.get 'first_name' %> <%= @student.get 'last_name' %>">
         </div>
@@ -34,7 +34,7 @@
           </span>
         </div>
       </div>
-      <div class="row">
+      <div class="row-fluid">
         <span>Studying</span>
         <span id="student-degree-input-container">
         <select id="student-course-input" class="student-profile-select">
@@ -45,7 +45,7 @@
         </select>
         </span>
       </div>
-      <div class="row">
+      <div class="row-fluid">
         <span>Graduating in </span>
         <span>
           <select id="year-input" class="student-profile-select">
@@ -57,7 +57,7 @@
         <!-- <input type="text" placeholder="e.g. 2014" id="year-input" class="student-profile-input" value="<%= @student.get 'year' %>"> -->
         </span>
       </div>
-      <div class="row">
+      <div class="row-fluid">
         <span>
     <select id="looking-for-select" class="span8 student-profile-select" <%= addTooltip(@student.get('tooltip'), 'Select the status that best matches you', 'right') %>>
           <option value="">Select your employment status</option>
@@ -75,17 +75,17 @@
   </div>
 </div>
 </div>
-<div class="row">
+<div class="row-fluid">
 <div class="span12" id="student-profile-body-container">
-  <div class="row">
+  <div class="row-fluid">
     <div class="span12" id="student-profile-body">
-      <div class="row">
+      <div class="row-fluid">
         <div class="span4">
           <h1 class="section-header">
           <i class="icon-file"></i> Documents
           </h1>
-          <div class="row">
-            <div class="span4">
+          <div class="row-fluid">
+            <div class="span12">
               <table class="table table-striped">
                 <tr>
                   <td id="table-cv" class="upload-container <%= "missing-document" unless @student.get('cv_file_name') %>">
@@ -156,8 +156,8 @@
                 <h1 class="section-header">
                 <i class="icon-user"></i> About Me
                 </h1>
-                <div class="row">
-                  <div class="span4">
+                <div class="row-fluid">
+                  <div class="span12">
                     <div id="student-bio-input-container" style="display:none">
                       <textarea id="student-bio-editor">
                       <%= @student.get('bio') %>
@@ -179,20 +179,20 @@
                 <h1 class="section-header">
                 <i class="icon-heart"></i> Passions
                 </h1>
-                <div class="row">
-                  <div class="span4">
-                    <div class="row">
-                      <div class="span4">
+                <div class="row-fluid">
+                  <div class="span12">
+                    <div class="row-fluid">
+                      <div class="span12">
                         <div class="tag-category">
                           <div class="skill-tags-form"></div>
                         </div>
                       </div>
-                      <div class="span4">
+                      <div class="span12">
                         <div class="tag-category">
                           <div class="interest-tags-form"></div>
                         </div>
                       </div>
-                      <div class="span4">
+                      <div class="span12">
                         <div class="tag-category">
                           <div class="year-group-tags-form"></div>
                         </div>
@@ -207,7 +207,7 @@
       </div>
     </div>
   </div>
-  <div class="row" id="opportunities-container">
+  <div class="row-fluid" id="opportunities-container">
     <div class="span6" id="events-partial">
     </div>
     <div class="span6" id="placements-partial">

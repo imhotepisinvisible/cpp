@@ -32,7 +32,7 @@ gem 'devise'                      # More customiseable authorisation
 
 # UI/Appearance Related Gems
 gem 'less-rails'                  # Less required for Bootstrap
-gem 'twitter-bootstrap-rails'     # Twitter Bootstrap <3 Rails
+gem 'twitter-bootstrap-rails', '~>2.2.7'     # Twitter Bootstrap <3 Rails
 gem 'bourbon'                     # Nice SCSS mixins
 gem 'font-awesome-rails', '~> 3.2.1' # Font Awesome = Icons
 gem "google_visualr", ">= 2.1"    # Google Charts

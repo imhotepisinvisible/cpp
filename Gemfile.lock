@@ -396,7 +396,7 @@ DEPENDENCIES
   therubyracer (= 0.12.1)
   thin
   tinymce-rails
-  twitter-bootstrap-rails
+  twitter-bootstrap-rails (~> 2.2.8)
   uglifier (>= 1.0.3)
   underscore-rails
   unicorn
