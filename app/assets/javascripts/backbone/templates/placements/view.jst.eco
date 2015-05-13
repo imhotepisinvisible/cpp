@@ -127,46 +127,56 @@
 
                         <!-- Requirements Section -->
                         <div class="span6">
-                          <h1 class="section-header">
-                            Requirements & Responsibilities
-                          </h1>
-
                           <div class="row-fluid">
-                            <div class="span12">
-                              <div class="content-row">
-                                <div class="content-primary">
-                                  Skills
-                                </div>
-                                <% if @placement.get('skill_list').length > 0: %>
-                                <% for i, tag of @placement.get('skill_list'): %>
-                                <span class="content-secondary tag-margin">
-                                  / <%= tag %>  
-                                </span>
-                                <% end %>
-                                <% else: %>
-                                No Skills Tagged
-                                <% end %>
-                              </div>
-                            </div>
-                          </div>
 
+                            <div class="span6">
 
-                          <!-- Example Formatting -->
-                          <div class="row-fluid">
-                            <div class="span12">
+                              <h1 class="section-header">
+                                Requirements
+                              </h1>
 
-                              <!-- NEEDS TO BE EDITABLE / LINK TO DATABASE -->
-                              <div class="content-row">
-                                <div class="content-primary">
-                                  Experience with
-                                </div>
-                                <div class="content-secondary">
-                                  C++ / Javascript / Python
+                                <div class="row-fluid">
+                                  <div class="span12">
+
+                                    <div class="tag-category">
+                                      <% if @placement.get('skill_list').length > 0: %>
+                                      <% for i, tag of @placement.get('skill_list'): %>
+                                      <span class="label sktags tag year-group-tag">
+                                        <%= tag %>
+                                      </span>
+                                      <% end %>
+                                      <% else: %>
+                                      No Requirements Tagged
+                                      <% end %>
+                                    </div>
+
+                                  </div>
                                 </div>
                               </div>
 
+                            <div class="span6">
+                              <h1 class="section-header">
+                                Responsibilities
+                              </h1>
+
+                                <div class="row-fluid">
+                                  <div class="span12">
+
+                                    <div class="tag-category">
+                                      <% if @placement.get('interest_list').length > 0: %>
+                                        <% for i, tag of @placement.get('interest_list'): %>
+                                          <span class="label sktags tag year-group-tag">
+                                            <%= tag %>
+                                          </span>
+                                        <% end %>
+                                      <% else: %>
+                                        No Responsibilities Tagged
+                                      <% end %>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-                          </div>
 
                         </div>
 
