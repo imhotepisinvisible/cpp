@@ -1,7 +1,10 @@
+
 <% if @partial: %>
     <div class="link-accent first-padding" id="btn-all">Contacts</div>
 <% end %>
 <% unless @partial: %>
+<div class="row-fluid">
+  <div class="span9" id="centre-span-border">
 <h1 class="section-header">
   <i class="icon-user"></i>
   Contacts
@@ -17,11 +20,13 @@
             <span class="contact-role pull-right"><%= contact.get 'role' %></span>
             <span class="contact-name"><%= "#{contact.get 'first_name'} #{contact.get 'last_name'}" %></span>
           </div>
-          <a class="contact-email" href="mailto:<%= contact.email %>"> <%= contact.get 'email' %></a>
+          <a class="contact-email" href="mailto:<%= contact.get 'email' %>"> <%= contact.get 'email' %></a>
         </div>
       </li>
     <% end %>
   <% end %>
 </ul>
-  <div class="link back">back</div>
+
+</div>
+</div>
 <% end %>

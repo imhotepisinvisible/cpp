@@ -71,7 +71,7 @@
 
               </div>
 
-              <div id="contacts-partial"></div>
+              <div class="link-accent first-padding" id="contacts">Contacts</div>
 
             </div>
           </div>

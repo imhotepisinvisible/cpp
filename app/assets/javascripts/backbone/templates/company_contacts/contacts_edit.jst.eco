@@ -3,6 +3,8 @@
 <% end %>
 
 <% unless @partial: %>
+<div class="row-fluid">
+  <div class="span9" id="centre-span-border">
 <h1 class="section-header"><i class="icon-user"></i> Contact
     <div id="btn-new" class="btn pull-right"><i class="icon-plus"></i></div>
 </h1>
@@ -12,5 +14,6 @@
 </div>
 <div id="btn-save-new" class="btn" style="display:none">Save</div>
 <span id="btn-cancel-new" class="link form-cancel" style="display:none">cancel</span>
-  <div class="link back">back</div>
+</div>
+</div>
 <% end %>

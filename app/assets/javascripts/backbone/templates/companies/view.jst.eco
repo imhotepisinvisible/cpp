@@ -1,6 +1,6 @@
 <div class="row-fluid">
   <div class="span9" id="centre-span-border">
-  
+
     <!-- Company Profile Photo and Key Info -->
     <div class="row-fluid">
       <div class="span12" id="student-profile-header">
@@ -8,7 +8,7 @@
 
           <!-- logo -->
           <div class="span3">
-            <div id="student-profile-img-container"> 
+            <div id="student-profile-img-container">
               <img src="<%= @company.get('logo_url') %>">
             </div>
           </div>
@@ -59,8 +59,8 @@
                   <% end %>
                 </div>
 
-                <!-- Links to all contacts - at the moment in contacts-partial -->
-                <div id="contacts-partial"></div>
+                <!-- Links to all contacts -->
+                <div class="link-accent first-padding" id="contacts">Contacts</div>
 
               </div>
             </div>
@@ -75,14 +75,14 @@
     <!-- Main body of Company Profile -->
     <div class="row-fluid">
       <div class="span12" id="student-profile-body-container">
-        
+
         <div class="row-fluid">
           <div class="span12" id="student-profile-body">
 
             <!-- company summary -->
             <div class="row-fluid">
               <div class="span12">
-      
+
                   <div class="full-width-card">
 
                   <!-- Full-Width 'header' -->
@@ -117,7 +117,7 @@
                           </div>
                           <div class="summary-content">
                             <%= @company.get('sector') %>
-                          </div>  
+                          </div>
                         </div>
 
                         <!-- Company HeadQuarters Location -->

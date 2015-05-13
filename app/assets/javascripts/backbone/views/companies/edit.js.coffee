@@ -9,6 +9,7 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
     'blur #company-description-input-container': 'descriptionStopEdit'
     'click .upload-document': 'uploadDocument'
     'click .delete-document': 'deleteDocument'
+    'click #contacts'     : 'editContacts'
 
     'blur #year-input' : 'changeYear'
     'blur #size-input' : 'changeSize'
@@ -92,32 +93,10 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
       collection: @model.placements
       editable: true
 
-    new CPP.Views.Contacts.PartialEdit
-      el: $(@el).find('#contacts-partial')
-      company: @model
-      company_id: @model.id
-      limit: 3
-    new CPP.Views.Emails.Partial
-      el: $(@el).find('#emails-partial')
-      company: @model
-      collection: @model.emails
-      editable: true
-
-    # new CPP.Views.Stats.LineGraph
-    #   url: "/companies/#{@model.id}/view_stats"
-    #   yAxis: 'Views'
-    #   title: 'Student Views'
-    #   el: $(@el).find('#orders_chart')
-    #   type: 'datetime'
-
     new CPP.Views.Companies.EditAdministrators
       el: $(@el).find('#edit-admins')
       company: @model
       header: true
-
-    #new CPP.Views.Companies.DepartmentRequests
-    #  el: $(@el).find('#departments')
-    #  company: @model
 
     if @model.get('founded') != null
       for option in $('#year-input').children()
@@ -211,3 +190,6 @@ class CPP.Views.CompaniesEdit extends CPP.Views.Base
         notify "success", "Updated Sector"
       error: (model, response) =>
         notify "error", "Could not update Sector"
+
+  editContacts: ->
+    Backbone.history.navigate('/companies/' + @model.id + '/company_contacts/edit', trigger: true)

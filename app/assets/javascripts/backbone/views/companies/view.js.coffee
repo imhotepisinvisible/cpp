@@ -9,6 +9,7 @@ class CPP.Views.CompaniesView extends CPP.Views.CompaniesItem
     'click #star-rating'  : 'companyHighlight'
     'click #ban-rating'   : 'companyHighlight'
     'click .button-company-edit'   : 'editCompany'
+    'click #contacts'     : 'viewContacts'
 
   # Record company view from student
   initialize: ->
@@ -16,7 +17,7 @@ class CPP.Views.CompaniesView extends CPP.Views.CompaniesItem
       @model.record_stat_view()
     @render()
 
-  # Render company template 
+  # Render company template
   render: ->
     $(@el).html(@template(company: @model, tooltip: (loggedIn() and CPP.CurrentUser.get('tooltip'))))
     super
@@ -31,21 +32,6 @@ class CPP.Views.CompaniesView extends CPP.Views.CompaniesItem
       el: $(@el).find('#placements-partial')
       company: @model
       collection: @model.placements
-
-    contacts_partial = new CPP.Views.Contacts.Partial
-      el: $(@el).find('#contacts-partial')
-      company: @model
-      company_id: @model.id
-      limit: 3
-
-    if isAdmin()
-      emails_partial = new CPP.Views.Emails.Partial
-        el: $(@el).find('#emails-partial')
-        company: @model
-        collection: @model.emails
-
-      # new CPP.Views.Companies.StatsPartial
-      #   company: @model
 
     @
 
@@ -71,4 +57,5 @@ class CPP.Views.CompaniesView extends CPP.Views.CompaniesItem
         $('#star-rating').removeClass('golden-star icon-star icon-star-empty')
         $('#star-rating').addClass(@model.getStarClass())
 
-
+  viewContacts: ->
+    Backbone.history.navigate('/companies/' + @model.id + '/company_contacts', trigger: true)
