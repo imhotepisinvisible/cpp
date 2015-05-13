@@ -40,12 +40,11 @@ ie_cleaner = lambda {|options|
 }
 
 Sanitize::Rails.configure(
-  :elements => %w[ a b blockquote br div img em i li ol p span strong u ul ],
+  :elements => %w[ a b blockquote br div em i li ol p span strong u ul ],
 
   :attributes => {
     :all  => ['style'],
-    'a'   => ['href'],
-    'img' => ['src']
+    'a'   => ['href']
   },
 
   :add_attributes => {
@@ -56,8 +55,7 @@ Sanitize::Rails.configure(
   },
 
   :protocols => {
-    'a' => {'href' => ['ftp', 'http', 'https', 'mailto', :relative]},
-    'img' => {'src' => ['http', 'https']}
+    'a' => {'href' => ['ftp', 'http', 'https', 'mailto', :relative]}
   },
 
   :transformers => [css_sanitizer, div_transformer, ie_cleaner],

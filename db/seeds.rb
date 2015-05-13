@@ -30,7 +30,7 @@ oliver = FactoryGirl.create :student,  {
   email: "oliver.grubin14@imperial.ac.uk",
   password: "cppcppcpp",
   password_confirmation: "cppcppcpp",
-  year: 3,
+  year: 2015,
   bio: "Placeholder Text",
   course_id: 14,
   cid: "og514"
@@ -47,7 +47,7 @@ isb14 = FactoryGirl.create :student,  {
   email: "isb14@ic.ac.uk",
   password: "cppcppcpp",
   password_confirmation: "cppcppcpp",
-  year: 3,
+  year: 2015,
   bio: "Placeholder Text.",
   course_id: 14,
   cid: "isb14"
@@ -64,7 +64,7 @@ hwl214 = FactoryGirl.create :student,  {
   email: "hwl214@ic.ac.uk",
   password: "cppcppcpp",
   password_confirmation: "cppcppcpp",
-  year: 3,
+  year: 2015,
   bio: "Placeholder Text.",
   course_id: 14,
   cid: "hwl214"
@@ -76,7 +76,7 @@ sg5414 = FactoryGirl.create :student,  {
   email: "sg5414@ic.ac.uk",
   password: "cppcppcpp",
   password_confirmation: "cppcppcpp",
-  year: 3,
+  year: 2015,
   bio: "Placeholder Text.",
   course_id: 14,
   cid: "sg5414"
@@ -88,7 +88,7 @@ al4209 = FactoryGirl.create :student,  {
   email: "al4209@ic.ac.uk",
   password: "cppcppcpp",
   password_confirmation: "cppcppcpp",
-  year: 3,
+  year: 2015,
   bio: "Placeholder Text.",
   course_id: 14,
   cid: "al4209"
@@ -301,4 +301,3 @@ FactoryGirl.create :department_administrator, {
   password_confirmation: "cppcppcpp",
   department: computing_department
 }
-
