@@ -24,7 +24,6 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
 
     @form = new Backbone.Form(model: @model).render()
     @render()
-    console.log "show"
     $('.navbar-inner').show()
     $(window).unbind('scroll');
     @

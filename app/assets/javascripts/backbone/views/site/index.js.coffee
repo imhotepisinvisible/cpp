@@ -8,6 +8,7 @@ class CPP.Views.Site.Index extends CPP.Views.Base
   # Bind event listeners
   events: -> _.extend {}, CPP.Views.Base::events,
     'scroll' : 'scroller'
+    'click #sp-btn-1' : 'moveNav'
 
   # From initialise call render of the index
   initialize: ->
@@ -23,8 +24,9 @@ class CPP.Views.Site.Index extends CPP.Views.Base
     super
     @
 
-  showNav: ->
-    $('.navbar-inner').show()
+  moveNav: ->
+    height = $(window).height();
+    window.scrollTo 0, height-55
 
   resize: ->
     height = $(window).height();
