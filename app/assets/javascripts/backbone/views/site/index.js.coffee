@@ -24,7 +24,8 @@ class CPP.Views.Site.Index extends CPP.Views.Base
     super
     @
 
-  moveNav: ->
+  moveNav: (e) ->
+    e.preventDefault()
     height = $(window).height();
     window.scrollTo 0, height-55
 

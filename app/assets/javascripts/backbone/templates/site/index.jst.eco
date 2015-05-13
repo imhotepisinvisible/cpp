@@ -10,7 +10,7 @@
     </div>
   </div>
     <div id="splash-login-box" style="position:absolute; right:0; bottom:0; margin-right: 80px; margin-bottom: 50px;">
-      <div id="sp-btn-1" class="splash-button">Login</div>
+      <div id="sp-btn-1" class="splash-button"><a href="#">Login</a></div>
       <div id="sp-btn-2" class="splash-button"><a href="/register">Sign Up</a></div>
     </div>
 </div>
