@@ -45,7 +45,7 @@ class Student < User
 
   ####################### Validate attached files ######################
   has_attached_file :cv, :styles => { :img => ["1240x1754", :png] },
-                    :processors => [:ghostscript]
+                    :processors => [:ghostscript, :thumbnail]
   has_attached_file :transcript
   has_attached_file :covering_letter
   has_attached_file :profile_picture, :styles => { :thumb => "180x180#" },
