@@ -32,7 +32,7 @@
 
             <!-- Short description -->
             <div id="about-job-header">
-              Summary Description
+              Description
             </div>
 
             <div id="about-job-content">
@@ -54,7 +54,7 @@
           </div>
 
         </div>
-      </div> 
+      </div>
     </div> <!-- end of header -->
 
     <!-- Main Body of the Job Profile -->

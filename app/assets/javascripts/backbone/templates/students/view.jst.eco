@@ -36,7 +36,7 @@
                   <%= @student.get 'first_name' %> <%= @student.get 'last_name' %>
                   </div>
 
-                  
+
                   <% AlumniYear = new Date %>
                   <% _AlumniYear = AlumniYear.getFullYear() %>
                   <% graduatingYear = @student.get('year') %>
@@ -250,7 +250,7 @@
                                   Github
                                 </div>
                                 <div class="content-secondary">
-                                  <%= @student.get('gitHub') %>
+                                  <a href="http://<%= @student.get('gitHub').replace(/http:\/\//g, "") %>"><%= @student.get('gitHub') %></a>
                                 </div>
                               </div>
 
@@ -268,7 +268,7 @@
                                   Linkedin
                                 </div>
                                 <div class="content-secondary">
-                                  <%= @student.get('linkedIn') %>
+                                  <a href="http://<%= @student.get('linkedIn').replace(/http:\/\//g, "") %>"><%= @student.get('linkedIn') %></a>
                                 </div>
                               </div>
 
@@ -287,7 +287,7 @@
                                     Personal Website
                                   </div>
                                   <div class="content-secondary">
-                                    <%= @student.get('personal') %>
+                                    <a href="http://<%= @student.get('personal').replace(/http:\/\//g, "") %>"><%= @student.get('personal') %></a>
                                   </div>
                                 </div>
 
@@ -305,7 +305,7 @@
                                   Other
                                 </div>
                                 <div class="content-secondary">
-                                  <%= @student.get('other') %>
+                                  <a href="http://<%= @student.get('other').replace(/http:\/\//g, "") %>"><%= @student.get('other') %></a>
                                 </div>
                               </div>
 

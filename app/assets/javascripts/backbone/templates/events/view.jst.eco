@@ -170,12 +170,12 @@
                     <div class="span12">
 
                      <div id="about-event-header">
-                      Summary Description
+                      Description
                     </div>
 
                     <div id="about-event-content">
                       <p>
-                        <%= @event.get 'description' %>
+                        <%- @event.get('description').replace(/\n/g, '<br>') %>
                       </p>
                     </div>
 
@@ -197,4 +197,3 @@
 
 </div>
 </div>
-

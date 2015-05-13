@@ -58,7 +58,8 @@ class Student < User
       :content_type => { :content_type => ["image/jpeg", "image/png"],
                           message: "Must be a jpeg or png file"}
 
-
+  ###################### Sanitize HTML ###############################
+  sanitizes :bio
 
   ############## Attributes can be set via mass assignment ############
   attr_accessible :year, :bio, :degree, :email, :cv, :transcript,

@@ -51,6 +51,9 @@ class Placement < ActiveRecord::Base
     :after => :now,
     :allow_nil => :true
 
+  ###################### Sanitize HTML ###############################
+  sanitizes :description
+
   ##################################################################
   # Attributes not to store in database direectly and exist
   # for life of object

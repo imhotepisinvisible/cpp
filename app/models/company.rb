@@ -61,6 +61,9 @@ class Company < ActiveRecord::Base
   validates :name, obscenity: { message: "Profanity is not allowed!" }
   validates :description, obscenity: { message: "Profanity is not allowed!" }
 
+  ###################### Sanitize HTML ###############################
+  sanitizes :description
+
   ###############################################################
   # Attributes not to store in database direectly and exist
   # for life of object

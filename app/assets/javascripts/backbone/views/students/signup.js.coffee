@@ -13,7 +13,6 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
   # If department admin then remove department from schema
   # Define signup form
   initialize: (options) ->
-    $('.navbar-inner').show()
     @login = options.login
 
     if isDepartmentAdmin()
@@ -25,6 +24,9 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
 
     @form = new Backbone.Form(model: @model).render()
     @render()
+    $('.navbar-inner').show()
+    $(window).unbind('scroll');
+    @
 
   # Render signup form and validate individual fields
   render: ->
