@@ -85,7 +85,7 @@
                             Salary
                           </div>
                           <div class="summary-content">
-                            <%= if @placement.get('salary'): %>
+                            <% if @placement.get('salary'): %>
                               <%= @placement.get('salary') %>
                             <% else: %>
                               N/A
@@ -99,7 +99,7 @@
                             Duration
                           </div>
                           <div class="summary-content">
-                            <%= if @placement.get('duration'): %>
+                            <% if @placement.get('duration'): %>
                               <%= @placement.get('duration') %>
                             <% else: %>
                               N/A
@@ -113,7 +113,7 @@
                             Deadline
                           </div>
                           <div class="summary-content">
-                            <%= if @placement.getReadableDate('deadline'): %>
+                            <% if @placement.getReadableDate('deadline'): %>
                               <%= @placement.getReadableDate('deadline') %>
                             <% else: %>
                               N/A

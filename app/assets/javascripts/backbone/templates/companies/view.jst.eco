@@ -96,7 +96,7 @@
                             Founded
                           </div>
                           <div class="summary-content">
-                            <%= if @company.get('founded'): %>
+                            <% if @company.get('founded'): %>
                               <%= @company.get('founded') %>
                             <% else: %>
                               N/A
@@ -110,7 +110,7 @@
                             Size
                           </div>
                           <div class="summary-content">
-                            <%= if @company.get('size'): %>
+                            <% if @company.get('size'): %>
                               <%= @company.get('size') %>
                             <% else: %>
                               N/A
@@ -124,7 +124,7 @@
                             Sector
                           </div>
                           <div class="summary-content">
-                            <%= if @company.get('sector'): %>
+                            <% if @company.get('sector'): %>
                               <%= @company.get('sector') %>
                             <% else: %>
                               N/A
@@ -138,7 +138,7 @@
                             HQ
                           </div>
                           <div class="summary-content">
-                            <%= if @company.get('hq'): %>
+                            <% if @company.get('hq'): %>
                               <%= @company.get('hq') %>
                             <% else: %>
                               N/A
