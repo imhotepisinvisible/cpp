@@ -17,6 +17,7 @@
 
 .navbar-fixed-top {
   margin-bottom: 0px;
+  position: fixed;
 }
 
 // Inner for background effects
@@ -28,7 +29,7 @@
   #gradient > .vertical(#006EAF,darken(#006EAF, 5%));
   // #gradient > .vertical(@navbarBackgroundHighlight, @navbarBackground);
   border: 0px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);  
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 
   // Prevent floats from breaking the navbar
   .clearfix();
@@ -61,7 +62,14 @@
   }
 }
 
-
+@media (max-width: 768px) {
+  .navbar .btn-navbar {
+    margin-right: 20px;
+  }
+  .navbar .brand {
+    margin-left: 20px;
+  }
+}
 
 // NAVIGATION
 // ----------
@@ -87,7 +95,7 @@
 .navbar-static-top .container,
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
-  width: 100%
+  width: 100%;
 }
 
 
