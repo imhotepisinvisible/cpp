@@ -9,10 +9,11 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-submit': 'submitStudent'
     'keydown' : 'enterPress'
-           
+
   # If department admin then remove department from schema
-  # Define signup form 
+  # Define signup form
   initialize: (options) ->
+    $('.navbar-inner').show()
     @login = options.login
 
     if isDepartmentAdmin()
@@ -41,7 +42,7 @@ class CPP.Views.Students.Signup extends CPP.Views.Base
   # Submit form, validate and save fields
   submitStudent: ->
     if @form.validate() == null
-    
+
       data = {}
       data['student'] = @form.getValue()
       $.ajax
