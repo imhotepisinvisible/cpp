@@ -55,7 +55,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       key: 'skill_list'
       title: 'Skills'
       url: '/tags/skills'
-      tag_class: 'label-success'
+      tag_class: 'sktags'
       tag_change_callback: saveModel
       additions: true
 
@@ -64,7 +64,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       key: 'interest_list'
       title: 'Interests'
       url: '/tags/interests'
-      tag_class: 'label-warning'
+      tag_class: 'sktags'
       tag_change_callback: saveModel
       additions: true
 
