@@ -67,3 +67,11 @@ class CPP.Collections.PlacementsRecent extends CPP.Collections.Base
           if placementA.get(this.sortKey) > placementB.get(this.sortKey) then -1
           else if placementB.get(this.sortKey) > placementA.get(this.sortKey) then 1
           else 0
+                  
+class CPP.Collections.PlacementsPager extends Backbone.PageableCollection
+  model: CPP.Models.Placement
+  url: '/placements'
+  mode: 'client' 
+
+  state:
+    pageSize: 20

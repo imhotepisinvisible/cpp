@@ -101,6 +101,8 @@ class CPP.Views.Events.Index extends CPP.Views.Base
     #if $(document).height() <= $(window).height()
     #  @collection.getNextPage()
 
+    #@selectedModels = grid.getSelectedModels()
+
     @renderFilters()
   @
 

@@ -7,7 +7,8 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
 
   # Bind events
   events: -> _.extend {}, CPP.Views.Base::events,
-    'click .company-logo-header'  : 'viewCompany'
+    #'click .company-logo-header'  : 'viewCompany'
+    'click tr'                    : 'viewCompany'
 
   # Bind to update placement collection
   initialize: ->
@@ -21,19 +22,62 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
 
   # Render placement template, placements and filters
   render: ->
+    columns = [
+      {
+        name: ''
+        cell: 'select-row'
+        headerCell: 'select-all'
+      }
+      {
+        name: 'company_logo_url'
+        label: 'Company'
+        editable: false
+        cell: 'image'
+      }
+      {
+        name: 'position'
+        label: 'Position'
+        cell: 'string'
+        editable: false
+      }
+      {
+        name: 'deadline'
+        label: 'Deadline'
+        cell: 'date'
+        editable: false
+      }
+      {
+        name: 'location'
+        label: 'Location'
+        cell: 'string'
+        editable: false
+      }
+      {
+        name: 'created_at'
+        label: 'Posted'
+        cell: 'string'
+        editable: false
+      }      
+      {
+        name: 'workflow_state'
+        label: 'Status'
+        cell: 'string'
+        editable: false
+      }
+    ]
     $(@el).html(@template(placements: @collection, editable: @editable))
-    @renderPlacements(@collection)
     @renderFilters()
+    grid = new (Backgrid.Grid)(
+      className: "backgrid table-hover table-clickable",
+      row: ModelRow
+      columns: columns
+      collection: @collection.fullCollection
+      footer: Backgrid.Extension.Infinator.extend(scrollToTop: false))
+      
+    # Render the grid and attach the root to your HTML document
+    $table = $('#placements-table')
+    $table.append grid.render().el
   @
-
-  # Remove all placements then for each placement in the collection
-  # passed in render the placement
-  renderPlacements: (col) ->
-    @$('#placements').html("")
-    col.each (placement) =>
-      view = new CPP.Views.Placements.Item(model: placement, editable: @editable)
-      @$('#placements').append(view.render().el)
-    @
 
   # Define the filters to render
   renderFilters: ->
@@ -65,7 +109,7 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
     @
 
   # Navigate to the placements associated company
-  viewCompany: ->
-    if @collection.company
-      Backbone.history.navigate("companies/" + @collection.company.id, trigger: true)
+  viewCompany: (e) ->
+    model = $(e.target).parent().data('model')
+    Backbone.history.navigate("companies/" + model.get('company_id'), trigger: true)
 
