@@ -93,7 +93,10 @@ class Placement < ActiveRecord::Base
     result[:company_name] = company.name
     result[:company_logo_url] = company.logo.url(:thumbnail)
     unless deadline.nil?
-      result[:deadine] = deadline.to_datetime.iso8601
+      result[:deadline] = deadline.to_datetime.iso8601
+    end
+    unless interview_date.nil?
+      result[:interview_date] = interview_date.to_datetime.iso8601
     end
     return result
   end
