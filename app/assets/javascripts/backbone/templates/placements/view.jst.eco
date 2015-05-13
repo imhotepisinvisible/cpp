@@ -71,7 +71,11 @@
                             Location
                           </div>
                           <div class="summary-content">
-                            <%= @placement.get('location') %>
+                            <% if @placement.get('location'): %>
+                              <%= @placement.get('location') %>
+                            <% else: %>
+                              N/A
+                            <% end %>
                           </div>
                         </div>
 
@@ -81,7 +85,11 @@
                             Salary
                           </div>
                           <div class="summary-content">
-                            <%= @placement.get('salary') %>
+                            <% if @placement.get('salary'): %>
+                              <%= @placement.get('salary') %>
+                            <% else: %>
+                              N/A
+                            <% end %>
                           </div>
                         </div>
 
@@ -91,7 +99,11 @@
                             Duration
                           </div>
                           <div class="summary-content">
-                            <%= @placement.get('duration') %>
+                            <% if @placement.get('duration'): %>
+                              <%= @placement.get('duration') %>
+                            <% else: %>
+                              N/A
+                            <% end %>
                           </div>
                         </div>
 
@@ -101,7 +113,11 @@
                             Deadline
                           </div>
                           <div class="summary-content">
-                            <%= @placement.getReadableDate('deadline') %>
+                            <% if @placement.getReadableDate('deadline'): %>
+                              <%= @placement.getReadableDate('deadline') %>
+                            <% else: %>
+                              N/A
+                            <% end %>
                           </div>
                         </div>
 
