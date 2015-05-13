@@ -16,8 +16,6 @@ class CPP.Models.Event extends CPP.Models.Base
       required: true
     location:
       required: true
-    departments:
-      required: true
 
   # Schema to be used for backbone forms
   schema: ->
@@ -37,9 +35,6 @@ class CPP.Models.Event extends CPP.Models.Base
     end_date:
       type: "DateTime"
       title: "End Date*"
-      DateEditor: "DatePicker"
-    deadline:
-      type: "DateTime"
       DateEditor: "DatePicker"
     description:
       type: "TextArea"

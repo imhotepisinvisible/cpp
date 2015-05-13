@@ -125,7 +125,11 @@ class StudentsController < ApplicationController
       impressionist(@student, message: 'company_cv_download')
     end
     document_type = params[:document_type]
-    document = (@student.send "#{document_type}".to_sym).path
+    if (params.has_key? :image)
+      document = (@student.send "#{document_type}".to_sym).path(:img)
+    else
+      document = (@student.send "#{document_type}".to_sym).path
+    end
     ext = File.extname document
     unless document.nil?
       if File.exist?(document)

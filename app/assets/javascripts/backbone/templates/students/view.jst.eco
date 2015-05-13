@@ -361,7 +361,7 @@
                               <div class="row-fluid">
                                 <div class="span12" id="student-profile-body">
                                   <div>
-                                    <img src="<%= @student.get('cv_img') %>">
+                                    <img src="/students/<%= @student.get 'id' %>/documents/cv?image">
                                   </div>
                                 </div>
                               </div>
