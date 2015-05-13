@@ -19,6 +19,9 @@ class CPP.Views.Users.ForgotPassword extends CPP.Views.Base
     $(@el).html(@template())
     super
     @renderForm()
+    console.log "pass"
+    $('.navbar-inner').show()
+    $(window).unbind('scroll');
     @
 
   # Initialise the form by defining its schema
@@ -33,7 +36,7 @@ class CPP.Views.Users.ForgotPassword extends CPP.Views.Base
     $('.form').html(@form.el)
     validateField(@form, field) for field of @form.fields
 
-  # Submit the password change 
+  # Submit the password change
   submitPassword: ->
    if @form.validate() == null
     data = {}
