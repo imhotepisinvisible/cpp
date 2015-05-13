@@ -109,7 +109,6 @@ class Student < User
     result = super(:methods => [:skill_list, :interest_list, :year_group_list, :reject_skill_list, :reject_interest_list, :type])
     result[:stat_count] = @stat_count
     result[:confirmed] = confirmed_at?
-    result[:cv_img] = cv.url(:img)
     result[:profile_thumb] = profile_picture.url(:thumb)
     return result
   end
