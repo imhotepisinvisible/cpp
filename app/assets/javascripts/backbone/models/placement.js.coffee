@@ -12,6 +12,8 @@ class CPP.Models.Placement extends CPP.Models.Base
       required: true
     location:
       required: true
+    deadline:
+      required: true
 
   schema: ->
     position:
@@ -28,6 +30,7 @@ class CPP.Models.Placement extends CPP.Models.Base
     deadline:
       type: "DateTime"
       DateEditor: "DatePicker"
+      title: "Deadline*"
     duration:
       type: "Text"
     salary:
@@ -37,10 +40,6 @@ class CPP.Models.Placement extends CPP.Models.Base
     application_procedure:
       type: "Text"
       title: "Application Procedure"
-    interview_date:
-      type: "DateTime"
-      title: "Interview Date (If Known)"
-      DateEditor: "DatePicker"
     other:
       type: "Text"
 
