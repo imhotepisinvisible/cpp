@@ -64,5 +64,5 @@ class CPP.Views.Events.View extends CPP.Views.Base
     $('#capacity-progress').addClass "progress-#{@model.getCapacityClass()}"
     $('#capacity-bar').width("#{@model.getPercentageCapacity()}%")
     $('#btn-signup-student').html(if attending then "Relinquish my ticket" else "Sign me up!")
-    $('#attending-text').html('You are ' + (unless attending then 'not ' else '') + 'attending this event')
+    $('#attending-text').html((unless attending then 'Not ' else '') + 'Attending!!')
     $('#number-attending').html(@model.getFilled())

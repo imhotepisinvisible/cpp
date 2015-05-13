@@ -71,9 +71,12 @@
 
                 <!--  download CV -->
                 <div>
-                  <a class="link-accent first-padding" href="<%= '/students/' + @student.id + '/documents/cv' %>">Download CV</a>
                   <!-- contact -->
-                  <a class="link-accent" href="mailto:<%= @student.get('email') %>">Contact</a>
+                  <a class="link-accent first-padding" href="mailto:<%= @student.get('email') %>">Contact</a>
+                  <% if not ((userId() != @student.get('id')) and isStudent()): %>
+                    <a class="link-accent" href="<%= '/students/' + @student.id + '/documents/cv' %>">Download CV</a>
+                  <% end %>
+
                 </div>
 
               </div>
@@ -158,6 +161,8 @@
                   </div>
 
                   <!-- full-width body (non-coloured part) -->
+                <% if not (not @student.get('gitHub') and not @student.get('linkedIn') and not @student.get('personal') and not @student.get('other') and @student.get('skill_list').length <= 0 and @student.get('interest_list').length <= 0 ): %>
+
                   <div class="full-body">
                     <div class="row-fluid">
                       <div class="span12">
@@ -316,7 +321,8 @@
                       </div> <!-- end of secondary body -->
 
                     </div>
-                  </div>
+                  </div> <!-- end of BODY -->
+                  <% end %>
 
                 </div> <!-- end of body -->
 
@@ -324,6 +330,7 @@
             </div>
 
             <!-- Second Body Section (CV Preview) -->
+            <% if not ((userId() != @student.get('id')) and isStudent()): %>
             <div class="row-fluid">
               <div class="span12" id="student-profile-body">
 
@@ -370,6 +377,7 @@
                 </div>
               </div>
             </div> <!-- end of second section (CV Preview) -->
+          <% end %>
 
           </div>
         </div>

@@ -1,8 +1,5 @@
 <h1 class="section-header">
 
-  <i class="icon-calendar"></i>
-  Events
-
   <div class="btn-group pull-right">
 
     <% if @company?: %>

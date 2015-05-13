@@ -38,9 +38,9 @@
             <!-- <div class="span4"> -->
             <div id="attending-text">
               <% if @attending: %>
-              You are attending this event
+                <div id="attending">Attending!</div>
               <% else: %>
-              You are not attending this event
+                <div id="not-attending">Not Attending!</div>
               <% end %>
             </div>
             <!-- </div> -->

@@ -30,17 +30,6 @@
               Last Updated: <%= lastUpdated[0..9] %>
             </div>
 
-            <!-- Short description -->
-            <div id="about-job-header">
-              Description
-            </div>
-
-            <div id="about-job-content">
-              <p>
-                <%- @placement.get('description').replace(/\n/g, '<br>') %>
-              </p>
-            </div>
-
             <!-- Useful info -->
             <div>
               <!-- Download Job Specification PDF -->
@@ -253,5 +242,51 @@
         </div>
       </div>
     </div>
+
+    <!-- Main Body of the Job Profile -->
+    <div class="row-fluid">
+      <div class="span12" id="job-body-container">
+
+        <div class="row-fluid">
+          <div class="span12" id="job-body">
+
+            <!-- Job Summary Elements -->
+            <div class="row-fluid">
+              <div class="span12">
+
+                <div class="full-width-card">
+
+                  <!-- Full-Width Header -->
+                  <div class="full-header">
+                    <div class="row-fluid">
+                      <div class="span12">
+                          <div class="summary-subject">
+                            Description
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="full-body">
+                    <div class="row-fluid">
+                      <div class="span12">
+                        <!-- Short description -->
+                          <div id="about-job-content">
+                            <p>
+                              <%- @placement.get('description').replace(/\n/g, '<br>') %>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
