@@ -43,38 +43,6 @@
     </div>
 
   </div>
-
-  <% if !user_signed_in? %>
-  <%= javascript_include_tag "splash" %>
-  <div id="splash-header" style="background-image: url('assets/hand.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-    <!--<img src="assets/hand.jpg" id="splash-header-pic">-->
-    <div id="splash-header-container">
-      <div id="splash-header-box-top">
-      </div>
-      <div id="splash-header-box-bottom">
-        <div id="splash-header-box-text">
-          Connecting quality students <br> with quality employers
-        </div>
-      </div>
-    </div>
-      <div id="splash-login-box" style="position:absolute; right:0; margin-right: 40px; margin-bottom: 30px height:100px">
-        <%= simple_form_for(resource, as: resource_name, url: user_session_path(), html: {class: "form-horizontal"}) do |f| %>
-        <%= f.input :email, :wrapper => :prepend, :label => "Email" do %>
-          <%= content_tag :span, (raw '<i class="icon-user"></i>'), :class => "add-on abbn" %>
-          <%= f.input_field :email %>
-        <% end %>
-        <%= f.input :password, :wrapper => :prepend, :label => "Password" do %>
-          <%= content_tag :span, (raw '<i class="icon-lock"></i>'), :class => "add-on abbn" %>
-          <%= f.input_field :password %>
-        <% end %>
-          <div>
-            <%= f.button :submit, "Log in" %>
-          </div>
-        <% end %>
-    </div>
-  </div>
-  <% end %>
-
 </div>
 
   <div class="container" id="main-container">
@@ -96,6 +64,5 @@
     </div>
   </footer>
   <%= render 'layouts/analytics' %>
-
 </body>
 </html>

@@ -85,6 +85,8 @@ class CPP.Routers.Students extends Backbone.Router
   register: (login) ->
     if login && CPP.CurrentUser? && CPP.CurrentUser isnt {}
       window.history.back()
+      $("#splash-header").hide()
+      $('.navbar-inner').show()
       return false
     student = new CPP.Models.Student
     student.collection = new CPP.Collections.Students
