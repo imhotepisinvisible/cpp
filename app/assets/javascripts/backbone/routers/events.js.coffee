@@ -10,7 +10,7 @@ class CPP.Routers.Events extends Backbone.Router
 
   # Events index for a specific company
   indexCompany: (company_id) ->
-    events = new CPP.Collection.Events
+    events = new CPP.Collections.EventsPager
     new CPP.Views.Events.Index collection: events
     events.fetch
       error: ->
