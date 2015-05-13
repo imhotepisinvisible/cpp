@@ -22,19 +22,19 @@
     <% if current_user %>
 
       <% if current_user.type == "Student" %>
-        <li><a href="/companies">Companies</a></li>
-        <li><a href="/events">Events</a></li>
-        <li><a href="/opportunities">Opportunities</a></li>
-        <li><a href="/students">Students</a></li>
+        <li><a href="/companies" data-toggle="collapse" data-target=".nav-collapse.in">Companies</a></li>
+        <li><a href="/events" data-toggle="collapse" data-target=".nav-collapse.in">Events</a></li>
+        <li><a href="/opportunities" data-toggle="collapse" data-target=".nav-collapse.in">Opportunities</a></li>
+        <li><a href="/students" data-toggle="collapse" data-target=".nav-collapse.in">Students</a></li>
       <% elsif current_user.type == "CompanyAdministrator" %>
-        <li><a href="/companies/<%= current_user.company_id %>/edit">Manage Company Profile</a></li>
-        <li><a href="/students">Students</a></li>
+        <li><a href="/company_dashboard" data-toggle="collapse" data-target=".nav-collapse.in">Manage Company Profile</a></li>
+        <li><a href="/students" data-toggle="collapse" data-target=".nav-collapse.in">Students</a></li>
 
       <% elsif current_user.type == "DepartmentAdministrator" %>
-        <li><a href="/events">Events</a></li>
-        <li><a href="/opportunities">Opportunities</a></li>
-        <li><a href="/companies">Companies</a></li>
-        <li><a href="/students">Students</a></li>
+        <li><a href="/events" data-toggle="collapse" data-target=".nav-collapse.in">Events</a></li>
+        <li><a href="/opportunities" data-toggle="collapse" data-target=".nav-collapse.in">Opportunities</a></li>
+        <li><a href="/companies" data-toggle="collapse" data-target=".nav-collapse.in">Companies</a></li>
+        <li><a href="/students" data-toggle="collapse" data-target=".nav-collapse.in">Students</a></li>
       <% end %>
 
     <% end %>
