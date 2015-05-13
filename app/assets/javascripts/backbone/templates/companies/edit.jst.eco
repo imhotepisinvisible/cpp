@@ -49,7 +49,7 @@
 
               <div id="about-header">
                 Summary
-              </div>  
+              </div>
 
               <div id="about-content">
 
@@ -106,8 +106,7 @@
                       </div>
                       <div class="summary-content">
                         <select id="year-input" class="student-profile-select">
-                          <% Year = new Date %>
-                          <% currentYear = Year.getFullYear() %>
+                          <% currentYear = moment().year() %>
                           <option value="">Pick a Year</option>
                           <% for year in [(currentYear - 200)..(currentYear)]: %>
                           <option value="<%= year %>"><%= year %></option>
@@ -172,7 +171,7 @@
                         </div>
 
                       </div>
-                    </div>  
+                    </div>
 
                   </div>
                 </div>

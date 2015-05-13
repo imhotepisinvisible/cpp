@@ -75,7 +75,7 @@
                     <div id="student-bio-container">
                       <p id="student-bio" class="student-editable <%= if not @student.get('bio') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to edit your "About Me" section', 'bottom') %>>
                         <% if @student.get('bio'): %>
-                          <%= @student.get('bio').replace(/\n/g, "<br/>") %>
+                          <%- @student.get('bio').replace(/\n/g, "<br/>") %>
                         <% else: %>
                         Click here to add an About Me!
                         <% end %>
@@ -165,8 +165,7 @@
                         </div>
                         <div class="summary-content">
                           <select id="year-input" class="student-profile-select">
-                          <% Year = new Date %>
-                          <% currentYear = Year.getFullYear() %>
+                          <% currentYear = moment().year() %>
                             <option value="">Pick a Year</option>
                             <% for year in [(currentYear - 15)..(currentYear + 10)]: %>
                             <option value="<%= year %>"><%= year %></option>
@@ -201,8 +200,7 @@
                         </div>
                         <div class="summary-content">
                           <select id="available-input" class="student-profile-select">
-                          <% theYear = new Date %>
-                          <% current_year = theYear.getFullYear() %>
+                          <% current_year = moment().year() %>
                             <option value="">Pick a Season and Year</option>
                             <% for year in [current_year..(current_year + 5)]: %>
                               <% for season in ['Spring', 'Summer', 'Autumn', 'Winter']: %>
