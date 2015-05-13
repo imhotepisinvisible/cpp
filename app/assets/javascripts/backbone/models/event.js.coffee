@@ -48,11 +48,6 @@ class CPP.Models.Event extends CPP.Models.Base
       type: "TextArea"
       title: "Location*"
     capacity: "Text"
-    departments:
-      type: "Checkboxes"
-      title: "Department(s)*"
-      options: @allDepartments
-      editorClass: "departments-checkbox"
     requirements:
       type: "TextArea"
       title: "Additional Requirements"
@@ -104,7 +99,7 @@ class CPP.Collections.EventsRecent extends CPP.Collections.Base
 class CPP.Collections.EventsPager extends Backbone.PageableCollection
   model: CPP.Models.Event
   url: '/events'
-  mode: 'client' 
+  mode: 'client'
 
   state:
     pageSize: 20

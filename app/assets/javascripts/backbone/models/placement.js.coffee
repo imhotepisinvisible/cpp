@@ -41,20 +41,15 @@ class CPP.Models.Placement extends CPP.Models.Base
       type: "DateTime"
       title: "Interview Date (If Known)"
       DateEditor: "DatePicker"
-    departments:
-      type: "Checkboxes"
-      title: "Department(s)*"
-      options: @allDepartments
-      editorClass: "departments-checkbox"
     other:
       type: "Text"
 
   getReadableDate: (field) ->
     moment(@get(field)).format('Do MMMM YYYY - H:mm')
-    
+
   getTimeAgo: (field) ->
     moment(@get(field)).fromNow()
-    
+
 class CPP.Collections.Placements extends CPP.Collections.Base
   url: '/placements'
   model: CPP.Models.Placement
