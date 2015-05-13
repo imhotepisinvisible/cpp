@@ -44,6 +44,10 @@
                   <div id="alumni-selector">
                     Alumni
                   </div>
+                  <div class="last-updated">
+                    <% lastUpdated = @student.get('updated_at') %>
+                    last updated: <%= lastUpdated[0..9] %>
+                  </div>
 
                 <% end %>
                 </p>

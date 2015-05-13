@@ -25,6 +25,10 @@
             <div id="job-title">
               <%= @placement.company.get('name') %> - <%= @placement.get 'position' %>
             </div>
+            <div class="last-updated">
+              <% lastUpdated = @placement.get('updated_at') %>
+              last updated: <%= lastUpdated[0..9] %>
+            </div>
 
             <!-- Short description -->
             <div id="about-job-header">
