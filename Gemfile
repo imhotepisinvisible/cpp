@@ -29,6 +29,7 @@ gem 'workflow'                    # Handling approval states
 gem 'rubyzip', '>= 1.0.0'         # will load new rubyzip version
 gem 'zip-zip'                     # will load compatibility for old rubyzip API.
 gem 'devise'                      # More customiseable authorisation
+gem 'sanitize-rails', require: 'sanitize/rails' # HTML Sanitization
 
 # UI/Appearance Related Gems
 gem 'less-rails'                  # Less required for Bootstrap

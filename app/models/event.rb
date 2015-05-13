@@ -55,6 +55,9 @@ class Event < ActiveRecord::Base
     :after => :start_date,
     :after_message => "End time cannot be before start time"
 
+  ###################### Sanitize HTML ###############################
+  sanitizes :description
+
   ############ Attributes can be set via mass assignment ############
   attr_accessible :skill_list, :interest_list, :year_group_list,
                   :title, :start_date, :end_date, :deadline,

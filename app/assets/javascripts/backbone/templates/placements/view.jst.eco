@@ -28,7 +28,7 @@
 
             <!-- Short description -->
             <div id="about-job-header">
-              Summary Description
+              Description
             </div>
 
             <div id="about-job-content">
@@ -50,7 +50,7 @@
           </div>
 
         </div>
-      </div> 
+      </div>
     </div> <!-- end of header -->
 
     <!-- Main Body of the Job Profile -->
@@ -136,7 +136,7 @@
                                 <% if @placement.get('skill_list').length > 0: %>
                                 <% for i, tag of @placement.get('skill_list'): %>
                                 <span class="content-secondary tag-margin">
-                                  / <%= tag %>  
+                                  / <%= tag %>
                                 </span>
                                 <% end %>
                                 <% else: %>
