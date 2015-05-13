@@ -48,12 +48,6 @@ class CPP.Views.CompaniesIndex extends CPP.Views.Base
       }]
     hidden_columns = [
       {
-        name: 'name'
-        label: 'delete'
-        cell: 'delete'
-        editable: false
-      }
-      {
         name: 'status'
         label: 'Status'
         cell: Backgrid.Cell.extend(render: ->
