@@ -1,3 +1,23 @@
+<div id="splash-header" style="background-image: url('assets/hand.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position:absolute; right:40px; left:0; top:0;">
+  <!--<img src="assets/hand.jpg" id="splash-header-pic">-->
+  <div id="splash-header-container">
+    <div id="splash-header-box-top">
+    </div>
+    <div id="splash-header-box-bottom">
+      <div id="splash-header-box-text">
+        Connecting quality students <br> with quality employers
+      </div>
+    </div>
+  </div>
+    <div id="splash-login-box" style="position:absolute; right:0; bottom:0; margin-right: 80px; margin-bottom: 50px;">
+      <div id="sp-btn-1" class="splash-button"><a href="/login">Login</a></div>
+      <div id="sp-btn-2" class="splash-button"><a href="/register">Sign Up</a></div>
+    </div>
+</div>
+
+<div id="fluffer">
+</div>
+
 <div id="span-card" style="margin-top:25px">
   <div id="splash-card-text-left" style="padding-top:20px; padding-left:20px">
     <div id="span-text-1">

@@ -44,25 +44,6 @@
 
   </div>
 
-  <% if !user_signed_in? %>
-  <div id="splash-header" style="background-image: url('assets/hand.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-    <!--<img src="assets/hand.jpg" id="splash-header-pic">-->
-    <div id="splash-header-container">
-      <div id="splash-header-box-top">
-      </div>
-      <div id="splash-header-box-bottom">
-        <div id="splash-header-box-text">
-          Connecting quality students <br> with quality employers
-        </div>
-      </div>
-    </div>
-      <div id="splash-login-box" style="position:absolute; right:0; bottom:0; margin-right: 50px; margin-bottom: 50px;">
-        <div id="splash-button"><a href="/register">Login</a></div>
-        <div id="splash-button"><a href="/register">Sign Up</a></div>
-      </div>
-  </div>
-  <% end %>
-
 </div>
 
   <div class="container" id="main-container">
@@ -84,10 +65,5 @@
     </div>
   </footer>
   <%= render 'layouts/analytics' %>
-
-  <form name="ignore_me">
-      <input type="hidden" id="page_is_dirty" name="page_is_dirty" value="0" />
-  </form>
-
 </body>
 </html>

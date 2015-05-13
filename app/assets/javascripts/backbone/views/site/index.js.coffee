@@ -5,6 +5,10 @@ class CPP.Views.Site.Index extends CPP.Views.Base
   el: "#app"
   template: JST['backbone/templates/site/index']
 
+  # Bind event listeners
+  events: -> _.extend {}, CPP.Views.Base::events,
+    'click #sp-btn-2' : 'showNav'
+
   # From initialise call render of the index
   initialize: ->
     @render()
@@ -22,6 +26,7 @@ class CPP.Views.Site.Index extends CPP.Views.Base
 
   resize: ->
     height = $(window).height();
+    $('#fluffer').css('height',height-60)
     setSplashContainerPos(height)
     setSplashLogin(height)
     setSplashHeight(height)
@@ -34,16 +39,11 @@ class CPP.Views.Site.Index extends CPP.Views.Base
      	$('.navbar-inner').hide()
     return
 
-
-  checkY = (height) ->
-    if $(window).scrollTop() > height-60
-    	$('.navbar-inner').show()
-    else
-     	$('.navbar-inner').hide()
-    return
+  showNav: ->
+    $('.navbar-inner').show()
 
   setSplashHeight = (height) ->
-    $('#splash-header').css('height',height)
+    $('#splash-header').css('height',height+60)
 
   setSplashContainerPos = (height) ->
     pos = (height-260)/2
