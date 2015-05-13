@@ -7,14 +7,13 @@ class CPP.Views.Site.Index extends CPP.Views.Base
 
   # Bind event listeners
   events: -> _.extend {}, CPP.Views.Base::events,
-    'click #sp-btn-2' : 'showNav'
+    'scroll' : 'scroller'
 
   # From initialise call render of the index
   initialize: ->
-    @render()
-    _.bindAll this, 'scroller'
-    $(window).scroll @scroller
     $(window).on "resize", @resize
+    $(window).scroll @scroller
+    @render()
 
   # Render the index page from the template
   render: ->
@@ -23,6 +22,9 @@ class CPP.Views.Site.Index extends CPP.Views.Base
     @resize()
     super
     @
+
+  showNav: ->
+    $('.navbar-inner').show()
 
   resize: ->
     height = $(window).height();
@@ -38,9 +40,6 @@ class CPP.Views.Site.Index extends CPP.Views.Base
     else
      	$('.navbar-inner').hide()
     return
-
-  showNav: ->
-    $('.navbar-inner').show()
 
   setSplashHeight = (height) ->
     $('#splash-header').css('height',height+60)
