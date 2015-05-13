@@ -25,6 +25,10 @@
             <div id="event-title">
              <%= @event.get 'title' %>
            </div>
+           <div class="last-updated">
+              <% lastUpdated = @event.get('updated_at') %>
+              last updated: <%= lastUpdated[0..9] %>
+            </div>
 
            <!-- Useful Connections -->
            <div class="row-fluid">

@@ -42,7 +42,7 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
     @setValue(@value)
 
     @$tagsList = $('<div> </div>').addClass('tageditor').hide()
-    @$input = $('<input type="text" placeholder="Type to Add"/>').attr('name', @getName()).addClass("input-medium pull-right")
+    @$input = $('<input type="text" placeholder="Type to Add"/>').attr('name', @getName()).addClass("input-medium pull-left")
 
     @id = @$el.attr('id')
     @name = @$el.attr('name')
@@ -62,7 +62,7 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
         item = @addTag item
         return item
 
-    header = $("<div>#{@title}</div>").addClass('tag-category-header')
+    header = $("<div> </div>").addClass('tag-category-header')
     header.append @$input
     header.append $("<div/>").addClass "clearfix"
 

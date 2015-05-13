@@ -40,12 +40,17 @@
                   <% AlumniYear = new Date %>
                   <% _AlumniYear = AlumniYear.getFullYear() %>
                   <% graduatingYear = @student.get('year') %>
-                  <% if (graduatingYear < _AlumniYear): %>
-                  <div id="alumni-selector">
-                    Alumni
-                  </div>
+                  <% if (graduatingYear < _AlumniYear) and (graduatingYear != null) and (graduatingYear > (_AlumniYear - 15)): %>
+                    <div id="alumni-selector">
+                      Alumni
+                    </div>
+                  <% end %>
 
-                <% end %>
+                    <div class="last-updated">
+                      <% lastUpdated = @student.get('updated_at') %>
+                      last updated: <%= lastUpdated[0..9] %>
+                    </div>
+
                 </p>
 
 
@@ -141,7 +146,7 @@
                         <!-- NEEDS TO BE MADE NON-HARD CODED -->
                         <div class="span3">
                           <div class="summary-subject">
-                            Availability
+                            Available
                           </div>
                           <div class="summary-content">
                             <% if @student.get('available') != null: %>
@@ -161,45 +166,56 @@
 
                         <!-- Knowledge Section -->
                         <div class="span6">
-                          <h1 class="section-header">
-                            Knowledge Areas
-                          </h1>
 
-                          <!-- Example Formating for Knowledge -->
                           <div class="row-fluid">
-                            <div class="span12">
 
-                              <!-- NEEDS TO BE EDITABLE / LINK TO DATABASE -->
-                              <div class="content-row">
-                                <div class="content-primary">
-                                  C++
-                                </div>
-                                <div class="content-secondary">
-                                  One Year / A* Coursework / 70% Exam
+                            <div class="span6">
+                              <h1 class="section-header">
+                                Skills
+                              </h1>
+
+                                <div class="row-fluid">
+                                  <div class="span12">
+
+                                    <div class="tag-category">
+                                      <% if @student.get('skill_list').length > 0: %>
+                                      <% for i, tag of @student.get('skill_list'): %>
+                                      <span class="label sktags tag year-group-tag">
+                                        <%= tag %>
+                                      </span>
+                                      <% end %>
+                                      <% else: %>
+                                      No Skills Tagged
+                                      <% end %>
+                                    </div>
+
+                                  </div>
                                 </div>
                               </div>
 
-                            </div>
-                          </div>
+                            <div class="span6">
+                              <h1 class="section-header">
+                                Interests
+                              </h1>
 
-                          <!-- OLD SKILLS, NEEDS TO BE UPDATED IN LINE WITH ABOVE -->
-                          <div class="row-fluid">
-                            <div class="span12">
+                                <div class="row-fluid">
+                                  <div class="span12">
 
-                              <div class="tag-category">
-                                <% if @student.get('skill_list').length > 0: %>
-                                <% for i, tag of @student.get('skill_list'): %>
-                                <span class="label label-success tag year-group-tag">
-                                  <%= tag %>
-                                </span>
-                                <% end %>
-                                <% else: %>
-                                No Knowledge Areas Specified
-                                <% end %>
+                                    <div class="tag-category">
+                                      <% if @student.get('interest_list').length > 0: %>
+                                        <% for i, tag of @student.get('interest_list'): %>
+                                          <span class="label sktags tag year-group-tag">
+                                            <%= tag %>
+                                          </span>
+                                        <% end %>
+                                      <% else: %>
+                                        No Interests Tagged
+                                      <% end %>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
-
                             </div>
-                          </div>
 
                         </div> <!-- end of knowledge section -->
 
@@ -212,7 +228,7 @@
 
                           <!-- NEEDS TO BE MADE INTERACTIVE/STORE IN DATABASE -->
 
-                          <% if not @student.get('gitHub') and not @student.get('LinkedIn') and not @student.get('personal') and not @student.get('other'): %>
+                          <% if not @student.get('gitHub') and not @student.get('linkedIn') and not @student.get('personal') and not @student.get('other'): %>
                             <div class="row-fluid">
                               <div class="span12">
                                 <div class="content-row">

@@ -186,7 +186,7 @@
                             <option><%= looking_fors.industrial %></option>
                             <option><%= looking_fors.summer %></option>
                             <option><%= looking_fors.graduate %></option>
-                            <option value=""><%= looking_fors.nothing %></option>
+                            <option><%= looking_fors.nothing %></option>
                             <option><%= looking_fors.graduateSecured %></option>
                             <option><%= looking_fors.summerSecured %></option>
                             <option><%= looking_fors.industrialSecured %></option>
@@ -197,7 +197,7 @@
                       <!-- Looking for, time period/when -->
                       <div class="span3">
                         <div class="summary-subject">
-                          Availability
+                          Available
                         </div>
                         <div class="summary-content">
                           <select id="available-input" class="student-profile-select">
@@ -224,35 +224,37 @@
 
                       <!-- Knowledge Section -->
                       <div class="span6">
-                        <h1 class="section-header">
-                          Knowledge Areas
-                        </h1>
 
-                        <!-- Example formatting for knowledge -->
                         <div class="row-fluid">
-                          <div class="span12">
-
-                            <!-- Needs to have database input/editing -->
-                            <div class="content-row">
-                              <div class="content-primary">
-                                C++
+                          <div class="span6">
+                            <h1 class="section-header">
+                              Skills
+                            </h1>
+                              <!-- Old Skills Input -->
+                              <div class="row-fluid">
+                                <div class="span12">
+                                  <div class="tag-category">
+                                    <div class="skill-tags-form"></div>
+                                  </div>
+                                </div>
                               </div>
+                          </div>
 
-                              <div class="content-secondary">
-                                One Year / A* Coursework / 70% Exam
+                          <div class="span6">
+                            <h1 class="section-header">
+                              Interests
+                            </h1>
+
+                            <div class="row-fluid">
+                              <div class="span12">
+                                <div class="tag-category">
+                                  <div class="interest-tags-form"></div>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-
-                        <!-- Old Skills Input -->
-                        <div class="span12">
-                          <div class="tag-category">
-                            <div class="skill-tags-form"></div>
-                          </div>
-                        </div>
                       </div> <!-- end of knowledge section -->
-
+                      </div>
                       <!-- External Links (Github, Linkedin, Other) -->
                       <div class="span6">
 
