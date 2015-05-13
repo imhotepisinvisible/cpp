@@ -27,7 +27,7 @@
             </div>
             <div class="last-updated">
               <% lastUpdated = @placement.get('updated_at') %>
-              last updated: <%= lastUpdated[0..9] %>
+              Last Updated: <%= lastUpdated[0..9] %>
             </div>
 
             <!-- Short description -->

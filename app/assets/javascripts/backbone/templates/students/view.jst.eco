@@ -48,7 +48,7 @@
 
                     <div class="last-updated">
                       <% lastUpdated = @student.get('updated_at') %>
-                      last updated: <%= lastUpdated[0..9] %>
+                      Last Updated: <%= lastUpdated[0..9] %>
                     </div>
 
                 </p>
@@ -268,7 +268,7 @@
                                   Linkedin
                                 </div>
                                 <div class="content-secondary">
-                                  <a href="http://<%= @student.get('linkedIn').replace(/http:\/\//g, "") %>"><%= @student.get('linkedIn') %></a>
+                                  <a class="content-link" href="http://<%= @student.get('linkedIn').replace(/http:\/\//g, "") %>"><%= @student.get('linkedIn') %></a>
                                 </div>
                               </div>
 

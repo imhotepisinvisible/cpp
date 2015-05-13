@@ -23,7 +23,7 @@
                 </p>
                 <div class="last-updated">
                     <% lastUpdated = @company.get('updated_at') %>
-                    last updated: <%= lastUpdated[0..9] %>
+                    Last Updated: <%= lastUpdated[0..9] %>
                 </div>
 
                 <!-- Admin, with editing header -->

@@ -54,7 +54,7 @@
               </div>
 
               <div id="student-name-container">
-                <span id="student-profile-intro-name" class="student-editable" <%= addTooltip(@student.get('tooltip'), 'Click to edit your name', 'right') %>>
+                <span id="student-profile-intro-name" class="editable-box student-editable" <%= addTooltip(@student.get('tooltip'), 'Click to edit your name', 'right') %>>
                   <%= @student.get('first_name') %> <%= @student.get('last_name') %>
                 </span>
               </div>
@@ -73,7 +73,7 @@
                     </div>
 
                     <div id="student-bio-container">
-                      <p id="student-bio" class="student-editable <%= if not @student.get('bio') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to edit your "About Me" section', 'bottom') %>>
+                      <p id="student-bio" class="editable-box student-editable <%= if not @student.get('bio') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to edit your "About Me" section', 'bottom') %>>
                         <% if @student.get('bio'): %>
                           <%= @student.get('bio').replace(/\n/g, "<br/>") %>
                         <% else: %>
@@ -279,7 +279,7 @@
                                     </div>
 
                                   <div id="student-gitHub-container">
-                                    <p id="student-gitHub" class="student-editable <%= if not @student.get('gitHub') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to add Github link', 'bottom') %>>
+                                    <p id="student-gitHub" class="editable-box student-editable <%= if not @student.get('gitHub') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to add Github link', 'bottom') %>>
                                       <% if @student.get('gitHub'): %>
                                         <%= @student.get('gitHub') %>
                                       <% else: %>
@@ -311,7 +311,7 @@
                                     </div>
 
                                   <div id="student-linkedIn-container">
-                                    <p id="student-linkedIn" class="student-editable <%= if not @student.get('linkedIn') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to add LinkedIn link', 'bottom') %>>
+                                    <p id="student-linkedIn" class="editable-box student-editable <%= if not @student.get('linkedIn') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to add LinkedIn link', 'bottom') %>>
                                       <% if @student.get('linkedIn'): %>
                                         <%= @student.get('linkedIn') %>
                                       <% else: %>
@@ -344,7 +344,7 @@
                                </div>
 
                                   <div id="student-personal-container">
-                                    <p id="student-personal" class="student-editable <%= if not @student.get('personal') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to add a link to your personal site', 'bottom') %>>
+                                    <p id="student-personal" class="editable-box student-editable <%= if not @student.get('personal') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to add a link to your personal site', 'bottom') %>>
                                       <% if @student.get('personal'): %>
                                         <%= @student.get('personal') %>
                                       <% else: %>
@@ -376,7 +376,7 @@
                                </div>
 
                                   <div id="student-other-container">
-                                    <p id="student-other" class="student-editable <%= if not @student.get('other') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to another link', 'bottom') %>>
+                                    <p id="student-other" class="editable-box student-editable <%= if not @student.get('other') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to another link', 'bottom') %>>
                                       <% if @student.get('other'): %>
                                         <%= @student.get('other') %>
                                       <% else: %>
