@@ -17,6 +17,5 @@
       <% end %>
     </h1>
     <div class="infinite-container" id="placements-table"></div>
-    <div class="loading"></div>
   </div>
 </div>

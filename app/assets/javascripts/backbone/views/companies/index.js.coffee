@@ -10,10 +10,10 @@ class CPP.Views.CompaniesIndex extends CPP.Views.Base
   # Bind to update collection
   initialize: ->
     @collection.on "fetch", (->
-    	@$('.loading').show()
+    	@$('#companies-table').append "<div class=\"loading\"></div>"
     	return), @
     @collection.bind 'reset', (->
-    	@$('.loading').hide()
+    	@$('.loading').remove()
     	return), @
     @editable = isDepartmentAdmin()
     @render()
