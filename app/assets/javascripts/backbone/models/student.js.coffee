@@ -80,3 +80,10 @@ class CPP.Collections.Students extends CPP.Collections.Base
           if studentA.get(this.sortKey) > studentB.get(this.sortKey) then -1
           else if studentB.get(this.sortKey) > studentA.get(this.sortKey) then 1
           else 0
+
+class CPP.Collections.StudentsPager extends Backbone.PageableCollection
+  model: CPP.Models.Student
+  url: '/students'
+  mode: 'client' 
+  state:
+    pageSize: 20

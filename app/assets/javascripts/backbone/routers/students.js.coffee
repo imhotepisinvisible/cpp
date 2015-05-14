@@ -15,7 +15,7 @@ class CPP.Routers.Students extends Backbone.Router
 
   # Student index
   index: ->
-    students = new CPP.Collections.Students
+    students = new CPP.Collections.StudentsPager
     new CPP.Views.Students.Index collection: students
     students.fetch
       error: ->

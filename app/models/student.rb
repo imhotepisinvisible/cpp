@@ -111,6 +111,11 @@ class Student < User
     result[:stat_count] = @stat_count
     result[:confirmed] = confirmed_at?
     result[:profile_thumb] = profile_picture.url(:thumb)
+    if course_id?
+      result[:course_name] = Course.find_by_id(course_id).name
+    else
+      result[:course_name] = "No course selected"
+    end
     return result
   end
 
