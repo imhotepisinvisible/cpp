@@ -35,8 +35,8 @@
         </div> <!--  Image Upload End -->
 
         <!-- Key Info -->
-        <div>
-          <div id="student-profile-key-info" class="span9">
+        <div class="span9">
+          <div id="student-profile-key-info" class="span12">
             <div id="student-profile-intro">
 
               <div id="company-name-input-container" style="display:none">

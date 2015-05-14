@@ -44,8 +44,8 @@
         </div> <!--  Image Upload End -->
 
         <!-- Key Info -->
-        <div>
-          <div id="student-profile-key-info" class="span9">
+        <div class="span9">
+          <div id="student-profile-key-info" class="span12">
             <div id="student-profile-intro">
                 <a class="edit-button" href="/students/<%= @student.get('id')%>">preview</a>
             <!-- Student name editing -->
@@ -295,8 +295,6 @@
                                       <% end %>
                                     </p>
                                   </div>
-
-
 
                               </div>
                             </div>
