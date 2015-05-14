@@ -5,13 +5,12 @@ class CPP.Views.Events.Index extends CPP.Views.Base
   template: JST['backbone/templates/events/index']
 
   events: -> _.extend {}, CPP.Views.Base::events,
-    'click .events-table tbody tr'  : 'viewEvent'
+    'click #events-table tbody tr'  : 'viewEvent'
     'click .button-delete-selected' : 'deleteSelected'
-    
+
   # Bind reset and filter events to render and renderEvents so that on change
   # the views change.
   initialize: ->
-    #@studentGrid.getSelectedModels().bind("change",@rowsSelected)
     #display ajax spinner whilst waiting for the collection to finish loading
     @collection.on "fetch", (->
     	@$('#events-table').append "<div class=\"loading\"></div>"
@@ -67,7 +66,6 @@ class CPP.Views.Events.Index extends CPP.Views.Base
       {
         name: 'capacity'
         label: 'Spaces Remaining'
-        #http://stackoverflow.com/questions/20093844/backgrid-formatter-adding-values-from-other-columns/20233521
         cell: 'string'
         editable: false
       }]
@@ -125,22 +123,16 @@ class CPP.Views.Events.Index extends CPP.Views.Base
   viewEvent: (e) ->
     model = $(e.target).parent().data('model')
     Backbone.history.navigate("events/" + model.id, trigger: true)
-        
+
   deleteSelected: ->
     selectedModels = @eventGrid.getSelectedModels()
     _.each(selectedModels, @destroy)
 
   destroy: (event) ->
-      @success = true    
+      @success = true
       event.destroy
-        wait: true            
+        wait: true
         success: (model, response) ->
           notify "success", "Event deleted"
         error: (model, response) ->
           notify "error", "Event could not be deleted"
-        
-     
-  
-  
-  
-      

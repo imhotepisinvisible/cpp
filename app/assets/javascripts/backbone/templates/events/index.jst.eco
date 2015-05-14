@@ -12,9 +12,9 @@
           <a href="/events/new" class="btn pull-right button-add-event">
             New Event
           </a>
-	  <div class="btn pull-right button-delete-selected"> 
-	    Delete Selected      
-	  </div>
+	      <div class="btn pull-right button-delete-selected">
+	         Delete Events      
+	      </div>
         <% end %>
       <% end %>
 
@@ -22,5 +22,3 @@
     <div class="infinite-container" id="events-table"></div>
   </div>
 </div>
-
-
