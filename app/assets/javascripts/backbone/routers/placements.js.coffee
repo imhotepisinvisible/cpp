@@ -19,7 +19,7 @@ class CPP.Routers.Placements extends Backbone.Router
   index: ->
     placements = new CPP.Collections.PlacementsPager
     new CPP.Views.Placements.Index collection: placements
-    placements.fetch({ data: $.param({deadline: moment().toISOString()}) })
+    placements.fetch({ data: {deadline: moment().toISOString()} })
       error: ->
         notify "error", "Couldn't fetch placements"
 
