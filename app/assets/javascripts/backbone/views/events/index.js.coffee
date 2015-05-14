@@ -5,8 +5,7 @@ class CPP.Views.Events.Index extends CPP.Views.Base
   template: JST['backbone/templates/events/index']
 
   events: -> _.extend {}, CPP.Views.Base::events,
-    "click .company-logo-header"      : "viewCompany"
-    'click tr'                        : 'viewEvent'
+    'click #events-table tbody tr'          : 'viewEvent'
 
   # Bind reset and filter events to render and renderEvents so that on change
   # the views change.
@@ -16,13 +15,12 @@ class CPP.Views.Events.Index extends CPP.Views.Base
     #	@$('#events-table').append "<div class=\"loading\"></div>"
     #	return), @
     #@collection.bind 'reset', @render, @
-    #@collection.bind 'filter', @renderEvents, @
     @editable = isAdmin()
     @render()
 
   # Render events
   render: ->
-    columns = [
+    event_columns = [
       {
         name: ''
         cell: 'select-row'
@@ -43,7 +41,9 @@ class CPP.Views.Events.Index extends CPP.Views.Base
       {
         name: 'start_date'
         label: 'Date'
-        cell: 'date'
+        cell: Backgrid.Extension.MomentCell.extend({
+          displayFormat: "DD/MM/YYYY"
+        })
         editable: false
       }
       {
@@ -63,28 +63,43 @@ class CPP.Views.Events.Index extends CPP.Views.Base
           @
         )
         editable: false
-      }
+      }]
+    hidden_columns = [
       {
         name: 'workflow_state'
         label: 'Status'
         cell: 'string'
         editable: false
       }
+      {
+        cell: EditCell
+      }
+      {
+        cell: DeleteCell
+      }
     ]
+    admin_columns = _.union(event_columns,hidden_columns)
 
     $(@el).html(@template(events: @collection, editable: @editable))
-    #@renderEvents(@collection.fullCollection)
-    grid = new (Backgrid.Grid)(
-      className: "backgrid table-hover table-clickable",
-      row: ModelRow
-      columns: columns
-      collection: @collection)
-      #emptyText: "No data to display")
-      #footer: Backgrid.Extension.Infinator.extend(scrollToTop: false))
+
+    if isDepartmentAdmin()
+      eventGrid = new (Backgrid.Grid)(
+        className: "backgrid table-hover table-clickable",
+        row: ModelRow
+        columns: admin_columns
+        collection: @collection)
+    else
+      eventGrid = new (Backgrid.Grid)(
+        className: "backgrid table-hover table-clickable",
+        row: ModelRow
+        columns: event_columns
+        collection: @collection)
+        #emptyText: "No data to display")
+        #footer: Backgrid.Extension.Infinator.extend(scrollToTop: false))
 
     # Render the grid and attach the root to your HTML document
     $table = $('#events-table')
-    $table.append grid.render().el
+    $table.append eventGrid.render().el
 
     # Initialize the paginator
     paginator = new (Backgrid.Extension.Paginator)(collection: @collection)
@@ -98,54 +113,7 @@ class CPP.Views.Events.Index extends CPP.Views.Base
       fields: [ 'company_logo_url', 'title', 'start_date', 'location', 'status' ])
     # Render the filter
     $table.before filter.render().el
-
-    #if $(document).height() <= $(window).height()
-    #  @collection.getNextPage()
-
-    #@renderFilters()
   @
-
-  # Render each event item
-  renderEvents: (col) ->
-    @$('#events').html("")
-    col.each (event) =>
-      view = new CPP.Views.Events.Item(model: event, editable: @editable)
-      @$('#events').append(view.render().el)
-    @
-
-  # Create event filters
-  renderFilters: ->
-    new CPP.Filter
-      el: $(@el).find('#event-filter')
-      filters: [
-        {name: "Tags"
-        type: "tags"
-        attribute: ["skill_list", "interest_list", "year_group_list"]
-        scope: ''},
-        {name: "Starting After",
-        type: 'date',
-        attribute: 'start_date'
-        scope: ''},
-        {name: "Company"
-        type: "text"
-        attribute: "company_name"
-        scope: ''},
-        {name: "Event Title",
-        type: "text",
-        attribute: 'title',
-        scope: ''},
-        {name: "Location"
-        type: "text"
-        attribute: "location"
-        scope: ''},
-      ]
-      data: @collection.fullCollection
-  @
-
-  # Navigate to company page
-  viewCompany: ->
-    if @collection.company
-      Backbone.history.navigate("companies/" + @collection.company.id, trigger: true)
 
   viewEvent: (e) ->
     model = $(e.target).parent().data('model')

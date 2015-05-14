@@ -25,7 +25,7 @@
 
 	  /** @property */
 	  className: "image-cell",
-
+          
 	  render: function () {
 		this.$el.empty();
 		this.$el.html( this.renderImage( this.model ) );

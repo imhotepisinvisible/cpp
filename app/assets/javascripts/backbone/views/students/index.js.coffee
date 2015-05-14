@@ -6,77 +6,135 @@ class CPP.Views.Students.Index extends CPP.Views.Base
 
   # Bind event listeners
   events: -> _.extend {}, CPP.Views.Base::events,
-    'click .button-export-cvs' : 'exportCVs'
-    "click .button-student-suspend": "suspend"
+    'click .button-export-cvs'      : 'exportCVs'
+    "click .button-student-suspend" : "suspend"
+    'click #students-table tbody tr'      : 'viewStudent'
 
   # Bind to update placement collection
   initialize: ->
-    @collection.on "fetch", (->
-        @$('#students-table').html "<div class=\"loading\"></div>"
-        return), @
-    @collection.bind 'reset', @render, @
-    @collection.bind 'filter', @renderStudents, @
+    #@collection.on "fetch", (->
+    #    @$('#students-table').append "<div class=\"loading\"></div>"
+    #    return), @
+    #@collection.bind 'reset', @render, @
     @editable = isDepartmentAdmin()
-    @courses = new CPP.Collections.Courses
-    @courses.fetch({async:false})
+    @studentGrid
     @render()
 
   # Render index template, students and filters
   render: ->
-    $(@el).html(@template(students: @collection, editable: @editable))
-    @renderStudents(@collection)
-    @renderFilters()
-  @
+    company_columns = [
+      {
+        name: ''
+        cell: 'select-row'
+        headerCell: 'select-all'
+      }
+      {
+        name: 'first_name'
+        label: 'First Name'
+        editable: false
+        cell: 'string'
+      }
+      {
+        name: 'last_name'
+        label: 'Last name'
+        cell: 'string'
+        editable: false
+      }
+      {
+        name: 'year'
+        label: 'Graduating'
+        cell: 'string'
+        editable: false
+      }
+      {
+        name: 'course_name'
+        label: 'Course'
+        cell: 'string'
+        editable: false
+      }
+      {
+        name: 'updated_at'
+        label: 'Last Updated'
+        cell: Backgrid.Cell.extend(render: ->
+          updated = moment(@model.get('updated_at')).fromNow()
+          @$el.text updated
+          @
+        )
+        editable: false
+      }]
+    hidden_columns = [
+      {
+        name: 'active'
+        label: 'Active'
+        cell: Backgrid.Cell.extend(render: ->
+          if @model.get('active')
+            result = "<i class=\"icon-ok\" />"
+          else
+            result = "<i class=\"icon-remove\" />"
+          @$el.html result
+          @
+        )
+        editable: false
+      }
+      {
+        name: 'confirmed'
+        label: 'Confirmed'
+        cell: Backgrid.Cell.extend(render: ->
+          if @model.get('confirmed')
+            result = "<i class=\"icon-ok\" />"
+          else
+            result = "<i class=\"icon-remove\" />"
+          @$el.html result
+          @
+        )
+        editable: false
+      }
+      {
+        cell: EditCell
+      }
+      {
+        cell: DeleteCell
+      }]
+    admin_columns = _.union(company_columns,hidden_columns)
 
-  # Remove all students, then for each student
-  # in the collection passed in, render the student
-  renderStudents: (col) ->
-    @collection = col
-    @$('#students').html("")
-    col.each (student) =>
-      view = new CPP.Views.Students.Item(model: student, editable: @editable, courses: @courses)
-      @$('#students').append(view.render().el)
+    $(@el).html(@template(students: @collection, editable: @editable))
+
+    if isDepartmentAdmin()
+      @studentGrid = new (Backgrid.Grid)(
+        className: "backgrid table-hover table-clickable",
+        row: ModelRow
+        columns: admin_columns
+        collection: @collection)
+    else
+      @studentGrid = new (Backgrid.Grid)(
+        className: "backgrid table-hover table-clickable",
+        row: ModelRow
+        columns: company_columns
+        collection: @collection)
+
+    # Render the grid and attach the root to your HTML document
+    $table = $('#students-table')
+    $table.append @studentGrid.render().el
+
+    # Initialize the paginator
+    paginator = new (Backgrid.Extension.Paginator)(collection: @collection)
+    # Render the paginator
+    $table.after paginator.render().el
+
+    # Initialize a client-side filter to filter on the client
+    # mode pageable collection's cache.
+    filter = new (Backgrid.Extension.ClientSideFilter)(
+      collection: @collection
+      fields: [ 'first_name', 'last_name', 'year', 'course' ])
+    # Render the filter
+    $table.before filter.render().el
   @
 
   exportCVs: ->
-    window.location = "export_cvs?students=" + @collection.pluck("id")
+    window.location = "export_cvs?students=" + _.pluck(@studentGrid.getSelectedModels(), "id")
   @
 
-  # Define the filters to render
-  renderFilters: ->
-    new CPP.Filter
-      el: $(@el).find('#student-filter')
-      filters: [
-        {name: "Tags"
-        type: 'tags'
-        attribute: ["skill_list", "interest_list", "year_group_list"]
-        scope: ''},
-        {name: "Graduating in"
-        type: "text"
-        attribute: 'year'
-        scope: ''},
-        {name: "Graduating after"
-        type: "graduating-after"
-        attribute: 'year'
-        scope: ''},
-        {name: "Course",
-        type: 'course',
-        attribute: 'course_id',
-        scope: ''},
-        {name: "First Name"
-        type: "text"
-        attribute: "first_name"
-        scope: ""},
-        {name: "Last Name"
-        type: "text"
-        attribute: "last_name"
-        scope: ""}
-      ]
-      data: @collection
-      courses: @courses
-  @
-
-  work: -> 
+  work: ->
     students = new CPP.Collections.Students
     students.fetch
       success: (students) ->
@@ -90,21 +148,22 @@ class CPP.Views.Students.Index extends CPP.Views.Base
             error: (student, response) ->
               console.log(first_name + "not updated")
 
-  suspend: (e) -> 
+  suspend: (e) ->
   #  e.preventDefault()
-    if @collection.length > 0
+    if @studentGrid.getSelectedModels().length > 0
       if confirm("Suspend all Student accounts?")
         $.ajax
           url: "students/suspend"
           type: 'PUT'
           dataType : 'html'
-          data: 
-            students: @collection.pluck('id')
+          data:
+             students: _.pluck(@studentGrid.getSelectedModels(), "id")
           success: =>
             notify 'success', "All student accounts suspended"
     else
       notify('error', "No students in list")
   @
 
-
-                
+  viewStudent: (e) ->
+    model = $(e.target).parent().data('model')
+    Backbone.history.navigate("students/" + model.id, trigger: true)

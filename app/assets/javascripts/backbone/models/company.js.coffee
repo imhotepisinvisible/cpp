@@ -36,8 +36,8 @@ class CPP.Models.Company extends CPP.Models.Base
       return "red-ban icon-ban-circle"
     return "icon-ban-circle"
 
-  getStatus: (code)->
-    return window.approvalStatusMap(code).split(',')[0]
+  getStatus: ()->
+    return window.approvalStatusMap(@get('status')).split(',')[0]
     
   validation:
     name:
@@ -69,3 +69,11 @@ class CPP.Collections.Companies extends CPP.Collections.Base
   model: CPP.Models.Company
   comparator: (company) ->
     return company.get "rating"
+
+class CPP.Collections.CompaniesPager extends Backbone.PageableCollection
+  model: CPP.Models.Company
+  url: '/companies'
+  mode: 'client' 
+
+  state:
+    pageSize: 20

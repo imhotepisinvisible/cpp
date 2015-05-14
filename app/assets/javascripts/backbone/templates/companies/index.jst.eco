@@ -1,6 +1,5 @@
 <div class="row-fluid">
-  <div class="span3" id="company-filter"></div>
-  <div class="span9">
+  <div id="centre-span-border">
     <h1 class="section-header">
       <i class="icon-briefcase"></i>
       Companies
@@ -9,28 +8,8 @@
           New Company
         </a>
       <% end %>
-    </h1>
-    <div id="companies-table">
-    <% if @companies.length > 0: %>
-      <table class="table table-bordered table-hover table-clickable">
-        <thead>
-          <tr>
-            <th>Logo</th>
-            <th>Name</th>
-            <th>Description</th>
-	    <th>Status</th>
-            <% if @editable: %>
-            <th class="btn-column"></th>
-            <% end %>
-          </tr>
-        </thead>
-        <tbody id="companies" class="cpp-tbl">
-          <tr><td colspan="<%= 4 + (@editable ? 1 : 0) %>"><div class="loading"></div></td></tr>
-        </tbody>
-      </table>
-    <% else: %>
-      <p>No companies signed up yet!</p>
-    <% end %>
+     </h1>
+    <div class="infinite-container" id="companies-table">
     </div>
   </div>
 </div>

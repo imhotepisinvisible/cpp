@@ -1,8 +1,5 @@
 <div class="row-fluid">
-
-  <div class="span3" id="student-filter"></div>
-  
-  <div class="span9">
+  <div id="centre-span-border">
     <h1 class="section-header">
       <i class="icon-user"></i>
       Students
@@ -20,31 +17,9 @@
           Download CVs
         </div>
       <% end %>
-    </h1>
-    <div id="students-table">
-    <% if @students.length > 0: %>
-      <table class="table table-bordered table-hover table-clickable">
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Graduating in</th>
-            <th>Course</th>
-            <th class="btn-column">Actions</th>
-            <th>Updated On</th>
-            <% if (@editable): %>
-            <th>Visible</th>
-            <th>Confirmed</th>
-            <% end %>
-          </tr>
-        </thead>
-        <tbody class="cpp-tbl" id="students">
-          <tr><td colspan="<%= 6 + (@editable ? 1 : 0) %>"><div class="loading"></div></td></tr>
-        </tbody>
-      </table>
-    <% else: %>
-      <p>No students signed up yet!</p>
-    <% end %>
+     </h1>
+    <div class="infinite-container" id="students-table">
+
     </div>
   </div>
 </div>
