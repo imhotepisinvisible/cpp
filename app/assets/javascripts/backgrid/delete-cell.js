@@ -1,37 +1,26 @@
 // stackoverflow.com/questions/17444408/how-to-add-a-custom-delete-option-for-backgrid-rows
-(function (root, factory) {
-
-  // CommonJS
-  if (typeof exports == "object") {
-    module.exports = factory(require("underscore"),
-                             require("backbone"),
-                             require("backgrid"));
-  }
-  // Browser
-  else {
-    factory(root._, root.Backbone, root.Backgrid);
-  }
-
-}(this, function (_, Backbone, Backgrid) {
-
-  "use strict";
-
-  var DeleteCell = Backgrid.Cell.extend({
-
-          className: "delete-cell",
-          template: _.template("<i class=\"icon-remove\" />"),
-          events: {
-                  "click": "deleteRow"
-          },
-          deleteRow: function (e) {
-              e.preventDefault();
-              this.model.collection.remove(this.model);
-	  },
-          render: function () {
-	      this.$el.html(this.template());
-	      this.delegateEvents();
-	      return this;
-	  }
-
-        });
-}));
+var DeleteCell = Backgrid.Cell.extend({
+    template: _.template("<div class=\"btn btn-small button-event-delete btn-danger\"><i class=\"icon-trash\" /></div>"),
+    events: {
+      "click": "deleteRow"
+    },
+    deleteRow: function (e) {
+      //e.preventDefault();
+      //this.model.collection.remove(this.model);
+      e.stopPropagation();
+      return this.model.destroy({
+        wait: true,
+        success: function(model, response) {
+          return notify("success", "Event deleted");
+        },
+        error: function(model, response) {
+          return notify("error", "Event could not be deleted");
+        }
+      });
+    },
+    render: function () {
+      this.$el.html(this.template());
+      this.delegateEvents();
+      return this;
+    }
+});

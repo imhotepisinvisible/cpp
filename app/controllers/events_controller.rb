@@ -31,11 +31,11 @@ class EventsController < ApplicationController
     if current_user && current_user.is_student?
       @events = Event.with_approved_state.select {|e| can? :show, e.company}
       @events.sort_by! {|e| [-e.relevance(current_user.id), e.company.name] }
-      paginate json: @events.as_json({:student_id => current_user.id})
+      respond_with @events.as_json({:student_id => current_user.id})
     elsif current_user && current_user.is_department_admin?
-      paginate json: @events
+      respond_with @events
     else
-      paginate json: @events
+      respond_with @events
     end
   end
 
@@ -43,21 +43,21 @@ class EventsController < ApplicationController
     @events = Event.with_new_state
     respond_with @events
   end
-        
+
   def email_approve
-    @event = Event.find(params[:id]) 
+    @event = Event.find(params[:id])
     @companyAdmin = CompanyAdministrator.find_by_company_id(@event.company_id)
     if !current_user.is_department_admin?
       redirect_to root_path
     elsif @event.approved? or @event.rejected?
-      @status = @event.current_state 
-      redirect_to @event, :notice => "Event already " + "#{@status}"      
-    else       
-      if @event.approve!        
-        UserMailer.approved_event_email(@companyAdmin.email, @event).deliver 
-        redirect_to @event, :notice => "Event approved"       
+      @status = @event.current_state
+      redirect_to @event, :notice => "Event already " + "#{@status}"
+    else
+      if @event.approve!
+        UserMailer.approved_event_email(@companyAdmin.email, @event).deliver
+        redirect_to @event, :notice => "Event approved"
       else
-        redirect_to @event, :notice => "Unprocessable entity" 
+        redirect_to @event, :notice => "Unprocessable entity"
       end
     end
   end
@@ -72,16 +72,16 @@ class EventsController < ApplicationController
   end
 
   def email_reject
-    @event = Event.find(params[:id]) 
+    @event = Event.find(params[:id])
     @companyAdmin = CompanyAdministrator.find_by_company_id(@event.company_id)
     if !current_user.is_department_admin?
       redirect_to root_path
     elsif @event.approved? or @event.rejected?
       @status = @event.current_state
-      redirect_to @event, :notice => "Event already " + "#{@status}" 
-    else      
+      redirect_to @event, :notice => "Event already " + "#{@status}"
+    else
       if @event.reject!
-        UserMailer.rejected_event_email(@companyAdmin.email, @event).deliver 
+        UserMailer.rejected_event_email(@companyAdmin.email, @event).deliver
         redirect_to @event, :notice => "Event rejected"
       else
         redirect_to @event, :notice => "Unprocessable entity"
@@ -127,7 +127,7 @@ class EventsController < ApplicationController
     @event = Event.new(params[:event])
     @admins = DepartmentAdministrator.all
 
-    if @event.save 
+    if @event.save
       respond_with @event, status: :created, location: @event
       @admins.each do |admin|
         UserMailer.validate_event_email(admin.email, @event).deliver
@@ -177,7 +177,7 @@ class EventsController < ApplicationController
       respond_with @event, status: :unprocessable_entity
     end
   end
-  
+
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy

@@ -4,18 +4,15 @@ class CPP.Views.CompaniesIndex extends CPP.Views.Base
   template: JST['backbone/templates/companies/index']
 
   events: -> _.extend {}, CPP.Views.Base::events,
-    'click tr'  : 'viewCompany'
-  
+    'click #companies-table tbody tr'  : 'viewCompany'
 
   # Company aggregate view for administrators
   # Bind to update collection
   initialize: (options) ->
-    @collection.on "fetch", (->
-        @$('#companies-table').append "<div class=\"loading\"></div>"
-        return), @
-    @collection.bind 'reset', @render, @
-    @collection.bind 'change', @render, @
-    @collection.bind 'filter', @renderCompanies, @
+    #@collection.on "fetch", (->
+    #    @$('#companies-table').append "<div class=\"loading\"></div>"
+    #    return), @
+    #@collection.bind 'reset', @render, @
     @editable = isDepartmentAdmin()
     @render()
 
@@ -56,19 +53,25 @@ class CPP.Views.CompaniesIndex extends CPP.Views.Base
           @
         )
         editable: false
-      }]               
-    admin_columns = _.union(columns,hidden_columns)   
+      }
+      {
+        cell: EditCell
+      }
+      {
+        cell: DeleteCell
+      }]
+    admin_columns = _.union(columns,hidden_columns)
+
     $(@el).html(@template(editable: @editable, companies: @collection))
-    
-    @renderFilters()
+
     if isDepartmentAdmin()
-      grid = new (Backgrid.Grid)(
+      companyGrid = new (Backgrid.Grid)(
         className: "backgrid table-hover table-clickable",
-        row: ModelRow      
-        columns: admin_columns        
+        row: ModelRow
+        columns: admin_columns
         collection: @collection)
     else
-      grid = new (Backgrid.Grid)(
+      companyGrid = new (Backgrid.Grid)(
         className: "backgrid table-hover table-clickable",
         row: ModelRow
         columns: columns
@@ -76,7 +79,7 @@ class CPP.Views.CompaniesIndex extends CPP.Views.Base
 
     # Render the grid and attach the root to your HTML document
     $table = $('#companies-table')
-    $table.append grid.render().el
+    $table.append companyGrid.render().el
 
     # Initialize the paginator
     paginator = new (Backgrid.Extension.Paginator)(collection: @collection)
@@ -87,30 +90,11 @@ class CPP.Views.CompaniesIndex extends CPP.Views.Base
     # mode pageable collection's cache.
     filter = new (Backgrid.Extension.ClientSideFilter)(
       collection: @collection
-      fields: [ 'title' ])
+      fields: [ 'name', 'description' ])
     # Render the filter
     $table.before filter.render().el
-    
-  # Set name and description text filters
-  renderFilters: ->
-    new CPP.Filter
-      el: $(@el).find('#company-filter')
-      filters: [
-        {name: "Name"
-        type: "text"
-        attribute: "name"
-        scope: ""
-        },
-        {name: "Description"
-        type: "text"
-        attribute: "description"
-        scope: ""}
-      ]
-      data: @collection
   @
 
   viewCompany: (e) ->
     model = $(e.target).parent().data('model')
     Backbone.history.navigate("companies/" + model.id, trigger: true)
-
-

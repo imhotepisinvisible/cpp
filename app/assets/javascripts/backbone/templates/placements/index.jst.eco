@@ -1,12 +1,5 @@
 <div class="row-fluid">
-  <div class="span3" id="placement-filter">
-    <i class="icon-search"></i>
-    <h1 class="section-header">Filters</h1>
-    <% if @placements.length > 0: %>
-      <div class="loading"></div>
-    <% end %>
-  </div>
-  <div class="span9">
+  <div id="centre-span-border">
     <h1 class="section-header">
       <i class="icon-folder-open"></i>
       Opportunities <%= " with " + @placements.company.get('name') if @placements.company? %>

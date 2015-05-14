@@ -6,20 +6,17 @@ class CPP.Views.Students.Index extends CPP.Views.Base
 
   # Bind event listeners
   events: -> _.extend {}, CPP.Views.Base::events,
-    'click .button-export-cvs' : 'exportCVs'
-    "click .button-student-suspend": "suspend"
-    'click tr'                        : 'viewStudent'
+    'click .button-export-cvs'      : 'exportCVs'
+    "click .button-student-suspend" : "suspend"
+    'click #students-table tbody tr'      : 'viewStudent'
 
   # Bind to update placement collection
   initialize: ->
-    @collection.on "fetch", (->
-        @$('#students-table').append "<div class=\"loading\"></div>"
-        return), @
-    @collection.bind 'reset', @render, @
-    @collection.bind 'filter', @renderStudents, @
+    #@collection.on "fetch", (->
+    #    @$('#students-table').append "<div class=\"loading\"></div>"
+    #    return), @
+    #@collection.bind 'reset', @render, @
     @editable = isDepartmentAdmin()
-    @courses = new CPP.Collections.Courses
-    @courses.fetch({async:false})
     @render()
 
   # Render index template, students and filters
@@ -32,7 +29,7 @@ class CPP.Views.Students.Index extends CPP.Views.Base
       }
       {
         name: 'first_name'
-        label: 'first_name'
+        label: 'First Name'
         editable: false
         cell: 'string'
       }
@@ -45,23 +42,23 @@ class CPP.Views.Students.Index extends CPP.Views.Base
       {
         name: 'year'
         label: 'Graduating'
-        cell: 'date'
+        cell: 'string'
         editable: false
       }
       {
-        name: 'course'
+        name: 'course_name'
         label: 'Course'
-        cell: Backgrid.Cell.extend(render: ->
-          course = @model.get('course_name') 
-          @$el.text course
-          @
-        )
+        cell: 'string'
         editable: false
       }
       {
         name: 'updated_at'
         label: 'Last Updated'
-        cell: 'date'
+        cell: Backgrid.Cell.extend(render: ->
+          updated = moment(@model.get('updated_at')).fromNow()
+          @$el.text updated
+          @
+        )
         editable: false
       }]
     hidden_columns = [
@@ -72,48 +69,51 @@ class CPP.Views.Students.Index extends CPP.Views.Base
           if @model.get('active')
             result = "<i class=\"icon-ok\" />"
           else
-            result = "<i class=\"icon-remove\" />"                  
+            result = "<i class=\"icon-remove\" />"
           @$el.html result
           @
         )
         editable: false
       }
       {
-        name: 'confirmed' 
-        label: 'Confirmed' 
+        name: 'confirmed'
+        label: 'Confirmed'
         cell: Backgrid.Cell.extend(render: ->
           if @model.get('confirmed')
             result = "<i class=\"icon-ok\" />"
           else
-            result = "<i class=\"icon-remove\" />"                  
+            result = "<i class=\"icon-remove\" />"
           @$el.html result
           @
         )
         editable: false
-      }]     
-    admin_columns = _.union(company_columns,hidden_columns)     
-      
+      }
+      {
+        cell: EditCell
+      }
+      {
+        cell: DeleteCell
+      }]
+    admin_columns = _.union(company_columns,hidden_columns)
+
     $(@el).html(@template(students: @collection, editable: @editable))
-    @renderFilters()
-    
+
     if isDepartmentAdmin()
-      grid = new (Backgrid.Grid)(
+      studentGrid = new (Backgrid.Grid)(
         className: "backgrid table-hover table-clickable",
-        row: ModelRow      
-        columns: admin_columns        
+        row: ModelRow
+        columns: admin_columns
         collection: @collection)
     else
-      grid = new (Backgrid.Grid)(
+      studentGrid = new (Backgrid.Grid)(
         className: "backgrid table-hover table-clickable",
         row: ModelRow
         columns: company_columns
-        collection: @collection)    
-            
-
+        collection: @collection)
 
     # Render the grid and attach the root to your HTML document
     $table = $('#students-table')
-    $table.append grid.render().el
+    $table.append studentGrid.render().el
 
     # Initialize the paginator
     paginator = new (Backgrid.Extension.Paginator)(collection: @collection)
@@ -124,55 +124,18 @@ class CPP.Views.Students.Index extends CPP.Views.Base
     # mode pageable collection's cache.
     filter = new (Backgrid.Extension.ClientSideFilter)(
       collection: @collection
-      fields: [ 'title' ])
+      fields: [ 'first_name', 'last_name', 'year', 'course' ])
     # Render the filter
     $table.before filter.render().el
 
-    
     #@selectedModels = grid.getSelectedModels() ###########
   @
 
   exportCVs: ->
-    #############
-    console.log(@selectedModels)    
-    window.location = "export_cvs?students=" + @selectedModels.pluck("id")
+    window.location = "export_cvs?students=" + @collection.pluck("id")
   @
 
-  # Define the filters to render
-  renderFilters: ->
-    new CPP.Filter
-      el: $(@el).find('#student-filter')
-      filters: [
-        {name: "Tags"
-        type: 'tags'
-        attribute: ["skill_list", "interest_list", "year_group_list"]
-        scope: ''},
-        {name: "Graduating in"
-        type: "text"
-        attribute: 'year'
-        scope: ''},
-        {name: "Graduating after"
-        type: "graduating-after"
-        attribute: 'year'
-        scope: ''},
-        {name: "Course",
-        type: 'course',
-        attribute: 'course_id',
-        scope: ''},
-        {name: "First Name"
-        type: "text"
-        attribute: "first_name"
-        scope: ""},
-        {name: "Last Name"
-        type: "text"
-        attribute: "last_name"
-        scope: ""}
-      ]
-      data: @collection
-      courses: @courses
-  @
-
-  work: -> 
+  work: ->
     students = new CPP.Collections.Students
     students.fetch
       success: (students) ->
@@ -186,19 +149,17 @@ class CPP.Views.Students.Index extends CPP.Views.Base
             error: (student, response) ->
               console.log(first_name + "not updated")
 
-  suspend: (e) -> 
+  suspend: (e) ->
   #  e.preventDefault()
-  # 
-    #if @collection.length > 0
-    if @selectedModels.length > 0
+    if @collection.length > 0
       if confirm("Suspend all Student accounts?")
         $.ajax
           url: "students/suspend"
           type: 'PUT'
           dataType : 'html'
-          data: 
+          data:
             #students: @collection.pluck('id') @selectedModels
-             students: @selectedModels.pluck('id') 
+             students: @selectedModels.pluck('id')
           success: =>
             notify 'success', "All student accounts suspended"
     else
@@ -208,6 +169,3 @@ class CPP.Views.Students.Index extends CPP.Views.Base
   viewStudent: (e) ->
     model = $(e.target).parent().data('model')
     Backbone.history.navigate("students/" + model.id, trigger: true)
-
-
-                

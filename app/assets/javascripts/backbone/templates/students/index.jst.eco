@@ -1,8 +1,5 @@
 <div class="row-fluid">
-
-  <div class="span3" id="student-filter"></div>
-  
-  <div class="span9">
+  <div id="centre-span-border">
     <h1 class="section-header">
       <i class="icon-user"></i>
       Students

@@ -8,8 +8,10 @@
 //= require backgrid-extensions/backgrid-paginator
 //= require backgrid-extensions/backgrid-filter
 //= require backgrid-extensions/backgrid-select-all
+//= require backgrid-extensions/backgrid-moment-cell
 //= require backgrid/backgrid-infinator
 //= require backgrid/image-cell
 //= require backgrid/delete-cell
+//= require backgrid/edit-cell
 //= require backgrid/model-row
 //= require backbone/cpp

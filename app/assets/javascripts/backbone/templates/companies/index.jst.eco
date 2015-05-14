@@ -1,6 +1,5 @@
 <div class="row-fluid">
-  <div class="span3" id="company-filter"></div>
-  <div class="span9">
+  <div id="centre-span-border">
     <h1 class="section-header">
       <i class="icon-briefcase"></i>
       Companies
@@ -13,5 +12,4 @@
     <div class="infinite-container" id="companies-table">
     </div>
   </div>
-</div>   
-  
+</div>
