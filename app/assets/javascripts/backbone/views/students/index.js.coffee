@@ -33,12 +33,16 @@ class CPP.Views.Students.Index extends CPP.Views.Base
         label: 'First Name'
         editable: false
         cell: 'string'
+        sortValue: (model, sortKey) ->
+          return model.get('first_name').toLowerCase()
       }
       {
         name: 'last_name'
         label: 'Last name'
         cell: 'string'
         editable: false
+        sortValue: (model, sortKey) ->
+          return model.get('last_name').toLowerCase()
       }
       {
         name: 'year'
@@ -51,6 +55,8 @@ class CPP.Views.Students.Index extends CPP.Views.Base
         label: 'Course'
         cell: 'string'
         editable: false
+        sortValue: (model, sortKey) ->
+          return model.get('course_name').toLowerCase()
       }
       {
         name: 'updated_at'
@@ -61,6 +67,8 @@ class CPP.Views.Students.Index extends CPP.Views.Base
           @
         )
         editable: false
+        sortValue: (model, sortKey) ->
+          return model.get('updated_at')
       }]
     hidden_columns = [
       {

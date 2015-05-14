@@ -31,12 +31,16 @@ class CPP.Views.Events.Index extends CPP.Views.Base
         label: 'Company'
         editable: false
         cell: 'image'
+        sortValue: (model, sortKey) ->
+          return model.get('company_name').toLowerCase()
       }
       {
         name: 'title'
         label: 'Event'
         cell: 'string'
         editable: false
+        sortValue: (model, sortKey) ->
+          return model.get('title').toLowerCase()
       }
       {
         name: 'start_date'
@@ -45,23 +49,22 @@ class CPP.Views.Events.Index extends CPP.Views.Base
           displayFormat: "DD/MM/YYYY"
         })
         editable: false
+        sortValue: (model, sortKey) ->
+          return model.get('start_date')
       }
       {
         name: 'location'
         label: 'Location'
         cell: 'string'
         editable: false
+        sortValue: (model, sortKey) ->
+          return model.get('location').toLowerCase()
       }
       {
-        name: 'spaces'
+        name: 'capacity'
         label: 'Spaces Remaining'
         #http://stackoverflow.com/questions/20093844/backgrid-formatter-adding-values-from-other-columns/20233521
-        cell: Backgrid.Cell.extend(render: ->
-          capacity = @model.get('capacity')
-          @$el.text capacity
-          # MUST do this for the grid to not error out
-          @
-        )
+        cell: 'string'
         editable: false
       }]
     hidden_columns = [
