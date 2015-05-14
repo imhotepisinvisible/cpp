@@ -159,7 +159,7 @@ class CPP.Views.Students.Index extends CPP.Views.Base
   suspend: (e) ->
   #  e.preventDefault()
     if @studentGrid.getSelectedModels().length > 0
-      if confirm("Suspend all Student accounts?")
+      if confirm("Suspend selected Student accounts?")
         $.ajax
           url: "students/suspend"
           type: 'PUT'
@@ -167,9 +167,9 @@ class CPP.Views.Students.Index extends CPP.Views.Base
           data:
              students: _.pluck(@studentGrid.getSelectedModels(), "id")
           success: =>
-            notify 'success', "All student accounts suspended"
+            notify 'success', "student accounts suspended"
     else
-      notify('error', "No students in list")
+      notify('error', "No students selected")
   @
 
   viewStudent: (e) ->
