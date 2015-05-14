@@ -12,10 +12,10 @@ class CPP.Views.Events.Index extends CPP.Views.Base
   initialize: ->
     #display ajax spinner whilst waiting for the collection to finish loading
     @collection.on "fetch", (->
-    	@$('.loading').show()
+    	@$('#events-table').append "<div class=\"loading\"></div>"
     	return), @
     @collection.bind 'reset', (->
-    	@$('.loading').hide()
+    	@$('.loading').remove()
     	return), @
     @editable = isAdmin()
     @render()

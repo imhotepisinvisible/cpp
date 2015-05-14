@@ -8,10 +8,10 @@ class CPP.Views.Students.Dashboard extends CPP.Views.Base
 
   initialize: ->
     @collection.on "fetch", (->
-    	@$('.loading').show()
+    	@$('#dashboard-table').append "<div class=\"loading\"></div>"
     	return), @
     @collection.bind 'reset', (->
-    	@$('.loading').hide()
+    	@$('.loading').remove()
     	return), @
     @editable = isAdmin()
     @render()
