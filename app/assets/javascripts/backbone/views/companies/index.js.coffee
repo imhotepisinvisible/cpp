@@ -27,21 +27,19 @@ class CPP.Views.CompaniesIndex extends CPP.Views.Base
       }
       {
         name: 'logo_url'
-        label: 'Logo'
-        editable: false
-        cell: 'image'
-      }
-      {
-        name: 'name'
         label: 'Name'
         editable: false
-        cell: 'string'
+        cell: 'image'
+        sortValue: (model, sortKey) ->
+          return model.get('name').toLowerCase()
       }
       {
         name: 'description'
         label: 'Description'
         cell: 'string'
         editable: false
+        sortValue: (model, sortKey) ->
+          return model.get('description').toLowerCase()
       }]
     hidden_columns = [
       {

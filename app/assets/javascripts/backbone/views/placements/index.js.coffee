@@ -31,12 +31,16 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
         label: 'Company'
         editable: false
         cell: 'image'
+        sortValue: (model, sortKey) ->
+          return model.get('company_name').toLowerCase()
       }
       {
         name: 'position'
         label: 'Position'
         cell: 'string'
         editable: false
+        sortValue: (model, sortKey) ->
+          return model.get('position').toLowerCase()
       }
       {
         name: 'deadline'
@@ -47,12 +51,16 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
           @
         )
         editable: false
+        sortValue: (model, sortKey) ->
+          return model.get('deadline')
       }
       {
         name: 'location'
         label: 'Location'
         cell: 'string'
         editable: false
+        sortValue: (model, sortKey) ->
+          return model.get('location').toLowerCase()
       }
       {
         name: 'created_at'
@@ -63,6 +71,8 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
           @
         )
         editable: false
+        sortValue: (model, sortKey) ->
+          return model.get('created_at')
       }]
     hidden_columns = [
       {

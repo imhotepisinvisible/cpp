@@ -7,21 +7,15 @@ class CPP.Views.Students.Dashboard extends CPP.Views.Base
   template: JST['backbone/templates/students/dashboard']
 
   initialize: ->
-    #@collection.reset(@collection.first(15))
-    #@collection.on "fetch", (->
-    #	@$('#events-table').append "<div class=\"loading\"></div>"
-    #	return), @
-    #@collection.bind 'reset', @render, @
+    @collection.on "fetch", (->
+    	@$('#events-table').append "<div class=\"loading\"></div>"
+    	return), @
+    @collection.bind 'reset', @render, @
     @editable = isAdmin()
     @render()
 
   render: ->
     columns = [
-      {
-        name: ''
-        cell: 'select-row'
-        headerCell: 'select-all'
-      }
       {
         name: 'type'
         label: 'Type'
@@ -34,12 +28,19 @@ class CPP.Views.Students.Dashboard extends CPP.Views.Base
           @
         )
         editable: false
+        sortValue: (model, sortKey) ->
+          if model.get('title')
+            return 'Event'
+          else
+            return 'Opportunity'
       }
       {
         name: 'company_logo_url'
         label: 'Company'
         editable: false
         cell: 'image'
+        sortValue: (model, sortKey) ->
+          return model.get('company_name').toLowerCase()
       }
       {
         name: 'title'
@@ -53,6 +54,11 @@ class CPP.Views.Students.Dashboard extends CPP.Views.Base
           @
         )
         editable: false
+        sortValue: (model, sortKey) ->
+          if model.get('title')
+            return model.get('title').toLowerCase()
+          else
+            return model.get('position').toLowerCase()
       }
       {
         name: 'Date/Deadline'
@@ -66,6 +72,11 @@ class CPP.Views.Students.Dashboard extends CPP.Views.Base
           @
         )
         editable: false
+        sortValue: (model, sortKey) ->
+          if model.get('title')
+            return model.get('start_date')
+          else
+            return model.get('deadline')
       }
       {
         name: "created_at"
@@ -76,18 +87,19 @@ class CPP.Views.Students.Dashboard extends CPP.Views.Base
           @
         )
         editable: false
+        sortValue: (model, sortKey) ->
+          return model.get('created_at')
       }
     ]
 
     $(@el).html(@template(events: @collection, editable: @editable))
-    grid = new (Backgrid.Grid)(
+    dashboardGrid = new (Backgrid.Grid)(
       className: "backgrid table-hover table-clickable",
       row: ModelRow
       columns: columns
-      collection: @collection
-      footer: Backgrid.Extension.Infinator.extend(scrollToTop: false))
+      collection: @collection)
 
     # Render the grid and attach the root to your HTML document
-    $table = $('#events-table')
-    $table.append grid.render().el
+    $table = $('#dashboard-table')
+    $table.append dashboardGrid.render().el
   @

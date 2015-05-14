@@ -1,36 +1,10 @@
 <div class="row">
   <div class="span12">
-    <h1 class="section-header">    
+    <h1 class="section-header">
     <i class="icon-calendar"></i>
     Dashboard
     </h1>
-    <div class="infinite-container" id="events-table">
+    <div class="infinite-container" id="dashboard-table">
     </div>
   </div>
 </div>
-
-<!-- <div class="row section-header"> -->
-<!--   <div class="span12"> -->
-<!--     <h1 class="section-header"> -->
-<!--     <i class="icon-clock"></i> -->
-<!--     Upcoming deadlines -->
-<!--     </h1> -->
-<!--   </div> -->
-<!-- </div> -->
-<!-- <div class="row section-header"> -->
-<!--   <div class="span6"> -->
-<!--      <h3><%= @item.get 'title' %></h3> -->
-<!--   </div> -->
-<!-- </div> -->
-<!-- <div class="row"> -->
-<!--   <div class="span6"> -->
-<!--     <div class="row"> -->
-<!--       <div class="span6" id="description"> -->
-<!--         <h4 class="section-header"><i class="icon-info-sign"></i> Description</h4> -->
-<!--         <div> -->
-<!-- 	  <%= @item.get 'description' %> -->
-<!-- 	</div> -->
-<!--       </div> -->
-<!--     </div> -->
-<!--   </div> -->
-<!-- </div> -->
