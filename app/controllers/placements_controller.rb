@@ -4,7 +4,7 @@ class PlacementsController < ApplicationController
   load_and_authorize_resource
   respond_to :json
   before_filter :require_login
-  
+
   # Find all placements current_user has access to
   # If company_id is specified, only show that company's placements
   # If limit is specified, limit results
@@ -22,14 +22,14 @@ class PlacementsController < ApplicationController
     if params.keys.include? "limit"
       @placements = @placements.limit(params[:limit])
     end
-    
+
     # if a deadline has been included, then only get items after this date
     if params.keys.include? "deadline"
       @placements = @placements.where("deadline > ? OR deadline IS NULL", params[:deadline])
     end
 
     if current_user && current_user.is_student?
-      @placements = Placement.with_approved_state.select {|p| can? :show, p.company }
+      @placements = @placements.with_approved_state.select {|p| can? :show, p.company }
       @placements = @placements.sort_by {|p| [-p.relevance(current_user.id), p.company.name] }
       respond_with @placements.as_json({:student_id => current_user.id})
     elsif current_user && current_user.is_department_admin?
@@ -51,10 +51,10 @@ class PlacementsController < ApplicationController
       redirect_to root_path
     elsif @placement.approved? or @placement.rejected?
       @status = @placement.current_state
-      redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Opportunity already " + "#{@status}" 
-    else       
-      if @placement.approve! 
-        UserMailer.approved_opportunity_email(@companyAdmin.email, @placement).deliver 
+      redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Opportunity already " + "#{@status}"
+    else
+      if @placement.approve!
+        UserMailer.approved_opportunity_email(@companyAdmin.email, @placement).deliver
         redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Opportunity approved"
       else
         redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Unprocessable entity"
@@ -78,10 +78,10 @@ class PlacementsController < ApplicationController
       redirect_to root_path
     elsif @placement.approved? or @placement.rejected?
       @status = @placement.current_state
-      redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Opportunity already " + "#{@status}" 
-    else      
+      redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Opportunity already " + "#{@status}"
+    else
       if @placement.reject!
-        UserMailer.rejected_opportunity_email(@companyAdmin.email, @placement).deliver 
+        UserMailer.rejected_opportunity_email(@companyAdmin.email, @placement).deliver
         redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Opportunity rejected"
       else
         redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Unprocessable entity"
@@ -121,7 +121,7 @@ class PlacementsController < ApplicationController
   # POST /placements
   # POST /placements.json
   def create
-    @placement = Placement.new(params[:placement])    
+    @placement = Placement.new(params[:placement])
     @admins = DepartmentAdministrator.all
 
     if @placement.save
