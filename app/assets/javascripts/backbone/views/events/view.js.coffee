@@ -60,9 +60,10 @@ class CPP.Views.Events.View extends CPP.Views.Base
   # attending parameter.
   updateViewCapacity: (attending) ->
     $('#capacity-text').html("#{@model.getFilled()} / #{@model.get 'capacity'}")
-    $('#capacity-progress').removeClass 'progress-info progress-danger progress-warning'
-    $('#capacity-progress').addClass "progress-#{@model.getCapacityClass()}"
-    $('#capacity-bar').width("#{@model.getPercentageCapacity()}%")
     $('#btn-signup-student').html(if attending then "Relinquish my ticket" else "Sign me up!")
-    $('#attending-text').html((unless attending then 'Not ' else '') + 'Attending!!')
-    $('#number-attending').html(@model.getFilled())
+    if attending
+      $('#attending-text').html("<div id=\"attending\">Attending!!</div>")
+    else
+      $('#attending-text').html("<div id=\"not-attending\">Not Attending!!</div>")
+    
+    

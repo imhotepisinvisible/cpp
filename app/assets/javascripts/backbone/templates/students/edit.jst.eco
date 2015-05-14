@@ -47,7 +47,7 @@
         <div>
           <div id="student-profile-key-info" class="span9">
             <div id="student-profile-intro">
-
+                <a class="edit-button" href="/students/<%= @student.get('id')%>">preview</a>
             <!-- Student name editing -->
               <div id="student-name-input-container" style="display:none">
                 <input type="text" id="student-name-editor" value="<%= @student.get('first_name') %> <%= @student.get('last_name') %>">
@@ -86,7 +86,7 @@
 
               <!-- Upload CV -->
               <div>
-                <a class="upload-container <%= "missing-document" unless @student.get('cv_file_name') %>">
+                <a class="upload-container">
 
                   <div>
 
@@ -94,13 +94,22 @@
                       <input class="file-input" id="file-cv" type="file" name="student[cv]" size="20">
                     </form>
 
-                    <div class="link-accent first-padding upload-document" id="upload-cv" <%= addTooltip(@student.get('tooltip'), 'Upload your CV', 'top') %>>Upload CV</div>
+                    <div class="link-accent first-padding upload-document" id="upload-cv">Upload CV</div>
 
                     <!-- Download CV -->
-                    <a class="link-accent download-document" id="download-cv" href="<%= '/students/' + @student.id + '/documents/cv' %>" <%= addTooltip(@student.get('tooltip'), 'Download your CV', 'top') %>>Download CV</a>
+                    <div id="download-cv-link">
+                    <% if @student.get('cv_file_size') != null: %>
+                         <a class="link-accent download-document" id="download-cv" href="<%= '/students/' + @student.id + '/documents/cv' %>" >Download CV</a>
+                    <% end %>
+                    </div>
 
                     <!-- Delete -->
-                    <a class="link-accent delete-document" id="delete-cv" <%= addTooltip(@student.get('tooltip'), 'Delete your CV', 'top') %>>Delete CV</a>
+                    <div id="delete-cv-link">
+                    <% if @student.get('cv_file_size') != null: %>
+                        <a class="link-accent delete-document" id="delete-cv">Delete CV</a>
+                      
+                    <% end %>
+                    </div>
                   </div>
 
                   <div class="clearfix"></div>
@@ -202,6 +211,7 @@
                           <select id="available-input" class="student-profile-select">
                           <% current_year = moment().year() %>
                             <option value="">Pick a Season and Year</option>
+                            <option> N/A </option>
                             <% for year in [current_year..(current_year + 5)]: %>
                               <% for season in ['Spring', 'Summer', 'Autumn', 'Winter']: %>
                                 <option value="<%= season + ', ' + year %>"><%= season + ', ' + year %></option>
@@ -277,11 +287,11 @@
                                     </div>
 
                                   <div id="student-gitHub-container">
-                                    <p id="student-gitHub" class="editable-box student-editable <%= if not @student.get('gitHub') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to add Github link', 'bottom') %>>
+                                    <p id="student-gitHub" class="editable-box student-editable <%= if not @student.get('gitHub') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to add link', 'bottom') %>>
                                       <% if @student.get('gitHub'): %>
                                         <%= @student.get('gitHub') %>
                                       <% else: %>
-                                      Click to add Github link
+                                      Click to add link
                                       <% end %>
                                     </p>
                                   </div>
@@ -309,11 +319,11 @@
                                     </div>
 
                                   <div id="student-linkedIn-container">
-                                    <p id="student-linkedIn" class="editable-box student-editable <%= if not @student.get('linkedIn') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to add LinkedIn link', 'bottom') %>>
+                                    <p id="student-linkedIn" class="editable-box student-editable <%= if not @student.get('linkedIn') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to add link', 'bottom') %>>
                                       <% if @student.get('linkedIn'): %>
                                         <%= @student.get('linkedIn') %>
                                       <% else: %>
-                                      Click to add LinkedIn link
+                                      Click to add link
                                       <% end %>
                                     </p>
                                   </div>
@@ -342,11 +352,11 @@
                                </div>
 
                                   <div id="student-personal-container">
-                                    <p id="student-personal" class="editable-box student-editable <%= if not @student.get('personal') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to add a link to your personal site', 'bottom') %>>
+                                    <p id="student-personal" class="editable-box student-editable <%= if not @student.get('personal') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to add link', 'bottom') %>>
                                       <% if @student.get('personal'): %>
                                         <%= @student.get('personal') %>
                                       <% else: %>
-                                      Click to add a link to your personal site
+                                      Click to add link
                                       <% end %>
                                     </p>
                                   </div>
@@ -374,11 +384,11 @@
                                </div>
 
                                   <div id="student-other-container">
-                                    <p id="student-other" class="editable-box student-editable <%= if not @student.get('other') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to another link', 'bottom') %>>
+                                    <p id="student-other" class="editable-box student-editable <%= if not @student.get('other') then 'missing' %>" <%= addTooltip(@student.get('tooltip'), 'Click to add link', 'bottom') %>>
                                       <% if @student.get('other'): %>
                                         <%= @student.get('other') %>
                                       <% else: %>
-                                      Click to add a link
+                                      Click to add link
                                       <% end %>
                                     </p>
                                   </div>
@@ -431,14 +441,19 @@
 
                   <div class="full-body">
 
-                    <div id=" ">
+                    <div id="cv-container">
                       <% if (@student.get 'cv_file_name'): %>
                       <div class="row-fluid">
                         <div class="span12" id="student-profile-body-container">
                           <div class="row-fluid">
                             <div class="span12" id="student-profile-body">
-                              <div>
+                              <div id="cv-preview">
                                 <img src="/students/<%= @student.get 'id' %>/documents/cv?image">
+                              </div>
+                              </div>
+                              <div class="progress progress-info progress-upload" style="display:none">
+                              <div id="progress-cv" class="bar">
+                              </div>
                               </div>
                             </div>
                           </div>
