@@ -12,10 +12,12 @@ class CPP.Views.Students.Index extends CPP.Views.Base
 
   # Bind to update placement collection
   initialize: ->
-    #@collection.on "fetch", (->
-    #    @$('#students-table').append "<div class=\"loading\"></div>"
-    #    return), @
-    #@collection.bind 'reset', @render, @
+    @collection.on "fetch", (->
+    	@$('.loading').show()
+    	return), @
+    @collection.bind 'reset', (->
+    	@$('.loading').hide()
+    	return), @
     @editable = isDepartmentAdmin()
     @studentGrid
     @render()
@@ -72,7 +74,7 @@ class CPP.Views.Students.Index extends CPP.Views.Base
       }]
     hidden_columns = [
       {
-        name: 'active'
+        name: 'is_active'
         label: 'Active'
         cell: Backgrid.Cell.extend(render: ->
           if @model.get('active')

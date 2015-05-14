@@ -112,6 +112,7 @@ class Student < User
     result = super(:methods => [:skill_list, :interest_list, :year_group_list, :reject_skill_list, :reject_interest_list, :type])
     result[:stat_count] = @stat_count
     result[:confirmed] = confirmed_at?
+    result[:is_active] = is_active?
     result[:profile_thumb] = profile_picture.url(:thumb)
     if course_id?
       result[:course_name] = Course.find_by_id(course_id).name
