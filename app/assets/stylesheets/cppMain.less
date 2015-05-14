@@ -23,6 +23,9 @@ body {
   line-height: 1.6;
   position: relative;
   padding-top: 57px; // only here to override, but should work with the variables!
+  @media (max-width: 868px){
+    padding: @navbarHeight 0px 0px 0px;
+  }
 }
 
 h1,h2,h3,h4,h5,h6,p {
@@ -174,6 +177,9 @@ textarea[name=description] {
   overflow: hidden;
   margin: 0px 0px 24px 0px;
   box-sizing: border-box;
+  @media (max-width: 868px){
+    padding: 0px 5px 5px 5px;
+  }
 }
 
 .link {
