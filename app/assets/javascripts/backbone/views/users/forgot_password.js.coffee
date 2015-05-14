@@ -19,7 +19,6 @@ class CPP.Views.Users.ForgotPassword extends CPP.Views.Base
     $(@el).html(@template())
     super
     @renderForm()
-    console.log "pass"
     $('.navbar-inner').show()
     $(window).unbind('scroll');
     @
