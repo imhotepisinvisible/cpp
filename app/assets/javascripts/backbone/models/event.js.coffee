@@ -16,8 +16,6 @@ class CPP.Models.Event extends CPP.Models.Base
       required: true
     location:
       required: true
-    departments:
-      required: true
 
   # Schema to be used for backbone forms
   schema: ->
@@ -37,9 +35,6 @@ class CPP.Models.Event extends CPP.Models.Base
     end_date:
       type: "DateTime"
       title: "End Date*"
-      DateEditor: "DatePicker"
-    deadline:
-      type: "DateTime"
       DateEditor: "DatePicker"
     description:
       type: "TextArea"
@@ -81,20 +76,6 @@ class CPP.Models.Event extends CPP.Models.Base
 class CPP.Collections.Events extends CPP.Collections.Base
   url: '/events'
   model: CPP.Models.Event
-
-
-class CPP.Collections.EventsRecent extends CPP.Collections.Base
-  url: '/events'
-  model: CPP.Models.Event
-  sortKey: 'created_at'
-  mode: 'infinite'
-  comparator: (eventA, eventB) ->
-          if eventA.get(this.sortKey) > eventB.get(this.sortKey) then -1
-          else if eventB.get(this.sortKey) > eventA.get(this.sortKey) then 1
-          else 0
-  state:
-    pageSize: 3
-
 
 class CPP.Collections.EventsPager extends Backbone.PageableCollection
   model: CPP.Models.Event

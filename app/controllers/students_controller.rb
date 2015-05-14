@@ -27,7 +27,7 @@ class StudentsController < ApplicationController
       @students = @students.joins(:registered_events).where("event_id = ?", params[:event_id])
     end
 
-    if current_user.is_company_admin?
+    unless current_user.is_department_admin?
       @students.select! { |s| s.is_active? }
     end
 
@@ -125,7 +125,11 @@ class StudentsController < ApplicationController
       impressionist(@student, message: 'company_cv_download')
     end
     document_type = params[:document_type]
-    document = (@student.send "#{document_type}".to_sym).path
+    if (params.has_key? :image)
+      document = (@student.send "#{document_type}".to_sym).path(:img)
+    else
+      document = (@student.send "#{document_type}".to_sym).path
+    end
     ext = File.extname document
     unless document.nil?
       if File.exist?(document)

@@ -15,7 +15,7 @@ class CPP.Routers.Students extends Backbone.Router
 
   # Student index
   index: ->
-    students = new CPP.Collections.Students
+    students = new CPP.Collections.StudentsPager
     new CPP.Views.Students.Index collection: students
     students.fetch
       error: ->
@@ -49,8 +49,8 @@ class CPP.Routers.Students extends Backbone.Router
     new CPP.Views.Students.Edit model: student
 
     # Fetch 3 events and placements for dashboard
-    student.events.fetch({ data: $.param({ limit: 3 , start_date: moment().toISOString()}) })
-    student.placements.fetch({ data: $.param({ limit: 3, deadline: moment().toISOString()}) })
+    #student.events.fetch({ data: $.param({ limit: 3 , start_date: moment().toISOString()}) })
+    #student.placements.fetch({ data: $.param({ limit: 3, deadline: moment().toISOString()}) })
 
   # Student administration page
   admin: (id) ->
@@ -102,9 +102,9 @@ class CPP.Routers.Students extends Backbone.Router
 
   #Student dashboard
   dashboard: ->
-    events = new CPP.Collections.EventsRecent
-    events.fetch({async:false})
-    placements = new CPP.Collections.PlacementsRecent
-    placements.fetch({async:false})
+    events = new CPP.Collections.EventsPager
+    events.fetch({async:false, data: { limit: 10 , start_date: moment().toISOString()} })
+    placements = new CPP.Collections.PlacementsPager
+    placements.fetch({async:false, data: { limit: 10 , start_date: moment().toISOString()} })
     events.add(placements.toJSON())
     new CPP.Views.Students.Dashboard collection: events

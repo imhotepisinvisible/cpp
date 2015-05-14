@@ -12,6 +12,8 @@ class CPP.Models.Placement extends CPP.Models.Base
       required: true
     location:
       required: true
+    deadline:
+      required: true
 
   schema: ->
     position:
@@ -28,6 +30,7 @@ class CPP.Models.Placement extends CPP.Models.Base
     deadline:
       type: "DateTime"
       DateEditor: "DatePicker"
+      title: "Deadline*"
     duration:
       type: "Text"
     salary:
@@ -37,10 +40,6 @@ class CPP.Models.Placement extends CPP.Models.Base
     application_procedure:
       type: "Text"
       title: "Application Procedure"
-    interview_date:
-      type: "DateTime"
-      title: "Interview Date (If Known)"
-      DateEditor: "DatePicker"
     other:
       type: "Text"
 
@@ -54,11 +53,10 @@ class CPP.Collections.Placements extends CPP.Collections.Base
   url: '/placements'
   model: CPP.Models.Placement
 
-class CPP.Collections.PlacementsRecent extends CPP.Collections.Base
-  url: '/placements'
+class CPP.Collections.PlacementsPager extends Backbone.PageableCollection
   model: CPP.Models.Placement
-  sortKey: 'created_at'
-  comparator: (placementA, placementB) ->
-          if placementA.get(this.sortKey) > placementB.get(this.sortKey) then -1
-          else if placementB.get(this.sortKey) > placementA.get(this.sortKey) then 1
-          else 0
+  url: '/placements'
+  mode: 'client'
+
+  state:
+    pageSize: 20

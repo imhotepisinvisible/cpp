@@ -35,8 +35,8 @@
         </div> <!--  Image Upload End -->
 
         <!-- Key Info -->
-        <div class="span9">
-          <div id="student-profile-key-info">
+        <div>
+          <div id="student-profile-key-info" class="span9">
             <div id="student-profile-intro">
 
               <div id="company-name-input-container" style="display:none">
@@ -54,7 +54,7 @@
               <div id="about-content">
 
                 <div id="company-description-input-container" style="display:none">
-                  <textarea id="company-description-editor">
+                  <textarea id="company-description-editor" class="company-editor-box">
                     <%= @company.get('description') %>
                   </textarea>
                 </div>
@@ -138,7 +138,7 @@
                         Sector
                       </div>
                       <div class="summary-content">
-                        <select id="sector-select" class="company-sector-select" <%= addTooltip(@company.get('tooltip'), 'Select the status that best matches you', 'right') %>>
+                        <select id="sector-select" class="student-profile-select" <%= addTooltip(@company.get('tooltip'), 'Select the status that best matches you', 'right') %>>
                           <option value="">Select your closest matching sector</option>
                           <% for sector in (sectors): %>
                           <option value="<%=sector %>"><%= sector %></option>
@@ -176,7 +176,6 @@
                   </div>
                 </div>
               </div>
-            </div>
 
             <!-- full-width body -->
             <div class="full-body">
@@ -193,6 +192,9 @@
                       <div class="span12" id="events-partial">
                       </div>
                     </div>
+                    <div class="row-fluid">
+                      <div class="span12" id="edit-admins"></div>
+                    </div>
                   </div>
 
                   <div class="span6">
@@ -204,9 +206,7 @@
                       <div class="span12" id="placements-partial">
                       </div>
                     </div>
-                    <div class="row-fluid">
-                      <div class="span12" id="edit-admins"></div>
-                    </div>
+
                   </div>
 
                   <!-- External Links (Github, Linkedin, Other) -->
@@ -224,3 +224,5 @@
 </div>
 </div>  <!-- end of info -->
 </div>
+</div>
+

@@ -44,7 +44,8 @@ class Student < User
   validates :last_name, obscenity: { message: "Profanity is not allowed!" }
 
   ####################### Validate attached files ######################
-  has_attached_file :cv, :styles => { :img => ["1240x1754", :png] }
+  has_attached_file :cv, :styles => { :img => ["1240x1754", :png] },
+                    :processors => [:ghostscript, :thumbnail]
   has_attached_file :transcript
   has_attached_file :covering_letter
   has_attached_file :profile_picture, :styles => { :thumb => "180x180#" },
@@ -109,8 +110,13 @@ class Student < User
     result = super(:methods => [:skill_list, :interest_list, :year_group_list, :reject_skill_list, :reject_interest_list, :type])
     result[:stat_count] = @stat_count
     result[:confirmed] = confirmed_at?
-    result[:cv_img] = cv.url(:img)
+    result[:is_active] = is_active?
     result[:profile_thumb] = profile_picture.url(:thumb)
+    if course_id?
+      result[:course_name] = Course.find_by_id(course_id).name
+    else
+      result[:course_name] = "No course selected"
+    end
     return result
   end
 
