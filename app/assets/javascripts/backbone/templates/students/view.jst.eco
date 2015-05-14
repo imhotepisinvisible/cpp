@@ -32,7 +32,7 @@
               <div id="student-profile-intro">
                 <% if (userId() == @student.get('id')): %>
                   <a class="edit-button" href="/edit">edit</a>
-                <% else if isAdmin(): %>
+                <% else if isDepartmentAdmin(): %>
                   <a class="edit-button" href="/students/<%= @student.get('id')%>/edit">edit</a>
                 <% end %>
                 <p>

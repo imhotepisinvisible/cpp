@@ -21,7 +21,7 @@
             <% if isAdmin(): %>
             <a class="image-buttons pull-right" href="/opportunities/<%= @placement.id %>/edit">Edit</a>
             <% end %>
-            
+
             <!-- Title -->
             <div id="job-title">
               <%= @placement.company.get('name') %> - <%= @placement.get 'position' %>
@@ -159,7 +159,7 @@
                                       </span>
                                       <% end %>
                                       <% else: %>
-                                      No Requirements Tagged
+                                        <div class="small-italics"> No Requirements Tagged </div>
                                       <% end %>
                                     </div>
 
@@ -183,7 +183,7 @@
                                           </span>
                                         <% end %>
                                       <% else: %>
-                                        No Responsibilities Tagged
+                                        <div class="small-italics"> No Responsibilities Tagged </div>
                                       <% end %>
                                     </div>
                                   </div>
