@@ -9,7 +9,7 @@
         </a>
       <% end %>
      </h1>
-    <div class="infinite-container" id="companies-table">
-    </div>
+    <div class="infinite-container" id="companies-table"></div>
+    <div class="loading"></div>
   </div>
 </div>
