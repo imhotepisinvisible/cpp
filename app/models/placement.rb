@@ -29,7 +29,7 @@ class Placement < ActiveRecord::Base
   attr_accessible :skill_list, :interest_list, :year_group_list,
                   :company_id, :position, :location, :description,
                   :duration, :deadline, :salary, :benefits,
-                  :application_procedure, :interview_date, :other
+                  :application_procedure, :interview_date, :other, :link, :contact
 
   ######################## Ensure present #########################
   validates :company_id,  :presence => true

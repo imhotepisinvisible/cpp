@@ -17,6 +17,13 @@
           <div class="span9">
             <div id="student-profile-key-info">
               <div id="student-profile-intro">
+      
+                <!-- Admin, with editing header -->
+                  <% if isDepartmentAdmin() or isCompanyAdmin(): %>
+                    <div class="btn-group pull-right">
+                      <div class="btn btn-small button-company-edit">edit</div>
+                    </div>
+                  <% end %>
 
                 <p id="student-profile-intro-name">
                   <%= @company.get 'name' %>
@@ -26,12 +33,6 @@
                     Last Updated: <%= lastUpdated[0..9] %>
                 </div>
 
-                <!-- Admin, with editing header -->
-                  <% if isDepartmentAdmin(): %>
-                    <div class="btn-group pull-right">
-                <div class="btn btn-small button-company-edit"><i class="icon-pencil" /></div>
-                    </div>
-                  <% end %>
 
                   <!-- Student, with favouriting header -->
                   <% if window.isStudent(): %>
@@ -160,6 +161,9 @@
                         <div class="span6">
                           <h1 class="section-header">
                             Events
+                          <div class="btn-group pull-right">
+                          <a href="/companies/<%= @company.get('id') %>/events" class="btn button-all-events">All</a>
+                          </div>
                           </h1>
 
                           <div class="row-fluid">
@@ -172,6 +176,9 @@
                         <div class="span6">
                           <h1 class="section-header">
                             Opportunities
+                             <div class="btn-group pull-right">
+                            <a href="/companies/<%= @company.get('id') %>/opportunities" class="btn">All</a>
+                          </div>
                           </h1>
 
                           <div class="row-fluid">

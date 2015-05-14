@@ -1,7 +1,7 @@
 <div class="row-fluid">
   <div id="centre-span-border">
     <h1 class="section-header">
-      <i class="icon-user"></i>
+      <!-- <i class="icon-user"></i> -->
       Students
 
       <% if @editable: %>

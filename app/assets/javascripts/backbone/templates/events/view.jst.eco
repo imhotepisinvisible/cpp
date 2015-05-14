@@ -12,14 +12,14 @@
             <a href="/companies/<%= @event.company.id %>">
               <img class="company-logo-img" src="<%= @event.company.get('logo_url') %>">
             </a>
-            <!-- Ability to edit -->
-            <% if @admin: %>
-            <a class="image-buttons pull-right" href="/events/<%= @event.id %>/edit">Edit</a>
-            <% end %>
           </div>
 
           <!-- Event Summary -->
           <div class="span9">
+            <!-- Ability to edit -->
+            <% if @admin: %>
+            <a class="image-buttons pull-right" href="/events/<%= @event.id %>/edit">Edit</a>
+            <% end %>
 
             <!-- event title -->
             <div id="event-title">

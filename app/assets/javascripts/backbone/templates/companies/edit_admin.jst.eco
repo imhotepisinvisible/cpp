@@ -6,9 +6,9 @@
   </div>
 
   <div class="btn-container btn-group pull-right">
-    <div class="btn btn-mini btn-edit-admin">Edit</div>
+    <div class="btn btn-edit-admin">Edit</div>
     <% if CPP.CurrentUser.id != @admin.id: %>
-      <div class="btn btn-mini btn-delete-admin btn-danger"><i class="icon-trash"></i></div>
+      <div class="btn btn-delete-admin btn-danger"><i class="icon-trash"></i></div>
     <% end %>
   </div>
 

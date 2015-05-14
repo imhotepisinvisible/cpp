@@ -21,17 +21,17 @@
             <img src="/assets/default_profile.png" id="student-profile-img">
             <% end %>
 
-            <div class="image-buttons">
+            <div class="centre-buttons-below">
 
               <form class="form-inline hidden">
                 <input class="file-input" id="file-profile-picture" type="file" name="student[profile_picture]" size="20">
               </form>
 
               <!-- UPLOAD IMAGE -->
-              <div class="image-button-links good first-padding upload-document" id="upload-profile-picture" <%= addTooltip(@student.get('tooltip'), 'Upload your profile picture', 'top') %>>Upload</div>
+              <div class="btn image-button-links good first-padding upload-document" id="upload-profile-picture" <%= addTooltip(@student.get('tooltip'), 'Upload your profile picture', 'top') %>>Upload</div>
 
               <!-- DELETE IMAGE -->
-              <div class="image-button-links bad delete-document" id="delete-profile-picture" <%= addTooltip(@student.get('tooltip'), 'Delete your profile picture', 'top') %>>Delete</div>
+              <div class="btn image-button-links bad delete-document" id="delete-profile-picture" <%= addTooltip(@student.get('tooltip'), 'Delete your profile picture', 'top') %>>Delete</div>
 
             </div>
 
