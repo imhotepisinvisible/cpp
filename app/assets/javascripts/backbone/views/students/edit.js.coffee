@@ -139,11 +139,11 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     .bind "fileuploaddone", (e, data) =>
       notify 'success', 'Uploaded successfully'
       $('#student-profile-img').attr('src', '/students/' + @model.id + '/documents/profile_picture')
-      $(e.target).closest('.upload-container').removeClass('missing-document')
+      $(e.target).closest('.upload-container')
       upload = $(e.target).closest('.upload-container')
       upload.find('.progress-upload').delay(250).slideUp 'slow', ->
         upload.find('.bar').width('0%')
-        upload.removeClass('missing-document')
+        upload
 
     .bind "fileuploadstart", (e, data) ->
       $(e.currentTarget).closest('.upload-container').find('.progress-upload').slideDown()
@@ -176,7 +176,9 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       upload = $(e.target).closest('.upload-container')
       upload.find('.progress-upload').delay(250).slideUp 'slow', ->
         upload.find('.bar').width('0%')
-        upload.removeClass('missing-document')
+        upload
+
+      @updateViewCV true
 
       notify 'success', 'Uploaded successfully'
       @model.set "cv_file_name", "cv"
@@ -186,6 +188,18 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       upload.find('.progress-upload').delay(250).slideUp 'slow', ->
         upload.find('.bar').width('0%')
       displayJQXHRErrors data
+
+      @updateViewCV false
+
+  updateViewCV: (uploaded) ->
+    if uploaded
+      $('#cv-container').html("<img src=\"/students/"+ @model.id + "/documents/cv?image\">")
+      $('#download-cv-link').html("<a class=\"link-accent download-document\" id=\"download-cv\" href=\"/students/" + @model.id + "/documents/cv\" >Download CV</a>")
+      $('#delete-cv-link').html("<a class=\"link-accent delete-document\" id=\"delete-cv\">Delete CV</a>")
+    else
+      $('#cv-container').html("your profile will not be shown without a CV")
+      $('#download-cv-link').html("")
+      $('#delete-cv-link').html("")
 
   # Upload a document
   uploadDocument: (e) ->
@@ -201,13 +215,16 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
         url: "/students/#{@model.id}/documents/#{documentType}"
         type: 'DELETE'
         success: (data) =>
-          $(e.currentTarget).closest('.upload-container').addClass('missing-document')
+          $(e.currentTarget).closest('.upload-container')
           if documentType == 'profile_picture'
             $('#student-profile-img').attr('src', '/assets/default_profile.png')
           if documentType == 'cv'
             @model.set("cv_file_name","")
+            @updateViewCV false
         error: (data) ->
           notify('error', "couldn't remove document")
+          if documentType == 'cv'
+            @updateViewCV true
 
   # Show inline bio edit
   bioEdit: ->

@@ -88,6 +88,8 @@ class Student < User
     !last_name.blank? &&
     !course_id.blank? &&
     !year.blank? &&
+    !available.blank? &&
+    !looking_for.blank? &&
     !cv_file_size.nil?
   end
 

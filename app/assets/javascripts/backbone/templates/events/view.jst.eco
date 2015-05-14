@@ -151,7 +151,7 @@
                         <div class="summary-subject">
                           Spaces Filled
                         </div>
-                        <div class="summary-content">
+                        <div id="capacity-text">
                           <% if @event.get("capacity"): %>
                           <%= @event.getFilled() %> / <%= @event.get("capacity") %>
                           <% else: %>
