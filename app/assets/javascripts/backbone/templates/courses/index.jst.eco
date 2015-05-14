@@ -1,7 +1,6 @@
 <div class="row-fluid">
   <div class="span12">
     <h1 class="section-header">
-      <i class="icon-book"></i>
       Courses
       <a href="/courses/new" class="btn pull-right button-course-add">
         New Course

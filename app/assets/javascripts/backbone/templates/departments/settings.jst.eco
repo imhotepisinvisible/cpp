@@ -1,10 +1,10 @@
 <div class="row-fluid">
   <div class="span12">
-    <h1 class="section-header"><i class="icon-cog"></i> Department Settings</h1>
+    <h1 class="section-header"> Department Settings</h1>
 
     <div class="row-fluid">
       <div class="span6">
-        <h2 class="section-header"><i class="icon-cogs"></i> Department Name</h2>
+        <h2 class="section-header"> Department Name</h2>
         <div id="name-form"></div>
         <div class="centre-div">
           <div id="btn-name-save" class="btn">Save</div>
@@ -13,7 +13,7 @@
       </div>
 
       <div class="span6">
-        <h2 class="section-header"><i class="icon-asterisk"></i> Change Password</h2>
+        <h2 class="section-header"> Change Password</h2>
         <div id="change-password"></div>
       </div>
     </div>

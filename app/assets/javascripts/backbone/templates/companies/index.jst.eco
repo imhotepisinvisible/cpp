@@ -1,7 +1,6 @@
 <div class="row-fluid">
   <div id="centre-span-border">
     <h1 class="section-header">
-      <i class="icon-briefcase"></i>
       Companies
       <% if @editable: %>
         <a href="/companies/register" class="btn pull-right button-company-add">

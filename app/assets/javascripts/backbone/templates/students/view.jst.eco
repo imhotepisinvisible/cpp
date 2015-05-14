@@ -68,7 +68,7 @@
                   </p>
                   <% else: %>
                   <div class="empty-student-profile-field-container">
-                    <i class="icon-user empty-student-profile-field"/>
+                    <i class="empty-student-profile-field"/>
                   </div>
                   <% end %>
                 </div>

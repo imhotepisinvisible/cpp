@@ -1,5 +1,4 @@
 <h1 class="section-header">
-  <i class="icon-book"></i> 
   <%= @course.get 'name' %>
 </h1>
 

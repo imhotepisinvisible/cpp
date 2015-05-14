@@ -1,7 +1,6 @@
 <div class="row-fluid">
   <div class="span12">
     <h1 class="section-header">
-      <i class="icon-envelope"></i>
       Emails
       <% if @type == "tagged" && !isDepartmentAdmin(): %>
       <a class="btn pull-right btn-add">
