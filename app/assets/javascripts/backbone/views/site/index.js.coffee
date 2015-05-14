@@ -26,6 +26,7 @@ class CPP.Views.Site.Index extends CPP.Views.Base
 
   moveNav: (e) ->
     e.preventDefault()
+    $('.btn-navbar.collapsed').click()
     height = $(window).height();
     window.scrollTo 0, height-55
 
@@ -35,6 +36,15 @@ class CPP.Views.Site.Index extends CPP.Views.Base
     setSplashContainerPos(height)
     setSplashLogin(height)
     setSplashHeight(height)
+    h1 = $('#t1').height()
+    h2 = $('#t2').height()
+    h3 = $('#t3').height()
+    h = Math.max.apply(Math,[h1,h2,h3])
+    $('.pic').css('height',h+40)
+    console.log "show"
+    $('.navbar').hide()
+    $('.navbar').show()
+
 
   scroller: ->
     height = $(window).height();
