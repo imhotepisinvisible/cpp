@@ -8,7 +8,7 @@ class CPP.Views.Site.Index extends CPP.Views.Base
   # Bind event listeners
   events: -> _.extend {}, CPP.Views.Base::events,
     'scroll' : 'scroller'
-    'click #sp-btn-1' : 'moveNav'
+    #'click #sp-btn-1' : 'moveNav'
 
   # From initialise call render of the index
   initialize: ->
@@ -26,6 +26,7 @@ class CPP.Views.Site.Index extends CPP.Views.Base
 
   moveNav: (e) ->
     e.preventDefault()
+    $('.btn-navbar.collapsed').click()
     height = $(window).height();
     window.scrollTo 0, height-55
 
@@ -35,6 +36,15 @@ class CPP.Views.Site.Index extends CPP.Views.Base
     setSplashContainerPos(height)
     setSplashLogin(height)
     setSplashHeight(height)
+    h1 = $('#t1').height()
+    h2 = $('#t2').height()
+    h3 = $('#t3').height()
+    h = Math.max.apply(Math,[h1,h2,h3])
+    $('.pic').css('height',h+40)
+    console.log "show"
+    $('.navbar').hide()
+    $('.navbar').show()
+
 
   scroller: ->
     height = $(window).height();
@@ -45,11 +55,12 @@ class CPP.Views.Site.Index extends CPP.Views.Base
     return
 
   setSplashHeight = (height) ->
-    $('#splash-header').css('height',height+60)
+    $('#splash-header').css('height',height)
 
   setSplashContainerPos = (height) ->
-    pos = (height-260)/2
-    $('#splash-header-container').css('margin-top',pos)
+    pos = (height-240)/2
+    $('#splash-header-box-top').css('margin-top',pos)
 
   setSplashLogin = (height) ->
-    $('#splash-login-box').css('margin-top',height-200)
+    pos = (height-100) - ((height/2)+120)
+    $('#sp-button').css('margin-top',pos)
