@@ -17,6 +17,7 @@ class CPP.Views.Students.Index extends CPP.Views.Base
     #    return), @
     #@collection.bind 'reset', @render, @
     @editable = isDepartmentAdmin()
+    @studentGrid
     @render()
 
   # Render index template, students and filters
@@ -99,13 +100,13 @@ class CPP.Views.Students.Index extends CPP.Views.Base
     $(@el).html(@template(students: @collection, editable: @editable))
 
     if isDepartmentAdmin()
-      studentGrid = new (Backgrid.Grid)(
+      @studentGrid = new (Backgrid.Grid)(
         className: "backgrid table-hover table-clickable",
         row: ModelRow
         columns: admin_columns
         collection: @collection)
     else
-      studentGrid = new (Backgrid.Grid)(
+      @studentGrid = new (Backgrid.Grid)(
         className: "backgrid table-hover table-clickable",
         row: ModelRow
         columns: company_columns
@@ -113,7 +114,7 @@ class CPP.Views.Students.Index extends CPP.Views.Base
 
     # Render the grid and attach the root to your HTML document
     $table = $('#students-table')
-    $table.append studentGrid.render().el
+    $table.append @studentGrid.render().el
 
     # Initialize the paginator
     paginator = new (Backgrid.Extension.Paginator)(collection: @collection)
@@ -127,12 +128,10 @@ class CPP.Views.Students.Index extends CPP.Views.Base
       fields: [ 'first_name', 'last_name', 'year', 'course' ])
     # Render the filter
     $table.before filter.render().el
-
-    #@selectedModels = grid.getSelectedModels() ###########
   @
 
   exportCVs: ->
-    window.location = "export_cvs?students=" + @collection.pluck("id")
+    window.location = "export_cvs?students=" + _.pluck(@studentGrid.getSelectedModels(), "id")
   @
 
   work: ->
@@ -151,15 +150,14 @@ class CPP.Views.Students.Index extends CPP.Views.Base
 
   suspend: (e) ->
   #  e.preventDefault()
-    if @collection.length > 0
+    if @studentGrid.getSelectedModels().length > 0
       if confirm("Suspend all Student accounts?")
         $.ajax
           url: "students/suspend"
           type: 'PUT'
           dataType : 'html'
           data:
-            #students: @collection.pluck('id') @selectedModels
-             students: @selectedModels.pluck('id')
+             students: _.pluck(@studentGrid.getSelectedModels(), "id")
           success: =>
             notify 'success', "All student accounts suspended"
     else
