@@ -10,11 +10,11 @@ class CPP.Views.Placements.Edit extends CPP.Views.Base
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-submit': 'submitPlacement'
 
-  # If department in options then swap to associated schema for edit form 
+  # If department in options then swap to associated schema for edit form
   # Render event edit form and tags
   # Setup skill, interest and year tag editors
   initialize: ->
-    if (this.options.department) 
+    if (this.options.department)
       swapDepartmentToCompanySchema @model, this.options.department
 
     @form = new Backbone.Form(model: @model).render()
@@ -63,7 +63,7 @@ class CPP.Views.Placements.Edit extends CPP.Views.Base
         forceUpdate: true
         success: (model, response) =>
           notify "success", "Placement Saved"
-          Backbone.history.navigate('companies/' + @model.get('company_id') + '/opportunities', trigger: true)
+          Backbone.history.navigate('/opportunities/' + model.id, trigger: true)
           @undelegateEvents()
         error: (model, response) =>
           errorlist = JSON.parse response.responseText

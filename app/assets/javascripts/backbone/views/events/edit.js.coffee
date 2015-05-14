@@ -68,7 +68,7 @@ class CPP.Views.Events.Edit extends CPP.Views.Base
         forceUpdate: true
         success: (model, response) =>
           notify "success", "Event Saved"
-          Backbone.history.navigate('companies/' + @model.get('company_id') + '/events', trigger: true)
+          Backbone.history.navigate('/events/' + model.id, trigger: true)
           @undelegateEvents()
         error: (model, response) =>
           errorlist = JSON.parse response.responseText
