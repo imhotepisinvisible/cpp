@@ -72,7 +72,7 @@ class CPP.Views.Students.Index extends CPP.Views.Base
       }]
     hidden_columns = [
       {
-        name: 'active'
+        name: 'is_active'
         label: 'Active'
         cell: Backgrid.Cell.extend(render: ->
           if @model.get('active')

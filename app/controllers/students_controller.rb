@@ -27,7 +27,7 @@ class StudentsController < ApplicationController
       @students = @students.joins(:registered_events).where("event_id = ?", params[:event_id])
     end
 
-    if current_user.is_company_admin?
+    unless current_user.is_department_admin?
       @students.select! { |s| s.is_active? }
     end
 
