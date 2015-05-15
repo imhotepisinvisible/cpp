@@ -4,7 +4,7 @@
       <div class="row-fluid">
         <div class="span12">
           <div class="span6">
-    
+
     <h1 class="summary-subject">
     Events <%= " by " + @events.company.get('name') if @events.company? %>
     </h1>
@@ -19,15 +19,15 @@
           <a href="/events/new" class="btn pull-right small-margin button-add-event">
             New Event
           </a>
-	      <div class="btn pull-right small-margin button-delete-selected">
-	         Delete Events      
+	      <div class="btn pull-right  small-margin button-delete-events">
+	         Delete Events
 	      </div>
         <% end %>
       <% end %>
       </div>
       </div>
       </div>
-    
+
     </div>
     <div class="infinite-container" id="events-table"></div>
   </div>

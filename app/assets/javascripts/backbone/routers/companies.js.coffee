@@ -10,13 +10,9 @@ class CPP.Routers.Companies extends Backbone.Router
       'company_dashboard'     : 'edit'
 
   # The company index page that admins will see
-  index: ->        
-    if isStudent()
-        companies = new CPP.Collections.Companies
-        new CPP.Views.CompaniesStudentIndex collection: companies
-    else
-        companies = new CPP.Collections.CompaniesPager
-        new CPP.Views.CompaniesIndex collection: companies
+  index: ->
+    companies = new CPP.Collections.CompaniesPager
+    new CPP.Views.CompaniesIndex collection: companies
     companies.fetch
       error: ->
         notify "error", "Couldn't fetch companies"

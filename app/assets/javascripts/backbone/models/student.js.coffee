@@ -71,7 +71,7 @@ class CPP.Models.Student extends CPP.Models.Base
     reasons.push("You need to add your graduating year") if @get('year') == null || @get('year') == '' || @get('year') == 0
     reasons.push("You need to add your C.V.")          if @get('cv_file_name') == null || @get('cv_file_name') == ''
     reasons.push("You need to add if you are looking for an opportunity") if @get('looking_for') == null || @get('looking_for') == '' || @get('looking_for') == 0
-    reasons.push("You need to add when if you are available") if @get('available') == null || @get('available') == '' || @get('available') == 0
+    reasons.push("You need to add if you are available") if @get('available') == null || @get('available') == '' || @get('available') == 0
     return reasons
 
 class CPP.Collections.Students extends CPP.Collections.Base

@@ -8,6 +8,7 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
   # Bind events
   events: -> _.extend {}, CPP.Views.Base::events,
     'click #placements-table tbody tr'       : 'viewPlacement'
+    'click .button-delete-opportunities'     : 'deleteSelected'
 
   # Bind to update placement collection
   initialize: ->
@@ -95,13 +96,13 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
     $(@el).html(@template(placements: @collection, editable: @editable))
 
     if isDepartmentAdmin()
-      placementGrid = new (Backgrid.Grid)(
+      @placementGrid = new (Backgrid.Grid)(
         className: "backgrid table-hover table-clickable",
         row: ModelRow
         columns: admin_columns
         collection: @collection)
     else
-      placementGrid = new (Backgrid.Grid)(
+      @placementGrid = new (Backgrid.Grid)(
         className: "backgrid table-hover table-clickable",
         row: ModelRow
         columns: placement_columns
@@ -109,7 +110,7 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
 
     # Render the grid and attach the root to your HTML document
     $table = $('#placements-table')
-    $table.append placementGrid.render().el
+    $table.append @placementGrid.render().el
 
     # Initialize the paginator
     paginator = new (Backgrid.Extension.Paginator)(collection: @collection)
@@ -129,3 +130,19 @@ class CPP.Views.Placements.Index extends CPP.Views.Base
   viewPlacement: (e) ->
     model = $(e.target).parent().data('model')
     Backbone.history.navigate("opportunities/" + model.id, trigger: true)
+
+  deleteSelected: ->    
+    if @placementGrid.getSelectedModels().length > 0
+      if confirm("Are you sure you want to delete the selected opportunities?")
+        _.each(@placementGrid.getSelectedModels(), @destroy)
+    else
+      notify "error", "No opportunitiess selected"
+      
+  destroy: (placement) ->
+      @success = true
+      placement.destroy
+        wait: true
+        success: (model, response) ->
+          notify "success", "Opportunities deleted"
+        error: (model, response) ->
+          notify "error", "Opportunities could not be deleted"

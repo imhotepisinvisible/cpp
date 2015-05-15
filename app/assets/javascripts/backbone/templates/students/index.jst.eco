@@ -22,13 +22,14 @@
            <div class="btn pull-right small-margin button-export-cvs">
             Download CVs
           </div>
-          <% end %>
-        </div>
-
-      </div>
-    </div>
-    
-  </div>
-  <div class="infinite-container" id="students-table"></div>
+          <div class="btn pull-right small-margin button-delete-students">
+	           Delete Students
+	       </div>
+         <% end %>
+       </div>
+     </div>
+   </div>
+       </div>
+    <div class="infinite-container" id="students-table"></div>
 </div>
 </div>
