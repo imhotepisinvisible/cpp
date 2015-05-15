@@ -1,8 +1,15 @@
 <div class="row-fluid">
   <div id="centre-span-border">
-        <div class="index-header">
+  <div class="index-header">
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="span6">
+    
     <h1 class="summary-subject">
     Events <%= " by " + @events.company.get('name') if @events.company? %>
+    </h1>
+    </div>
+    <div class="span6">
       <% if @editable: %>
         <% if @events.company?: %>
           <a href="/companies/<%= @events.company.get('id') %>/events/new" class="btn pull-right button-add-event">
@@ -17,8 +24,10 @@
 	      </div>
         <% end %>
       <% end %>
-
-    </h1>
+      </div>
+      </div>
+      </div>
+    
     </div>
     <div class="infinite-container" id="events-table"></div>
   </div>
