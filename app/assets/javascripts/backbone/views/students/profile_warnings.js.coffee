@@ -10,5 +10,6 @@ class CPP.Views.Students.ProfileWarnings extends CPP.Views.Base
 
   # Render the tamplate
   render: ->
-    $(@el).html(@template(model: @model))
+    if @model.get("first_name")
+      $(@el).html(@template(model: @model))
     @

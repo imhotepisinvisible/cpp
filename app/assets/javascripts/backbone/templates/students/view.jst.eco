@@ -49,8 +49,7 @@
                   <% end %>
 
                     <div class="last-updated">
-                      <% lastUpdated = @student.get('updated_at') %>
-                      Last Updated: <%= lastUpdated[0..9] %>
+                      Last Updated: <%= moment(@student.get('updated_at')).format('DD/MM/YYYY') %>
                     </div>
 
                 </p>
@@ -115,8 +114,8 @@
                             Studying
                           </div>
                           <div class="summary-content">
-                            <% if @student.get('course_id') != null: %>
-                              <%= @courses.get(@student.get 'course_id').attributes.name %>
+                            <% if @student.get('course_name'): %>
+                              <%= @student.get('course_name') %>
                             <br>
                             <% else: %>
                               N/A

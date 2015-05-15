@@ -21,7 +21,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     'change #student-course-input' : 'changeCourse'
     'keyup #student-name-input-container' : 'stopEditOnEnter'
     'keyup #student-degree-input-container': 'stopEditOnEnter'
-    
+
     'click #student-gitHub-container': 'gitEdit'
     'blur #student-gitHub-input-container':'gitStopEdit'
 
@@ -38,6 +38,29 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
   # Setup skills, interests and year tag editors
   # Initialise uploads and call render
   initialize: ->
+    @courses = new CPP.Collections.Courses
+    @courses.fetch
+      success: =>
+        @courses.each (model) =>
+          if @model.get('course_id') == model.get('id')
+            @$('#student-course-input').append '<option value="' + model.get('id') + '\" selected=\"selected\">' + model.get('name') + '</option>'
+          else
+            @$('#student-course-input').append '<option value="' + model.get('id') + '">' + model.get('name') + '</option>'
+          return
+        return
+
+    @model.bind 'change', @render, @
+    @render()
+    @uploadInitialize 'cv'
+    @uploadInitialize 'transcript'
+    @uploadInitialize 'covering-letter'
+    @profileUploadInitialize()
+
+  # Render student edit template with tags, partials and inline editors
+  render: ->
+    if @model.get("first_name")
+      $(@el).html(@template(student: @model, courses: @courses))
+
     # Auxiliary function, saved model on tag input
     saveModel = ->
       @model.save {},
@@ -49,7 +72,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
           notify "error", "Couldn't Update Profile"
         wait: true
         forceUpdate: true
-
     @skill_list_tags_form = new Backbone.Form.editors.TagEditor
       model: @model
       key: 'skill_list'
@@ -68,18 +90,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       tag_change_callback: saveModel
       additions: true
 
-    @courses = new CPP.Collections.Courses
-    @courses.fetch({async:false})
-    
-    @render()
-    @uploadInitialize 'cv'
-    @uploadInitialize 'transcript'
-    @uploadInitialize 'covering-letter'
-    @profileUploadInitialize()
-
-  # Render student edit template with tags, partials and inline editors
-  render: ->
-    $(@el).html(@template(student: @model, courses: @courses))
     @skill_list_tags_form.render()
     $('.skill-tags-form').append(@skill_list_tags_form.el)
     @interest_list_tags_form.render()
@@ -110,12 +120,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     for option in $('#looking-for-select').children()
       if $(option).val() == @model.get('looking_for')
         $(option).attr('selected', 'selected')
-
-    # Set the default selected course
-    if @model.get('course_id') != null
-      for option in $('#student-course-input').children()
-        if parseInt($(option).val()) == @model.get('course_id')
-          $(option).attr('selected', 'selected')
 
     if @model.get('year') != null
       for option in $('#year-input').children()
@@ -279,8 +283,8 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     $('#student-name-input-container').show()
     $('#student-name-editor').focus()
 
-  
-  # Stop inline name edit, find first and last names and if they are specified and at least one has changed then save changes  
+
+  # Stop inline name edit, find first and last names and if they are specified and at least one has changed then save changes
   nameStopEdit: ->
     originalName = @model.get('first_name') + ' ' + @model.get('last_name')
     name = $('#student-name-editor').val()
@@ -317,7 +321,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
 
     $('#student-name-container').show()
 
-  # Remove tag from lists 
+  # Remove tag from lists
   removeTag: (e) ->
     close_div = $(e.currentTarget)
     tag_div = close_div.parent()
@@ -369,7 +373,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       error: (model, response) =>
         notify "error", "Could not update looking for"
 
-  # Update and save year field highlight 
+  # Update and save year field highlight
   changeYear: (e) ->
     year = parseInt($(e.currentTarget).val())
     if year
@@ -388,7 +392,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       error: (model, response) =>
         notify 'error', 'Could not update year'
 
-  # Update and save year field highlight 
+  # Update and save year field highlight
   changeAvailable: (e) ->
     available = $(e.currentTarget).val()
     if available
@@ -418,7 +422,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       error: (model, response) =>
         notify 'error', 'Could not update course'
 
-  # Stop inline edit on enter key press 
+  # Stop inline edit on enter key press
   stopEditOnEnter: (e) ->
     if (e.keyCode == 13)
       @nameStopEdit()

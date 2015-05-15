@@ -9,12 +9,12 @@ class CPP.Views.Students.View extends CPP.Views.Base
   initialize: ->
     if isCompanyAdmin()
       @model.record_stat_view()
-    @courses = new CPP.Collections.Courses
-    @courses.fetch({async:false})
+    @model.bind 'change', @render, @
     @render()
 
   # render student template with student model
   render: ->
-    $(@el).html(@template(student: @model, courses: @courses))
+    if @model.get("first_name")
+      $(@el).html(@template(student: @model, courses: @courses))
     super
     @
