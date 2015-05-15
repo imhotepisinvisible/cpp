@@ -21,7 +21,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     'change #student-course-input' : 'changeCourse'
     'keyup #student-name-input-container' : 'stopEditOnEnter'
     'keyup #student-degree-input-container': 'stopEditOnEnter'
-    
+
     'click #student-gitHub-container': 'gitEdit'
     'blur #student-gitHub-input-container':'gitStopEdit'
 
@@ -69,8 +69,17 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       additions: true
 
     @courses = new CPP.Collections.Courses
-    @courses.fetch({async:false})
-    
+    @courses.fetch
+      success: =>
+        @courses.each (model) =>
+          if @model.get('course_id') == model.get('id')
+            @$('#student-course-input').append '<option value="' + model.get('id') + '\" selected=\"selected\">' + model.get('name') + '</option>'
+          else
+            @$('#student-course-input').append '<option value="' + model.get('id') + '">' + model.get('name') + '</option>'
+          return
+        return
+
+    @model.bind 'change', @render, @
     @render()
     @uploadInitialize 'cv'
     @uploadInitialize 'transcript'
@@ -110,12 +119,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     for option in $('#looking-for-select').children()
       if $(option).val() == @model.get('looking_for')
         $(option).attr('selected', 'selected')
-
-    # Set the default selected course
-    if @model.get('course_id') != null
-      for option in $('#student-course-input').children()
-        if parseInt($(option).val()) == @model.get('course_id')
-          $(option).attr('selected', 'selected')
 
     if @model.get('year') != null
       for option in $('#year-input').children()
@@ -279,8 +282,8 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     $('#student-name-input-container').show()
     $('#student-name-editor').focus()
 
-  
-  # Stop inline name edit, find first and last names and if they are specified and at least one has changed then save changes  
+
+  # Stop inline name edit, find first and last names and if they are specified and at least one has changed then save changes
   nameStopEdit: ->
     originalName = @model.get('first_name') + ' ' + @model.get('last_name')
     name = $('#student-name-editor').val()
@@ -317,7 +320,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
 
     $('#student-name-container').show()
 
-  # Remove tag from lists 
+  # Remove tag from lists
   removeTag: (e) ->
     close_div = $(e.currentTarget)
     tag_div = close_div.parent()
@@ -369,7 +372,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       error: (model, response) =>
         notify "error", "Could not update looking for"
 
-  # Update and save year field highlight 
+  # Update and save year field highlight
   changeYear: (e) ->
     year = parseInt($(e.currentTarget).val())
     if year
@@ -388,7 +391,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       error: (model, response) =>
         notify 'error', 'Could not update year'
 
-  # Update and save year field highlight 
+  # Update and save year field highlight
   changeAvailable: (e) ->
     available = $(e.currentTarget).val()
     if available
@@ -418,7 +421,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       error: (model, response) =>
         notify 'error', 'Could not update course'
 
-  # Stop inline edit on enter key press 
+  # Stop inline edit on enter key press
   stopEditOnEnter: (e) ->
     if (e.keyCode == 13)
       @nameStopEdit()

@@ -26,11 +26,12 @@ class CPP.Routers.Students extends Backbone.Router
     student = @getStudentFromID(id)
     unless student
       notify "error", "Invalid Student"
+      
     student.fetch
-      success: ->
-        new CPP.Views.Students.View model: student
       error: ->
         notify "error", "Couldn't fetch student"
+
+    new CPP.Views.Students.View model: student
 
   # Student edit
   edit: (id) ->
