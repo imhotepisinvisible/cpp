@@ -20,7 +20,7 @@
             <a href="/opportunities/new" class="btn small-margin pull-right button-add-placement">
               New Opportunity
             </a>
-            <div class="btn pull-right button-delete-opportunities">
+            <div class="btn pull-right small-margin button-delete-opportunities">
               Delete Opportunities
             </div>
             <% end %>

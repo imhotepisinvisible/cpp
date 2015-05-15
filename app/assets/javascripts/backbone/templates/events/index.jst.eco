@@ -19,8 +19,8 @@
           <a href="/events/new" class="btn pull-right small-margin button-add-event">
             New Event
           </a>
-	      <div class="btn pull-right button-delete-events">
-	         Delete Events      
+	      <div class="btn pull-right  small-margin button-delete-events">
+	         Delete Events
 	      </div>
         <% end %>
       <% end %>

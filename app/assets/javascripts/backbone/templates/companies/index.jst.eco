@@ -11,12 +11,12 @@
           </div>
           <div class="span6">
             <% if @editable: %>
-              <a href="/companies/register" class="btn small-margin pull-right button-company-add">
+              <div><a href="/companies/register" class="btn small-margin pull-right button-company-add">
                 New Company
-              </a>
-              <div class="btn pull-right button-delete-companies">
+              </a></div>
+              <div class="btn pull-right small-margin button-delete-companies">
              Delete Companies
-          </div>
+            </div>
             <% end %>
           </div>
         </div>
