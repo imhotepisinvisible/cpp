@@ -68,9 +68,9 @@ class CPP.Views.Students.Settings extends CPP.Views.Base
           wait: true
           forceUpdate: true
           success: (model, response) =>
-            notify 'success', "Switched #{stateText} showing profile to companies"
+            notify 'success', "Switched #{stateText} showing profile to companies and students"
           error: (model, response) =>
-            notify 'error', "Unable to switch #{stateText} showing profile to companies"
+            notify 'error', "Unable to switch #{stateText} showing profile to companies and students"
     )
 
   # Render student settings and rejection tags
