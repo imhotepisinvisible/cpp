@@ -103,5 +103,6 @@ class CPP.Views.Students.Dashboard extends CPP.Views.Base
 
     # Render the grid and attach the root to your HTML document
     $table = $('#dashboard-table')
-    $table.append dashboardGrid.render().el
+    #dashboardGrid.render().sort("Posted","descending")
+    $table.append @dashboardGrid.render.el
   @

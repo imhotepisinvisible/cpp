@@ -12,6 +12,9 @@
           <a href="/opportunities/new" class="btn pull-right button-add-placement">
             New Opportunity
           </a>
+              <div class="btn pull-right button-delete-opportunities">
+	         Delete Opportunities      
+	      </div>
         <% end %>
       <% end %>
     </h1>
