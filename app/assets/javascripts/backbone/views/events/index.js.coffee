@@ -65,8 +65,8 @@ class CPP.Views.Events.Index extends CPP.Views.Base
       }
       {
         name: 'capacity'
-        label: 'Spaces Remaining'
-        cell: 'string'
+        label: 'Spaces'
+        cell: 'integer'
         editable: false
       }]
     hidden_columns = [

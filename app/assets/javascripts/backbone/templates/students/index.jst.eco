@@ -1,26 +1,32 @@
 <div class="row-fluid">
   <div id="centre-span-border">
-    <h1 class="section-header">
-      <!-- <i class="icon-user"></i> -->
-      Students
-
-      <% if @editable: %>
-        <a href="/students/new" class="btn pull-right button-student-add">
-          New Student
-        </a>
-	      <a href = "students" class="btn pull-right button-student-suspend">
-	        Suspend Students
-	      </a>
-      <% end %>
-      <% if isAdmin(): %>
-        <div class="btn pull-right button-export-cvs">
-          Download CVs
-        </div>
-            <div class="btn pull-right button-delete-students">
-	        Delete Students      
-	    </div>
-      <% end %>
+    <div class="index-header">
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="span6">
+            <h1 class="summary-subject">
+              <!-- <i class="icon-user"></i> -->
+              Students
+            </h1>
+          </div>
+          <div class="span6">
+            <% if @editable: %>
+            <a href="/students/new" class="btn small-margin pull-right button-student-add">
+              New Student
+            </a>
+            <a href = "students" class="btn small-margin pull-right button-student-suspend">
+             Suspend Students
+           </a>
+           <% end %>
+           <% if isAdmin(): %>
+           <div class="btn pull-right small-margin button-export-cvs">
+            Download CVs
+          </div>
+          <div class="btn pull-right button-delete-students">
+	           Delete Students
+	       </div>
+         <% end %>
      </h1>
     <div class="infinite-container" id="students-table"></div>
-  </div>
+</div>
 </div>

@@ -1,23 +1,35 @@
 <div class="row-fluid">
   <div id="centre-span-border">
-    <h1 class="section-header">
-      Opportunities <%= " with " + @placements.company.get('name') if @placements.company? %>
+    <div class="index-header">
 
-      <% if @editable: %>
-        <% if @placements.company?: %>
-          <a href="/companies/<%= @placements.company.get('id') %>/opportunities/new" class="btn pull-right button-add-placement">
-            New Opportunity
-          </a>
-        <% else: %>
-          <a href="/opportunities/new" class="btn pull-right button-add-placement">
-            New Opportunity
-          </a>
-              <div class="btn pull-right button-delete-opportunities">
-	         Delete Opportunities      
-	      </div>
-        <% end %>
-      <% end %>
-    </h1>
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="span6">
+
+            <h1 class="summary-subject">
+              Opportunities <%= " with " + @placements.company.get('name') if @placements.company? %>
+            </h1>
+          </div>
+          <div class="span6">
+            <% if @editable: %>
+            <% if @placements.company?: %>
+            <a href="/companies/<%= @placements.company.get('id') %>/opportunities/new" class="btn pull-right button-add-placement">
+              New Opportunity
+            </a>
+            <% else: %>
+            <a href="/opportunities/new" class="btn small-margin pull-right button-add-placement">
+              New Opportunity
+            </a>
+            <div class="btn pull-right button-delete-opportunities">
+              Delete Opportunities
+            </div>
+            <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+    </div>
     <div class="infinite-container" id="placements-table"></div>
   </div>
 </div>

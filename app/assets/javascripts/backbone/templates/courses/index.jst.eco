@@ -1,11 +1,30 @@
-<div class="row-fluid">
+<div class="margin-top40">
+  <div class="row-fluid">
   <div class="span12">
-    <h1 class="section-header">
-      Courses
-      <a href="/courses/new" class="btn pull-right button-course-add">
-        New Course
-      </a>
-    </h1>
+
+    <div class="index-header">
+
+      <div class="row-fluid">
+        <div class="span12">
+
+          <div class="span6">
+
+            <h1 class="summary-subject">
+            Courses
+            </h1>
+
+          </div>
+
+          <div class="span6">
+            <a href="/courses/new" class="btn small-margin pull-right button-course-add">
+              New Course
+            </a>
+        </div>
+
+      </div>
+    </div>
+    </div>
+
     <% if @courses.length > 0: %>
       <table class="table table-bordered">
         <thead>
@@ -21,7 +40,8 @@
     <% else: %>
       <p>No Courses!</p>
     <% end %>
-  </div>
+</div>
 </div>
 <div class="row-fluid">
+</div>
 </div>

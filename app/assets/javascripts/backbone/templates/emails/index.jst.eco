@@ -1,13 +1,25 @@
 <div class="row-fluid">
   <div class="span12">
-    <h1 class="section-header">
-      Emails
-      <% if @type == "tagged" && !isDepartmentAdmin(): %>
-      <a class="btn pull-right btn-add">
-        New Email
-      </a>
-      <% end %>
-    </h1>
+    <div class="index-header">
+
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="span6">
+
+            <h1 class="summary-subject">
+                Emails
+              </h1>
+          </div>
+      <div class="span6">
+        <% if @type == "tagged" && !isDepartmentAdmin(): %>
+        <a class="btn small-margin pull-right btn-add">
+          New Email
+        </a>
+        <% end %>
+        </div>
+      </div>
+    </div>
+    </div>
     <% if @emails.length > 0: %>
     <table class="table table-bordered">
       <thead>

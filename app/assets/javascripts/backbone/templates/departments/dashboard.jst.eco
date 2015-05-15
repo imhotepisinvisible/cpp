@@ -1,14 +1,19 @@
+<div class="margin-top40">
 <div class="row-fluid">
   <div class="span12">
     <div class="row-fluid">
       <div class="span6">
-        <h2 class="section-header">Approvals</h2>
+      <div class="index-header">
+        <h2 class="summary-subject">Approvals</h2>
+      </div>
         <div id="pending-approvals"></div>
       </div>
 
       <div class="span6">
         <div class="row-fluid">
-            <h2 class="section-header"></i> Company Notifications</h2>
+          <div class="index-header">
+            <h2 class="summary-subject"></i> Company Notifications</h2>
+            </div>
             These notifications will be displayed to a company when they create a new placement or event.
             <div id="notifications-form"></div>
             <div class="centre-div">
@@ -28,4 +33,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

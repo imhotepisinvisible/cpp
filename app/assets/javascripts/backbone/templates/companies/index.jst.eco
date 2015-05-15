@@ -1,16 +1,28 @@
 <div class="row-fluid">
   <div id="centre-span-border">
-    <h1 class="section-header">
-      Companies
-      <% if @editable: %>
-        <a href="/companies/register" class="btn pull-right button-company-add">
-          New Company
-        </a>
-            <div class="btn pull-right button-delete-companies">
-	         Delete Companies      
-	      </div>
-      <% end %>
-     </h1>
+    <div class="index-header">
+
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="span6">
+            <h1 class="summary-subject">
+              Companies
+              </h1>
+          </div>
+          <div class="span6">
+            <% if @editable: %>
+              <a href="/companies/register" class="btn small-margin pull-right button-company-add">
+                New Company
+              </a>
+              <div class="btn pull-right button-delete-companies">
+             Delete Companies
+          </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+     </div>
     <div class="infinite-container" id="companies-table"></div>
   </div>
 </div>
