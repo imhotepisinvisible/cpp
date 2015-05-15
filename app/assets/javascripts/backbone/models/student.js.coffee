@@ -69,9 +69,9 @@ class CPP.Models.Student extends CPP.Models.Base
     reasons.push("You need to add your last name")    if @get('last_name') == null || @get('last_name') == ''
     reasons.push("You need to add your course")       if @get('course_id') == null || @get('course_id') == ''
     reasons.push("You need to add your graduating year") if @get('year') == null || @get('year') == '' || @get('year') == 0
-    reasons.push("You need to add your C.V")          if @get('cv_file_name') == null || @get('cv_file_name') == ''
-    reasons.push("You need to add if you're looking, or not") if @get('looking_for') == null || @get('looking_for') == '' || @get('looking_for') == 0
-    reasons.push("You need to add when available, or not") if @get('available') == null || @get('available') == '' || @get('available') == 0
+    reasons.push("You need to add your C.V.")          if @get('cv_file_name') == null || @get('cv_file_name') == ''
+    reasons.push("You need to add if you are looking for an opportunity") if @get('looking_for') == null || @get('looking_for') == '' || @get('looking_for') == 0
+    reasons.push("You need to add when if you are available") if @get('available') == null || @get('available') == '' || @get('available') == 0
     return reasons
 
 class CPP.Collections.Students extends CPP.Collections.Base
@@ -86,6 +86,6 @@ class CPP.Collections.Students extends CPP.Collections.Base
 class CPP.Collections.StudentsPager extends Backbone.PageableCollection
   model: CPP.Models.Student
   url: '/students'
-  mode: 'client' 
+  mode: 'client'
   state:
     pageSize: 20
