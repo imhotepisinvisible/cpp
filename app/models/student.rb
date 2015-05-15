@@ -34,6 +34,11 @@ class Student < User
   ########################## Declare tags ###########################
   acts_as_taggable_on :skills, :interests, :year_groups, :reject_skills, :reject_interests
 
+  ########################## Ensure present ##########################
+	validates :first_name,   :presence => true
+  validates :last_name,   :presence => true
+  validates :email,   :presence => true
+  validates :cid,   :presence => true
 
   ######################### Validate fields #########################
   validates :bio, :length => { :maximum => 500 }

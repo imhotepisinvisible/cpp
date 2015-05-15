@@ -100,6 +100,12 @@ class CPP.Views.Students.Index extends CPP.Views.Base
         editable: false
       }
       {
+        name: 'cid'
+        label: 'College ID'
+        cell: 'string'
+        editable: false
+      }
+      {
         cell: EditCell
       }
       {
