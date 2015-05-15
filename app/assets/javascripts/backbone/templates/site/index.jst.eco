@@ -55,7 +55,7 @@ style="position:absolute; right:0; bottom:0; margin-right: 80px; margin-bottom: 
         <li style="margin: 15px 0;">Publish jobs and opportunities directly to students</n></li>
         <li style="margin: 15px 0;">Search students by degree, year of graduation and skills</n></li>
       </ul>
-      <div class="sp-link link-accent">Company sign up</div>
+      <div class="sp-link link-accent"><a href="mailto:cpp@doc.ic.ac.uk">Contact the Department of Computing</a></div>
     </div>
     <div class="span8">
       <!--Body content-->
@@ -72,7 +72,7 @@ style="position:absolute; right:0; bottom:0; margin-right: 80px; margin-bottom: 
           <li style="margin: 15px 0;">Keep up to date with employer events and opportunities</li>
           <li style="margin: 15px 0;">Discover contacts among ex-students and industry partners</li>
         </ul>
-        <div class="sp-link link-accent">Alumni sign up</div>
+        <div class="sp-link link-accent"><a href="/register">Alumni sign up</a></div>
     </div>
     <div class="span8">
       <!--Body content-->
