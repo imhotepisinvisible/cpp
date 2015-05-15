@@ -51,7 +51,7 @@
         <li style="margin: 15px 0;">Publish jobs and opportunities directly to students</n></li>
         <li style="margin: 15px 0;">Search students by degree, year of graduation and skills</n></li>
       </ul>
-      <div class="sp-link link-accent"><a href="mailto:cpp@doc.ic.ac.uk?Subject=[CPP][Company Registration Request]">Contact the Department of Computing</a></div>
+      <div class="sp-link link-accent"><a href="mailto:cpp@doc.ic.ac.uk?Subject=[CPP] Company Registration Request">Contact the DoC</a></div>
     </div>
     <div class="span8">
       <!--Body content-->
@@ -102,7 +102,7 @@
       </div>
       <div class="span2">
         <div class="logo">
-          <img src="/assets/company_logos/facebook_logo.jpg"/>
+          <img src="/assets/company_logos/palantir_logo.jpg"/>
         </div>
       </div>
       <div class="span2">
@@ -113,27 +113,3 @@
     </div>
   </div>
 </div>
-
-
-<!--
-
-<div class="span2">
-  <img src="/assets/company_logos/google_logo.jpg"/>
-</div>
-<div class="span2">
-  <img src="/assets/company_logos/facebook_logo.jpg"/>
-</div>
-<div class="span2">
-  <img src="/assets/company_logos/amazon_logo.jpg"/>
-</div>
-<div class="span2">
-  <img src="/assets/company_logos/microsoft_logo.jpg"/>
-</div>
-<div class="span2">
-  <img src="/assets/company_logos/palantir_logo.jpg"/>
-</div>
-<div class="span2">
-  <img src="/assets/company_logos/vmware_logo.jpg"/>
-</div>
-
--->
