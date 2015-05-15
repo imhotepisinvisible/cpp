@@ -1,61 +1,333 @@
-<h1 class="section-header">
-  Editing Company
-</h1>
-
 <div class="row-fluid">
-  <div class="span12">
-    <div class="form"></div>
-  </div>
-</div>
+  <div class="span9" id="centre-span-border">
 
-<div class="row-fluid">
-  <div class="offset1 span3">
-    <span>Logo</span>
-    <div id="company-logo-large company-logo-img-container"
-         class="upload-container img-polaroid <%= "missing-document" unless @company.get('logo_file_name') %> image-buttons-container">
-        <img src="<%= @company.get('logo_url') %>" id="company-logo-img" class="company-logo-image">
-      <div class="image-buttons">
-        <form class="form-inline hidden">
-            <input class="file-input" id="file-logo" type="file" name="company[logo]" size="20">
-        </form>
-        <div class="btn-group">
-          <div class="btn upload-document" id="upload-logo"><i class="icon-upload-alt"/></div>
-          <div class="btn btn-danger delete-document" id="delete-logo"><i class="icon-trash" /></div>
+    <!-- Company Profile Photo and Key Info -->
+    <div class="row-fluid">
+      <div class="span12" id="student-profile-header">
+        <div class="full-borderless-card">
+
+          <!-- logo -->
+          <div class="span3">
+            <div id="student-profile-img-container"
+
+                  class="upload-container <%= "missing-document" unless @company.get('logo_file_name') %> image-buttons-container">
+
+            <img src="<%= @company.get('logo_url') %>" id="company-logo-img" class="company-logo-image">
+
+            <div class="centre-buttons-below">
+
+              <form class="form-inline hidden">
+                <input class="file-input" id="file-logo" type="file" name="company[logo]" size="20">
+              </form>
+
+              <div class="btn image-button-links first-padding upload-document" id="upload-logo" <%= addTooltip(@tooltip, 'Upload a logo', 'top') %>>Upload</div>
+
+              <div class="btn image-button-links delete-document" id="delete-logo" <%= addTooltip(@tooltip, 'Delete logo', 'top') %>>Delete</div>
+
+            </div>
+
+            <div class="progress progress-info progress-upload" style="display:none">
+              <div id="progress-logo" class="bar"></div>
+            </div>
+
+          </div>
+          <div class="clearfix"></div>
+        </div> <!--  Image Upload End -->
+
+        <!-- Key Info -->
+        <div class="span9">
+          <div id="student-profile-key-info" class="span12">
+            <div id="student-profile-intro">
+
+              <a class="edit-button" href="/companies/<%= @company.get('id')%>">preview</a>
+
+              <div id="company-name-input-container" style="display:none">
+                <input type="text" id="company-name-editor" value="<%= @company.get 'name' %>">
+              </div>
+
+              <div id="company-name-container">
+                <span id="company-name" class="section-header editable-box company-editable" <%= addTooltip(@tooltip, 'Click to edit company name', 'top') %>><%= @company.get 'name' %></span>
+              </div>
+
+              <div id="about-header">
+                Summary
+              </div>
+
+              <div id="about-content">
+
+                <div id="company-description-input-container" style="display:none">
+                  <textarea id="company-description-editor" class="company-editor-box">
+                    <%= @company.get('description') %>
+                  </textarea>
+                </div>
+
+                <div id="company-description-container">
+                  <p id="company-description" class="editable-box company-editable <%= if not @company.get('description') then 'missing' %>" <%= addTooltip(@company.get('tooltip'), 'Click to edit company description', 'bottom') %>>
+                    <% if @company.get('description'): %>
+                    <%- @company.get('description').replace(/\n/g, "<br/>") %>
+                    <% else: %>
+                    Click here to add a company description
+                    <% end %>
+                  </p>
+                </div>
+
+              </div>
+
+              <div class="link-accent first-padding" id="contacts">Contacts</div>
+
+            </div>
+          </div>
         </div>
       </div>
-      <div class="progress progress-info progress-upload" style="display:none">
-        <div id="progress-logo" class="bar"></div>
-      </div>
     </div>
   </div>
-</div>
 
-<div class="row-fluid row-top-space">
-  <div class="offset1 span3">
-    <label>Department Registration Status</label>
-    <select id="select-approval-status">
-      <option value="-1"><%= window.approvalStatusMap(-1) %></option>
-      <option value="0"><%= window.approvalStatusMap(0) %></option>
-      <option value="1"><%= window.approvalStatusMap(1) %></option>
-      <option value="2"><%= window.approvalStatusMap(2) %></option>
-      <option value="3"><%= window.approvalStatusMap(3) %></option>
-    </select>
-  </div>
-</div>
-
-<div class="row-fluid row-top-space">
-  <div class="offset1 span3">
-    <div id="edit-admins"></div>
-  </div>
-</div>
 
 <div class="row-fluid">
-  <div class="span12">
-    <div class="control-group">
-      <div class="controls">
-        <div class="btn btn-save">Save</div>
-        <span class='form-cancel link back'>cancel</span>
+  <div class="span12" id="student-profile-body-container">
+
+    <div class="row-fluid">
+      <div class="span12" id="student-profile-body">
+
+        <!-- Student Summary -->
+        <div class="row-fluid">
+          <div class="span12">
+
+            <div class="full-width-card">
+
+              <!-- Full-width Header -->
+              <div class="full-header">
+                <div class="row-fluid">
+                  <div class="span12">
+
+
+                    <!-- Studying -->
+                    <div class="span3">
+                      <div class="summary-subject">
+                        Founded
+                      </div>
+                      <div class="summary-content">
+                        <select id="year-input" class="student-profile-select">
+                          <% currentYear = moment().year() %>
+                          <option value="">Pick a Year</option>
+                          <% for year in [(currentYear - 200)..(currentYear)]: %>
+                          <option value="<%= year %>"><%= year %></option>
+                          <% end %>
+                        </select>
+                      </div>
+                    </div>
+
+
+                    <!-- Graduating -->
+                    <div class="span3">
+                      <div class="summary-subject">
+                        Size
+                      </div>
+                      <div class="summary-content">
+
+                        <select id="size-input" class="student-profile-select">
+                          <option value="">Select a size</option>
+                          <% for size in ['Small', 'Medium', 'Large']: %>
+                          <option value="<%= size %>"><%= size %></option>
+                          <% end %>
+                        </select>
+                      </div>
+                    </div>
+
+                    <!-- Looking for -->
+                    <div class="span3">
+                      <div class="summary-subject">
+                        Sector
+                      </div>
+                      <div class="summary-content">
+                        <select id="sector-select" class="student-profile-select" <%= addTooltip(@company.get('tooltip'), 'Select the status that best matches you', 'right') %>>
+                          <option value="">Select your closest matching sector</option>
+                          <% for sector in (sectors): %>
+                          <option value="<%=sector %>"><%= sector %></option>
+                          <% end %>
+                        </select>
+                      </div>
+                    </div>
+
+                    <!-- Looking for, time period/when -->
+                    <div class="span3">
+                      <div class="summary-subject">
+                        HQ
+                      </div>
+                      <div class="summary-content">
+
+                        <div id="company-hq-input-container" style="display:none">
+                          <textarea id="company-hq-editor">
+                            <%= @company.get('hq') %>
+                          </textarea>
+                        </div>
+
+                        <div id="company-hq-container">
+                          <p id="company-hq" class="editable-box company-editable <%= if not @company.get('hq') then 'missing' %>" <%= addTooltip(@company.get('tooltip'), 'Click to add hq location', 'bottom') %>>
+                            <% if @company.get('hq'): %>
+                            <%= @company.get('hq').replace(/\n/g, "<br/>") %>
+                            <% else: %>
+                            Click to add hq location
+                            <% end %>
+                          </p>
+                        </div>
+
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            <!-- full-width body -->
+            <div class="full-body">
+              <div class="row-fluid">
+                <div class="span12">
+
+                  <!-- Knowledge Section -->
+                  <div class="span6">
+                    <h1 class="section-header">
+                      Events
+                        <div class="btn-group pull-right">
+                        <a href="/companies/<%= @company.get('id') %>/events" class="btn button-all-events">All</a>
+                        
+                          <a href="/companies/<%= @company.get('id') %>/events/new" class="btn button-add-event">
+                            <i class="icon-plus"></i>
+                          </a>
+
+                        </div>
+                    </h1>
+
+                    <div class="row-fluid">
+                      <div class="span12" id="events-partial">
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="span6">
+                    <h1 class="section-header">
+                      Opportunities
+                        <div class="btn-group pull-right">
+                      <a href="/companies/<%= @company.get('id') %>/opportunities" class="btn">All</a>
+                      
+                        <a href="/companies/<%= @company.get('id') %>/opportunities/new" class="btn">
+                          <i class="icon-plus"></i>
+                        </a>
+                      
+                      </div>
+                    </h1>
+
+                    <div class="row-fluid">
+                      <div class="span12" id="placements-partial">
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <!-- External Links (Github, Linkedin, Other) -->
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
+
+<!-- Should all work below here! -->
+
+      <div class="row-fluid">
+          <div class="span12">
+
+            <div class="full-width-card">
+
+              <!-- Full-width Header -->
+              <div class="full-header">
+                <div class="row-fluid">
+                  <div class="span12">
+                      <div class="summary-subject">
+                        Membership Access
+                      </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="full-body">
+                <div class="row-fluid">
+                  <div class="span12">
+
+                    <div class="span6">
+                      <h1 class="section-header">
+                        Approval Status
+                      </h1>
+
+                      <!-- Admin only bit -->
+                        <div class="row-fluid">
+                          <div class="span12">
+
+                              <label>Department Registration Status</label>
+                              <select id="select-approval-status">
+                                <option value="-1"><%= window.approvalStatusMap(-1) %></option>
+                                <option value="0"><%= window.approvalStatusMap(0) %></option>
+                                <option value="1"><%= window.approvalStatusMap(1) %></option>
+                                <option value="2"><%= window.approvalStatusMap(2) %></option>
+                                <option value="3"><%= window.approvalStatusMap(3) %></option>
+                              </select>
+                            </div>
+                          </div>
+
+                    </div>
+
+                    <div class="span6">
+                      <h1 class="section-header">
+                        Edit Admins
+                      </h1>
+
+<!--                         <div class="row-fluid">
+                          <div class="span12">
+                              <div id="edit-admins"></div>
+                            </div>
+                          </div> -->
+                    
+                    <div class="row-fluid">
+                      <div class="span12" id="edit-admins"></div>
+                    </div>
+
+<!--                           <div class="row-fluid">
+                            <div class="span12">
+                              <div class="control-group">
+                                <div class="controls">
+                                  <div class="btn btn-save">Save</div>
+                                  <span class='form-cancel link back'>cancel</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div> -->
+
+
+
+                      </div>
+
+
+                  </div>
+                </div>
+              </div>
+  
+
+
+            </div>
+          </div>
+      </div>
+
+
+
+      <!-- </div> -->
     </div>
   </div>
 </div>
+</div>  <!-- end of info -->
+</div>
+</div>
+

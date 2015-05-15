@@ -1,6 +1,5 @@
 <div class="row-fluid">
   <div class="span12">
-    <h1 class="section-header"><%= @department.get 'name' %> Dashboard</h1>
     <div class="row-fluid">
       <div class="span6">
         <h2 class="section-header">Approvals</h2>
