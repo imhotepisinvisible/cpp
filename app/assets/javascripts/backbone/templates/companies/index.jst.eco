@@ -1,13 +1,15 @@
 <div class="row-fluid">
   <div id="centre-span-border">
-    <h1 class="section-header">
+    <div class="index-header">
+    <h1 class="summary-subject">
       Companies
       <% if @editable: %>
-        <a href="/companies/register" class="btn pull-right button-company-add">
+        <a href="/companies/register" class="btn small-margin pull-right button-company-add">
           New Company
         </a>
       <% end %>
      </h1>
+     </div>
     <div class="infinite-container" id="companies-table"></div>
   </div>
 </div>

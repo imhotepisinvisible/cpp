@@ -2,7 +2,7 @@
   <div class="span12">
     <h1 class="section-header">
       Courses
-      <a href="/courses/new" class="btn pull-right button-course-add">
+      <a href="/courses/new" class="btn small-margin pull-right button-course-add">
         New Course
       </a>
     </h1>

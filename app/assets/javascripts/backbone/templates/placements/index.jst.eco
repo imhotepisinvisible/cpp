@@ -1,6 +1,7 @@
 <div class="row-fluid">
   <div id="centre-span-border">
-    <h1 class="section-header">
+    <div class="index-header">
+    <h1 class="summary-subject">
       Opportunities <%= " with " + @placements.company.get('name') if @placements.company? %>
 
       <% if @editable: %>
@@ -9,12 +10,13 @@
             New Opportunity
           </a>
         <% else: %>
-          <a href="/opportunities/new" class="btn pull-right button-add-placement">
+          <a href="/opportunities/new" class="btn small-margin pull-right button-add-placement">
             New Opportunity
           </a>
         <% end %>
       <% end %>
     </h1>
+    </div>
     <div class="infinite-container" id="placements-table"></div>
   </div>
 </div>
