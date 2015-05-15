@@ -44,7 +44,6 @@ class CPP.Views.Site.Index extends CPP.Views.Base
     h3 = $('#t3').height()
     h = Math.max.apply(Math,[h1,h2,h3])
     $('.pic').css('height',h+40)
-    console.log "show"
     $('.navbar').hide()
     $('.navbar').show()
 

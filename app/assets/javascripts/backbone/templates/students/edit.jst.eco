@@ -107,7 +107,7 @@
                     <div id="delete-cv-link">
                     <% if @student.get('cv_file_size') != null: %>
                         <a class="link-accent delete-document" id="delete-cv">Delete CV</a>
-                      
+
                     <% end %>
                     </div>
                   </div>
@@ -211,7 +211,7 @@
                           <select id="available-input" class="student-profile-select">
                           <% current_year = moment().year() %>
                             <option value="">Pick a Season and Year</option>
-                            <option> N/A </option>
+                            <option>Not Available</option>
                             <% for year in [current_year..(current_year + 5)]: %>
                               <% for season in ['Spring', 'Summer', 'Autumn', 'Winter']: %>
                                 <option value="<%= season + ', ' + year %>"><%= season + ', ' + year %></option>
