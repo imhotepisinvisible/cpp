@@ -6,7 +6,6 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
   template: JST['backbone/templates/companies/admin']
 
   events: -> _.extend {}, CPP.Views.Base::events,
-    'click .btn-save': 'save'
     # 'click .upload-document': 'uploadDocument'
     # 'click .delete-document': 'delDocument'
     # 'change #file-logo': 'fileChange'
@@ -26,6 +25,7 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
     'blur #company-hq-input-container':'hqStopEdit'
 
     'change #sector-select' : 'changeSector'
+    'change #select-approval-status' : 'changeApproval'
 
   # Initialise the company adminstrator form
   initialize: ->
@@ -113,7 +113,7 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
     super
     # $('.form').append(@form.el)
     # Backbone.Validation.bind @form
-    
+
     # validateField(@form, field) for field of @form.fields
 
     # Render partials
@@ -217,7 +217,7 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
     window.inPlaceStopEdit @model, 'company', 'hq', 'Click to add a link', ((hq) ->
       hq.replace(/\n/g, "<br/>"))
 
-  # Update looking_for field in model and save
+  # Update field in model and save
   changeSector: (e) ->
     sector = $(e.currentTarget).val()
     @model.set 'sector', sector
@@ -228,6 +228,19 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
         notify "success", "Updated Sector"
       error: (model, response) =>
         notify "error", "Could not update Sector"
+
+    # Update field in model and save
+  changeApproval: (e) ->
+    status = $(e.currentTarget).val()
+    @model.set 'status', status
+    @model.save {},
+      wait: true
+      forceUpdate: true
+      success: (model, response) =>
+        notify "success", "Updated Approval Status"
+      error: (model, response) =>
+        notify "error", "Could not update approval status"
+
 
   editContacts: ->
     Backbone.history.navigate('/companies/' + @model.id + '/company_contacts/edit', trigger: true)
@@ -241,41 +254,3 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
     reader.onload = (e) ->
       $('.company-logo-image').attr('src', e.target.result)
     reader.readAsDataURL(logo)
-
-  # Save the form
-  # save: ->
-  #   if @form.validate() == null
-  #     @form.commit()
-  #     @model.save {},
-  #       wait: true
-  #       forceUpdate: true
-  #       success: (model, response) =>
-  #         # Save the approval status
-  #         $.ajax
-  #           url: "/companies/#{@model.id}/departments/#{getAdminDepartment()}/status"
-  #           type: 'PUT'
-  #           data:
-  #             status: $('#select-approval-status').val()
-  #           success: =>
-  #             # Upload the logo if it has changed
-  #             if $('#file-logo').get(0).files.length > 0
-  #               @logoUploadInitialize()
-  #               $('#file-logo').fileupload 'send',
-  #                 files: $('#file-logo').get(0).files
-  #             else if $('.company-logo-image').attr('src') == '/assets/default_profile.png'
-  #               @deleteDocument()
-  #             else
-  #               Backbone.history.navigate('/companies/' + @model.id, trigger: true)
-  #               notify "success", "Company saved"
-  #               @undelegateEvents()
-  #           error: =>
-  #             notify 'error', "Could not change approval status"
-  #       error: (model, response) =>
-  #         try
-  #           errorlist = JSON.parse response.responseText
-  #           if response.errors
-  #             window.displayErrorMessages response.errors
-  #           else
-  #             notify 'error', 'Unable to save company'
-  #         catch err
-  #           notify 'error', response.responseText
