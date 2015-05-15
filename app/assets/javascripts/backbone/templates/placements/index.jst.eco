@@ -1,7 +1,6 @@
 <div class="row-fluid">
   <div id="centre-span-border">
     <h1 class="section-header">
-      <i class="icon-folder-open"></i>
       Opportunities <%= " with " + @placements.company.get('name') if @placements.company? %>
 
       <% if @editable: %>

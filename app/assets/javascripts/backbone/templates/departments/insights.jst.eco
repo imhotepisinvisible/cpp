@@ -7,7 +7,6 @@
     <div class="row-fluid">
       <div class="span8">
         <h2 class="section-header">
-        <i class="icon-briefcase"></i>
           Company Views
         </h2>
         <div id="companies-chart"><div class="loading"></div></div>
@@ -17,7 +16,6 @@
     <div class="row-fluid">
       <div class="span8">
         <h2 class="section-header">
-        <i class="icon-user"></i>
           Student Views
         </h2>
         <div id="student-chart"><div class="loading"></div></div>
@@ -33,7 +31,6 @@
     <div class="row-fluid">
       <div class="span4">
         <h2 class="section-header">
-        <i class="icon-briefcase top-5-icon"></i>
           Companies
         </h2>
         <div class="row-fluid">
@@ -44,7 +41,6 @@
       </div>
       <div class="span4">
         <h2 class="section-header">
-        <i class="icon-user top-5-icon"></i>
           Students
         </h2>
         <div class="row-fluid">
@@ -58,7 +54,6 @@
     <div class="row-fluid">
       <div class="span4">
         <h2 class="section-header">
-        <i class="icon-calendar top-5-icon"></i>
           Events
         </h2>
         <div class="row-fluid">
@@ -69,7 +64,6 @@
       </div>
       <div class="span4">
         <h2 class="section-header">
-        <i class="icon-folder-open top-5-icon"></i>
           Opportunities
         </h2>
         <div class="row-fluid">

@@ -5,7 +5,7 @@
 <% unless @partial: %>
 <div class="row-fluid">
   <div class="span9" id="centre-span-border">
-<h1 class="section-header"><i class="icon-user"></i> Contact
+<h1 class="section-header"> Contact
     <div id="btn-new" class="btn pull-right"><i class="icon-plus"></i></div>
 </h1>
 <div id="contact-list-container">

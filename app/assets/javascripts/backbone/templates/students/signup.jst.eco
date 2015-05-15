@@ -1,6 +1,6 @@
 <h1 class="section-header">
   <% if @student.isNew(): %>
-    <i class="icon-user"></i>
+    <!-- <i class="icon-user"></i> -->
     Student Sign Up
   <% end %>
 </h1>

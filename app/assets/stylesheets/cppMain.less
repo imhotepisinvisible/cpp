@@ -215,11 +215,28 @@ img.center {
    display: inline-block;
 }
 .image-buttons{
-   display: inline-block;
-   position: relative;
-   padding: 10px;
-   // right:10px;
-   // bottom:10px;
+  display: inline-block;
+  position: relative;
+  margin: 5px;
+  border: 1px solid #989898;
+  color: #989898;
+  padding: 1px 5px;
+  border-radius: 4px;
+  text-align: center;
+  &:hover{
+    cursor: pointer;
+    color: #0088cc;
+    text-decoration: none;
+    border-color: #0088cc;
+  }
+
+}
+
+.centre-buttons-below {
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  margin-top: 10px;
 }
 
 .table-clickable tr td {
@@ -498,5 +515,40 @@ img.center {
     cursor: pointer;
     color: #0088cc;
     text-decoration: none;
+    border-color: #0088cc;
   }
 }
+
+.hide-me {
+  @media (max-width: 768px) {
+    display: none;
+  } 
+}
+
+.btn {
+  border: 1px solid #989898;
+  color: #989898;
+  padding: 1px 5px;
+  border-radius: 4px;
+  text-align: center;
+  background-color: #ffffff;
+  font-size: 14px;
+  box-shadow: none;
+  background-image: none; 
+  &:hover{
+    cursor: pointer;
+    color: #0088cc;
+    text-decoration: none;
+    border-color: #0088cc;
+    background-color: #ffffff;
+    box-shadow: none;
+    background-image: none; 
+  }
+}
+
+.small-italics {
+  font-size: 12px;
+  font-style: italic;
+  color: #989898;
+}
+

@@ -14,15 +14,15 @@
 
             <img src="<%= @company.get('logo_url') %>" id="company-logo-img" class="company-logo-image">
 
-            <div class="image-buttons">
+            <div class="centre-buttons-below">
 
               <form class="form-inline hidden">
                 <input class="file-input" id="file-logo" type="file" name="company[logo]" size="20">
               </form>
 
-              <div class="image-button-links good first-padding upload-document" id="upload-logo" <%= addTooltip(@tooltip, 'Upload a logo', 'top') %>>Upload</div>
+              <div class="btn image-button-links first-padding upload-document" id="upload-logo" <%= addTooltip(@tooltip, 'Upload a logo', 'top') %>>Upload</div>
 
-              <div class="image-button-links bad delete-document" id="delete-logo" <%= addTooltip(@tooltip, 'Delete logo', 'top') %>>Delete</div>
+              <div class="btn image-button-links delete-document" id="delete-logo" <%= addTooltip(@tooltip, 'Delete logo', 'top') %>>Delete</div>
 
             </div>
 
@@ -35,9 +35,11 @@
         </div> <!--  Image Upload End -->
 
         <!-- Key Info -->
-        <div>
-          <div id="student-profile-key-info" class="span9">
+        <div class="span9">
+          <div id="student-profile-key-info" class="span12">
             <div id="student-profile-intro">
+
+              <a class="edit-button" href="/companies/<%= @company.get('id')%>">preview</a>
 
               <div id="company-name-input-container" style="display:none">
                 <input type="text" id="company-name-editor" value="<%= @company.get 'name' %>">
@@ -186,6 +188,14 @@
                   <div class="span6">
                     <h1 class="section-header">
                       Events
+                        <div class="btn-group pull-right">
+                        <a href="/companies/<%= @company.get('id') %>/events" class="btn button-all-events">All</a>
+                        
+                          <a href="/companies/<%= @company.get('id') %>/events/new" class="btn button-add-event">
+                            <i class="icon-plus"></i>
+                          </a>
+
+                        </div>
                     </h1>
 
                     <div class="row-fluid">
@@ -200,6 +210,14 @@
                   <div class="span6">
                     <h1 class="section-header">
                       Opportunities
+                        <div class="btn-group pull-right">
+                      <a href="/companies/<%= @company.get('id') %>/opportunities" class="btn">All</a>
+                      
+                        <a href="/companies/<%= @company.get('id') %>/opportunities/new" class="btn">
+                          <i class="icon-plus"></i>
+                        </a>
+                      
+                      </div>
                     </h1>
 
                     <div class="row-fluid">

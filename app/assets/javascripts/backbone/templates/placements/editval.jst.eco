@@ -1,5 +1,4 @@
 <h1 class="section-header">
-  <i class="icon-folder-open"></i>
   <% if @placement.isNew(): %>
     Create a New Opportunity
   <% else: %>
@@ -86,7 +85,7 @@
     <div class="control-group">
       <div class="controls">
         <div class="btn btn-submit">Save</div>
-        <span class='form-cancel link back'>cancel</span>
+        <span class='form-cancel btn back'>cancel</span>
       </div>
     </div>
 

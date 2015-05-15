@@ -19,6 +19,12 @@ class CPP.Models.Placement extends CPP.Models.Base
     position:
       type: "Text"
       title: "Position*"
+    contact:
+      type: 'Text'
+      title: "Primary Contact*"
+    link:
+      type: 'Text'
+      title: "External Link"
     description:
       type: "TextArea"
       rows: 60

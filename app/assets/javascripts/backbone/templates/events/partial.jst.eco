@@ -2,16 +2,7 @@
 
   <div class="btn-group pull-right">
 
-    <% if @company?: %>
-
-      <a href="/companies/<%= @company.get('id') %>/events" class="btn button-all-events">All</a>
-      <% if @editable: %>
-        <a href="/companies/<%= @company.get('id') %>/events/new" class="btn button-add-event">
-          <i class="icon-plus"></i>
-        </a>
-      <% end %>
-
-    <% else: %>
+    <% if !@company?: %>
 
       <a href="/events" class="btn button-all-events">All</a>
 

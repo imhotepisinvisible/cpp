@@ -12,14 +12,15 @@
             <a href="/companies/<%= @placement.company.id %>">
               <img class="company-logo-img" src="<%= @placement.company.get('logo_url') %>">
             </a>
-            <!-- Ability to edit -->
-            <% if isAdmin(): %>
-            <a class="image-buttons pull-right" href="/opportunities/<%= @placement.id %>/edit">Edit</a>
-            <% end %>
           </div>
 
           <!-- Job Summary -->
           <div class="span9">
+
+                        <!-- Ability to edit -->
+            <% if isAdmin(): %>
+            <a class="image-buttons pull-right" href="/opportunities/<%= @placement.id %>/edit">Edit</a>
+            <% end %>
 
             <!-- Title -->
             <div id="job-title">
@@ -32,12 +33,19 @@
 
             <!-- Useful info -->
             <div>
-              <!-- Download Job Specification PDF -->
-              <a class="link-accent first-padding">Download Job Spec</a>
               <!-- Contact -->
-              <a class="link-accent">Contact</a>
+            <% if @placement.get('contact'): %>
+              <a class="link-accent first-padding" href="mailto:<%= @placement.get('contact') %>">
+                Primary Contact
+              </a>
+            <% end %>
               <!-- Apply through external link -->
-              <a class="link-accent">Apply</a>
+            <% if @placement.get('link'): %>
+              <a class="link-accent" href="http://<%= @placement.get('link') %>">
+                External Link
+              </a>
+            <% end %>
+
             </div>
 
           </div>
@@ -151,7 +159,7 @@
                                       </span>
                                       <% end %>
                                       <% else: %>
-                                      No Requirements Tagged
+                                        <div class="small-italics"> No Requirements Tagged </div>
                                       <% end %>
                                     </div>
 
@@ -175,7 +183,7 @@
                                           </span>
                                         <% end %>
                                       <% else: %>
-                                        No Responsibilities Tagged
+                                        <div class="small-italics"> No Responsibilities Tagged </div>
                                       <% end %>
                                     </div>
                                   </div>
