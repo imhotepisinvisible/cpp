@@ -8,7 +8,7 @@ class CPP.Views.Site.Index extends CPP.Views.Base
   # Bind event listeners
   events: -> _.extend {}, CPP.Views.Base::events,
     'scroll' : 'scroller'
-    #'click #sp-btn-1' : 'moveNav'
+    'click #sp-btn-1' : 'moveNav'
 
   # From initialise call render of the index
   initialize: ->
@@ -26,9 +26,12 @@ class CPP.Views.Site.Index extends CPP.Views.Base
 
   moveNav: (e) ->
     e.preventDefault()
-    $('.btn-navbar.collapsed').click()
-    height = $(window).height();
-    window.scrollTo 0, height-55
+    if $(window).width() > 979
+      Backbone.history.navigate("login", trigger: false)
+      height = $(window).height();
+      window.scrollTo 0, height-55
+    else
+      window.location = '/login'
 
   resize: ->
     height = $(window).height();

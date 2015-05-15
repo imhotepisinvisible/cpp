@@ -13,7 +13,7 @@
     <div class="row-fluid">
       <div class="span4 offset8">
         <div id="sp-button" style="width:230px; margin:auto;">
-          <div id="sp-btn-1" class="splash-button"><a href="/login">Login</a></div>
+          <div id="sp-btn-1" class="splash-button"><a href="#">Login</a></div>
           <div id="sp-btn-2" class="splash-button"><a href="/register">Sign Up</a></div>
         </div>
       </div>
