@@ -7,6 +7,9 @@
         <a href="/companies/register" class="btn pull-right button-company-add">
           New Company
         </a>
+            <div class="btn pull-right button-delete-companies">
+	         Delete Companies      
+	      </div>
       <% end %>
      </h1>
     <div class="infinite-container" id="companies-table"></div>

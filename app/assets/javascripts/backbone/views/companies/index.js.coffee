@@ -5,6 +5,7 @@ class CPP.Views.CompaniesIndex extends CPP.Views.Base
 
   events: -> _.extend {}, CPP.Views.Base::events,
     'click #companies-table tbody tr'  : 'viewCompany'
+    'click .button-delete-companies'   : 'deleteSelected'
 
   # Company aggregate view for administrators
   # Bind to update collection
@@ -65,13 +66,13 @@ class CPP.Views.CompaniesIndex extends CPP.Views.Base
     $(@el).html(@template(editable: @editable, companies: @collection))
 
     if isDepartmentAdmin()
-      companyGrid = new (Backgrid.Grid)(
+      @companyGrid = new (Backgrid.Grid)(
         className: "backgrid table-hover table-clickable",
         row: ModelRow
         columns: admin_columns
         collection: @collection)
     else
-      companyGrid = new (Backgrid.Grid)(
+      @companyGrid = new (Backgrid.Grid)(
         className: "backgrid table-hover table-clickable",
         row: ModelRow
         columns: columns
@@ -79,7 +80,7 @@ class CPP.Views.CompaniesIndex extends CPP.Views.Base
 
     # Render the grid and attach the root to your HTML document
     $table = $('#companies-table')
-    $table.append companyGrid.render().el
+    $table.append @companyGrid.render().el
 
     # Initialize the paginator
     paginator = new (Backgrid.Extension.Paginator)(collection: @collection)
@@ -98,3 +99,19 @@ class CPP.Views.CompaniesIndex extends CPP.Views.Base
   viewCompany: (e) ->
     model = $(e.target).parent().data('model')
     Backbone.history.navigate("companies/" + model.id, trigger: true)
+
+  deleteSelected: ->    
+    if @companyGrid.getSelectedModels().length > 0
+      if confirm("Are you sure you want to delete the selected companies?")
+        _.each(@companyGrid.getSelectedModels(), @destroy)
+    else
+      notify "error", "No companies selected"
+      
+  destroy: (company) ->
+      @success = true
+      company.destroy
+        wait: true
+        success: (model, response) ->
+          notify "success", "Company deleted"
+        error: (model, response) ->
+          notify "error", "Company could not be deleted"

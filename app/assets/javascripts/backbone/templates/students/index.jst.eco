@@ -16,6 +16,9 @@
         <div class="btn pull-right button-export-cvs">
           Download CVs
         </div>
+            <div class="btn pull-right button-delete-students">
+	        Delete Students      
+	    </div>
       <% end %>
      </h1>
     <div class="infinite-container" id="students-table"></div>

@@ -6,7 +6,7 @@ class CPP.Views.Events.Index extends CPP.Views.Base
 
   events: -> _.extend {}, CPP.Views.Base::events,
     'click #events-table tbody tr'  : 'viewEvent'
-    'click .button-delete-selected' : 'deleteSelected'
+    'click .button-delete-events'   : 'deleteSelected'
 
   # Bind reset and filter events to render and renderEvents so that on change
   # the views change.
@@ -125,8 +125,11 @@ class CPP.Views.Events.Index extends CPP.Views.Base
     Backbone.history.navigate("events/" + model.id, trigger: true)
 
   deleteSelected: ->
-    selectedModels = @eventGrid.getSelectedModels()
-    _.each(selectedModels, @destroy)
+    if @eventGrid.getSelectedModels() > 0
+      if confirm("Are you sure you want to delete the selected events?")
+        _.each(@eventGrid.getSelectedModels(), @destroy)
+    else
+      notify "error", "No events selected"
 
   destroy: (event) ->
       @success = true

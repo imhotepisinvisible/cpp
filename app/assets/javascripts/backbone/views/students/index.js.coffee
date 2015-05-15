@@ -8,7 +8,8 @@ class CPP.Views.Students.Index extends CPP.Views.Base
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .button-export-cvs'      : 'exportCVs'
     "click .button-student-suspend" : "suspend"
-    'click #students-table tbody tr'      : 'viewStudent'
+    'click .button-delete-students' : 'deleteSelected'
+    'click #students-table tbody tr': 'viewStudent'
 
   # Bind to update placement collection
   initialize: ->
@@ -177,3 +178,19 @@ class CPP.Views.Students.Index extends CPP.Views.Base
   viewStudent: (e) ->
     model = $(e.target).parent().data('model')
     Backbone.history.navigate("students/" + model.id, trigger: true)
+
+  deleteSelected: ->    
+    if @studentGrid.getSelectedModels() > 0
+      if confirm("Are you sure you want to delete the selected students?")
+        _.each(@studentGrid.getSelectedModels(), @destroy)
+    else
+      notify "error", "No students selected"
+      
+  destroy: (student) ->
+      @success = true
+      student.destroy
+        wait: true
+        success: (model, response) ->
+          notify "success", "Student deleted"
+        error: (model, response) ->
+          notify "error", "Student could not be deleted"
