@@ -38,36 +38,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
   # Setup skills, interests and year tag editors
   # Initialise uploads and call render
   initialize: ->
-    # Auxiliary function, saved model on tag input
-    saveModel = ->
-      @model.save {},
-        success: (model, response) ->
-          notify "success", "Updated Profile"
-        error: (model, response) ->
-          # Notify tag-specific errors here (profanity etc)
-          errorlist = JSON.parse response.responseText
-          notify "error", "Couldn't Update Profile"
-        wait: true
-        forceUpdate: true
-
-    @skill_list_tags_form = new Backbone.Form.editors.TagEditor
-      model: @model
-      key: 'skill_list'
-      title: 'Skills'
-      url: '/tags/skills'
-      tag_class: 'sktags'
-      tag_change_callback: saveModel
-      additions: true
-
-    @interest_list_tags_form = new Backbone.Form.editors.TagEditor
-      model: @model
-      key: 'interest_list'
-      title: 'Interests'
-      url: '/tags/interests'
-      tag_class: 'sktags'
-      tag_change_callback: saveModel
-      additions: true
-
     @courses = new CPP.Collections.Courses
     @courses.fetch
       success: =>
@@ -88,7 +58,38 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
 
   # Render student edit template with tags, partials and inline editors
   render: ->
-    $(@el).html(@template(student: @model, courses: @courses))
+    if @model.get("first_name")
+      $(@el).html(@template(student: @model, courses: @courses))
+
+    # Auxiliary function, saved model on tag input
+    saveModel = ->
+      @model.save {},
+        success: (model, response) ->
+          notify "success", "Updated Profile"
+        error: (model, response) ->
+          # Notify tag-specific errors here (profanity etc)
+          errorlist = JSON.parse response.responseText
+          notify "error", "Couldn't Update Profile"
+        wait: true
+        forceUpdate: true
+    @skill_list_tags_form = new Backbone.Form.editors.TagEditor
+      model: @model
+      key: 'skill_list'
+      title: 'Skills'
+      url: '/tags/skills'
+      tag_class: 'sktags'
+      tag_change_callback: saveModel
+      additions: true
+
+    @interest_list_tags_form = new Backbone.Form.editors.TagEditor
+      model: @model
+      key: 'interest_list'
+      title: 'Interests'
+      url: '/tags/interests'
+      tag_class: 'sktags'
+      tag_change_callback: saveModel
+      additions: true
+
     @skill_list_tags_form.render()
     $('.skill-tags-form').append(@skill_list_tags_form.el)
     @interest_list_tags_form.render()
