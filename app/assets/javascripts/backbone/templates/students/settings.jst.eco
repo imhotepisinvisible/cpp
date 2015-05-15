@@ -46,7 +46,7 @@
               <input id="tooltip-checkbox" type="checkbox" class="switch-checkbox" <%= if @student.get('active') then 'checked="checked"' %>>
             </div>
             <span class="switch-text">
-              Show profile to companies and studentss
+              Show profile to companies and students
             </span>
           </div>
         </div>

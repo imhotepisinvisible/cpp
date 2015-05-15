@@ -121,6 +121,12 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       if $(option).val() == @model.get('looking_for')
         $(option).attr('selected', 'selected')
 
+    # Set the default selected course
+    if @model.get('course_id') != null
+      for option in $('#student-course-input').children()
+        if parseInt($(option).val()) == @model.get('course_id')
+          $(option).attr('selected', 'selected')
+
     if @model.get('year') != null
       for option in $('#year-input').children()
         if parseInt($(option).val()) == @model.get('year')
