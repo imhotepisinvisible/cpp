@@ -81,6 +81,11 @@ class CPP.Collections.EventsPager extends Backbone.PageableCollection
   model: CPP.Models.Event
   url: '/events'
   mode: 'client'
+  sortKey: 'created_at'
+  comparator: (eventA, eventB) ->
+    if eventA.get(this.sortKey) > eventB.get(this.sortKey) then -1
+    else if eventB.get(this.sortKey) > eventA.get(this.sortKey) then 1
+    else 0
 
   state:
     pageSize: 20

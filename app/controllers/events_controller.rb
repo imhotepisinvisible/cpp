@@ -19,13 +19,13 @@ class EventsController < ApplicationController
       @events = @events.where(:company_id => params[:company_id])
     end
 
-    if params.keys.include? "limit"
-      @events = @events.limit(params[:limit])
-    end
-
     # if a start date has been included, then only get items after this date
     if params.keys.include? "start_date"
       @events = @events.where("start_date > ?", params[:start_date])
+    end
+
+    if params.keys.include? "limit"
+      @events = @events.limit(params[:limit])
     end
 
     if current_user && current_user.is_student?
@@ -94,9 +94,9 @@ class EventsController < ApplicationController
   def reject
     @event = Event.find(params[:id])
     @companyAdmin = CompanyAdministrator.find_by_company_id(@event.company_id)
-    if @event.reject!    
+    if @event.reject!
       UserMailer.rejected_event_email(@companyAdmin.email, @event).deliver
-      respond_with @event      
+      respond_with @event
     else
       respond_with @event, status: :unprocessable_entity
     end

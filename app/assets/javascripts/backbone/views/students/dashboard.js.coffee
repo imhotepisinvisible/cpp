@@ -3,8 +3,10 @@ CPP.Views.Students ||= {}
 # Dashboard for students
 class CPP.Views.Students.Dashboard extends CPP.Views.Base
   el: "#app"
-
   template: JST['backbone/templates/students/dashboard']
+
+  events: -> _.extend {}, CPP.Views.Base::events,
+    'click #dashboard-table tbody tr'  : 'viewEorO'
 
   initialize: ->
     @collection.on "fetch", (->
@@ -95,7 +97,7 @@ class CPP.Views.Students.Dashboard extends CPP.Views.Base
     ]
 
     $(@el).html(@template(events: @collection, editable: @editable))
-    dashboardGrid = new (Backgrid.Grid)(
+    @dashboardGrid = new (Backgrid.Grid)(
       className: "backgrid table-hover table-clickable",
       row: ModelRow
       columns: columns
@@ -103,6 +105,13 @@ class CPP.Views.Students.Dashboard extends CPP.Views.Base
 
     # Render the grid and attach the root to your HTML document
     $table = $('#dashboard-table')
-    #dashboardGrid.render().sort("Posted","descending")
-    $table.append @dashboardGrid.render.el
+    @dashboardGrid.render()
+    $table.append @dashboardGrid.el
   @
+
+  viewEorO: (e) ->
+    model = $(e.target).parent().data('model')
+    if model.get('title')
+      Backbone.history.navigate("events/" + model.id, trigger: true)
+    else
+      Backbone.history.navigate("opportunities/" + model.id, trigger: true)

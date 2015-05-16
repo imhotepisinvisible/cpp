@@ -6,7 +6,7 @@ class CPP.Router extends Backbone.Router
   # Navigate to appropriate dashboard depending on current user
   index: ->
     if isStudent()
-      Backbone.history.navigate("/edit", trigger: true)
+      Backbone.history.navigate("/dashboard", trigger: true)
     else if isCompanyAdmin()
       Backbone.history.navigate("/company_dashboard", trigger: true)
     else if isDepartmentAdmin()

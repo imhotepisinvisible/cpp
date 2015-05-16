@@ -28,10 +28,10 @@
               </form>
 
               <!-- UPLOAD IMAGE -->
-              <div class="btn image-button-links good first-padding upload-document" id="upload-profile-picture" <%= addTooltip(@student.get('tooltip'), 'Upload your profile picture', 'top') %>>Upload</div>
+              <div class="btn image-button-links good first-padding upload-document" id="upload-profile-picture" <%= addTooltip(@student.get('tooltip'), 'Upload your profile picture', 'top') %>>Upload Picture</div>
 
               <!-- DELETE IMAGE -->
-              <div class="btn image-button-links bad delete-document" id="delete-profile-picture" <%= addTooltip(@student.get('tooltip'), 'Delete your profile picture', 'top') %>>Delete</div>
+              <div class="btn image-button-links bad delete-document" id="delete-profile-picture" <%= addTooltip(@student.get('tooltip'), 'Delete your profile picture', 'top') %>>Delete Picture</div>
 
             </div>
 

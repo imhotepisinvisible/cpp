@@ -207,7 +207,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       $('#download-cv-link').html("<a class=\"link-accent download-document\" id=\"download-cv\" href=\"/students/" + @model.id + "/documents/cv\" >Download CV</a>")
       $('#delete-cv-link').html("<a class=\"link-accent delete-document\" id=\"delete-cv\">Delete CV</a>")
     else
-      $('#cv-container').html("your profile will not be shown without a CV")
+      $('#cv-container').html("No CV uploaded")
       $('#download-cv-link').html("")
       $('#delete-cv-link').html("")
 

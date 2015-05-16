@@ -63,6 +63,11 @@ class CPP.Collections.PlacementsPager extends Backbone.PageableCollection
   model: CPP.Models.Placement
   url: '/placements'
   mode: 'client'
+  sortKey: 'created_at'
+  comparator: (eventA, eventB) ->
+    if eventA.get(this.sortKey) > eventB.get(this.sortKey) then -1
+    else if eventB.get(this.sortKey) > eventA.get(this.sortKey) then 1
+    else 0
 
   state:
     pageSize: 20
