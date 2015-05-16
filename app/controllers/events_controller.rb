@@ -83,7 +83,8 @@ class EventsController < ApplicationController
       redirect_to @event, :notice => "Event already " + "#{@status}"
     else
       if @event.reject!
-        UserMailer.rejected_event_email(@companyAdmin.email, @event).deliver
+        ### uncomment to send rejection notification email to company ###
+        #UserMailer.rejected_event_email(@companyAdmin.email, @event).deliver
         redirect_to @event, :notice => "Event rejected"
       else
         redirect_to @event, :notice => "Unprocessable entity"
@@ -95,7 +96,8 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @companyAdmin = CompanyAdministrator.find_by_company_id(@event.company_id)
     if @event.reject!
-      UserMailer.rejected_event_email(@companyAdmin.email, @event).deliver
+      ### uncomment to send rejection notification email to company ###
+      #UserMailer.rejected_event_email(@companyAdmin.email, @event).deliver
       respond_with @event
     else
       respond_with @event, status: :unprocessable_entity
