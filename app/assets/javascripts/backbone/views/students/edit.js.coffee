@@ -180,15 +180,16 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
 
     .bind "fileuploadprogress", (e, data) ->
       progress = parseInt(data.loaded / data.total * 100, 10)
-      $('#progress-' + documentType).width(progress + '%')
+      $('#progress-cv').width(progress + '%')
 
     .bind "fileuploaddone", (e, data) =>
       upload = $(e.target).closest('.upload-container')
+      # $('#cv-container').html("<img src=\"/students/"+ @model.id + "/documents/cv?image\">")
+      $('#delete-cv-link').html("<a class=\"link-accent delete-document\" id=\"delete-cv\">Delete CV</a>")
+      $('#download-cv-link').html("<a class=\"link-accent download-document\" id=\"download-cv\" href=\"/students/" + @model.id + "/documents/cv\" >Download CV</a>")
       upload.find('.progress-upload').delay(250).slideUp 'slow', ->
         upload.find('.bar').width('0%')
         upload
-
-      @updateViewCV true
 
       notify 'success', 'Uploaded successfully'
       @model.set "cv_file_name", "cv"
@@ -230,11 +231,11 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
             $('#student-profile-img').attr('src', '/assets/default_profile.png')
           if documentType == 'cv'
             @model.set("cv_file_name","")
-            @updateViewCV false
+            $('#cv-container').html("your profile will not be shown without a CV")
+            $('#download-cv-link').html("")
+            $('#delete-cv-link').html("")
         error: (data) ->
           notify('error', "couldn't remove document")
-          if documentType == 'cv'
-            @updateViewCV true
 
   # Show inline bio edit
   bioEdit: ->
@@ -376,8 +377,40 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       forceUpdate: true
       success: (model, response) =>
         notify "success", "Looking for updated"
+        if lookingFor == "Not looking for anything"
+          @updateAvailable("Not Available")
       error: (model, response) =>
         notify "error", "Could not update looking for"
+
+  updateAvailable: (available) ->
+    @model.set 'available', available
+    @model.save {},
+      wait: true
+      forceUpdate: true
+      success: (model, response) =>
+        notify 'success', 'Availability updated'
+      error: (model, response) =>
+        notify 'error', 'Could not update when available'
+
+  # Update and save year field highlight
+  changeAvailable: (e) ->
+    available = $(e.currentTarget).val()
+    if available
+      $(e.currentTarget).removeClass('missing')
+    else
+      available = null
+      $(e.currentTarget).addClass('missing')
+      return
+
+    @model.set 'available', available
+    @model.save {},
+      wait: true
+      forceUpdate: true
+      success: (model, response) =>
+        notify 'success', 'Availability updated'
+      error: (model, response) =>
+        notify 'error', 'Could not update when available'
+
 
   # Update and save year field highlight
   changeYear: (e) ->
@@ -398,24 +431,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       error: (model, response) =>
         notify 'error', 'Could not update year'
 
-  # Update and save year field highlight
-  changeAvailable: (e) ->
-    available = $(e.currentTarget).val()
-    if available
-      $(e.currentTarget).removeClass('missing')
-    else
-      available = null
-      $(e.currentTarget).addClass('missing')
-      return
-
-    @model.set 'available', available
-    @model.save {},
-      wait: true
-      forceUpdate: true
-      success: (model, response) =>
-        notify 'success', 'Availability updated'
-      error: (model, response) =>
-        notify 'error', 'Could not update when available'
 
   changeCourse: (e) ->
     courseId = parseInt($(e.currentTarget).val())
