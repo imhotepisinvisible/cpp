@@ -1,5 +1,5 @@
 # Calculates ordinal for number
-# 
+#
 window.getOrdinal = (n) ->
    s = ["th", "st", "nd", "rd"]
    v = n % 100
@@ -27,13 +27,9 @@ window.notify = (alert_class, message, time = 2000) ->
 window.tiny_mce_init = ->
   tinyMCE.init
     mode: "textareas"
-    theme: "advanced"
-    theme_advanced_toolbar_location: "top"
-    theme_advanced_toolbar_align: "left"
-    theme_advanced_statusbar_location: "none"
-    theme_advanced_buttons1: "bold,italic,underline,|,fontselect,fontsizeselect,forecolor,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,link,unlink,image,code"
-    theme_advanced_buttons2: ""
-    theme_advanced_buttons3: ""
+    theme: "modern"
+    menubar:false
+    statusbar: false
 
 # Store contents of editor into input variable
 window.tiny_mce_save = ->

@@ -16,10 +16,10 @@ window.CPP =
     new CPP.Routers.Students
     new CPP.Routers.Events
     new CPP.Routers.Placements
-    new CPP.Routers.Emails
-    new CPP.Routers.TaggedEmails
-    new CPP.Routers.EventEmails
-    new CPP.Routers.DirectEmails
+    #new CPP.Routers.Emails
+    #new CPP.Routers.TaggedEmails
+    #new CPP.Routers.EventEmails
+    #new CPP.Routers.DirectEmails
     new CPP.Routers.CompanyContacts
     new CPP.Routers.ForgotPassword
     new CPP.Routers.Departments
