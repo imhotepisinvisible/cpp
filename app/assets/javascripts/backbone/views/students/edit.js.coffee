@@ -370,8 +370,40 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       forceUpdate: true
       success: (model, response) =>
         notify "success", "Looking for updated"
+        if lookingFor == "Not looking for anything"
+          @updateAvailable("Not Available")
       error: (model, response) =>
         notify "error", "Could not update looking for"
+
+  updateAvailable: (available) ->
+    @model.set 'available', available
+    @model.save {},
+      wait: true
+      forceUpdate: true
+      success: (model, response) =>
+        notify 'success', 'Availability updated'
+      error: (model, response) =>
+        notify 'error', 'Could not update when available'
+
+  # Update and save year field highlight
+  changeAvailable: (e) ->
+    available = $(e.currentTarget).val()
+    if available
+      $(e.currentTarget).removeClass('missing')
+    else
+      available = null
+      $(e.currentTarget).addClass('missing')
+      return
+
+    @model.set 'available', available
+    @model.save {},
+      wait: true
+      forceUpdate: true
+      success: (model, response) =>
+        notify 'success', 'Availability updated'
+      error: (model, response) =>
+        notify 'error', 'Could not update when available'
+
 
   # Update and save year field highlight
   changeYear: (e) ->
@@ -392,24 +424,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       error: (model, response) =>
         notify 'error', 'Could not update year'
 
-  # Update and save year field highlight
-  changeAvailable: (e) ->
-    available = $(e.currentTarget).val()
-    if available
-      $(e.currentTarget).removeClass('missing')
-    else
-      available = null
-      $(e.currentTarget).addClass('missing')
-      return
-
-    @model.set 'available', available
-    @model.save {},
-      wait: true
-      forceUpdate: true
-      success: (model, response) =>
-        notify 'success', 'Availability updated'
-      error: (model, response) =>
-        notify 'error', 'Could not update when available'
 
   changeCourse: (e) ->
     courseId = parseInt($(e.currentTarget).val())

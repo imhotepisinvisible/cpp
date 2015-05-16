@@ -170,7 +170,7 @@
                       <!-- Graduating -->
                       <div class="span3">
                         <div class="summary-subject">
-                          Graduating
+                          Graduation
                         </div>
                         <div class="summary-content">
                           <select id="year-input" class="student-profile-select">
