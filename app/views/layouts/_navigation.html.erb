@@ -25,16 +25,16 @@
         <li><a href="/companies" data-toggle="collapse" data-target=".nav-collapse.in">Companies</a></li>
         <li><a href="/events" data-toggle="collapse" data-target=".nav-collapse.in">Events</a></li>
         <li><a href="/opportunities" data-toggle="collapse" data-target=".nav-collapse.in">Opportunities</a></li>
-        <li><a href="/students" data-toggle="collapse" data-target=".nav-collapse.in">Students</a></li>
+        <li><a href="/students" data-toggle="collapse" data-target=".nav-collapse.in">Students/Alumni</a></li>
       <% elsif current_user.type == "CompanyAdministrator" %>
         <li><a href="/company_dashboard" data-toggle="collapse" data-target=".nav-collapse.in">Manage Company Profile</a></li>
-        <li><a href="/students" data-toggle="collapse" data-target=".nav-collapse.in">Students</a></li>
+        <li><a href="/students" data-toggle="collapse" data-target=".nav-collapse.in">Students/Alumni</a></li>
 
       <% elsif current_user.type == "DepartmentAdministrator" %>
         <li><a href="/events" data-toggle="collapse" data-target=".nav-collapse.in">Events</a></li>
         <li><a href="/opportunities" data-toggle="collapse" data-target=".nav-collapse.in">Opportunities</a></li>
         <li><a href="/companies" data-toggle="collapse" data-target=".nav-collapse.in">Companies</a></li>
-        <li><a href="/students" data-toggle="collapse" data-target=".nav-collapse.in">Students</a></li>
+        <li><a href="/students" data-toggle="collapse" data-target=".nav-collapse.in">Students/Alumni</a></li>
       <% end %>
 
     <% end %>
