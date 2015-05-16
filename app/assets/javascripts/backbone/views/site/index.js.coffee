@@ -66,4 +66,6 @@ class CPP.Views.Site.Index extends CPP.Views.Base
 
   setSplashLogin = (height) ->
     pos = (height-100) - ((height/2)+120)
+    if pos < 10
+      pos = 10
     $('#sp-button').css('margin-top',pos)
