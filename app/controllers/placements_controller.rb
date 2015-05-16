@@ -64,7 +64,9 @@ class PlacementsController < ApplicationController
 
   def approve
     @placement = Placement.find(params[:id])
+    @companyAdmin = CompanyAdministrator.find_by_company_id(@placement.company_id)
     if @placement.approve!
+      UserMailer.approved_opportunity_email(@companyAdmin.email, @placement).deliver
       respond_with @placement
     else
       respond_with @placement, status: :unprocessable_entity
@@ -81,7 +83,8 @@ class PlacementsController < ApplicationController
       redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Opportunity already " + "#{@status}"
     else
       if @placement.reject!
-        UserMailer.rejected_opportunity_email(@companyAdmin.email, @placement).deliver
+        ### uncomment to send rejection notification email to company ### 
+        #UserMailer.rejected_opportunity_email(@companyAdmin.email, @placement).deliver
         redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Opportunity rejected"
       else
         redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Unprocessable entity"
@@ -91,7 +94,10 @@ class PlacementsController < ApplicationController
 
   def reject
     @placement = Placement.find(params[:id])
+    @companyAdmin = CompanyAdministrator.find_by_company_id(@placement.company_id)
     if @placement.reject!
+      ### uncomment to send rejection notification email to company ### 
+      #UserMailer.rejected_opportunity_email(@companyAdmin.email, @placement).deliver
       respond_with @placement
     else
       respond_with @placement, status: :unprocessable_entity
