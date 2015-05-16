@@ -13,6 +13,7 @@ class CPP.Views.Departments.Dashboard extends CPP.Views.Base
 
   initialize: ->
     @initNotificationsForm()
+    @model.bind 'change', @cancelNotifications, @
     @render()
 
   render: ->
@@ -27,7 +28,7 @@ class CPP.Views.Departments.Dashboard extends CPP.Views.Base
       el: $(@el).find('#edit-admins')
       model: @model
 
-  # Create event/placement notification form, values inputted are to 
+  # Create event/placement notification form, values inputted are to
   # be displayed to companies on creating new events/placements.
   initNotificationsForm: ->
     @notificationsForm = new Backbone.Form
