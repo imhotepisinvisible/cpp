@@ -51,6 +51,7 @@ class UserMailer < ActionMailer::Base
     subject = "CPP Account Created"
     @url = Rails.application.config.absolute_site_url
     @id = user.id
+    @cid = user.cid
     mail(:to => user.email, :subject => subject)
   end
 
