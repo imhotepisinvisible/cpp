@@ -178,11 +178,12 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
 
     .bind "fileuploaddone", (e, data) =>
       upload = $(e.target).closest('.upload-container')
+      # $('#cv-container').html("<img src=\"/students/"+ @model.id + "/documents/cv?image\">")
+      $('#delete-cv-link').html("<a class=\"link-accent delete-document\" id=\"delete-cv\">Delete CV</a>")
+      $('#download-cv-link').html("<a class=\"link-accent download-document\" id=\"download-cv\" href=\"/students/" + @model.id + "/documents/cv\" >Download CV</a>")
       upload.find('.progress-upload').delay(250).slideUp 'slow', ->
         upload.find('.bar').width('0%')
-        upload
-
-      @updateViewCV true
+        upload      
 
       notify 'success', 'Uploaded successfully'
       @model.set "cv_file_name", "cv"
@@ -192,20 +193,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       upload.find('.progress-upload').delay(250).slideUp 'slow', ->
         upload.find('.bar').width('0%')
       displayJQXHRErrors data
-
-      @updateViewCV false
-
-  updateViewCV: (uploaded) ->
-    if uploaded
-      $('#cv-container').html("<img src=\"/students/"+ @model.id + "/documents/cv?image\">")
-      $('#download-cv-link').html("<a class=\"link-accent download-document\" id=\"download-cv\" href=\"/students/" + @model.id + "/documents/cv\" >Download CV</a>")
-      $('#delete-cv-link').html("<a class=\"link-accent delete-document\" id=\"delete-cv\">Delete CV</a>")
-      @render
-    else
-      $('#cv-container').html("your profile will not be shown without a CV")
-      $('#download-cv-link').html("")
-      $('#delete-cv-link').html("")
-      @render
 
   # Upload a document
   uploadDocument: (e) ->
@@ -226,11 +213,11 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
             $('#student-profile-img').attr('src', '/assets/default_profile.png')
           if documentType == 'cv'
             @model.set("cv_file_name","")
-            @updateViewCV false
+            $('#cv-container').html("your profile will not be shown without a CV")
+            $('#download-cv-link').html("")
+            $('#delete-cv-link').html("")
         error: (data) ->
           notify('error', "couldn't remove document")
-          if documentType == 'cv'
-            @updateViewCV true
 
   # Show inline bio edit
   bioEdit: ->
