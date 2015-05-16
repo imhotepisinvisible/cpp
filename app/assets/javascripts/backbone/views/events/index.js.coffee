@@ -125,7 +125,7 @@ class CPP.Views.Events.Index extends CPP.Views.Base
     Backbone.history.navigate("events/" + model.id, trigger: true)
 
   deleteSelected: ->
-    if @eventGrid.getSelectedModels() > 0
+    if @eventGrid.getSelectedModels().length > 0
       if confirm("Are you sure you want to delete the selected events?")
         _.each(@eventGrid.getSelectedModels(), @destroy)
     else

@@ -148,7 +148,10 @@ class CPP.Views.Students.Index extends CPP.Views.Base
   @
 
   exportCVs: ->
-    window.location = "export_cvs?students=" + _.pluck(@studentGrid.getSelectedModels(), "id")
+    if @studentGrid.getSelectedModels().length > 0
+      window.location = "export_cvs?students=" + _.pluck(@studentGrid.getSelectedModels(), "id")
+    else
+      notify('error', "No students selected")
   @
 
   work: ->
@@ -186,7 +189,7 @@ class CPP.Views.Students.Index extends CPP.Views.Base
     Backbone.history.navigate("students/" + model.id, trigger: true)
 
   deleteSelected: ->    
-    if @studentGrid.getSelectedModels() > 0
+    if @studentGrid.getSelectedModels().length > 0
       if confirm("Are you sure you want to delete the selected students?")
         _.each(@studentGrid.getSelectedModels(), @destroy)
     else
