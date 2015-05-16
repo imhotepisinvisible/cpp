@@ -96,6 +96,10 @@
 
                     <div class="link-accent first-padding upload-document" id="upload-cv">Upload CV</div>
 
+                    <div class="progress progress-info progress-upload" style="display:none">
+                        <div id="progress-cv" class="bar"></div>
+                    </div>
+
                     <!-- Download CV -->
                     <div id="download-cv-link">
                     <% if @student.get('cv_file_size') != null: %>

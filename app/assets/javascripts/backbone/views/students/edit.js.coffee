@@ -174,7 +174,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
 
     .bind "fileuploadprogress", (e, data) ->
       progress = parseInt(data.loaded / data.total * 100, 10)
-      $('#progress-' + documentType).width(progress + '%')
+      $('#progress-cv').width(progress + '%')
 
     .bind "fileuploaddone", (e, data) =>
       upload = $(e.target).closest('.upload-container')
@@ -200,10 +200,12 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       $('#cv-container').html("<img src=\"/students/"+ @model.id + "/documents/cv?image\">")
       $('#download-cv-link').html("<a class=\"link-accent download-document\" id=\"download-cv\" href=\"/students/" + @model.id + "/documents/cv\" >Download CV</a>")
       $('#delete-cv-link').html("<a class=\"link-accent delete-document\" id=\"delete-cv\">Delete CV</a>")
+      @render
     else
       $('#cv-container').html("your profile will not be shown without a CV")
       $('#download-cv-link').html("")
       $('#delete-cv-link').html("")
+      @render
 
   # Upload a document
   uploadDocument: (e) ->
