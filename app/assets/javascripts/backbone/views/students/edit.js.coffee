@@ -49,17 +49,13 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
           return
         return
 
-    @model.bind 'change', @render, @
     @render()
     @uploadInitialize 'cv'
-    @uploadInitialize 'transcript'
-    @uploadInitialize 'covering-letter'
     @profileUploadInitialize()
 
   # Render student edit template with tags, partials and inline editors
   render: ->
-    if @model.get("first_name")
-      $(@el).html(@template(student: @model, courses: @courses))
+    $(@el).html(@template(student: @model, courses: @courses))
 
     # Auxiliary function, saved model on tag input
     saveModel = ->
@@ -100,16 +96,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       model: @model
     profile_warnings.render()
 
-    events_partial = new CPP.Views.Events.Partial
-      el: $(@el).find('#events-partial')
-      model: @model
-      collection: @model.events
-
-    placements_partial = new CPP.Views.Placements.Partial
-      el: $(@el).find('#placements-partial')
-      model: @model
-      collection: @model.placements
-
     $('#add-skill-tag-input').typeahead
       source: (query, process) =>
         $.get '/tags/skills', {student_id: @model.id}, (data) ->
@@ -148,12 +134,15 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
 
     .bind "fileuploaddone", (e, data) =>
       notify 'success', 'Uploaded successfully'
-      $('#student-profile-img').attr('src', '/students/' + @model.id + '/documents/profile_picture')
       $(e.target).closest('.upload-container')
       upload = $(e.target).closest('.upload-container')
       upload.find('.progress-upload').delay(250).slideUp 'slow', ->
         upload.find('.bar').width('0%')
         upload
+      $('#delete-profile-picture').show()
+      @model.fetch
+        success: =>
+          $('#student-profile-img').attr('src', @model.get('profile_thumb'))
 
     .bind "fileuploadstart", (e, data) ->
       $(e.currentTarget).closest('.upload-container').find('.progress-upload').slideDown()
@@ -184,22 +173,18 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
 
     .bind "fileuploaddone", (e, data) =>
       upload = $(e.target).closest('.upload-container')
-      # $('#cv-container').html("<img src=\"/students/"+ @model.id + "/documents/cv?image\">")
-      $('#delete-cv-link').html("<a class=\"link-accent delete-document\" id=\"delete-cv\">Delete CV</a>")
-      $('#download-cv-link').html("<a class=\"link-accent download-document\" id=\"download-cv\" href=\"/students/" + @model.id + "/documents/cv\" >Download CV</a>")
       upload.find('.progress-upload').delay(250).slideUp 'slow', ->
         upload.find('.bar').width('0%')
         upload
-
       notify 'success', 'Uploaded successfully'
       @model.set "cv_file_name", "cv"
+      @updateViewCV true
 
     .bind "fileuploadfail", (e, data) =>
       upload = $(e.target).closest('.upload-container')
       upload.find('.progress-upload').delay(250).slideUp 'slow', ->
         upload.find('.bar').width('0%')
       displayJQXHRErrors data
-
       @updateViewCV false
 
   updateViewCV: (uploaded) ->
@@ -229,13 +214,12 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
           $(e.currentTarget).closest('.upload-container')
           if documentType == 'profile_picture'
             $('#student-profile-img').attr('src', '/assets/default_profile.png')
+            $('#delete-profile-picture').hide()
           if documentType == 'cv'
             @model.set("cv_file_name","")
-            $('#cv-container').html("your profile will not be shown without a CV")
-            $('#download-cv-link').html("")
-            $('#delete-cv-link').html("")
+            @updateViewCV false
         error: (data) ->
-          notify('error', "couldn't remove document")
+          notify('error', "Couldn't remove document")
 
   # Show inline bio edit
   bioEdit: ->
@@ -282,14 +266,12 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     window.inPlaceStopEdit @model, 'student', 'other', 'Click to add a link', ((other) ->
       other.replace(/\n/g, "<br/>"))
 
-
   # Show inline name edit
   nameEdit: ->
     $('#student-name-container').hide()
     $('#student-name-editor').html(@model.get('first_name') + ' ' + @model.get('last_name'))
     $('#student-name-input-container').show()
     $('#student-name-editor').focus()
-
 
   # Stop inline name edit, find first and last names and if they are specified and at least one has changed then save changes
   nameStopEdit: ->
@@ -367,7 +349,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       error: (model, response) ->
         notify "error", "Failed to add tag"
 
-
   # Update looking_for field in model and save
   changeLookingFor: (e) ->
     lookingFor = $(e.currentTarget).val()
@@ -387,10 +368,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
     @model.save {},
       wait: true
       forceUpdate: true
-      success: (model, response) =>
-        notify 'success', 'Availability updated'
-      error: (model, response) =>
-        notify 'error', 'Could not update when available'
 
   # Update and save year field highlight
   changeAvailable: (e) ->
@@ -409,8 +386,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       success: (model, response) =>
         notify 'success', 'Availability updated'
       error: (model, response) =>
-        notify 'error', 'Could not update when available'
-
+        notify 'error', 'Could not update availability'
 
   # Update and save year field highlight
   changeYear: (e) ->
@@ -431,7 +407,6 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
       error: (model, response) =>
         notify 'error', 'Could not update year'
 
-
   changeCourse: (e) ->
     courseId = parseInt($(e.currentTarget).val())
     @model.set 'course_id', courseId
@@ -447,4 +422,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
   stopEditOnEnter: (e) ->
     if (e.keyCode == 13)
       @nameStopEdit()
-      #@degreeStopEdit()
+      @gitStopEdit()
+      @linkedInStopEdit()
+      @personalStopEdit()
+      @otherStopEdit()

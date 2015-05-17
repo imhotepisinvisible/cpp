@@ -26,7 +26,7 @@ class CPP.Routers.Students extends Backbone.Router
     student = @getStudentFromID(id)
     unless student
       notify "error", "Invalid Student"
-      
+
     student.fetch
       error: ->
         notify "error", "Couldn't fetch student"
@@ -44,14 +44,10 @@ class CPP.Routers.Students extends Backbone.Router
       notify "error", "Invalid Student"
 
     student.fetch
+      success: ->
+        new CPP.Views.Students.Edit model: student
       error: ->
         notify "error", "Couldn't fetch student"
-
-    new CPP.Views.Students.Edit model: student
-
-    # Fetch 3 events and placements for dashboard
-    #student.events.fetch({ data: $.param({ limit: 3 , start_date: moment().toISOString()}) })
-    #student.placements.fetch({ data: $.param({ limit: 3, deadline: moment().toISOString()}) })
 
   # Student administration page
   admin: (id) ->
@@ -67,9 +63,6 @@ class CPP.Routers.Students extends Backbone.Router
     student = @getStudentFromID(id)
     unless student
       notify "error", "Invalid Student"
-    #These aren't even on the settings page, so why are they being fetched?
-    #student.events.fetch({ data: $.param({ limit: 3}) })
-    #student.placements.fetch({ data: $.param({ limit: 3}) })
     student.fetch
       success: ->
         new CPP.Views.Students.Settings model: student

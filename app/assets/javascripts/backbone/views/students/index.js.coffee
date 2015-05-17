@@ -20,7 +20,6 @@ class CPP.Views.Students.Index extends CPP.Views.Base
     	@$('.loading').remove()
     	return), @
     @editable = isDepartmentAdmin()
-    @studentGrid
     @render()
 
   # Render index template, students and filters
@@ -78,7 +77,7 @@ class CPP.Views.Students.Index extends CPP.Views.Base
         name: 'is_active'
         label: 'Active'
         cell: Backgrid.Cell.extend(render: ->
-          if @model.get('active')
+          if @model.get('is_active')
             result = "<i class=\"icon-ok\" />"
           else
             result = "<i class=\"icon-remove\" />"
@@ -188,13 +187,13 @@ class CPP.Views.Students.Index extends CPP.Views.Base
     model = $(e.target).parent().data('model')
     Backbone.history.navigate("students/" + model.id, trigger: true)
 
-  deleteSelected: ->    
+  deleteSelected: ->
     if @studentGrid.getSelectedModels().length > 0
       if confirm("Are you sure you want to delete the selected students?")
         _.each(@studentGrid.getSelectedModels(), @destroy)
     else
       notify "error", "No students selected"
-      
+
   destroy: (student) ->
       @success = true
       student.destroy

@@ -96,10 +96,6 @@
 
                     <div class="link-accent first-padding upload-document" id="upload-cv">Upload CV</div>
 
-                    <div class="progress progress-info progress-upload" style="display:none">
-                        <div id="progress-cv" class="bar"></div>
-                    </div>
-
                     <!-- Download CV -->
                     <div id="download-cv-link">
                     <% if @student.get('cv_file_size') != null: %>
@@ -111,8 +107,11 @@
                     <div id="delete-cv-link">
                     <% if @student.get('cv_file_size') != null: %>
                         <a class="link-accent delete-document" id="delete-cv">Delete CV</a>
-
                     <% end %>
+                    </div>
+
+                    <div class="progress progress-info progress-upload" style="display:none">
+                        <div id="progress-cv" class="bar"></div>
                     </div>
                   </div>
 
@@ -462,7 +461,7 @@
                         </div>
                       </div>
                       <% else: %>
-                      <p> You need to upload a CV, or else your profile will not be shown </p>
+                      <p>No CV Uploaded</p>
                       <% end %>
                     </div>
                   </div>

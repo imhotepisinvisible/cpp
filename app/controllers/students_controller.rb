@@ -130,8 +130,8 @@ class StudentsController < ApplicationController
     else
       document = (@student.send "#{document_type}".to_sym).path
     end
-    ext = File.extname document
     unless document.nil?
+      ext = File.extname document
       if File.exist?(document)
         if (params.has_key? :preview)
           send_file document, :filename => "#{@student.last_name}_#{@student.first_name}_#{document_type}#{ext}", :disposition => 'inline'
