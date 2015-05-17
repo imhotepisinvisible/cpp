@@ -140,9 +140,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
         upload.find('.bar').width('0%')
         upload
       $('#delete-profile-picture').show()
-      @model.fetch
-        success: =>
-          $('#student-profile-img').attr('src', @model.get('profile_thumb'))
+      $('#student-profile-img').attr('src', data.result.profile_thumb)
 
     .bind "fileuploadstart", (e, data) ->
       $(e.currentTarget).closest('.upload-container').find('.progress-upload').slideDown()
