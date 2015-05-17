@@ -42,7 +42,7 @@ class Backbone.Form.editors.TagEditor extends Backbone.Form.editors.Base
     @setValue(@value)
 
     @$tagsList = $('<div> </div>').addClass('tageditor').hide()
-    @$input = $('<input type="text" placeholder="Type to Add"/>').attr('name', @getName()).addClass("input-medium pull-left")
+    @$input = $('<input type="text" placeholder="Type to Add"/>').attr('name', @getName()).addClass("span12 input-medium pull-left")
 
     @id = @$el.attr('id')
     @name = @$el.attr('name')
