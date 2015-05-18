@@ -17,7 +17,8 @@
     <% if @editable: %>
     <div class="span2">
       <div class="btn-group pull-right">
-        <div class="btn btn-edit">Edit</div>
+        <div class="btn btn-delete btn-danger"><i class="icon-trash" /></div>
+        <div class="btn btn-edit"><i class="icon-pencil" /></div>
       </div>
     </div>
     <% end %>

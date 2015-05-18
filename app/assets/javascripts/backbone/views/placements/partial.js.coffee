@@ -12,7 +12,9 @@ class CPP.Views.Placements.Partial extends CPP.Views.Base
     @collection.on "fetch", (->
     	@$('#placements').html "<div class=\"loading\"></div>"
     	return), @
-    @collection.bind('reset', @render, @)
+    @collection.bind 'reset', @render, @
+    @collection.bind 'change', @render, @
+    @collection.bind 'destroy', @render, @
     @render()
 
   # For the first three placements, call addOne

@@ -30,9 +30,9 @@ class CPP.Views.Placements.Item extends CPP.Views.Base
     @model.destroy
       wait: true
       success: (model, response) ->
-        notify "success", "Placement deleted"
+        notify "success", "Opportunity deleted"
       error: (model, response) ->
-        notify "error", "Placement could not be deleted"
+        notify "error", "Opportunity could not be deleted"
 
   # Render placement item template
   render: ->

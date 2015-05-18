@@ -43,8 +43,6 @@ class CPP.Routers.Events extends Backbone.Router
       success: ->
         event.company.departments = new CPP.Collections.Departments
         event.company.departments.fetch
-          data:
-            $.param({ company_id: event.company.id})
           success: ->
             new CPP.Views.Events.Edit model: event
       error: ->

@@ -134,11 +134,8 @@ class EventsController < ApplicationController
     @admins = DepartmentAdministrator.all
 
     if @event.save
+      UserMailer.validate_event_email("cpp@doc.ic.ac.uk", @event).deliver
       respond_with @event, status: :created, location: @event
-      @admins.each do |admin|
-        UserMailer.validate_event_email(admin.email, @event).deliver
-          head :no_content
-      end
     else
       respond_with @event, status: :unprocessable_entity
     end
