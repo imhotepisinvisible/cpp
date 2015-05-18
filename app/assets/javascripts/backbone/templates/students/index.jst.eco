@@ -22,6 +22,8 @@
            <div class="btn pull-right small-margin button-export-cvs">
             Download CVs
           </div>
+          <% end %>
+          <% if isDepartmentAdmin(): %>
           <div class="btn pull-right small-margin button-delete-students">
 	           Delete Students
 	       </div>

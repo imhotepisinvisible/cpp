@@ -83,7 +83,7 @@ class PlacementsController < ApplicationController
       redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Opportunity already " + "#{@status}"
     else
       if @placement.reject!
-        ### uncomment to send rejection notification email to company ### 
+        ### uncomment to send rejection notification email to company ###
         #UserMailer.rejected_opportunity_email(@companyAdmin.email, @placement).deliver
         redirect_to "#{@url}/opportunities/#{@placement.id}", :notice => "Opportunity rejected"
       else
@@ -96,7 +96,7 @@ class PlacementsController < ApplicationController
     @placement = Placement.find(params[:id])
     @companyAdmin = CompanyAdministrator.find_by_company_id(@placement.company_id)
     if @placement.reject!
-      ### uncomment to send rejection notification email to company ### 
+      ### uncomment to send rejection notification email to company ###
       #UserMailer.rejected_opportunity_email(@companyAdmin.email, @placement).deliver
       respond_with @placement
     else
@@ -131,11 +131,8 @@ class PlacementsController < ApplicationController
     @admins = DepartmentAdministrator.all
 
     if @placement.save
+      UserMailer.validate_placement_email("cpp@doc.ic.ac.uk", @placement).deliver
       respond_with @placement, status: :created, location: @placement
-      @admins.each do |admin|
-        UserMailer.validate_placement_email(admin.email, @placement).deliver
-          head :no_content
-      end
     else
       respond_with @placement, status: :unprocessable_entity
     end

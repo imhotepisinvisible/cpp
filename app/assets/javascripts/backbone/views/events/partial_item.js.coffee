@@ -7,7 +7,8 @@ class CPP.Views.Events.PartialItem extends CPP.Views.Base
 
   # Bind event listeners
   events: -> _.extend {}, CPP.Views.Base::events,
-    'click .btn-edit' : 'editEvent'
+    'click .btn-edit'   : 'editEvent'
+    'click .btn-delete' : 'deleteEvent'
     'click .event-item' : 'viewEvent'
 
   template: JST['backbone/templates/events/partial_item']
@@ -26,8 +27,16 @@ class CPP.Views.Events.PartialItem extends CPP.Views.Base
     e.stopPropagation()
     Backbone.history.navigate("events/" + @model.id + "/edit", trigger: true)
 
-  # View the event  
+  # View the event
   viewEvent: (e) ->
     e.stopPropagation()
     Backbone.history.navigate('events/' + @model.id, trigger: true)
 
+  deleteEvent: (e) ->
+    e.stopPropagation()
+    @model.destroy
+      wait: true
+      success: (model, response) ->
+        notify "success", "Event deleted"
+      error: (model, response) ->
+        notify "error", "Event could not be deleted"

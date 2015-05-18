@@ -11,17 +11,17 @@
 
           <!-- Profile Image Upload -->
           <div class="span3">
-            <div class="span12">
-            <div id="student-profile-img-container" class="span12 upload-container <%= "missing-document" unless @student.get('profile_picture_file_name') %> image-buttons-container">
+            <div id="student-profile-img-container"
+
+            class="upload-container <%= "missing-document" unless @student.get('profile_picture_file_name') %> image-buttons-container">
 
             <% if @student.get 'profile_picture_file_name': %>
             <img src="<%= @student.get 'profile_thumb' %>" id="student-profile-img">
             <% else: %>
             <img src="/assets/default_profile.png" id="student-profile-img">
             <% end %>
-            </div>
 
-            <div class="centre-buttons-below" align="center">
+            <div class="centre-buttons-below">
 
               <form class="form-inline hidden">
                 <input class="file-input" id="file-profile-picture" type="file" name="student[profile_picture]" size="20">
@@ -39,10 +39,9 @@
               <div id="progress-profile-picture" class="bar"></div>
             </div>
 
-          
+          </div>
           <div class="clearfix"></div>
         </div> <!--  Image Upload End -->
-        </div>
 
         <!-- Key Info -->
         <div class="span9">
@@ -281,7 +280,7 @@
 
                             <div class="content-row">
                               <div class="content-primary">
-                                Github
+                                GitHub
                               </div>
                               <div class="content-secondary">
 
@@ -312,7 +311,7 @@
 
                             <div class="content-row">
                               <div class="content-primary">
-                                Linkedin
+                                LinkedIn
                               </div>
                               <div class="content-secondary">
 
