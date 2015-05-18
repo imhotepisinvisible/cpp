@@ -8,14 +8,13 @@
 
           <!-- logo -->
           <div class="span3">
-            <div class="span12">
-            <div id="student-profile-img-container" class="span12 upload-container <%= "missing-document" unless @company.get('logo_file_name') %> image-buttons-container">
+            <div id="student-profile-img-container"
+
+                  class="upload-container <%= "missing-document" unless @company.get('logo_file_name') %> image-buttons-container">
 
             <img src="<%= @company.get('logo_url') %>" id="company-logo-img" class="company-logo-image">
-              </div>
-            
 
-            <div class="centre-buttons-below" align="center">
+            <div class="centre-buttons-below">
 
               <form class="form-inline hidden">
                 <input class="file-input" id="file-logo" type="file" name="company[logo]" size="20">
@@ -31,10 +30,9 @@
               <div id="progress-logo" class="bar"></div>
             </div>
 
-          
+          </div>
           <div class="clearfix"></div>
         </div> <!--  Image Upload End -->
-        </div>
 
         <!-- Key Info -->
         <div class="span9">
