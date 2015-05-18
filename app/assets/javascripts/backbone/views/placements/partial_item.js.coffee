@@ -8,6 +8,7 @@ class CPP.Views.Placements.PartialItem extends CPP.Views.Base
   # Bind events
   events: -> _.extend {}, CPP.Views.Base::events,
     'click .btn-edit'       : 'editPlacement'
+    'click .btn-delete'     : 'deletePlacement'
     'click .placement-item' : 'viewPlacement'
 
   template: JST['backbone/templates/placements/partial_item']
@@ -22,13 +23,22 @@ class CPP.Views.Placements.PartialItem extends CPP.Views.Base
     @
 
   # Stop propagation to only register event on clicked item
-  # Edit placement via placement edit button 
+  # Edit placement via placement edit button
   editPlacement: (e) ->
     e.stopPropagation()
     Backbone.history.navigate("opportunities/" + @model.id + "/edit", trigger: true)
 
   # Stop propagation to only register event on clicked item
-  # View placement via clicking on partial item  
+  # View placement via clicking on partial item
   viewPlacement: (e) ->
     e.stopPropagation()
     Backbone.history.navigate('opportunities/' + @model.id, trigger: true)
+
+  deletePlacement: (e) ->
+    e.stopPropagation()
+    @model.destroy
+      wait: true
+      success: (model, response) ->
+        notify "success", "Opportunity deleted"
+      error: (model, response) ->
+        notify "error", "Opportunity could not be deleted"

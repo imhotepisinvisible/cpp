@@ -10,7 +10,9 @@ class CPP.Views.Events.Partial extends CPP.Views.Base
     @collection.on "fetch", (->
     	@$('#events').html "<div class=\"loading\"></div>"
     	return), @
-    @collection.bind('reset', @render, @)
+    @collection.bind 'reset', @render, @
+    @collection.bind 'change', @render, @
+    @collection.bind 'destroy', @render, @
     @render()
 
   addTopThree: () ->

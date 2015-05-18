@@ -35,8 +35,6 @@ class CPP.Routers.Placements extends Backbone.Router
       success: ->
         placement.company.departments = new CPP.Collections.Departments
         placement.company.departments.fetch
-          data:
-            $.param({ company_id: placement.company.id})
           success: ->
             new CPP.Views.Placements.Edit model: placement
       error: ->

@@ -69,7 +69,7 @@ class UserMailer < ActionMailer::Base
     @url = Rails.application.config.absolute_site_url
     puts "VALIDATE EVENT EMAIL"
     subject = "[CPP][New Event] #{@company.name}: #{@event.title}"
-    mail(:to => "cpp@doc.ic.ac.uk", :subject => subject)
+    mail(:to => address, :subject => subject)
   end
 
   def validate_placement_email(address, placement)
@@ -78,7 +78,7 @@ class UserMailer < ActionMailer::Base
     @url = Rails.application.config.absolute_site_url
     puts "VALIDATE PLACEMENT EMAIL"
     subject = "[CPP][New Opportunity] #{@company.name}: #{@placement.position}"
-    mail(:to => "cpp@doc.ic.ac.uk", :subject => subject)
+    mail(:to => address, :subject => subject)
   end
 
   def approved_event_email(address, event)
