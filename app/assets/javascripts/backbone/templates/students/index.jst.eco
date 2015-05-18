@@ -18,7 +18,7 @@
              Suspend Students
            </a>
            <% end %>
-           <% if isAdmin(): %>
+           <% if isDepartmentAdmin(): %>
            <div class="btn pull-right small-margin button-export-cvs">
             Download CVs
           </div>
