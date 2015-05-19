@@ -12,7 +12,7 @@
           <!-- Profile Image Upload -->
           <div class="span3">
             <div class="span12">
-            <div id="student-profile-img-container" class="upload-container <%= "missing-document" unless @student.get('profile_picture_file_name') %> image-buttons-container" align="center">
+            <div id="student-profile-img-container" class="span12 upload-container <%= "missing-document" unless @student.get('profile_picture_file_name') %> image-buttons-container" align="center">
 
               <div class="span12">
                 <% if @student.get 'profile_picture_file_name': %>
