@@ -11,7 +11,7 @@
       <div class="link-title">
         <%= @model.get('position') %>
       </div>
-      <div class="link-description"><%= @model.get('description') %></div>
+      <div class="link-description">Deadline: <%= @model.getReadableDate('deadline') %></div>
     </div>
 
     <% if @editable: %>
