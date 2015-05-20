@@ -55,6 +55,13 @@ class UserMailer < ActionMailer::Base
     mail(:to => user.email, :subject => subject)
   end
 
+  def account_confirmed(user)
+    puts "ACCOUNT CONFIRMED EMAIL"
+    subject = "CPP Account Confirmed"
+    @url = Rails.application.config.absolute_site_url
+    mail(:to => user.email, :subject => subject)
+  end
+
   def account_reminder(user)
     puts "ACCOUNT_REMINDER_EMAIL"
     subject = "CPP Account Reminder"
