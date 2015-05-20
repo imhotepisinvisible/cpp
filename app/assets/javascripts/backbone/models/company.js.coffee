@@ -37,8 +37,8 @@ class CPP.Models.Company extends CPP.Models.Base
     return "icon-ban-circle"
 
   getStatus: ()->
-    return window.approvalStatusMap(@get('status')).split(',')[0]
-    
+    return window.approvalStatusMap(@get('reg_status')).split(',')[0]
+
   validation:
     name:
       required: true
@@ -73,7 +73,7 @@ class CPP.Collections.Companies extends CPP.Collections.Base
 class CPP.Collections.CompaniesPager extends Backbone.PageableCollection
   model: CPP.Models.Company
   url: '/companies'
-  mode: 'client' 
+  mode: 'client'
 
   state:
     pageSize: 20

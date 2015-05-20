@@ -113,8 +113,6 @@ class Company < ActiveRecord::Base
       result[:rating] = rating(options[:student_id])
     end
 
-    result[:status] = reg_status
-
     result[:stat_count] = @stat_count
 
     return result

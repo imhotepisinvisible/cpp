@@ -192,7 +192,7 @@
                       Events
                         <div class="btn-group pull-right">
                         <a href="/companies/<%= @company.get('id') %>/events" class="btn button-all-events">All</a>
-                        
+
                           <a href="/companies/<%= @company.get('id') %>/events/new" class="btn button-add-event">
                             <i class="icon-plus"></i>
                           </a>
@@ -212,11 +212,11 @@
                       Opportunities
                         <div class="btn-group pull-right">
                       <a href="/companies/<%= @company.get('id') %>/opportunities" class="btn">All</a>
-                      
+
                         <a href="/companies/<%= @company.get('id') %>/opportunities/new" class="btn">
                           <i class="icon-plus"></i>
                         </a>
-                      
+
                       </div>
                     </h1>
 
@@ -284,52 +284,25 @@
 
                     <div class="span6">
                       <h1 class="section-header">
-                        Edit Admins
+                        Edit Administrators
                       </h1>
 
-<!--                         <div class="row-fluid">
-                          <div class="span12">
-                              <div id="edit-admins"></div>
-                            </div>
-                          </div> -->
-                    
-                    <div class="row-fluid">
-                      <div class="span12" id="edit-admins"></div>
-                    </div>
-
-<!--                           <div class="row-fluid">
-                            <div class="span12">
-                              <div class="control-group">
-                                <div class="controls">
-                                  <div class="btn btn-save">Save</div>
-                                  <span class='form-cancel link back'>cancel</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div> -->
-
-
-
+                      <div class="row-fluid">
+                        <div class="span12" id="edit-admins"></div>
                       </div>
 
+                    </div>
 
                   </div>
                 </div>
               </div>
-  
-
 
             </div>
           </div>
       </div>
-
-
-
-      <!-- </div> -->
     </div>
   </div>
 </div>
 </div>  <!-- end of info -->
 </div>
 </div>
-

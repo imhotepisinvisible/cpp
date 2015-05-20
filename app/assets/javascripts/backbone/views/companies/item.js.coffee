@@ -36,7 +36,7 @@ class CPP.Views.CompaniesItem extends CPP.Views.Base
     # Prevent event from triggering click on item to navigate to view
     e.stopPropagation()
     @changeStatus CPP_APPROVAL_STATUS.REJECTED, 'rejected, consider emailing this company to explain why.'
-    
+
   # Delete event and update on server
   deleteCompany: (e) ->
     # Remove item from view
@@ -50,11 +50,10 @@ class CPP.Views.CompaniesItem extends CPP.Views.Base
 
   # Change approval status of company
   changeStatus: (status, message) ->
-    $.ajax
-      url: "/companies/#{@model.id}/departments/#{getAdminDepartment()}/status"
-      type: 'PUT'
-      data:
-        status: status
+    @model.set 'reg_status', status
+    @model.save {},
+      wait: true
+      forceUpdate: true
       success: =>
         notify 'success', "Company #{message}"
         @model.collection.remove(@model)

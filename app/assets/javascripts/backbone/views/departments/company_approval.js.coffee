@@ -26,11 +26,10 @@ class CPP.Views.Departments.CompanyApproval extends CPP.Views.Base
 
   # Changes the company status for the given department (model) to status
   changeStatus: (status, message) ->
-    $.ajax
-      url: "/companies/#{@model.id}/departments/#{@dept.id}/status"
-      type: 'PUT'
-      data:
-        status: status
+    @model.set 'reg_status', status
+    @model.save {},
+      wait: true
+      forceUpdate: true
       success: =>
         notify 'success', "Company #{message}"
         @model.collection.remove(@model)

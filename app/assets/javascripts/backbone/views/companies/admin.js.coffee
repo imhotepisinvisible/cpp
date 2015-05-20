@@ -34,8 +34,7 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
     @logoUploadInitialize()
 
     # Obtain approval status for company
-    $.get "/companies/#{@model.id}/departments/#{getAdminDepartment()}/status", (status) ->
-      $('#select-approval-status').val(status)
+    $('#select-approval-status').val(@model.get('reg_status'))
 
   # Logo uploader
   logoUploadInitialize: ->
@@ -132,7 +131,7 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
     new CPP.Views.Companies.EditAdministrators
       el: $(@el).find('#edit-admins')
       company: @model
-      header: true
+      header: false
 
     if @model.get('founded') != null
       for option in $('#year-input').children()
@@ -149,10 +148,6 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
       if $(option).val() == @model.get('sector')
         $(option).attr('selected', 'selected')
 
-    new CPP.Views.Companies.EditAdministrators
-      el: $(@el).find('#edit-admins')
-      company: @model
-      header: false
     @
 
   # Start editing the company name
@@ -232,12 +227,13 @@ class CPP.Views.Companies.Admin extends CPP.Views.Base
     # Update field in model and save
   changeApproval: (e) ->
     status = $(e.currentTarget).val()
-    @model.set 'status', status
+    @model.set 'reg_status', status
     @model.save {},
       wait: true
       forceUpdate: true
       success: (model, response) =>
         notify "success", "Updated Approval Status"
+        $('#select-approval-status').val(status)
       error: (model, response) =>
         notify "error", "Could not update approval status"
 

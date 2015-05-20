@@ -1,19 +1,19 @@
 <div class="item">
   <div class="approval-display-container">
     <div class="row-fluid">
-    
+
       <div class="span2">
         <div class="company-logo-header">
-          <a href="/companies/<%= @company.id %>"><img src="<%= @company.get('logo_url') %>"></a>
+          <a href="/companies/<%= @company.id %>"><%= @company.get('name') %></a>
         </div>
       </div>
-      
+
       <div class="span8">
         <div class="company-status">
           <span class="approval-status">Pending your approval</span>
         </div>
       </div>
-      
+
       <div class="span2">
         <div class="btn-group pull-right">
           <div id="btn-approve" class="btn btn btn-primary"><i class="icon-ok" /></div>
