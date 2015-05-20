@@ -187,7 +187,7 @@ class CPP.Views.Students.Edit extends CPP.Views.Base
 
   updateViewCV: (uploaded) ->
     if uploaded
-      $('#cv-container').html("<img src=\"/students/"+ @model.id + "/documents/cv?image\">")
+      $('#cv-container').html("<img src=\"/students/"+ @model.id + "/documents/cv?image&t=" + moment() + "\">")
       $('#download-cv-link').html("<a class=\"link-accent download-document\" id=\"download-cv\" href=\"/students/" + @model.id + "/documents/cv\" >Download CV</a>")
       $('#delete-cv-link').html("<a class=\"link-accent delete-document\" id=\"delete-cv\">Delete CV</a>")
     else
