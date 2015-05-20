@@ -78,6 +78,7 @@ CPP::Application.configure do
   }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = { host: 'cpp.doc.ic.ac.uk' }
 
   #set global variable for site url
   config.absolute_site_url = "https://cpp.doc.ic.ac.uk"

@@ -41,7 +41,7 @@ class CPP.Models.Student extends CPP.Models.Base
       title: "Email*"
     cid:
       type: "Text"
-      title: "College ID*"
+      title: "DoC Username*"
     password:
       type: "Password"
       title: "Password*"
