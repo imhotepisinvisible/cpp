@@ -36,6 +36,7 @@ class Placement < ActiveRecord::Base
   validates :position,    :presence => true
   validates :location,    :presence => true
   validates :description, :presence => true
+  validates :deadline,    :presence => true
 
   ###################### Disallow Profanity #######################
   validates :description, obscenity: { message: "Profanity is not allowed!" }
@@ -44,8 +45,7 @@ class Placement < ActiveRecord::Base
   ####################### Validate date fields ######################
   validates_datetime :deadline,
     :after => :now,
-    :after_message => "Cannot be in the past",
-    :allow_nil => :true
+    :after_message => "Cannot be in the past"
 
   validates_datetime :interview_date,
     :after => :now,

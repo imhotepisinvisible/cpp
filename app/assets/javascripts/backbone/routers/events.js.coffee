@@ -12,7 +12,7 @@ class CPP.Routers.Events extends Backbone.Router
   indexCompany: (company_id) ->
     events = new CPP.Collections.EventsPager
     new CPP.Views.Events.Index collection: events
-    events.fetch
+    events.fetch({data: { company_id: company_id} })
       error: ->
         notify "error", "Couldn't fetch events"
 

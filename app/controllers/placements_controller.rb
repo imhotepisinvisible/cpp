@@ -21,7 +21,7 @@ class PlacementsController < ApplicationController
 
     # if a deadline has been included, then only get items after this date
     if params.keys.include? "deadline"
-      @placements = @placements.where("deadline > ? OR deadline IS NULL", params[:deadline])
+      @placements = @placements.where("deadline > ?", DateTime.parse(params[:deadline]).to_formatted_s(:db))
     end
 
     if params.keys.include? "limit"

@@ -21,7 +21,7 @@ class EventsController < ApplicationController
 
     # if a start date has been included, then only get items after this date
     if params.keys.include? "start_date"
-      @events = @events.where("start_date > ?", params[:start_date])
+      @events = @events.where("start_date > ?", DateTime.parse(params[:start_date]).to_formatted_s(:db))
     end
 
     if params.keys.include? "limit"

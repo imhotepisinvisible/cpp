@@ -9,9 +9,9 @@ class CPP.Routers.Placements extends Backbone.Router
 
   # Placements index for specific company
   indexCompany: (company_id) ->
-    placements = new CPP.Collections.Placements
+    placements = new CPP.Collections.PlacementsPager
     new CPP.Views.Placements.Index collection: placements
-    placements.fetch
+    placements.fetch({data: { company_id: company_id} })
       error: ->
         notify "error", "Couldn't fetch placements"
 

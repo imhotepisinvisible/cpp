@@ -17,17 +17,15 @@
             <a href = "students" class="btn small-margin pull-right button-student-suspend">
              Suspend Students
            </a>
+           <div class="btn pull-right small-margin button-delete-students">
+ 	           Delete Students
+ 	         </div>
            <% end %>
            <% if isAdmin(): %>
            <div class="btn pull-right small-margin button-export-cvs">
             Download CVs
           </div>
           <% end %>
-          <% if isDepartmentAdmin(): %>
-          <div class="btn pull-right small-margin button-delete-students">
-	           Delete Students
-	       </div>
-         <% end %>
        </div>
      </div>
    </div>
