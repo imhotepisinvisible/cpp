@@ -1,9 +1,9 @@
 CPP::Application.routes.draw do
 
   devise_for :users, :skip => :registrations
-  devise_for :students, :skip => :sessions
-  devise_for :department_administrators, :skip => :sessions
-  devise_for :company_administrators, :skip => :sessions
+  devise_for :students, :skip => [:sessions, :registrations]
+  devise_for :department_administrators, :skip => [:sessions, :registrations]
+  devise_for :company_administrators, :skip => [:sessions, :registrations]
 
   as :user do
     delete '/logout', :to => 'devise/sessions#destroy', :as => :destroy_user_session
