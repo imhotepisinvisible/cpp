@@ -24,7 +24,6 @@ class Ability
     when nil
       can :create, Student
       can :request_approval, Student
-      can :read, Department
     when "Student"
       can :manage, Student, :id => user.id
       can :index, Student

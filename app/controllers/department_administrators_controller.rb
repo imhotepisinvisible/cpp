@@ -1,11 +1,13 @@
 class DepartmentAdministratorsController < ApplicationController
   impressionist
 
+  load_and_authorize_resource
+
   respond_to :json
 
   # Return department admins
   # If department_id is specified, return only those of department
-  # 
+  #
   # GET /department_administrators
   # GET /department_administrators.json
   # GET /departments/1/department_administrators.json
