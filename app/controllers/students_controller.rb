@@ -5,7 +5,7 @@ class StudentsController < ApplicationController
   respond_to :json, :csv
 
   # Return the list of students available to user
-  # If company admin returns all students accessbale to them and who are active
+  # If company admin returns all students accessible to them and who are active
   # If department admin return department students
   # If event_id is specified, only show students attending event
   # GET /students
@@ -41,7 +41,15 @@ class StudentsController < ApplicationController
   # GET /students/1.json
   def show
     @student = Student.find(params[:id])
-    respond_with @student
+    unless current_user.is_department_admin?
+      if @student.is_active?
+        respond_with @student
+      else
+        head :forbidden
+      end
+    else
+      respond_with @student
+    end
   end
 
   # Create new student
