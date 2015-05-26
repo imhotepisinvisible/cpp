@@ -17,9 +17,9 @@ class Company < ActiveRecord::Base
   is_impressionable
 
   ###################### Declare associations ########################
-  has_many :events
-  has_many :placements
-  has_many :emails
+  has_many :events, :dependent => :destroy
+  has_many :placements, :dependent => :destroy
+  has_many :emails, :dependent => :destroy
   has_many :company_administrators, :dependent => :destroy
   has_many :company_contacts
   has_many :student_company_ratings
