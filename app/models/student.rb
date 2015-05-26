@@ -139,4 +139,12 @@ class Student < User
     UserMailer.account_created(self).deliver
   end
 
+  def active_for_authentication?
+    super && !deleted_at
+  end
+
+  def inactive_message
+    return !self.deleted_at ? super : "Trying to log in to deleted account"
+  end
+
 end
