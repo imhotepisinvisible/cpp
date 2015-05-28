@@ -41,7 +41,7 @@ class StudentsController < ApplicationController
   # GET /students/1.json
   def show
     @student = Student.find(params[:id])
-    unless current_user.is_department_admin?
+    unless current_user.is_department_admin? or current_user == @student
       if @student.is_active?
         respond_with @student
       else
