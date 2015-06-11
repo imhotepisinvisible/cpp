@@ -6,6 +6,7 @@ CPP::Application.routes.draw do
   devise_for :company_administrators, :skip => [:sessions, :registrations]
 
   as :user do
+    put 'users' => 'devise/registrations#update', :as => :user_registration
     delete '/logout', :to => 'devise/sessions#destroy', :as => :destroy_user_session
     get '/login', :to => 'devise/sessions#new', :as => :new_user_session
     post '/login', :to => 'devise/sessions#create', :as => :user_session
