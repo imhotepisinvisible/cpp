@@ -40,7 +40,7 @@ class Ability
       can :manage, DirectEmail, :company_id => user.company_id
       can :manage, Email, :company_id => user.company_id
       can :manage, Company, :id => user.company_id
-      can :manage, CompanyAdministrator, :id => user.id
+      can :manage, CompanyAdministrator, :company_id => user.company_id
       can :apply, Department
       can :read, Course
       can :index, Student
