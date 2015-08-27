@@ -30,6 +30,15 @@
             </h1>
             <div id="edit-admins"></div>
         </div>
+        <div class="row-fluid">
+            <h1 class="section-header">
+                Read Only Viewers
+              <a class="btn pull-right" id="btn-new-readonlyadmin" href="/departments/<%= @department.id %>/readonlyregister">
+                <i class="icon-plus"></i>
+              </a>
+            </h1>
+            <div id="edit-readonlyadmins"></div>
+        </div>
       </div>
     </div>
   </div>

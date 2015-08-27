@@ -101,8 +101,10 @@ class Event < ActiveRecord::Base
     result[:relevance] = relevance(options[:student_id]) if options.has_key? :student_id
     result[:departments] = options[:depts] if options.has_key? :depts
     result[:stat_count] = @stat_count
-    result[:company_name] = company.name
-    result[:company_logo_url] = company.logo.url(:thumbnail)
+    unless company.nil?
+      result[:company_name] = company.name
+      result[:company_logo_url] = company.logo.url(:thumbnail)
+    end
     unless start_date.nil?
       result[:start_date] = start_date.to_datetime.iso8601
     end

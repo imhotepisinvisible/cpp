@@ -28,6 +28,10 @@ class CPP.Views.Departments.Dashboard extends CPP.Views.Base
       el: $(@el).find('#edit-admins')
       model: @model
 
+    new CPP.Views.Departments.EditReadonlyAdministrators
+      el: $(@el).find('#edit-readonlyadmins')
+      model: @model
+
   # Create event/placement notification form, values inputted are to
   # be displayed to companies on creating new events/placements.
   initNotificationsForm: ->

@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   end
 
   def is_department_admin?
-    self.class.name == "DepartmentAdministrator"
+    self.class.name == "DepartmentAdministrator" || self.class.name == "ReadonlyAdministrator"
   end
 
   def is_admin?

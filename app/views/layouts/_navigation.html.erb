@@ -30,7 +30,7 @@
         <li><a href="/company_dashboard" data-toggle="collapse" data-target=".nav-collapse.in">Manage Company Profile</a></li>
         <li><a href="/students" data-toggle="collapse" data-target=".nav-collapse.in">Students/Alumni</a></li>
 
-      <% elsif current_user.type == "DepartmentAdministrator" %>
+      <% elsif current_user.type == "DepartmentAdministrator" || current_user.type == "ReadonlyAdministrator" %>
         <li><a href="/events" data-toggle="collapse" data-target=".nav-collapse.in">Events</a></li>
         <li><a href="/opportunities" data-toggle="collapse" data-target=".nav-collapse.in">Opportunities</a></li>
         <li><a href="/companies" data-toggle="collapse" data-target=".nav-collapse.in">Companies</a></li>
@@ -48,7 +48,7 @@
       <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.full_name %> <b class="caret"></b></a>
       <ul class="dropdown-menu">
 
-        <% if current_user.type == "DepartmentAdministrator" %>
+        <% if current_user.type == "DepartmentAdministrator" || current_user.type == "ReadonlyAdministrator" %>
           <li><a href="/<%= edit_path %>">Dashboard</a></li>
         <% else %>
           <li><a href="/<%= edit_path %>">Edit My Profile</a></li>

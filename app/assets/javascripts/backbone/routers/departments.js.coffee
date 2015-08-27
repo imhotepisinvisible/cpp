@@ -5,6 +5,7 @@ class CPP.Routers.Departments extends Backbone.Router
     'departments/:id/dashboard':  'dashboard'
     'department_dashboard' :      'dashboard'
     'departments/:id/register' :  'register'
+    'departments/:id/readonlyregister' :  'readonlyregister'
     'departments/:id/insights' :  'insights'
     'insights'     :  'insights'
 
@@ -58,11 +59,28 @@ class CPP.Routers.Departments extends Backbone.Router
         error: ->
           notify 'error', "Couldn't fetch department"
 
+  readonlyregister: (id) ->
+    if isStudent() or isCompanyAdmin()
+      window.history.back()
+      return false
+
+    department = @getDepartmentFromID id
+    unless department
+      notify 'error', 'Invalid department'
+    else
+      department.fetch
+        success: ->
+          new CPP.Views.DepartmentAdministrator.Readonlyregister
+            dept: department
+            model: new CPP.Models.ReadonlyAdministrator
+        error: ->
+          notify 'error', "Couldn't fetch department"
+
   # Return the department using id provided, or logged in user
   getDepartmentFromID: (id) ->
     if id?
       return new CPP.Models.Department id: id
-    else if CPP.CurrentUser.get('type') == 'DepartmentAdministrator'
+    else if (CPP.CurrentUser.get('type') == 'DepartmentAdministrator' || CPP.CurrentUser.get('type') == "ReadonlyAdministrator")
       return new CPP.Models.Department id: CPP.CurrentUser.get('department_id')
     else
       return false
@@ -82,5 +100,3 @@ class CPP.Routers.Departments extends Backbone.Router
           new CPP.Views.Departments.Insights model: department
         error: ->
           notify 'error', "Couldn't fetch department"
-
-

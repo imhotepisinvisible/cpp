@@ -127,7 +127,7 @@ window.isCompanyAdmin = ->
   loggedIn() && CPP.CurrentUser.get('type') == "CompanyAdministrator"
 
 window.isDepartmentAdmin = ->
-  loggedIn() && CPP.CurrentUser.get('type') == "DepartmentAdministrator"
+  loggedIn() && (CPP.CurrentUser.get('type') == "DepartmentAdministrator" || CPP.CurrentUser.get('type') == "ReadonlyAdministrator")
 
 window.isAdmin = ->
   isCompanyAdmin() || isDepartmentAdmin()

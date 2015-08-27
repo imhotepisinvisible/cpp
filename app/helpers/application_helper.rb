@@ -10,7 +10,7 @@ module ApplicationHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
-  
+
   def lipsum(*args)
     require 'lorem'
     Lorem::Base.new(*args).output
@@ -24,7 +24,7 @@ module ApplicationHelper
       return "students/#{current_user.id}/settings"
     when 'CompanyAdministrator'
       return "companies/#{current_user.company_id}/settings"
-    when 'DepartmentAdministrator'
+    when 'DepartmentAdministrator', 'ReadonlyAdministrator'
       return "department_settings"
     else
       return ''
@@ -39,7 +39,7 @@ module ApplicationHelper
       return "students/#{current_user.id}"
     when 'CompanyAdministrator'
       return "companies/#{current_user.company_id}"
-    when 'DepartmentAdministrator'
+    when 'DepartmentAdministrator', 'ReadonlyAdministrator'
       return ''
     else
       return ''
@@ -54,7 +54,7 @@ module ApplicationHelper
       return 'edit'
     when 'CompanyAdministrator'
       return "companies/#{current_user.company_id}/edit"
-    when 'DepartmentAdministrator'
+    when 'DepartmentAdministrator', 'ReadonlyAdministrator'
       return "department_dashboard"
     else
       return ''

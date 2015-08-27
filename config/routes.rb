@@ -4,6 +4,7 @@ CPP::Application.routes.draw do
   devise_for :students, :skip => [:sessions, :registrations]
   devise_for :department_administrators, :skip => [:sessions, :registrations]
   devise_for :company_administrators, :skip => [:sessions, :registrations]
+  devise_for :readonly_administrators, :skip => [:sessions, :registrations]
 
   as :user do
     put 'users' => 'devise/registrations#update', :as => :user_registration
@@ -120,8 +121,10 @@ CPP::Application.routes.draw do
   end
   resources :departments
   resources :department_administrators
+  resources :readonly_administrators
   resources :departments do
     resources :department_administrators
+    resources :readonly_administrators
     resources :companies do
       get :pending, :on => :collection
       put :approve, :on => :member

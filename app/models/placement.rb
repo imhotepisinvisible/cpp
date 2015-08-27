@@ -90,8 +90,10 @@ class Placement < ActiveRecord::Base
     result[:relevance] = relevance(options[:student_id]) if options.has_key? :student_id
     result[:departments] = options[:depts] if options.has_key? :depts
     result[:stat_count] = @stat_count
-    result[:company_name] = company.name
-    result[:company_logo_url] = company.logo.url(:thumbnail)
+    unless company.nil?
+      result[:company_name] = company.name
+      result[:company_logo_url] = company.logo.url(:thumbnail)
+    end
     unless deadline.nil?
       result[:deadline] = deadline.to_datetime.iso8601
     end

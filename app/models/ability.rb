@@ -55,6 +55,7 @@ class Ability
       can :manage, DepartmentAdministrator, :id => user.id
       can :create, CompanyAdministrator
       can :manage, CompanyAdministrator
+      can :manage, ReadonlyAdministrator
       can :manage, Department
       #can :manage, Email do |email|
       #  email.company.all_departments.map(&:id).include? user.department_id
@@ -69,6 +70,20 @@ class Ability
       can :create, Student
       can :manage, Student
       can :manage, Resque
+    when "ReadonlyAdministrator"
+      can :read, Course
+      can :read, DepartmentAdministrator, :id => user.id
+      can :read, CompanyAdministrator
+      can :read, ReadonlyAdministrator
+      can :read, Department
+      #can :manage, Email do |email|
+      #  email.company.all_departments.map(&:id).include? user.department_id
+      #end
+      can [:read, :pending], Email
+      can [:read, :pending], Company
+      can [:read, :pending], Event
+      can [:read, :pending], Placement
+      can :read, Student
     end
 
     unless user.type.nil?
