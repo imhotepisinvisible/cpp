@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Config/Server
 gem 'thin'                        # Better server :)
 gem 'unicorn'                     # Unicorn webserver: better for running on a VM
-gem 'rails', '3.2.21'             # Running on rails, wooo
+gem 'rails', '3.2.22'             # Running on rails, wooo
 gem 'therubyracer', '0.12.1'      # Javascript Engine
 
 # Back End Gems
