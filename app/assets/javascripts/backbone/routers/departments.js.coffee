@@ -80,7 +80,7 @@ class CPP.Routers.Departments extends Backbone.Router
   getDepartmentFromID: (id) ->
     if id?
       return new CPP.Models.Department id: id
-    else if (CPP.CurrentUser.get('type') == 'DepartmentAdministrator' || CPP.CurrentUser.get('type') == "ReadonlyAdministrator")
+    else if isDepartmentAdmin()
       return new CPP.Models.Department id: CPP.CurrentUser.get('department_id')
     else
       return false

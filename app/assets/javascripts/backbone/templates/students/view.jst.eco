@@ -43,9 +43,9 @@
 
                   <% _AlumniYear = moment().year() %>
                   <% graduatingYear = @student.get('year') %>
-                  <% if (graduatingYear < _AlumniYear) and (graduatingYear != null) and (graduatingYear > (_AlumniYear - 15)): %>
+                  <% if (graduatingYear != null) && (graduatingYear < _AlumniYear) && (graduatingYear > (_AlumniYear - 15)): %>
                     <div id="alumni-selector">
-                      Alumni
+                      Graduate
                     </div>
                   <% end %>
 
@@ -57,21 +57,20 @@
 
 
                 <!-- Student 'about me' -->
-                <div id="about-header">
-                  Summary
-                </div>
-
-                <div id="about-content">
-                  <% if @student.get('bio'): %>
-                  <p>
-                    <%- @student.get('bio').replace(/\n/g, "<br/>") %>
-                  </p>
-                  <% else: %>
+                <% if @student.get('bio'): %>
+                  <div id="about-header">
+                    Summary
+                  </div>
+                  <div id="about-content">
+                    <p>
+                      <%- @student.get('bio').replace(/\n/g, "<br/>") %>
+                    </p>
+                  </div>
+                <% else: %>
                   <div class="empty-student-profile-field-container">
                     <i class="empty-student-profile-field"/>
                   </div>
-                  <% end %>
-                </div>
+                <% end %>
 
                 <!--  download CV -->
                 <div>

@@ -17,7 +17,7 @@
           <div class="span9">
             <div id="student-profile-key-info">
               <div id="student-profile-intro">
-      
+
                 <!-- Admin, with editing header -->
                   <% if isDepartmentAdmin() or isCompanyAdmin(): %>
                     <div class="btn-group pull-right">
@@ -44,21 +44,20 @@
 
 
                 <!-- Company 'about me' -->
-                <div id="about-header">
-                  Summary
-                </div>
-
-                <div id="about-content">
-                  <% if @company.get('description'): %>
-                  <p>
-                    <%- @company.get('description').replace(/\n/g, "<br/>") %>
-                  </p>
-                  <% else: %>
+                <% if @company.get('description'): %>
+                  <div id="about-header">
+                    Summary
+                  </div>
+                  <div id="about-content">
+                    <p>
+                      <%- @company.get('description').replace(/\n/g, "<br/>") %>
+                    </p>
+                  </div>
+                <% else: %>
                   <div class="empty-student-profile-field-container">
                     <i class="icon-user empty-student-profile-field"/>
                   </div>
-                  <% end %>
-                </div>
+                <% end %>
 
                 <!-- Links to all contacts -->
                 <div class="link-accent first-padding" id="contacts">Contacts</div>
