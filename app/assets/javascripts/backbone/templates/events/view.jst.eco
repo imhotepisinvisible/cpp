@@ -81,7 +81,7 @@
                 <% end %>
               </a>
               <% if @event.get('link'): %>
-                <a class="link-accent" href="http://<%= @event.get('link') %>">
+                <a class="link-accent" href="http://<%= @event.get('link').replace(/^https?:\/\//, "") %>">
                   External Link
                 </a>
               <% end %>
