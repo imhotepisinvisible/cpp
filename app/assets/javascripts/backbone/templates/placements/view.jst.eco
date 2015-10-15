@@ -41,7 +41,7 @@
             <% end %>
               <!-- Apply through external link -->
             <% if @placement.get('link'): %>
-              <a class="link-accent" href="http://<%= @placement.get('link') %>">
+              <a class="link-accent" href="http://<%= @placement.get('link').replace(/^https?:\/\//, "") %>">
                 External Link
               </a>
             <% end %>
