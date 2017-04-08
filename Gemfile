@@ -3,11 +3,11 @@ source 'https://rubygems.org'
 # Config/Server
 gem 'thin'                        # Better server :)
 gem 'unicorn'                     # Unicorn webserver: better for running on a VM
-gem 'rails', '3.2.22'             # Running on rails, wooo
+gem 'rails', '3.2.22.5'           # Running on rails, wooo
 gem 'therubyracer', '0.12.1'      # Javascript Engine
 
 # Back End Gems
-gem 'validates_timeliness'        # Date/Time Validation
+gem 'validates_timeliness', '~> 3.0'        # Date/Time Validation
 gem 'cantango'                    # Nice RBAC
 gem 'haml-rails'                  # Support HAML Templates in Rails
 gem 'simple_form'                 # Nicer forms in rails
@@ -15,7 +15,7 @@ gem 'rufus-scheduler'             # Task Scheduling
 gem 'acts-as-taggable-on'         # Tagging framework
 gem 'acts_as_paranoid', '~>0.4.0' # Hides records instead of deleting them, being able to recover them.
 gem 'acts_as_list'                # Re-orderable lists
-gem 'newrelic_rpm'                # Newrelic Monitoring
+#gem 'newrelic_rpm'                # Newrelic Monitoring
 gem 'paperclip'                   # Nice model attachment
 gem 'aws-sdk'                     # AWS SDK for paperclip uploads
 gem 'redis'                       # Allows connection to redis server
@@ -24,7 +24,7 @@ gem 'resque-scheduler', '~> 2.2.0' #, :require => 'resque_scheduler' # Job sched
 gem 'resque_mailer'               # Email queueing gem
 gem 'obscenity'                   # Obscenity filter
 gem 'lorem'                       # Simple Lorem
-gem 'impressionist'               # Stats & Logging
+gem 'impressionist', '1.5.1'      # Stats & Logging
 gem 'workflow'                    # Handling approval states
 gem 'rubyzip', '>= 1.0.0'         # will load new rubyzip version
 gem 'zip-zip'                     # will load compatibility for old rubyzip API.
@@ -33,14 +33,14 @@ gem 'sanitize-rails', require: 'sanitize/rails' # HTML Sanitization
 
 # UI/Appearance Related Gems
 gem 'less-rails'                  # Less required for Bootstrap
-gem 'twitter-bootstrap-rails'     # Twitter Bootstrap <3 Rails
+gem 'twitter-bootstrap-rails', '~> 2.2.8'     # Twitter Bootstrap <3 Rails
 gem 'bourbon'                     # Nice SCSS mixins
 gem 'font-awesome-rails', '~> 3.2.1' # Font Awesome = Icons
 gem "google_visualr", ">= 2.1"    # Google Charts
 gem 'tinymce-rails'               # WYSIWYG editor for emails
 gem 'kaminari'                    # Pagination of backend collections
 gem 'api-pagination'              # Give backbone the pagination information
-gem 'jquery-ui-rails'             # JQuery user interface plugin
+gem 'jquery-ui-rails', '~> 5.0.5'             # JQuery user interface plugin
 gem 'backgridjs-rails'
 
 # JS Frameworks/Plugins
@@ -75,6 +75,7 @@ group :development, :test do
   gem 'faker'                 # For faking data
   gem 'factory_girl_rails', :require => false # Easy fixtures
   gem 'database_cleaner'      # For tests, wipe database between tests
+  gem 'test-unit', '~> 3.0'
 end
 
 group :development do

@@ -8,7 +8,8 @@ RUN apt-get install -q -y \
     ruby \
     ruby-dev \
     build-essential \
-  && gem install --no-ri --no-rdoc mailcatcher \
+  && gem install --no-ri --no-rdoc mime-types --version "< 3" \
+  && gem install --no-ri --no-rdoc --conservative mailcatcher; exit 0 \
   && apt-get remove -y build-essential \
   && apt-get autoremove -y \
   && apt-get clean \

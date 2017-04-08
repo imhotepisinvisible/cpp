@@ -20,7 +20,7 @@ RUN git clone https://github.com/sstephenson/ruby-build.git /tmp/ruby-build && \
 RUN npm install -g istanbul
 
 # Install ruby
-RUN ruby-build -v 1.9.3-p551 /usr/local
+RUN ruby-build -v 2.3.1 /usr/local
  
 # Install base gems
 RUN gem install bundler rubygems-bundler --no-rdoc --no-ri
