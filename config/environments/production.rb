@@ -28,7 +28,7 @@ CPP::Application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = false
+  config.force_ssl = true
 
   # See everything in the log (default is :info)
   config.log_level = :debug
@@ -88,5 +88,8 @@ CPP::Application.configure do
 
   # load production database config file
   config.paths['config/database'] = '/app/.cpp_db'
+
+  # load secrets
+  YAML.load_file("/app/.cpp_secrets").each {|k,v| ENV[k] = v }
 
 end
