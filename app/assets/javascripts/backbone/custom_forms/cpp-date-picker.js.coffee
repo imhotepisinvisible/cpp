@@ -39,7 +39,7 @@ class Backbone.Form.editors.Datepicker extends Backbone.Form.editors.Base
   # Set date
   setValue: (date) =>
     if date == null || date.toString() == (new Date(null)).toString()
-      @$el.val("")
+      @$el.val(moment().format(getDateFormat()))
     else
       @$el.val(moment(date).format(getDateFormat()))
 
